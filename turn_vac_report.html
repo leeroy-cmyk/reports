@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Turn & Vac Report — McKay PM</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', sans-serif; background: #f4f6f9; color: #1a2535; min-height: 100vh; }
+
+  header { background: #ffffff; border-bottom: 2px solid #d0dce8; padding: 16px 32px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 1px 4px rgba(0,0,0,.06); }
+  header h1 { font-size: 1.4rem; color: #1a5276; }
+  .header-right { display: flex; align-items: center; gap: 16px; }
+  .fetched-at { font-size: 0.78rem; color: #7f8fa4; }
+  .fetched-at span { color: #1a5276; font-weight: 600; }
+
+  .refresh-btn { background: #1a5276; border: 1px solid #154360; color: #ffffff; padding: 7px 18px; border-radius: 6px; cursor: pointer; font-size: 0.85rem; display: flex; align-items: center; gap: 7px; transition: background .15s; }
+  .refresh-btn:hover { background: #1f618d; }
+  .refresh-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  .refresh-btn .spin { display: inline-block; animation: spin 0.8s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .loading-bar { height: 3px; background: #e8edf2; }
+  .loading-bar-fill { height: 3px; background: #2e86c1; width: 0; transition: width 0.4s ease; }
+
+  .tabs { display: flex; background: #ffffff; border-bottom: 1px solid #d0dce8; padding: 0 24px; }
+  .tab { padding: 12px 24px; cursor: pointer; font-size: 0.9rem; color: #7f8fa4; border-bottom: 3px solid transparent; transition: all .2s; }
+  .tab:hover { color: #1a5276; }
+  .tab.active { color: #1a5276; border-bottom-color: #2e86c1; font-weight: 600; }
+
+  .panel { display: none; padding: 28px 32px; }
+  .panel.active { display: block; }
+
+  .error-bar { background: #fdf2f2; border: 1px solid #e8b4b4; color: #922b21; padding: 12px 20px; margin: 16px 32px; border-radius: 6px; font-size: 0.85rem; display: none; }
+
+  /* Cards */
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; margin-bottom: 28px; }
+  .card { background: #ffffff; border: 1px solid #d0dce8; border-radius: 10px; padding: 18px 20px; box-shadow: 0 1px 3px rgba(0,0,0,.05); }
+  .card .label { font-size: 0.73rem; color: #7f8fa4; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px; }
+  .card .value { font-size: 2rem; font-weight: 700; color: #1a5276; line-height: 1; }
+  .card .sub { font-size: 0.75rem; color: #a0aebb; margin-top: 6px; }
+  .card.red .value { color: #c0392b; }
+  .card.green .value { color: #1e8449; }
+  .card.orange .value { color: #ca6f1e; }
+  .card.yellow .value { color: #b7950b; }
+
+  .section-title { font-size: 1rem; color: #1a5276; font-weight: 600; margin: 24px 0 14px; padding-bottom: 6px; border-bottom: 2px solid #d0dce8; }
+
+  /* Timeline */
+  .timeline { display: grid; grid-template-columns: repeat(auto-fill, minmax(155px, 1fr)); gap: 12px; margin-bottom: 24px; }
+  .month-block { background: #ffffff; border: 1px solid #d0dce8; border-radius: 8px; padding: 14px 16px; box-shadow: 0 1px 3px rgba(0,0,0,.04); }
+  .month-block .month-label { font-size: 0.78rem; color: #7f8fa4; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+  .month-block .month-count { font-size: 1.6rem; font-weight: 700; color: #1a5276; }
+  .month-block .month-sub { font-size: 0.73rem; color: #a0aebb; margin-top: 3px; }
+  .month-block.past .month-count { color: #c0392b; }
+  .month-block.current { border-color: #2e86c1; border-width: 2px; }
+  .month-block.current .month-label { color: #1a5276; font-weight: 700; }
+
+  /* Tables */
+  .prop-table, .data-table { width: 100%; border-collapse: collapse; }
+  .prop-table th, .data-table th { text-align: left; padding: 10px 12px; font-size: 0.73rem; color: #7f8fa4; text-transform: uppercase; letter-spacing: 0.7px; border-bottom: 2px solid #d0dce8; background: #f4f6f9; white-space: nowrap; }
+  .data-table th { cursor: pointer; user-select: none; }
+  .data-table th:hover { color: #1a5276; }
+  .data-table th.sorted { color: #2e86c1; }
+  .prop-table td, .data-table td { padding: 9px 12px; font-size: 0.85rem; border-bottom: 1px solid #e8edf2; white-space: nowrap; background: #ffffff; }
+  .prop-table tr:hover td, .data-table tr:hover td { background: #eaf2f8; }
+  .data-table tr.overdue td { background: #fdf5f5; }
+  .data-table tr.overdue:hover td { background: #fce8e8; }
+
+  .prop-bar { height: 8px; border-radius: 4px; background: #d0dce8; width: 80px; display: inline-block; vertical-align: middle; margin-left: 8px; overflow: hidden; }
+  .prop-bar-fill { height: 100%; border-radius: 4px; background: #2e86c1; }
+  .prop-bar-fill.orange { background: #ca6f1e; }
+
+  /* Badges */
+  .badge { display: inline-block; padding: 2px 9px; border-radius: 12px; font-size: 0.72rem; font-weight: 600; }
+  .badge.yes { background: #d5f5e3; color: #1e8449; }
+  .badge.no  { background: #fadbd8; color: #c0392b; }
+  .badge.avail  { background: #d6eaf8; color: #1a5276; }
+  .badge.soon   { background: #fdebd0; color: #ca6f1e; }
+  .badge.future { background: #eaecf8; color: #4a4aaa; }
+  .badge.movein { background: #e8d5f5; color: #6c3483; }
+  .badge.notice { background: #fef9e7; color: #b7950b; border: 1px solid #f9e79f; }
+
+  .days-badge { display: inline-block; min-width: 52px; text-align: center; padding: 2px 8px; border-radius: 10px; font-size: 0.76rem; font-weight: 600; }
+  .days-badge.d-long   { background: #fadbd8; color: #c0392b; }
+  .days-badge.d-mid    { background: #fdebd0; color: #ca6f1e; }
+  .days-badge.d-short  { background: #d5f5e3; color: #1e8449; }
+  .days-badge.d-future { background: #eaecf8; color: #4a4aaa; }
+  .days-badge.d-none   { background: #edf0f3; color: #a0aebb; }
+
+  /* Filters */
+  .controls { display: flex; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; align-items: center; }
+  .controls input, .controls select { background: #ffffff; border: 1px solid #c8d6e0; color: #1a2535; padding: 7px 11px; border-radius: 6px; font-size: 0.83rem; outline: none; }
+  .controls input { width: 220px; }
+  .controls input:focus, .controls select:focus { border-color: #2e86c1; box-shadow: 0 0 0 2px #d6eaf8; }
+  .row-count { font-size: 0.78rem; color: #7f8fa4; margin-bottom: 10px; }
+
+  /* Performance KPIs */
+  .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(175px, 1fr)); gap: 16px; margin-bottom: 28px; }
+  .kpi-card { background: #fff; border: 1px solid #d0dce8; border-left: 4px solid #2e86c1; border-radius: 8px; padding: 16px 20px; box-shadow: 0 1px 3px rgba(0,0,0,.05); }
+  .kpi-card .kpi-label { font-size: 0.73rem; color: #7f8fa4; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 6px; }
+  .kpi-card .kpi-value { font-size: 1.7rem; font-weight: 700; color: #1a5276; line-height: 1.1; }
+  .kpi-card .kpi-sub { font-size: 0.75rem; color: #a0aebb; margin-top: 5px; }
+  .kpi-card.good { border-left-color: #1e8449; } .kpi-card.good .kpi-value { color: #1e8449; }
+  .kpi-card.warn { border-left-color: #ca6f1e; } .kpi-card.warn .kpi-value { color: #ca6f1e; }
+  .kpi-card.bad  { border-left-color: #c0392b; } .kpi-card.bad  .kpi-value { color: #c0392b; }
+
+  /* Turns Due tab */
+  .due-buckets { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 28px; }
+  .due-bucket { border-radius: 8px; padding: 16px; text-align: center; cursor: pointer; transition: box-shadow .15s; }
+  .due-bucket:hover { box-shadow: 0 2px 8px rgba(0,0,0,.1); }
+  .due-bucket.active-filter { box-shadow: 0 0 0 3px #2e86c1; }
+  .due-bucket .db-count { font-size: 2rem; font-weight: 700; line-height: 1; }
+  .due-bucket .db-label { font-size: 0.73rem; text-transform: uppercase; letter-spacing: 0.6px; margin-top: 6px; font-weight: 600; }
+  .due-bucket .db-sub   { font-size: 0.72rem; margin-top: 3px; }
+  .due-bucket.b-overdue { background: #fadbd8; border: 2px solid #e74c3c; }
+  .due-bucket.b-overdue .db-count { color: #c0392b; } .due-bucket.b-overdue .db-label { color: #922b21; } .due-bucket.b-overdue .db-sub { color: #c0392b; }
+  .due-bucket.b-week    { background: #fdebd0; border: 1px solid #e59866; }
+  .due-bucket.b-week .db-count { color: #ca6f1e; } .due-bucket.b-week .db-label { color: #a04010; } .due-bucket.b-week .db-sub { color: #ca6f1e; }
+  .due-bucket.b-twoweek { background: #fef9e7; border: 1px solid #f9e79f; }
+  .due-bucket.b-twoweek .db-count { color: #b7950b; } .due-bucket.b-twoweek .db-label { color: #7d6608; } .due-bucket.b-twoweek .db-sub { color: #b7950b; }
+  .due-bucket.b-month   { background: #d6eaf8; border: 1px solid #aed6f1; }
+  .due-bucket.b-month .db-count { color: #1a5276; } .due-bucket.b-month .db-label { color: #1a5276; } .due-bucket.b-month .db-sub { color: #2e86c1; }
+  .due-bucket.b-future  { background: #f4f6f9; border: 1px solid #d0dce8; }
+  .due-bucket.b-future .db-count { color: #4a6a8a; } .due-bucket.b-future .db-label { color: #4a6a8a; } .due-bucket.b-future .db-sub { color: #7f8fa4; }
+  .due-bucket.b-completed { background: #d5f5e3; border: 1px solid #82e0aa; }
+  .due-bucket.b-completed .db-count { color: #1e8449; } .due-bucket.b-completed .db-label { color: #145a32; } .due-bucket.b-completed .db-sub { color: #1e8449; }
+
+  .due-list { border: 1px solid #d0dce8; border-radius: 8px; overflow: hidden; }
+  .due-list-header { background: #f4f6f9; padding: 9px 16px; font-size: 0.73rem; color: #7f8fa4; text-transform: uppercase; letter-spacing: 0.7px; display: grid; grid-template-columns: 80px 100px 60px 70px 80px 1fr 90px 110px; gap: 8px; border-bottom: 2px solid #d0dce8; }
+  .due-row { display: grid; grid-template-columns: 80px 100px 60px 70px 80px 1fr 90px 110px; gap: 8px; align-items: center; padding: 10px 16px; border-bottom: 1px solid #e8edf2; background: #fff; font-size: 0.85rem; }
+  .due-row:hover { background: #eaf2f8; }
+  .due-row:last-child { border-bottom: none; }
+  .countdown { text-align: center; border-radius: 6px; padding: 3px 8px; font-weight: 700; font-size: 0.82rem; white-space: nowrap; }
+  .countdown.c-overdue { background: #fadbd8; color: #c0392b; }
+  .countdown.c-week    { background: #fdebd0; color: #ca6f1e; }
+  .countdown.c-twoweek { background: #fef9e7; color: #b7950b; }
+  .countdown.c-month   { background: #d6eaf8; color: #1a5276; }
+  .countdown.c-future  { background: #f4f6f9; color: #7f8fa4; }
+  .countdown.c-notice  { background: #eaecf8; color: #4a4aaa; }
+  .countdown.c-done    { background: #d5f5e3; color: #1e8449; }
+  .due-prop { font-weight: 600; color: #1a2535; }
+  .due-meta { color: #7f8fa4; font-size: 0.8rem; }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>Turn &amp; Vacancy Report</h1>
+    <div style="font-size:0.8rem;color:#7f8fa4;margin-top:3px;">McKay Property Management — Live from AppFolio</div>
+  </div>
+  <div class="header-right">
+    <div class="fetched-at" id="fetchedAt">—</div>
+    <button class="refresh-btn" id="refreshBtn" onclick="loadData()">
+      <span id="refreshIcon">↻</span> Refresh
+    </button>
+  </div>
+</header>
+<div class="loading-bar"><div class="loading-bar-fill" id="loadingBar"></div></div>
+<div class="error-bar" id="errorBar"></div>
+
+<div class="tabs">
+  <div class="tab active" onclick="showTab('overview',this)">Overview</div>
+  <div class="tab" onclick="showTab('turnsDue',this)">Turns Due</div>
+  <div class="tab" onclick="showTab('byProperty',this)">By Property</div>
+  <div class="tab" onclick="showTab('detail',this)">Full Detail</div>
+</div>
+
+<div id="overview" class="panel active"><div id="overviewContent"><p style="color:#7f8fa4;padding:20px;">Loading…</p></div></div>
+<div id="turnsDue" class="panel"><div id="turnsDueContent"><p style="color:#7f8fa4;padding:20px;">Loading…</p></div></div>
+<div id="byProperty" class="panel"><div id="propContent"></div></div>
+<div id="detail" class="panel">
+  <div class="controls">
+    <input type="text" id="searchBox" placeholder="Search property, unit, city…" oninput="filterTable()">
+    <select id="filterReady" onchange="filterTable()">
+      <option value="">All — Rent Ready</option>
+      <option value="Yes">Rent Ready</option>
+      <option value="No">Not Ready</option>
+    </select>
+    <select id="filterCity" onchange="filterTable()"><option value="">All Cities</option></select>
+    <select id="filterProp" onchange="filterTable()"><option value="">All Properties</option></select>
+    <select id="filterStatus" onchange="filterTable()">
+      <option value="">All Statuses</option>
+      <option value="Vacant-Unrented">Vacant — Unrented</option>
+      <option value="Vacant-Rented">Vacant — Rented</option>
+      <option value="Notice-Unrented">Notice — Unrented</option>
+      <option value="Notice-Rented">Notice — Rented</option>
+    </select>
+    <select id="filterAvail" onchange="filterTable()">
+      <option value="">All Availability</option>
+      <option value="overdue">Available Now (no move-in)</option>
+      <option value="this_month">Available This Month</option>
+      <option value="next_month">Available Next Month</option>
+      <option value="movein">Move-In Scheduled</option>
+    </select>
+  </div>
+  <div class="row-count" id="rowCount"></div>
+  <table class="data-table" id="detailTable">
+    <thead>
+      <tr>
+        <th onclick="sortTable(0)">Property <span>⇅</span></th>
+        <th onclick="sortTable(1)">Unit <span>⇅</span></th>
+        <th onclick="sortTable(2)">City <span>⇅</span></th>
+        <th onclick="sortTable(3)">Beds/Ba <span>⇅</span></th>
+        <th onclick="sortTable(4)">Status <span>⇅</span></th>
+        <th onclick="sortTable(5)">Rent Ready <span>⇅</span></th>
+        <th onclick="sortTable(6)">Days Vacant <span>⇅</span></th>
+        <th onclick="sortTable(7)">Last Move-Out <span>⇅</span></th>
+        <th onclick="sortTable(8)">Turn Target <span>⇅</span></th>
+        <th onclick="sortTable(9)">Available On <span>⇅</span></th>
+        <th onclick="sortTable(10)">Next Move-In <span>⇅</span></th>
+        <th onclick="sortTable(11)">Sched Rent <span>⇅</span></th>
+        <th onclick="sortTable(12)">Avail Status <span>⇅</span></th>
+      </tr>
+    </thead>
+    <tbody id="detailTbody"></tbody>
+  </table>
+</div>
+
+<script>
+const TODAY = new Date(); TODAY.setHours(0,0,0,0);
+
+function parseDate(s) {
+  if (!s) return null;
+  const d = new Date(s + (s.includes('T') ? '' : 'T00:00:00'));
+  return isNaN(d) ? null : d;
+}
+function fmtDate(s) {
+  if (!s) return '—';
+  const d = parseDate(s);
+  if (!d) return s;
+  return (d.getMonth()+1) + '/' + d.getDate() + '/' + d.getFullYear();
+}
+function daysBetween(d1, d2) { return Math.round((d2 - d1) / 86400000); }
+
+let allData = [];
+let filteredData = [];
+let sortCol = 9, sortAsc = true;
+
+async function loadData() {
+  const btn = document.getElementById('refreshBtn');
+  const icon = document.getElementById('refreshIcon');
+  const bar = document.getElementById('loadingBar');
+  const errBar = document.getElementById('errorBar');
+
+  btn.disabled = true;
+  icon.textContent = '↻';
+  icon.classList.add('spin');
+  bar.style.width = '40%';
+  errBar.style.display = 'none';
+
+  try {
+    const resp = await fetch('http://localhost:3002/api/turnvac');
+    bar.style.width = '80%';
+    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+    const json = await resp.json();
+    if (!json.ok) throw new Error(json.error || 'Unknown error');
+
+    allData = json.rows.map(r => {
+      const moveOutD   = parseDate(r.last_move_out);
+      const availOnD   = parseDate(r.available_on);
+      const nextMIDate = parseDate(r.next_move_in);
+      const turnTargD  = parseDate(r.unit_turn_target_date);
+      const isVacant   = (r.unit_status || '').startsWith('Vacant-');
+      // Days vacant and rent-ready only meaningful once the unit is actually vacant
+      const dv = isVacant ? (r.days_vacant != null ? r.days_vacant : (moveOutD ? daysBetween(moveOutD, TODAY) : null)) : null;
+      const effectiveRentReady = isVacant ? r.rent_ready : 'No';
+      const isAvailNow  = isVacant && availOnD && availOnD <= TODAY && !nextMIDate;
+      const isAvailSoon = isVacant && availOnD && availOnD > TODAY && daysBetween(TODAY, availOnD) <= 30;
+
+      let availStatus;
+      if (!isVacant) {
+        availStatus = 'Not Yet Vacant';
+      } else if (nextMIDate) {
+        availStatus = daysBetween(TODAY, nextMIDate) <= 14 ? 'Move-In Imminent' : 'Move-In Scheduled';
+      } else if (isAvailNow) {
+        availStatus = 'Available Now';
+      } else if (isAvailSoon) {
+        availStatus = 'Available Soon';
+      } else {
+        availStatus = 'Upcoming';
+      }
+
+      return { ...r, moveOutD, availOnD, nextMIDate, turnTargD, dv, isVacant, effectiveRentReady, isAvailNow, isAvailSoon, availStatus };
+    });
+
+    const ts = new Date(json.fetched_at);
+    document.getElementById('fetchedAt').innerHTML = 'Updated <span>' + ts.toLocaleTimeString() + '</span>';
+    bar.style.width = '100%';
+    setTimeout(() => { bar.style.width = '0'; bar.style.transition = 'none'; setTimeout(() => bar.style.transition = 'width 0.4s ease', 50); }, 600);
+
+    buildOverview();
+    buildTurnsDue();
+    buildByProperty();
+    buildDetailFilters();
+    filterTable();
+  } catch(e) {
+    bar.style.width = '0';
+    errBar.style.display = 'block';
+    errBar.textContent = '⚠ Could not fetch data: ' + e.message + ' — make sure the server is running (turn_vac_server.js)';
+  } finally {
+    btn.disabled = false;
+    icon.classList.remove('spin');
+    icon.textContent = '↻';
+  }
+}
+
+// ── OVERVIEW ─────────────────────────────────────────────────────────────────
+function buildOverview() {
+  const d = allData;
+  const total = d.length;
+  const rentReady = d.filter(r => r.effectiveRentReady === 'Yes').length;
+  const availNow  = d.filter(r => r.isAvailNow).length;
+  const hasMI     = d.filter(r => r.isVacant && r.nextMIDate).length;
+  const nm = TODAY.getMonth(), ny = TODAY.getFullYear();
+  const miThisMonth = d.filter(r => r.isVacant && r.nextMIDate && r.nextMIDate.getMonth()===nm && r.nextMIDate.getFullYear()===ny).length;
+  const vacantRows = d.filter(r => r.dv !== null);
+  const avgV = vacantRows.length ? Math.round(vacantRows.reduce((s,r)=>s+r.dv,0)/vacantRows.length) : 0;
+  const vacantUnrented = d.filter(r => r.unit_status === 'Vacant-Unrented').length;
+
+  // ── Performance KPIs ──
+  // Avg Turn Time: vacant units where available_on has passed, has move-out date
+  const completedTurns = d.filter(r => r.isVacant && r.availOnD && r.availOnD <= TODAY && r.moveOutD);
+  const avgTurnTime = completedTurns.length
+    ? Math.round(completedTurns.reduce((s,r) => s + daysBetween(r.moveOutD, r.availOnD), 0) / completedTurns.length) : null;
+
+  // On-Time Rate: completed turns where available_on <= turn_target_date
+  const onTimeBase = completedTurns.filter(r => r.turnTargD);
+  const onTimePct = onTimeBase.length
+    ? Math.round(onTimeBase.filter(r => r.availOnD <= r.turnTargD).length / onTimeBase.length * 100) : null;
+
+  // Revenue at Risk: daily rent loss from Vacant-Unrented units with no move-in
+  const atRisk = d.filter(r => r.unit_status === 'Vacant-Unrented' && !r.nextMIDate && r.schd_rent);
+  const dailyLoss = Math.round(atRisk.reduce((s,r) => s + parseFloat(r.schd_rent||0)/30, 0));
+  const totalLost = Math.round(atRisk.reduce((s,r) => s + (parseFloat(r.schd_rent||0)/30) * (r.dv||0), 0));
+
+  // Active turns: vacant, not rent ready, no move-in
+  const activeTurns = d.filter(r => r.isVacant && r.effectiveRentReady !== 'Yes' && !r.nextMIDate).length;
+
+  // Due this week: available_on within 7 days (vacant or notice)
+  const dueThisWeek = d.filter(r => r.availOnD && r.availOnD > TODAY && daysBetween(TODAY, r.availOnD) <= 7).length;
+
+  // By month — only count vacant units as "ready"; notice units still appear in timeline
+  const byMonth = {};
+  d.forEach(r => {
+    if (!r.availOnD) return;
+    const key = r.availOnD.getFullYear() + '-' + String(r.availOnD.getMonth()+1).padStart(2,'0');
+    if (!byMonth[key]) byMonth[key] = { d: r.availOnD, count: 0, ready: 0, lbl: r.availOnD.toLocaleString('default',{month:'long',year:'numeric'}) };
+    byMonth[key].count++;
+    if (r.effectiveRentReady === 'Yes') byMonth[key].ready++;
+  });
+  const months = Object.values(byMonth).sort((a,b) => a.d - b.d).slice(0, 10);
+
+  // By property
+  const props = {};
+  d.forEach(r => {
+    const p = r.property_name || r.property || '?';
+    if (!props[p]) props[p] = { city: r.city, total:0, ready:0, availNow:0 };
+    props[p].total++;
+    if (r.effectiveRentReady === 'Yes') props[p].ready++;
+    if (r.isAvailNow) props[p].availNow++;
+  });
+  const propRows = Object.entries(props).sort((a,b) => b[1].total - a[1].total).map(([p,v]) => {
+    const pct = Math.round(v.ready/v.total*100);
+    return `<tr>
+      <td><strong>${p}</strong></td><td>${v.city||'—'}</td><td>${v.total}</td>
+      <td><span class="badge yes">${v.ready}</span></td>
+      <td><span class="badge no">${v.total-v.ready}</span></td>
+      <td>${v.availNow > 0 ? `<span class="badge avail">${v.availNow}</span>` : '—'}</td>
+      <td>${pct}% <span class="prop-bar"><span class="prop-bar-fill ${pct<50?'orange':''}" style="width:${pct}%"></span></span></td>
+    </tr>`;
+  }).join('');
+
+  const onTimeColor = onTimePct===null?'':onTimePct>=80?'good':onTimePct>=60?'warn':'bad';
+  const turnTimeColor = avgTurnTime===null?'':avgTurnTime<=14?'good':avgTurnTime<=21?'warn':'bad';
+
+  document.getElementById('overviewContent').innerHTML = `
+    <div class="cards">
+      <div class="card"><div class="label">Total Units</div><div class="value">${total}</div><div class="sub">in pipeline</div></div>
+      <div class="card red"><div class="label">Available Now</div><div class="value">${availNow}</div><div class="sub">no move-in scheduled</div></div>
+      <div class="card orange"><div class="label">Vacant — Unrented</div><div class="value">${vacantUnrented}</div><div class="sub">needs leasing</div></div>
+      <div class="card green"><div class="label">Rent Ready</div><div class="value">${rentReady}</div><div class="sub">${Math.round(rentReady/total*100)}% of pipeline</div></div>
+      <div class="card yellow"><div class="label">Move-In Scheduled</div><div class="value">${hasMI}</div><div class="sub">${miThisMonth} this month</div></div>
+      <div class="card"><div class="label">Avg Days Vacant</div><div class="value">${avgV}</div><div class="sub">across vacant units</div></div>
+    </div>
+    <div class="section-title">Performance KPIs</div>
+    <div class="kpi-grid">
+      <div class="kpi-card ${turnTimeColor}">
+        <div class="kpi-label">Avg Turn Time</div>
+        <div class="kpi-value">${avgTurnTime !== null ? avgTurnTime + 'd' : '—'}</div>
+        <div class="kpi-sub">move-out → available (${completedTurns.length} completed turns)</div>
+      </div>
+      <div class="kpi-card ${onTimeColor}">
+        <div class="kpi-label">On-Time Rate</div>
+        <div class="kpi-value">${onTimePct !== null ? onTimePct + '%' : '—'}</div>
+        <div class="kpi-sub">turns completed by target date (${onTimeBase.length} with targets set)</div>
+      </div>
+      <div class="kpi-card ${activeTurns > 5 ? 'warn' : ''}">
+        <div class="kpi-label">Active Turns</div>
+        <div class="kpi-value">${activeTurns}</div>
+        <div class="kpi-sub">vacant, in-progress, no move-in yet</div>
+      </div>
+      <div class="kpi-card ${dueThisWeek > 0 ? 'warn' : ''}">
+        <div class="kpi-label">Due This Week</div>
+        <div class="kpi-value">${dueThisWeek}</div>
+        <div class="kpi-sub">available dates in next 7 days</div>
+      </div>
+      <div class="kpi-card ${dailyLoss > 500 ? 'bad' : dailyLoss > 200 ? 'warn' : ''}">
+        <div class="kpi-label">Daily Revenue at Risk</div>
+        <div class="kpi-value">$${dailyLoss.toLocaleString()}</div>
+        <div class="kpi-sub">lost/day from ${atRisk.length} vacant-unrented units</div>
+      </div>
+      <div class="kpi-card bad">
+        <div class="kpi-label">Total Lost to Date</div>
+        <div class="kpi-value">$${totalLost.toLocaleString()}</div>
+        <div class="kpi-sub">est. rent lost while vacant-unrented</div>
+      </div>
+    </div>
+    <div class="section-title">Availability by Month</div>
+    <div class="timeline">${months.map(m => {
+      const isPast = m.d < new Date(ny, nm, 1);
+      const isCur  = m.d.getMonth()===nm && m.d.getFullYear()===ny;
+      return `<div class="month-block ${isPast?'past':''} ${isCur?'current':''}">
+        <div class="month-label">${m.lbl}</div>
+        <div class="month-count">${m.count}</div>
+        <div class="month-sub">${m.ready} rent ready</div>
+      </div>`;
+    }).join('')}</div>
+    <div class="section-title">Rent Ready by Property</div>
+    <table class="prop-table">
+      <thead><tr><th>Property</th><th>City</th><th>Units</th><th>Rent Ready</th><th>Not Ready</th><th>Avail Now</th><th>Ready %</th></tr></thead>
+      <tbody>${propRows}</tbody>
+    </table>`;
+}
+
+// ── TURNS DUE ─────────────────────────────────────────────────────────────────
+let dueFilter = null;
+
+function buildTurnsDue() {
+  // All units with an available_on date, sorted by urgency
+  const units = allData
+    .filter(r => r.availOnD)
+    .sort((a,b) => a.availOnD - b.availOnD);
+
+  function bucket(r) {
+    if (!r.isVacant) return 'notice';
+    if (r.effectiveRentReady === 'Yes') return 'completed';
+    const days = daysBetween(TODAY, r.availOnD);
+    if (days < 0)  return 'overdue';
+    if (days <= 7) return 'week';
+    if (days <= 14) return 'twoweek';
+    if (days <= 30) return 'month';
+    return 'future';
+  }
+
+  const counts = { overdue:0, week:0, twoweek:0, month:0, future:0, notice:0, completed:0 };
+  units.forEach(r => counts[bucket(r)]++);
+
+  function bucketCard(id, cls, label, sub) {
+    const active = dueFilter === id ? 'active-filter' : '';
+    return `<div class="due-bucket b-${cls} ${active}" onclick="filterDue('${id}')">
+      <div class="db-count">${counts[id]}</div>
+      <div class="db-label">${label}</div>
+      <div class="db-sub">${sub}</div>
+    </div>`;
+  }
+
+  function countdownClass(b) {
+    return { overdue:'c-overdue', week:'c-week', twoweek:'c-twoweek', month:'c-month', future:'c-future', notice:'c-notice', completed:'c-done' }[b];
+  }
+  function countdownLabel(r, b) {
+    if (b === 'completed') return '✓ Done';
+    if (b === 'notice') {
+      const d = daysBetween(TODAY, r.availOnD);
+      return `in ${d}d*`;
+    }
+    const days = daysBetween(TODAY, r.availOnD);
+    if (days < 0)  return `${Math.abs(days)}d LATE`;
+    if (days === 0) return 'TODAY';
+    return `in ${days}d`;
+  }
+
+  const visibleUnits = dueFilter ? units.filter(r => bucket(r) === dueFilter) : units;
+
+  const rows = visibleUnits.map(r => {
+    const b = bucket(r);
+    const days = r.availOnD ? daysBetween(TODAY, r.availOnD) : null;
+    const moDate = r.moveOutD ? fmtDate(r.last_move_out) : '—';
+    const turnTarget = r.turnTargD ? fmtDate(r.unit_turn_target_date) : '—';
+    return `<div class="due-row">
+      <span class="countdown ${countdownClass(b)}">${countdownLabel(r, b)}</span>
+      <span class="due-prop">${r.property_name||'—'}</span>
+      <span>${r.unit||'—'}</span>
+      <span>${r.bed_and_bath||'—'}</span>
+      <span>${statusBadge(r.unit_status)}</span>
+      <span class="due-meta">Move-out: ${moDate} &nbsp;·&nbsp; Target: ${turnTarget}</span>
+      <span><span class="badge ${r.isVacant?(r.effectiveRentReady==='Yes'?'yes':'no'):'notice'}">${r.isVacant?r.rent_ready:'N/A'}</span></span>
+      <span>${fmtDate(r.available_on)}</span>
+    </div>`;
+  }).join('') || '<div style="padding:20px;color:#7f8fa4;text-align:center;">No units in this category</div>';
+
+  document.getElementById('turnsDueContent').innerHTML = `
+    <div class="due-buckets">
+      ${bucketCard('overdue','overdue','Past Due','available date passed')}
+      ${bucketCard('week','week','Due This Week','next 7 days')}
+      ${bucketCard('twoweek','twoweek','Due in 2 Weeks','8 – 14 days')}
+      ${bucketCard('month','month','Due This Month','15 – 30 days')}
+      ${bucketCard('future','future','Future','30+ days out')}
+      ${bucketCard('completed','completed','Turn Complete','rent ready ✓')}
+      ${bucketCard('notice','notice','Not Yet Vacant','notice given')}
+    </div>
+    ${dueFilter ? `<div style="margin-bottom:12px;font-size:0.82rem;color:#2e86c1;cursor:pointer;" onclick="filterDue(null)">← Show all</div>` : ''}
+    <div class="due-list">
+      <div class="due-list-header">
+        <span>Due In</span><span>Property</span><span>Unit</span><span>Bed/Ba</span>
+        <span>Status</span><span>Move-Out / Target</span><span>Rent Ready</span><span>Available On</span>
+      </div>
+      ${rows}
+    </div>
+    <div style="font-size:0.75rem;color:#a0aebb;margin-top:10px;">* Not Yet Vacant: tenant has given notice, available date is projected</div>`;
+}
+
+function filterDue(id) {
+  dueFilter = dueFilter === id ? null : id;
+  buildTurnsDue();
+}
+
+// ── BY PROPERTY ───────────────────────────────────────────────────────────────
+function buildByProperty() {
+  const props = {};
+  allData.forEach(r => {
+    const p = r.property_name || '?';
+    if (!props[p]) props[p] = { city: r.city, state: r.state, units: [] };
+    props[p].units.push(r);
+  });
+
+  const rows = Object.entries(props).sort((a,b) => b[1].units.length - a[1].units.length).map(([p,v]) => {
+    const u = v.units;
+    const total = u.length;
+    const ready = u.filter(x => x.effectiveRentReady === 'Yes').length;
+    const availNow = u.filter(x => x.isAvailNow).length;
+    const hasMI = u.filter(x => x.isVacant && x.nextMIDate).length;
+    const vacantUnrented = u.filter(x => x.unit_status === 'Vacant-Unrented').length;
+    const dvs = u.filter(x => x.dv !== null).map(x => x.dv);
+    const avgV = dvs.length ? Math.round(dvs.reduce((s,d)=>s+d,0)/dvs.length) : null;
+    return `<tr>
+      <td><strong>${p}</strong></td>
+      <td>${v.city||'—'}, ${v.state||''}</td>
+      <td><strong>${total}</strong></td>
+      <td><span class="badge yes">${ready}</span></td>
+      <td><span class="badge no">${total-ready}</span></td>
+      <td>${vacantUnrented > 0 ? `<span class="badge avail">${vacantUnrented}</span>` : '—'}</td>
+      <td>${availNow > 0 ? `<span class="badge avail">${availNow}</span>` : '—'}</td>
+      <td>${hasMI > 0 ? `<span class="badge movein">${hasMI}</span>` : '—'}</td>
+      <td>${avgV !== null ? avgV + 'd' : '—'}</td>
+    </tr>`;
+  }).join('');
+
+  document.getElementById('propContent').innerHTML = `
+    <table class="prop-table">
+      <thead><tr>
+        <th>Property</th><th>City</th><th>Total</th>
+        <th>Rent Ready</th><th>Not Ready</th>
+        <th>Vacant Unrented</th><th>Avail Now</th>
+        <th>Move-In Sched.</th><th>Avg Days Vac.</th>
+      </tr></thead>
+      <tbody>${rows}</tbody>
+    </table>`;
+}
+
+// ── DETAIL ────────────────────────────────────────────────────────────────────
+function buildDetailFilters() {
+  const cities = [...new Set(allData.map(r => r.city).filter(Boolean))].sort();
+  const propSel = document.getElementById('filterProp');
+  const citySel = document.getElementById('filterCity');
+  propSel.innerHTML = '<option value="">All Properties</option>';
+  citySel.innerHTML = '<option value="">All Cities</option>';
+  cities.forEach(c => { const o = document.createElement('option'); o.value=c; o.textContent=c; citySel.appendChild(o); });
+  const props = [...new Set(allData.map(r => r.property_name).filter(Boolean))].sort();
+  props.forEach(p => { const o = document.createElement('option'); o.value=p; o.textContent=p; propSel.appendChild(o); });
+}
+
+function filterTable() {
+  const search  = document.getElementById('searchBox').value.toLowerCase();
+  const ready   = document.getElementById('filterReady').value;
+  const city    = document.getElementById('filterCity').value;
+  const prop    = document.getElementById('filterProp').value;
+  const status  = document.getElementById('filterStatus').value;
+  const avail   = document.getElementById('filterAvail').value;
+  const nm = TODAY.getMonth(), ny = TODAY.getFullYear();
+
+  filteredData = allData.filter(r => {
+    if (search && !`${r.property_name} ${r.unit} ${r.city} ${r.address||''}`.toLowerCase().includes(search)) return false;
+    if (ready  && r.rent_ready !== ready) return false;
+    if (city   && r.city !== city) return false;
+    if (prop   && r.property_name !== prop) return false;
+    if (status && r.unit_status !== status) return false;
+    if (avail === 'overdue'     && !r.isAvailNow) return false;
+    if (avail === 'this_month'  && !(r.availOnD && r.availOnD.getMonth()===nm && r.availOnD.getFullYear()===ny)) return false;
+    if (avail === 'next_month'  && !(r.availOnD && r.availOnD.getMonth()===(nm+1)%12)) return false;
+    if (avail === 'movein'      && !r.nextMIDate) return false;
+    return true;
+  });
+  applySortAndRender();
+}
+
+function daysBadge(d) {
+  if (d === null || d === undefined) return `<span class="days-badge d-none">—</span>`;
+  if (d < 0)    return `<span class="days-badge d-future">${Math.abs(d)}d future</span>`;
+  if (d >= 120) return `<span class="days-badge d-long">${d}d</span>`;
+  if (d >= 45)  return `<span class="days-badge d-mid">${d}d</span>`;
+  return `<span class="days-badge d-short">${d}d</span>`;
+}
+
+function statusBadge(s) {
+  const r = s || '';
+  if (r.includes('Vacant') && r.includes('Unrented')) return `<span class="badge no">${r}</span>`;
+  if (r.includes('Vacant') && r.includes('Rented'))   return `<span class="badge avail">${r}</span>`;
+  if (r.includes('Notice') && r.includes('Unrented')) return `<span class="badge notice">${r}</span>`;
+  return `<span class="badge future">${r}</span>`;
+}
+function availBadge(s) {
+  const m = { 'Available Now':'avail','Available Soon':'soon','Upcoming':'future','Move-In Scheduled':'movein','Move-In Imminent':'avail','Not Yet Vacant':'notice' };
+  return `<span class="badge ${m[s]||'future'}">${s}</span>`;
+}
+
+function renderDetail() {
+  const rows = filteredData.map(r => {
+    const overdue = r.isAvailNow && r.dv > 30;
+    const rrBadge = r.isVacant
+      ? `<span class="badge ${r.rent_ready==='Yes'?'yes':'no'}">${r.rent_ready||'—'}</span>`
+      : `<span class="badge notice">N/A</span>`;
+    return `<tr class="${overdue?'overdue':''}">
+      <td>${r.property_name||'—'}</td>
+      <td><strong>${r.unit||'—'}</strong></td>
+      <td>${r.city||'—'}</td>
+      <td>${r.bed_and_bath||'—'}</td>
+      <td>${statusBadge(r.unit_status)}</td>
+      <td>${rrBadge}</td>
+      <td>${daysBadge(r.dv)}</td>
+      <td>${fmtDate(r.last_move_out)}</td>
+      <td>${fmtDate(r.unit_turn_target_date)}</td>
+      <td>${fmtDate(r.available_on)}</td>
+      <td>${fmtDate(r.next_move_in)}</td>
+      <td>${r.schd_rent ? '$' + Number(r.schd_rent).toLocaleString('en-US',{minimumFractionDigits:0}) : '—'}</td>
+      <td>${availBadge(r.availStatus)}</td>
+    </tr>`;
+  }).join('') || '<tr><td colspan="13" style="text-align:center;color:#4a6a8a;padding:24px;">No matching records</td></tr>';
+  document.getElementById('detailTbody').innerHTML = rows;
+  document.getElementById('rowCount').textContent = `Showing ${filteredData.length} of ${allData.length} units`;
+}
+
+function sortTable(col) {
+  if (sortCol === col) { sortAsc = !sortAsc; } else { sortCol = col; sortAsc = true; }
+  document.querySelectorAll('.data-table th').forEach((th, i) => {
+    th.classList.toggle('sorted', i === col);
+    const sp = th.querySelector('span');
+    if (sp) sp.textContent = i === col ? (sortAsc ? ' ↑' : ' ↓') : ' ⇅';
+  });
+  applySortAndRender();
+}
+
+function getVal(r, col) {
+  const fields = ['property_name','unit','city','bed_and_bath','unit_status','rent_ready','dv','moveOutD','turnTargD','availOnD','nextMIDate','schd_rent','availStatus'];
+  const v = r[fields[col]];
+  if (v instanceof Date) return v.getTime();
+  if (v === null || v === undefined || v === '') return -Infinity;
+  if (typeof v === 'string' && !isNaN(v)) return parseFloat(v);
+  return v;
+}
+
+function applySortAndRender() {
+  filteredData.sort((a, b) => {
+    const va = getVal(a, sortCol), vb = getVal(b, sortCol);
+    if (va < vb) return sortAsc ? -1 : 1;
+    if (va > vb) return sortAsc ? 1 : -1;
+    return 0;
+  });
+  renderDetail();
+}
+
+function showTab(id, el) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  el.classList.add('active');
+}
+
+loadData();
+</script>
+</body>
+</html>
