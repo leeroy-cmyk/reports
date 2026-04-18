@@ -57,7 +57,7 @@ async function fetchWorkOrders() {
 
 async function fetchBudget() {
   console.log('Fetching property directory...');
-  const RM_CAPEX_ACCOUNTS = ['52001','52002','52003','80121','80122','80130','80140'];
+  const RM_CAPEX_ACCOUNTS = ['52001','52002','52003','80121','80122','80130','80140','53001','53002','53003','54001','54002','54003'];
   const today = new Date().toISOString().slice(0, 10);
 
   const propData = await fetchAF('/api/v2/reports/property_directory.json', { property_visibility: 'active' });

@@ -177,7 +177,7 @@ const CF_CLASS = '25056';
 const CF_PROP  = '25068';
 
 const WAGE_MAP = {
-  'leeroy':25.50,'hippen':28.44,'hoard':27.00,'lakins':24.00,'leonides':25.00,
+  'leeroy':50.00,'hippen':28.44,'hoard':27.00,'lakins':24.00,'leonides':25.00,
   'magoon':25.00,'mcquaid':25.00,'miller':28.09,'mitchell':27.00,'robson':23.00,
   'saldana':28.40,'sanchez':25.50,'uttke':34.00,'chavez':27.00,'cramer':25.75,
   'deckard':22.00,'dunlap':23.00,'gutierrez':25.00,'higley':31.99,
@@ -209,29 +209,36 @@ function getRampPropCode(tx) {
 
 function getRampClassLabel(tx) {
   const e = (tx.accounting_categories || []).find(c => c.tracking_category_remote_id === 'QuickbooksClass');
-  if (!e) return null;
+  if (!e) return 'Unclassified';
   const v = e.category_name;
-  if (!v || !v.includes(':')) return null;
+  if (!v || !v.includes(':')) return 'Unclassified';
   const sub = v.split(':').slice(1).join(':').trim();
   if (sub.startsWith('R&M'))  return 'R&M';
   if (sub === 'Turn')         return 'Turn';
   if (sub === 'Grounds')      return 'Grounds';
   if (sub.toLowerCase().includes('capex') || sub === 'Non-Discretionary CapEx') return 'CapEx';
-  return null;
+  return 'Unclassified';
 }
 
 function getQBTClassLabel(classVal) {
-  if (!classVal || !classVal.includes(':')) return null;
+  if (!classVal || !classVal.includes(':')) return 'Unclassified';
   const sub = classVal.split(':').slice(1).join(':');
   if (sub.startsWith('R&M'))  return 'R&M';
   if (sub === 'Turn')         return 'Turn';
   if (sub === 'Grounds')      return 'Grounds';
   if (sub.toLowerCase().includes('capex')) return 'CapEx';
-  return null;
+  return 'Unclassified';
 }
 
+const CAT_ACCOUNTS = {
+  'R&M':    ['52001','52002','52003'],
+  'CapEx':  ['80121','80122','80130','80140'],
+  'Turn':   ['53001','53002','53003'],
+  'Grounds':['54001','54002','54003'],
+};
+
 function getPropBudget(pCode, classLabel) {
-  if (!RAW_BUDGET || !pCode) return 0;
+  if (!RAW_BUDGET || !pCode || !CAT_ACCOUNTS[classLabel]) return 0;
   const matching = RAW_BUDGET.properties.filter(p => propCode(p.property_name) === pCode);
   const getVal = (p, acct) => {
     const a = p.accounts[acct]; if (!a) return 0;
@@ -239,10 +246,7 @@ function getPropBudget(pCode, classLabel) {
     if (BUDGET_MODE === 'monthly') return parseFloat(a.annual || 0) / 12;
     return parseFloat(a.ytd_budget || 0);
   };
-  const sum = (accts) => matching.reduce((s, p) => s + accts.reduce((ss, a) => ss + getVal(p, a), 0), 0);
-  if (classLabel === 'R&M')   return sum(['52001','52002','52003']);
-  if (classLabel === 'CapEx') return sum(['80121','80122','80130','80140']);
-  return 0;
+  return matching.reduce((s, p) => s + CAT_ACCOUNTS[classLabel].reduce((ss, a) => ss + getVal(p, a), 0), 0);
 }
 
 function budgetPeriodLabel() {
@@ -299,10 +303,10 @@ function varHtml(budget, actual) {
 }
 
 function buildActuals() {
-  const actuals = {}; // propCode → { R&M, Turn, Grounds, CapEx }
-  const init = () => ({ 'R&M': 0, 'Turn': 0, 'Grounds': 0, 'CapEx': 0 });
+  const actuals = {}; // propCode → { R&M, Turn, Grounds, CapEx, Unclassified }
+  const init = () => ({ 'R&M': 0, 'Turn': 0, 'Grounds': 0, 'CapEx': 0, 'Unclassified': 0 });
 
-  // QBT labor
+  // QBT labor — include ALL valid employees with a recognized property
   if (RAW_QBT) {
     Object.values(RAW_QBT.timesheets).forEach(t => {
       if (t.date < PERIOD_FROM || t.date > PERIOD_TO) return;
@@ -310,23 +314,22 @@ function buildActuals() {
       if (!emp) return;
       const classVal = t.customfields?.[CF_CLASS] || '';
       const propVal  = t.customfields?.[CF_PROP]  || '';
-      const cls = getQBTClassLabel(classVal);
-      if (!cls) return;
       const pCode = propCode(propVal.includes(':') ? propVal.split(':')[0].trim() : propVal);
       if (!pCode || !BUDGET_CODES.has(pCode)) return;
+      const cls = getQBTClassLabel(classVal);
       if (!actuals[pCode]) actuals[pCode] = init();
       actuals[pCode][cls] += (t.duration / 3600) * emp.wage;
     });
   }
 
-  // Ramp materials
+  // Ramp materials — include ALL transactions with a recognized property
   if (RAW_RAMP) {
     RAW_RAMP.transactions.forEach(tx => {
       const d = tx.user_transaction_time.slice(0,10);
       if (d < PERIOD_FROM || d > PERIOD_TO) return;
       const pCode = getRampPropCode(tx);
-      const cls   = getRampClassLabel(tx);
-      if (!pCode || !cls) return;
+      if (!pCode) return;
+      const cls = getRampClassLabel(tx);
       if (!actuals[pCode]) actuals[pCode] = init();
       actuals[pCode][cls] += tx.amount;
     });
@@ -337,8 +340,7 @@ function buildActuals() {
 
 function render() {
   const actuals = buildActuals();
-  const CATS = ['R&M', 'CapEx', 'Turn', 'Grounds'];
-  const HAS_BUDGET = { 'R&M': true, 'CapEx': true, 'Turn': false, 'Grounds': false };
+  const CATS = ['R&M', 'CapEx', 'Turn', 'Grounds', 'Unclassified'];
 
   // Collect all property codes that have spend OR budget > 0
   const allProps = new Set([
@@ -348,85 +350,89 @@ function render() {
 
   // Build per-prop summary
   const rows = [...allProps].map(p => {
-    const act = actuals[p] || { 'R&M': 0, 'Turn': 0, 'Grounds': 0, 'CapEx': 0 };
-    const bgt = {
-      'R&M':   getPropBudget(p, 'R&M'),
-      'CapEx':  getPropBudget(p, 'CapEx'),
-      'Turn':   0,
-      'Grounds': 0,
-    };
+    const act = actuals[p] || { 'R&M': 0, 'Turn': 0, 'Grounds': 0, 'CapEx': 0, 'Unclassified': 0 };
+    const bgt = {};
+    CATS.forEach(c => { bgt[c] = getPropBudget(p, c); });
     const totalAct = CATS.reduce((s, c) => s + act[c], 0);
-    const totalBgt = bgt['R&M'] + bgt['CapEx'];
+    const totalBgt = bgt['R&M'] + bgt['CapEx'] + bgt['Turn'] + bgt['Grounds'];
     return { p, act, bgt, totalAct, totalBgt };
   }).filter(r => r.totalAct > 0 || r.totalBgt > 0)
     .sort((a, b) => b.totalAct - a.totalAct);
 
   // Grand totals
-  const grand = { act: { 'R&M':0,'Turn':0,'Grounds':0,'CapEx':0 }, bgt: { 'R&M':0,'CapEx':0 } };
+  const grand = { act: {}, bgt: {} };
+  CATS.forEach(c => { grand.act[c] = 0; grand.bgt[c] = 0; });
   rows.forEach(r => {
-    CATS.forEach(c => { grand.act[c] += r.act[c]; });
-    grand.bgt['R&M']  += r.bgt['R&M'];
-    grand.bgt['CapEx'] += r.bgt['CapEx'];
+    CATS.forEach(c => { grand.act[c] += r.act[c]; grand.bgt[c] += r.bgt[c]; });
   });
   const grandTotalAct = CATS.reduce((s, c) => s + grand.act[c], 0);
-  const grandTotalBgt = grand.bgt['R&M'] + grand.bgt['CapEx'];
+  const grandTotalBgt = CATS.reduce((s, c) => s + grand.bgt[c], 0);
 
   // CARDS
-  const rmVar   = grand.bgt['R&M']  - grand.act['R&M'];
-  const cxVar   = grand.bgt['CapEx'] - grand.act['CapEx'];
-  const totVar  = grandTotalBgt - (grand.act['R&M'] + grand.act['CapEx']);
-  const totPct  = grandTotalBgt > 0 ? Math.round((grand.act['R&M'] + grand.act['CapEx']) / grandTotalBgt * 100) : null;
+  const budgetedAct = CATS.filter(c => c !== 'Unclassified').reduce((s,c) => s + grand.act[c], 0);
+  const totVar  = grandTotalBgt - budgetedAct;
+  const totPct  = grandTotalBgt > 0 ? Math.round(budgetedAct / grandTotalBgt * 100) : null;
   document.getElementById('asOf').textContent = budgetPeriodLabel() + ' · ' + new Date().toLocaleDateString('en-US', {month:'short',day:'numeric',year:'numeric'});
   document.getElementById('cards').innerHTML = [
-    { c: 'c-blue',   label: 'R&M + CapEx Budget',   val: fmt(grandTotalBgt),   sub: budgetPeriodLabel() + ' budget' },
-    { c: 'c-orange', label: 'R&M + CapEx Actual',    val: fmt(grand.act['R&M'] + grand.act['CapEx']), sub: 'Labor + materials' },
-    { c: totVar >= 0 ? 'c-green' : 'c-red', label: 'Variance',
+    { c: 'c-blue',   label: 'Total Budget',   val: fmt(grandTotalBgt),  sub: budgetPeriodLabel() + ' (R&M + CapEx + Turn + Grounds)' },
+    { c: 'c-orange', label: 'Total Actual',   val: fmt(grandTotalAct),  sub: 'Labor + materials (all categories)' },
+    { c: totVar >= 0 ? 'c-green' : 'c-red',  label: 'Variance',
       val: (totVar >= 0 ? '▼ ' : '▲ ') + fmt(Math.abs(totVar)),
       sub: totPct !== null ? totPct + '% of budget used' : '—' },
-    { c: 'c-purple', label: 'Turn + Grounds (actuals)', val: fmt(grand.act['Turn'] + grand.act['Grounds']), sub: 'No budget tracked' },
+    { c: 'c-purple', label: 'Unclassified',   val: fmt(grand.act['Unclassified']), sub: 'No category assigned' },
   ].map(({ c, label, val, sub }) =>
     `<div class="card ${c}"><div class="card-label">${label}</div><div class="card-value">${val}</div><div class="card-sub">${sub}</div></div>`
   ).join('');
 
-  // BVA TABLE
-  const bgtPeriod = budgetPeriodLabel() + ' Budget';
-  const thead = `<thead>
-    <tr>
-      <th class="prop-col" rowspan="2">Property</th>
-      <th class="grp" colspan="3">R&M</th>
-      <th class="grp" colspan="3">CapEx</th>
-      <th class="grp-act" colspan="2">No Budget</th>
-      <th rowspan="2" style="text-align:right">Total Actual</th>
-    </tr>
-    <tr>
-      <th>${bgtPeriod}</th><th>Actual</th><th>Variance</th>
-      <th>${bgtPeriod}</th><th>Actual</th><th>Variance</th>
-      <th>Turn</th><th>Grounds</th>
-    </tr>
-  </thead>`;
+  // BVA TABLE — show budget col only if any property has a budget for that category
+  const bgtPeriod = budgetPeriodLabel();
+  const hasTurnBgt    = rows.some(r => r.bgt['Turn'] > 0);
+  const hasGroundsBgt = rows.some(r => r.bgt['Grounds'] > 0);
+
+  const bvaColDef = (cat) => {
+    const hasBgt = rows.some(r => r.bgt[cat] > 0);
+    return hasBgt ? 3 : 1; // colspan
+  };
+
+  const theadRow1 = `<tr>
+    <th class="prop-col" rowspan="2">Property</th>
+    <th class="grp" colspan="3">R&M</th>
+    <th class="grp" colspan="3">CapEx</th>
+    <th class="grp" colspan="${hasTurnBgt ? 3 : 1}">Turn</th>
+    <th class="grp" colspan="${hasGroundsBgt ? 3 : 1}">Grounds</th>
+    <th class="grp-act" rowspan="2">Unclassified</th>
+    <th rowspan="2" style="text-align:right">Total</th>
+  </tr>`;
+  const theadRow2 = `<tr>
+    <th>${bgtPeriod} Bgt</th><th>Actual</th><th>Variance</th>
+    <th>${bgtPeriod} Bgt</th><th>Actual</th><th>Variance</th>
+    ${hasTurnBgt    ? `<th>${bgtPeriod} Bgt</th><th>Actual</th><th>Variance</th>` : '<th>Actual</th>'}
+    ${hasGroundsBgt ? `<th>${bgtPeriod} Bgt</th><th>Actual</th><th>Variance</th>` : '<th>Actual</th>'}
+  </tr>`;
+  const thead = `<thead>${theadRow1}${theadRow2}</thead>`;
+
+  const catCell = (bgt, act, showBgt) => showBgt
+    ? `<td class="bgt-val">${bgt > 0 ? fmt(bgt) : '<span class="no-bgt">—</span>'}</td>
+       <td class="act-val">${act > 0 ? fmt(act) : '—'}</td>
+       <td>${varHtml(bgt, act)}</td>`
+    : `<td class="act-val">${act > 0 ? fmt(act) : '—'}</td>`;
 
   const tbody = '<tbody>' + rows.map(r => `<tr>
     <td class="prop-name">${r.p}</td>
-    <td class="bgt-val">${r.bgt['R&M'] > 0 ? fmt(r.bgt['R&M']) : '<span class="no-bgt">—</span>'}</td>
-    <td class="act-val">${r.act['R&M'] > 0 ? fmt(r.act['R&M']) : '—'}</td>
-    <td>${varHtml(r.bgt['R&M'], r.act['R&M'])}</td>
-    <td class="bgt-val">${r.bgt['CapEx'] > 0 ? fmt(r.bgt['CapEx']) : '<span class="no-bgt">—</span>'}</td>
-    <td class="act-val">${r.act['CapEx'] > 0 ? fmt(r.act['CapEx']) : '—'}</td>
-    <td>${varHtml(r.bgt['CapEx'], r.act['CapEx'])}</td>
-    <td>${r.act['Turn'] > 0 ? fmt(r.act['Turn']) : '—'}</td>
-    <td>${r.act['Grounds'] > 0 ? fmt(r.act['Grounds']) : '—'}</td>
+    ${catCell(r.bgt['R&M'],    r.act['R&M'],    true)}
+    ${catCell(r.bgt['CapEx'],  r.act['CapEx'],  true)}
+    ${catCell(r.bgt['Turn'],   r.act['Turn'],   hasTurnBgt)}
+    ${catCell(r.bgt['Grounds'],r.act['Grounds'],hasGroundsBgt)}
+    <td>${r.act['Unclassified'] > 0 ? fmt(r.act['Unclassified']) : '—'}</td>
     <td class="act-val">${fmt(r.totalAct)}</td>
   </tr>`).join('') +
   `<tr class="tot-row">
     <td class="prop-name">Total</td>
-    <td class="bgt-val">${fmt(grand.bgt['R&M'])}</td>
-    <td class="act-val">${fmt(grand.act['R&M'])}</td>
-    <td>${varHtml(grand.bgt['R&M'], grand.act['R&M'])}</td>
-    <td class="bgt-val">${fmt(grand.bgt['CapEx'])}</td>
-    <td class="act-val">${fmt(grand.act['CapEx'])}</td>
-    <td>${varHtml(grand.bgt['CapEx'], grand.act['CapEx'])}</td>
-    <td>${fmt(grand.act['Turn'])}</td>
-    <td>${fmt(grand.act['Grounds'])}</td>
+    ${catCell(grand.bgt['R&M'],    grand.act['R&M'],    true)}
+    ${catCell(grand.bgt['CapEx'],  grand.act['CapEx'],  true)}
+    ${catCell(grand.bgt['Turn'],   grand.act['Turn'],   hasTurnBgt)}
+    ${catCell(grand.bgt['Grounds'],grand.act['Grounds'],hasGroundsBgt)}
+    <td>${fmt(grand.act['Unclassified'])}</td>
     <td class="act-val">${fmt(grandTotalAct)}</td>
   </tr></tbody>`;
   document.getElementById('bvaTable').innerHTML = thead + tbody;
