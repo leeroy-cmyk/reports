@@ -267,14 +267,21 @@ function getPropBudget(pCode, classLabel) {
     const a = p.accounts[acct]; if (!a) return 0;
     if (BUDGET_MODE === 'mtd')     return parseFloat(a.mtd_budget || 0);
     if (BUDGET_MODE === 'monthly') return parseFloat(a.annual || 0) / 12;
+    if (BUDGET_MODE === 'custom')  return parseFloat(a.annual || 0) / 365 * customDays();
     return parseFloat(a.ytd_budget || 0);
   };
   return matching.reduce((s, p) => s + CAT_ACCOUNTS[classLabel].reduce((ss, a) => ss + getVal(p, a), 0), 0);
 }
 
+function customDays() {
+  if (!PERIOD_FROM || !PERIOD_TO) return 30;
+  return Math.max(1, Math.round((new Date(PERIOD_TO) - new Date(PERIOD_FROM)) / 86400000) + 1);
+}
+
 function budgetPeriodLabel() {
   if (BUDGET_MODE === 'mtd')     return 'This Month';
   if (BUDGET_MODE === 'monthly') return 'Monthly (÷12)';
+  if (BUDGET_MODE === 'custom')  return customDays() + '-Day Budget';
   return 'YTD';
 }
 
@@ -297,9 +304,13 @@ function setPeriod(mode, btn) {
     PERIOD_TO    = now.toISOString().slice(0,10);
     BUDGET_MODE  = 'ytd';
   } else {
-    PERIOD_FROM  = document.getElementById('dateFrom').value;
-    PERIOD_TO    = document.getElementById('dateTo').value;
-    BUDGET_MODE  = 'custom';
+    const from = document.getElementById('dateFrom').value;
+    const to   = document.getElementById('dateTo').value;
+    if (!from || !to) { alert('Please enter both a start and end date.'); return; }
+    if (from > to)    { alert('Start date must be before end date.'); return; }
+    PERIOD_FROM = from;
+    PERIOD_TO   = to;
+    BUDGET_MODE = 'custom';
   }
   document.getElementById('dateFrom').value = PERIOD_FROM;
   document.getElementById('dateTo').value   = PERIOD_TO;
