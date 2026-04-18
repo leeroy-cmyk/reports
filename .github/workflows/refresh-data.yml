@@ -2,7 +2,7 @@ name: Refresh AppFolio Data
 
 on:
   schedule:
-    - cron: '0 */3 * * *'   # every 3 hours
+    - cron: '*/5 * * * *'   # every 5 minutes (GitHub minimum)
   workflow_dispatch:          # manual trigger from GitHub UI
 
 jobs:
