@@ -83,6 +83,11 @@
   .var-over { color: #c0392b; font-weight: 700; }
   .var-none { color: #bdc3c7; }
   .no-bgt   { color: #bdc3c7; font-size: 10px; }
+  .unclass-val { color: #9b59b6; }
+  .bva-table th.grp-total { background: #eaf4fb; color: #1a5276; border-bottom: 2px solid #1a5276; }
+  .tot-bgt  { color: #7f8fa4; border-left: 2px solid #d0dce8; }
+  .tot-act  { font-weight: 800; color: #1a2535; }
+  .tot-var  { }
 
   /* PROPERTY CHART CARDS */
   .prop-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
@@ -214,13 +219,7 @@ const RAMP_ACCT_CAT = {
   '53000':'Turn','53001':'Turn','53002':'Turn','53003':'Turn',
   // Grounds
   '54000':'Grounds','54001':'Grounds','54002':'Grounds','54003':'Grounds',
-  // CapEx — Nondiscretionary, Discretionary, CapEx-Turn, CapEx-Appliance, Construction, AppFolio
-  '51000':'CapEx','51001':'CapEx','51002':'CapEx','51003':'CapEx',
-  '55000':'CapEx','55001':'CapEx','55002':'CapEx','55003':'CapEx',
-  '56000':'CapEx','56001':'CapEx','56002':'CapEx','56003':'CapEx',
-  '57000':'CapEx','57001':'CapEx','57002':'CapEx','57003':'CapEx',
-  '59000':'CapEx','59001':'CapEx','59002':'CapEx',
-  '80121':'CapEx','80122':'CapEx','80130':'CapEx','80140':'CapEx',
+  // CapEx accounts — omitted (excluded from this report; separate CapEx report planned)
   // Maintenance supplies → R&M
   '67800':'R&M',
 };
@@ -244,7 +243,7 @@ function getQBTClassLabel(classVal) {
   if (sub.startsWith('R&M'))  return 'R&M';
   if (sub === 'Turn')         return 'Turn';
   if (sub === 'Grounds')      return 'Grounds';
-  if (sub.toLowerCase().includes('capex')) return 'CapEx';
+  if (sub.toLowerCase().includes('capex')) return null; // CapEx excluded from this report
   return 'Unclassified';
 }
 
@@ -252,7 +251,6 @@ const CAT_ACCOUNTS = {
   'R&M':    ['52001'],
   'Turn':   ['52002'],
   'Grounds':['52003'],
-  'CapEx':  ['80121','80122','80130','80140'],
 };
 
 // Team members allowed in Ramp (by normalized last name) + Hanzhao
@@ -328,8 +326,8 @@ function varHtml(budget, actual) {
 }
 
 function buildActuals() {
-  const actuals = {}; // propCode → { R&M, Turn, Grounds, CapEx, Unclassified }
-  const init = () => ({ 'R&M': 0, 'Turn': 0, 'Grounds': 0, 'CapEx': 0, 'Unclassified': 0 });
+  const actuals = {};
+  const init = () => ({ 'R&M': 0, 'Turn': 0, 'Grounds': 0, 'Unclassified': 0 });
 
   // QBT labor — include ALL valid employees with a recognized property
   if (RAW_QBT) {
@@ -342,6 +340,7 @@ function buildActuals() {
       const pCode = propCode(propVal.includes(':') ? propVal.split(':')[0].trim() : propVal);
       if (!pCode || !BUDGET_CODES.has(pCode)) return;
       const cls = getQBTClassLabel(classVal);
+      if (!cls) return; // CapEx excluded
       if (!actuals[pCode]) actuals[pCode] = init();
       actuals[pCode][cls] += (t.duration / 3600) * emp.wage;
     });
@@ -367,7 +366,7 @@ function buildActuals() {
 
 function render() {
   const actuals = buildActuals();
-  const CATS = ['R&M', 'CapEx', 'Turn', 'Grounds', 'Unclassified'];
+  const MAIN_CATS = ['R&M', 'Turn', 'Grounds']; // the 3 budgeted categories
 
   // Collect all property codes that have spend OR budget > 0
   const allProps = new Set([
@@ -377,34 +376,33 @@ function render() {
 
   // Build per-prop summary
   const rows = [...allProps].map(p => {
-    const act = actuals[p] || { 'R&M': 0, 'Turn': 0, 'Grounds': 0, 'CapEx': 0, 'Unclassified': 0 };
+    const act = actuals[p] || { 'R&M': 0, 'Turn': 0, 'Grounds': 0, 'Unclassified': 0 };
     const bgt = {};
-    CATS.forEach(c => { bgt[c] = getPropBudget(p, c); });
-    const totalAct = CATS.reduce((s, c) => s + act[c], 0);
-    const totalBgt = bgt['R&M'] + bgt['CapEx'] + bgt['Turn'] + bgt['Grounds'];
+    MAIN_CATS.forEach(c => { bgt[c] = getPropBudget(p, c); });
+    const totalAct = MAIN_CATS.reduce((s, c) => s + act[c], 0);
+    const totalBgt = MAIN_CATS.reduce((s, c) => s + bgt[c], 0);
     return { p, act, bgt, totalAct, totalBgt };
-  }).filter(r => r.totalAct > 0 || r.totalBgt > 0)
+  }).filter(r => r.totalAct > 0 || r.totalBgt > 0 || (r.act['Unclassified'] || 0) > 0)
     .sort((a, b) => b.totalAct - a.totalAct);
 
   // Grand totals
-  const grand = { act: {}, bgt: {} };
-  CATS.forEach(c => { grand.act[c] = 0; grand.bgt[c] = 0; });
+  const grand = { act: { 'R&M':0,'Turn':0,'Grounds':0,'Unclassified':0 }, bgt: { 'R&M':0,'Turn':0,'Grounds':0 } };
   rows.forEach(r => {
-    CATS.forEach(c => { grand.act[c] += r.act[c]; grand.bgt[c] += r.bgt[c]; });
+    MAIN_CATS.forEach(c => { grand.act[c] += r.act[c]; grand.bgt[c] += r.bgt[c]; });
+    grand.act['Unclassified'] += (r.act['Unclassified'] || 0);
   });
-  const grandTotalAct = CATS.reduce((s, c) => s + grand.act[c], 0);
-  const grandTotalBgt = CATS.reduce((s, c) => s + grand.bgt[c], 0);
+  const grandTotalAct = MAIN_CATS.reduce((s, c) => s + grand.act[c], 0);
+  const grandTotalBgt = MAIN_CATS.reduce((s, c) => s + grand.bgt[c], 0);
 
   // CARDS
-  const budgetedAct = CATS.filter(c => c !== 'Unclassified').reduce((s,c) => s + grand.act[c], 0);
-  const totVar  = grandTotalBgt - budgetedAct;
-  const totPct  = grandTotalBgt > 0 ? Math.round(budgetedAct / grandTotalBgt * 100) : null;
+  const totVar  = grandTotalBgt - grandTotalAct;
+  const totPct  = grandTotalBgt > 0 ? Math.round(grandTotalAct / grandTotalBgt * 100) : null;
   const _ts = RAW_BUDGET?.fetched_at || RAW_QBT?.fetched_at;
   const _d = _ts ? new Date(_ts) : null;
   document.getElementById('asOf').textContent = _d ? ('Updated ' + _d.toLocaleDateString('en-US', {month:'short',day:'numeric',year:'numeric'}) + ' · ' + _d.toLocaleTimeString('en-US', {hour:'numeric',minute:'2-digit'})) : '—';
   document.getElementById('cards').innerHTML = [
-    { c: 'c-blue',   label: 'Total Budget',   val: fmt(grandTotalBgt),  sub: budgetPeriodLabel() + ' (R&M + CapEx + Turn + Grounds)' },
-    { c: 'c-orange', label: 'Total Actual',   val: fmt(grandTotalAct),  sub: 'Labor + materials (all categories)' },
+    { c: 'c-blue',   label: 'Total Budget',   val: fmt(grandTotalBgt),  sub: budgetPeriodLabel() + ' · R&M + Turn + Grounds' },
+    { c: 'c-orange', label: 'Total Actual',   val: fmt(grandTotalAct),  sub: 'R&M + Turn + Grounds (labor + materials)' },
     { c: totVar >= 0 ? 'c-green' : 'c-red',  label: 'Variance',
       val: (totVar >= 0 ? '▼ ' : '▲ ') + fmt(Math.abs(totVar)),
       sub: totPct !== null ? totPct + '% of budget used' : '—' },
@@ -413,30 +411,24 @@ function render() {
     `<div class="card ${c}"><div class="card-label">${label}</div><div class="card-value">${val}</div><div class="card-sub">${sub}</div></div>`
   ).join('');
 
-  // BVA TABLE — show budget col only if any property has a budget for that category
+  // BVA TABLE
   const bgtPeriod = budgetPeriodLabel();
   const hasTurnBgt    = rows.some(r => r.bgt['Turn'] > 0);
   const hasGroundsBgt = rows.some(r => r.bgt['Grounds'] > 0);
 
-  const bvaColDef = (cat) => {
-    const hasBgt = rows.some(r => r.bgt[cat] > 0);
-    return hasBgt ? 3 : 1; // colspan
-  };
-
   const theadRow1 = `<tr>
     <th class="prop-col" rowspan="2">Property</th>
     <th class="grp" colspan="3">R&M</th>
-    <th class="grp" colspan="3">CapEx</th>
     <th class="grp" colspan="${hasTurnBgt ? 3 : 1}">Turn</th>
     <th class="grp" colspan="${hasGroundsBgt ? 3 : 1}">Grounds</th>
     <th class="grp-act" rowspan="2">Unclassified</th>
-    <th rowspan="2" style="text-align:right">Total</th>
+    <th class="grp grp-total" colspan="3">Total</th>
   </tr>`;
   const theadRow2 = `<tr>
     <th>${bgtPeriod} Bgt</th><th>Actual</th><th>Variance</th>
-    <th>${bgtPeriod} Bgt</th><th>Actual</th><th>Variance</th>
     ${hasTurnBgt    ? `<th>${bgtPeriod} Bgt</th><th>Actual</th><th>Variance</th>` : '<th>Actual</th>'}
     ${hasGroundsBgt ? `<th>${bgtPeriod} Bgt</th><th>Actual</th><th>Variance</th>` : '<th>Actual</th>'}
+    <th>${bgtPeriod} Bgt</th><th>Actual</th><th>Variance</th>
   </tr>`;
   const thead = `<thead>${theadRow1}${theadRow2}</thead>`;
 
@@ -446,28 +438,31 @@ function render() {
        <td>${varHtml(bgt, act)}</td>`
     : `<td class="act-val">${act > 0 ? fmt(act) : '—'}</td>`;
 
+  const totalCell = (bgt, act) =>
+    `<td class="bgt-val tot-bgt">${bgt > 0 ? fmt(bgt) : '<span class="no-bgt">—</span>'}</td>
+     <td class="act-val tot-act">${act > 0 ? fmt(act) : '—'}</td>
+     <td class="tot-var">${varHtml(bgt, act)}</td>`;
+
   const tbody = '<tbody>' + rows.map(r => `<tr>
     <td class="prop-name">${r.p}</td>
     ${catCell(r.bgt['R&M'],    r.act['R&M'],    true)}
-    ${catCell(r.bgt['CapEx'],  r.act['CapEx'],  true)}
     ${catCell(r.bgt['Turn'],   r.act['Turn'],   hasTurnBgt)}
     ${catCell(r.bgt['Grounds'],r.act['Grounds'],hasGroundsBgt)}
-    <td>${r.act['Unclassified'] > 0 ? fmt(r.act['Unclassified']) : '—'}</td>
-    <td class="act-val">${fmt(r.totalAct)}</td>
+    <td class="unclass-val">${r.act['Unclassified'] > 0 ? fmt(r.act['Unclassified']) : '—'}</td>
+    ${totalCell(r.totalBgt, r.totalAct)}
   </tr>`).join('') +
   `<tr class="tot-row">
     <td class="prop-name">Total</td>
     ${catCell(grand.bgt['R&M'],    grand.act['R&M'],    true)}
-    ${catCell(grand.bgt['CapEx'],  grand.act['CapEx'],  true)}
     ${catCell(grand.bgt['Turn'],   grand.act['Turn'],   hasTurnBgt)}
     ${catCell(grand.bgt['Grounds'],grand.act['Grounds'],hasGroundsBgt)}
-    <td>${fmt(grand.act['Unclassified'])}</td>
-    <td class="act-val">${fmt(grandTotalAct)}</td>
+    <td class="unclass-val">${fmt(grand.act['Unclassified'])}</td>
+    ${totalCell(grandTotalBgt, grandTotalAct)}
   </tr></tbody>`;
   document.getElementById('bvaTable').innerHTML = thead + tbody;
 
   // PROPERTY CHARTS
-  const CHART_MAIN = ['R&M', 'Turn', 'Grounds', 'CapEx'];
+  const CHART_MAIN = ['R&M', 'Turn', 'Grounds'];
   const propHtml = rows.map(r => {
     const catRows = [...CHART_MAIN, ...(r.act['Unclassified'] > 0 ? ['Unclassified'] : [])].map(cat => {
       const act = r.act[cat];
