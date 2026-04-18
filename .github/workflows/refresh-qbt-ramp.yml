@@ -1,14 +1,14 @@
-name: Refresh AppFolio Data
+name: Refresh QBTime and Ramp
 
 on:
   schedule:
-    - cron: '*/5 * * * *'   # every 5 minutes (GitHub minimum)
+    - cron: '*/30 * * * *'   # every 30 minutes
   workflow_dispatch:
 
 jobs:
   fetch:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 15
     permissions:
       contents: write
 
@@ -19,11 +19,12 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Fetch AppFolio data
+      - name: Fetch QBTime and Ramp data
         env:
-          AF_USERNAME: ${{ secrets.AF_USERNAME }}
-          AF_PASSWORD: ${{ secrets.AF_PASSWORD }}
-          FETCH_ONLY: appfolio
+          QBT_TOKEN: ${{ secrets.QBT_TOKEN }}
+          RAMP_CLIENT_ID: ${{ secrets.RAMP_CLIENT_ID }}
+          RAMP_CLIENT_SECRET: ${{ secrets.RAMP_CLIENT_SECRET }}
+          FETCH_ONLY: qbt-ramp
         run: node scripts/fetch-data.js
 
       - name: Commit updated data
@@ -31,5 +32,5 @@ jobs:
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data/
-          git diff --cached --quiet || git commit -m "chore: refresh AppFolio data $(date -u '+%Y-%m-%d %H:%M UTC')"
+          git diff --cached --quiet || git commit -m "chore: refresh QBTime+Ramp data $(date -u '+%Y-%m-%d %H:%M UTC')"
           git push

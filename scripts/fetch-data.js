@@ -272,26 +272,32 @@ async function fetchRampTransactions() {
   save('ramp.json', { ok: true, fetched_at: new Date().toISOString(), transactions });
 }
 
-(async () => {
-  let anyFailed = false;
-  // AppFolio data — always run first; failures here are fatal
-  try {
-    await fetchTurnVac();
-    await fetchWorkOrders();
-    await fetchBudget();
-  } catch(e) {
-    console.error('AppFolio fetch failed:', e.message);
-    process.exit(1);
-  }
-  // QBT and Ramp — isolated so AppFolio data always commits even if these fail
-  try { await fetchQBTime(); }
-  catch(e) { console.error('QBTime fetch failed (non-fatal):', e.message); anyFailed = true; }
-  try { await fetchRampTransactions(); }
-  catch(e) { console.error('Ramp fetch failed (non-fatal):', e.message); anyFailed = true; }
+// FETCH_ONLY env var controls what runs — used by split workflows:
+//   'appfolio'  → turnvac + workorders + budget only (fast, every 5 min)
+//   'qbt-ramp'  → QBTime + Ramp only (slower, every 30 min)
+//   unset/'all' → everything
+const FETCH_ONLY = process.env.FETCH_ONLY || 'all';
 
-  if (anyFailed) {
-    console.log('Completed with some non-fatal errors.');
-    process.exit(0); // still exit 0 so git commit runs
+(async () => {
+  if (FETCH_ONLY !== 'qbt-ramp') {
+    try {
+      await fetchTurnVac();
+      await fetchWorkOrders();
+      await fetchBudget();
+    } catch(e) {
+      console.error('AppFolio fetch failed:', e.message);
+      process.exit(1);
+    }
   }
-  console.log('All data fetched successfully.');
+
+  if (FETCH_ONLY !== 'appfolio') {
+    let anyFailed = false;
+    try { await fetchQBTime(); }
+    catch(e) { console.error('QBTime fetch failed (non-fatal):', e.message); anyFailed = true; }
+    try { await fetchRampTransactions(); }
+    catch(e) { console.error('Ramp fetch failed (non-fatal):', e.message); anyFailed = true; }
+    if (anyFailed) console.log('Completed with some non-fatal errors.');
+  }
+
+  console.log('Done.');
 })();
