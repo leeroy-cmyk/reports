@@ -14,10 +14,6 @@
   .fetched-at { font-size: 0.78rem; color: #7f8fa4; }
   .fetched-at span { color: #1a5276; font-weight: 600; }
 
-  .refresh-btn { background: #1a5276; border: 1px solid #154360; color: #ffffff; padding: 7px 18px; border-radius: 6px; cursor: pointer; font-size: 0.85rem; display: flex; align-items: center; gap: 7px; transition: background .15s; }
-  .refresh-btn:hover { background: #1f618d; }
-  .refresh-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-  .refresh-btn .spin { display: inline-block; animation: spin 0.8s linear infinite; }
   @keyframes spin { to { transform: rotate(360deg); } }
 
   .loading-bar { height: 3px; background: #e8edf2; }
@@ -152,9 +148,6 @@
   </div>
   <div class="header-right">
     <div class="fetched-at" id="fetchedAt">—</div>
-    <button class="refresh-btn" id="refreshBtn" onclick="loadData()">
-      <span id="refreshIcon">↻</span> Refresh
-    </button>
   </div>
 </header>
 <div class="loading-bar"><div class="loading-bar-fill" id="loadingBar"></div></div>
@@ -239,14 +232,9 @@ let filteredData = [];
 let sortCol = 9, sortAsc = true;
 
 async function loadData() {
-  const btn = document.getElementById('refreshBtn');
-  const icon = document.getElementById('refreshIcon');
   const bar = document.getElementById('loadingBar');
   const errBar = document.getElementById('errorBar');
 
-  btn.disabled = true;
-  icon.textContent = '↻';
-  icon.classList.add('spin');
   bar.style.width = '40%';
   errBar.style.display = 'none';
 
@@ -286,7 +274,7 @@ async function loadData() {
     });
 
     const ts = new Date(json.fetched_at);
-    document.getElementById('fetchedAt').innerHTML = 'Updated <span>' + ts.toLocaleTimeString() + '</span>';
+    document.getElementById('fetchedAt').innerHTML = 'Updated <span>' + ts.toLocaleDateString('en-US', {month:'short',day:'numeric',year:'numeric'}) + ' · ' + ts.toLocaleTimeString('en-US', {hour:'numeric',minute:'2-digit'}) + '</span>';
     bar.style.width = '100%';
     setTimeout(() => { bar.style.width = '0'; bar.style.transition = 'none'; setTimeout(() => bar.style.transition = 'width 0.4s ease', 50); }, 600);
 
@@ -300,9 +288,6 @@ async function loadData() {
     errBar.style.display = 'block';
     errBar.textContent = '⚠ Could not fetch data: ' + e.message + ' — data may not have been fetched yet — check GitHub Actions';
   } finally {
-    btn.disabled = false;
-    icon.classList.remove('spin');
-    icon.textContent = '↻';
   }
 }
 

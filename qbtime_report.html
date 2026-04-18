@@ -126,7 +126,6 @@
   </div>
   <div class="header-right">
     <span class="as-of" id="asOf"></span>
-    <button class="btn-icon" id="btnRefresh" onclick="loadData()"><span id="refreshIcon">↻</span> Refresh</button>
   </div>
 </div>
 
@@ -400,7 +399,9 @@ function render() {
   const budgetedAct = CATS.filter(c => c !== 'Unclassified').reduce((s,c) => s + grand.act[c], 0);
   const totVar  = grandTotalBgt - budgetedAct;
   const totPct  = grandTotalBgt > 0 ? Math.round(budgetedAct / grandTotalBgt * 100) : null;
-  document.getElementById('asOf').textContent = budgetPeriodLabel() + ' · ' + new Date().toLocaleDateString('en-US', {month:'short',day:'numeric',year:'numeric'});
+  const _ts = RAW_BUDGET?.fetched_at || RAW_QBT?.fetched_at;
+  const _d = _ts ? new Date(_ts) : null;
+  document.getElementById('asOf').textContent = _d ? ('Updated ' + _d.toLocaleDateString('en-US', {month:'short',day:'numeric',year:'numeric'}) + ' · ' + _d.toLocaleTimeString('en-US', {hour:'numeric',minute:'2-digit'})) : '—';
   document.getElementById('cards').innerHTML = [
     { c: 'c-blue',   label: 'Total Budget',   val: fmt(grandTotalBgt),  sub: budgetPeriodLabel() + ' (R&M + CapEx + Turn + Grounds)' },
     { c: 'c-orange', label: 'Total Actual',   val: fmt(grandTotalAct),  sub: 'Labor + materials (all categories)' },
@@ -512,11 +513,8 @@ function render() {
 }
 
 async function loadData() {
-  const btn  = document.getElementById('btnRefresh');
-  const icon = document.getElementById('refreshIcon');
   const over = document.getElementById('loadingOverlay');
   const err  = document.getElementById('errorBar');
-  btn.disabled = true; icon.className = 'spin';
   over.classList.remove('hidden'); err.classList.remove('show');
   try {
     const [qbtRes, rampRes, budgetRes] = await Promise.all([
@@ -538,7 +536,6 @@ async function loadData() {
     err.textContent = '⚠ ' + e.message;
     err.classList.add('show');
   } finally {
-    btn.disabled = false; icon.className = '';
     over.classList.add('hidden');
   }
 }

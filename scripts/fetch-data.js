@@ -160,19 +160,35 @@ async function fetchQBTime() {
     }
   }
 
-  // Fetch timesheets — last 180 days (covers full YTD + prior 6 months)
-  const endDate = new Date().toISOString().slice(0, 10);
-  const startDate = new Date(Date.now() - 180 * 86400000).toISOString().slice(0, 10);
-  const timesheets = await fetchAllQBT(
+  // Incremental timesheet fetch — merge with existing data like Ramp does
+  const qbtPath = path.join(DATA_DIR, 'qbtime.json');
+  let existing = {};
+  if (fs.existsSync(qbtPath)) {
+    try {
+      const prev = JSON.parse(fs.readFileSync(qbtPath, 'utf8'));
+      Object.assign(existing, prev.timesheets || {});
+      console.log('QBTime: loaded ' + Object.keys(existing).length + ' existing timesheets');
+    } catch(e) { console.log('QBTime: starting fresh'); }
+  }
+
+  // First run: 180-day lookback; subsequent: 14-day overlap to catch edits
+  const hasExisting = Object.keys(existing).length > 0;
+  const lookbackDays = hasExisting ? 14 : 180;
+  const endDate   = new Date().toISOString().slice(0, 10);
+  const startDate = new Date(Date.now() - lookbackDays * 86400000).toISOString().slice(0, 10);
+  console.log('QBTime: fetching timesheets ' + startDate + ' to ' + endDate + ' (' + lookbackDays + '-day window)...');
+
+  const fresh = await fetchAllQBT(
     '/api/v1/timesheets?start_date=' + startDate + '&end_date=' + endDate + '&on_the_clock=no',
     'timesheets'
   );
+  Object.assign(existing, fresh);
 
   save('qbtime.json', {
     ok: true, fetched_at: new Date().toISOString(),
-    users, jobcodes, customfields, cfItems, timesheets
+    users, jobcodes, customfields, cfItems, timesheets: existing
   });
-  console.log('QBTime: saved ' + Object.keys(timesheets).length + ' timesheets');
+  console.log('QBTime: saved ' + Object.keys(existing).length + ' timesheets (' + Object.keys(fresh).length + ' refreshed)');
 }
 
 const RAMP_CLIENT_ID     = process.env.RAMP_CLIENT_ID;
