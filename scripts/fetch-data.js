@@ -103,11 +103,82 @@ async function fetchBudget() {
   });
 }
 
+const QBT_TOKEN = process.env.QBT_TOKEN;
+const QBT_HOST = 'rest.tsheets.com';
+
+function fetchQBT(apiPath) {
+  return new Promise((resolve, reject) => {
+    const req = https.request({
+      hostname: QBT_HOST, path: apiPath, method: 'GET',
+      headers: { 'Authorization': 'Bearer ' + QBT_TOKEN, 'Accept': 'application/json' }
+    }, res => {
+      let data = '';
+      res.on('data', c => data += c);
+      res.on('end', () => {
+        try { resolve(JSON.parse(data)); }
+        catch(e) { reject(new Error('QBT parse error (' + res.statusCode + '): ' + data.slice(0, 200))); }
+      });
+    });
+    req.on('error', reject);
+    req.end();
+  });
+}
+
+async function fetchAllQBT(path, resultsKey) {
+  let page = 1, all = {};
+  while (true) {
+    const sep = path.includes('?') ? '&' : '?';
+    const res = await fetchQBT(path + sep + 'page=' + page + '&per_page=200');
+    const chunk = (res.results && res.results[resultsKey]) || {};
+    Object.assign(all, chunk);
+    if (!res.more) break;
+    page++;
+    await sleep(100);
+  }
+  return all;
+}
+
+async function fetchQBTime() {
+  if (!QBT_TOKEN) { console.log('QBT_TOKEN not set, skipping QBTime fetch.'); return; }
+  console.log('Fetching QuickBooks Time data...');
+
+  const [users, jobcodes, customfields] = await Promise.all([
+    fetchAllQBT('/api/v1/users', 'users'),
+    fetchAllQBT('/api/v1/jobcodes', 'jobcodes'),
+    fetchAllQBT('/api/v1/customfields', 'customfields'),
+  ]);
+
+  // Fetch all custom field items
+  const cfItems = {};
+  for (const cfId of Object.keys(customfields)) {
+    if (customfields[cfId].type === 'managed-list') {
+      const items = await fetchAllQBT('/api/v1/customfielditems?customfield_id=' + cfId, 'customfielditems');
+      cfItems[cfId] = items;
+      await sleep(150);
+    }
+  }
+
+  // Fetch timesheets — last 365 days
+  const endDate = new Date().toISOString().slice(0, 10);
+  const startDate = new Date(Date.now() - 365 * 86400000).toISOString().slice(0, 10);
+  const timesheets = await fetchAllQBT(
+    '/api/v1/timesheets?start_date=' + startDate + '&end_date=' + endDate + '&on_the_clock=no',
+    'timesheets'
+  );
+
+  save('qbtime.json', {
+    ok: true, fetched_at: new Date().toISOString(),
+    users, jobcodes, customfields, cfItems, timesheets
+  });
+  console.log('QBTime: saved ' + Object.keys(timesheets).length + ' timesheets');
+}
+
 (async () => {
   try {
     await fetchTurnVac();
     await fetchWorkOrders();
     await fetchBudget();
+    await fetchQBTime();
     console.log('All data fetched successfully.');
   } catch(e) {
     console.error('Fatal error:', e.message);
