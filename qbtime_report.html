@@ -259,10 +259,14 @@ function hasMarkup(classVal) {
   return classVal && classVal.includes(':');
 }
 
-// "r203:CapEx Turns" → "CapEx Turns"; "r203" → "r203 Operating"; "m5x2" → "m5x2"
+// "r203:CapEx Turns" → "CapEx Turns"; "r203:R&M-Electrical" → "R&M"; "r203" → "r203 Operating"
 function getClassLabel(classVal) {
   if (!classVal) return 'Unclassified';
-  if (classVal.includes(':')) return classVal.split(':').slice(1).join(':');
+  if (classVal.includes(':')) {
+    const sub = classVal.split(':').slice(1).join(':');
+    if (sub.startsWith('R&M')) return 'R&M';
+    return sub;
+  }
   return classVal === 'r203' ? 'r203 Operating' : classVal;
 }
 
