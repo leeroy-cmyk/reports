@@ -159,6 +159,8 @@
     <button class="range-btn active" onclick="setRange(90,this)">90d</button>
     <button class="range-btn" onclick="setRange(365,this)">365d</button>
     <button class="range-btn" onclick="setRangeYTD(this)">YTD</button>
+    <button class="range-btn" onclick="setRangeThisMonth(this)">This Mo</button>
+    <button class="range-btn" onclick="setRangeLastMonth(this)">Last Mo</button>
     <button class="btn-refresh" style="margin-left:auto" onclick="applyDateRange()">Apply</button>
   </div>
 
@@ -232,6 +234,7 @@ let RAW_QBT         = null;
 let RAW_RAMP        = null;
 let RAW_BUDGET      = null;
 let BUDGET_CODES    = new Set();
+let BUDGET_MODE     = 'ytd';  // 'ytd' | 'mtd' | 'monthly'
 let FILTERED        = [];
 let CURRENT_PIVOT_CLASS = 'All';
 let detailSort = { col: 'date', dir: 'desc' };
@@ -312,21 +315,28 @@ function getRampClassLabel(tx) {
   return sub;
 }
 
-// Get YTD budget amount for a property+class from budget.json
+// Get budget amount for a property+class.
+// BUDGET_MODE: 'mtd' = this month, 'monthly' = annual/12, 'ytd' = year-to-date
 function getPropBudget(pCode, classLabel) {
   if (!RAW_BUDGET || !pCode) return 0;
   const matching = RAW_BUDGET.properties.filter(p => propCode(p.property_name) === pCode);
-  if (classLabel === 'R&M') {
-    return matching.reduce((sum, p) =>
-      sum + ['52001','52002','52003'].reduce((s, acct) =>
-        s + parseFloat(p.accounts[acct]?.ytd_budget || 0), 0), 0);
-  }
-  if (classLabel === 'CapEx') {
-    return matching.reduce((sum, p) =>
-      sum + ['80121','80122','80130','80140'].reduce((s, acct) =>
-        s + parseFloat(p.accounts[acct]?.ytd_budget || 0), 0), 0);
-  }
+  const getVal = (p, acct) => {
+    const a = p.accounts[acct];
+    if (!a) return 0;
+    if (BUDGET_MODE === 'mtd')     return parseFloat(a.mtd_budget || 0);
+    if (BUDGET_MODE === 'monthly') return parseFloat(a.annual || 0) / 12;
+    return parseFloat(a.ytd_budget || 0);
+  };
+  const getRaw = accts => matching.reduce((sum, p) => sum + accts.reduce((s, acct) => s + getVal(p, acct), 0), 0);
+  if (classLabel === 'R&M')   return getRaw(['52001','52002','52003']);
+  if (classLabel === 'CapEx') return getRaw(['80121','80122','80130','80140']);
   return 0;
+}
+
+function budgetLabel() {
+  if (BUDGET_MODE === 'mtd')     return 'This Month Budget';
+  if (BUDGET_MODE === 'monthly') return 'Monthly Budget (÷12)';
+  return 'YTD Budget';
 }
 
 function showTab(id) {
@@ -369,6 +379,7 @@ function setRange(days, btn) {
   document.getElementById('dateTo').value = to.toISOString().slice(0,10);
   document.querySelectorAll('.range-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
+  BUDGET_MODE = 'ytd';
   applyDateRange();
 }
 
@@ -378,6 +389,32 @@ function setRangeYTD(btn) {
   document.getElementById('dateTo').value = now.toISOString().slice(0,10);
   document.querySelectorAll('.range-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
+  BUDGET_MODE = 'ytd';
+  applyDateRange();
+}
+
+function setRangeThisMonth(btn) {
+  const now = new Date();
+  const from = new Date(now.getFullYear(), now.getMonth(), 1).toISOString().slice(0,10);
+  const to   = now.toISOString().slice(0,10);
+  document.getElementById('dateFrom').value = from;
+  document.getElementById('dateTo').value   = to;
+  document.querySelectorAll('.range-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  BUDGET_MODE = 'mtd';
+  applyDateRange();
+}
+
+function setRangeLastMonth(btn) {
+  const now = new Date();
+  const firstOfThis  = new Date(now.getFullYear(), now.getMonth(), 1);
+  const lastOfLast   = new Date(firstOfThis - 1);
+  const firstOfLast  = new Date(lastOfLast.getFullYear(), lastOfLast.getMonth(), 1);
+  document.getElementById('dateFrom').value = firstOfLast.toISOString().slice(0,10);
+  document.getElementById('dateTo').value   = lastOfLast.toISOString().slice(0,10);
+  document.querySelectorAll('.range-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  BUDGET_MODE = 'monthly';
   applyDateRange();
 }
 
@@ -671,9 +708,9 @@ function renderPivotAll(props, pivot) {
       <th class="grp-header" colspan="2">Grounds</th>
       <th class="grp-header" colspan="2">CapEx</th>
       <th rowspan="2" style="text-align:right">Total</th>
-      <th rowspan="2" style="text-align:right">R&M Bgt</th>
+      <th rowspan="2" style="text-align:right" id="rmBgtHdr">R&M Bgt</th>
       <th rowspan="2" style="text-align:right">R&M Var</th>
-      <th rowspan="2" style="text-align:right">CapEx Bgt</th>
+      <th rowspan="2" style="text-align:right" id="cxBgtHdr">CapEx Bgt</th>
       <th rowspan="2" style="text-align:right">CapEx Var</th>
     </tr>
     <tr>
@@ -729,7 +766,7 @@ function renderPivotClass(props, pivot, cls, withBudget) {
   });
 
   const budgetCols = withBudget
-    ? '<th>YTD Budget</th><th>Variance</th><th>% Used</th>'
+    ? `<th>${budgetLabel()}</th><th>Variance</th><th>% Used</th>`
     : '<th colspan="3" class="cell-no-budget" style="text-align:center;font-style:italic">No budget data for this class</th>';
 
   const thead = `<thead><tr>
