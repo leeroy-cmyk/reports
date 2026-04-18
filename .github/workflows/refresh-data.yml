@@ -1,0 +1,33 @@
+name: Refresh AppFolio Data
+
+on:
+  schedule:
+    - cron: '0 */3 * * *'   # every 3 hours
+  workflow_dispatch:          # manual trigger from GitHub UI
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Fetch data from AppFolio
+        env:
+          AF_USERNAME: ${{ secrets.AF_USERNAME }}
+          AF_PASSWORD: ${{ secrets.AF_PASSWORD }}
+        run: node scripts/fetch-data.js
+
+      - name: Commit updated data
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/
+          git diff --cached --quiet || git commit -m "chore: refresh AppFolio data $(date -u '+%Y-%m-%d %H:%M UTC')"
+          git push

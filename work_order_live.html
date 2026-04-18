@@ -482,13 +482,13 @@ async function loadData() {
   errBar.classList.remove('show');
 
   try {
-    const res = await fetch('http://localhost:3001/api/workorders');
+    const res = await fetch('./data/workorders.json');
     if (!res.ok) throw new Error('Server returned ' + res.status);
     const json = await res.json();
     if (!json.ok) throw new Error(json.error || 'Unknown error');
     render(json.rows);
   } catch(e) {
-    errBar.textContent = '⚠ Failed to fetch data: ' + e.message + ' — Is server.js running? (node server.js)';
+    errBar.textContent = '⚠ Failed to fetch data: ' + e.message + ' — data may not have been fetched yet — check GitHub Actions';
     errBar.classList.add('show');
     document.getElementById('mainContent').style.display = 'none';
   } finally {

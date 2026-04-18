@@ -472,7 +472,7 @@ async function loadData() {
   errBar.classList.remove('show');
 
   try {
-    const res = await fetch('http://localhost:3001/api/budget');
+    const res = await fetch('./data/budget.json');
     if (!res.ok) throw new Error('Server returned ' + res.status);
     const json = await res.json();
     if (!json.ok) throw new Error(json.error || 'Unknown error');

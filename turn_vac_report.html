@@ -251,7 +251,7 @@ async function loadData() {
   errBar.style.display = 'none';
 
   try {
-    const resp = await fetch('http://localhost:3002/api/turnvac');
+    const resp = await fetch('./data/turnvac.json');
     bar.style.width = '80%';
     if (!resp.ok) throw new Error('HTTP ' + resp.status);
     const json = await resp.json();
@@ -298,7 +298,7 @@ async function loadData() {
   } catch(e) {
     bar.style.width = '0';
     errBar.style.display = 'block';
-    errBar.textContent = '⚠ Could not fetch data: ' + e.message + ' — make sure the server is running (turn_vac_server.js)';
+    errBar.textContent = '⚠ Could not fetch data: ' + e.message + ' — data may not have been fetched yet — check GitHub Actions';
   } finally {
     btn.disabled = false;
     icon.classList.remove('spin');
