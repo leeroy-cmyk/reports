@@ -28,7 +28,7 @@
   .error-bar { background: #fdf2f2; border: 1px solid #e8b4b4; color: #922b21; padding: 12px 20px; margin: 16px 32px; border-radius: 8px; font-size: 13px; display: none; }
   .error-bar.show { display: block; }
 
-  .container { max-width: 1500px; margin: 0 auto; padding: 28px 32px; }
+  .container { max-width: 1600px; margin: 0 auto; padding: 28px 32px; }
 
   .date-range-bar { background: #ffffff; border: 1px solid #d0dce8; border-radius: 10px; padding: 14px 20px; margin-bottom: 24px; display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
   .date-range-bar label { font-size: 12px; font-weight: 700; color: #7f8fa4; text-transform: uppercase; letter-spacing: 0.4px; }
@@ -42,17 +42,17 @@
   @media (max-width: 600px) { .cards { grid-template-columns: repeat(2, 1fr); } }
   .card { background: #ffffff; border: 1px solid #d0dce8; border-radius: 12px; padding: 18px 16px; position: relative; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
   .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; border-radius: 12px 12px 0 0; }
-  .card.c-blue::before { background: linear-gradient(90deg,#2e86c1,#5dade2); }
-  .card.c-green::before { background: linear-gradient(90deg,#1e8449,#27ae60); }
+  .card.c-blue::before   { background: linear-gradient(90deg,#2e86c1,#5dade2); }
+  .card.c-green::before  { background: linear-gradient(90deg,#1e8449,#27ae60); }
   .card.c-orange::before { background: linear-gradient(90deg,#ca6f1e,#e67e22); }
   .card.c-purple::before { background: linear-gradient(90deg,#6c3483,#9b59b6); }
-  .card.c-teal::before { background: linear-gradient(90deg,#117a65,#1abc9c); }
-  .card.c-red::before { background: linear-gradient(90deg,#c0392b,#e74c3c); }
+  .card.c-teal::before   { background: linear-gradient(90deg,#117a65,#1abc9c); }
+  .card.c-red::before    { background: linear-gradient(90deg,#c0392b,#e74c3c); }
   .card-label { font-size: 10px; font-weight: 700; color: #7f8fa4; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 8px; }
   .card-value { font-size: 28px; font-weight: 800; color: #1a2535; line-height: 1; }
   .card-sub { font-size: 11px; color: #95a5a6; margin-top: 5px; }
 
-  .tabs { display: flex; gap: 2px; border-bottom: 1px solid #d0dce8; }
+  .tabs { display: flex; gap: 2px; border-bottom: 1px solid #d0dce8; overflow-x: auto; }
   .tab { padding: 10px 18px; cursor: pointer; font-size: 13px; font-weight: 600; color: #7f8fa4; border-radius: 8px 8px 0 0; transition: all 0.15s; border: 1px solid transparent; border-bottom: none; white-space: nowrap; }
   .tab:hover { color: #1a2535; background: #f4f6f9; }
   .tab.active { color: #1a5276; background: #ffffff; border-color: #d0dce8; border-bottom-color: #ffffff; margin-bottom: -1px; }
@@ -66,11 +66,14 @@
   th.sort-desc::after { content: ' ↓'; color: #2e86c1; }
   td { padding: 9px 12px; border-bottom: 1px solid #e8ecf0; vertical-align: middle; }
   tr:hover td { background: #f0f5fb; }
+  .tot-row td { background: #f4f6f9; font-weight: 700; border-top: 2px solid #d0dce8; }
 
   .badge { padding: 2px 8px; border-radius: 12px; font-size: 10px; font-weight: 700; white-space: nowrap; }
   .st-approved { background: #d5f5e3; color: #1e8449; }
   .st-submitted { background: #d6eaf8; color: #1a5276; }
-  .st-pending { background: #fef9e7; color: #b7950b; }
+  .st-pending   { background: #fef9e7; color: #b7950b; }
+  .markup-badge { background: #fdebd0; color: #a04000; font-size: 10px; font-weight: 700; padding: 1px 6px; border-radius: 10px; }
+  .opex-badge   { background: #d6eaf8; color: #1a5276; font-size: 10px; font-weight: 700; padding: 1px 6px; border-radius: 10px; }
 
   .filter-bar { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; align-items: center; }
   .filter-bar input, .filter-bar select { background: #ffffff; border: 1px solid #d0dce8; color: #1a2535; padding: 8px 12px; border-radius: 8px; font-size: 13px; outline: none; }
@@ -78,7 +81,7 @@
   .filter-bar input:focus, .filter-bar select:focus { border-color: #2e86c1; }
   .results-count { font-size: 12px; color: #7f8fa4; margin-left: auto; font-weight: 600; }
 
-  .table-wrapper { overflow-x: auto; max-height: 580px; overflow-y: auto; border: 1px solid #d0dce8; border-radius: 8px; }
+  .table-wrapper { overflow-x: auto; max-height: 600px; overflow-y: auto; border: 1px solid #d0dce8; border-radius: 8px; }
 
   .chart-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-bottom: 24px; }
   .chart-row.two-col { grid-template-columns: 1fr 1fr; }
@@ -88,10 +91,27 @@
   .bar-item { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
   .bar-label { font-size: 12px; color: #5d6d7e; width: 160px; flex-shrink: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .bar-fill { height: 14px; border-radius: 7px; min-width: 4px; transition: width 0.3s; }
-  .bar-count { font-size: 12px; font-weight: 700; color: #1a2535; min-width: 50px; }
+  .bar-count { font-size: 12px; font-weight: 700; color: #1a2535; min-width: 70px; }
   .bar-pct { font-size: 11px; color: #7f8fa4; }
 
   .section-title { font-size: 12px; font-weight: 700; color: #1a5276; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid #d0dce8; }
+
+  /* PIVOT TABLE */
+  .pivot-wrapper { overflow-x: auto; border: 1px solid #d0dce8; border-radius: 8px; max-height: 680px; overflow-y: auto; }
+  .pivot-table { border-collapse: collapse; font-size: 12px; min-width: 100%; }
+  .pivot-table th { background: #f4f6f9; color: #7f8fa4; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px; padding: 8px 12px; border: 1px solid #d0dce8; white-space: nowrap; position: sticky; top: 0; z-index: 10; text-align: right; }
+  .pivot-table th.prop-col { text-align: left; position: sticky; left: 0; z-index: 20; background: #f4f6f9; min-width: 160px; }
+  .pivot-table td { padding: 7px 12px; border: 1px solid #e8ecf0; vertical-align: top; text-align: right; white-space: nowrap; }
+  .pivot-table td.prop-name { text-align: left; font-weight: 600; color: #1a2535; background: #ffffff; position: sticky; left: 0; z-index: 5; border-right: 2px solid #d0dce8; }
+  .pivot-table tr:hover td { background: #f0f5fb; }
+  .pivot-table tr:hover td.prop-name { background: #f0f5fb; }
+  .pivot-table .tot-row td { background: #f4f6f9; font-weight: 700; border-top: 2px solid #d0dce8; }
+  .pivot-table .tot-row td.prop-name { background: #f4f6f9; }
+  .cell-actual { font-size: 12px; font-weight: 700; color: #1a2535; }
+  .cell-markup { font-size: 10px; color: #ca6f1e; margin-top: 1px; }
+  .cell-opex { font-size: 10px; color: #2e86c1; margin-top: 1px; }
+  .pivot-legend { display: flex; gap: 20px; align-items: center; margin-bottom: 14px; font-size: 12px; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 4px; }
 </style>
 </head>
 <body>
@@ -104,7 +124,7 @@
 <div class="header">
   <div>
     <h1>Labor & Time Report — McKay Property Management</h1>
-    <div class="sub">QuickBooks Time · All employees · Last 365 days</div>
+    <div class="sub">QuickBooks Time · Field employees only · Actual & billed labor</div>
   </div>
   <div class="header-right">
     <span class="as-of" id="asOf">—</span>
@@ -124,11 +144,11 @@
     <input type="date" id="dateFrom">
     <span style="color:#95a5a6;font-size:13px">to</span>
     <input type="date" id="dateTo">
-    <button class="range-btn" onclick="setRange(7)">7d</button>
-    <button class="range-btn" onclick="setRange(30)">30d</button>
-    <button class="range-btn active" onclick="setRange(90)">90d</button>
-    <button class="range-btn" onclick="setRange(365)">365d</button>
-    <button class="range-btn" onclick="setRangeYTD()">YTD</button>
+    <button class="range-btn" onclick="setRange(7,this)">7d</button>
+    <button class="range-btn" onclick="setRange(30,this)">30d</button>
+    <button class="range-btn active" onclick="setRange(90,this)">90d</button>
+    <button class="range-btn" onclick="setRange(365,this)">365d</button>
+    <button class="range-btn" onclick="setRangeYTD(this)">YTD</button>
     <button class="btn-refresh" style="margin-left:auto" onclick="applyDateRange()">Apply</button>
   </div>
 
@@ -136,6 +156,7 @@
 
   <div class="tabs">
     <div class="tab active" onclick="showTab('overview')">Overview</div>
+    <div class="tab" onclick="showTab('pivot')">Cost by Property & Class</div>
     <div class="tab" onclick="showTab('byEmployee')">By Employee</div>
     <div class="tab" onclick="showTab('byProperty')">By Property</div>
     <div class="tab" onclick="showTab('byClass')">By Class</div>
@@ -146,6 +167,15 @@
     <div class="chart-row" id="overviewCharts"></div>
   </div>
 
+  <div class="tab-content" id="tab-pivot">
+    <div class="pivot-legend">
+      <span><span class="legend-dot" style="background:#1a2535"></span><strong>Top line:</strong> Actual cost (hours × wage)</span>
+      <span><span class="legend-dot" style="background:#ca6f1e"></span><strong>Orange:</strong> Billed to property (50% markup)</span>
+      <span><span class="legend-dot" style="background:#2e86c1"></span><strong>Blue:</strong> Operating expense (no markup)</span>
+    </div>
+    <div class="pivot-wrapper"><table class="pivot-table" id="pivotTable"></table></div>
+  </div>
+
   <div class="tab-content" id="tab-byEmployee">
     <div class="section-title">Hours & Labor Cost by Employee</div>
     <div class="table-wrapper"><table id="empTable"></table></div>
@@ -153,13 +183,13 @@
 
   <div class="tab-content" id="tab-byProperty">
     <div class="chart-row two-col" id="propCharts"></div>
-    <div class="section-title">Hours by Property</div>
+    <div class="section-title">Hours & Cost by Property</div>
     <div class="table-wrapper"><table id="propTable"></table></div>
   </div>
 
   <div class="tab-content" id="tab-byClass">
     <div class="chart-row two-col" id="classCharts"></div>
-    <div class="section-title">Hours by Class</div>
+    <div class="section-title">Hours & Cost by Class</div>
     <div class="table-wrapper"><table id="classTable"></table></div>
   </div>
 
@@ -185,24 +215,73 @@ const CF_CLASS = '25056';
 const CF_PROP  = '25068';
 const CF_SVC   = '25054';
 const CF_MILES = '25250';
-const CF_BILL  = '25070';
 const CF_WO    = '2748416';
 
+// Accurate wages from "team wages v6" Google Sheet
+const WAGE_MAP = {
+  'leeroy':     50.00,
+  'hippen':     28.44,
+  'hoard':      27.00,
+  'lakins':     24.00,
+  'leonides':   25.00,
+  'magoon':     25.00,
+  'mcquaid':    25.00,
+  'miller':     28.09,
+  'mitchell':   27.00,
+  'robson':     23.00,
+  'saldana':    28.40,
+  'sanchez':    25.50,
+  'uttke':      34.00,
+  'chavez':     27.00,
+  'cramer':     25.75,
+  'deckard':    22.00,
+  'dunlap':     23.00,
+  'gutierrez':  25.00,
+  'higley':     31.99,
+};
+
+function getEmployeeInfo(user) {
+  if (!user) return null;
+  const raw = (user.display_name || '').trim();
+  // Outright Clean LLC = LeeRoy
+  if (raw.toLowerCase().includes('outright')) return { name: 'LeeRoy', wage: 50.00 };
+  // Extract last name from "First Last" format
+  const parts = raw.split(/\s+/);
+  const lastName = parts[parts.length - 1].toLowerCase().replace(/[^a-z]/g, '');
+  const wage = WAGE_MAP[lastName];
+  if (wage === undefined) return null; // vendor — exclude
+  return { name: raw, wage };
+}
+
+// Class "r203:CapEx Turns" → billed to property → 50% markup
+// Class "r203" exactly → operating expense → no markup
+function hasMarkup(classVal) {
+  return classVal && classVal.includes(':');
+}
+
+// "r203:CapEx Turns" → "CapEx Turns"; "r203" → "r203 Operating"; "m5x2" → "m5x2"
+function getClassLabel(classVal) {
+  if (!classVal) return 'Unclassified';
+  if (classVal.includes(':')) return classVal.split(':').slice(1).join(':');
+  return classVal === 'r203' ? 'r203 Operating' : classVal;
+}
+
+// "rl16 (96):rl16-D10" → "rl16 (96)"; "r203" → "r203"
+function getPropLabel(propVal) {
+  if (!propVal) return 'Unassigned';
+  return propVal.includes(':') ? propVal.split(':')[0].trim() : propVal;
+}
+
 function showTab(id) {
-  const tabs = ['overview','byEmployee','byProperty','byClass','detail'];
+  const tabs = ['overview','pivot','byEmployee','byProperty','byClass','detail'];
   document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('active', tabs[i] === id));
   document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
   document.getElementById('tab-' + id).classList.add('active');
 }
 
 function fmtHours(sec) { return (sec / 3600).toFixed(1) + 'h'; }
-function fmtCost(n) { return '$' + n.toLocaleString('en-US', {minimumFractionDigits:0, maximumFractionDigits:0}); }
-
-function cfItemName(cfItems, cfId, rawVal) {
-  if (!rawVal) return '';
-  // rawVal might be "name" or "id:name" — return as-is since QBT returns name strings
-  return rawVal;
-}
+function fmtCost(n)  { return '$' + Math.round(n).toLocaleString('en-US'); }
+function fmtCostSm(n){ return '$' + Math.round(n).toLocaleString('en-US'); }
 
 function stClass(s) {
   if (!s) return '';
@@ -212,250 +291,329 @@ function stClass(s) {
   return 'st-pending';
 }
 
-function setRange(days) {
+function setRange(days, btn) {
   const to = new Date();
   const from = new Date(Date.now() - days * 86400000);
   document.getElementById('dateFrom').value = from.toISOString().slice(0,10);
   document.getElementById('dateTo').value = to.toISOString().slice(0,10);
   document.querySelectorAll('.range-btn').forEach(b => b.classList.remove('active'));
-  event.target.classList.add('active');
+  btn.classList.add('active');
   applyDateRange();
 }
 
-function setRangeYTD() {
+function setRangeYTD(btn) {
   const now = new Date();
   document.getElementById('dateFrom').value = now.getFullYear() + '-01-01';
   document.getElementById('dateTo').value = now.toISOString().slice(0,10);
   document.querySelectorAll('.range-btn').forEach(b => b.classList.remove('active'));
-  event.target.classList.add('active');
+  btn.classList.add('active');
   applyDateRange();
 }
 
 function applyDateRange() {
   if (!RAW) return;
-  const from = document.getElementById('dateFrom').value;
-  const to = document.getElementById('dateTo').value;
-  render(RAW, from, to);
+  render(RAW, document.getElementById('dateFrom').value, document.getElementById('dateTo').value);
 }
 
-function barChart(title, entries, color, totalSec, fmt) {
+function barChart(title, entries, color, fmtFn) {
   const max = entries[0]?.[1] || 1;
   const rows = entries.slice(0, 14).map(([label, val]) => `
     <div class="bar-item">
       <div class="bar-label" title="${label}">${label}</div>
       <div class="bar-fill" style="width:${Math.round(val/max*200)}px;background:${color}"></div>
-      <div class="bar-count">${fmt(val)}</div>
-      <div class="bar-pct">${totalSec ? Math.round(val/totalSec*100)+'%' : ''}</div>
+      <div class="bar-count">${fmtFn(val)}</div>
     </div>`).join('');
   return `<div class="mini-chart"><h3>${title}</h3>${rows}</div>`;
 }
 
-function makeTable(headers, rows) {
-  const thead = '<thead><tr>' + headers.map(h =>
-    `<th onclick="sortDetail('${h.key}')" class="${detailSort.col===h.key?'sort-'+detailSort.dir:''}">${h.label}</th>`
-  ).join('') + '</tr></thead>';
-  const tbody = '<tbody>' + rows.map(r =>
-    `<tr>${headers.map(h => `<td>${r[h.key] ?? ''}</td>`).join('')}</tr>`
-  ).join('') + '</tbody>';
-  return thead + tbody;
-}
-
 function render(data, fromDate, toDate) {
-  const { users, jobcodes, customfields, cfItems, timesheets } = data;
+  const { users, jobcodes, timesheets } = data;
 
-  // Filter by date range
+  // Filter by date + employees only
   const sheets = Object.values(timesheets).filter(t => {
     if (fromDate && t.date < fromDate) return false;
     if (toDate && t.date > toDate) return false;
-    return true;
+    const emp = getEmployeeInfo(users[t.user_id]);
+    return emp !== null;
   });
 
-  const totalSec = sheets.reduce((s, t) => s + (t.duration || 0), 0);
-  const totalHrs = totalSec / 3600;
-  const approved = sheets.filter(t => t.state === 'APPROVED').length;
-
-  // Compute cost: duration * pay_rate
-  let totalCost = 0;
-  sheets.forEach(t => {
+  // Enrich each sheet entry
+  const enriched = sheets.map(t => {
     const u = users[t.user_id];
-    const rate = u ? (u.pay_rate || 0) : 0;
-    totalCost += (t.duration / 3600) * rate;
+    const emp = getEmployeeInfo(u);
+    const hrs = t.duration / 3600;
+    const classVal = t.customfields?.[CF_CLASS] || '';
+    const propVal  = t.customfields?.[CF_PROP]  || '';
+    const markup = hasMarkup(classVal) ? 1.5 : 1.0;
+    const actual = hrs * emp.wage;
+    const billed = actual * markup;
+    return {
+      ...t,
+      _name:    emp.name,
+      _wage:    emp.wage,
+      _hrs:     hrs,
+      _actual:  actual,
+      _billed:  billed,
+      _markup:  markup > 1,
+      _class:   classVal,
+      _classLabel: getClassLabel(classVal),
+      _prop:    propVal,
+      _propLabel: getPropLabel(propVal),
+      _svc:     t.customfields?.[CF_SVC]  || '',
+      _miles:   t.customfields?.[CF_MILES]|| '',
+      _wo:      t.customfields?.[CF_WO]   || '',
+      _jobcode: jobcodes[t.jobcode_id]?.name || '',
+    };
   });
 
-  const uniqueEmps = new Set(sheets.map(t => t.user_id)).size;
-  const avgHrsPerEmp = uniqueEmps ? totalHrs / uniqueEmps : 0;
+  const totalHrs    = enriched.reduce((s,t) => s + t._hrs, 0);
+  const totalActual = enriched.reduce((s,t) => s + t._actual, 0);
+  const totalBilled = enriched.reduce((s,t) => s + t._billed, 0);
+  const totalMarkupAmt = totalBilled - totalActual;
+  const uniqueEmps  = new Set(enriched.map(t => t._name)).size;
+  const approved    = enriched.filter(t => t.state === 'APPROVED').length;
 
-  // HEADER
-  document.getElementById('badgeTotal').textContent = totalHrs.toFixed(0) + ' hrs';
+  document.getElementById('badgeTotal').textContent = totalHrs.toFixed(0) + ' hrs · ' + fmtCost(totalBilled) + ' billed';
   document.getElementById('asOf').textContent = 'As of ' + new Date().toLocaleDateString('en-US', {year:'numeric',month:'short',day:'numeric'});
 
-  // CARDS
   document.getElementById('cards').innerHTML = [
-    {c:'c-blue',  label:'Total Hours',     val: totalHrs.toFixed(1) + 'h',   sub: sheets.length + ' timesheet entries'},
-    {c:'c-green', label:'Est. Labor Cost', val: fmtCost(totalCost),           sub: 'Based on pay rates'},
-    {c:'c-purple',label:'Active Employees',val: uniqueEmps,                   sub: 'In selected period'},
-    {c:'c-teal',  label:'Avg Hrs / Employee', val: avgHrsPerEmp.toFixed(1)+'h', sub: 'In selected period'},
-    {c:'c-orange',label:'Approved',        val: approved,                     sub: Math.round(approved/sheets.length*100)+'% of entries'},
-    {c:'c-red',   label:'Pending / Other', val: sheets.length - approved,     sub: 'Not yet approved'},
+    {c:'c-blue',   label:'Total Hours',      val: totalHrs.toFixed(1) + 'h',   sub: enriched.length + ' timesheet entries'},
+    {c:'c-green',  label:'Actual Labor Cost', val: fmtCost(totalActual),         sub: 'Hours × wage rate'},
+    {c:'c-orange', label:'Billed to Properties', val: fmtCost(totalBilled),      sub: '50% markup on property work'},
+    {c:'c-red',    label:'Markup Amount',     val: fmtCost(totalMarkupAmt),      sub: 'Billed − actual'},
+    {c:'c-purple', label:'Active Employees',  val: uniqueEmps,                   sub: 'In selected period'},
+    {c:'c-teal',   label:'Approved Entries',  val: approved,                     sub: Math.round(approved/enriched.length*100) + '% of entries'},
   ].map(({c,label,val,sub}) =>
     `<div class="card ${c}"><div class="card-label">${label}</div><div class="card-value">${val}</div><div class="card-sub">${sub}</div></div>`
   ).join('');
 
-  // BY EMPLOYEE
-  const empMap = {};
-  sheets.forEach(t => {
-    const uid = t.user_id;
-    const u = users[uid];
-    const name = u ? u.display_name : 'User ' + uid;
-    if (!empMap[uid]) empMap[uid] = { name, hrs: 0, cost: 0, entries: 0, payRate: u ? u.pay_rate : 0 };
-    empMap[uid].hrs += t.duration / 3600;
-    empMap[uid].cost += (t.duration / 3600) * (u ? u.pay_rate || 0 : 0);
-    empMap[uid].entries++;
+  // --- OVERVIEW CHARTS ---
+  const empTotals = {};
+  const clsTotals = {};
+  const propTotals = {};
+  enriched.forEach(t => {
+    empTotals[t._name]       = (empTotals[t._name]  || 0) + t._billed;
+    clsTotals[t._classLabel] = (clsTotals[t._classLabel] || 0) + t._billed;
+    propTotals[t._propLabel] = (propTotals[t._propLabel] || 0) + t._billed;
   });
-  const empRows = Object.values(empMap).sort((a,b) => b.hrs - a.hrs);
-
-  // BY CLASS
-  const classMap = {};
-  sheets.forEach(t => {
-    const cls = t.customfields?.[CF_CLASS] || 'Unclassified';
-    if (!classMap[cls]) classMap[cls] = { cls, hrs: 0, entries: 0 };
-    classMap[cls].hrs += t.duration / 3600;
-    classMap[cls].entries++;
-  });
-  const classRows = Object.values(classMap).sort((a,b) => b.hrs - a.hrs);
-
-  // BY PROPERTY
-  const propMap = {};
-  sheets.forEach(t => {
-    const prop = t.customfields?.[CF_PROP] || jobcodes[t.jobcode_id]?.name || 'Unknown';
-    if (!propMap[prop]) propMap[prop] = { prop, hrs: 0, entries: 0 };
-    propMap[prop].hrs += t.duration / 3600;
-    propMap[prop].entries++;
-  });
-  const propRows = Object.values(propMap).sort((a,b) => b.hrs - a.hrs);
-
-  // OVERVIEW CHARTS
+  const sortDesc = obj => Object.entries(obj).sort((a,b) => b[1]-a[1]);
   document.getElementById('overviewCharts').innerHTML =
-    barChart('Hours by Employee', empRows.map(r => [r.name, r.hrs * 3600]), '#2e86c1', totalSec, fmtHours) +
-    barChart('Hours by Class', classRows.map(r => [r.cls, r.hrs * 3600]), '#27ae60', totalSec, fmtHours) +
-    barChart('Hours by Property', propRows.slice(0, 14).map(r => [r.prop, r.hrs * 3600]), '#8e44ad', totalSec, fmtHours);
+    barChart('Billed Cost by Employee', sortDesc(empTotals),  '#2e86c1', fmtCost) +
+    barChart('Billed Cost by Class',    sortDesc(clsTotals),  '#27ae60', fmtCost) +
+    barChart('Billed Cost by Property', sortDesc(propTotals).slice(0,14), '#8e44ad', fmtCost);
 
-  // EMPLOYEE TABLE
-  document.getElementById('empTable').innerHTML = makeTable(
-    [{key:'name',label:'Employee'},{key:'hrs',label:'Hours'},{key:'cost',label:'Est. Cost'},{key:'rate',label:'Pay Rate'},{key:'entries',label:'Entries'}],
-    empRows.map(r => ({ name: r.name, hrs: r.hrs.toFixed(1) + 'h', cost: fmtCost(r.cost), rate: r.payRate ? '$'+r.payRate+'/hr' : '—', entries: r.entries }))
-  );
+  // --- PIVOT TABLE ---
+  renderPivot(enriched);
 
-  // PROPERTY CHARTS + TABLE
-  document.getElementById('propCharts').innerHTML =
-    barChart('Top Properties by Hours', propRows.slice(0,14).map(r=>[r.prop, r.hrs*3600]), '#8e44ad', totalSec, fmtHours) +
-    barChart('Top Properties by Entries', propRows.slice(0,14).sort((a,b)=>b.entries-a.entries).map(r=>[r.prop,r.entries*3600/r.hrs > 0 ? r.entries : r.entries]), '#e67e22', null, v => v + ' entries');
-  document.getElementById('propTable').innerHTML = makeTable(
-    [{key:'prop',label:'Property/Unit'},{key:'hrs',label:'Hours'},{key:'entries',label:'Entries'},{key:'pct',label:'% of Total'}],
-    propRows.map(r => ({ prop: r.prop, hrs: r.hrs.toFixed(1)+'h', entries: r.entries, pct: Math.round(r.hrs/totalHrs*100)+'%' }))
-  );
-
-  // CLASS CHARTS + TABLE
-  document.getElementById('classCharts').innerHTML =
-    barChart('Hours by Class', classRows.map(r=>[r.cls, r.hrs*3600]), '#27ae60', totalSec, fmtHours) +
-    barChart('Entries by Class', classRows.sort((a,b)=>b.entries-a.entries).map(r=>[r.cls,r.entries]), '#1abc9c', null, v => v + ' entries');
-  document.getElementById('classTable').innerHTML = makeTable(
-    [{key:'cls',label:'Class'},{key:'hrs',label:'Hours'},{key:'entries',label:'Entries'},{key:'pct',label:'% of Total'}],
-    classRows.sort((a,b)=>b.hrs-a.hrs).map(r => ({ cls: r.cls, hrs: r.hrs.toFixed(1)+'h', entries: r.entries, pct: Math.round(r.hrs/totalHrs*100)+'%' }))
-  );
-
-  // POPULATE FILTER DROPDOWNS
-  const empSel = document.getElementById('filterEmployee');
-  empSel.innerHTML = '<option value="">All Employees</option>' +
-    empRows.map(r => `<option>${r.name}</option>`).join('');
-  const clsSel = document.getElementById('filterClass');
-  clsSel.innerHTML = '<option value="">All Classes</option>' +
-    classRows.map(r => `<option>${r.cls}</option>`).join('');
-  const stSel = document.getElementById('filterState');
-  const states = [...new Set(sheets.map(t => t.state))].sort();
-  stSel.innerHTML = '<option value="">All States</option>' + states.map(s => `<option>${s}</option>`).join('');
-
-  FILTERED = sheets.map(t => {
-    const u = users[t.user_id];
-    return {
-      ...t,
-      _empName: u ? u.display_name : 'User ' + t.user_id,
-      _payRate: u ? u.pay_rate || 0 : 0,
-      _jobcodeName: jobcodes[t.jobcode_id]?.name || '',
-      _class: t.customfields?.[CF_CLASS] || '',
-      _prop: t.customfields?.[CF_PROP] || '',
-      _svc: t.customfields?.[CF_SVC] || '',
-      _miles: t.customfields?.[CF_MILES] || '',
-      _bill: t.customfields?.[CF_BILL] || '',
-      _wo: t.customfields?.[CF_WO] || '',
-    };
+  // --- BY EMPLOYEE ---
+  const empMap = {};
+  enriched.forEach(t => {
+    if (!empMap[t._name]) empMap[t._name] = { name: t._name, wage: t._wage, hrs: 0, actual: 0, billed: 0, entries: 0 };
+    empMap[t._name].hrs    += t._hrs;
+    empMap[t._name].actual += t._actual;
+    empMap[t._name].billed += t._billed;
+    empMap[t._name].entries++;
   });
+  const empRows = Object.values(empMap).sort((a,b) => b.billed - a.billed);
+  const empThead = '<thead><tr><th>Employee</th><th>Wage</th><th>Hours</th><th>Actual Cost</th><th>Billed (50% mkup)</th><th>Entries</th></tr></thead>';
+  const empTbody = '<tbody>' + empRows.map(r =>
+    `<tr><td>${r.name}</td><td>$${r.wage}/hr</td><td>${r.hrs.toFixed(1)}h</td><td>${fmtCost(r.actual)}</td><td>${fmtCost(r.billed)}</td><td>${r.entries}</td></tr>`
+  ).join('') +
+  `<tr class="tot-row"><td>Total</td><td>—</td><td>${totalHrs.toFixed(1)}h</td><td>${fmtCost(totalActual)}</td><td>${fmtCost(totalBilled)}</td><td>${enriched.length}</td></tr>` +
+  '</tbody>';
+  document.getElementById('empTable').innerHTML = empThead + empTbody;
 
+  // --- BY PROPERTY ---
+  const propMap = {};
+  enriched.forEach(t => {
+    const k = t._propLabel;
+    if (!propMap[k]) propMap[k] = { prop: k, hrs: 0, actual: 0, billed: 0, entries: 0 };
+    propMap[k].hrs    += t._hrs;
+    propMap[k].actual += t._actual;
+    propMap[k].billed += t._billed;
+    propMap[k].entries++;
+  });
+  const propRows = Object.values(propMap).sort((a,b) => b.billed - a.billed);
+  document.getElementById('propCharts').innerHTML =
+    barChart('Billed Cost by Property', propRows.map(r=>[r.prop, r.billed]), '#8e44ad', fmtCost) +
+    barChart('Hours by Property',       propRows.map(r=>[r.prop, r.hrs * 3600]), '#e67e22', fmtHours);
+  const propThead2 = '<thead><tr><th>Property</th><th>Hours</th><th>Actual Cost</th><th>Billed</th><th>% of Total</th></tr></thead>';
+  const propTbody2 = '<tbody>' + propRows.map(r =>
+    `<tr><td>${r.prop}</td><td>${r.hrs.toFixed(1)}h</td><td>${fmtCost(r.actual)}</td><td>${fmtCost(r.billed)}</td><td>${Math.round(r.billed/totalBilled*100)}%</td></tr>`
+  ).join('') + '</tbody>';
+  document.getElementById('propTable').innerHTML = propThead2 + propTbody2;
+
+  // --- BY CLASS ---
+  const classMap = {};
+  enriched.forEach(t => {
+    const k = t._classLabel;
+    if (!classMap[k]) classMap[k] = { cls: k, markup: t._markup, hrs: 0, actual: 0, billed: 0, entries: 0 };
+    classMap[k].hrs    += t._hrs;
+    classMap[k].actual += t._actual;
+    classMap[k].billed += t._billed;
+    classMap[k].entries++;
+  });
+  const classRows = Object.values(classMap).sort((a,b) => b.billed - a.billed);
+  document.getElementById('classCharts').innerHTML =
+    barChart('Billed Cost by Class', classRows.map(r=>[r.cls, r.billed]), '#27ae60', fmtCost) +
+    barChart('Hours by Class',       classRows.map(r=>[r.cls, r.hrs * 3600]), '#1abc9c', fmtHours);
+  const clsThead = '<thead><tr><th>Class</th><th>Type</th><th>Hours</th><th>Actual Cost</th><th>Billed</th><th>% of Total</th></tr></thead>';
+  const clsTbody = '<tbody>' + classRows.map(r =>
+    `<tr><td>${r.cls}</td><td>${r.markup ? '<span class="markup-badge">+50% markup</span>' : '<span class="opex-badge">OpEx</span>'}</td><td>${r.hrs.toFixed(1)}h</td><td>${fmtCost(r.actual)}</td><td>${fmtCost(r.billed)}</td><td>${Math.round(r.billed/totalBilled*100)}%</td></tr>`
+  ).join('') + '</tbody>';
+  document.getElementById('classTable').innerHTML = clsThead + clsTbody;
+
+  // --- FILTER DROPDOWNS ---
+  document.getElementById('filterEmployee').innerHTML = '<option value="">All Employees</option>' +
+    empRows.map(r => `<option>${r.name}</option>`).join('');
+  const classLabels = [...new Set(enriched.map(t => t._classLabel))].sort();
+  document.getElementById('filterClass').innerHTML = '<option value="">All Classes</option>' +
+    classLabels.map(c => `<option>${c}</option>`).join('');
+  const states = [...new Set(enriched.map(t => t.state))].sort();
+  document.getElementById('filterState').innerHTML = '<option value="">All States</option>' +
+    states.map(s => `<option>${s}</option>`).join('');
+
+  FILTERED = enriched;
   sortAndRenderDetail();
   document.getElementById('mainContent').style.display = 'block';
+}
+
+function renderPivot(enriched) {
+  // Build sets of unique properties and class labels
+  const propSet = new Set(enriched.map(t => t._propLabel));
+  const clsSet  = new Set(enriched.map(t => t._classLabel));
+  const props   = [...propSet].filter(p => p !== 'Unassigned').sort();
+  const classes = [...clsSet].sort();
+
+  // Build pivot data: prop → class → {actual, billed, hrs}
+  const pivot = {};
+  const colTotals = {};
+  props.forEach(p => { pivot[p] = {}; });
+  classes.forEach(c => { colTotals[c] = { actual: 0, billed: 0 }; });
+
+  enriched.forEach(t => {
+    const p = t._propLabel, c = t._classLabel;
+    if (p === 'Unassigned') return;
+    if (!pivot[p][c]) pivot[p][c] = { actual: 0, billed: 0, hrs: 0, markup: t._markup };
+    pivot[p][c].actual += t._actual;
+    pivot[p][c].billed += t._billed;
+    pivot[p][c].hrs    += t._hrs;
+    colTotals[c].actual += t._actual;
+    colTotals[c].billed += t._billed;
+  });
+
+  // Row totals
+  const rowTotals = {};
+  props.forEach(p => {
+    rowTotals[p] = { actual: 0, billed: 0 };
+    classes.forEach(c => {
+      if (pivot[p][c]) {
+        rowTotals[p].actual += pivot[p][c].actual;
+        rowTotals[p].billed += pivot[p][c].billed;
+      }
+    });
+  });
+  const grandActual = props.reduce((s,p) => s + rowTotals[p].actual, 0);
+  const grandBilled = props.reduce((s,p) => s + rowTotals[p].billed, 0);
+
+  // Render
+  const thead = `<thead><tr>
+    <th class="prop-col">Property</th>
+    ${classes.map(c => `<th>${c}</th>`).join('')}
+    <th>Total Actual</th><th>Total Billed</th>
+  </tr></thead>`;
+
+  const tbody = '<tbody>' + props.map(p => {
+    const cells = classes.map(c => {
+      const cell = pivot[p][c];
+      if (!cell || cell.actual === 0) return '<td></td>';
+      const isMarkup = cell.markup;
+      return `<td>
+        <div class="cell-actual">${fmtCostSm(cell.actual)}</div>
+        <div class="${isMarkup ? 'cell-markup' : 'cell-opex'}">${isMarkup ? '→ ' + fmtCostSm(cell.billed) + ' billed' : 'OpEx'}</div>
+      </td>`;
+    }).join('');
+    return `<tr>
+      <td class="prop-name">${p}</td>
+      ${cells}
+      <td><div class="cell-actual">${fmtCostSm(rowTotals[p].actual)}</div></td>
+      <td><div class="cell-actual">${fmtCostSm(rowTotals[p].billed)}</div></td>
+    </tr>`;
+  }).join('') +
+  `<tr class="tot-row">
+    <td class="prop-name">Total</td>
+    ${classes.map(c => `<td>
+      <div class="cell-actual">${colTotals[c].actual > 0 ? fmtCostSm(colTotals[c].actual) : ''}</div>
+      ${colTotals[c].billed !== colTotals[c].actual && colTotals[c].billed > 0 ? `<div class="cell-markup">→ ${fmtCostSm(colTotals[c].billed)}</div>` : ''}
+    </td>`).join('')}
+    <td>${fmtCostSm(grandActual)}</td>
+    <td>${fmtCostSm(grandBilled)}</td>
+  </tr>` +
+  '</tbody>';
+
+  document.getElementById('pivotTable').innerHTML = thead + tbody;
 }
 
 function applyFilters() {
   if (!FILTERED.length) return;
   const search = (document.getElementById('searchInput').value || '').toLowerCase();
-  const emp = document.getElementById('filterEmployee').value;
-  const cls = document.getElementById('filterClass').value;
+  const emp   = document.getElementById('filterEmployee').value;
+  const cls   = document.getElementById('filterClass').value;
   const state = document.getElementById('filterState').value;
 
   let rows = FILTERED;
-  if (emp) rows = rows.filter(t => t._empName === emp);
-  if (cls) rows = rows.filter(t => t._class === cls);
+  if (emp)   rows = rows.filter(t => t._name === emp);
+  if (cls)   rows = rows.filter(t => t._classLabel === cls);
   if (state) rows = rows.filter(t => t.state === state);
   if (search) rows = rows.filter(t => {
-    const blob = [t._empName, t._prop, t._class, t._svc, t.notes, t._wo, t._jobcodeName].join(' ').toLowerCase();
+    const blob = [t._name, t._propLabel, t._classLabel, t._svc, t.notes, t._wo, t._jobcode].join(' ').toLowerCase();
     return blob.includes(search);
   });
 
   renderDetailTable(rows);
-  document.getElementById('resultsCount').textContent = rows.length.toLocaleString() + ' of ' + FILTERED.length.toLocaleString() + ' entries';
+  document.getElementById('resultsCount').textContent = rows.length.toLocaleString() + ' of ' + FILTERED.length.toLocaleString();
 }
 
 function sortDetail(col) {
   if (detailSort.col === col) detailSort.dir = detailSort.dir === 'asc' ? 'desc' : 'asc';
   else { detailSort.col = col; detailSort.dir = 'asc'; }
-  sortAndRenderDetail();
-}
-
-function sortAndRenderDetail() {
   applyFilters();
 }
+
+function sortAndRenderDetail() { applyFilters(); }
 
 function renderDetailTable(rows) {
   const { col, dir } = detailSort;
   const sorted = [...rows].sort((a, b) => {
     let av = a[col] ?? '', bv = b[col] ?? '';
-    if (col === 'duration') { av = a.duration; bv = b.duration; }
+    if (col === '_hrs' || col === '_actual' || col === '_billed') { av = a[col]; bv = b[col]; }
     if (typeof av === 'number') return dir === 'asc' ? av - bv : bv - av;
     return dir === 'asc' ? String(av).localeCompare(String(bv)) : String(bv).localeCompare(String(av));
   });
 
-  const headers = [
-    {key:'date',label:'Date'},{key:'_empName',label:'Employee'},
-    {key:'_jobcodeName',label:'Jobcode'},{key:'_class',label:'Class'},
-    {key:'_prop',label:'Property'},{key:'_svc',label:'Service Item'},
-    {key:'duration',label:'Hours'},{key:'state',label:'State'},
-    {key:'_wo',label:'WO #'},{key:'_miles',label:'Miles'},{key:'notes',label:'Notes'}
+  const ths = [
+    {k:'date',     l:'Date'},    {k:'_name',  l:'Employee'},  {k:'_jobcode',l:'Jobcode'},
+    {k:'_classLabel',l:'Class'}, {k:'_propLabel',l:'Property'},{k:'_svc',   l:'Service'},
+    {k:'_hrs',     l:'Hours'},   {k:'_actual',l:'Actual $'},  {k:'_billed', l:'Billed $'},
+    {k:'state',    l:'State'},   {k:'_wo',    l:'WO #'},      {k:'_miles',  l:'Miles'},
+    {k:'notes',    l:'Notes'}
   ];
-  const thead = '<thead><tr>' + headers.map(h =>
-    `<th onclick="sortDetail('${h.key}')" class="${detailSort.col===h.key?'sort-'+detailSort.dir:''}">${h.label}</th>`
-  ).join('') + '</tr></thead>';
+  const cs = col => detailSort.col === col ? 'sort-' + detailSort.dir : '';
+  const thead = '<thead><tr>' + ths.map(h => `<th onclick="sortDetail('${h.k}')" class="${cs(h.k)}">${h.l}</th>`).join('') + '</tr></thead>';
   const tbody = '<tbody>' + sorted.map(t => `<tr>
     <td>${t.date}</td>
-    <td>${t._empName}</td>
-    <td>${t._jobcodeName}</td>
-    <td>${t._class}</td>
-    <td style="max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${t._prop}">${t._prop}</td>
+    <td>${t._name}</td>
+    <td>${t._jobcode}</td>
+    <td>${t._classLabel}</td>
+    <td style="max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${t._propLabel}">${t._propLabel}</td>
     <td>${t._svc}</td>
-    <td>${(t.duration/3600).toFixed(2)}h</td>
+    <td>${t._hrs.toFixed(2)}h</td>
+    <td>${fmtCost(t._actual)}</td>
+    <td>${t._markup ? fmtCost(t._billed) + ' <span class="markup-badge">+50%</span>' : '<span class="opex-badge">OpEx</span>'}</td>
     <td><span class="badge ${stClass(t.state)}">${t.state}</span></td>
     <td>${t._wo}</td>
     <td>${t._miles}</td>
-    <td style="max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${(t.notes||'').replace(/"/g,'&quot;')}">${t.notes||''}</td>
+    <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${(t.notes||'').replace(/"/g,'&quot;')}">${t.notes||''}</td>
   </tr>`).join('') + '</tbody>';
   document.getElementById('detailTable').innerHTML = thead + tbody;
 }
@@ -471,12 +629,11 @@ async function loadData() {
 
   try {
     const res = await fetch('./data/qbtime.json');
-    if (!res.ok) throw new Error('Server returned ' + res.status);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
     const json = await res.json();
-    if (!json.ok) throw new Error(json.error || 'Unknown error');
+    if (!json.ok) throw new Error(json.error || 'Bad data');
     RAW = json;
 
-    // Default to last 90 days
     const to = new Date().toISOString().slice(0,10);
     const from = new Date(Date.now() - 90 * 86400000).toISOString().slice(0,10);
     document.getElementById('dateFrom').value = from;
