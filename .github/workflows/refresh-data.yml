@@ -23,6 +23,8 @@ jobs:
           AF_USERNAME: ${{ secrets.AF_USERNAME }}
           AF_PASSWORD: ${{ secrets.AF_PASSWORD }}
           QBT_TOKEN: ${{ secrets.QBT_TOKEN }}
+          RAMP_CLIENT_ID: ${{ secrets.RAMP_CLIENT_ID }}
+          RAMP_CLIENT_SECRET: ${{ secrets.RAMP_CLIENT_SECRET }}
         run: node scripts/fetch-data.js
 
       - name: Commit updated data

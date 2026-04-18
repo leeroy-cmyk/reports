@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Labor & Time Report — McKay Property Management</title>
+<title>Labor & Materials Report — McKay Property Management</title>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f4f6f9; color: #1a2535; line-height: 1.5; min-height: 100vh; }
@@ -28,7 +28,7 @@
   .error-bar { background: #fdf2f2; border: 1px solid #e8b4b4; color: #922b21; padding: 12px 20px; margin: 16px 32px; border-radius: 8px; font-size: 13px; display: none; }
   .error-bar.show { display: block; }
 
-  .container { max-width: 1600px; margin: 0 auto; padding: 28px 32px; }
+  .container { max-width: 1700px; margin: 0 auto; padding: 28px 32px; }
 
   .date-range-bar { background: #ffffff; border: 1px solid #d0dce8; border-radius: 10px; padding: 14px 20px; margin-bottom: 24px; display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
   .date-range-bar label { font-size: 12px; font-weight: 700; color: #7f8fa4; text-transform: uppercase; letter-spacing: 0.4px; }
@@ -92,39 +92,49 @@
   .bar-label { font-size: 12px; color: #5d6d7e; width: 160px; flex-shrink: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .bar-fill { height: 14px; border-radius: 7px; min-width: 4px; transition: width 0.3s; }
   .bar-count { font-size: 12px; font-weight: 700; color: #1a2535; min-width: 70px; }
-  .bar-pct { font-size: 11px; color: #7f8fa4; }
 
   .section-title { font-size: 12px; font-weight: 700; color: #1a5276; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid #d0dce8; }
 
-  /* PIVOT TABLE */
+  /* PIVOT */
+  .pivot-controls { display: flex; align-items: center; gap: 16px; margin-bottom: 14px; flex-wrap: wrap; }
+  .pivot-class-bar { display: flex; gap: 4px; }
+  .pcls-btn { background: #f4f6f9; border: 1px solid #d0dce8; color: #1a5276; padding: 6px 14px; border-radius: 6px; font-size: 12px; font-weight: 700; cursor: pointer; transition: all 0.15s; }
+  .pcls-btn:hover { background: #d6eaf8; }
+  .pcls-btn.active { background: #1a5276; color: #fff; border-color: #1a5276; }
+  .pivot-legend { display: flex; gap: 16px; align-items: center; font-size: 12px; flex-wrap: wrap; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 4px; }
   .pivot-wrapper { overflow-x: auto; border: 1px solid #d0dce8; border-radius: 8px; max-height: 680px; overflow-y: auto; }
   .pivot-table { border-collapse: collapse; font-size: 12px; min-width: 100%; }
   .pivot-table th { background: #f4f6f9; color: #7f8fa4; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px; padding: 8px 12px; border: 1px solid #d0dce8; white-space: nowrap; position: sticky; top: 0; z-index: 10; text-align: right; }
-  .pivot-table th.prop-col { text-align: left; position: sticky; left: 0; z-index: 20; background: #f4f6f9; min-width: 160px; }
-  .pivot-table td { padding: 7px 12px; border: 1px solid #e8ecf0; vertical-align: top; text-align: right; white-space: nowrap; }
+  .pivot-table th.prop-col { text-align: left; position: sticky; left: 0; z-index: 20; background: #f4f6f9; min-width: 110px; }
+  .pivot-table th.grp-header { text-align: center; background: #edf2f7; color: #1a5276; font-size: 11px; border-bottom: 2px solid #2e86c1; }
+  .pivot-table td { padding: 7px 12px; border: 1px solid #e8ecf0; text-align: right; white-space: nowrap; }
   .pivot-table td.prop-name { text-align: left; font-weight: 600; color: #1a2535; background: #ffffff; position: sticky; left: 0; z-index: 5; border-right: 2px solid #d0dce8; }
   .pivot-table tr:hover td { background: #f0f5fb; }
   .pivot-table tr:hover td.prop-name { background: #f0f5fb; }
   .pivot-table .tot-row td { background: #f4f6f9; font-weight: 700; border-top: 2px solid #d0dce8; }
   .pivot-table .tot-row td.prop-name { background: #f4f6f9; }
-  .cell-actual { font-size: 12px; font-weight: 700; color: #1a2535; }
-  .cell-markup { font-size: 10px; color: #ca6f1e; margin-top: 1px; }
-  .cell-opex { font-size: 10px; color: #2e86c1; margin-top: 1px; }
-  .pivot-legend { display: flex; gap: 20px; align-items: center; margin-bottom: 14px; font-size: 12px; }
-  .legend-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 4px; }
+  .cell-budget { color: #7f8fa4; font-size: 11px; }
+  .cell-labor  { color: #1a2535; font-weight: 600; }
+  .cell-mat    { color: #6c3483; font-size: 11px; }
+  .cell-total  { font-weight: 700; }
+  .cell-var-good { color: #1e8449; font-weight: 700; font-size: 11px; }
+  .cell-var-over { color: #c0392b; font-weight: 700; font-size: 11px; }
+  .cell-markup { font-size: 10px; color: #ca6f1e; }
+  .cell-no-budget { color: #bdc3c7; font-size: 10px; }
 </style>
 </head>
 <body>
 
 <div id="loadingOverlay" class="loading-overlay">
   <div class="loading-spinner"></div>
-  <div class="loading-text">Loading QuickBooks Time data…</div>
+  <div class="loading-text">Loading labor, materials & budget data…</div>
 </div>
 
 <div class="header">
   <div>
-    <h1>Labor & Time Report — McKay Property Management</h1>
-    <div class="sub">QuickBooks Time · Field employees only · Actual & billed labor</div>
+    <h1>Labor & Materials Report — McKay Property Management</h1>
+    <div class="sub">QuickBooks Time + Ramp · Actual cost by property & class vs budget</div>
   </div>
   <div class="header-right">
     <span class="as-of" id="asOf">—</span>
@@ -168,10 +178,21 @@
   </div>
 
   <div class="tab-content" id="tab-pivot">
-    <div class="pivot-legend">
-      <span><span class="legend-dot" style="background:#1a2535"></span><strong>Top line:</strong> Actual cost (hours × wage)</span>
-      <span><span class="legend-dot" style="background:#ca6f1e"></span><strong>Orange:</strong> Billed to property (50% markup)</span>
-      <span><span class="legend-dot" style="background:#2e86c1"></span><strong>Blue:</strong> Operating expense (no markup)</span>
+    <div class="pivot-controls">
+      <div class="pivot-class-bar">
+        <button class="pcls-btn active" onclick="setPivotClass('All',this)">All</button>
+        <button class="pcls-btn" onclick="setPivotClass('R&M',this)">R&M</button>
+        <button class="pcls-btn" onclick="setPivotClass('Turn',this)">Turn</button>
+        <button class="pcls-btn" onclick="setPivotClass('Grounds',this)">Grounds</button>
+        <button class="pcls-btn" onclick="setPivotClass('CapEx',this)">CapEx</button>
+      </div>
+      <div class="pivot-legend">
+        <span><span class="legend-dot" style="background:#1a2535"></span>Labor (QBT)</span>
+        <span><span class="legend-dot" style="background:#6c3483"></span>Materials (Ramp)</span>
+        <span><span class="legend-dot" style="background:#7f8fa4"></span>YTD Budget</span>
+        <span><span class="legend-dot" style="background:#1e8449"></span>Under budget</span>
+        <span><span class="legend-dot" style="background:#c0392b"></span>Over budget</span>
+      </div>
     </div>
     <div class="pivot-wrapper"><table class="pivot-table" id="pivotTable"></table></div>
   </div>
@@ -207,8 +228,12 @@
 </div>
 
 <script>
-let RAW = null;
-let FILTERED = [];
+let RAW_QBT         = null;
+let RAW_RAMP        = null;
+let RAW_BUDGET      = null;
+let BUDGET_CODES    = new Set();
+let FILTERED        = [];
+let CURRENT_PIVOT_CLASS = 'All';
 let detailSort = { col: 'date', dir: 'desc' };
 
 const CF_CLASS = '25056';
@@ -217,49 +242,29 @@ const CF_SVC   = '25054';
 const CF_MILES = '25250';
 const CF_WO    = '2748416';
 
-// Accurate wages from "team wages v6" Google Sheet
 const WAGE_MAP = {
-  'leeroy':     50.00,
-  'hippen':     28.44,
-  'hoard':      27.00,
-  'lakins':     24.00,
-  'leonides':   25.00,
-  'magoon':     25.00,
-  'mcquaid':    25.00,
-  'miller':     28.09,
-  'mitchell':   27.00,
-  'robson':     23.00,
-  'saldana':    28.40,
-  'sanchez':    25.50,
-  'uttke':      34.00,
-  'chavez':     27.00,
-  'cramer':     25.75,
-  'deckard':    22.00,
-  'dunlap':     23.00,
-  'gutierrez':  25.00,
-  'higley':     31.99,
+  'leeroy':    50.00, 'hippen':    28.44, 'hoard':     27.00,
+  'lakins':    24.00, 'leonides':  25.00, 'magoon':    25.00,
+  'mcquaid':   25.00, 'miller':    28.09, 'mitchell':  27.00,
+  'robson':    23.00, 'saldana':   28.40, 'sanchez':   25.50,
+  'uttke':     34.00, 'chavez':    27.00, 'cramer':    25.75,
+  'deckard':   22.00, 'dunlap':    23.00, 'gutierrez': 25.00,
+  'higley':    31.99,
 };
 
 function getEmployeeInfo(user) {
   if (!user) return null;
   const raw = (user.display_name || '').trim();
-  // Outright Clean LLC = LeeRoy
   if (raw.toLowerCase().includes('outright')) return { name: 'LeeRoy', wage: 50.00 };
-  // Extract last name from "First Last" format
   const parts = raw.split(/\s+/);
   const lastName = parts[parts.length - 1].toLowerCase().replace(/[^a-z]/g, '');
   const wage = WAGE_MAP[lastName];
-  if (wage === undefined) return null; // vendor — exclude
+  if (wage === undefined) return null;
   return { name: raw, wage };
 }
 
-// Class "r203:CapEx Turns" → billed to property → 50% markup
-// Class "r203" exactly → operating expense → no markup
-function hasMarkup(classVal) {
-  return classVal && classVal.includes(':');
-}
+function hasMarkup(classVal) { return classVal && classVal.includes(':'); }
 
-// "r203:CapEx Turns" → "CapEx Turns"; "r203:R&M-Electrical" → "R&M"; "r203" → "r203 Operating"
 function getClassLabel(classVal) {
   if (!classVal) return 'Unclassified';
   if (classVal.includes(':')) {
@@ -270,10 +275,58 @@ function getClassLabel(classVal) {
   return classVal === 'r203' ? 'r203 Operating' : classVal;
 }
 
-// "rl16 (96):rl16-D10" → "rl16 (96)"; "r203" → "r203"
 function getPropLabel(propVal) {
   if (!propVal) return 'Unassigned';
   return propVal.includes(':') ? propVal.split(':')[0].trim() : propVal;
+}
+
+// Extract canonical 4-char property code: "rl16 (96)" → "rl16", "kn47 K1" → "kn47"
+function propCode(str) {
+  if (!str) return null;
+  const m = str.match(/([a-z]{1,3}\d{2,3})/i);
+  return m ? m[1].toLowerCase() : null;
+}
+
+// Extract property code from Ramp QuickbooksDepartment: "rl16 (96):rl16-D10" → "rl16"
+// Validates against known budget property codes to exclude class codes like "r203"
+function getRampPropCode(tx) {
+  const cats = tx.accounting_categories || [];
+  const entry = cats.find(c => c.tracking_category_remote_id === 'QuickbooksDepartment');
+  if (!entry) return null;
+  const code = propCode(entry.category_name);
+  return (code && BUDGET_CODES.has(code)) ? code : null;
+}
+
+// Extract class label from Ramp transaction
+function getRampClassLabel(tx) {
+  const cats = tx.accounting_categories || [];
+  const entry = cats.find(c => c.tracking_category_remote_id === 'QuickbooksClass');
+  if (!entry) return null;
+  const classVal = entry.category_name;
+  if (!classVal || !classVal.includes(':')) return null;
+  const sub = classVal.split(':').slice(1).join(':').trim();
+  if (sub.startsWith('R&M')) return 'R&M';
+  if (sub === 'Turn') return 'Turn';
+  if (sub === 'Grounds') return 'Grounds';
+  if (sub.toLowerCase().includes('capex') || sub === 'Non-Discretionary CapEx') return 'CapEx';
+  return sub;
+}
+
+// Get YTD budget amount for a property+class from budget.json
+function getPropBudget(pCode, classLabel) {
+  if (!RAW_BUDGET || !pCode) return 0;
+  const matching = RAW_BUDGET.properties.filter(p => propCode(p.property_name) === pCode);
+  if (classLabel === 'R&M') {
+    return matching.reduce((sum, p) =>
+      sum + ['52001','52002','52003'].reduce((s, acct) =>
+        s + parseFloat(p.accounts[acct]?.ytd_budget || 0), 0), 0);
+  }
+  if (classLabel === 'CapEx') {
+    return matching.reduce((sum, p) =>
+      sum + ['80121','80122','80130','80140'].reduce((s, acct) =>
+        s + parseFloat(p.accounts[acct]?.ytd_budget || 0), 0), 0);
+  }
+  return 0;
 }
 
 function showTab(id) {
@@ -283,9 +336,23 @@ function showTab(id) {
   document.getElementById('tab-' + id).classList.add('active');
 }
 
+function setPivotClass(cls, btn) {
+  CURRENT_PIVOT_CLASS = cls;
+  document.querySelectorAll('.pcls-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  if (FILTERED.length) renderPivot(FILTERED);
+}
+
 function fmtHours(sec) { return (sec / 3600).toFixed(1) + 'h'; }
-function fmtCost(n)  { return '$' + Math.round(n).toLocaleString('en-US'); }
-function fmtCostSm(n){ return '$' + Math.round(n).toLocaleString('en-US'); }
+function fmtCost(n)    { return '$' + Math.round(n).toLocaleString('en-US'); }
+function fmtCostSm(n)  { return '$' + Math.round(n).toLocaleString('en-US'); }
+function fmtVar(n)     {
+  if (n === 0) return '<span class="cell-no-budget">—</span>';
+  const s = fmtCostSm(Math.abs(n));
+  return n > 0
+    ? `<span class="cell-var-good">▼ ${s}</span>`
+    : `<span class="cell-var-over">▲ ${s}</span>`;
+}
 
 function stClass(s) {
   if (!s) return '';
@@ -315,8 +382,8 @@ function setRangeYTD(btn) {
 }
 
 function applyDateRange() {
-  if (!RAW) return;
-  render(RAW, document.getElementById('dateFrom').value, document.getElementById('dateTo').value);
+  if (!RAW_QBT) return;
+  render(RAW_QBT, document.getElementById('dateFrom').value, document.getElementById('dateTo').value);
 }
 
 function barChart(title, entries, color, fmtFn) {
@@ -330,18 +397,16 @@ function barChart(title, entries, color, fmtFn) {
   return `<div class="mini-chart"><h3>${title}</h3>${rows}</div>`;
 }
 
-function render(data, fromDate, toDate) {
-  const { users, jobcodes, timesheets } = data;
+function render(qbtData, fromDate, toDate) {
+  const { users, jobcodes, timesheets } = qbtData;
 
-  // Filter by date + employees only
+  // --- QBT ENRICHMENT ---
   const sheets = Object.values(timesheets).filter(t => {
     if (fromDate && t.date < fromDate) return false;
     if (toDate && t.date > toDate) return false;
-    const emp = getEmployeeInfo(users[t.user_id]);
-    return emp !== null;
+    return getEmployeeInfo(users[t.user_id]) !== null;
   });
 
-  // Enrich each sheet entry
   const enriched = sheets.map(t => {
     const u = users[t.user_id];
     const emp = getEmployeeInfo(u);
@@ -351,63 +416,88 @@ function render(data, fromDate, toDate) {
     const markup = hasMarkup(classVal) ? 1.5 : 1.0;
     const actual = hrs * emp.wage;
     const billed = actual * markup;
+    const pLabel = getPropLabel(propVal);
     return {
       ...t,
-      _name:    emp.name,
-      _wage:    emp.wage,
-      _hrs:     hrs,
-      _actual:  actual,
-      _billed:  billed,
-      _markup:  markup > 1,
-      _class:   classVal,
+      _name:       emp.name,
+      _wage:       emp.wage,
+      _hrs:        hrs,
+      _actual:     actual,
+      _billed:     billed,
+      _markup:     markup > 1,
+      _class:      classVal,
       _classLabel: getClassLabel(classVal),
-      _prop:    propVal,
-      _propLabel: getPropLabel(propVal),
-      _svc:     t.customfields?.[CF_SVC]  || '',
-      _miles:   t.customfields?.[CF_MILES]|| '',
-      _wo:      t.customfields?.[CF_WO]   || '',
-      _jobcode: jobcodes[t.jobcode_id]?.name || '',
+      _prop:       propVal,
+      _propLabel:  pLabel,
+      _propCode:   propCode(pLabel),
+      _svc:        t.customfields?.[CF_SVC]  || '',
+      _miles:      t.customfields?.[CF_MILES]|| '',
+      _wo:         t.customfields?.[CF_WO]   || '',
+      _jobcode:    jobcodes[t.jobcode_id]?.name || '',
     };
   });
 
-  const totalHrs    = enriched.reduce((s,t) => s + t._hrs, 0);
-  const totalActual = enriched.reduce((s,t) => s + t._actual, 0);
-  const totalBilled = enriched.reduce((s,t) => s + t._billed, 0);
-  const totalMarkupAmt = totalBilled - totalActual;
-  const uniqueEmps  = new Set(enriched.map(t => t._name)).size;
-  const approved    = enriched.filter(t => t.state === 'APPROVED').length;
+  // --- RAMP FILTERED ---
+  let rampFiltered = [];
+  if (RAW_RAMP) {
+    rampFiltered = RAW_RAMP.transactions.filter(tx => {
+      const dateStr = tx.user_transaction_time.slice(0, 10);
+      if (fromDate && dateStr < fromDate) return false;
+      if (toDate && dateStr > toDate) return false;
+      return getRampPropCode(tx) !== null && getRampClassLabel(tx) !== null;
+    }).map(tx => ({
+      date:       tx.user_transaction_time.slice(0,10),
+      propCode:   getRampPropCode(tx),
+      classLabel: getRampClassLabel(tx),
+      amount:     tx.amount,
+      merchant:   tx.merchant_name,
+      state:      tx.state,
+    }));
+  }
 
-  document.getElementById('badgeTotal').textContent = totalHrs.toFixed(0) + ' hrs · ' + fmtCost(totalBilled) + ' billed';
-  document.getElementById('asOf').textContent = 'As of ' + new Date().toLocaleDateString('en-US', {year:'numeric',month:'short',day:'numeric'});
+  const totalHrs      = enriched.reduce((s,t) => s + t._hrs, 0);
+  const totalActual   = enriched.reduce((s,t) => s + t._actual, 0);
+  const totalBilled   = enriched.reduce((s,t) => s + t._billed, 0);
+  const totalMarkup   = totalBilled - totalActual;
+  const totalMat      = rampFiltered.reduce((s,t) => s + t.amount, 0);
+  const totalCost     = totalActual + totalMat;
+  const uniqueEmps    = new Set(enriched.map(t => t._name)).size;
+  const approved      = enriched.filter(t => t.state === 'APPROVED').length;
+
+  document.getElementById('badgeTotal').textContent =
+    totalHrs.toFixed(0) + ' hrs · ' + fmtCost(totalCost) + ' total cost';
+  document.getElementById('asOf').textContent =
+    'As of ' + new Date().toLocaleDateString('en-US', {year:'numeric',month:'short',day:'numeric'});
 
   document.getElementById('cards').innerHTML = [
-    {c:'c-blue',   label:'Total Hours',      val: totalHrs.toFixed(1) + 'h',   sub: enriched.length + ' timesheet entries'},
-    {c:'c-green',  label:'Actual Labor Cost', val: fmtCost(totalActual),         sub: 'Hours × wage rate'},
-    {c:'c-orange', label:'Billed to Properties', val: fmtCost(totalBilled),      sub: '50% markup on property work'},
-    {c:'c-red',    label:'Markup Amount',     val: fmtCost(totalMarkupAmt),      sub: 'Billed − actual'},
-    {c:'c-purple', label:'Active Employees',  val: uniqueEmps,                   sub: 'In selected period'},
-    {c:'c-teal',   label:'Approved Entries',  val: approved,                     sub: Math.round(approved/enriched.length*100) + '% of entries'},
+    {c:'c-blue',   label:'Total Hours',          val: totalHrs.toFixed(1) + 'h',  sub: enriched.length + ' timesheet entries'},
+    {c:'c-green',  label:'Actual Labor Cost',     val: fmtCost(totalActual),        sub: 'Hours × wage rate (QBT)'},
+    {c:'c-orange', label:'Labor Billed',          val: fmtCost(totalBilled),        sub: '50% markup on property work'},
+    {c:'c-purple', label:'Materials (Ramp)',       val: fmtCost(totalMat),           sub: rampFiltered.length + ' transactions'},
+    {c:'c-teal',   label:'Total Cost',            val: fmtCost(totalCost),          sub: 'Labor + materials'},
+    {c:'c-red',    label:'Markup Amount',         val: fmtCost(totalMarkup),        sub: 'Billed − actual labor'},
   ].map(({c,label,val,sub}) =>
     `<div class="card ${c}"><div class="card-label">${label}</div><div class="card-value">${val}</div><div class="card-sub">${sub}</div></div>`
   ).join('');
 
   // --- OVERVIEW CHARTS ---
-  const empTotals = {};
-  const clsTotals = {};
-  const propTotals = {};
+  const empTotals = {}, clsTotals = {}, propTotals = {};
   enriched.forEach(t => {
     empTotals[t._name]       = (empTotals[t._name]  || 0) + t._billed;
     clsTotals[t._classLabel] = (clsTotals[t._classLabel] || 0) + t._billed;
-    propTotals[t._propLabel] = (propTotals[t._propLabel] || 0) + t._billed;
+    propTotals[t._propCode || 'Unassigned'] = (propTotals[t._propCode || 'Unassigned'] || 0) + t._actual;
+  });
+  rampFiltered.forEach(r => {
+    propTotals[r.propCode] = (propTotals[r.propCode] || 0) + r.amount;
   });
   const sortDesc = obj => Object.entries(obj).sort((a,b) => b[1]-a[1]);
   document.getElementById('overviewCharts').innerHTML =
-    barChart('Billed Cost by Employee', sortDesc(empTotals),  '#2e86c1', fmtCost) +
-    barChart('Billed Cost by Class',    sortDesc(clsTotals),  '#27ae60', fmtCost) +
-    barChart('Billed Cost by Property', sortDesc(propTotals).slice(0,14), '#8e44ad', fmtCost);
+    barChart('Labor Billed by Employee', sortDesc(empTotals), '#2e86c1', fmtCost) +
+    barChart('Labor Billed by Class',    sortDesc(clsTotals), '#27ae60', fmtCost) +
+    barChart('Total Cost by Property',   sortDesc(propTotals).slice(0,14), '#8e44ad', fmtCost);
 
-  // --- PIVOT TABLE ---
-  renderPivot(enriched);
+  FILTERED = enriched;
+  renderPivot(enriched, rampFiltered);
 
   // --- BY EMPLOYEE ---
   const empMap = {};
@@ -419,53 +509,61 @@ function render(data, fromDate, toDate) {
     empMap[t._name].entries++;
   });
   const empRows = Object.values(empMap).sort((a,b) => b.billed - a.billed);
-  const empThead = '<thead><tr><th>Employee</th><th>Wage</th><th>Hours</th><th>Actual Cost</th><th>Billed (50% mkup)</th><th>Entries</th></tr></thead>';
-  const empTbody = '<tbody>' + empRows.map(r =>
-    `<tr><td>${r.name}</td><td>$${r.wage}/hr</td><td>${r.hrs.toFixed(1)}h</td><td>${fmtCost(r.actual)}</td><td>${fmtCost(r.billed)}</td><td>${r.entries}</td></tr>`
-  ).join('') +
-  `<tr class="tot-row"><td>Total</td><td>—</td><td>${totalHrs.toFixed(1)}h</td><td>${fmtCost(totalActual)}</td><td>${fmtCost(totalBilled)}</td><td>${enriched.length}</td></tr>` +
-  '</tbody>';
-  document.getElementById('empTable').innerHTML = empThead + empTbody;
+  document.getElementById('empTable').innerHTML =
+    '<thead><tr><th>Employee</th><th>Wage</th><th>Hours</th><th>Actual Cost</th><th>Billed (+50%)</th><th>Entries</th></tr></thead>' +
+    '<tbody>' + empRows.map(r =>
+      `<tr><td>${r.name}</td><td>$${r.wage}/hr</td><td>${r.hrs.toFixed(1)}h</td><td>${fmtCost(r.actual)}</td><td>${fmtCost(r.billed)}</td><td>${r.entries}</td></tr>`
+    ).join('') +
+    `<tr class="tot-row"><td>Total</td><td>—</td><td>${totalHrs.toFixed(1)}h</td><td>${fmtCost(totalActual)}</td><td>${fmtCost(totalBilled)}</td><td>${enriched.length}</td></tr>` +
+    '</tbody>';
 
   // --- BY PROPERTY ---
   const propMap = {};
   enriched.forEach(t => {
-    const k = t._propLabel;
-    if (!propMap[k]) propMap[k] = { prop: k, hrs: 0, actual: 0, billed: 0, entries: 0 };
+    const k = t._propCode || 'Unassigned';
+    if (!propMap[k]) propMap[k] = { prop: k, hrs: 0, actual: 0, billed: 0, mat: 0 };
     propMap[k].hrs    += t._hrs;
     propMap[k].actual += t._actual;
     propMap[k].billed += t._billed;
-    propMap[k].entries++;
   });
-  const propRows = Object.values(propMap).sort((a,b) => b.billed - a.billed);
+  rampFiltered.forEach(r => {
+    const k = r.propCode;
+    if (!propMap[k]) propMap[k] = { prop: k, hrs: 0, actual: 0, billed: 0, mat: 0 };
+    propMap[k].mat += r.amount;
+  });
+  const propRows = Object.values(propMap).sort((a,b) => (b.actual+b.mat)-(a.actual+a.mat));
   document.getElementById('propCharts').innerHTML =
-    barChart('Billed Cost by Property', propRows.map(r=>[r.prop, r.billed]), '#8e44ad', fmtCost) +
-    barChart('Hours by Property',       propRows.map(r=>[r.prop, r.hrs * 3600]), '#e67e22', fmtHours);
-  const propThead2 = '<thead><tr><th>Property</th><th>Hours</th><th>Actual Cost</th><th>Billed</th><th>% of Total</th></tr></thead>';
-  const propTbody2 = '<tbody>' + propRows.map(r =>
-    `<tr><td>${r.prop}</td><td>${r.hrs.toFixed(1)}h</td><td>${fmtCost(r.actual)}</td><td>${fmtCost(r.billed)}</td><td>${Math.round(r.billed/totalBilled*100)}%</td></tr>`
-  ).join('') + '</tbody>';
-  document.getElementById('propTable').innerHTML = propThead2 + propTbody2;
+    barChart('Total Cost by Property', propRows.map(r=>[r.prop, r.actual+r.mat]), '#8e44ad', fmtCost) +
+    barChart('Hours by Property',      propRows.map(r=>[r.prop, r.hrs * 3600]),   '#e67e22', fmtHours);
+  document.getElementById('propTable').innerHTML =
+    '<thead><tr><th>Property</th><th>Hours</th><th>Labor Cost</th><th>Materials</th><th>Total Cost</th><th>% of Total</th></tr></thead>' +
+    '<tbody>' + propRows.map(r =>
+      `<tr><td>${r.prop}</td><td>${r.hrs.toFixed(1)}h</td><td>${fmtCost(r.actual)}</td><td>${fmtCost(r.mat)}</td><td>${fmtCost(r.actual+r.mat)}</td><td>${Math.round((r.actual+r.mat)/totalCost*100)}%</td></tr>`
+    ).join('') + '</tbody>';
 
   // --- BY CLASS ---
   const classMap = {};
   enriched.forEach(t => {
     const k = t._classLabel;
-    if (!classMap[k]) classMap[k] = { cls: k, markup: t._markup, hrs: 0, actual: 0, billed: 0, entries: 0 };
+    if (!classMap[k]) classMap[k] = { cls: k, markup: t._markup, hrs: 0, actual: 0, billed: 0, mat: 0 };
     classMap[k].hrs    += t._hrs;
     classMap[k].actual += t._actual;
     classMap[k].billed += t._billed;
-    classMap[k].entries++;
   });
-  const classRows = Object.values(classMap).sort((a,b) => b.billed - a.billed);
+  rampFiltered.forEach(r => {
+    const k = r.classLabel;
+    if (!classMap[k]) classMap[k] = { cls: k, markup: false, hrs: 0, actual: 0, billed: 0, mat: 0 };
+    classMap[k].mat += r.amount;
+  });
+  const classRows = Object.values(classMap).sort((a,b) => (b.actual+b.mat)-(a.actual+a.mat));
   document.getElementById('classCharts').innerHTML =
-    barChart('Billed Cost by Class', classRows.map(r=>[r.cls, r.billed]), '#27ae60', fmtCost) +
-    barChart('Hours by Class',       classRows.map(r=>[r.cls, r.hrs * 3600]), '#1abc9c', fmtHours);
-  const clsThead = '<thead><tr><th>Class</th><th>Type</th><th>Hours</th><th>Actual Cost</th><th>Billed</th><th>% of Total</th></tr></thead>';
-  const clsTbody = '<tbody>' + classRows.map(r =>
-    `<tr><td>${r.cls}</td><td>${r.markup ? '<span class="markup-badge">+50% markup</span>' : '<span class="opex-badge">OpEx</span>'}</td><td>${r.hrs.toFixed(1)}h</td><td>${fmtCost(r.actual)}</td><td>${fmtCost(r.billed)}</td><td>${Math.round(r.billed/totalBilled*100)}%</td></tr>`
-  ).join('') + '</tbody>';
-  document.getElementById('classTable').innerHTML = clsThead + clsTbody;
+    barChart('Total Cost by Class', classRows.map(r=>[r.cls, r.actual+r.mat]), '#27ae60', fmtCost) +
+    barChart('Hours by Class',      classRows.map(r=>[r.cls, r.hrs * 3600]),   '#1abc9c', fmtHours);
+  document.getElementById('classTable').innerHTML =
+    '<thead><tr><th>Class</th><th>Type</th><th>Hours</th><th>Labor Cost</th><th>Materials</th><th>Total Cost</th></tr></thead>' +
+    '<tbody>' + classRows.map(r =>
+      `<tr><td>${r.cls}</td><td>${r.markup ? '<span class="markup-badge">+50% markup</span>' : '<span class="opex-badge">OpEx</span>'}</td><td>${r.hrs.toFixed(1)}h</td><td>${fmtCost(r.actual)}</td><td>${fmtCost(r.mat)}</td><td>${fmtCost(r.actual+r.mat)}</td></tr>`
+    ).join('') + '</tbody>';
 
   // --- FILTER DROPDOWNS ---
   document.getElementById('filterEmployee').innerHTML = '<option value="">All Employees</option>' +
@@ -477,81 +575,200 @@ function render(data, fromDate, toDate) {
   document.getElementById('filterState').innerHTML = '<option value="">All States</option>' +
     states.map(s => `<option>${s}</option>`).join('');
 
-  FILTERED = enriched;
   sortAndRenderDetail();
   document.getElementById('mainContent').style.display = 'block';
 }
 
-function renderPivot(enriched) {
-  // Build sets of unique properties and class labels
-  const propSet = new Set(enriched.map(t => t._propLabel));
-  const clsSet  = new Set(enriched.map(t => t._classLabel));
-  const props   = [...propSet].filter(p => p !== 'Unassigned').sort();
-  const classes = [...clsSet].sort();
+function renderPivot(enriched, rampFiltered) {
+  // Use cached ramp if not passed
+  if (!rampFiltered) {
+    const fromDate = document.getElementById('dateFrom').value;
+    const toDate   = document.getElementById('dateTo').value;
+    if (RAW_RAMP) {
+      rampFiltered = RAW_RAMP.transactions.filter(tx => {
+        const d = tx.user_transaction_time.slice(0,10);
+        if (fromDate && d < fromDate) return false;
+        if (toDate && d > toDate) return false;
+        return getRampPropCode(tx) !== null && getRampClassLabel(tx) !== null;
+      }).map(tx => ({
+        date: tx.user_transaction_time.slice(0,10),
+        propCode: getRampPropCode(tx), classLabel: getRampClassLabel(tx),
+        amount: tx.amount, merchant: tx.merchant_name,
+      }));
+    } else rampFiltered = [];
+  }
 
-  // Build pivot data: prop → class → {actual, billed, hrs}
+  const cls = CURRENT_PIVOT_CLASS;
+
+  // Collect all property codes present in the data
+  const propCodes = new Set();
+  enriched.forEach(t => { if (t._propCode) propCodes.add(t._propCode); });
+  rampFiltered.forEach(r => { if (r.propCode) propCodes.add(r.propCode); });
+  if (RAW_BUDGET) RAW_BUDGET.properties.forEach(p => { const c = propCode(p.property_name); if (c) propCodes.add(c); });
+
+  const CLASS_ORDER = ['R&M','Turn','Grounds','CapEx'];
+  const hasBudget   = c => c === 'R&M' || c === 'CapEx';
+
+  // Build pivot: propCode → classLabel → {labor, mat}
   const pivot = {};
-  const colTotals = {};
-  props.forEach(p => { pivot[p] = {}; });
-  classes.forEach(c => { colTotals[c] = { actual: 0, billed: 0 }; });
+  propCodes.forEach(p => { pivot[p] = {}; });
 
   enriched.forEach(t => {
-    const p = t._propLabel, c = t._classLabel;
-    if (p === 'Unassigned') return;
-    if (!pivot[p][c]) pivot[p][c] = { actual: 0, billed: 0, hrs: 0, markup: t._markup };
-    pivot[p][c].actual += t._actual;
-    pivot[p][c].billed += t._billed;
-    pivot[p][c].hrs    += t._hrs;
-    colTotals[c].actual += t._actual;
-    colTotals[c].billed += t._billed;
+    const p = t._propCode, c = t._classLabel;
+    if (!p || !pivot[p]) return;
+    if (cls !== 'All' && c !== cls) return;
+    if (!pivot[p][c]) pivot[p][c] = { labor: 0, mat: 0 };
+    pivot[p][c].labor += t._actual;
+  });
+  rampFiltered.forEach(r => {
+    const p = r.propCode, c = r.classLabel;
+    if (!p || !pivot[p]) return;
+    if (cls !== 'All' && c !== cls) return;
+    if (!pivot[p][c]) pivot[p][c] = { labor: 0, mat: 0 };
+    pivot[p][c].mat += r.amount;
   });
 
   // Row totals
-  const rowTotals = {};
+  const rowTotal = p => Object.values(pivot[p]).reduce((s,v) => s + v.labor + v.mat, 0);
+
+  // Sort by total spend desc, remove zero-cost props
+  const props = [...propCodes].filter(p => rowTotal(p) > 0).sort((a,b) => rowTotal(b) - rowTotal(a));
+
+  if (cls === 'All') {
+    renderPivotAll(props, pivot);
+  } else {
+    renderPivotClass(props, pivot, cls, hasBudget(cls));
+  }
+}
+
+function renderPivotAll(props, pivot) {
+  const classes = ['R&M','Turn','Grounds','CapEx'];
+
+  const grandTotals = { labor:0, mat:0, rmBgt:0, cxBgt:0 };
+
+  // Compute column totals
+  const colTotals = {};
+  classes.forEach(c => { colTotals[c] = { labor:0, mat:0 }; });
+
   props.forEach(p => {
-    rowTotals[p] = { actual: 0, billed: 0 };
     classes.forEach(c => {
       if (pivot[p][c]) {
-        rowTotals[p].actual += pivot[p][c].actual;
-        rowTotals[p].billed += pivot[p][c].billed;
+        colTotals[c].labor += pivot[p][c].labor;
+        colTotals[c].mat   += pivot[p][c].mat;
       }
     });
+    grandTotals.labor  += Object.values(pivot[p]).reduce((s,v) => s+v.labor, 0);
+    grandTotals.mat    += Object.values(pivot[p]).reduce((s,v) => s+v.mat, 0);
+    grandTotals.rmBgt  += getPropBudget(p, 'R&M');
+    grandTotals.cxBgt  += getPropBudget(p, 'CapEx');
   });
-  const grandActual = props.reduce((s,p) => s + rowTotals[p].actual, 0);
-  const grandBilled = props.reduce((s,p) => s + rowTotals[p].billed, 0);
 
-  // Render
-  const thead = `<thead><tr>
-    <th class="prop-col">Property</th>
-    ${classes.map(c => `<th>${c}</th>`).join('')}
-    <th>Total Actual</th><th>Total Billed</th>
-  </tr></thead>`;
+  const thead = `<thead>
+    <tr>
+      <th class="prop-col" rowspan="2">Property</th>
+      <th class="grp-header" colspan="2">R&M</th>
+      <th class="grp-header" colspan="2">Turn</th>
+      <th class="grp-header" colspan="2">Grounds</th>
+      <th class="grp-header" colspan="2">CapEx</th>
+      <th rowspan="2" style="text-align:right">Total</th>
+      <th rowspan="2" style="text-align:right">R&M Bgt</th>
+      <th rowspan="2" style="text-align:right">R&M Var</th>
+      <th rowspan="2" style="text-align:right">CapEx Bgt</th>
+      <th rowspan="2" style="text-align:right">CapEx Var</th>
+    </tr>
+    <tr>
+      ${classes.map(() => '<th>Labor</th><th>Mat</th>').join('')}
+    </tr>
+  </thead>`;
 
   const tbody = '<tbody>' + props.map(p => {
+    const rmBgt = getPropBudget(p, 'R&M');
+    const cxBgt = getPropBudget(p, 'CapEx');
+    const rmAct = (pivot[p]['R&M']?.labor||0) + (pivot[p]['R&M']?.mat||0);
+    const cxAct = (pivot[p]['CapEx']?.labor||0) + (pivot[p]['CapEx']?.mat||0);
+    const tot   = Object.values(pivot[p]).reduce((s,v) => s+v.labor+v.mat, 0);
     const cells = classes.map(c => {
-      const cell = pivot[p][c];
-      if (!cell || cell.actual === 0) return '<td></td>';
-      const isMarkup = cell.markup;
-      return `<td>
-        <div class="cell-actual">${fmtCostSm(cell.actual)}</div>
-        <div class="${isMarkup ? 'cell-markup' : 'cell-opex'}">${isMarkup ? '→ ' + fmtCostSm(cell.billed) + ' billed' : 'OpEx'}</div>
-      </td>`;
+      const v = pivot[p][c] || { labor:0, mat:0 };
+      const L = v.labor > 0 ? `<span class="cell-labor">${fmtCostSm(v.labor)}</span>` : '—';
+      const M = v.mat   > 0 ? `<span class="cell-mat">${fmtCostSm(v.mat)}</span>`   : '—';
+      return `<td>${L}</td><td>${M}</td>`;
     }).join('');
     return `<tr>
       <td class="prop-name">${p}</td>
       ${cells}
-      <td><div class="cell-actual">${fmtCostSm(rowTotals[p].actual)}</div></td>
-      <td><div class="cell-actual">${fmtCostSm(rowTotals[p].billed)}</div></td>
+      <td><strong>${fmtCostSm(tot)}</strong></td>
+      <td class="cell-budget">${rmBgt > 0 ? fmtCostSm(rmBgt) : '—'}</td>
+      <td>${rmBgt > 0 ? fmtVar(rmBgt - rmAct) : '<span class="cell-no-budget">—</span>'}</td>
+      <td class="cell-budget">${cxBgt > 0 ? fmtCostSm(cxBgt) : '—'}</td>
+      <td>${cxBgt > 0 ? fmtVar(cxBgt - cxAct) : '<span class="cell-no-budget">—</span>'}</td>
     </tr>`;
   }).join('') +
   `<tr class="tot-row">
     <td class="prop-name">Total</td>
-    ${classes.map(c => `<td>
-      <div class="cell-actual">${colTotals[c].actual > 0 ? fmtCostSm(colTotals[c].actual) : ''}</div>
-      ${colTotals[c].billed !== colTotals[c].actual && colTotals[c].billed > 0 ? `<div class="cell-markup">→ ${fmtCostSm(colTotals[c].billed)}</div>` : ''}
-    </td>`).join('')}
-    <td>${fmtCostSm(grandActual)}</td>
-    <td>${fmtCostSm(grandBilled)}</td>
+    ${classes.map(c =>
+      `<td><strong>${colTotals[c].labor>0?fmtCostSm(colTotals[c].labor):'—'}</strong></td><td><strong>${colTotals[c].mat>0?fmtCostSm(colTotals[c].mat):'—'}</strong></td>`
+    ).join('')}
+    <td><strong>${fmtCostSm(grandTotals.labor+grandTotals.mat)}</strong></td>
+    <td class="cell-budget">${grandTotals.rmBgt>0?fmtCostSm(grandTotals.rmBgt):'—'}</td>
+    <td>${grandTotals.rmBgt>0?fmtVar(grandTotals.rmBgt-(colTotals['R&M'].labor+colTotals['R&M'].mat)):'—'}</td>
+    <td class="cell-budget">${grandTotals.cxBgt>0?fmtCostSm(grandTotals.cxBgt):'—'}</td>
+    <td>${grandTotals.cxBgt>0?fmtVar(grandTotals.cxBgt-(colTotals['CapEx'].labor+colTotals['CapEx'].mat)):'—'}</td>
+  </tr>` +
+  '</tbody>';
+
+  document.getElementById('pivotTable').innerHTML = thead + tbody;
+}
+
+function renderPivotClass(props, pivot, cls, withBudget) {
+  // For a specific class: Property | Budget(YTD) | Labor | Materials | Total | Var | % Used
+  const colTotals = { bgt:0, labor:0, mat:0 };
+  props.forEach(p => {
+    colTotals.bgt   += getPropBudget(p, cls);
+    colTotals.labor += pivot[p][cls]?.labor || 0;
+    colTotals.mat   += pivot[p][cls]?.mat   || 0;
+  });
+
+  const budgetCols = withBudget
+    ? '<th>YTD Budget</th><th>Variance</th><th>% Used</th>'
+    : '<th colspan="3" class="cell-no-budget" style="text-align:center;font-style:italic">No budget data for this class</th>';
+
+  const thead = `<thead><tr>
+    <th class="prop-col">Property</th>
+    ${budgetCols}
+    <th>Labor (QBT)</th>
+    <th>Materials (Ramp)</th>
+    <th>Total Cost</th>
+  </tr></thead>`;
+
+  const tbody = '<tbody>' + props.map(p => {
+    const bgt   = withBudget ? getPropBudget(p, cls) : 0;
+    const labor = pivot[p][cls]?.labor || 0;
+    const mat   = pivot[p][cls]?.mat   || 0;
+    const tot   = labor + mat;
+    const variance = bgt - tot;
+    const pctUsed  = bgt > 0 ? Math.round(tot / bgt * 100) : null;
+    const varCell  = withBudget ? (bgt > 0 ? fmtVar(variance) : '<span class="cell-no-budget">—</span>') : '';
+    const pctCell  = withBudget ? (pctUsed !== null ? `<span class="${pctUsed > 100 ? 'cell-var-over' : 'cell-var-good'}">${pctUsed}%</span>` : '—') : '';
+    const bgtCell  = withBudget ? `<td class="cell-budget">${bgt > 0 ? fmtCostSm(bgt) : '—'}</td>` : '';
+
+    return `<tr>
+      <td class="prop-name">${p}</td>
+      ${withBudget ? bgtCell + `<td>${varCell}</td><td>${pctCell}</td>` : '<td colspan="3"></td>'}
+      <td>${labor > 0 ? `<span class="cell-labor">${fmtCostSm(labor)}</span>` : '—'}</td>
+      <td>${mat   > 0 ? `<span class="cell-mat">${fmtCostSm(mat)}</span>`   : '—'}</td>
+      <td><strong>${tot > 0 ? fmtCostSm(tot) : '—'}</strong></td>
+    </tr>`;
+  }).join('') +
+  `<tr class="tot-row">
+    <td class="prop-name">Total</td>
+    ${withBudget
+      ? `<td class="cell-budget">${colTotals.bgt>0?fmtCostSm(colTotals.bgt):'—'}</td>
+         <td>${colTotals.bgt>0?fmtVar(colTotals.bgt-colTotals.labor-colTotals.mat):'—'}</td>
+         <td>${colTotals.bgt>0?`<span class="${(colTotals.labor+colTotals.mat)/colTotals.bgt>1?'cell-var-over':'cell-var-good'}">${Math.round((colTotals.labor+colTotals.mat)/colTotals.bgt*100)}%</span>`:'—'}</td>`
+      : '<td colspan="3"></td>'}
+    <td><strong>${fmtCostSm(colTotals.labor)}</strong></td>
+    <td><strong>${fmtCostSm(colTotals.mat)}</strong></td>
+    <td><strong>${fmtCostSm(colTotals.labor+colTotals.mat)}</strong></td>
   </tr>` +
   '</tbody>';
 
@@ -561,19 +778,17 @@ function renderPivot(enriched) {
 function applyFilters() {
   if (!FILTERED.length) return;
   const search = (document.getElementById('searchInput').value || '').toLowerCase();
-  const emp   = document.getElementById('filterEmployee').value;
-  const cls   = document.getElementById('filterClass').value;
-  const state = document.getElementById('filterState').value;
-
+  const emp    = document.getElementById('filterEmployee').value;
+  const cls    = document.getElementById('filterClass').value;
+  const state  = document.getElementById('filterState').value;
   let rows = FILTERED;
-  if (emp)   rows = rows.filter(t => t._name === emp);
-  if (cls)   rows = rows.filter(t => t._classLabel === cls);
-  if (state) rows = rows.filter(t => t.state === state);
+  if (emp)    rows = rows.filter(t => t._name === emp);
+  if (cls)    rows = rows.filter(t => t._classLabel === cls);
+  if (state)  rows = rows.filter(t => t.state === state);
   if (search) rows = rows.filter(t => {
     const blob = [t._name, t._propLabel, t._classLabel, t._svc, t.notes, t._wo, t._jobcode].join(' ').toLowerCase();
     return blob.includes(search);
   });
-
   renderDetailTable(rows);
   document.getElementById('resultsCount').textContent = rows.length.toLocaleString() + ' of ' + FILTERED.length.toLocaleString();
 }
@@ -590,19 +805,16 @@ function renderDetailTable(rows) {
   const { col, dir } = detailSort;
   const sorted = [...rows].sort((a, b) => {
     let av = a[col] ?? '', bv = b[col] ?? '';
-    if (col === '_hrs' || col === '_actual' || col === '_billed') { av = a[col]; bv = b[col]; }
     if (typeof av === 'number') return dir === 'asc' ? av - bv : bv - av;
     return dir === 'asc' ? String(av).localeCompare(String(bv)) : String(bv).localeCompare(String(av));
   });
-
   const ths = [
-    {k:'date',     l:'Date'},    {k:'_name',  l:'Employee'},  {k:'_jobcode',l:'Jobcode'},
-    {k:'_classLabel',l:'Class'}, {k:'_propLabel',l:'Property'},{k:'_svc',   l:'Service'},
-    {k:'_hrs',     l:'Hours'},   {k:'_actual',l:'Actual $'},  {k:'_billed', l:'Billed $'},
-    {k:'state',    l:'State'},   {k:'_wo',    l:'WO #'},      {k:'_miles',  l:'Miles'},
-    {k:'notes',    l:'Notes'}
+    {k:'date',l:'Date'},{k:'_name',l:'Employee'},{k:'_jobcode',l:'Jobcode'},
+    {k:'_classLabel',l:'Class'},{k:'_propLabel',l:'Property'},{k:'_svc',l:'Service'},
+    {k:'_hrs',l:'Hours'},{k:'_actual',l:'Actual $'},{k:'_billed',l:'Billed $'},
+    {k:'state',l:'State'},{k:'_wo',l:'WO #'},{k:'_miles',l:'Miles'},{k:'notes',l:'Notes'}
   ];
-  const cs = col => detailSort.col === col ? 'sort-' + detailSort.dir : '';
+  const cs = k => detailSort.col === k ? 'sort-' + detailSort.dir : '';
   const thead = '<thead><tr>' + ths.map(h => `<th onclick="sortDetail('${h.k}')" class="${cs(h.k)}">${h.l}</th>`).join('') + '</tr></thead>';
   const tbody = '<tbody>' + sorted.map(t => `<tr>
     <td>${t.date}</td>
@@ -623,27 +835,39 @@ function renderDetailTable(rows) {
 }
 
 async function loadData() {
-  const btn = document.getElementById('btnRefresh');
-  const icon = document.getElementById('refreshIcon');
+  const btn     = document.getElementById('btnRefresh');
+  const icon    = document.getElementById('refreshIcon');
   const overlay = document.getElementById('loadingOverlay');
-  const errBar = document.getElementById('errorBar');
+  const errBar  = document.getElementById('errorBar');
 
   btn.disabled = true; icon.className = 'spin'; icon.textContent = '↻';
   overlay.classList.remove('hidden'); errBar.classList.remove('show');
 
   try {
-    const res = await fetch('./data/qbtime.json');
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    const json = await res.json();
-    if (!json.ok) throw new Error(json.error || 'Bad data');
-    RAW = json;
+    const [qbtRes, rampRes, budgetRes] = await Promise.all([
+      fetch('./data/qbtime.json'),
+      fetch('./data/ramp.json'),
+      fetch('./data/budget.json'),
+    ]);
+    if (!qbtRes.ok) throw new Error('qbtime.json HTTP ' + qbtRes.status);
 
-    const to = new Date().toISOString().slice(0,10);
+    RAW_QBT = await qbtRes.json();
+    if (!RAW_QBT.ok) throw new Error(RAW_QBT.error || 'Bad QBT data');
+
+    if (rampRes.ok) { RAW_RAMP = await rampRes.json(); }
+    else console.warn('ramp.json not available:', rampRes.status);
+
+    if (budgetRes.ok) {
+      RAW_BUDGET = await budgetRes.json();
+      BUDGET_CODES = new Set(RAW_BUDGET.properties.map(p => propCode(p.property_name)).filter(Boolean));
+    } else console.warn('budget.json not available:', budgetRes.status);
+
+    const to   = new Date().toISOString().slice(0,10);
     const from = new Date(Date.now() - 90 * 86400000).toISOString().slice(0,10);
     document.getElementById('dateFrom').value = from;
-    document.getElementById('dateTo').value = to;
+    document.getElementById('dateTo').value   = to;
 
-    render(json, from, to);
+    render(RAW_QBT, from, to);
   } catch(e) {
     errBar.textContent = '⚠ Failed to load data: ' + e.message + ' — check GitHub Actions';
     errBar.classList.add('show');

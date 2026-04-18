@@ -173,12 +173,94 @@ async function fetchQBTime() {
   console.log('QBTime: saved ' + Object.keys(timesheets).length + ' timesheets');
 }
 
+const RAMP_CLIENT_ID     = process.env.RAMP_CLIENT_ID;
+const RAMP_CLIENT_SECRET = process.env.RAMP_CLIENT_SECRET;
+
+function fetchRampToken() {
+  return new Promise((resolve, reject) => {
+    const body = 'grant_type=client_credentials&scope=transactions:read';
+    const auth = Buffer.from(RAMP_CLIENT_ID + ':' + RAMP_CLIENT_SECRET).toString('base64');
+    const req = https.request({
+      hostname: 'api.ramp.com', path: '/developer/v1/token', method: 'POST',
+      headers: {
+        'Authorization': 'Basic ' + auth,
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Length': Buffer.byteLength(body)
+      }
+    }, res => {
+      let d = ''; res.on('data', c => d += c);
+      res.on('end', () => {
+        try { resolve(JSON.parse(d).access_token); }
+        catch(e) { reject(new Error('Ramp token error: ' + d.slice(0, 200))); }
+      });
+    });
+    req.on('error', reject); req.write(body); req.end();
+  });
+}
+
+function fetchRamp(token, path) {
+  return new Promise((resolve, reject) => {
+    const req = https.request({
+      hostname: 'api.ramp.com', path, method: 'GET',
+      headers: { 'Authorization': 'Bearer ' + token, 'Accept': 'application/json' }
+    }, res => {
+      let d = ''; res.on('data', c => d += c);
+      res.on('end', () => {
+        try { resolve(JSON.parse(d)); }
+        catch(e) { reject(new Error('Ramp parse error (' + res.statusCode + '): ' + d.slice(0, 200))); }
+      });
+    });
+    req.on('error', reject); req.end();
+  });
+}
+
+async function fetchRampTransactions() {
+  if (!RAMP_CLIENT_ID || !RAMP_CLIENT_SECRET) { console.log('Ramp credentials not set, skipping.'); return; }
+  console.log('Fetching Ramp transactions...');
+  const token = await fetchRampToken();
+
+  // Load existing data to merge — keeps all historical records
+  const rampPath = path.join(DATA_DIR, 'ramp.json');
+  let existing = {};
+  if (fs.existsSync(rampPath)) {
+    try {
+      const prev = JSON.parse(fs.readFileSync(rampPath, 'utf8'));
+      (prev.transactions || []).forEach(t => { existing[t.id] = t; });
+      console.log('  Loaded ' + Object.keys(existing).length + ' existing transactions');
+    } catch(e) { console.log('  Could not load existing ramp.json, starting fresh'); }
+  }
+
+  // On first run fetch 5 months; on subsequent runs fetch since last 2 days (overlap for safety)
+  const hasExisting = Object.keys(existing).length > 0;
+  const lookbackDays = hasExisting ? 2 : 150;
+  const fromTime = new Date(Date.now() - lookbackDays * 86400000).toISOString();
+
+  let newCount = 0, nextPage = null, page = 1;
+  while (true) {
+    const qs = new URLSearchParams({ limit: '100', from_time: fromTime });
+    if (nextPage) qs.set('start', nextPage);
+    const res = await fetchRamp(token, '/developer/v1/transactions?' + qs.toString());
+    (res.data || []).forEach(t => { existing[t.id] = t; newCount++; });
+    process.stdout.write('  page ' + page + ' (+' + newCount + ' new)\r');
+    if (!res.page || !res.page.next) break;
+    const nextUrl = new URL(res.page.next);
+    nextPage = nextUrl.searchParams.get('start');
+    page++;
+    await sleep(100);
+  }
+
+  const transactions = Object.values(existing).sort((a,b) => a.user_transaction_time < b.user_transaction_time ? 1 : -1);
+  console.log('\nRamp: ' + transactions.length + ' total transactions (' + newCount + ' new/updated)');
+  save('ramp.json', { ok: true, fetched_at: new Date().toISOString(), transactions });
+}
+
 (async () => {
   try {
     await fetchTurnVac();
     await fetchWorkOrders();
     await fetchBudget();
     await fetchQBTime();
+    await fetchRampTransactions();
     console.log('All data fetched successfully.');
   } catch(e) {
     console.error('Fatal error:', e.message);
