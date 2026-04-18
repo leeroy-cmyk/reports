@@ -110,6 +110,7 @@ function fetchQBT(apiPath) {
   return new Promise((resolve, reject) => {
     const req = https.request({
       hostname: QBT_HOST, path: apiPath, method: 'GET',
+      timeout: 30000,
       headers: { 'Authorization': 'Bearer ' + QBT_TOKEN, 'Accept': 'application/json' }
     }, res => {
       let data = '';
@@ -119,6 +120,7 @@ function fetchQBT(apiPath) {
         catch(e) { reject(new Error('QBT parse error (' + res.statusCode + '): ' + data.slice(0, 200))); }
       });
     });
+    req.on('timeout', () => { req.destroy(new Error('QBT request timeout')); });
     req.on('error', reject);
     req.end();
   });
@@ -158,9 +160,9 @@ async function fetchQBTime() {
     }
   }
 
-  // Fetch timesheets — last 365 days
+  // Fetch timesheets — last 180 days (covers full YTD + prior 6 months)
   const endDate = new Date().toISOString().slice(0, 10);
-  const startDate = new Date(Date.now() - 365 * 86400000).toISOString().slice(0, 10);
+  const startDate = new Date(Date.now() - 180 * 86400000).toISOString().slice(0, 10);
   const timesheets = await fetchAllQBT(
     '/api/v1/timesheets?start_date=' + startDate + '&end_date=' + endDate + '&on_the_clock=no',
     'timesheets'
@@ -255,15 +257,25 @@ async function fetchRampTransactions() {
 }
 
 (async () => {
+  let anyFailed = false;
+  // AppFolio data — always run first; failures here are fatal
   try {
     await fetchTurnVac();
     await fetchWorkOrders();
     await fetchBudget();
-    await fetchQBTime();
-    await fetchRampTransactions();
-    console.log('All data fetched successfully.');
   } catch(e) {
-    console.error('Fatal error:', e.message);
+    console.error('AppFolio fetch failed:', e.message);
     process.exit(1);
   }
+  // QBT and Ramp — isolated so AppFolio data always commits even if these fail
+  try { await fetchQBTime(); }
+  catch(e) { console.error('QBTime fetch failed (non-fatal):', e.message); anyFailed = true; }
+  try { await fetchRampTransactions(); }
+  catch(e) { console.error('Ramp fetch failed (non-fatal):', e.message); anyFailed = true; }
+
+  if (anyFailed) {
+    console.log('Completed with some non-fatal errors.');
+    process.exit(0); // still exit 0 so git commit runs
+  }
+  console.log('All data fetched successfully.');
 })();
