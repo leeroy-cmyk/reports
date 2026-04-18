@@ -207,15 +207,29 @@ function getRampPropCode(tx) {
   return (code && BUDGET_CODES.has(code)) ? code : null;
 }
 
+// Ramp GL account → report category. Returns null = exclude (non-maintenance operating expense).
+const RAMP_ACCT_CAT = {
+  // R&M (labor / material / contractor sub-accounts)
+  '52000':'R&M','52001':'R&M','52002':'R&M','52003':'R&M',
+  // Turn
+  '53000':'Turn','53001':'Turn','53002':'Turn','53003':'Turn',
+  // Grounds
+  '54000':'Grounds','54001':'Grounds','54002':'Grounds','54003':'Grounds',
+  // CapEx — Nondiscretionary, Discretionary, CapEx-Turn, CapEx-Appliance, Construction, AppFolio
+  '51000':'CapEx','51001':'CapEx','51002':'CapEx','51003':'CapEx',
+  '55000':'CapEx','55001':'CapEx','55002':'CapEx','55003':'CapEx',
+  '56000':'CapEx','56001':'CapEx','56002':'CapEx','56003':'CapEx',
+  '57000':'CapEx','57001':'CapEx','57002':'CapEx','57003':'CapEx',
+  '59000':'CapEx','59001':'CapEx','59002':'CapEx',
+  '80121':'CapEx','80122':'CapEx','80130':'CapEx','80140':'CapEx',
+  // Maintenance supplies → R&M
+  '67800':'R&M',
+};
+
 function getRampCategory(tx) {
   const e = (tx.accounting_categories || []).find(c => c.tracking_category_remote_id === 'QuickbooksCategory');
-  if (!e || !e.category_id) return 'Unclassified';
-  const acct = e.category_id;
-  if (acct === '52001') return 'R&M';
-  if (acct === '52002') return 'Turn';
-  if (acct === '52003') return 'Grounds';
-  if (['80121','80122','80130','80140'].includes(acct)) return 'CapEx';
-  return 'Unclassified';
+  if (!e || !e.category_id) return null; // no GL account — exclude
+  return RAMP_ACCT_CAT[e.category_id] || null; // null = non-maintenance, exclude
 }
 
 function isTeamRampTx(tx) {
@@ -343,6 +357,7 @@ function buildActuals() {
       const pCode = getRampPropCode(tx);
       if (!pCode) return;
       const cls = getRampCategory(tx);
+      if (!cls) return; // non-maintenance account — exclude
       if (!actuals[pCode]) actuals[pCode] = init();
       actuals[pCode][cls] += tx.amount;
     });
