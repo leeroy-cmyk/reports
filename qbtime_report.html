@@ -207,17 +207,22 @@ function getRampPropCode(tx) {
   return (code && BUDGET_CODES.has(code)) ? code : null;
 }
 
-function getRampClassLabel(tx) {
-  const e = (tx.accounting_categories || []).find(c => c.tracking_category_remote_id === 'QuickbooksClass');
-  if (!e) return 'Unclassified';
-  const v = e.category_name;
-  if (!v || !v.includes(':')) return 'Unclassified';
-  const sub = v.split(':').slice(1).join(':').trim();
-  if (sub.startsWith('R&M'))  return 'R&M';
-  if (sub === 'Turn')         return 'Turn';
-  if (sub === 'Grounds')      return 'Grounds';
-  if (sub.toLowerCase().includes('capex') || sub === 'Non-Discretionary CapEx') return 'CapEx';
+function getRampCategory(tx) {
+  const e = (tx.accounting_categories || []).find(c => c.tracking_category_remote_id === 'QuickbooksCategory');
+  if (!e || !e.category_id) return 'Unclassified';
+  const acct = e.category_id;
+  if (acct === '52001') return 'R&M';
+  if (acct === '52002') return 'Turn';
+  if (acct === '52003') return 'Grounds';
+  if (['80121','80122','80130','80140'].includes(acct)) return 'CapEx';
   return 'Unclassified';
+}
+
+function isTeamRampTx(tx) {
+  const ch = tx.card_holder;
+  if (!ch) return false;
+  const last = (ch.last_name || '').trim().toLowerCase().replace(/[^a-z]/g, '');
+  return TEAM_LAST_NAMES.has(last);
 }
 
 function getQBTClassLabel(classVal) {
@@ -231,11 +236,18 @@ function getQBTClassLabel(classVal) {
 }
 
 const CAT_ACCOUNTS = {
-  'R&M':    ['52001','52002','52003'],
+  'R&M':    ['52001'],
+  'Turn':   ['52002'],
+  'Grounds':['52003'],
   'CapEx':  ['80121','80122','80130','80140'],
-  'Turn':   ['53001','53002','53003'],
-  'Grounds':['54001','54002','54003'],
 };
+
+// Team members allowed in Ramp (by normalized last name) + Hanzhao
+const TEAM_LAST_NAMES = new Set([
+  'hippen','hoard','lakins','leonides','magoon','mcquaid','miller',
+  'mitchell','robson','saldana','sanchez','uttke','chavez','cramer',
+  'deckard','dunlap','gutierrez','higley','phillips','meng',
+]);
 
 function getPropBudget(pCode, classLabel) {
   if (!RAW_BUDGET || !pCode || !CAT_ACCOUNTS[classLabel]) return 0;
@@ -322,14 +334,15 @@ function buildActuals() {
     });
   }
 
-  // Ramp materials — include ALL transactions with a recognized property
+  // Ramp materials — team members only, account-based category
   if (RAW_RAMP) {
     RAW_RAMP.transactions.forEach(tx => {
       const d = tx.user_transaction_time.slice(0,10);
       if (d < PERIOD_FROM || d > PERIOD_TO) return;
+      if (!isTeamRampTx(tx)) return;
       const pCode = getRampPropCode(tx);
       if (!pCode) return;
-      const cls = getRampClassLabel(tx);
+      const cls = getRampCategory(tx);
       if (!actuals[pCode]) actuals[pCode] = init();
       actuals[pCode][cls] += tx.amount;
     });
@@ -438,11 +451,11 @@ function render() {
   document.getElementById('bvaTable').innerHTML = thead + tbody;
 
   // PROPERTY CHARTS
+  const CHART_MAIN = ['R&M', 'Turn', 'Grounds', 'CapEx'];
   const propHtml = rows.map(r => {
-    const catRows = CATS.map(cat => {
+    const catRows = [...CHART_MAIN, ...(r.act['Unclassified'] > 0 ? ['Unclassified'] : [])].map(cat => {
       const act = r.act[cat];
       const bgt = r.bgt[cat];
-      if (act === 0 && bgt === 0) return '';
       const hasBgt = bgt > 0;
       const max = Math.max(act, bgt, 1);
       const actPct = Math.min(act / max * 100, 100);
