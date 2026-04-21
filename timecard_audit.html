@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Timecard Audit — McKay Property Management</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f4f6f9; color: #1a2535; line-height: 1.5; }
+
+  .header { background: #fff; border-bottom: 1px solid #d0dce8; padding: 16px 32px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; gap: 20px; flex-wrap: wrap; }
+  .header h1 { font-size: 19px; font-weight: 800; color: #1a2535; letter-spacing: -0.4px; }
+  .header .sub { color: #7f8fa4; font-size: 12px; margin-top: 2px; }
+  .as-of { color: #95a5a6; font-size: 11px; }
+  .btn-icon { background: #f4f6f9; border: 1px solid #d0dce8; color: #1a5276; padding: 7px 14px; border-radius: 7px; font-size: 12px; font-weight: 700; cursor: pointer; transition: all 0.15s; }
+  .btn-icon:hover { background: #1a5276; color: #fff; border-color: #1a5276; }
+
+  .period-bar { background: #fff; border-bottom: 1px solid #d0dce8; padding: 0 32px; display: flex; align-items: center; gap: 0; flex-wrap: wrap; }
+  .period-btn { padding: 14px 22px; font-size: 14px; font-weight: 700; color: #7f8fa4; background: none; border: none; border-bottom: 3px solid transparent; cursor: pointer; transition: all 0.15s; white-space: nowrap; }
+  .period-btn:hover { color: #1a2535; }
+  .period-btn.active { color: #1a5276; border-bottom-color: #1a5276; }
+  .custom-range { display: flex; align-items: center; gap: 8px; padding: 8px 16px; border-left: 1px solid #d0dce8; margin-left: auto; }
+  .custom-range label { font-size: 11px; font-weight: 700; color: #95a5a6; text-transform: uppercase; }
+  .custom-range input { background: #f4f6f9; border: 1px solid #d0dce8; color: #1a2535; padding: 5px 8px; border-radius: 6px; font-size: 12px; }
+
+  .loading-overlay { position: fixed; inset: 0; background: rgba(244,246,249,0.93); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 999; gap: 14px; }
+  .loading-overlay.hidden { display: none; }
+  .loading-spinner { width: 44px; height: 44px; border: 4px solid #d0dce8; border-top-color: #2e86c1; border-radius: 50%; animation: spin 0.8s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .loading-text { color: #1a5276; font-size: 15px; font-weight: 600; }
+
+  .container { max-width: 1800px; margin: 0 auto; padding: 28px 32px; }
+
+  .cards { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; margin-bottom: 28px; }
+  @media (max-width: 1200px) { .cards { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 700px) { .cards { grid-template-columns: repeat(2, 1fr); } }
+  .card { background: #fff; border: 1px solid #d0dce8; border-radius: 12px; padding: 18px 20px; position: relative; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+  .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; border-radius: 12px 12px 0 0; }
+  .c-blue::before   { background: linear-gradient(90deg,#2e86c1,#5dade2); }
+  .c-green::before  { background: linear-gradient(90deg,#1e8449,#27ae60); }
+  .c-red::before    { background: linear-gradient(90deg,#c0392b,#e74c3c); }
+  .c-orange::before { background: linear-gradient(90deg,#ca6f1e,#e67e22); }
+  .c-purple::before { background: linear-gradient(90deg,#6c3483,#9b59b6); }
+  .c-teal::before   { background: linear-gradient(90deg,#117a65,#1abc9c); }
+  .card-label { font-size: 10px; font-weight: 700; color: #7f8fa4; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 8px; }
+  .card-value { font-size: 30px; font-weight: 800; color: #1a2535; line-height: 1; }
+  .card-value.big-pct { font-size: 26px; }
+  .card-sub { font-size: 11px; color: #95a5a6; margin-top: 6px; }
+  .card-var-good { color: #1e8449; font-weight: 700; }
+  .card-var-bad  { color: #c0392b; font-weight: 700; }
+
+  .section { background: #fff; border: 1px solid #d0dce8; border-radius: 12px; margin-bottom: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); overflow: hidden; }
+  .section-header { padding: 16px 24px; border-bottom: 1px solid #d0dce8; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+  .section-title { font-size: 14px; font-weight: 800; color: #1a2535; }
+  .section-sub { font-size: 12px; color: #95a5a6; margin-top: 2px; }
+
+  /* FILTERS */
+  .filter-bar { padding: 12px 24px; background: #f8fafc; border-bottom: 1px solid #d0dce8; display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+  .filter-bar label { font-size: 11px; font-weight: 700; color: #7f8fa4; text-transform: uppercase; }
+  .filter-bar select, .filter-bar input[type=text] { background: #fff; border: 1px solid #d0dce8; color: #1a2535; padding: 6px 10px; border-radius: 6px; font-size: 12px; min-width: 160px; }
+  .issue-toggle { display: flex; gap: 6px; flex-wrap: wrap; }
+  .issue-btn { padding: 5px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; cursor: pointer; border: 1px solid; transition: all 0.15s; }
+  .issue-btn.all   { background: #1a5276; color: #fff; border-color: #1a5276; }
+  .issue-btn.long  { background: #fde8d8; color: #ca6f1e; border-color: #f0a76b; }
+  .issue-btn.prop  { background: #fdf2cc; color: #9a7d0a; border-color: #f0c940; }
+  .issue-btn.class { background: #f4ecf7; color: #6c3483; border-color: #c39bd3; }
+  .issue-btn.cust  { background: #d6eaf8; color: #1a5276; border-color: #7fb3d3; }
+  .issue-btn.notes { background: #fdfefe; color: #616a6b; border-color: #aab7b8; }
+  .issue-btn.inactive { opacity: 0.4; }
+
+  /* TABLES */
+  .table-wrap { overflow-x: auto; max-height: 500px; overflow-y: auto; }
+  table { border-collapse: collapse; font-size: 12px; min-width: 100%; }
+  th { background: #f4f6f9; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px; color: #7f8fa4; padding: 9px 14px; border: 1px solid #d0dce8; white-space: nowrap; text-align: left; position: sticky; top: 0; z-index: 10; cursor: pointer; user-select: none; }
+  th:hover { background: #e8ecf0; color: #1a2535; }
+  th.num { text-align: right; }
+  td { padding: 8px 14px; border: 1px solid #e8ecf0; white-space: nowrap; font-size: 12px; }
+  td.num { text-align: right; }
+  tr:hover td { background: #f0f5fb; }
+  .sticky-col { position: sticky; left: 0; z-index: 5; background: #fff; border-right: 2px solid #d0dce8; font-weight: 600; }
+  tr:hover .sticky-col { background: #f0f5fb; }
+
+  /* EMPLOYEE TABLE */
+  .compliance-bar { display: flex; align-items: center; gap: 8px; }
+  .bar-track { flex: 1; height: 8px; background: #e8ecf0; border-radius: 4px; overflow: hidden; min-width: 60px; }
+  .bar-fill { height: 100%; border-radius: 4px; transition: width 0.3s; }
+  .bar-good  { background: #27ae60; }
+  .bar-ok    { background: #e67e22; }
+  .bar-poor  { background: #e74c3c; }
+  .pct-label { font-size: 11px; font-weight: 700; min-width: 36px; }
+  .pct-good  { color: #1e8449; }
+  .pct-ok    { color: #ca6f1e; }
+  .pct-poor  { color: #c0392b; }
+
+  /* BADGES */
+  .badge { display: inline-block; padding: 2px 7px; border-radius: 10px; font-size: 10px; font-weight: 700; letter-spacing: 0.3px; white-space: nowrap; }
+  .b-long  { background: #fde8d8; color: #ca6f1e; }
+  .b-prop  { background: #fdf2cc; color: #9a7d0a; }
+  .b-class { background: #f4ecf7; color: #6c3483; }
+  .b-cust  { background: #d6eaf8; color: #1a5276; }
+  .b-notes { background: #f2f3f4; color: #616a6b; }
+  .b-ok    { background: #d5f5e3; color: #1e8449; }
+  .badges  { display: flex; gap: 4px; flex-wrap: wrap; }
+
+  /* ROW STATES */
+  tr.row-flagged td { background: #fffbf5; }
+  tr.row-flagged:hover td { background: #fff3e0; }
+  tr.row-flagged .sticky-col { background: #fffbf5; }
+  tr.row-flagged:hover .sticky-col { background: #fff3e0; }
+
+  .customer-path { font-size: 11px; color: #7f8fa4; }
+  .customer-path .fund { color: #1a5276; }
+  .customer-path .prop { color: #117a65; }
+  .customer-path .meld { color: #1a2535; font-weight: 700; }
+  .customer-path .shallow { color: #c0392b; font-weight: 700; }
+  .sep { color: #aab7b8; margin: 0 3px; }
+
+  .notes-cell { max-width: 200px; overflow: hidden; text-overflow: ellipsis; }
+  .no-data { color: #c0392b; font-style: italic; font-size: 11px; }
+  .dur-ok  { color: #1e8449; font-weight: 600; }
+  .dur-warn{ color: #ca6f1e; font-weight: 700; }
+  .dur-bad { color: #c0392b; font-weight: 800; }
+
+  #count-label { font-size: 12px; color: #7f8fa4; }
+  .no-results { text-align: center; padding: 40px; color: #95a5a6; font-size: 14px; }
+</style>
+</head>
+<body>
+
+<div class="loading-overlay" id="loading">
+  <div class="loading-spinner"></div>
+  <div class="loading-text">Loading timecard data…</div>
+</div>
+
+<div class="header">
+  <div>
+    <h1>Timecard Audit</h1>
+    <div class="sub">McKay Property Management — QBT compliance check</div>
+  </div>
+  <div style="display:flex;gap:12px;align-items:center;">
+    <span class="as-of" id="as-of"></span>
+    <button class="btn-icon" onclick="refresh()">↻ Refresh</button>
+  </div>
+</div>
+
+<div class="period-bar">
+  <button class="period-btn active" onclick="setPeriod('month')" id="btn-month">This Month</button>
+  <button class="period-btn" onclick="setPeriod('last')" id="btn-last">Last Month</button>
+  <button class="period-btn" onclick="setPeriod('week')" id="btn-week">This Week</button>
+  <button class="period-btn" onclick="setPeriod('all')" id="btn-all">All Time</button>
+  <div class="custom-range" id="custom-range">
+    <label>From</label>
+    <input type="date" id="date-from" onchange="setPeriod('custom')">
+    <label>To</label>
+    <input type="date" id="date-to" onchange="setPeriod('custom')">
+  </div>
+</div>
+
+<div class="container">
+  <!-- KPI CARDS -->
+  <div class="cards">
+    <div class="card c-blue">
+      <div class="card-label">Total Entries</div>
+      <div class="card-value" id="kpi-total">—</div>
+      <div class="card-sub" id="kpi-hours">— hours logged</div>
+    </div>
+    <div class="card c-red">
+      <div class="card-label">Flagged Entries</div>
+      <div class="card-value" id="kpi-flagged">—</div>
+      <div class="card-sub" id="kpi-flagged-pct">— % of entries</div>
+    </div>
+    <div class="card c-green">
+      <div class="card-label">Compliance Rate</div>
+      <div class="card-value big-pct" id="kpi-comply">—</div>
+      <div class="card-sub">entries with no issues</div>
+    </div>
+    <div class="card c-orange">
+      <div class="card-label">Long Entries (&gt;2hr)</div>
+      <div class="card-value" id="kpi-long">—</div>
+      <div class="card-sub">duration over 2 hours</div>
+    </div>
+    <div class="card c-purple">
+      <div class="card-label">Wrong Customer</div>
+      <div class="card-value" id="kpi-cust">—</div>
+      <div class="card-sub">not at fund › prop › meld</div>
+    </div>
+    <div class="card c-teal">
+      <div class="card-label">Missing Fields</div>
+      <div class="card-value" id="kpi-missing">—</div>
+      <div class="card-sub" id="kpi-missing-detail">no prop / class / notes</div>
+    </div>
+  </div>
+
+  <!-- EMPLOYEE SCORECARD -->
+  <div class="section">
+    <div class="section-header">
+      <div>
+        <div class="section-title">Employee Scorecard</div>
+        <div class="section-sub">Compliance rate and issue breakdown per team member</div>
+      </div>
+    </div>
+    <div class="table-wrap" style="max-height:400px;">
+      <table id="emp-table">
+        <thead>
+          <tr>
+            <th class="sticky-col" onclick="sortEmp('name')">Employee ↕</th>
+            <th class="num" onclick="sortEmp('total')">Entries ↕</th>
+            <th class="num" onclick="sortEmp('hours')">Hours ↕</th>
+            <th onclick="sortEmp('comply')">Compliance ↕</th>
+            <th class="num" onclick="sortEmp('long')">Long &gt;2hr ↕</th>
+            <th class="num" onclick="sortEmp('prop')">No Property ↕</th>
+            <th class="num" onclick="sortEmp('class')">No Class ↕</th>
+            <th class="num" onclick="sortEmp('cust')">Wrong Customer ↕</th>
+            <th class="num" onclick="sortEmp('notes')">No Notes ↕</th>
+          </tr>
+        </thead>
+        <tbody id="emp-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- FLAGGED ENTRIES DETAIL -->
+  <div class="section">
+    <div class="section-header">
+      <div>
+        <div class="section-title">Flagged Entry Detail</div>
+        <div class="section-sub" id="count-label">Loading…</div>
+      </div>
+    </div>
+    <div class="filter-bar">
+      <div>
+        <label>Employee</label><br>
+        <select id="filter-emp" onchange="applyFilters()"><option value="">All Employees</option></select>
+      </div>
+      <div>
+        <label>Issue Filter</label><br>
+        <div class="issue-toggle">
+          <button class="issue-btn all" id="issue-all" onclick="toggleIssue('all')">All Issues</button>
+          <button class="issue-btn long" id="issue-long" onclick="toggleIssue('long')">Long &gt;2hr</button>
+          <button class="issue-btn prop" id="issue-prop" onclick="toggleIssue('prop')">No Property</button>
+          <button class="issue-btn class" id="issue-class" onclick="toggleIssue('class')">No Class</button>
+          <button class="issue-btn cust" id="issue-cust" onclick="toggleIssue('cust')">Wrong Customer</button>
+          <button class="issue-btn notes" id="issue-notes" onclick="toggleIssue('notes')">No Notes</button>
+        </div>
+      </div>
+      <div style="margin-left:auto;">
+        <label>Search notes</label><br>
+        <input type="text" id="filter-notes" placeholder="Filter by notes…" oninput="applyFilters()">
+      </div>
+    </div>
+    <div class="table-wrap" style="max-height:600px;">
+      <table id="detail-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Employee</th>
+            <th class="num">Duration</th>
+            <th>Property / Unit</th>
+            <th>Class</th>
+            <th>Customer (Fund › Prop › Meld)</th>
+            <th>Notes</th>
+            <th>Issues</th>
+          </tr>
+        </thead>
+        <tbody id="detail-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+const DATA_URL = 'data/audit.json';
+let RAW = null;
+let periodStart = '', periodEnd = '';
+let currentPeriod = 'month';
+let activeIssue = 'all';
+let empSortKey = 'comply', empSortDir = 1;
+let filteredRows = [];
+
+// ── DATE HELPERS ──────────────────────────────────────────────
+function today() {
+  const d = new Date(); return fmt(d);
+}
+function fmt(d) {
+  return d.toISOString().split('T')[0];
+}
+function startOfMonth(offset = 0) {
+  const d = new Date(); d.setDate(1); d.setMonth(d.getMonth() + offset);
+  return fmt(d);
+}
+function endOfMonth(offset = 0) {
+  const d = new Date(); d.setDate(1); d.setMonth(d.getMonth() + offset + 1); d.setDate(0);
+  return fmt(d);
+}
+function startOfWeek() {
+  const d = new Date(); d.setDate(d.getDate() - d.getDay());
+  return fmt(d);
+}
+
+function setPeriod(p) {
+  currentPeriod = p;
+  document.querySelectorAll('.period-btn').forEach(b => b.classList.remove('active'));
+  if (p === 'month') { periodStart = startOfMonth(); periodEnd = today(); document.getElementById('btn-month').classList.add('active'); }
+  else if (p === 'last') { periodStart = startOfMonth(-1); periodEnd = endOfMonth(-1); document.getElementById('btn-last').classList.add('active'); }
+  else if (p === 'week') { periodStart = startOfWeek(); periodEnd = today(); document.getElementById('btn-week').classList.add('active'); }
+  else if (p === 'all') { periodStart = '2000-01-01'; periodEnd = '2099-12-31'; document.getElementById('btn-all').classList.add('active'); }
+  else if (p === 'custom') {
+    periodStart = document.getElementById('date-from').value || '2000-01-01';
+    periodEnd   = document.getElementById('date-to').value   || '2099-12-31';
+  }
+  if (RAW) render();
+}
+
+// ── DATA ──────────────────────────────────────────────────────
+function fmtDur(secs) {
+  const h = Math.floor(secs / 3600), m = Math.floor((secs % 3600) / 60);
+  return h + 'h ' + String(m).padStart(2,'0') + 'm';
+}
+
+async function load() {
+  document.getElementById('loading').classList.remove('hidden');
+  try {
+    const res = await fetch(DATA_URL + '?t=' + Date.now());
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const text = await res.text();
+    RAW = JSON.parse(text);
+    document.getElementById('as-of').textContent = 'Updated ' + new Date(RAW.fetched_at).toLocaleString();
+    setPeriod('month');
+  } catch(e) {
+    document.getElementById('loading').classList.add('hidden');
+    alert('Failed to load data: ' + e.message);
+  } finally {
+    document.getElementById('loading').classList.add('hidden');
+  }
+}
+
+function refresh() { RAW = null; load(); }
+
+// ── RENDER ────────────────────────────────────────────────────
+function render() {
+  const entries = RAW.entries.filter(e => e.date >= periodStart && e.date <= periodEnd);
+
+  // Populate employee filter
+  const empSel = document.getElementById('filter-emp');
+  const prevEmp = empSel.value;
+  const empNames = new Set(entries.map(e => e.name));
+  empSel.innerHTML = '<option value="">All Employees</option>';
+  [...empNames].sort().forEach(n => { const o = document.createElement('option'); o.value = n; o.textContent = n; empSel.appendChild(o); });
+  empSel.value = prevEmp;
+
+  // KPI
+  let flagged = 0, totalSecs = 0, longCnt = 0, custCnt = 0, missingCnt = 0;
+  entries.forEach(e => {
+    totalSecs += e.dur;
+    if (e.issues.length) flagged++;
+    if (e.issues.includes('long'))  longCnt++;
+    if (e.issues.includes('cust'))  custCnt++;
+    if (e.issues.includes('prop') || e.issues.includes('class') || e.issues.includes('notes')) missingCnt++;
+  });
+  const total = entries.length;
+  const comply = total ? Math.round((total - flagged) / total * 100) : 0;
+  document.getElementById('kpi-total').textContent = total.toLocaleString();
+  document.getElementById('kpi-hours').textContent = (totalSecs/3600).toFixed(1) + ' hours logged';
+  document.getElementById('kpi-flagged').textContent = flagged.toLocaleString();
+  document.getElementById('kpi-flagged-pct').textContent = total ? Math.round(flagged/total*100) + '% of entries' : '—';
+  document.getElementById('kpi-comply').textContent = comply + '%';
+  document.getElementById('kpi-long').textContent = longCnt.toLocaleString();
+  document.getElementById('kpi-cust').textContent = custCnt.toLocaleString();
+  document.getElementById('kpi-missing').textContent = missingCnt.toLocaleString();
+
+  renderEmpTable(entries);
+  applyFilters(entries);
+}
+
+// ── EMPLOYEE TABLE ────────────────────────────────────────────
+let empData = [];
+function renderEmpTable(entries) {
+  const byEmp = {};
+  entries.forEach(e => {
+    if (!byEmp[e.name]) byEmp[e.name] = { name:e.name, total:0, secs:0, long:0, prop:0, cls:0, cust:0, notes:0 };
+    byEmp[e.name].total++;
+    byEmp[e.name].secs += e.dur;
+    if (e.issues.includes('long'))  byEmp[e.name].long++;
+    if (e.issues.includes('prop'))  byEmp[e.name].prop++;
+    if (e.issues.includes('class')) byEmp[e.name].cls++;
+    if (e.issues.includes('cust'))  byEmp[e.name].cust++;
+    if (e.issues.includes('notes')) byEmp[e.name].notes++;
+  });
+  empData = Object.values(byEmp);
+  sortAndRenderEmp();
+}
+
+function sortEmp(key) {
+  if (empSortKey === key) empSortDir *= -1; else { empSortKey = key; empSortDir = 1; }
+  sortAndRenderEmp();
+}
+function sortAndRenderEmp() {
+  const sorted = [...empData].sort((a,b) => {
+    let av, bv;
+    if (empSortKey === 'name')   { av = a.name; bv = b.name; }
+    else if (empSortKey === 'total')  { av = a.total; bv = b.total; }
+    else if (empSortKey === 'hours')  { av = a.secs; bv = b.secs; }
+    else if (empSortKey === 'comply') { av = a.total ? (a.total - a.long - a.prop - a.cls - a.cust - a.notes) / a.total : 0; bv = b.total ? (b.total - b.long - b.prop - b.cls - b.cust - b.notes) / b.total : 0; }
+    else { av = a[empSortKey]; bv = b[empSortKey]; }
+    if (av < bv) return -1 * empSortDir; if (av > bv) return empSortDir; return 0;
+  });
+
+  const tbody = document.getElementById('emp-tbody');
+  tbody.innerHTML = '';
+  sorted.forEach(e => {
+    const flagged = e.long + e.prop + e.cls + e.cust + e.notes;
+    const comply = e.total ? Math.round((e.total - Math.min(flagged, e.total)) / e.total * 100) : 100;
+    const pctClass = comply >= 90 ? 'pct-good' : comply >= 70 ? 'pct-ok' : 'pct-poor';
+    const barClass = comply >= 90 ? 'bar-good' : comply >= 70 ? 'bar-ok' : 'bar-poor';
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td class="sticky-col">${e.name}</td>
+      <td class="num">${e.total}</td>
+      <td class="num">${(e.secs/3600).toFixed(1)}</td>
+      <td>
+        <div class="compliance-bar">
+          <div class="bar-track"><div class="bar-fill ${barClass}" style="width:${comply}%"></div></div>
+          <span class="pct-label ${pctClass}">${comply}%</span>
+        </div>
+      </td>
+      <td class="num">${e.long > 0 ? '<span class="badge b-long">'+e.long+'</span>' : '<span style="color:#ccc">—</span>'}</td>
+      <td class="num">${e.prop > 0 ? '<span class="badge b-prop">'+e.prop+'</span>' : '<span style="color:#ccc">—</span>'}</td>
+      <td class="num">${e.cls  > 0 ? '<span class="badge b-class">'+e.cls+'</span>'  : '<span style="color:#ccc">—</span>'}</td>
+      <td class="num">${e.cust > 0 ? '<span class="badge b-cust">'+e.cust+'</span>' : '<span style="color:#ccc">—</span>'}</td>
+      <td class="num">${e.notes> 0 ? '<span class="badge b-notes">'+e.notes+'</span>': '<span style="color:#ccc">—</span>'}</td>`;
+    tbody.appendChild(tr);
+  });
+}
+
+// ── DETAIL TABLE ──────────────────────────────────────────────
+function toggleIssue(key) {
+  activeIssue = key;
+  document.querySelectorAll('.issue-btn').forEach(b => b.classList.add('inactive'));
+  document.getElementById('issue-' + key).classList.remove('inactive');
+  applyFilters();
+}
+
+function applyFilters(entries) {
+  if (!RAW) return;
+  if (!entries) entries = RAW.entries.filter(e => e.date >= periodStart && e.date <= periodEnd);
+
+  const empFilter   = document.getElementById('filter-emp').value;
+  const notesFilter = document.getElementById('filter-notes').value.toLowerCase();
+
+  filteredRows = entries.filter(e => {
+    if (empFilter   && e.name !== empFilter) return false;
+    if (notesFilter && !e.notes.toLowerCase().includes(notesFilter)) return false;
+    if (activeIssue === 'all') return e.issues.length > 0;
+    return e.issues.includes(activeIssue);
+  });
+
+  filteredRows.sort((a,b) => b.date.localeCompare(a.date) || b.id - a.id);
+  document.getElementById('count-label').textContent = filteredRows.length.toLocaleString() + ' flagged entries shown';
+  renderDetailTable(filteredRows);
+}
+
+function renderDetailTable(rows) {
+  const tbody = document.getElementById('detail-tbody');
+  tbody.innerHTML = '';
+  if (rows.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="8" class="no-results">No flagged entries for the selected filters.</td></tr>';
+    return;
+  }
+  const display = rows.slice(0, 500);
+  display.forEach(e => {
+    const durClass = e.dur > 14400 ? 'dur-bad' : e.dur > 7200 ? 'dur-warn' : 'dur-ok';
+    const propHtml = e.prop ? esc(e.prop) : '<span class="no-data">missing</span>';
+    const clsHtml  = e.cls  ? esc(e.cls)  : '<span class="no-data">missing</span>';
+
+    const depth = e.path.length;
+    let custHtml;
+    if (depth === 0) {
+      custHtml = '<span class="no-data">missing</span>';
+    } else if (depth === 1) {
+      custHtml = `<span class="customer-path"><span class="shallow">⚠ ${esc(e.path[0])}</span> <span style="color:#aab7b8;font-size:10px;">— needs prop › meld</span></span>`;
+    } else if (depth === 2) {
+      custHtml = `<span class="customer-path"><span class="fund">${esc(e.path[0])}</span><span class="sep">›</span><span class="prop">${esc(e.path[1])}</span> <span style="color:#aab7b8;font-size:10px;">— needs meld #</span></span>`;
+    } else {
+      custHtml = `<span class="customer-path"><span class="fund">${esc(e.path[0])}</span><span class="sep">›</span><span class="prop">${esc(e.path[1])}</span><span class="sep">›</span><span class="meld">${esc(e.path[2])}</span></span>`;
+    }
+
+    const notesHtml = e.notes.trim().length >= 3
+      ? `<span title="${esc(e.notes)}">${esc(e.notes.substring(0,60))}${e.notes.length>60?'…':''}</span>`
+      : '<span class="no-data">missing</span>';
+
+    const badgeMap = { long:'b-long', prop:'b-prop', class:'b-class', cust:'b-cust', notes:'b-notes' };
+    const badgeLbl = { long:'Long', prop:'No Prop', class:'No Class', cust:'No Meld', notes:'No Notes' };
+    const badgeHtml = e.issues.map(i => `<span class="badge ${badgeMap[i]}">${badgeLbl[i]}</span>`).join(' ');
+
+    const tr = document.createElement('tr');
+    tr.className = 'row-flagged';
+    tr.innerHTML = `
+      <td>${e.date}</td>
+      <td>${esc(e.name)}</td>
+      <td class="num"><span class="${durClass}">${fmtDur(e.dur)}</span></td>
+      <td>${propHtml}</td>
+      <td>${clsHtml}</td>
+      <td>${custHtml}</td>
+      <td class="notes-cell">${notesHtml}</td>
+      <td><div class="badges">${badgeHtml}</div></td>`;
+    tbody.appendChild(tr);
+  });
+  if (rows.length > 500) {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td colspan="8" style="text-align:center;color:#7f8fa4;font-size:12px;padding:12px;">Showing first 500 of ${rows.length.toLocaleString()} — use filters to narrow down</td>`;
+    tbody.appendChild(tr);
+  }
+}
+
+function esc(s) {
+  return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ── INIT ──────────────────────────────────────────────────────
+load();
+</script>
+</body>
+</html>

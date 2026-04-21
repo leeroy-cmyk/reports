@@ -272,6 +272,40 @@ async function fetchRampTransactions() {
   save('ramp.json', { ok: true, fetched_at: new Date().toISOString(), transactions });
 }
 
+function buildAuditData() {
+  const qbtPath = path.join(DATA_DIR, 'qbtime.json');
+  if (!fs.existsSync(qbtPath)) { console.log('buildAuditData: qbtime.json not found, skipping.'); return; }
+  console.log('Building audit.json...');
+  const { users, jobcodes, timesheets, fetched_at } = JSON.parse(fs.readFileSync(qbtPath, 'utf8'));
+
+  function getPath(id) {
+    const j = jobcodes[id];
+    if (!j) return [];
+    if (j.parent_id === 0) return [j.name];
+    return [...getPath(j.parent_id), j.name];
+  }
+
+  const entries = Object.values(timesheets)
+    .filter(t => t.type === 'regular')
+    .map(t => {
+      const u = users[t.user_id];
+      const name = u ? u.first_name + ' ' + u.last_name : 'User ' + t.user_id;
+      const cls  = t.customfields['25056'] || '';
+      const prop = t.customfields['25068'] || '';
+      const p    = getPath(t.jobcode_id);
+      const issues = [];
+      if (t.duration > 7200)         issues.push('long');
+      if (!prop.trim())               issues.push('prop');
+      if (!cls.trim())                issues.push('class');
+      if (p.length < 3)               issues.push('cust');
+      if (!t.notes || t.notes.trim().length < 3) issues.push('notes');
+      return { id: t.id, date: t.date, name, dur: t.duration, prop, cls, path: p, notes: t.notes || '', issues };
+    });
+
+  save('audit.json', { fetched_at, entries });
+  console.log('audit.json: ' + entries.length + ' entries');
+}
+
 // FETCH_ONLY env var controls what runs — used by split workflows:
 //   'appfolio'  → turnvac + workorders + budget only (fast, every 5 min)
 //   'qbt-ramp'  → QBTime + Ramp only (slower, every 30 min)
@@ -292,7 +326,7 @@ const FETCH_ONLY = process.env.FETCH_ONLY || 'all';
 
   if (FETCH_ONLY !== 'appfolio') {
     let anyFailed = false;
-    try { await fetchQBTime(); }
+    try { await fetchQBTime(); buildAuditData(); }
     catch(e) { console.error('QBTime fetch failed (non-fatal):', e.message); anyFailed = true; }
     try { await fetchRampTransactions(); }
     catch(e) { console.error('Ramp fetch failed (non-fatal):', e.message); anyFailed = true; }
