@@ -6,31 +6,53 @@ on:
   workflow_dispatch:
 
 jobs:
-  fetch:
+  fetch-qbt:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     permissions:
       contents: write
-
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
 
-      - name: Fetch QBTime and Ramp data
+      - name: Fetch QBTime + build audit data
         env:
           QBT_TOKEN: ${{ secrets.QBT_TOKEN }}
-          RAMP_CLIENT_ID: ${{ secrets.RAMP_CLIENT_ID }}
-          RAMP_CLIENT_SECRET: ${{ secrets.RAMP_CLIENT_SECRET }}
-          FETCH_ONLY: qbt-ramp
+          FETCH_ONLY: qbt-only
         run: node scripts/fetch-data.js
 
-      - name: Commit updated data
+      - name: Commit QBTime data
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/
-          git diff --cached --quiet || git commit -m "chore: refresh QBTime+Ramp data $(date -u '+%Y-%m-%d %H:%M UTC')"
+          git add data/qbtime.json data/audit.json
+          git diff --cached --quiet || git commit -m "chore: refresh QBTime+audit $(date -u '+%Y-%m-%d %H:%M UTC')"
+          git push
+
+  fetch-ramp:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Fetch Ramp transactions
+        env:
+          RAMP_CLIENT_ID: ${{ secrets.RAMP_CLIENT_ID }}
+          RAMP_CLIENT_SECRET: ${{ secrets.RAMP_CLIENT_SECRET }}
+          FETCH_ONLY: ramp-only
+        run: node scripts/fetch-data.js
+
+      - name: Commit Ramp data
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/ramp.json
+          git diff --cached --quiet || git commit -m "chore: refresh Ramp data $(date -u '+%Y-%m-%d %H:%M UTC')"
           git push

@@ -308,14 +308,20 @@ function buildAuditData() {
   console.log('audit.json: ' + entries.length + ' entries');
 }
 
-// FETCH_ONLY env var controls what runs — used by split workflows:
-//   'appfolio'  → turnvac + workorders + budget only (fast, every 5 min)
-//   'qbt-ramp'  → QBTime + Ramp only (slower, every 30 min)
+// FETCH_ONLY env var controls what runs:
+//   'appfolio'  → turnvac + workorders + budget (every 5 min)
+//   'qbt-only'  → QBTime + audit.json only
+//   'ramp-only' → Ramp only
+//   'qbt-ramp'  → QBTime + Ramp (legacy, local use)
 //   unset/'all' → everything
 const FETCH_ONLY = process.env.FETCH_ONLY || 'all';
 
 (async () => {
-  if (FETCH_ONLY !== 'qbt-ramp') {
+  const runAppFolio = FETCH_ONLY === 'all' || FETCH_ONLY === 'appfolio';
+  const runQBT      = FETCH_ONLY === 'all' || FETCH_ONLY === 'qbt-ramp' || FETCH_ONLY === 'qbt-only';
+  const runRamp     = FETCH_ONLY === 'all' || FETCH_ONLY === 'qbt-ramp' || FETCH_ONLY === 'ramp-only';
+
+  if (runAppFolio) {
     try {
       await fetchTurnVac();
       await fetchWorkOrders();
@@ -326,13 +332,14 @@ const FETCH_ONLY = process.env.FETCH_ONLY || 'all';
     }
   }
 
-  if (FETCH_ONLY !== 'appfolio') {
-    let anyFailed = false;
+  if (runQBT) {
     try { await fetchQBTime(); buildAuditData(); }
-    catch(e) { console.error('QBTime fetch failed (non-fatal):', e.message); anyFailed = true; }
+    catch(e) { console.error('QBTime fetch failed:', e.message); if (FETCH_ONLY === 'qbt-only') process.exit(1); }
+  }
+
+  if (runRamp) {
     try { await fetchRampTransactions(); }
-    catch(e) { console.error('Ramp fetch failed (non-fatal):', e.message); anyFailed = true; }
-    if (anyFailed) console.log('Completed with some non-fatal errors.');
+    catch(e) { console.error('Ramp fetch failed:', e.message); if (FETCH_ONLY === 'ramp-only') process.exit(1); }
   }
 
   console.log('Done.');

@@ -139,7 +139,8 @@
   </div>
   <div style="display:flex;gap:12px;align-items:center;">
     <span class="as-of" id="as-of"></span>
-    <button class="btn-icon" onclick="refresh()">↻ Refresh</button>
+    <button class="btn-icon" id="refresh-btn" onclick="triggerRefresh()">↻ Refresh</button>
+    <span id="refresh-status" style="font-size:11px;color:#7f8fa4;"></span>
   </div>
 </div>
 
@@ -335,6 +336,48 @@ async function load() {
 }
 
 function refresh() { RAW = null; load(); }
+
+async function triggerRefresh() {
+  const btn = document.getElementById('refresh-btn');
+  const status = document.getElementById('refresh-status');
+  btn.disabled = true;
+  status.textContent = 'Fetching fresh data from QBT…';
+
+  try {
+    const res = await fetch('/api/refresh', { method: 'POST' });
+    if (res.status === 409) { status.textContent = 'Already refreshing…'; btn.disabled = false; return; }
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    status.textContent = 'Fetching… (takes ~2 min)';
+    pollRefresh();
+  } catch(e) {
+    // Fallback: not running via local API server, just re-read the file
+    status.textContent = '';
+    btn.disabled = false;
+    refresh();
+  }
+}
+
+async function pollRefresh() {
+  const btn = document.getElementById('refresh-btn');
+  const status = document.getElementById('refresh-status');
+  try {
+    const res = await fetch('/api/refresh-status');
+    const { running } = await res.json();
+    if (running) {
+      setTimeout(pollRefresh, 3000);
+    } else {
+      status.textContent = 'Done! Reloading…';
+      btn.disabled = false;
+      await new Promise(r => setTimeout(r, 800));
+      status.textContent = '';
+      refresh();
+    }
+  } catch(e) {
+    status.textContent = '';
+    btn.disabled = false;
+    refresh();
+  }
+}
 
 // ── RENDER ────────────────────────────────────────────────────
 function render() {
