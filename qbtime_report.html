@@ -208,36 +208,26 @@ function propCode(str) {
 }
 
 function getRampPropCode(tx) {
-  const e = (tx.accounting_categories || []).find(c => c.tracking_category_remote_id === 'QuickbooksDepartment');
-  if (!e) return null;
-  const code = propCode(e.category_name);
+  if (!tx.dept) return null;
+  const code = propCode(tx.dept);
   return (code && BUDGET_CODES.has(code)) ? code : null;
 }
 
 // Ramp GL account → report category. Returns null = exclude (non-maintenance operating expense).
 const RAMP_ACCT_CAT = {
-  // R&M (labor / material / contractor sub-accounts)
   '52000':'R&M','52001':'R&M','52002':'R&M','52003':'R&M',
-  // Turn
   '53000':'Turn','53001':'Turn','53002':'Turn','53003':'Turn',
-  // Grounds
   '54000':'Grounds','54001':'Grounds','54002':'Grounds','54003':'Grounds',
-  // CapEx accounts — omitted (excluded from this report; separate CapEx report planned)
-  // Maintenance supplies → R&M
   '67800':'R&M',
 };
 
 function getRampCategory(tx) {
-  const e = (tx.accounting_categories || []).find(c => c.tracking_category_remote_id === 'QuickbooksCategory');
-  if (!e || !e.category_id) return null; // no GL account — exclude
-  return RAMP_ACCT_CAT[e.category_id] || null; // null = non-maintenance, exclude
+  if (!tx.gl) return null;
+  return RAMP_ACCT_CAT[tx.gl] || null;
 }
 
 function isTeamRampTx(tx) {
-  const ch = tx.card_holder;
-  if (!ch) return false;
-  const last = (ch.last_name || '').trim().toLowerCase().replace(/[^a-z]/g, '');
-  return TEAM_LAST_NAMES.has(last);
+  return TEAM_LAST_NAMES.has(tx.ln || '');
 }
 
 function getQBTClassLabel(classVal) {
@@ -367,7 +357,7 @@ function buildActuals() {
   // Ramp materials — team members only, account-based category
   if (RAW_RAMP) {
     RAW_RAMP.transactions.forEach(tx => {
-      const d = tx.user_transaction_time.slice(0,10);
+      const d = tx.d;
       if (d < PERIOD_FROM || d > PERIOD_TO) return;
       if (!isTeamRampTx(tx)) return;
       const pCode = getRampPropCode(tx);
@@ -375,7 +365,7 @@ function buildActuals() {
       const cls = getRampCategory(tx);
       if (!cls) return; // non-maintenance account — exclude
       if (!actuals[pCode]) actuals[pCode] = init();
-      actuals[pCode][cls] += tx.amount;
+      actuals[pCode][cls] += tx.amt;
     });
   }
 
@@ -532,7 +522,7 @@ async function loadData() {
   try {
     const [qbtRes, rampRes, budgetRes] = await Promise.all([
       fetch('./data/qbtime.json'),
-      fetch('./data/ramp.json'),
+      fetch('./data/ramp_processed.json'),
       fetch('./data/budget.json'),
     ]);
     if (!qbtRes.ok) throw new Error('qbtime.json ' + qbtRes.status);

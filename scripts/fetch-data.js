@@ -308,6 +308,28 @@ function buildAuditData() {
   console.log('audit.json: ' + entries.length + ' entries');
 }
 
+function buildRampProcessed() {
+  const rampPath = path.join(DATA_DIR, 'ramp.json');
+  if (!fs.existsSync(rampPath)) { console.log('buildRampProcessed: ramp.json not found, skipping.'); return; }
+  console.log('Building ramp_processed.json...');
+  const { transactions, fetched_at } = JSON.parse(fs.readFileSync(rampPath, 'utf8'));
+
+  const slim = transactions.map(t => {
+    const dept = (t.accounting_categories || []).find(c => c.tracking_category_remote_id === 'QuickbooksDepartment');
+    const cat  = (t.accounting_categories || []).find(c => c.tracking_category_remote_id === 'QuickbooksCategory');
+    return {
+      d:    t.user_transaction_time.slice(0, 10),
+      ln:   (t.card_holder?.last_name || '').toLowerCase().replace(/[^a-z]/g, ''),
+      amt:  t.amount,
+      dept: dept?.category_name || null,
+      gl:   cat?.category_id    || null,
+    };
+  });
+
+  save('ramp_processed.json', { fetched_at, transactions: slim });
+  console.log('ramp_processed.json: ' + slim.length + ' transactions (' + (JSON.stringify(slim).length / 1024).toFixed(0) + ' KB)');
+}
+
 // FETCH_ONLY env var controls what runs:
 //   'appfolio'  → turnvac + workorders + budget (every 5 min)
 //   'qbt-only'  → QBTime + audit.json only
@@ -338,7 +360,7 @@ const FETCH_ONLY = process.env.FETCH_ONLY || 'all';
   }
 
   if (runRamp) {
-    try { await fetchRampTransactions(); }
+    try { await fetchRampTransactions(); buildRampProcessed(); }
     catch(e) { console.error('Ramp fetch failed:', e.message); if (FETCH_ONLY === 'ramp-only') process.exit(1); }
   }
 

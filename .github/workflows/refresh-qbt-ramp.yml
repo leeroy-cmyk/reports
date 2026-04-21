@@ -2,22 +2,37 @@ name: Refresh QBTime and Ramp
 
 on:
   schedule:
-    - cron: '*/30 * * * *'   # every 30 minutes
+    - cron: '*/30 * * * *'
   workflow_dispatch:
 
 jobs:
-  fetch-qbt:
+  refresh:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 45
     permissions:
       contents: write
+
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
 
-      - name: Fetch QBTime + build audit data
+      - name: Configure git
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      # ramp.json (~80MB) lives in cache, not git — keeps repo small and avoids re-fetching from scratch
+      - name: Restore Ramp cache
+        uses: actions/cache@v4
+        with:
+          path: data/ramp.json
+          key: ramp-data-v1
+
+      # ── Step 1: QBTime + Audit ────────────────────────────────────────────
+      - name: Fetch QBTime + build audit.json
         env:
           QBT_TOKEN: ${{ secrets.QBT_TOKEN }}
           FETCH_ONLY: qbt-only
@@ -25,34 +40,36 @@ jobs:
 
       - name: Commit QBTime data
         run: |
-          git config user.name  "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data/qbtime.json data/audit.json
-          git diff --cached --quiet || git commit -m "chore: refresh QBTime+audit $(date -u '+%Y-%m-%d %H:%M UTC')"
-          git push
+          git diff --cached --quiet && { echo "No QBTime changes"; exit 0; }
+          git commit -m "chore: refresh QBTime+audit $(date -u '+%Y-%m-%d %H:%M UTC')"
+          for i in 1 2 3 4 5; do
+            git pull --rebase origin main && git push && exit 0
+            echo "Push attempt $i failed, retrying in $((i * 5))s..."
+            sleep $((i * 5))
+          done
+          exit 1
 
-  fetch-ramp:
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
-    permissions:
-      contents: write
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Fetch Ramp transactions
+      # ── Step 2: Ramp (failure here does NOT affect QBTime) ───────────────
+      - name: Fetch Ramp + build ramp_processed.json
+        continue-on-error: true
         env:
-          RAMP_CLIENT_ID: ${{ secrets.RAMP_CLIENT_ID }}
+          RAMP_CLIENT_ID:     ${{ secrets.RAMP_CLIENT_ID }}
           RAMP_CLIENT_SECRET: ${{ secrets.RAMP_CLIENT_SECRET }}
           FETCH_ONLY: ramp-only
         run: node scripts/fetch-data.js
 
-      - name: Commit Ramp data
+      - name: Commit Ramp processed data
+        continue-on-error: true
         run: |
-          git config user.name  "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/ramp.json
-          git diff --cached --quiet || git commit -m "chore: refresh Ramp data $(date -u '+%Y-%m-%d %H:%M UTC')"
-          git push
+          git add data/ramp_processed.json
+          git diff --cached --quiet && { echo "No Ramp changes"; exit 0; }
+          git commit -m "chore: refresh Ramp $(date -u '+%Y-%m-%d %H:%M UTC')"
+          for i in 1 2 3 4 5; do
+            git pull --rebase origin main && git push && exit 0
+            echo "Push attempt $i failed, retrying in $((i * 5))s..."
+            sleep $((i * 5))
+          done
+          exit 1
+
+      # Cache is saved automatically by actions/cache when the job ends
