@@ -21,12 +21,14 @@ const entries = Object.values(timesheets)
     const prop  = t.customfields['25068'] || '';
     const path  = getPath(t.jobcode_id);
 
+    const isOpex = cls === 'r203';
+    const hasSpecificProp = prop.trim() && prop !== 'r203';
     const issues = [];
-    if (t.duration > 7200) issues.push('long');
-    if (!prop.trim())        issues.push('prop');
-    if (!cls.trim())         issues.push('class');
-    if (path.length < 3)     issues.push('cust');
-    if (!t.notes || t.notes.trim().length < 3) issues.push('notes');
+    if (t.duration > 7200)                                      issues.push('long');
+    if (!prop.trim() && !isOpex)                                issues.push('prop');
+    if (hasSpecificProp && (!cls.trim() || cls === 'r203'))     issues.push('class');
+    if (path.length < 3 && !isOpex)                            issues.push('cust');
+    if (!t.notes || t.notes.trim().length < 3)                  issues.push('notes');
 
     return {
       id:    t.id,
