@@ -26,7 +26,7 @@ const entries = Object.values(timesheets)
     const issues = [];
     if (t.duration > 7200)                                      issues.push('long');
     if (!prop.trim() && !isOpex)                                issues.push('prop');
-    if (hasSpecificProp && (!cls.trim() || cls === 'r203'))     issues.push('class');
+    if (hasSpecificProp && !cls.trim())                          issues.push('class');
     if (path.length < 3 && !isOpex)                            issues.push('cust');
     if (!t.notes || t.notes.trim().length < 3)                  issues.push('notes');
 
