@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Update — Apr 13–19, 2026</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f4f6f9; color: #222; font-size: 14px; line-height: 1.5; }
+  .header { background: linear-gradient(135deg, #1a5276 0%, #2e86c1 100%); color: white; padding: 20px 32px; }
+  .header h1 { font-size: 21px; font-weight: 700; }
+  .header p { font-size: 12.5px; opacity: 0.8; margin-top: 2px; }
+  .container { max-width: 1080px; margin: 0 auto; padding: 20px; }
+
+  /* Goal section */
+  .goal-section { background: white; border-radius: 9px; margin-bottom: 14px; box-shadow: 0 1px 3px rgba(0,0,0,.07); overflow: hidden; }
+  .goal-header { display: flex; align-items: center; gap: 10px; padding: 14px 18px 12px; border-bottom: 1px solid #e8eef5; }
+  .goal-header h2 { font-size: 14.5px; font-weight: 700; color: #1a5276; flex: 1; }
+  .goal-header .badge { font-size: 11px; padding: 3px 9px; border-radius: 10px; font-weight: 600; }
+  .badge-on  { background: #e8f8f5; color: #1e8449; }
+  .badge-off { background: #fde8e8; color: #c0392b; }
+  .badge-mixed { background: #fef3e2; color: #ca6f1e; }
+  .goal-body { padding: 14px 18px; }
+
+  /* KPI table */
+  .kpi-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-bottom: 12px; }
+  .kpi-table th { background: #eaf0f8; color: #1a5276; font-weight: 600; padding: 6px 10px; text-align: left; font-size: 11.5px; }
+  .kpi-table td { padding: 6px 10px; border-bottom: 1px solid #f2f5f9; }
+  .kpi-table tr:last-child td { border-bottom: none; }
+  .hit { color: #1e8449; font-weight: 700; }
+  .miss { color: #c0392b; font-weight: 700; }
+  .neutral { color: #ca6f1e; font-weight: 700; }
+  .arrow-up { color: #1e8449; }
+  .arrow-down { color: #c0392b; }
+
+  /* Region grid */
+  .region-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 12px; }
+  .rc { border: 1px solid #e0e7ef; border-radius: 7px; padding: 11px 12px; }
+  .rc h3 { font-size: 11px; font-weight: 700; color: #1a5276; text-transform: uppercase; letter-spacing: .4px; margin-bottom: 8px; }
+  .rs { display: flex; justify-content: space-between; font-size: 12px; padding: 3px 0; border-bottom: 1px solid #f2f5f9; }
+  .rs:last-of-type { border-bottom: none; }
+  .rv { font-weight: 700; }
+  .rv.red { color: #c0392b; } .rv.green { color: #1e8449; } .rv.orange { color: #ca6f1e; }
+  .rc-flag { font-size: 10.5px; margin-top: 6px; padding: 2px 6px; border-radius: 7px; display: inline-block; font-weight: 600; }
+  .flag-r { background: #fde8e8; color: #c0392b; }
+  .flag-o { background: #fef3e2; color: #ca6f1e; }
+  .flag-b { background: #e8f0fa; color: #1a5276; }
+  .flag-g { background: #e8f8f5; color: #1e8449; }
+
+  /* Bullet list */
+  .bl { display: flex; gap: 9px; padding: 6px 0; border-bottom: 1px solid #f2f5f9; font-size: 13px; align-items: flex-start; }
+  .bl:last-child { border-bottom: none; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+  .dr { background: #e74c3c; } .do { background: #e67e22; } .db { background: #2e86c1; } .dg { background: #27ae60; } .dx { background: #95a5a6; }
+  .bl strong { color: #1a5276; }
+  .bl .sub { font-size: 11.5px; color: #777; margin-top: 1px; }
+
+  /* Two-col */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  /* Alert */
+  .alert { border-radius: 6px; padding: 9px 13px; margin-bottom: 8px; display: flex; gap: 9px; align-items: flex-start; font-size: 12.5px; }
+  .alert:last-child { margin-bottom: 0; }
+  .alert-r { background: #fde8e8; border-left: 4px solid #e74c3c; }
+  .alert-o { background: #fef3e2; border-left: 4px solid #e67e22; }
+  .alert-b { background: #e8f0fa; border-left: 4px solid #2e86c1; }
+  .alert-g { background: #e8f8f5; border-left: 4px solid #27ae60; }
+
+  /* Inline goal pill */
+  .goal-pill { font-size: 11px; background: #e8f0fa; color: #1a5276; padding: 1px 7px; border-radius: 8px; font-weight: 600; display: inline-block; margin-left: 6px; }
+
+  @media (max-width: 750px) {
+    .region-grid { grid-template-columns: repeat(2,1fr); }
+    .two-col { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Weekly Update — April 13–19, 2026</h1>
+  <p>Lee Roy Phillips &nbsp;·&nbsp; Maintenance &amp; Construction Manager &nbsp;·&nbsp; McKay Properties &nbsp;·&nbsp; Q2 2026</p>
+</div>
+
+<div class="container">
+
+  <!-- R&M -->
+  <div class="goal-section">
+    <div class="goal-header">
+      <h2>🔧 R&amp;M</h2>
+      <span class="badge badge-mixed">Mixed</span>
+    </div>
+    <div class="goal-body">
+      <div class="two-col">
+        <div>
+          <div style="font-size:11.5px;font-weight:700;color:#1a5276;text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px;">Q2 Goals</div>
+          <table class="kpi-table">
+            <thead><tr><th>KPI</th><th>Goal</th><th>Q1 Actual</th><th>This Week</th><th></th></tr></thead>
+            <tbody>
+              <tr>
+                <td>R&amp;M % of GPR</td>
+                <td>≤11%</td>
+                <td>8.07%</td>
+                <td>—</td>
+                <td><span class="neutral">~9.6%*</span></td>
+              </tr>
+              <tr>
+                <td>Emergency WO Completion</td>
+                <td>1 day</td>
+                <td>0.8 days</td>
+                <td class="miss">3.3 days</td>
+                <td>&#x2193;</td>
+              </tr>
+              <tr>
+                <td>Resident Satisfaction</td>
+                <td>4.4 / 5</td>
+                <td>4.2</td>
+                <td class="hit">4.8</td>
+                <td>&#x2191;</td>
+              </tr>
+              <tr>
+                <td>Avg Speed of Repair</td>
+                <td>4 days</td>
+                <td>2.2 days</td>
+                <td class="miss">5.9 days</td>
+                <td>&#x2193;</td>
+              </tr>
+              <tr>
+                <td>Vendor Completion Time</td>
+                <td>7 days</td>
+                <td>—</td>
+                <td class="miss">20.6 days</td>
+                <td>&#x2193;</td>
+              </tr>
+              <tr>
+                <td>Time to Assignment</td>
+                <td>1 day</td>
+                <td>—</td>
+                <td class="miss">2.24 days</td>
+                <td>&#x2193;</td>
+              </tr>
+              <tr>
+                <td>Time to Schedule</td>
+                <td>1 day</td>
+                <td>—</td>
+                <td class="hit">0.2 days</td>
+                <td>&#x2191;</td>
+              </tr>
+              <tr>
+                <td>KPI Reporting</td>
+                <td>90% weekly</td>
+                <td>69%</td>
+                <td>—</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Vendor Cost % of R&amp;M</td>
+                <td>30%</td>
+                <td>45.6%</td>
+                <td>—</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+          <div style="font-size:11px;color:#999;margin-top:4px;">* Jonathan flagged R&amp;M at ~9.6% of GPR with recent loss (target 8.07% per Q1; back to 11% for Q2)</div>
+        </div>
+        <div>
+          <div style="font-size:11.5px;font-weight:700;color:#1a5276;text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px;">This Week</div>
+          <div class="bl"><div class="dot dr"></div><div><strong>Emergency WOs at 3.3 days</strong> — WOs are being responded to timely, but not closed after drywall/remediation follow-up. Process being reinforced. Juan: expects to cut by half next week.<div class="sub">Jonathan flagged this as top priority in weekly update review.</div></div></div>
+          <div class="bl"><div class="dot dr"></div><div><strong>Vendor completion at 20.6 days</strong> — 3× over goal. Vendor health score was 90.3 in Q1; this week indicates regression.<div class="sub">Likely driven by specific outstanding jobs — needs investigation.</div></div></div>
+          <div class="bl"><div class="dot do"></div><div><strong>Notable repairs</strong> — J312 fridge ($740), K104 AC ($587), p705 AC ordered ($587). Vehicle/equipment: Fuel $1,426 · Maintenance $249 · Tools &amp; Supplies $878.</div></div>
+          <div class="bl"><div class="dot dg"></div><div><strong>Pest control — all pending WOs now scheduled</strong> <span class="goal-pill">Q2 Goal: budget &amp; summary by May 15</span><div class="sub">LeeRoy coordinated with all vendors. Daily pest meeting added at 1:30pm.</div></div></div>
+          <div class="bl"><div class="dot dr"></div><div><strong>Cedar North (rl16) — Fire alarm inspections overdue, all 4 buildings</strong><div class="sub">Due date was 3/13/26. Richland penalties possible. Forwarded to Juan to schedule with certified inspector.</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GROUNDS -->
+  <div class="goal-section">
+    <div class="goal-header">
+      <h2>🌿 Grounds</h2>
+      <span class="badge badge-mixed">In Progress</span>
+    </div>
+    <div class="goal-body">
+      <div class="two-col">
+        <div>
+          <div style="font-size:11.5px;font-weight:700;color:#1a5276;text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px;">Q2 Goals</div>
+          <table class="kpi-table">
+            <thead><tr><th>Goal</th><th>Target</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td>Grounds Maintenance SOP</td><td>Ship</td><td><span class="neutral">In progress</span></td></tr>
+              <tr><td>kn47/rl16 weekly tasks</td><td>66/72</td><td><span class="miss">8/72</span></td></tr>
+              <tr><td>Lawn care routes in Meld</td><td>10/13 wks</td><td><span class="miss">4/13</span></td></tr>
+              <tr><td>Hire 2nd Spokane tech</td><td>Y</td><td><span class="neutral">Recruiting</span></td></tr>
+              <tr><td>Grounds analytics (Zoho)</td><td>8/13 wks</td><td><span class="neutral">In progress</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <div style="font-size:11.5px;font-weight:700;color:#1a5276;text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px;">This Week</div>
+          <div class="bl"><div class="dot dg"></div><div><strong>First mow/trim of season</strong> — ~80% of properties completed this week. Operations return to normal schedule next week.</div></div>
+          <div class="bl"><div class="dot dg"></div><div><strong>kn47 Grounds SOP created by Juan</strong> — Sheet-based audit SOP for kn47 lawn service. Hannah (TC grounds tech) is point person. Jonathan wants same approach extended to tc68.<div class="sub">Doc: docs.google.com/document/d/1KwYaih8...</div></div></div>
+          <div class="bl"><div class="dot dg"></div><div><strong>Grounds/Lawn Care SOP (Asana)</strong> — LeeRoy attached PDF to Asana task, marked complete. Juan shared Grounds Sheet-Audit SOP doc.</div></div>
+          <div class="bl"><div class="dot dg"></div><div><strong>Regional grounds management delegation started this week</strong> — Each region now has a supervisor responsible for grounds scheduling and execution. Going well so far.<div class="sub">Tacoma route SOP (tc68) to be built next, building on kn47 model.</div></div></div>
+          <div class="bl"><div class="dot db"></div><div><strong>5 lawn care applicants this week (Indeed)</strong> — Gustavo Cruz, Rashad Al-Ghani (×2 — Kennewick &amp; Spokane), Daniel Garcia, Alejandro Vazquez. Review at employers.indeed.com.<div class="sub">Toward Q2 goal: hire 2nd Spokane tech.</div></div></div>
+          <div class="bl"><div class="dot do"></div><div><strong>Recurring Melds set up</strong> — 0155 and 1905 W Second added for David Sanchez weekly grounds.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TURNS -->
+  <div class="goal-section">
+    <div class="goal-header">
+      <h2>🔄 Turns</h2>
+      <span class="badge badge-off">Behind</span>
+    </div>
+    <div class="goal-body">
+
+      <div class="two-col" style="margin-bottom:14px;">
+        <div>
+          <div style="font-size:11.5px;font-weight:700;color:#1a5276;text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px;">Q2 Goals</div>
+          <table class="kpi-table">
+            <thead><tr><th>Goal</th><th>Q2 Target</th><th>Q1 Actual</th><th>Q2 QTD</th><th></th></tr></thead>
+            <tbody>
+              <tr><td>Avg cost per turn</td><td>$1,200</td><td>$686*</td><td class="neutral">$996</td><td></td></tr>
+              <tr><td>First-pass completion</td><td>95%</td><td>94.4%</td><td class="miss">72%</td><td>&#x2193;</td></tr>
+              <tr><td>KPI reporting</td><td>80%</td><td>26%</td><td>—</td><td></td></tr>
+              <tr><td>Turn cost recapture</td><td>90%</td><td>36.2%</td><td class="miss">0%</td><td>&#x2193;</td></tr>
+              <tr><td>Turn start lead time</td><td>≤7 days</td><td>7 days</td><td class="miss">8 days</td><td>&#x2193;</td></tr>
+              <tr><td>Turn duration</td><td>≤6 days</td><td>7 days</td><td class="miss">7 days</td><td>&#x2193;</td></tr>
+            </tbody>
+          </table>
+          <div style="font-size:11px;color:#999;margin-top:4px;">* Q1 cost skewed low due to CapEx miscategorization</div>
+        </div>
+        <div>
+          <div style="font-size:11.5px;font-weight:700;color:#1a5276;text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px;">This Week</div>
+          <div class="bl"><div class="dot dr"></div><div><strong>Chris (Turn Coordinator) quit this week</strong> — A skilled replacement has been identified and starts next Monday. Finding a strong turn coordinator has been a persistent challenge.<div class="sub">Tacoma team: Jonas Hoard → service WOs full-time; Armani Mitchell → turns full-time. $3k appliance budget approved for A28.</div></div></div>
+          <div class="bl"><div class="dot dg"></div><div><strong>Regional turn management delegation started this week — going well</strong> — Area supervisors are now scheduling and managing turns in their regions. <span style="color:#c0392b;font-weight:600;">Spokane is the exception</span> — still identifying a POC for that area.</div></div>
+          <div class="bl"><div class="dot dr"></div><div><strong>CapEx vs. turn categorization — needs cleanup</strong> <span class="goal-pill">Q2 Goal</span><div class="sub">Q1 turn cost appeared low ($686) partly due to CapEx miscategorization. Ian: be consistent on what belongs in turns via Meld; review high-cost turns weekly.</div></div></div>
+          <div class="bl"><div class="dot dr"></div><div><strong>First-pass completion down to 72%</strong> — Key and code issues driving rework. Goal is 95%.</div></div>
+          <div class="bl"><div class="dot dr"></div><div><strong>Turn cost recapture at 0% QTD</strong> — Kickoff meeting with Special Projects scheduled this week to ramp up the process. Expecting 100% recapture on units vacating end of month.</div></div>
+          <div class="bl"><div class="dot do"></div><div><strong>Turn start lead time at 8 days</strong> — Over the 7-day goal; Tacoma backlog is the primary driver. Turn duration averaging 7 days vs. 6-day target.</div></div>
+          <div class="bl"><div class="dot dr"></div><div><strong>KPI reporting at 26% in Q1</strong> — Q2 goal is 80%. Ownership not yet fully assigned.</div></div>
+          <div class="bl"><div class="dot do"></div><div><strong>kn47 L105 — $40k turn cost</strong> — On r203 roadmap agenda for lessons learned. 306 days vacant, still not rent-ready.</div></div>
+        </div>
+      </div>
+
+      <!-- Turn pipeline -->
+      <div style="font-size:11.5px;font-weight:700;color:#1a5276;text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px;">Pipeline — Live from AppFolio (Apr 22)</div>
+      <div class="region-grid">
+        <div class="rc">
+          <h3>📍 Tacoma</h3>
+          <div class="rs"><span>Vacant</span><span class="rv red">14</span></div>
+          <div class="rs"><span>Rent-Ready</span><span class="rv orange">4</span></div>
+          <div class="rs"><span>Moving In</span><span class="rv green">1</span></div>
+          <div><span class="rc-flag flag-o">Active push</span> <span class="rc-flag flag-b">D085 → Apr 24</span></div>
+        </div>
+        <div class="rc">
+          <h3>📍 Kennewick</h3>
+          <div class="rs"><span>Vacant</span><span class="rv red">22</span></div>
+          <div class="rs"><span>Rent-Ready</span><span class="rv green">18</span></div>
+          <div class="rs"><span>Moving In</span><span class="rv green">2</span></div>
+          <div><span class="rc-flag flag-r">L105 — 306 days</span></div>
+        </div>
+        <div class="rc">
+          <h3>📍 Richland</h3>
+          <div class="rs"><span>Vacant</span><span class="rv orange">9</span></div>
+          <div class="rs"><span>Rent-Ready</span><span class="rv">6</span></div>
+          <div class="rs"><span>Moving In</span><span class="rv green">2</span></div>
+          <div><span class="rc-flag flag-r">Fire alarms overdue</span></div>
+        </div>
+        <div class="rc">
+          <h3>📍 Pasco</h3>
+          <div class="rs"><span>Vacant</span><span class="rv">5</span></div>
+          <div class="rs"><span>Rent-Ready</span><span class="rv green">3</span></div>
+          <div class="rs"><span>Moving In</span><span class="rv">0</span></div>
+          <div><span class="rc-flag flag-o">ps17 A1 → Apr 30</span></div>
+        </div>
+        <div class="rc">
+          <h3>📍 Spokane</h3>
+          <div class="rs"><span>Vacant</span><span class="rv">13</span></div>
+          <div class="rs"><span>Rent-Ready</span><span class="rv green">11</span></div>
+          <div class="rs"><span>Moving In</span><span class="rv green">4</span></div>
+          <div><span class="rc-flag flag-b">k308 → Apr 22</span> <span class="rc-flag flag-o">c313-21: 148d</span></div>
+        </div>
+      </div>
+      <div style="font-size:12px;color:#888;margin-top:8px;">64 total vacant · 37 overdue targets · 8 move-ins this week (Apr 21–27)</div>
+    </div>
+  </div>
+
+  <!-- PROJECTS -->
+  <div class="goal-section">
+    <div class="goal-header">
+      <h2>🏗️ Projects</h2>
+      <span class="badge badge-mixed">In Progress</span>
+    </div>
+    <div class="goal-body">
+      <div class="two-col">
+        <div>
+          <div style="font-size:11.5px;font-weight:700;color:#1a5276;text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px;">Q2 Goals</div>
+          <table class="kpi-table">
+            <thead><tr><th>Goal</th><th>Target</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td>Hire CapEx Projects Tech</td><td>Y</td><td><span class="miss">Not started</span></td></tr>
+              <tr><td>kn47 + rl16 refi projects</td><td>15/15</td><td><span class="neutral">Active</span></td></tr>
+              <tr><td>W225 COO phases</td><td>6/6</td><td><span class="neutral">In progress</span></td></tr>
+              <tr><td>Bank draws by 18th/mo</td><td>3 months</td><td><span class="miss">Delayed — Apr 18 missed</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <div style="font-size:11.5px;font-weight:700;color:#1a5276;text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px;">This Week</div>
+          <div class="bl"><div class="dot dr"></div><div><strong>Bank draw missed — Apr 18 deadline not met</strong> <span class="goal-pill">Q2 Goal: 3/3 months by 18th</span><div class="sub">Not a good start on this goal. Priority to ensure May 18 is not missed. LeeRoy to follow up with Lawrence on process.</div></div></div>
+          <div class="bl"><div class="dot do"></div><div><strong>W225 — Ace Drywall deposit pending</strong><div class="sub">LeeRoy approved $89,976.90 wire transfer (Invoice 4766). Awaiting Hanzhao confirmation before demo vendor (Damian) schedules. COO phases: Boiler, Drywall, Fire Safety, Plumbing, Entry Doors, Ventilation.</div></div></div>
+          <div class="bl"><div class="dot db"></div><div><strong>GoGo Heights — 2nd inspection Apr 20</strong><div class="sub">Louisa reviewing fire/wall-damaged units + top 5 delinquency units. 2023/2024 financials and DQ report received from Northmarq.</div></div></div>
+          <div class="bl"><div class="dot dr"></div><div><strong>kn47 L105 — lesson-learned discussion</strong><div class="sub">$40k turn cost vs. $3k projected. On r203 roadmap agenda. Unit at 306 days vacant — largest single drag on Kennewick vacancy.</div></div></div>
+          <div class="bl"><div class="dot dx"></div><div><strong>AppFolio financial remigration</strong><div class="sub">Ian resurfaced ($1/unit, min $200). No action this week.</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="text-align:center;font-size:11px;color:#bbb;padding:10px 0;">
+    Apr 22, 2026 &nbsp;·&nbsp; Sources: Gmail · Google Docs (R203 Roadmaps) · AppFolio Live Data &nbsp;·&nbsp; Week of Apr 13–19
+  </div>
+
+</div>
+</body>
+</html>
