@@ -21,12 +21,17 @@ const entries = Object.values(timesheets)
     const prop  = t.customfields['25068'] || '';
     const path  = getPath(t.jobcode_id);
 
-    const isOpex = cls === 'r203';
+    const isOpex    = cls === 'r203';
+    const isGrounds = /grounds/i.test(cls);
     const hasSpecificProp = prop.trim() && prop !== 'r203';
     const issues = [];
     if (t.duration > 7200)                                      issues.push('long');
     if (!prop.trim() && !isOpex)                                issues.push('prop');
     if (hasSpecificProp && !cls.trim())                          issues.push('class');
+    if (hasSpecificProp && !isOpex && !isGrounds) {
+      const colon = prop.indexOf(':');
+      if (colon === -1 || !prop.slice(colon + 1).trim())        issues.push('unit');
+    }
     if (path.length < 3 && !isOpex)                            issues.push('cust');
     if (!t.notes || t.notes.trim().length < 3)                  issues.push('notes');
 

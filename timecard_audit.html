@@ -66,6 +66,7 @@
   .issue-btn.class { background: #f4ecf7; color: #6c3483; border-color: #c39bd3; }
   .issue-btn.cust  { background: #d6eaf8; color: #1a5276; border-color: #7fb3d3; }
   .issue-btn.notes { background: #fdfefe; color: #616a6b; border-color: #aab7b8; }
+  .issue-btn.unit  { background: #fce4ec; color: #880e4f; border-color: #f48fb1; }
   .issue-btn.inactive { opacity: 0.4; }
 
   /* TABLES */
@@ -99,6 +100,7 @@
   .b-class { background: #f4ecf7; color: #6c3483; }
   .b-cust  { background: #d6eaf8; color: #1a5276; }
   .b-notes { background: #f2f3f4; color: #616a6b; }
+  .b-unit  { background: #fce4ec; color: #880e4f; }
   .b-ok    { background: #d5f5e3; color: #1e8449; }
   .badges  { display: flex; gap: 4px; flex-wrap: wrap; }
 
@@ -188,7 +190,7 @@
     <div class="card c-teal">
       <div class="card-label">Missing Fields</div>
       <div class="card-value" id="kpi-missing">—</div>
-      <div class="card-sub" id="kpi-missing-detail">no prop / class / notes</div>
+      <div class="card-sub" id="kpi-missing-detail">no prop / unit / class / notes</div>
     </div>
   </div>
 
@@ -210,8 +212,9 @@
             <th onclick="sortEmp('comply')">Compliance ↕</th>
             <th class="num" onclick="sortEmp('long')">Long &gt;2hr ↕</th>
             <th class="num" onclick="sortEmp('prop')">No Property ↕</th>
+            <th class="num" onclick="sortEmp('unit')">No Unit # ↕</th>
             <th class="num" onclick="sortEmp('class')">No Class ↕</th>
-            <th class="num" onclick="sortEmp('cust')">Wrong Customer ↕</th>
+            <th class="num" onclick="sortEmp('cust')">No Meld ↕</th>
             <th class="num" onclick="sortEmp('notes')">No Notes ↕</th>
           </tr>
         </thead>
@@ -240,7 +243,8 @@
           <button class="issue-btn long" id="issue-long" onclick="toggleIssue('long')">Long &gt;2hr</button>
           <button class="issue-btn prop" id="issue-prop" onclick="toggleIssue('prop')">No Property</button>
           <button class="issue-btn class" id="issue-class" onclick="toggleIssue('class')">No Class</button>
-          <button class="issue-btn cust" id="issue-cust" onclick="toggleIssue('cust')">Wrong Customer</button>
+          <button class="issue-btn cust" id="issue-cust" onclick="toggleIssue('cust')">No Meld</button>
+          <button class="issue-btn unit" id="issue-unit" onclick="toggleIssue('unit')">No Unit #</button>
           <button class="issue-btn notes" id="issue-notes" onclick="toggleIssue('notes')">No Notes</button>
         </div>
       </div>
@@ -398,7 +402,7 @@ function render() {
     if (e.issues.length) flagged++;
     if (e.issues.includes('long'))  longCnt++;
     if (e.issues.includes('cust'))  custCnt++;
-    if (e.issues.includes('prop') || e.issues.includes('class') || e.issues.includes('notes')) missingCnt++;
+    if (e.issues.includes('prop') || e.issues.includes('unit') || e.issues.includes('class') || e.issues.includes('notes')) missingCnt++;
   });
   const total = entries.length;
   const comply = total ? Math.round((total - flagged) / total * 100) : 0;
@@ -420,11 +424,12 @@ let empData = [];
 function renderEmpTable(entries) {
   const byEmp = {};
   entries.forEach(e => {
-    if (!byEmp[e.name]) byEmp[e.name] = { name:e.name, total:0, secs:0, long:0, prop:0, cls:0, cust:0, notes:0 };
+    if (!byEmp[e.name]) byEmp[e.name] = { name:e.name, total:0, secs:0, long:0, prop:0, unit:0, cls:0, cust:0, notes:0 };
     byEmp[e.name].total++;
     byEmp[e.name].secs += e.dur;
     if (e.issues.includes('long'))  byEmp[e.name].long++;
     if (e.issues.includes('prop'))  byEmp[e.name].prop++;
+    if (e.issues.includes('unit'))  byEmp[e.name].unit++;
     if (e.issues.includes('class')) byEmp[e.name].cls++;
     if (e.issues.includes('cust'))  byEmp[e.name].cust++;
     if (e.issues.includes('notes')) byEmp[e.name].notes++;
@@ -443,7 +448,7 @@ function sortAndRenderEmp() {
     if (empSortKey === 'name')   { av = a.name; bv = b.name; }
     else if (empSortKey === 'total')  { av = a.total; bv = b.total; }
     else if (empSortKey === 'hours')  { av = a.secs; bv = b.secs; }
-    else if (empSortKey === 'comply') { av = a.total ? (a.total - a.long - a.prop - a.cls - a.cust - a.notes) / a.total : 0; bv = b.total ? (b.total - b.long - b.prop - b.cls - b.cust - b.notes) / b.total : 0; }
+    else if (empSortKey === 'comply') { av = a.total ? (a.total - a.long - a.prop - a.unit - a.cls - a.cust - a.notes) / a.total : 0; bv = b.total ? (b.total - b.long - b.prop - b.unit - b.cls - b.cust - b.notes) / b.total : 0; }
     else { av = a[empSortKey]; bv = b[empSortKey]; }
     if (av < bv) return -1 * empSortDir; if (av > bv) return empSortDir; return 0;
   });
@@ -451,7 +456,7 @@ function sortAndRenderEmp() {
   const tbody = document.getElementById('emp-tbody');
   tbody.innerHTML = '';
   sorted.forEach(e => {
-    const flagged = e.long + e.prop + e.cls + e.cust + e.notes;
+    const flagged = e.long + e.prop + e.unit + e.cls + e.cust + e.notes;
     const comply = e.total ? Math.round((e.total - Math.min(flagged, e.total)) / e.total * 100) : 100;
     const pctClass = comply >= 90 ? 'pct-good' : comply >= 70 ? 'pct-ok' : 'pct-poor';
     const barClass = comply >= 90 ? 'bar-good' : comply >= 70 ? 'bar-ok' : 'bar-poor';
@@ -467,10 +472,11 @@ function sortAndRenderEmp() {
         </div>
       </td>
       <td class="num">${e.long > 0 ? '<span class="badge b-long">'+e.long+'</span>' : '<span style="color:#ccc">—</span>'}</td>
-      <td class="num">${e.prop > 0 ? '<span class="badge b-prop">'+e.prop+'</span>' : '<span style="color:#ccc">—</span>'}</td>
-      <td class="num">${e.cls  > 0 ? '<span class="badge b-class">'+e.cls+'</span>'  : '<span style="color:#ccc">—</span>'}</td>
-      <td class="num">${e.cust > 0 ? '<span class="badge b-cust">'+e.cust+'</span>' : '<span style="color:#ccc">—</span>'}</td>
-      <td class="num">${e.notes> 0 ? '<span class="badge b-notes">'+e.notes+'</span>': '<span style="color:#ccc">—</span>'}</td>`;
+      <td class="num">${e.prop > 0 ? '<span class="badge b-prop">'+e.prop+'</span>'   : '<span style="color:#ccc">—</span>'}</td>
+      <td class="num">${e.unit > 0 ? '<span class="badge b-unit">'+e.unit+'</span>'   : '<span style="color:#ccc">—</span>'}</td>
+      <td class="num">${e.cls  > 0 ? '<span class="badge b-class">'+e.cls+'</span>'   : '<span style="color:#ccc">—</span>'}</td>
+      <td class="num">${e.cust > 0 ? '<span class="badge b-cust">'+e.cust+'</span>'   : '<span style="color:#ccc">—</span>'}</td>
+      <td class="num">${e.notes> 0 ? '<span class="badge b-notes">'+e.notes+'</span>' : '<span style="color:#ccc">—</span>'}</td>`;
     tbody.appendChild(tr);
   });
 }
@@ -531,8 +537,8 @@ function renderDetailTable(rows) {
       ? `<span title="${esc(e.notes)}">${esc(e.notes.substring(0,60))}${e.notes.length>60?'…':''}</span>`
       : '<span class="no-data">missing</span>';
 
-    const badgeMap = { long:'b-long', prop:'b-prop', class:'b-class', cust:'b-cust', notes:'b-notes' };
-    const badgeLbl = { long:'Long', prop:'No Prop', class:'No Class', cust:'No Meld', notes:'No Notes' };
+    const badgeMap = { long:'b-long', prop:'b-prop', unit:'b-unit', class:'b-class', cust:'b-cust', notes:'b-notes' };
+    const badgeLbl = { long:'Long', prop:'No Prop', unit:'No Unit #', class:'No Class', cust:'No Meld', notes:'No Notes' };
     const badgeHtml = e.issues.map(i => `<span class="badge ${badgeMap[i]}">${badgeLbl[i]}</span>`).join(' ');
 
     const tr = document.createElement('tr');
