@@ -23,6 +23,8 @@ jobs:
         env:
           AF_USERNAME: ${{ secrets.AF_USERNAME }}
           AF_PASSWORD: ${{ secrets.AF_PASSWORD }}
+          FIREBASE_EMAIL:    ${{ secrets.FIREBASE_EMAIL }}
+          FIREBASE_PASSWORD: ${{ secrets.FIREBASE_PASSWORD }}
           FETCH_ONLY: appfolio
         run: node scripts/fetch-data.js
 

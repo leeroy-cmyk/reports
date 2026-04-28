@@ -335,6 +335,103 @@ function buildRampProcessed() {
   console.log('ramp_processed.json: ' + slim.length + ' transactions (' + (JSON.stringify(slim).length / 1024).toFixed(0) + ' KB)');
 }
 
+const FIREBASE_API_KEY = 'AIzaSyAMAicBq6GIvo7p6s67n0wGoi1zuX21ybw';
+const FIREBASE_PROJECT = 'ridgeview-estimates';
+const FIRESTORE_BASE   = `https://firestore.googleapis.com/v1/projects/${FIREBASE_PROJECT}/databases/(default)/documents`;
+const FIREBASE_AUTH_URL = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${FIREBASE_API_KEY}`;
+
+const ESTIMATE_CATEGORIES = ['demo','drywall','paint','plumbing','electrical','flooring','carpet','carpet_cleaning','cabinets','appliances','windows','doors','hardware','cleaning'];
+
+async function syncVacanciesToFirebase() {
+  const email = process.env.FIREBASE_EMAIL;
+  const pass  = process.env.FIREBASE_PASSWORD;
+  if (!email || !pass) { console.log('Firebase sync skipped (no credentials)'); return; }
+
+  const turnvacPath = path.join(DATA_DIR, 'turnvac.json');
+  if (!fs.existsSync(turnvacPath)) { console.log('Firebase sync skipped (no turnvac.json)'); return; }
+
+  const { rows } = JSON.parse(fs.readFileSync(turnvacPath, 'utf8'));
+  const vacantUnits = rows.filter(r =>
+    (r.unit_status === 'Vacant-Rented' || r.unit_status === 'Vacant-Unrented') && r.last_move_out
+  );
+  if (vacantUnits.length === 0) { console.log('Firebase sync: no vacant units'); return; }
+
+  // Auth
+  const authRes = await fetch(FIREBASE_AUTH_URL, {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email, password: pass, returnSecureToken: true }),
+  });
+  const { idToken, error: authErr } = await authRes.json();
+  if (!idToken) { console.log('Firebase auth failed:', authErr?.message); return; }
+
+  const headers = { 'Authorization': `Bearer ${idToken}`, 'Content-Type': 'application/json' };
+
+  // Query existing estimate_needed records (just property + unit fields)
+  const qRes = await fetch(`${FIRESTORE_BASE}:runQuery`, {
+    method: 'POST', headers,
+    body: JSON.stringify({ structuredQuery: {
+      from: [{ collectionId: 'estimates' }],
+      where: { compositeFilter: { op: 'AND', filters: [
+        { fieldFilter: { field: { fieldPath: 'companyId' }, op: 'EQUAL', value: { stringValue: 'ridgeview' } } },
+        { fieldFilter: { field: { fieldPath: 'status' }, op: 'EQUAL', value: { stringValue: 'estimate_needed' } } },
+      ]}},
+      select: { fields: [{ fieldPath: 'property' }, { fieldPath: 'unitNumber' }] },
+    }}),
+  });
+  const existing = new Set();
+  for (const item of await qRes.json()) {
+    if (item.document) {
+      const p = item.document.fields?.property?.stringValue   || '';
+      const u = item.document.fields?.unitNumber?.stringValue || '';
+      existing.add(p + '|' + u);
+    }
+  }
+
+  // Add new units only
+  let added = 0;
+  for (const unit of vacantUnits) {
+    const prop    = unit.property_name;
+    const unitNum = unit.unit;
+    if (existing.has(prop + '|' + unitNum)) continue;
+
+    const now    = Date.now();
+    const d      = new Date();
+    const dateStr = d.toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' });
+    const num    = 'RRR-' + String(d.getFullYear()).slice(2) + String(d.getMonth()+1).padStart(2,'0') + String(d.getDate()).padStart(2,'0') + '-' + String(Math.floor(Math.random()*9000)+1000);
+    const docId  = now.toString() + Math.random().toString(36).slice(2,6);
+    const notes  = `AppFolio status: ${unit.unit_status} · Move out: ${unit.last_move_out} · Rent ready: ${unit.rent_ready}`;
+
+    const emptyItems = {};
+    ESTIMATE_CATEGORIES.forEach(c => { emptyItems[c] = { arrayValue: { values: [] } }; });
+
+    await fetch(`${FIRESTORE_BASE}/estimates?documentId=${docId}`, {
+      method: 'POST', headers,
+      body: JSON.stringify({ fields: {
+        id:             { stringValue: docId },
+        estimateNumber: { stringValue: num },
+        date:           { stringValue: dateStr },
+        property:       { stringValue: prop },
+        unitNumber:     { stringValue: unitNum },
+        preparedBy:     { stringValue: '' },
+        preparedFor:    { stringValue: '' },
+        status:         { stringValue: 'estimate_needed' },
+        contingencyPct: { stringValue: '' },
+        items:          { mapValue: { fields: emptyItems } },
+        notes:          { stringValue: notes },
+        photos:         { arrayValue: { values: [] } },
+        createdBy:      { stringValue: 'appfolio-sync' },
+        createdByName:  { stringValue: 'AppFolio Sync' },
+        updatedAt:      { integerValue: now },
+        companyId:      { stringValue: 'ridgeview' },
+      }}),
+    });
+
+    existing.add(prop + '|' + unitNum);
+    added++;
+  }
+  console.log(`Firebase sync: ${added} new move-out(s) added, ${vacantUnits.length - added} already listed`);
+}
+
 // FETCH_ONLY env var controls what runs:
 //   'appfolio'  → turnvac + workorders + budget (every 5 min)
 //   'qbt-only'  → QBTime + audit.json only
@@ -353,6 +450,7 @@ const FETCH_ONLY = process.env.FETCH_ONLY || 'all';
       await fetchTurnVac();
       await fetchWorkOrders();
       await fetchBudget();
+      await syncVacanciesToFirebase();
     } catch(e) {
       console.error('AppFolio fetch failed:', e.message);
       process.exit(1);
