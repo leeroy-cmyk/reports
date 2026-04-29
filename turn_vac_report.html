@@ -156,12 +156,14 @@
 <div class="tabs">
   <div class="tab active" onclick="showTab('overview',this)">Overview</div>
   <div class="tab" onclick="showTab('turnsDue',this)">Turns Due</div>
+  <div class="tab" onclick="showTab('recentlyAdded',this)">Recently Added <span id="recentBadge" style="display:none;background:#e74c3c;color:#fff;border-radius:10px;font-size:0.7rem;font-weight:700;padding:1px 7px;margin-left:4px;vertical-align:middle;"></span></div>
   <div class="tab" onclick="showTab('byProperty',this)">By Property</div>
   <div class="tab" onclick="showTab('detail',this)">Full Detail</div>
 </div>
 
 <div id="overview" class="panel active"><div id="overviewContent"><p style="color:#7f8fa4;padding:20px;">Loading…</p></div></div>
 <div id="turnsDue" class="panel"><div id="turnsDueContent"><p style="color:#7f8fa4;padding:20px;">Loading…</p></div></div>
+<div id="recentlyAdded" class="panel"><div id="recentContent"><p style="color:#7f8fa4;padding:20px;">Loading…</p></div></div>
 <div id="byProperty" class="panel"><div id="propContent"></div></div>
 <div id="detail" class="panel">
   <div class="controls">
@@ -231,6 +233,85 @@ let allData = [];
 let filteredData = [];
 let sortCol = 9, sortAsc = true;
 
+// ── RECENTLY ADDED ────────────────────────────────────────────────────────────
+const DISMISSED_KEY = 'turnvac_dismissed_recent';
+
+function getDismissed() {
+  try { return new Set(JSON.parse(localStorage.getItem(DISMISSED_KEY) || '[]')); }
+  catch(e) { return new Set(); }
+}
+
+function dismissUnit(key) {
+  const d = getDismissed();
+  d.add(key);
+  localStorage.setItem(DISMISSED_KEY, JSON.stringify([...d]));
+  buildRecentlyAdded();
+}
+
+function unitKey(r) { return (r.property_name || '') + '||' + (r.unit || ''); }
+
+function buildRecentlyAdded() {
+  const cutoff = new Date(TODAY);
+  cutoff.setDate(cutoff.getDate() - 2);
+  const dismissed = getDismissed();
+
+  const recent = allData
+    .filter(r => r.moveOutD && r.moveOutD >= cutoff && !dismissed.has(unitKey(r)))
+    .sort((a, b) => b.moveOutD - a.moveOutD);
+
+  const badge = document.getElementById('recentBadge');
+  if (recent.length > 0) {
+    badge.textContent = recent.length;
+    badge.style.display = 'inline-block';
+  } else {
+    badge.style.display = 'none';
+  }
+
+  if (recent.length === 0) {
+    document.getElementById('recentContent').innerHTML =
+      `<div style="padding:48px;text-align:center;color:#7f8fa4;font-size:0.9rem;">No units moved out or became vacant in the last 2 days.</div>`;
+    return;
+  }
+
+  function whenLabel(d) {
+    const diff = daysBetween(d, TODAY);
+    if (diff === 0) return 'Today';
+    if (diff === 1) return 'Yesterday';
+    return diff + 'd ago';
+  }
+
+  const rows = recent.map(r => {
+    const rrBadge = r.isVacant
+      ? `<span class="badge ${r.rent_ready === 'Yes' ? 'yes' : 'no'}">${r.rent_ready || '—'}</span>`
+      : `<span class="badge notice">N/A</span>`;
+    const key = unitKey(r).replace(/'/g, "\\'");
+    return `<tr>
+      <td><strong>${r.property_name || '—'}</strong></td>
+      <td>${r.unit || '—'}</td>
+      <td>${r.city || '—'}</td>
+      <td>${r.bed_and_bath || '—'}</td>
+      <td>${statusBadge(r.unit_status)}</td>
+      <td>${fmtDate(r.last_move_out)}</td>
+      <td style="color:#2e86c1;font-weight:600;">${whenLabel(r.moveOutD)}</td>
+      <td>${rrBadge}</td>
+      <td>${r.schd_rent ? '$' + Number(r.schd_rent).toLocaleString() : '—'}</td>
+      <td><button onclick="dismissUnit('${key}')" style="background:none;border:1px solid #d5d8dc;color:#7f8fa4;border-radius:4px;padding:3px 9px;cursor:pointer;font-size:0.78rem;" onmouseover="this.style.borderColor='#c0392b';this.style.color='#c0392b';" onmouseout="this.style.borderColor='#d5d8dc';this.style.color='#7f8fa4';">Remove</button></td>
+    </tr>`;
+  }).join('');
+
+  document.getElementById('recentContent').innerHTML = `
+    <div style="margin-bottom:18px;font-size:0.88rem;color:#7f8fa4;">
+      ${recent.length} unit${recent.length === 1 ? '' : 's'} moved out or became vacant in the last 2 days.
+    </div>
+    <table class="prop-table">
+      <thead><tr>
+        <th>Property</th><th>Unit</th><th>City</th><th>Bed/Ba</th>
+        <th>Status</th><th>Move-Out</th><th>When</th><th>Rent Ready</th><th>Rent</th><th></th>
+      </tr></thead>
+      <tbody>${rows}</tbody>
+    </table>`;
+}
+
 async function loadData() {
   const bar = document.getElementById('loadingBar');
   const errBar = document.getElementById('errorBar');
@@ -280,6 +361,7 @@ async function loadData() {
 
     buildOverview();
     buildTurnsDue();
+    buildRecentlyAdded();
     buildByProperty();
     buildDetailFilters();
     filterTable();
