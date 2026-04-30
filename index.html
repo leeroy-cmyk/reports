@@ -63,8 +63,24 @@
         <span class="badge badge-maintenance">Maintenance</span>
       </a>
 
+      <a class="card" href="invoices_report.html">
+        <div class="card-title">Unpaid Vendor Invoices</div>
+        <div class="card-date" id="invoices-date">—</div>
+        <div class="card-desc">Gmail invoice scan vs. Ramp card spend — vendor invoices without a payment confirmation.</div>
+        <span class="badge badge-finance">Finance</span>
+      </a>
+
     </div>
   </main>
   <footer>R203 · leeroy-cmyk.github.io/reports</footer>
+<script>
+  fetch('./data/invoices.json').then(r=>r.json()).then(d=>{
+    const el = document.getElementById('invoices-date');
+    if (el && d.fetched_at) {
+      const ts = new Date(d.fetched_at);
+      el.textContent = ts.toLocaleDateString('en-US', { month:'long', day:'numeric', year:'numeric' });
+    }
+  }).catch(()=>{});
+</script>
 </body>
 </html>

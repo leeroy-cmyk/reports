@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unpaid Vendor Invoices</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f4f6f9; color: #222; }
+
+  .topbar { background: #1a5276; color: #fff; padding: 22px 32px; display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .topbar h1 { font-size: 20px; font-weight: 700; }
+  .topbar p { font-size: 12px; opacity: .7; margin-top: 3px; }
+  .updated { font-size: 11px; color: rgba(255,255,255,.6); white-space: nowrap; }
+
+  .kpi-bar { display: flex; gap: 14px; padding: 18px 32px; background: #fff; border-bottom: 1px solid #e0e4ea; flex-wrap: wrap; }
+  .kpi { background: #f4f6f9; border-radius: 8px; padding: 12px 18px; min-width: 140px; }
+  .kpi .val { font-size: 24px; font-weight: 800; color: #1a5276; }
+  .kpi .val.red { color: #c0392b; }
+  .kpi .val.green { color: #1e8449; }
+  .kpi .lbl { font-size: 11px; color: #666; margin-top: 2px; }
+
+  .section { padding: 22px 32px; }
+  .section h2 { font-size: 15px; font-weight: 700; color: #1a5276; margin-bottom: 12px; }
+
+  table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,.06); font-size: 12.5px; }
+  th { background: #2e86c1; color: #fff; padding: 9px 13px; text-align: left; font-weight: 600; white-space: nowrap; }
+  td { padding: 9px 13px; border-bottom: 1px solid #eef0f4; vertical-align: middle; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #f5fbff; }
+  .group-row td { background: #d6eaf8; font-weight: 700; color: #1a5276; font-size: 11.5px; border-top: 2px solid #aed6f1; padding: 6px 13px; }
+
+  .badge { font-size: 10px; font-weight: 700; border-radius: 10px; padding: 2px 8px; display: inline-block; }
+  .badge-red    { background: #fdecea; color: #c0392b; }
+  .badge-orange { background: #fef9e7; color: #b7770d; }
+  .badge-green  { background: #eafaf1; color: #1e8449; }
+  .badge-gray   { background: #eee; color: #555; }
+  .badge-blue   { background: #d6eaf8; color: #1a5276; }
+
+  .amt { font-family: 'Courier New', monospace; font-weight: 700; }
+  .amt-red   { color: #c0392b; }
+  .amt-green { color: #1e8449; }
+  .amt-blue  { color: #1a5276; }
+
+  .days-old { font-size: 11px; }
+  .days-old.hot  { color: #c0392b; font-weight: 700; }
+  .days-old.warm { color: #b7770d; }
+  .days-old.cool { color: #888; }
+
+  a.gl { color: #2e86c1; font-size: 11px; text-decoration: none; }
+  a.gl:hover { text-decoration: underline; }
+
+  .ramp-cell { font-size: 11px; }
+  .ramp-cell .rt { font-weight: 700; color: #1a5276; }
+  .ramp-cell .rc { color: #888; }
+
+  .comparison-table td, .comparison-table th { }
+  .no-ramp { color: #bbb; font-size: 11px; font-style: italic; }
+
+  .note { font-size: 11.5px; color: #777; font-style: italic; }
+  .subrow td { background: #fafcff; color: #555; }
+  .subtotal td { background: #fef5f5; font-weight: 700; }
+
+  .loading { text-align: center; padding: 60px; color: #888; }
+  footer { text-align: center; padding: 24px; font-size: 11px; color: #aaa; }
+  @media (max-width: 700px) { .kpi-bar, .topbar { padding: 14px 16px; } .section { padding: 14px 16px; } }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div>
+    <h1>Unpaid Vendor Invoices</h1>
+    <p>Gmail invoice scan + Ramp card comparison · Lee Roy Phillips, Maintenance &amp; Construction</p>
+  </div>
+  <div class="updated" id="updated">Loading…</div>
+</div>
+
+<div class="kpi-bar" id="kpi-bar"><div class="loading">Loading…</div></div>
+
+<div id="app">
+  <div class="loading">Loading data…</div>
+</div>
+
+<footer>R203 · leeroy-cmyk.github.io/reports · <a href="index.html" style="color:#aaa">← Dashboard</a></footer>
+
+<script>
+const REFRESH_MS = 5 * 60 * 1000;
+
+function fmt$(n) {
+  if (n == null) return '—';
+  return '$' + Number(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+function daysLabel(d) {
+  if (d == null) return '';
+  if (d === 0) return 'Today';
+  return d + 'd ago';
+}
+
+function daysClass(d, hasReminder) {
+  if (d == null) return 'cool';
+  if (hasReminder || d >= 14) return 'hot';
+  if (d >= 7) return 'warm';
+  return 'cool';
+}
+
+function badgeStatus(inv) {
+  const rc = inv.reminder_count || 0;
+  const d = inv.days_outstanding;
+  if (rc >= 3) return `<span class="badge badge-red">Reminder ×${rc}</span>`;
+  if (rc >= 1) return `<span class="badge badge-orange">Reminder ×${rc}</span>`;
+  if (d >= 14) return `<span class="badge badge-orange">Overdue ${d}d</span>`;
+  return `<span class="badge badge-blue">New</span>`;
+}
+
+function daysSince(iso) {
+  if (!iso) return null;
+  return Math.floor((Date.now() - new Date(iso).getTime()) / 86400000);
+}
+
+function gmailLink(id) {
+  return `<a class="gl" href="https://mail.google.com/mail/u/0/#all/${id}" target="_blank">Gmail ↗</a>`;
+}
+
+function render(data) {
+  // Update timestamp
+  const ts = new Date(data.fetched_at);
+  document.getElementById('updated').textContent = 'Updated ' + ts.toLocaleDateString('en-US', { month:'short', day:'numeric' }) + ' · ' + ts.toLocaleTimeString('en-US', { hour:'numeric', minute:'2-digit' });
+
+  // KPI bar
+  const t = data.totals || {};
+  document.getElementById('kpi-bar').innerHTML = `
+    <div class="kpi"><div class="val red">${fmt$(t.unpaid_amount_confirmed)}</div><div class="lbl">Unpaid (confirmed amounts)</div></div>
+    <div class="kpi"><div class="val red">${t.unpaid_count || 0}</div><div class="lbl">Unpaid Invoices</div></div>
+    <div class="kpi"><div class="val">${t.vendor_count || 0}</div><div class="lbl">Vendors w/ Balances</div></div>
+    <div class="kpi"><div class="val green">${t.paid_count || 0}</div><div class="lbl">Paid (confirmed)</div></div>
+    <div class="kpi"><div class="val">${data.period_days}d</div><div class="lbl">Lookback window</div></div>
+  `;
+
+  const unpaid = data.unpaid || [];
+
+  // Group by vendor
+  const byVendor = {};
+  for (const inv of unpaid) {
+    const v = inv.vendor || 'Unknown';
+    if (!byVendor[v]) byVendor[v] = [];
+    byVendor[v].push(inv);
+  }
+
+  let unpaidHtml = '';
+  for (const [vendor, invs] of Object.entries(byVendor)) {
+    const vendorTotal = invs.reduce((s, i) => s + (i.amount || 0), 0);
+    const ramp = invs[0]?.ramp;
+    const rampStr = ramp
+      ? `${fmt$(ramp.total)} / ${ramp.count} Ramp txns`
+      : '<span class="no-ramp">Not in Ramp</span>';
+
+    unpaidHtml += `<tr class="group-row"><td colspan="7">${vendor} <span style="font-weight:400;color:#555;font-size:11px;">— Ramp card spend (${data.period_days}d): ${rampStr}</span></td></tr>`;
+
+    for (const inv of invs) {
+      const d = daysSince(inv.invoice_date);
+      inv.days_outstanding = d;
+      unpaidHtml += `
+        <tr>
+          <td>${inv.invoice_num ? '#' + inv.invoice_num : '—'}</td>
+          <td class="amt amt-red">${inv.amount ? fmt$(inv.amount) : '<span class="note">See invoice</span>'}</td>
+          <td>${inv.invoice_date || '—'}</td>
+          <td><span class="days-old ${daysClass(d, inv.reminder_count > 0)}">${daysLabel(d)}</span></td>
+          <td>${badgeStatus(inv)}</td>
+          <td class="note" style="max-width:260px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="${inv.subject}">${inv.subject}</td>
+          <td>${gmailLink(inv.gmail_id)}</td>
+        </tr>`;
+    }
+
+    if (invs.length > 1 || vendorTotal > 0) {
+      unpaidHtml += `
+        <tr class="subtotal">
+          <td colspan="1" style="text-align:right;color:#1a5276">Subtotal:</td>
+          <td class="amt amt-red">${vendorTotal > 0 ? fmt$(vendorTotal) : '—'}</td>
+          <td colspan="5"></td>
+        </tr>`;
+    }
+  }
+
+  // Ramp vendor comparison table
+  const rampSummary = data.ramp_vendor_summary || {};
+  let rampRows = '';
+  for (const [vendor, ramp] of Object.entries(rampSummary)) {
+    const hasUnpaid = byVendor[vendor];
+    const unpaidAmt = hasUnpaid ? hasUnpaid.reduce((s, i) => s + (i.amount || 0), 0) : 0;
+    const unpaidCount = hasUnpaid ? hasUnpaid.length : 0;
+    rampRows += `
+      <tr>
+        <td>${vendor}</td>
+        <td class="amt amt-blue">${fmt$(ramp.total)}</td>
+        <td>${ramp.count}</td>
+        <td class="amt ${unpaidCount > 0 ? 'amt-red' : 'amt-green'}">${unpaidCount > 0 ? fmt$(unpaidAmt) + (unpaidAmt === 0 && unpaidCount > 0 ? ' (TBD)' : '') : '✓ $0'}</td>
+        <td>${unpaidCount > 0 ? `<span class="badge badge-red">${unpaidCount} unpaid</span>` : '<span class="badge badge-green">Current</span>'}</td>
+      </tr>`;
+  }
+  // Add vendors with invoices but not in Ramp
+  for (const vendor of Object.keys(byVendor)) {
+    if (rampSummary[vendor]) continue;
+    const invs = byVendor[vendor];
+    const amt = invs.reduce((s, i) => s + (i.amount || 0), 0);
+    rampRows += `
+      <tr>
+        <td>${vendor}</td>
+        <td class="no-ramp">No Ramp history</td>
+        <td class="no-ramp">—</td>
+        <td class="amt amt-red">${fmt$(amt) || '—'}</td>
+        <td><span class="badge badge-red">${invs.length} unpaid</span></td>
+      </tr>`;
+  }
+
+  document.getElementById('app').innerHTML = `
+    <!-- Unpaid Invoices -->
+    <div class="section">
+      <h2>🔴 Unpaid Invoices — Action Required</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Invoice #</th>
+            <th>Amount</th>
+            <th>Invoice Date</th>
+            <th>Outstanding</th>
+            <th>Status</th>
+            <th>Subject</th>
+            <th>Link</th>
+          </tr>
+        </thead>
+        <tbody>${unpaidHtml || '<tr><td colspan="7" style="text-align:center;color:#888;padding:24px">No unpaid invoices found 🎉</td></tr>'}</tbody>
+      </table>
+    </div>
+
+    <!-- Ramp Comparison -->
+    <div class="section">
+      <h2>📊 Ramp Card vs. Invoice Balances (${data.period_days}-day window)</h2>
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>Vendor</th>
+            <th>Ramp Card Spend</th>
+            <th>Ramp Transactions</th>
+            <th>Unpaid Invoice Total</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>${rampRows || '<tr><td colspan="5" style="text-align:center;color:#888;padding:16px">No data</td></tr>'}</tbody>
+      </table>
+      <p class="note" style="margin-top:8px">Ramp card = point-of-sale charges. Unpaid invoices are billed separately via QB/HousecallPro and paid via ACH — they appear here when no email payment confirmation is found.</p>
+    </div>
+  `;
+}
+
+async function load() {
+  try {
+    const res = await fetch('./data/invoices.json?_=' + Date.now());
+    const data = await res.json();
+    render(data);
+  } catch(e) {
+    document.getElementById('app').innerHTML = '<div class="loading">Error loading data: ' + e.message + '</div>';
+  }
+}
+
+load();
+setInterval(load, REFRESH_MS);
+</script>
+</body>
+</html>

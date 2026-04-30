@@ -72,4 +72,28 @@ jobs:
           done
           exit 1
 
+      # ── Step 3: Invoices (Gmail + Ramp) ─────────────────────────────────────
+      - name: Fetch invoices (Gmail + Ramp)
+        continue-on-error: true
+        env:
+          GOOGLE_CLIENT_ID:     ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+          RAMP_CLIENT_ID:       ${{ secrets.RAMP_CLIENT_ID }}
+          RAMP_CLIENT_SECRET:   ${{ secrets.RAMP_CLIENT_SECRET }}
+        run: node scripts/fetch-invoices.js
+
+      - name: Commit invoices data
+        continue-on-error: true
+        run: |
+          git add data/invoices.json
+          git diff --cached --quiet && { echo "No invoice changes"; exit 0; }
+          git commit -m "chore: refresh invoices $(date -u '+%Y-%m-%d %H:%M UTC')"
+          for i in 1 2 3 4 5; do
+            git pull --rebase origin main && git push && exit 0
+            echo "Push attempt $i failed, retrying in $((i * 5))s..."
+            sleep $((i * 5))
+          done
+          exit 1
+
       # Cache is saved automatically by actions/cache when the job ends
