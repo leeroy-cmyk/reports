@@ -398,7 +398,7 @@ function buildTurnCosts() {
       empName = raw;
     }
     const cat = qbtToCat(t.customfields?.['25056'] || '');
-    if (!cat) continue;
+    if (cat !== 'Turn') continue; // Turn class only
     const hrs = Math.round(t.duration / 3600 * 100) / 100;
     ensureUnit(unitCode).labor.push({ d: t.date, emp: empName, hrs, cost: Math.round(hrs * wage * 100) / 100, cat });
   }
@@ -409,7 +409,7 @@ function buildTurnCosts() {
       const unitCode = extractUnitCode(tx.dept);
       if (!unitCode) continue;
       const cat = TC_RAMP_CATS[tx.gl];
-      if (!cat) continue;
+      if (cat !== 'Turn') continue; // Turn GL only (53xxx)
       ensureUnit(unitCode).materials.push({ d: tx.d, amt: tx.amt, cat, ln: tx.ln });
     }
   }

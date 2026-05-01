@@ -159,8 +159,8 @@
   .cost-detail-col { padding: 14px 18px; }
   .cost-detail-col + .cost-detail-col { border-left: 1px solid #e8edf2; }
   .cost-detail-heading { font-size: 0.75rem; font-weight: 700; color: #1a5276; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; }
-  .cost-entry { display: grid; grid-template-columns: 54px 1fr 64px 42px 64px; gap: 8px; padding: 5px 0; border-bottom: 1px solid #f0f3f6; font-size: 0.81rem; align-items: center; }
-  .cost-entry.mat { grid-template-columns: 54px 1fr 64px 72px; }
+  .cost-entry { display: grid; grid-template-columns: 54px 1fr 42px 64px; gap: 8px; padding: 5px 0; border-bottom: 1px solid #f0f3f6; font-size: 0.81rem; align-items: center; }
+  .cost-entry.mat { grid-template-columns: 54px 1fr 72px; }
   .cost-entry:last-child { border-bottom: none; }
   .ce-date { color: #a0aebb; font-size: 0.77rem; }
   .ce-amt { text-align: right; font-weight: 700; color: #1a2535; }
@@ -895,57 +895,127 @@ function toggleCostDetail(i) {
 
 function fmtC(n) { return '$' + Math.round(n).toLocaleString('en-US'); }
 
-function catPill(cat) {
-  const cls = { 'Turn':'cp-turn','R&M':'cp-rm','Grounds':'cp-grounds','CapEx':'cp-capex' }[cat] || 'cp-rm';
-  return `<span class="cat-pill ${cls}">${cat}</span>`;
-}
-
 function buildCostDetailHtml(r) {
   const laborHtml = r.labor.length === 0
-    ? '<div class="no-cost-entries">No labor entries in period</div>'
+    ? '<div class="no-cost-entries">No turn labor in period</div>'
     : r.labor.map(e => {
         const mm = e.d.slice(5,7), dd = e.d.slice(8,10);
         return `<div class="cost-entry">
           <span class="ce-date">${mm}/${dd}</span>
           <span>${e.emp}</span>
-          ${catPill(e.cat)}
           <span class="ce-hrs">${e.hrs}h</span>
           <span class="ce-amt">${fmtC(e.cost)}</span>
         </div>`;
-      }).join('') +
-      `<div class="cost-detail-subtotal">Labor: ${fmtC(r.totalLabor)}</div>`;
+      }).join('') + `<div class="cost-detail-subtotal">Labor: ${fmtC(r.totalLabor)}</div>`;
 
   const matsHtml = r.materials.length === 0
-    ? '<div class="no-cost-entries">No material charges in period</div>'
+    ? '<div class="no-cost-entries">No turn materials/contractor in period</div>'
     : r.materials.map(e => {
         const mm = e.d.slice(5,7), dd = e.d.slice(8,10);
         const name = RAMP_LN_NAMES[e.ln] || (e.ln || '—');
         return `<div class="cost-entry mat">
           <span class="ce-date">${mm}/${dd}</span>
           <span>${name}</span>
-          ${catPill(e.cat)}
           <span class="ce-amt">${fmtC(e.amt)}</span>
         </div>`;
-      }).join('') +
-      `<div class="cost-detail-subtotal">Materials: ${fmtC(r.totalMats)}</div>`;
+      }).join('') + `<div class="cost-detail-subtotal">Materials/Contractor: ${fmtC(r.totalMats)}</div>`;
 
   return `<div class="cost-detail-inner">
     <div class="cost-detail-col">
-      <div class="cost-detail-heading">Labor — QuickBooks Time</div>
+      <div class="cost-detail-heading">Labor — QBT (Turn class)</div>
       ${laborHtml}
     </div>
     <div class="cost-detail-col">
-      <div class="cost-detail-heading">Materials — Ramp</div>
+      <div class="cost-detail-heading">Materials/Contractor — Ramp (Turn GL)</div>
       ${matsHtml}
     </div>
   </div>`;
+}
+
+let filteredCostsRows = [];
+
+function buildPropSummaryTable() {
+  const props = {};
+  costsRows.forEach(r => {
+    if (!props[r.prop]) props[r.prop] = { active:0, complete:0, completeCosts:[], totalLabor:0, totalMats:0, total:0 };
+    const p = props[r.prop];
+    if (r.status === 'Active') p.active++;
+    if ((r.status === 'Complete' || r.status === 'Occupied') && r.total > 0) { p.complete++; p.completeCosts.push(r.total); }
+    p.totalLabor += r.totalLabor;
+    p.totalMats  += r.totalMats;
+    p.total      += r.total;
+  });
+
+  const rows = Object.entries(props).sort((a,b) => b[1].total - a[1].total).map(([prop, p]) => {
+    const avg = p.completeCosts.length ? p.completeCosts.reduce((s,c)=>s+c,0)/p.completeCosts.length : 0;
+    return `<tr>
+      <td><strong>${prop}</strong></td>
+      <td>${p.active > 0 ? `<span class="badge cost-active">${p.active}</span>` : '—'}</td>
+      <td>${p.complete > 0 ? `<span class="badge cost-complete">${p.complete}</span>` : '—'}</td>
+      <td>${avg > 0 ? fmtC(avg) : '—'}</td>
+      <td>${p.totalLabor > 0 ? fmtC(p.totalLabor) : '—'}</td>
+      <td>${p.totalMats > 0 ? fmtC(p.totalMats) : '—'}</td>
+      <td><strong>${p.total > 0 ? fmtC(p.total) : '—'}</strong></td>
+    </tr>`;
+  }).join('');
+
+  return `<div style="overflow-x:auto;border:1px solid #d0dce8;border-radius:8px;margin-bottom:24px;">
+    <table class="prop-table">
+      <thead><tr>
+        <th>Property</th><th>Active Turns</th><th>Completed w/ Costs</th>
+        <th>Avg Cost / Turn</th><th>Labor</th><th>Materials</th><th>Total</th>
+      </tr></thead>
+      <tbody>${rows || '<tr><td colspan="7" style="text-align:center;padding:16px;color:#7f8fa4;">No data</td></tr>'}</tbody>
+    </table>
+  </div>`;
+}
+
+const COST_SBADGE = {
+  'Active':   '<span class="badge cost-active">Active Turn</span>',
+  'Complete': '<span class="badge cost-complete">Complete</span>',
+  'Occupied': '<span class="badge cost-occupied">Occupied</span>',
+  'Notice':   '<span class="badge notice">Notice</span>',
+};
+
+function filterCostsTable() {
+  const search = (document.getElementById('costSearch')?.value || '').toLowerCase();
+  const prop   = document.getElementById('costPropFilter')?.value || '';
+  const status = document.getElementById('costStatusFilter')?.value || '';
+  filteredCostsRows = costsRows.map((r, i) => ({ r, i })).filter(({ r }) => {
+    if (prop   && r.prop !== prop) return false;
+    if (status && r.status !== status) return false;
+    if (search && !(r.prop + '-' + r.unitNum).toLowerCase().includes(search)) return false;
+    return true;
+  });
+  renderCostsTable();
+}
+
+function renderCostsTable() {
+  const tbody   = document.getElementById('costTbody');
+  const countEl = document.getElementById('costRowCount');
+  if (!tbody) return;
+  const rows = filteredCostsRows.map(({ r, i }) => `
+    <tr class="cost-data-row" onclick="toggleCostDetail(${i})">
+      <td><strong>${r.prop}</strong></td>
+      <td>${r.unitNum}</td>
+      <td>${COST_SBADGE[r.status]||r.status}</td>
+      <td>${r.turnStart ? fmtDate(r.turnStart) : '<span style="color:#bdc3c7">—</span>'}</td>
+      <td>${r.totalLabor>0 ? fmtC(r.totalLabor) : '<span style="color:#d0dce8">—</span>'}</td>
+      <td>${r.totalMats>0  ? fmtC(r.totalMats)  : '<span style="color:#d0dce8">—</span>'}</td>
+      <td><strong style="color:${r.total>0?'#1a2535':'#bdc3c7'}">${r.total>0?fmtC(r.total):'—'}</strong></td>
+      <td><span id="cexp-${i}" style="color:#2e86c1;font-size:0.78rem">▼</span></td>
+    </tr>
+    <tr class="cost-detail-row" id="cdet-${i}">
+      <td colspan="8">${buildCostDetailHtml(r)}</td>
+    </tr>`).join('');
+  tbody.innerHTML = rows || '<tr><td colspan="8" style="text-align:center;padding:28px;color:#7f8fa4;">No units match filters</td></tr>';
+  if (countEl) countEl.textContent = filteredCostsRows.length + ' of ' + costsRows.length + ' units';
 }
 
 function buildCostsTab() {
   const el = document.getElementById('costsContent');
   if (!RAW_COSTS) {
     el.innerHTML = `<div style="padding:40px;text-align:center;color:#7f8fa4;">
-      <div style="font-size:1.2rem;margin-bottom:8px;">📊</div>
       Cost data will be available after the next QBT/Ramp sync (within 30 min).<br>
       <span style="font-size:0.8rem;">Run <code>FETCH_ONLY=qbt-ramp node scripts/fetch-data.js</code> locally to generate immediately.</span>
     </div>`;
@@ -955,9 +1025,8 @@ function buildCostsTab() {
   const vacMap = buildVacMap();
   costsRows = [];
 
-  // Units from turn_costs.json with spend in period
   for (const [code, u] of Object.entries(RAW_COSTS.units)) {
-    const labor    = u.labor.filter(e => e.d >= COST_FROM && e.d <= COST_TO);
+    const labor     = u.labor.filter(e => e.d >= COST_FROM && e.d <= COST_TO);
     const materials = u.materials.filter(e => e.d >= COST_FROM && e.d <= COST_TO);
     const totalLabor = labor.reduce((s,e) => s + e.cost, 0);
     const totalMats  = materials.reduce((s,e) => s + e.amt, 0);
@@ -974,16 +1043,15 @@ function buildCostsTab() {
     costsRows.push({ code, prop: u.prop, unitNum: u.unitNum, status, turnStart, totalLabor, totalMats, total, labor, materials });
   }
 
-  // Also show active-turn units that have no entries yet in turn_costs
+  // Include active-turn units with no cost entries yet
   allData.filter(r => r.isVacant && r.effectiveRentReady !== 'Yes').forEach(r => {
     const pc = propCodeTC(r.property_name);
     if (!pc || !r.unit) return;
     const code = pc + '-' + r.unit.trim();
-    if (RAW_COSTS.units[code]) return; // already included
+    if (RAW_COSTS.units[code]) return;
     costsRows.push({ code, prop: pc, unitNum: r.unit.trim(), status: 'Active', turnStart: r.last_move_out, totalLabor: 0, totalMats: 0, total: 0, labor: [], materials: [] });
   });
 
-  // Sort: Active first, then Complete, then Notice/Occupied; within group by property then total desc
   const statusOrd = { 'Active':0, 'Complete':1, 'Notice':2, 'Occupied':3 };
   costsRows.sort((a, b) => {
     const so = (statusOrd[a.status] ?? 9) - (statusOrd[b.status] ?? 9);
@@ -993,9 +1061,8 @@ function buildCostsTab() {
     return b.total - a.total;
   });
 
-  // KPIs
   const activeRows   = costsRows.filter(r => r.status === 'Active');
-  const completeRows = costsRows.filter(r => r.status === 'Complete' && r.total > 0);
+  const completeRows = costsRows.filter(r => (r.status === 'Complete' || r.status === 'Occupied') && r.total > 0);
   const accruing     = activeRows.reduce((s,r) => s + r.total, 0);
   const avgCompleted = completeRows.length ? completeRows.reduce((s,r)=>s+r.total,0)/completeRows.length : 0;
   const totalLabor   = costsRows.reduce((s,r)=>s+r.totalLabor,0);
@@ -1003,65 +1070,48 @@ function buildCostsTab() {
 
   const kpis = [
     { cls: activeRows.length>0?'warn':'', lbl: 'Active Turns', val: activeRows.length, sub: fmtC(accruing) + ' accruing' },
-    { cls: 'good', lbl: 'Completed Turns', val: completeRows.length, sub: avgCompleted>0 ? 'avg '+fmtC(avgCompleted)+'/turn' : 'none with costs in period' },
-    { cls: '', lbl: 'Total Labor', val: fmtC(totalLabor), sub: 'QBT timecards' },
-    { cls: '', lbl: 'Total Materials', val: fmtC(totalMats), sub: 'Ramp card purchases' },
+    { cls: 'good', lbl: 'Completed Turns', val: completeRows.length, sub: avgCompleted>0 ? 'avg '+fmtC(avgCompleted)+'/turn' : 'no completed turns yet' },
+    { cls: '', lbl: 'Turn Labor', val: fmtC(totalLabor), sub: 'QBT — Turn class only' },
+    { cls: '', lbl: 'Turn Materials', val: fmtC(totalMats), sub: 'Ramp — Turn GL only' },
   ];
   const kpiHtml = kpis.map(k => `<div class="kpi-card ${k.cls}"><div class="kpi-label">${k.lbl}</div><div class="kpi-value">${k.val}</div><div class="kpi-sub">${k.sub}</div></div>`).join('');
 
-  // Status badges
-  const sbadge = {
-    'Active':   '<span class="badge cost-active">Active Turn</span>',
-    'Complete': '<span class="badge cost-complete">Complete</span>',
-    'Occupied': '<span class="badge cost-occupied">Occupied</span>',
-    'Notice':   '<span class="badge notice">Notice</span>',
-  };
-
-  // Property summary bar above table
-  const propTotals = {};
-  costsRows.forEach(r => {
-    if (!propTotals[r.prop]) propTotals[r.prop] = { active:0, total:0 };
-    if (r.status === 'Active') propTotals[r.prop].active++;
-    propTotals[r.prop].total += r.total;
-  });
-  const propSummaryHtml = Object.entries(propTotals)
-    .sort((a,b) => b[1].total - a[1].total)
-    .map(([p,v]) => `<span style="background:#fff;border:1px solid #d0dce8;border-radius:16px;padding:4px 12px;font-size:0.8rem;white-space:nowrap;">
-      <strong>${p}</strong> ${v.active>0?`<span style="color:#c0392b;font-weight:700">${v.active} active</span> · `:''}${fmtC(v.total)}
-    </span>`).join('');
-
-  const tableRows = costsRows.map((r, i) => `
-    <tr class="cost-data-row" onclick="toggleCostDetail(${i})">
-      <td><strong>${r.prop}</strong></td>
-      <td>${r.unitNum}</td>
-      <td>${sbadge[r.status]||r.status}</td>
-      <td>${r.turnStart ? fmtDate(r.turnStart) : '<span style="color:#bdc3c7">—</span>'}</td>
-      <td>${r.totalLabor>0 ? fmtC(r.totalLabor) : '<span style="color:#d0dce8">—</span>'}</td>
-      <td>${r.totalMats>0  ? fmtC(r.totalMats)  : '<span style="color:#d0dce8">—</span>'}</td>
-      <td><strong style="color:${r.total>0?'#1a2535':'#bdc3c7'}">${r.total>0?fmtC(r.total):'—'}</strong></td>
-      <td><span id="cexp-${i}" style="color:#2e86c1;font-size:0.78rem">▼</span></td>
-    </tr>
-    <tr class="cost-detail-row" id="cdet-${i}">
-      <td colspan="8">${buildCostDetailHtml(r)}</td>
-    </tr>`).join('');
-
-  const noData = '<tr><td colspan="8" style="text-align:center;padding:28px;color:#7f8fa4;">No cost data for selected period</td></tr>';
+  const propOptions = [...new Set(costsRows.map(r => r.prop))].sort().map(p => `<option value="${p}">${p}</option>`).join('');
 
   el.innerHTML = `
     <div class="kpi-grid">${kpiHtml}</div>
-    ${propSummaryHtml ? `<div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px;">${propSummaryHtml}</div>` : ''}
+    <div class="section-title">Cost by Property</div>
+    ${buildPropSummaryTable()}
+    <div class="section-title" style="margin-top:24px;">Unit Detail</div>
+    <div class="controls" style="margin-bottom:12px;">
+      <input type="text" id="costSearch" placeholder="Search property or unit…" oninput="filterCostsTable()" style="width:200px;">
+      <select id="costPropFilter" onchange="filterCostsTable()">
+        <option value="">All Properties</option>${propOptions}
+      </select>
+      <select id="costStatusFilter" onchange="filterCostsTable()">
+        <option value="">All Statuses</option>
+        <option value="Active">Active Turn</option>
+        <option value="Complete">Complete</option>
+        <option value="Occupied">Occupied</option>
+        <option value="Notice">Notice</option>
+      </select>
+      <span id="costRowCount" class="row-count"></span>
+    </div>
     <div style="overflow-x:auto;border:1px solid #d0dce8;border-radius:8px;">
       <table class="cost-table">
         <thead><tr>
-          <th>Property</th><th>Unit</th><th>Status</th><th>Turn Start</th>
+          <th>Property</th><th>Unit</th><th>Status</th><th>Move-Out</th>
           <th>Labor</th><th>Materials</th><th>Total</th><th></th>
         </tr></thead>
-        <tbody>${tableRows||noData}</tbody>
+        <tbody id="costTbody"></tbody>
       </table>
     </div>
     <div style="margin-top:10px;font-size:0.75rem;color:#a0aebb;">
-      Cost data persists for all turns including occupied units. Labor = QBT wage rates. Materials = Ramp card purchases tagged to unit.
+      Turn class labor (QBT) + Turn GL materials/contractor (Ramp) only. Data retained after move-in.
     </div>`;
+
+  filteredCostsRows = costsRows.map((r, i) => ({ r, i }));
+  renderCostsTable();
 }
 </script>
 </body>
