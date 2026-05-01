@@ -1,11 +1,11 @@
 {
   "ok": true,
-  "fetched_at": "2026-05-01T00:03:46.563Z",
+  "fetched_at": "2026-05-01T08:23:40.386Z",
   "period_days": 60,
   "totals": {
     "unpaid_count": 53,
     "unpaid_amount_confirmed": 1799.52,
-    "paid_count": 31,
+    "paid_count": 30,
     "vendor_count": 16
   },
   "unpaid": [
@@ -52,6 +52,34 @@
       }
     },
     {
+      "vendor": "Duo Cleaning Company LLC",
+      "invoice_num": "23334390",
+      "amount": 350,
+      "invoice_date": "2026-05-01",
+      "subject": "Reminder: Invoice 23334390 is due from Duo Cleaning Company LLC - $350.00",
+      "gmail_id": "19de1b1a8fa628ba",
+      "reminder_count": 2,
+      "is_reminder": true,
+      "ramp": {
+        "total": 77800,
+        "count": 220
+      }
+    },
+    {
+      "vendor": "Duo Cleaning Company LLC",
+      "invoice_num": "23334391",
+      "amount": 350,
+      "invoice_date": "2026-05-01",
+      "subject": "Reminder: Invoice 23334391 is due from Duo Cleaning Company LLC - $350.00",
+      "gmail_id": "19de1b1a836d9544",
+      "reminder_count": 2,
+      "is_reminder": true,
+      "ramp": {
+        "total": 77800,
+        "count": 220
+      }
+    },
+    {
       "vendor": "TAYLOR'D SYSTEMS LLC is due",
       "invoice_num": "Reminder",
       "amount": null,
@@ -71,44 +99,6 @@
       "gmail_id": "19dc0aaf09aedfad",
       "reminder_count": 1,
       "is_reminder": true,
-      "ramp": null
-    },
-    {
-      "vendor": "Duo Cleaning Company LLC",
-      "invoice_num": "23334390",
-      "amount": 350,
-      "invoice_date": "2026-04-29",
-      "subject": "Reminder: Invoice 23334390 is due from Duo Cleaning Company LLC - $350.00",
-      "gmail_id": "19dd764ff86a3910",
-      "reminder_count": 1,
-      "is_reminder": true,
-      "ramp": {
-        "total": 77800,
-        "count": 220
-      }
-    },
-    {
-      "vendor": "Duo Cleaning Company LLC",
-      "invoice_num": "23334391",
-      "amount": 350,
-      "invoice_date": "2026-04-29",
-      "subject": "Reminder: Invoice 23334391 is due from Duo Cleaning Company LLC - $350.00",
-      "gmail_id": "19dd764ff0e9799d",
-      "reminder_count": 1,
-      "is_reminder": true,
-      "ramp": {
-        "total": 77800,
-        "count": 220
-      }
-    },
-    {
-      "vendor": "Empire Electric USA is 4 days overdue",
-      "invoice_num": null,
-      "amount": null,
-      "invoice_date": "2026-03-01",
-      "subject": "Your invoice from Empire Electric USA is 4 days overdue",
-      "gmail_id": "19cab386b1949610",
-      "reminder_count": 0,
       "ramp": null
     },
     {
@@ -569,6 +559,19 @@
       "gmail_id": "19ddbf125d69d77b",
       "reminder_count": 0,
       "ramp": null
+    },
+    {
+      "vendor": "Virtel Flooring Services LLC",
+      "invoice_num": "1194",
+      "amount": null,
+      "invoice_date": "2026-05-01",
+      "subject": "New payment request from Virtel Flooring Services LLC - invoice 1194",
+      "gmail_id": "19de1aaa8bfa83a5",
+      "reminder_count": 0,
+      "ramp": {
+        "total": 85052.26,
+        "count": 70
+      }
     }
   ],
   "ramp_vendor_summary": {
