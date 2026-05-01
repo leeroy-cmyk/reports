@@ -257,8 +257,7 @@
   <div class="cost-period-row">
     <button class="cpb" onclick="setCostPeriod('thisMo',this)">This Month</button>
     <button class="cpb" onclick="setCostPeriod('lastMo',this)">Last Month</button>
-    <button class="cpb active" id="cpbYTD" onclick="setCostPeriod('ytd',this)">YTD</button>
-    <button class="cpb" onclick="setCostPeriod('allTime',this)">All Time</button>
+    <button class="cpb active" id="cpbSinceApr15" onclick="setCostPeriod('sinceApr15',this)">Since Apr 15</button>
     <div class="cost-sep"></div>
     <input type="date" id="costDateFrom" class="cost-date-input">
     <span style="color:#bdc3c7;font-size:0.8rem">–</span>
@@ -428,9 +427,9 @@ async function loadData() {
     buildDetailFilters();
     filterTable();
 
-    // Initialize Costs tab
+    // Initialize Costs tab — default to Apr 15, 2026 forward
     const now2 = new Date();
-    COST_FROM = now2.getFullYear() + '-01-01';
+    COST_FROM = '2026-04-15';
     COST_TO   = now2.toISOString().slice(0, 10);
     document.getElementById('costDateFrom').value = COST_FROM;
     document.getElementById('costDateTo').value   = COST_TO;
@@ -869,11 +868,8 @@ function setCostPeriod(mode, btn) {
     const last  = new Date(now.getFullYear(), now.getMonth(), 0);
     COST_FROM = new Date(last.getFullYear(), last.getMonth(), 1).toISOString().slice(0,10);
     COST_TO   = last.toISOString().slice(0,10);
-  } else if (mode === 'ytd') {
-    COST_FROM = now.getFullYear() + '-01-01';
-    COST_TO   = now.toISOString().slice(0,10);
-  } else if (mode === 'allTime') {
-    COST_FROM = '2020-01-01';
+  } else if (mode === 'sinceApr15') {
+    COST_FROM = '2026-04-15';
     COST_TO   = now.toISOString().slice(0,10);
   } else if (mode === 'custom') {
     const f = document.getElementById('costDateFrom').value;
@@ -962,9 +958,9 @@ function buildCostsTab() {
   // Units from turn_costs.json with spend in period
   for (const [code, u] of Object.entries(RAW_COSTS.units)) {
     const labor    = u.labor.filter(e => e.d >= COST_FROM && e.d <= COST_TO);
-    const mats     = u.materials.filter(e => e.d >= COST_FROM && e.d <= COST_TO);
+    const materials = u.materials.filter(e => e.d >= COST_FROM && e.d <= COST_TO);
     const totalLabor = labor.reduce((s,e) => s + e.cost, 0);
-    const totalMats  = mats.reduce((s,e) => s + e.amt, 0);
+    const totalMats  = materials.reduce((s,e) => s + e.amt, 0);
     const total = totalLabor + totalMats;
 
     const vac = vacMap[code];
@@ -974,8 +970,8 @@ function buildCostsTab() {
     else if (vac.effectiveRentReady === 'Yes') { status = 'Complete'; turnStart = vac.last_move_out; }
     else { status = 'Active'; turnStart = vac.last_move_out; }
 
-    if (total === 0 && status !== 'Active') continue; // hide zero-cost occupied units
-    costsRows.push({ code, prop: u.prop, unitNum: u.unitNum, status, turnStart, totalLabor, totalMats, total, labor, mats });
+    if (total === 0 && status !== 'Active') continue;
+    costsRows.push({ code, prop: u.prop, unitNum: u.unitNum, status, turnStart, totalLabor, totalMats, total, labor, materials });
   }
 
   // Also show active-turn units that have no entries yet in turn_costs
@@ -984,7 +980,7 @@ function buildCostsTab() {
     if (!pc || !r.unit) return;
     const code = pc + '-' + r.unit.trim();
     if (RAW_COSTS.units[code]) return; // already included
-    costsRows.push({ code, prop: pc, unitNum: r.unit.trim(), status: 'Active', turnStart: r.last_move_out, totalLabor: 0, totalMats: 0, total: 0, labor: [], mats: [] });
+    costsRows.push({ code, prop: pc, unitNum: r.unit.trim(), status: 'Active', turnStart: r.last_move_out, totalLabor: 0, totalMats: 0, total: 0, labor: [], materials: [] });
   });
 
   // Sort: Active first, then Complete, then Notice/Occupied; within group by property then total desc
