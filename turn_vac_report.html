@@ -137,6 +137,45 @@
   .countdown.c-done    { background: #d5f5e3; color: #1e8449; }
   .due-prop { font-weight: 600; color: #1a2535; }
   .due-meta { color: #7f8fa4; font-size: 0.8rem; }
+
+  /* Turn Costs tab */
+  .cost-period-row { display: flex; gap: 6px; margin-bottom: 20px; align-items: center; flex-wrap: wrap; }
+  .cpb { padding: 6px 16px; font-size: 0.83rem; font-weight: 600; border-radius: 20px; border: 1px solid #d0dce8; background: #fff; color: #7f8fa4; cursor: pointer; transition: all 0.15s; }
+  .cpb:hover { border-color: #1a5276; color: #1a5276; }
+  .cpb.active { background: #1a5276; color: #fff; border-color: #1a5276; }
+  .cost-date-input { background: #fff; border: 1px solid #d0dce8; color: #1a2535; padding: 5px 8px; border-radius: 6px; font-size: 0.8rem; }
+  .cost-sep { width: 1px; height: 20px; background: #d0dce8; margin: 0 6px; }
+
+  .cost-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+  .cost-table th { text-align: left; padding: 10px 12px; font-size: 0.73rem; color: #7f8fa4; text-transform: uppercase; letter-spacing: 0.7px; border-bottom: 2px solid #d0dce8; background: #f4f6f9; white-space: nowrap; }
+  .cost-table td { padding: 9px 12px; border-bottom: 1px solid #e8edf2; background: #fff; white-space: nowrap; }
+  .cost-table tr.cost-data-row { cursor: pointer; }
+  .cost-table tr.cost-data-row:hover td { background: #eaf2f8; }
+  .cost-table tr.cost-detail-row { display: none; }
+  .cost-table tr.cost-detail-row.open { display: table-row; }
+  .cost-table tr.cost-detail-row td { background: #f9fbfc; padding: 0; border-bottom: 2px solid #d0dce8; }
+
+  .cost-detail-inner { display: grid; grid-template-columns: 1fr 1fr; }
+  .cost-detail-col { padding: 14px 18px; }
+  .cost-detail-col + .cost-detail-col { border-left: 1px solid #e8edf2; }
+  .cost-detail-heading { font-size: 0.75rem; font-weight: 700; color: #1a5276; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; }
+  .cost-entry { display: grid; grid-template-columns: 54px 1fr 64px 42px 64px; gap: 8px; padding: 5px 0; border-bottom: 1px solid #f0f3f6; font-size: 0.81rem; align-items: center; }
+  .cost-entry.mat { grid-template-columns: 54px 1fr 64px 72px; }
+  .cost-entry:last-child { border-bottom: none; }
+  .ce-date { color: #a0aebb; font-size: 0.77rem; }
+  .ce-amt { text-align: right; font-weight: 700; color: #1a2535; }
+  .ce-hrs { color: #7f8fa4; text-align: right; font-size: 0.77rem; }
+  .cost-detail-subtotal { margin-top: 8px; font-size: 0.82rem; font-weight: 700; color: #1a5276; text-align: right; padding-top: 6px; border-top: 1px solid #d0dce8; }
+  .no-cost-entries { color: #a0aebb; font-style: italic; font-size: 0.81rem; padding: 6px 0; }
+
+  .badge.cost-active   { background: #fadbd8; color: #c0392b; }
+  .badge.cost-complete { background: #d5f5e3; color: #1e8449; }
+  .badge.cost-occupied { background: #edf0f3; color: #7f8fa4; }
+  .cat-pill { display: inline-block; padding: 1px 7px; border-radius: 10px; font-size: 0.72rem; font-weight: 600; }
+  .cp-turn     { background: #e8d5f5; color: #6c3483; }
+  .cp-rm       { background: #d6eaf8; color: #1a5276; }
+  .cp-grounds  { background: #d5f5e3; color: #1e8449; }
+  .cp-capex    { background: #fef9e7; color: #b7950b; }
 </style>
 </head>
 <body>
@@ -159,6 +198,7 @@
   <div class="tab" onclick="showTab('recentlyAdded',this)">Recently Added <span id="recentBadge" style="display:none;background:#e74c3c;color:#fff;border-radius:10px;font-size:0.7rem;font-weight:700;padding:1px 7px;margin-left:4px;vertical-align:middle;"></span></div>
   <div class="tab" onclick="showTab('byProperty',this)">By Property</div>
   <div class="tab" onclick="showTab('detail',this)">Full Detail</div>
+  <div class="tab" onclick="showTab('turnCosts',this)">Turn Costs</div>
 </div>
 
 <div id="overview" class="panel active"><div id="overviewContent"><p style="color:#7f8fa4;padding:20px;">Loading…</p></div></div>
@@ -211,6 +251,21 @@
     </thead>
     <tbody id="detailTbody"></tbody>
   </table>
+</div>
+
+<div id="turnCosts" class="panel">
+  <div class="cost-period-row">
+    <button class="cpb" onclick="setCostPeriod('thisMo',this)">This Month</button>
+    <button class="cpb" onclick="setCostPeriod('lastMo',this)">Last Month</button>
+    <button class="cpb active" id="cpbYTD" onclick="setCostPeriod('ytd',this)">YTD</button>
+    <button class="cpb" onclick="setCostPeriod('allTime',this)">All Time</button>
+    <div class="cost-sep"></div>
+    <input type="date" id="costDateFrom" class="cost-date-input">
+    <span style="color:#bdc3c7;font-size:0.8rem">–</span>
+    <input type="date" id="costDateTo" class="cost-date-input">
+    <button class="cpb" onclick="setCostPeriod('custom',null)">Go</button>
+  </div>
+  <div id="costsContent"><p style="color:#7f8fa4;padding:20px;">Loading…</p></div>
 </div>
 
 <script>
@@ -320,11 +375,18 @@ async function loadData() {
   errBar.style.display = 'none';
 
   try {
-    const resp = await fetch('./data/turnvac.json');
+    const [resp, costsResp] = await Promise.all([
+      fetch('./data/turnvac.json'),
+      fetch('./data/turn_costs.json').catch(() => null),
+    ]);
     bar.style.width = '80%';
     if (!resp.ok) throw new Error('HTTP ' + resp.status);
     const json = await resp.json();
     if (!json.ok) throw new Error(json.error || 'Unknown error');
+
+    if (costsResp && costsResp.ok) {
+      try { RAW_COSTS = await costsResp.json(); } catch(e) { /* ignore */ }
+    }
 
     allData = json.rows.map(r => {
       const moveOutD   = parseDate(r.last_move_out);
@@ -365,6 +427,14 @@ async function loadData() {
     buildByProperty();
     buildDetailFilters();
     filterTable();
+
+    // Initialize Costs tab
+    const now2 = new Date();
+    COST_FROM = now2.getFullYear() + '-01-01';
+    COST_TO   = now2.toISOString().slice(0, 10);
+    document.getElementById('costDateFrom').value = COST_FROM;
+    document.getElementById('costDateTo').value   = COST_TO;
+    buildCostsTab();
   } catch(e) {
     bar.style.width = '0';
     errBar.style.display = 'block';
@@ -755,6 +825,248 @@ function showTab(id, el) {
 }
 
 loadData();
+
+// ── TURN COSTS TAB ──────────────────────────────────────────────────────────
+let RAW_COSTS  = null;
+let COST_FROM  = '';
+let COST_TO    = '';
+let costsRows  = [];
+
+const RAMP_LN_NAMES = {
+  'hippen':'Wade Hippen','hoard':'Jonas Hoard','lakins':'Jaxson Lakins',
+  'leonides':'Reynaldo Leonides','magoon':'Micheal Magoon','mcquaid':'Bryon McQuaid',
+  'miller':'Jared Miller','mitchell':'Armani Mitchell','robson':'Ryan Robson',
+  'saldana':'Margarito Saldana','sanchez':'David Sanchez','uttke':'Lawrence Uttke',
+  'chavez':'Isaac Chavez','cramer':'Ron Cramer','deckard':'Hannah Deckard',
+  'dunlap':'James Dunlap','gutierrez':'Justin Gutierrez','higley':'Scott Higley',
+  'phillips':'LeeRoy','meng':'Hanzhao Meng',
+};
+
+function propCodeTC(str) {
+  if (!str) return null;
+  const m = str.match(/([a-z]{1,3}\d{2,3})/i);
+  return m ? m[1].toLowerCase() : null;
+}
+
+function buildVacMap() {
+  const map = {};
+  allData.forEach(r => {
+    const pc = propCodeTC(r.property_name);
+    if (!pc || !r.unit) return;
+    map[pc + '-' + r.unit.trim()] = r;
+  });
+  return map;
+}
+
+function setCostPeriod(mode, btn) {
+  document.querySelectorAll('.cpb').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  const now = new Date();
+  if (mode === 'thisMo') {
+    COST_FROM = new Date(now.getFullYear(), now.getMonth(), 1).toISOString().slice(0,10);
+    COST_TO   = now.toISOString().slice(0,10);
+  } else if (mode === 'lastMo') {
+    const last  = new Date(now.getFullYear(), now.getMonth(), 0);
+    COST_FROM = new Date(last.getFullYear(), last.getMonth(), 1).toISOString().slice(0,10);
+    COST_TO   = last.toISOString().slice(0,10);
+  } else if (mode === 'ytd') {
+    COST_FROM = now.getFullYear() + '-01-01';
+    COST_TO   = now.toISOString().slice(0,10);
+  } else if (mode === 'allTime') {
+    COST_FROM = '2020-01-01';
+    COST_TO   = now.toISOString().slice(0,10);
+  } else if (mode === 'custom') {
+    const f = document.getElementById('costDateFrom').value;
+    const t = document.getElementById('costDateTo').value;
+    if (!f || !t) { alert('Please enter both dates.'); return; }
+    if (f > t)    { alert('Start date must be before end date.'); return; }
+    COST_FROM = f; COST_TO = t;
+  }
+  if (mode !== 'custom') {
+    document.getElementById('costDateFrom').value = COST_FROM;
+    document.getElementById('costDateTo').value   = COST_TO;
+  }
+  buildCostsTab();
+}
+
+function toggleCostDetail(i) {
+  const row  = document.getElementById('cdet-' + i);
+  const icon = document.getElementById('cexp-' + i);
+  if (!row) return;
+  const open = row.classList.toggle('open');
+  if (icon) icon.textContent = open ? '▲' : '▼';
+}
+
+function fmtC(n) { return '$' + Math.round(n).toLocaleString('en-US'); }
+
+function catPill(cat) {
+  const cls = { 'Turn':'cp-turn','R&M':'cp-rm','Grounds':'cp-grounds','CapEx':'cp-capex' }[cat] || 'cp-rm';
+  return `<span class="cat-pill ${cls}">${cat}</span>`;
+}
+
+function buildCostDetailHtml(r) {
+  const laborHtml = r.labor.length === 0
+    ? '<div class="no-cost-entries">No labor entries in period</div>'
+    : r.labor.map(e => {
+        const mm = e.d.slice(5,7), dd = e.d.slice(8,10);
+        return `<div class="cost-entry">
+          <span class="ce-date">${mm}/${dd}</span>
+          <span>${e.emp}</span>
+          ${catPill(e.cat)}
+          <span class="ce-hrs">${e.hrs}h</span>
+          <span class="ce-amt">${fmtC(e.cost)}</span>
+        </div>`;
+      }).join('') +
+      `<div class="cost-detail-subtotal">Labor: ${fmtC(r.totalLabor)}</div>`;
+
+  const matsHtml = r.materials.length === 0
+    ? '<div class="no-cost-entries">No material charges in period</div>'
+    : r.materials.map(e => {
+        const mm = e.d.slice(5,7), dd = e.d.slice(8,10);
+        const name = RAMP_LN_NAMES[e.ln] || (e.ln || '—');
+        return `<div class="cost-entry mat">
+          <span class="ce-date">${mm}/${dd}</span>
+          <span>${name}</span>
+          ${catPill(e.cat)}
+          <span class="ce-amt">${fmtC(e.amt)}</span>
+        </div>`;
+      }).join('') +
+      `<div class="cost-detail-subtotal">Materials: ${fmtC(r.totalMats)}</div>`;
+
+  return `<div class="cost-detail-inner">
+    <div class="cost-detail-col">
+      <div class="cost-detail-heading">Labor — QuickBooks Time</div>
+      ${laborHtml}
+    </div>
+    <div class="cost-detail-col">
+      <div class="cost-detail-heading">Materials — Ramp</div>
+      ${matsHtml}
+    </div>
+  </div>`;
+}
+
+function buildCostsTab() {
+  const el = document.getElementById('costsContent');
+  if (!RAW_COSTS) {
+    el.innerHTML = `<div style="padding:40px;text-align:center;color:#7f8fa4;">
+      <div style="font-size:1.2rem;margin-bottom:8px;">📊</div>
+      Cost data will be available after the next QBT/Ramp sync (within 30 min).<br>
+      <span style="font-size:0.8rem;">Run <code>FETCH_ONLY=qbt-ramp node scripts/fetch-data.js</code> locally to generate immediately.</span>
+    </div>`;
+    return;
+  }
+
+  const vacMap = buildVacMap();
+  costsRows = [];
+
+  // Units from turn_costs.json with spend in period
+  for (const [code, u] of Object.entries(RAW_COSTS.units)) {
+    const labor    = u.labor.filter(e => e.d >= COST_FROM && e.d <= COST_TO);
+    const mats     = u.materials.filter(e => e.d >= COST_FROM && e.d <= COST_TO);
+    const totalLabor = labor.reduce((s,e) => s + e.cost, 0);
+    const totalMats  = mats.reduce((s,e) => s + e.amt, 0);
+    const total = totalLabor + totalMats;
+
+    const vac = vacMap[code];
+    let status, turnStart = null;
+    if (!vac) { status = 'Occupied'; }
+    else if (!vac.isVacant) { status = 'Notice'; turnStart = vac.last_move_out; }
+    else if (vac.effectiveRentReady === 'Yes') { status = 'Complete'; turnStart = vac.last_move_out; }
+    else { status = 'Active'; turnStart = vac.last_move_out; }
+
+    if (total === 0 && status !== 'Active') continue; // hide zero-cost occupied units
+    costsRows.push({ code, prop: u.prop, unitNum: u.unitNum, status, turnStart, totalLabor, totalMats, total, labor, mats });
+  }
+
+  // Also show active-turn units that have no entries yet in turn_costs
+  allData.filter(r => r.isVacant && r.effectiveRentReady !== 'Yes').forEach(r => {
+    const pc = propCodeTC(r.property_name);
+    if (!pc || !r.unit) return;
+    const code = pc + '-' + r.unit.trim();
+    if (RAW_COSTS.units[code]) return; // already included
+    costsRows.push({ code, prop: pc, unitNum: r.unit.trim(), status: 'Active', turnStart: r.last_move_out, totalLabor: 0, totalMats: 0, total: 0, labor: [], mats: [] });
+  });
+
+  // Sort: Active first, then Complete, then Notice/Occupied; within group by property then total desc
+  const statusOrd = { 'Active':0, 'Complete':1, 'Notice':2, 'Occupied':3 };
+  costsRows.sort((a, b) => {
+    const so = (statusOrd[a.status] ?? 9) - (statusOrd[b.status] ?? 9);
+    if (so !== 0) return so;
+    if (a.prop < b.prop) return -1;
+    if (a.prop > b.prop) return 1;
+    return b.total - a.total;
+  });
+
+  // KPIs
+  const activeRows   = costsRows.filter(r => r.status === 'Active');
+  const completeRows = costsRows.filter(r => r.status === 'Complete' && r.total > 0);
+  const accruing     = activeRows.reduce((s,r) => s + r.total, 0);
+  const avgCompleted = completeRows.length ? completeRows.reduce((s,r)=>s+r.total,0)/completeRows.length : 0;
+  const totalLabor   = costsRows.reduce((s,r)=>s+r.totalLabor,0);
+  const totalMats    = costsRows.reduce((s,r)=>s+r.totalMats,0);
+
+  const kpis = [
+    { cls: activeRows.length>0?'warn':'', lbl: 'Active Turns', val: activeRows.length, sub: fmtC(accruing) + ' accruing' },
+    { cls: 'good', lbl: 'Completed Turns', val: completeRows.length, sub: avgCompleted>0 ? 'avg '+fmtC(avgCompleted)+'/turn' : 'none with costs in period' },
+    { cls: '', lbl: 'Total Labor', val: fmtC(totalLabor), sub: 'QBT timecards' },
+    { cls: '', lbl: 'Total Materials', val: fmtC(totalMats), sub: 'Ramp card purchases' },
+  ];
+  const kpiHtml = kpis.map(k => `<div class="kpi-card ${k.cls}"><div class="kpi-label">${k.lbl}</div><div class="kpi-value">${k.val}</div><div class="kpi-sub">${k.sub}</div></div>`).join('');
+
+  // Status badges
+  const sbadge = {
+    'Active':   '<span class="badge cost-active">Active Turn</span>',
+    'Complete': '<span class="badge cost-complete">Complete</span>',
+    'Occupied': '<span class="badge cost-occupied">Occupied</span>',
+    'Notice':   '<span class="badge notice">Notice</span>',
+  };
+
+  // Property summary bar above table
+  const propTotals = {};
+  costsRows.forEach(r => {
+    if (!propTotals[r.prop]) propTotals[r.prop] = { active:0, total:0 };
+    if (r.status === 'Active') propTotals[r.prop].active++;
+    propTotals[r.prop].total += r.total;
+  });
+  const propSummaryHtml = Object.entries(propTotals)
+    .sort((a,b) => b[1].total - a[1].total)
+    .map(([p,v]) => `<span style="background:#fff;border:1px solid #d0dce8;border-radius:16px;padding:4px 12px;font-size:0.8rem;white-space:nowrap;">
+      <strong>${p}</strong> ${v.active>0?`<span style="color:#c0392b;font-weight:700">${v.active} active</span> · `:''}${fmtC(v.total)}
+    </span>`).join('');
+
+  const tableRows = costsRows.map((r, i) => `
+    <tr class="cost-data-row" onclick="toggleCostDetail(${i})">
+      <td><strong>${r.prop}</strong></td>
+      <td>${r.unitNum}</td>
+      <td>${sbadge[r.status]||r.status}</td>
+      <td>${r.turnStart ? fmtDate(r.turnStart) : '<span style="color:#bdc3c7">—</span>'}</td>
+      <td>${r.totalLabor>0 ? fmtC(r.totalLabor) : '<span style="color:#d0dce8">—</span>'}</td>
+      <td>${r.totalMats>0  ? fmtC(r.totalMats)  : '<span style="color:#d0dce8">—</span>'}</td>
+      <td><strong style="color:${r.total>0?'#1a2535':'#bdc3c7'}">${r.total>0?fmtC(r.total):'—'}</strong></td>
+      <td><span id="cexp-${i}" style="color:#2e86c1;font-size:0.78rem">▼</span></td>
+    </tr>
+    <tr class="cost-detail-row" id="cdet-${i}">
+      <td colspan="8">${buildCostDetailHtml(r)}</td>
+    </tr>`).join('');
+
+  const noData = '<tr><td colspan="8" style="text-align:center;padding:28px;color:#7f8fa4;">No cost data for selected period</td></tr>';
+
+  el.innerHTML = `
+    <div class="kpi-grid">${kpiHtml}</div>
+    ${propSummaryHtml ? `<div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px;">${propSummaryHtml}</div>` : ''}
+    <div style="overflow-x:auto;border:1px solid #d0dce8;border-radius:8px;">
+      <table class="cost-table">
+        <thead><tr>
+          <th>Property</th><th>Unit</th><th>Status</th><th>Turn Start</th>
+          <th>Labor</th><th>Materials</th><th>Total</th><th></th>
+        </tr></thead>
+        <tbody>${tableRows||noData}</tbody>
+      </table>
+    </div>
+    <div style="margin-top:10px;font-size:0.75rem;color:#a0aebb;">
+      Cost data persists for all turns including occupied units. Labor = QBT wage rates. Materials = Ramp card purchases tagged to unit.
+    </div>`;
+}
 </script>
 </body>
 </html>

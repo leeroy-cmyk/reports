@@ -335,6 +335,94 @@ function buildRampProcessed() {
   console.log('ramp_processed.json: ' + slim.length + ' transactions (' + (JSON.stringify(slim).length / 1024).toFixed(0) + ' KB)');
 }
 
+// ── TURN COSTS ──────────────────────────────────────────────────────────────
+const TC_WAGE_MAP = {
+  'leeroy':50.00,'hippen':28.44,'hoard':27.00,'lakins':24.00,'leonides':25.00,
+  'magoon':25.00,'mcquaid':25.00,'miller':28.09,'mitchell':27.00,'robson':23.00,
+  'saldana':28.40,'sanchez':25.50,'uttke':34.00,'chavez':27.00,'cramer':25.75,
+  'deckard':22.00,'dunlap':23.00,'gutierrez':25.00,'higley':31.99,
+};
+const TC_RAMP_CATS = {
+  '52000':'R&M','52001':'R&M','52002':'R&M','52003':'R&M','67800':'R&M',
+  '53000':'Turn','53001':'Turn','53002':'Turn','53003':'Turn',
+  '54000':'Grounds','54001':'Grounds','54002':'Grounds','54003':'Grounds',
+};
+
+function extractUnitCode(propField) {
+  if (!propField) return null;
+  const colon = propField.indexOf(':');
+  if (colon === -1) return null;
+  const unit = propField.slice(colon + 1).trim();
+  return unit.includes('-') ? unit : null; // must be "propcode-unitnum" format
+}
+
+function qbtToCat(cls) {
+  if (!cls || !cls.includes(':')) return null;
+  const sub = cls.split(':').slice(1).join(':');
+  if (sub.startsWith('R&M')) return 'R&M';
+  if (sub === 'Turn') return 'Turn';
+  if (sub === 'Grounds') return 'Grounds';
+  if (/capex/i.test(sub)) return 'CapEx';
+  return null;
+}
+
+function buildTurnCosts() {
+  const qbtPath  = path.join(DATA_DIR, 'qbtime.json');
+  const rampPath = path.join(DATA_DIR, 'ramp_processed.json');
+  if (!fs.existsSync(qbtPath)) { console.log('buildTurnCosts: qbtime.json missing, skipping.'); return; }
+  console.log('Building turn_costs.json...');
+  const qbt = JSON.parse(fs.readFileSync(qbtPath, 'utf8'));
+  const units = {};
+
+  function ensureUnit(code) {
+    if (!units[code]) {
+      const dash = code.indexOf('-');
+      units[code] = { prop: dash > -1 ? code.slice(0, dash) : code, unitNum: dash > -1 ? code.slice(dash + 1) : code, labor: [], materials: [] };
+    }
+    return units[code];
+  }
+
+  for (const t of Object.values(qbt.timesheets || {})) {
+    if (t.type !== 'regular') continue;
+    const unitCode = extractUnitCode(t.customfields?.['25068']);
+    if (!unitCode) continue;
+    const u = qbt.users?.[t.user_id];
+    if (!u) continue;
+    const raw = (u.display_name || '').trim();
+    let empName, wage;
+    if (raw.toLowerCase().includes('outright')) { empName = 'LeeRoy'; wage = 50.00; }
+    else {
+      const ln = raw.split(/\s+/).pop().toLowerCase().replace(/[^a-z]/g, '');
+      wage = TC_WAGE_MAP[ln];
+      if (wage === undefined) continue;
+      empName = raw;
+    }
+    const cat = qbtToCat(t.customfields?.['25056'] || '');
+    if (!cat) continue;
+    const hrs = Math.round(t.duration / 3600 * 100) / 100;
+    ensureUnit(unitCode).labor.push({ d: t.date, emp: empName, hrs, cost: Math.round(hrs * wage * 100) / 100, cat });
+  }
+
+  if (fs.existsSync(rampPath)) {
+    const ramp = JSON.parse(fs.readFileSync(rampPath, 'utf8'));
+    for (const tx of (ramp.transactions || [])) {
+      const unitCode = extractUnitCode(tx.dept);
+      if (!unitCode) continue;
+      const cat = TC_RAMP_CATS[tx.gl];
+      if (!cat) continue;
+      ensureUnit(unitCode).materials.push({ d: tx.d, amt: tx.amt, cat, ln: tx.ln });
+    }
+  }
+
+  for (const u of Object.values(units)) {
+    u.labor.sort((a, b) => b.d.localeCompare(a.d));
+    u.materials.sort((a, b) => b.d.localeCompare(a.d));
+  }
+
+  save('turn_costs.json', { ok: true, fetched_at: qbt.fetched_at, units });
+  console.log('turn_costs.json: ' + Object.keys(units).length + ' units');
+}
+
 const FIREBASE_API_KEY = 'AIzaSyAMAicBq6GIvo7p6s67n0wGoi1zuX21ybw';
 const FIREBASE_PROJECT = 'ridgeview-estimates';
 const FIRESTORE_BASE   = `https://firestore.googleapis.com/v1/projects/${FIREBASE_PROJECT}/databases/(default)/documents`;
@@ -458,12 +546,12 @@ const FETCH_ONLY = process.env.FETCH_ONLY || 'all';
   }
 
   if (runQBT) {
-    try { await fetchQBTime(); buildAuditData(); }
+    try { await fetchQBTime(); buildAuditData(); buildTurnCosts(); }
     catch(e) { console.error('QBTime fetch failed:', e.message); if (FETCH_ONLY === 'qbt-only') process.exit(1); }
   }
 
   if (runRamp) {
-    try { await fetchRampTransactions(); buildRampProcessed(); }
+    try { await fetchRampTransactions(); buildRampProcessed(); buildTurnCosts(); }
     catch(e) { console.error('Ramp fetch failed:', e.message); if (FETCH_ONLY === 'ramp-only') process.exit(1); }
   }
 
