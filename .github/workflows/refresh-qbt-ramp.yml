@@ -40,7 +40,7 @@ jobs:
 
       - name: Commit QBTime data
         run: |
-          git add data/qbtime.json data/audit.json
+          git add data/qbtime.json data/audit.json data/turn_costs.json
           git diff --cached --quiet && { echo "No QBTime changes"; exit 0; }
           git commit -m "chore: refresh QBTime+audit $(date -u '+%Y-%m-%d %H:%M UTC')"
           for i in 1 2 3 4 5; do
@@ -62,7 +62,7 @@ jobs:
       - name: Commit Ramp processed data
         continue-on-error: true
         run: |
-          git add data/ramp_processed.json
+          git add data/ramp_processed.json data/turn_costs.json
           git diff --cached --quiet && { echo "No Ramp changes"; exit 0; }
           git commit -m "chore: refresh Ramp $(date -u '+%Y-%m-%d %H:%M UTC')"
           for i in 1 2 3 4 5; do
