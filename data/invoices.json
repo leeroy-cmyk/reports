@@ -1,9 +1,9 @@
 {
   "ok": true,
-  "fetched_at": "2026-05-04T08:40:16.209Z",
+  "fetched_at": "2026-05-04T16:08:15.400Z",
   "period_days": 60,
   "totals": {
-    "unpaid_count": 56,
+    "unpaid_count": 57,
     "unpaid_amount_confirmed": 6223.88,
     "paid_count": 28,
     "vendor_count": 18
@@ -80,6 +80,20 @@
       }
     },
     {
+      "vendor": "Duo Cleaning Company LLC",
+      "invoice_num": "23334477",
+      "amount": 225,
+      "invoice_date": "2026-05-04",
+      "subject": "Reminder: Invoice 23334477 is due from Duo Cleaning Company LLC - $225.00",
+      "gmail_id": "19df39d62c378857",
+      "reminder_count": 2,
+      "is_reminder": true,
+      "ramp": {
+        "total": 77800,
+        "count": 220
+      }
+    },
+    {
       "vendor": "TAYLOR'D SYSTEMS LLC is due",
       "invoice_num": "Reminder",
       "amount": null,
@@ -100,20 +114,6 @@
       "reminder_count": 1,
       "is_reminder": true,
       "ramp": null
-    },
-    {
-      "vendor": "Duo Cleaning Company LLC",
-      "invoice_num": "23334477",
-      "amount": 225,
-      "invoice_date": "2026-05-02",
-      "subject": "Reminder: Invoice 23334477 is due from Duo Cleaning Company LLC - $225.00",
-      "gmail_id": "19de9500d11ba170",
-      "reminder_count": 1,
-      "is_reminder": true,
-      "ramp": {
-        "total": 77800,
-        "count": 220
-      }
     },
     {
       "vendor": "Justin's Handyman Service and Remodel, LLC with a few clicks",
@@ -606,6 +606,16 @@
         "total": 85052.26,
         "count": 70
       }
+    },
+    {
+      "vendor": "TAYLOR'D SYSTEMS LLC",
+      "invoice_num": "211027JR3977",
+      "amount": null,
+      "invoice_date": "2026-05-04",
+      "subject": "Invoice 211027JR3977 from TAYLOR'D SYSTEMS LLC",
+      "gmail_id": "19df242e9bbd95b8",
+      "reminder_count": 0,
+      "ramp": null
     }
   ],
   "ramp_vendor_summary": {
