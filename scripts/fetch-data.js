@@ -414,6 +414,20 @@ function buildTurnCosts() {
     }
   }
 
+  // Add estimates from AppFolio work orders
+  const woPath = path.join(DATA_DIR, 'workorders.json');
+  if (fs.existsSync(woPath)) {
+    const wo = JSON.parse(fs.readFileSync(woPath, 'utf8'));
+    for (const r of (wo.rows || [])) {
+      if (r.work_order_type !== 'Unit Turn') continue;
+      const est = parseFloat(r.estimate_amount) || 0;
+      if (est <= 0) continue;
+      const code = r.property_name + '-' + (r.unit_name || '').trim();
+      if (!code.includes('-') || code.endsWith('-')) continue;
+      ensureUnit(code).estimate = Math.round(((units[code].estimate || 0) + est) * 100) / 100;
+    }
+  }
+
   for (const u of Object.values(units)) {
     u.labor.sort((a, b) => b.d.localeCompare(a.d));
     u.materials.sort((a, b) => b.d.localeCompare(a.d));
