@@ -1,0 +1,23 @@
+name: QBT Timecard Fill
+
+on:
+  schedule:
+    - cron: '0 1 * * 2-6'  # 6pm PDT Mon–Fri (1am UTC Tue–Sat)
+  workflow_dispatch:
+
+jobs:
+  fill:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Fill timecard gaps
+        env:
+          QBT_TOKEN: ${{ secrets.QBT_TOKEN }}
+        run: node scripts/fill-timecard.js
