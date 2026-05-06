@@ -90,6 +90,15 @@ tr.focus-row td{background:#fff8f2}
 .r2-chip{background:#fef9e7;color:#b7950b}
 .r3-chip{background:#fdedec;color:#c0392b}
 @media(max-width:900px){.two-col{grid-template-columns:1fr}}
+.insight{background:#eaf4fb;border-left:3px solid #2e86c1;padding:10px 14px;margin-bottom:10px;font-size:12px;color:#1a2535;border-radius:0 6px 6px 0;line-height:1.5}
+.data-flag{background:#fff3cd;border:1px solid #ffc107;border-radius:6px;padding:10px 14px;margin-bottom:14px;font-size:12px;color:#7d5a00;line-height:1.5}
+.wo-chart-row{display:flex;gap:5px;align-items:flex-end;height:90px;margin-bottom:5px}
+.wo-bar{border-radius:3px 3px 0 0;flex:1;min-width:22px;position:relative}
+.wo-bar.peak{background:#c0392b}
+.wo-bar.high{background:#e67e22}
+.wo-bar.norm{background:#2e86c1}
+.wo-bar-val{font-size:9px;color:#fff;position:absolute;bottom:3px;width:100%;text-align:center;font-weight:700}
+.wo-bar-lbl{font-size:10px;color:#7f8fa4;text-align:center;flex:1}
 </style>
 </head>
 <body>
@@ -108,6 +117,7 @@ tr.focus-row td{background:#fff8f2}
     <button class="tab-btn" onclick="showTab(2)">R&amp;M Assumptions</button>
     <button class="tab-btn" onclick="showTab(3)">Summary</button>
     <button class="tab-btn" onclick="showTab(4)">Model vs Actuals</button>
+    <button class="tab-btn" onclick="showTab(5)">Work Orders</button>
   </div>
 </div>
 
@@ -405,6 +415,156 @@ tr.focus-row td{background:#fff8f2}
     </div>
 
   </div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════ TAB 6: WORK ORDERS ══════════════════════ -->
+<div id="pane5" class="pane">
+<div class="wrap">
+
+  <div class="data-flag"><strong>Source:</strong> 480 completed work orders · January–November 2023 · All amounts $0 (cost tracking not done at WO level by prior operator — R&amp;M actuals come from AppFolio GL).</div>
+
+  <div class="kpi-row">
+    <div class="kpi"><div class="kpi-val">480</div><div class="kpi-lbl">Total Work Orders</div><div class="kpi-sub">Jan–Nov 2023</div></div>
+    <div class="kpi warn"><div class="kpi-val">28</div><div class="kpi-lbl">Avg Days to Complete</div><div class="kpi-sub">All completed WOs</div></div>
+    <div class="kpi warn"><div class="kpi-val">47</div><div class="kpi-lbl">Took 90+ Days</div><div class="kpi-sub">9.8% of orders</div></div>
+    <div class="kpi warn"><div class="kpi-val">92</div><div class="kpi-lbl">Appliance WOs</div><div class="kpi-sub">#1 category · 19%</div></div>
+    <div class="kpi"><div class="kpi-val">60</div><div class="kpi-lbl">Make Ready WOs</div><div class="kpi-sub">33 units turned</div></div>
+    <div class="kpi warn"><div class="kpi-val">21</div><div class="kpi-lbl">WOs — Unit A101</div><div class="kpi-sub">Highest single unit</div></div>
+  </div>
+
+  <div class="two-col">
+
+    <!-- Category breakdown -->
+    <div class="card">
+      <div class="card-title">Work Orders by Category</div>
+      <div class="seg-bar" id="woCatBar"></div>
+      <div class="seg-labels" id="woCatLeg" style="margin-bottom:14px"></div>
+      <div class="tbl-wrap">
+      <table>
+        <thead><tr>
+          <th>Category</th>
+          <th style="text-align:right">Count</th>
+          <th style="text-align:right">%</th>
+          <th>Note</th>
+        </tr></thead>
+        <tbody>
+          <tr><td>Appliances</td><td style="text-align:right"><strong>92</strong></td><td style="text-align:right">19.2%</td><td><span class="badge c3">High volume</span></td></tr>
+          <tr><td>Miscellaneous</td><td style="text-align:right"><strong>81</strong></td><td style="text-align:right">16.9%</td><td></td></tr>
+          <tr><td>Plumbing</td><td style="text-align:right"><strong>79</strong></td><td style="text-align:right">16.5%</td><td><span class="badge c2">Recurring</span></td></tr>
+          <tr><td>Make Ready</td><td style="text-align:right"><strong>60</strong></td><td style="text-align:right">12.5%</td><td>33 units turned</td></tr>
+          <tr><td>Carpentry</td><td style="text-align:right"><strong>41</strong></td><td style="text-align:right">8.5%</td><td></td></tr>
+          <tr><td>Electrical</td><td style="text-align:right"><strong>35</strong></td><td style="text-align:right">7.3%</td><td></td></tr>
+          <tr><td>Windows</td><td style="text-align:right"><strong>28</strong></td><td style="text-align:right">5.8%</td><td></td></tr>
+          <tr><td>Access</td><td style="text-align:right"><strong>16</strong></td><td style="text-align:right">3.3%</td><td>Locks &amp; keys</td></tr>
+          <tr><td>HVAC</td><td style="text-align:right"><strong>15</strong></td><td style="text-align:right">3.1%</td><td></td></tr>
+          <tr><td>Pest Control</td><td style="text-align:right"><strong>7</strong></td><td style="text-align:right">1.5%</td><td><span class="badge c2">Under-reported*</span></td></tr>
+          <tr><td>Roofing</td><td style="text-align:right"><strong>7</strong></td><td style="text-align:right">1.5%</td><td></td></tr>
+          <tr><td>Common Area</td><td style="text-align:right"><strong>6</strong></td><td style="text-align:right">1.3%</td><td></td></tr>
+          <tr><td>Prev. Maintenance</td><td style="text-align:right"><strong>5</strong></td><td style="text-align:right">1.0%</td><td></td></tr>
+          <tr><td>Flooring</td><td style="text-align:right"><strong>4</strong></td><td style="text-align:right">0.8%</td><td></td></tr>
+          <tr class="total-row"><td>Total</td><td style="text-align:right">476</td><td style="text-align:right">100%</td><td></td></tr>
+        </tbody>
+      </table>
+      </div>
+      <div style="font-size:11px;color:#7f8fa4;margin-top:8px;font-style:italic">*Pest control runs as a blanket contract ($29k/yr actual) — individual WOs rarely filed</div>
+    </div>
+
+    <!-- Monthly + Priority -->
+    <div>
+      <div class="card">
+        <div class="card-title">Monthly Volume — 2023</div>
+        <div class="wo-chart-row" id="woMonthChart"></div>
+        <div style="display:flex;gap:5px" id="woMonthLbls"></div>
+        <div style="font-size:11px;color:#7f8fa4;margin-top:6px">Red = Oct peak (68) · Orange = Jan spike (61)</div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Priority Distribution</div>
+        <div class="seg-bar">
+          <div style="flex:1;background:#c0392b"></div>
+          <div style="flex:20;background:#e67e22"></div>
+          <div style="flex:125;background:#f39c12"></div>
+          <div style="flex:333;background:#2e86c1"></div>
+        </div>
+        <div class="seg-labels" style="margin-top:6px;margin-bottom:14px">
+          <div class="seg-lbl"><div class="seg-dot" style="background:#c0392b"></div>Emergency: 1</div>
+          <div class="seg-lbl"><div class="seg-dot" style="background:#e67e22"></div>High: 20 (4.2%)</div>
+          <div class="seg-lbl"><div class="seg-dot" style="background:#f39c12"></div>Medium: 125 (26%)</div>
+          <div class="seg-lbl"><div class="seg-dot" style="background:#2e86c1"></div>Low: 333 (69%)</div>
+        </div>
+        <div class="card-title" style="margin-top:4px">Completion Time</div>
+        <div class="seg-bar">
+          <div style="flex:142;background:#1e8449"></div>
+          <div style="flex:201;background:#2e86c1"></div>
+          <div style="flex:89;background:#e67e22"></div>
+          <div style="flex:47;background:#c0392b"></div>
+        </div>
+        <div class="seg-labels" style="margin-top:6px">
+          <div class="seg-lbl"><div class="seg-dot" style="background:#1e8449"></div>&lt;7 days: 142 (30%)</div>
+          <div class="seg-lbl"><div class="seg-dot" style="background:#2e86c1"></div>7–30 days: 201 (42%)</div>
+          <div class="seg-lbl"><div class="seg-dot" style="background:#e67e22"></div>31–90 days: 89 (19%)</div>
+          <div class="seg-lbl"><div class="seg-dot" style="background:#c0392b"></div>90+ days: 47 (10%)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- High volume units + long WOs -->
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">High-Volume Units</div>
+      <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Unit</th><th style="text-align:right">WOs</th><th>Top Categories</th><th>Flag</th></tr></thead>
+        <tbody>
+          <tr><td><span class="unit-n">A101</span></td><td style="text-align:right"><strong style="color:#c0392b">21</strong></td><td style="font-size:11px">Windows, Carpentry, Appliances, Elec, Misc</td><td><span class="badge c3">Problem unit</span></td></tr>
+          <tr><td><span class="unit-n">C304</span></td><td style="text-align:right"><strong>11</strong></td><td style="font-size:11px">Misc, Appliances, Plumbing</td><td><span class="badge c2">Monitor</span></td></tr>
+          <tr><td><span class="unit-n">C201</span></td><td style="text-align:right"><strong>10</strong></td><td style="font-size:11px">Appliances, Misc, Plumbing, Electrical</td><td><span class="badge c2">Monitor</span></td></tr>
+          <tr><td><span class="unit-n">A303</span></td><td style="text-align:right"><strong>10</strong></td><td style="font-size:11px">Make Ready, Carpentry</td><td><span class="badge c1">Turnover</span></td></tr>
+          <tr><td><span class="unit-n">G203</span></td><td style="text-align:right"><strong>9</strong></td><td style="font-size:11px">Misc, Windows, Electrical, HVAC</td><td><span class="badge c2">Monitor</span></td></tr>
+          <tr><td><span class="unit-n">B306</span></td><td style="text-align:right"><strong>9</strong></td><td style="font-size:11px">Misc, Appliances, Carpentry</td><td></td></tr>
+          <tr><td><span class="unit-n">E106</span></td><td style="text-align:right"><strong>8</strong></td><td style="font-size:11px">Plumbing, Windows</td><td><span class="badge c2">Plumbing</span></td></tr>
+          <tr><td><span class="unit-n">J101</span></td><td style="text-align:right"><strong>8</strong></td><td style="font-size:11px">Carpentry, Appliances, Electrical</td><td><span class="badge c3">234-day WO</span></td></tr>
+          <tr><td><span class="unit-n">D101</span></td><td style="text-align:right"><strong>7</strong></td><td style="font-size:11px">Plumbing, Misc</td><td></td></tr>
+          <tr><td><span class="unit-n">G108</span></td><td style="text-align:right"><strong>7</strong></td><td style="font-size:11px">Appliances, Plumbing</td><td></td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Longest Open Work Orders (90+ Days)</div>
+      <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>WO#</th><th>Unit</th><th>Category</th><th style="text-align:right">Days Open</th></tr></thead>
+        <tbody>
+          <tr><td>1303285</td><td><span class="unit-n">J101</span></td><td>Carpentry</td><td style="text-align:right"><span class="trend-up">234</span></td></tr>
+          <tr><td>1314680</td><td><span class="unit-n">E306</span></td><td>Miscellaneous</td><td style="text-align:right"><span class="trend-up">230</span></td></tr>
+          <tr><td>1342234</td><td><span class="unit-n">J201</span></td><td>Carpentry</td><td style="text-align:right"><span class="trend-up">151</span></td></tr>
+          <tr><td>1431009</td><td><span class="unit-n">D102</span></td><td>Prev. Maintenance</td><td style="text-align:right"><span class="trend-up">137</span></td></tr>
+          <tr><td colspan="3" style="font-size:11px;color:#7f8fa4;font-style:italic">+ 43 others between 90–130 days</td><td style="text-align:right">—</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <div style="margin-top:16px">
+        <div class="card-title">Make Ready — 33 Units Turned in 2023</div>
+        <div style="font-size:11px;color:#5d6d7e;line-height:1.8;margin-top:6px">
+          A206, A303, A306, B101, B103, C101, C102, C205, C207, D104, D105, D201, D204, D301, E101, E306, F303, G105, G108, G203, G204, G306, H103, H201, H202, H304, J204, J306, K203, K205, K206, K304 + 1 more
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Key Insights -->
+  <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:#7f8fa4;margin:20px 0 10px">Key Findings</div>
+  <div class="insight"><strong>Appliances are the #1 maintenance driver (19%).</strong> 92 WOs in 11 months — washers, dishwashers, stoves, fridges. Backs up the CapEx inspection: appliance replacement is warranted across multiple buildings.</div>
+  <div class="insight"><strong>28-day average to close is slow.</strong> 10% of orders took 90+ days. The 234-day carpentry WO at J101 and 230-day at E306 reflect the prior operator's deferred maintenance posture — not current performance (R&amp;M trended down $242k → $227k in 2024–2025).</div>
+  <div class="insight"><strong>Unit A101 had 21 work orders in 11 months.</strong> Virginia Mea is the current tenant ($2,413 balance). Touching Windows, Carpentry, Appliances, and Electrical — this unit needs a capital plan, not just reactive maintenance.</div>
+  <div class="insight"><strong>33 units turned in 2023 (18.5% turnover).</strong> K and J buildings appear most frequently in Make Ready — older Classic units with higher maintenance burden align with inspection findings.</div>
+  <div class="insight"><strong>Pest control is under-represented</strong> at 7 WOs vs. $29k/yr actual spend. Handled via blanket vendor contract (GL 630475), so WO data understates the true maintenance picture by design.</div>
+
 </div>
 </div>
 
@@ -1732,6 +1892,29 @@ function renderComparison(){
     kpiCmp(portTotPuMo, modelTotPuMo,     'Portfolio \'25 Avg', 'Total R&M/Unit/Mo (excl turns)'),
   ].join('');
 }
+
+// ── WORK ORDER CHARTS ─────────────────────────────────────────────────────────
+(function(){
+  const cats=[
+    {l:'Appliances',n:92,c:'#c0392b'},{l:'Misc',n:81,c:'#e67e22'},{l:'Plumbing',n:79,c:'#2e86c1'},
+    {l:'Make Ready',n:60,c:'#27ae60'},{l:'Carpentry',n:41,c:'#8e44ad'},{l:'Electrical',n:35,c:'#f39c12'},
+    {l:'Windows',n:28,c:'#16a085'},{l:'Other',n:60,c:'#7f8c8d'},
+  ];
+  const catEl=document.getElementById('woCatBar'), legEl=document.getElementById('woCatLeg');
+  if(catEl){
+    catEl.innerHTML=cats.map(c=>`<div style="flex:${c.n};background:${c.c};min-width:${c.n?4:0}px" title="${c.l}: ${c.n}"></div>`).join('');
+    legEl.innerHTML=cats.map(c=>`<div class="seg-lbl"><div class="seg-dot" style="background:${c.c}"></div>${c.l}: ${c.n}</div>`).join('');
+  }
+  const months=[{m:'Jan',n:61,t:'high'},{m:'Feb',n:37,t:'norm'},{m:'Mar',n:43,t:'norm'},{m:'Apr',n:37,t:'norm'},
+    {m:'May',n:38,t:'norm'},{m:'Jun',n:35,t:'norm'},{m:'Jul',n:38,t:'norm'},{m:'Aug',n:47,t:'norm'},
+    {m:'Sep',n:41,t:'norm'},{m:'Oct',n:68,t:'peak'},{m:'Nov',n:37,t:'norm'}];
+  const mx=Math.max(...months.map(m=>m.n));
+  const chartEl=document.getElementById('woMonthChart'), lblEl=document.getElementById('woMonthLbls');
+  if(chartEl){
+    chartEl.innerHTML=months.map(m=>`<div class="wo-bar ${m.t}" style="height:${Math.round(m.n/mx*86)}px"><span class="wo-bar-val">${m.n}</span></div>`).join('');
+    lblEl.innerHTML=months.map(m=>`<div class="wo-bar-lbl">${m.m}</div>`).join('');
+  }
+})();
 
 // Init
 renderRR();
