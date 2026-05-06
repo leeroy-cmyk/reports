@@ -10,6 +10,23 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .page-hdr h1{font-size:18px;font-weight:700}
 .page-hdr p{font-size:11px;opacity:.65;margin-top:2px}
 .today-badge{background:#e74c3c;color:#fff;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px}
+.edit-bar{background:#fef9e7;border-bottom:2px solid #f9ca24;padding:0 24px;display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:12px;color:#7d6608}
+.edit-bar strong{color:#6d5a00}
+.edit-btn{background:#f9ca24;color:#3d2f00;border:none;padding:6px 14px;border-radius:6px;font-size:12px;font-weight:700;cursor:pointer}
+.edit-btn:hover{background:#f0bb00}
+.guide-panel{display:none;background:#fffdf0;border-bottom:3px solid #f9ca24;padding:20px 28px;font-size:13px;color:#2c3e50;line-height:1.7}
+.guide-panel.open{display:block}
+.guide-panel h2{font-size:14px;font-weight:700;color:#1a5276;margin-bottom:12px}
+.guide-panel h3{font-size:12px;font-weight:700;color:#1a5276;margin:14px 0 6px;text-transform:uppercase;letter-spacing:.4px}
+.guide-panel ol,.guide-panel ul{padding-left:20px}
+.guide-panel li{margin-bottom:6px}
+.guide-panel code{background:#eaf4fb;color:#1a5276;padding:2px 6px;border-radius:4px;font-size:12px;font-family:'Courier New',monospace}
+.guide-panel .ex{background:#1a2a3a;color:#a8d8ea;padding:12px 16px;border-radius:6px;font-family:'Courier New',monospace;font-size:12px;margin:8px 0;line-height:1.8;white-space:pre}
+.guide-panel .ex .hi{color:#f9ca24;font-weight:700}
+.guide-panel .note{background:#eaf4fb;border-left:4px solid #2e86c1;padding:8px 12px;border-radius:0 6px 6px 0;margin-top:10px;font-size:12px}
+.guide-panel table{border-collapse:collapse;width:100%;margin:8px 0}
+.guide-panel td,.guide-panel th{padding:6px 10px;text-align:left;border:1px solid #e0e8f0;font-size:12px}
+.guide-panel th{background:#f4f6f9;font-weight:700;color:#1a5276}
 .legend{display:flex;flex-wrap:wrap;gap:8px;padding:10px 16px;background:#fff;border-bottom:1px solid #e0e8f0}
 .li{display:flex;align-items:center;gap:5px;font-size:11px;color:#5a6a7a;cursor:default}
 .ld{width:10px;height:10px;border-radius:2px;flex-shrink:0}
@@ -44,6 +61,63 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 </style>
 </head>
 <body>
+
+<div class="edit-bar" style="padding:8px 24px">
+  <span><strong>Need to update a date?</strong> &nbsp;Click the guide for step-by-step instructions.</span>
+  <button class="edit-btn" onclick="toggleGuide()">📋 Edit Guide</button>
+</div>
+
+<div class="guide-panel" id="guidePanel">
+  <h2>How to Update the W225 Timeline</h2>
+  <p>All task dates live in one spot near the top of this file. You don't need to know how to code — just find the task, change the date, and save. Here's how:</p>
+
+  <h3>Step 1 — Open the file on GitHub</h3>
+  <ol>
+    <li>Go to <code>github.com/leeroy-cmyk/reports</code></li>
+    <li>Click on <code>w225_timeline.html</code></li>
+    <li>Click the <strong>pencil icon</strong> (✏️) in the top-right of the file view</li>
+  </ol>
+
+  <h3>Step 2 — Find the task you want to change</h3>
+  <ol>
+    <li>Press <strong>Ctrl+F</strong> (or Cmd+F on Mac) to open search</li>
+    <li>Type the task name — for example: <code>Water Heater</code> or <code>3rd Floor Paint</code></li>
+    <li>Each task looks like this:</li>
+  </ol>
+  <div class="ex">    {name:'Water Heater Install', start:null, end:<span class="hi">'2026-06-30'</span>},</div>
+
+  <h3>Step 3 — Change the date</h3>
+  <p>Dates use the format <code>YYYY-MM-DD</code>. Just replace the date string:</p>
+  <table>
+    <tr><th>Before</th><th>After (moved 2 weeks)</th></tr>
+    <tr><td><code>end:'2026-06-30'</code></td><td><code>end:'2026-07-14'</code></td></tr>
+    <tr><td><code>start:'2026-05-11'</code></td><td><code>start:'2026-05-25'</code></td></tr>
+  </table>
+  <div class="note">
+    <strong>No start date?</strong> If a task shows <code>start:null</code> leave it as <code>null</code> — the chart will show a milestone diamond on the due date instead of a bar.
+    <br><strong>No dates yet?</strong> Leave both as <code>null</code> — it shows "date TBD" on the chart.
+  </div>
+
+  <h3>Step 4 — Mark a task complete</h3>
+  <p>Add <code>done:true</code> to the task and it will turn green with a checkmark:</p>
+  <div class="ex">    {name:'Atlas Boiler Install', start:null, end:'2026-06-15', <span class="hi">done:true</span>},</div>
+
+  <h3>Step 5 — Save your changes</h3>
+  <ol>
+    <li>Scroll to the bottom of the GitHub editor</li>
+    <li>In the <strong>Commit changes</strong> box, type a brief note like: <code>Update plumbing dates</code></li>
+    <li>Click <strong>Commit changes</strong> — the live site updates in ~60 seconds</li>
+  </ol>
+
+  <h3>Quick reference — date format</h3>
+  <table>
+    <tr><th>Date</th><th>Code</th></tr>
+    <tr><td>June 15, 2026</td><td><code>'2026-06-15'</code></td></tr>
+    <tr><td>July 4, 2026</td><td><code>'2026-07-04'</code></td></tr>
+    <tr><td>August 1, 2026</td><td><code>'2026-08-01'</code></td></tr>
+    <tr><td>Unknown / TBD</td><td><code>null</code></td></tr>
+  </table>
+</div>
 
 <div class="page-hdr">
   <div>
@@ -240,8 +314,10 @@ function renderGantt(){
         // Full bar (has both start and end)
         const bw=Math.max((e-s)*PX, 16);
         const bar=mk('div','bar');
-        bar.style.left=(s*PX)+'px'; bar.style.width=bw+'px'; bar.style.background=sec.color;
-        bar.textContent=task.name;
+        bar.style.left=(s*PX)+'px'; bar.style.width=bw+'px';
+        bar.style.background=task.done?'#27ae60':sec.color;
+        bar.style.opacity=task.done?'0.75':'1';
+        bar.textContent=(task.done?'✓ ':'')+task.name;
         addTT(bar,task,sec); row.appendChild(bar);
 
       } else if(e!==null){
@@ -249,10 +325,10 @@ function renderGantt(){
         const est=Math.max(0,e-10);
         const line=mk('div','est-line');
         line.style.left=(est*PX)+'px'; line.style.width=((e-est)*PX)+'px';
-        line.style.background=sec.color+'55'; row.appendChild(line);
+        line.style.background=(task.done?'#27ae60':sec.color)+'55'; row.appendChild(line);
 
         const ms=mk('div','ms');
-        ms.style.left=(e*PX-7)+'px'; ms.style.background=sec.color;
+        ms.style.left=(e*PX-7)+'px'; ms.style.background=task.done?'#27ae60':sec.color;
         addTT(ms,task,sec); row.appendChild(ms);
 
       } else {
@@ -278,11 +354,18 @@ function renderGantt(){
   document.getElementById('chartScroll').scrollLeft=Math.max(0,todayOff*PX-80);
 }
 
+// ── Edit guide toggle ─────────────────────────────────────────────────────────
+function toggleGuide(){
+  const p=document.getElementById('guidePanel');
+  p.classList.toggle('open');
+  document.querySelector('.edit-btn').textContent=p.classList.contains('open')?'✕ Close Guide':'📋 Edit Guide';
+}
+
 // ── Tooltip ───────────────────────────────────────────────────────────────────
 const tt=document.getElementById('tt');
 function addTT(el_,task,sec){
   el_.addEventListener('mouseenter',e=>{
-    const rows=[['Section',sec.name],['Start',dFmt(task.start)],['Due',dFmt(task.end)]];
+    const rows=[['Section',sec.name],['Start',dFmt(task.start)],['Due',dFmt(task.end)],['Status',task.done?'✓ Complete':'In Progress']];
     if(task.blockedBy?.length) rows.push(['Blocked by',task.blockedBy.join(', ')]);
     if(task.deps?.length)      rows.push(['Blocks',task.deps.join(', ')]);
     tt.innerHTML=`<div class="tt-name" style="color:${sec.color}">${task.name}</div>`
