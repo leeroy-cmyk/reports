@@ -245,71 +245,63 @@ tr.focus-row td{background:#fff8f2}
 <div id="pane2" class="pane">
 <div class="wrap">
 
-  <!-- Historical Section -->
-  <div class="card">
-    <div class="card-title">Historical R&amp;M — 2024 vs 2025 (Accrual, Jan–Dec)</div>
-    <div id="rmKpiRow"></div>
-    <div class="seg-bar" id="rmHistBar"></div>
-    <div class="seg-labels" id="rmHistLbls" style="margin-bottom:16px"></div>
-    <div class="two-col">
-      <div>
-        <div style="font-size:11px;font-weight:700;color:#1a5276;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">Repairs &amp; Maintenance (635xxx + Pest/Electrical)</div>
-        <table style="width:100%;border-collapse:collapse">
-          <thead><tr>
-            <th style="text-align:left;padding:6px 8px;font-size:10px;color:#7f8fa4;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid #d0dce8;background:#f4f6f9">Account</th>
-            <th style="text-align:right;padding:6px 8px;font-size:10px;color:#7f8fa4;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid #d0dce8;background:#f4f6f9">2024</th>
-            <th style="text-align:right;padding:6px 8px;font-size:10px;color:#7f8fa4;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid #d0dce8;background:#f4f6f9">2025</th>
-            <th style="text-align:right;padding:6px 8px;font-size:10px;color:#7f8fa4;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid #d0dce8;background:#f4f6f9">Δ YoY</th>
-          </tr></thead>
-          <tbody id="rmRepairsBody"></tbody>
-          <tfoot id="rmRepairsFoot"></tfoot>
-        </table>
-      </div>
-      <div>
-        <div style="font-size:11px;font-weight:700;color:#1a5276;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">Grounds / Landscaping (630xxx excl. Pest &amp; Electrical)</div>
-        <table style="width:100%;border-collapse:collapse">
-          <thead><tr>
-            <th style="text-align:left;padding:6px 8px;font-size:10px;color:#7f8fa4;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid #d0dce8;background:#f4f6f9">Account</th>
-            <th style="text-align:right;padding:6px 8px;font-size:10px;color:#7f8fa4;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid #d0dce8;background:#f4f6f9">2024</th>
-            <th style="text-align:right;padding:6px 8px;font-size:10px;color:#7f8fa4;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid #d0dce8;background:#f4f6f9">2025</th>
-            <th style="text-align:right;padding:6px 8px;font-size:10px;color:#7f8fa4;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid #d0dce8;background:#f4f6f9">Δ YoY</th>
-          </tr></thead>
-          <tbody id="rmGroundsBody"></tbody>
-          <tfoot id="rmGroundsFoot"></tfoot>
-        </table>
-      </div>
-    </div>
-  </div>
+  <div class="kpi-row" id="rmKpiRow"></div>
 
-  <!-- Projection Section -->
-  <div class="card">
-    <div class="card-title">Future Projection Calculator</div>
-    <div class="input-grid" style="margin-bottom:16px">
-      <div class="input-group">
-        <label>Annual Growth Rate (%)</label>
-        <input type="number" id="rm_growth" value="3" min="0" max="50" step="0.5" style="width:110px" oninput="renderRM()">
-      </div>
-      <div class="input-group">
-        <label>Projection Years</label>
-        <select id="rm_years" onchange="renderRM()" style="width:130px;padding:6px 10px;border:1px solid #d0dce8;border-radius:6px;font-size:13px;font-weight:600;color:#1a5276;background:#fff">
-          <option value="3">3 Years</option>
-          <option value="5" selected>5 Years</option>
-          <option value="10">10 Years</option>
-        </select>
-      </div>
-    </div>
-    <div class="tbl-wrap">
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">2024 vs 2025 — Accrual Basis</div>
+      <div class="tbl-wrap">
       <table>
         <thead><tr>
-          <th style="text-align:left">Year</th>
-          <th style="text-align:right">Repairs &amp; Maint</th>
+          <th>Category</th>
+          <th style="text-align:right">2024</th>
+          <th style="text-align:right">2025</th>
+          <th style="text-align:right">Δ YoY</th>
+          <th style="text-align:right">$/u/mo</th>
+        </tr></thead>
+        <tbody id="rmSummaryBody"></tbody>
+        <tfoot id="rmSummaryFoot"></tfoot>
+      </table>
+      </div>
+      <div style="margin-top:18px">
+        <div class="card-title">Top Expense Accounts — 2025</div>
+        <div class="tbl-wrap" style="margin-top:8px">
+        <table>
+          <thead><tr><th>Account</th><th style="text-align:right">2024</th><th style="text-align:right">2025</th><th style="text-align:right">Δ</th></tr></thead>
+          <tbody id="rmTopBody"></tbody>
+        </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Projection</div>
+      <div style="display:flex;gap:16px;align-items:flex-end;margin-bottom:14px;flex-wrap:wrap">
+        <div class="input-group">
+          <label>Growth Rate %/yr</label>
+          <input type="number" id="rm_growth" value="3" min="0" max="50" step="0.5" style="width:90px" oninput="renderRM()">
+        </div>
+        <div class="input-group">
+          <label>Years</label>
+          <select id="rm_years" onchange="renderRM()" style="width:100px;padding:6px 10px;border:1px solid #d0dce8;border-radius:6px;font-size:13px;font-weight:600;color:#1a5276;background:#fff">
+            <option value="3">3</option>
+            <option value="5" selected>5</option>
+            <option value="10">10</option>
+          </select>
+        </div>
+      </div>
+      <div class="tbl-wrap">
+      <table>
+        <thead><tr>
+          <th>Year</th>
+          <th style="text-align:right">Repairs</th>
           <th style="text-align:right">Grounds</th>
-          <th style="text-align:right">Total R&amp;M</th>
-          <th style="text-align:right">$/Unit/Yr</th>
-          <th style="text-align:right">$/Unit/Mo</th>
+          <th style="text-align:right">Total</th>
+          <th style="text-align:right">$/u/mo</th>
         </tr></thead>
         <tbody id="rm_proj"></tbody>
       </table>
+      </div>
     </div>
   </div>
 
@@ -319,102 +311,68 @@ tr.focus-row td{background:#fff8f2}
 <!-- ═══════════════════════════════ TAB 4: SUMMARY ═══════════════════════════ -->
 <div id="pane3" class="pane">
 <div class="wrap">
-  <div class="kpi-row" id="sumKpi"></div>
-  <div style="margin-bottom:18px">
-    <div class="seg-bar" id="sumBar"></div>
-    <div class="seg-labels" id="sumLbls" style="margin-top:6px"></div>
-  </div>
 
-  <!-- R&M: Historical vs Budget (full-width) -->
-  <div class="card" style="margin-bottom:18px">
-    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;flex-wrap:wrap;gap:10px">
-      <div>
-        <div class="card-title" style="margin-bottom:2px">Annual R&amp;M — Historical vs Budget</div>
-        <div style="font-size:11px;color:#7f8fa4">Left = 2025 Actuals &nbsp;·&nbsp; Right = Future Budget Assumptions</div>
-      </div>
-      <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end">
-        <div class="input-group">
-          <label>Budget Repairs $/Unit/Mo</label>
-          <input type="number" id="sum_rep_pu" value="78" oninput="renderSummary()" style="width:88px;padding:5px 8px;border:1px solid #d0dce8;border-radius:6px;font-size:13px;font-weight:700;color:#1a5276">
-        </div>
-        <div class="input-group">
-          <label>Budget Total $/Unit/Mo</label>
-          <input type="number" id="sum_tot_pu" value="120" oninput="renderSummary()" style="width:88px;padding:5px 8px;border:1px solid #d0dce8;border-radius:6px;font-size:13px;font-weight:700;color:#1a5276">
-        </div>
-        <div class="input-group">
-          <label style="color:#9aabba;font-size:10px">Grounds = Total − Repairs</label>
-          <div id="sum_grd_derived" style="font-size:13px;font-weight:700;color:#27ae60;padding:5px 0">$42 / unit / mo</div>
-        </div>
-      </div>
-    </div>
-    <div class="tbl-wrap">
-    <table style="width:100%;border-collapse:collapse">
-      <thead>
-        <tr>
-          <th rowspan="2" style="text-align:left;padding:6px 8px;font-size:10px;color:#7f8fa4;text-transform:uppercase;letter-spacing:.5px;background:#f4f6f9;border-bottom:2px solid #d0dce8;vertical-align:bottom">Category</th>
-          <th colspan="2" style="text-align:center;padding:6px 8px;font-size:10px;font-weight:700;color:#2471a3;text-transform:uppercase;letter-spacing:.5px;background:#eaf4fb;border-bottom:1px solid #d0dce8">2025 Actual (Historical)</th>
-          <th colspan="2" style="text-align:center;padding:6px 8px;font-size:10px;font-weight:700;color:#7d6608;text-transform:uppercase;letter-spacing:.5px;background:#fef9e7;border-bottom:1px solid #d0dce8">Budget / Predicted</th>
-          <th rowspan="2" style="text-align:right;padding:6px 8px;font-size:10px;color:#7f8fa4;text-transform:uppercase;letter-spacing:.5px;background:#f4f6f9;border-bottom:2px solid #d0dce8;vertical-align:bottom">Δ Act vs Bud</th>
-        </tr>
-        <tr>
-          <th style="text-align:right;padding:5px 8px;font-size:10px;color:#2471a3;background:#eaf4fb;border-bottom:1px solid #d0dce8">Annual $</th>
-          <th style="text-align:right;padding:5px 8px;font-size:10px;color:#2471a3;background:#eaf4fb;border-bottom:1px solid #d0dce8">$/u/mo</th>
-          <th style="text-align:right;padding:5px 8px;font-size:10px;color:#7d6608;background:#fef9e7;border-bottom:1px solid #d0dce8">Annual $</th>
-          <th style="text-align:right;padding:5px 8px;font-size:10px;color:#7d6608;background:#fef9e7;border-bottom:1px solid #d0dce8">$/u/mo</th>
-        </tr>
-      </thead>
-      <tbody id="sumRMBody"></tbody>
-      <tfoot id="sumRMFoot"></tfoot>
-    </table>
-    </div>
-  </div>
+  <div class="kpi-row" id="sumKpi"></div>
 
   <div class="two-col">
 
-    <!-- CapEx (Future Assumed) -->
+    <!-- CapEx breakdown -->
     <div class="card">
-      <div class="card-title">Unit CapEx — Future Assumed</div>
-      <table style="width:100%;border-collapse:collapse;margin-bottom:14px">
+      <div class="card-title">CapEx Plan</div>
+      <div class="tbl-wrap">
+      <table>
         <thead><tr>
-          <th style="text-align:left;padding:6px 8px;font-size:10px;color:#7f8fa4;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid #d0dce8;background:#f4f6f9">Item</th>
-          <th style="text-align:right;padding:6px 8px;font-size:10px;color:#7f8fa4;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid #d0dce8;background:#f4f6f9">Amount</th>
-          <th style="text-align:right;padding:6px 8px;font-size:10px;color:#7f8fa4;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid #d0dce8;background:#f4f6f9">$/Unit</th>
+          <th>Item</th>
+          <th style="text-align:right">Amount</th>
+          <th style="text-align:right">$/Unit</th>
         </tr></thead>
         <tbody id="sumCxBody"></tbody>
         <tfoot id="sumCxFoot"></tfoot>
       </table>
-      <div style="font-size:11px;font-weight:700;color:#1a5276;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">Other CapEx — Future Assumed (Editable)</div>
-      <table style="width:100%;border-collapse:collapse">
-        <thead><tr>
-          <th style="text-align:left;padding:5px 8px;font-size:10px;color:#7f8fa4;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid #d0dce8;background:#f4f6f9">Description</th>
-          <th style="text-align:right;padding:5px 8px;font-size:10px;color:#7f8fa4;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid #d0dce8;background:#f4f6f9">Amount</th>
-        </tr></thead>
-        <tbody>
-          <tr><td style="padding:5px 8px;font-size:12px">Plumbing Main Stack Replacements <span style="color:#c0392b;font-size:10px">ND·P1</span></td><td style="text-align:right;padding:5px 8px"><input type="number" id="oc_plumbing" value="225000" oninput="renderSummary()" style="width:110px;padding:4px 8px;border:1px solid #d0dce8;border-radius:5px;font-size:12px;font-weight:700;color:#1a5276;text-align:right"></td></tr>
-          <tr><td style="padding:5px 8px;font-size:12px">Exterior Siding <span style="color:#c0392b;font-size:10px">ND·P1</span></td><td style="text-align:right;padding:5px 8px"><input type="number" id="oc_siding" value="65000" oninput="renderSummary()" style="width:110px;padding:4px 8px;border:1px solid #d0dce8;border-radius:5px;font-size:12px;font-weight:700;color:#1a5276;text-align:right"></td></tr>
-          <tr><td style="padding:5px 8px;font-size:12px">Interior Stairwells (14 × $3,000) <span style="color:#c0392b;font-size:10px">ND·P1</span></td><td style="text-align:right;padding:5px 8px"><input type="number" id="oc_stairwells" value="42000" oninput="renderSummary()" style="width:110px;padding:4px 8px;border:1px solid #d0dce8;border-radius:5px;font-size:12px;font-weight:700;color:#1a5276;text-align:right"></td></tr>
-          <tr><td style="padding:5px 8px;font-size:12px">Water Intrusion Remediation (Bldg D) <span style="color:#c0392b;font-size:10px">ND·P1</span></td><td style="text-align:right;padding:5px 8px"><input type="number" id="oc_water" value="5000" oninput="renderSummary()" style="width:110px;padding:4px 8px;border:1px solid #d0dce8;border-radius:5px;font-size:12px;font-weight:700;color:#1a5276;text-align:right"></td></tr>
-          <tr><td style="padding:5px 8px;font-size:12px">Interior Common Area Walkway <span style="color:#c0392b;font-size:10px">ND·P1</span></td><td style="text-align:right;padding:5px 8px"><input type="number" id="oc_walkway" value="8000" oninput="renderSummary()" style="width:110px;padding:4px 8px;border:1px solid #d0dce8;border-radius:5px;font-size:12px;font-weight:700;color:#1a5276;text-align:right"></td></tr>
-          <tr><td style="padding:5px 8px;font-size:12px">Patio Screening — Birds (135 × $300) <span style="color:#7d6608;font-size:10px">D·P2</span></td><td style="text-align:right;padding:5px 8px"><input type="number" id="oc_patio" value="40500" oninput="renderSummary()" style="width:110px;padding:4px 8px;border:1px solid #d0dce8;border-radius:5px;font-size:12px;font-weight:700;color:#1a5276;text-align:right"></td></tr>
-          <tr><td style="padding:5px 8px;font-size:12px">Garages — Doors &amp; Walls (14 × $2,000) <span style="color:#7d6608;font-size:10px">D·P2</span></td><td style="text-align:right;padding:5px 8px"><input type="number" id="oc_garages" value="28000" oninput="renderSummary()" style="width:110px;padding:4px 8px;border:1px solid #d0dce8;border-radius:5px;font-size:12px;font-weight:700;color:#1a5276;text-align:right"></td></tr>
-          <tr><td style="padding:5px 8px;font-size:12px">Landscaping &amp; Irrigation Restoration <span style="color:#7d6608;font-size:10px">D·P2</span></td><td style="text-align:right;padding:5px 8px"><input type="number" id="oc_landscape" value="47000" oninput="renderSummary()" style="width:110px;padding:4px 8px;border:1px solid #d0dce8;border-radius:5px;font-size:12px;font-weight:700;color:#1a5276;text-align:right"></td></tr>
-        </tbody>
-        <tfoot id="sumOtherFoot"></tfoot>
-      </table>
+      </div>
     </div>
 
-    <!-- All-In Budget Roll-Up -->
-    <div class="card">
-      <div class="card-title">All-In Budget Roll-Up</div>
-      <table style="width:100%;border-collapse:collapse">
-        <thead><tr>
-          <th style="text-align:left;padding:6px 8px;font-size:10px;color:#7f8fa4;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid #d0dce8;background:#f4f6f9">Line Item</th>
-          <th style="text-align:center;padding:6px 8px;font-size:10px;color:#7f8fa4;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid #d0dce8;background:#f4f6f9">Basis</th>
-          <th style="text-align:right;padding:6px 8px;font-size:10px;color:#7f8fa4;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid #d0dce8;background:#f4f6f9">Amount</th>
-        </tr></thead>
-        <tbody id="sumRollBody"></tbody>
-        <tfoot id="sumRollFoot"></tfoot>
-      </table>
+    <!-- R&M assumptions + roll-up -->
+    <div>
+      <div class="card" style="margin-bottom:14px">
+        <div class="card-title">R&amp;M Budget Assumptions</div>
+        <div style="display:flex;gap:14px;flex-wrap:wrap;align-items:flex-end;margin-bottom:14px">
+          <div class="input-group">
+            <label>Repairs $/Unit/Mo</label>
+            <input type="number" id="sum_rep_pu" value="78" oninput="renderSummary()" style="width:88px;padding:5px 8px;border:1px solid #d0dce8;border-radius:6px;font-size:14px;font-weight:700;color:#1a5276">
+          </div>
+          <div class="input-group">
+            <label>Grounds $/Unit/Mo</label>
+            <input type="number" id="sum_grd_pu" value="42" oninput="renderSummary()" style="width:88px;padding:5px 8px;border:1px solid #d0dce8;border-radius:6px;font-size:14px;font-weight:700;color:#1a5276">
+          </div>
+        </div>
+        <div class="tbl-wrap">
+        <table>
+          <thead><tr>
+            <th>Category</th>
+            <th style="text-align:right">$/u/mo</th>
+            <th style="text-align:right">Annual</th>
+            <th style="text-align:right">vs 2025 Actual</th>
+          </tr></thead>
+          <tbody id="sumRMBody"></tbody>
+          <tfoot id="sumRMFoot"></tfoot>
+        </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">All-In Total</div>
+        <div class="tbl-wrap">
+        <table>
+          <thead><tr>
+            <th>Line Item</th>
+            <th style="text-align:right">Amount</th>
+          </tr></thead>
+          <tbody id="sumRollBody"></tbody>
+          <tfoot id="sumRollFoot"></tfoot>
+        </table>
+        </div>
+      </div>
     </div>
 
   </div>
@@ -425,68 +383,44 @@ tr.focus-row td{background:#fff8f2}
 <div id="pane4" class="pane">
 <div class="wrap">
 
-  <div class="kpi-row" id="cmpKpi"></div>
+  <!-- Three scenario cards -->
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:18px" id="cmpScenCards"></div>
 
-  <!-- R&M Comparison -->
-  <div class="card" style="margin-bottom:18px">
-    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;flex-wrap:wrap;gap:8px">
-      <div>
-        <div class="card-title" style="margin-bottom:2px">R&amp;M Comparison — $/Unit/Month</div>
-        <div style="font-size:11px;color:#7f8fa4">GoGo acquisition model vs GoGo 2025 actuals vs McKay portfolio trailing 2025 (839 avg units, all funds)</div>
-      </div>
-    </div>
-    <div class="tbl-wrap">
-    <table>
-      <thead>
-        <tr>
-          <th rowspan="2" style="text-align:left;vertical-align:bottom;background:#f4f6f9;padding:7px 10px;min-width:160px">Category</th>
-          <th colspan="2" style="text-align:center;background:#fef9e7;color:#7d6608;padding:5px 10px;border-bottom:1px solid #d0dce8">GoGo Model (Assumed)</th>
-          <th colspan="2" style="text-align:center;background:#eaf4fb;color:#1a5276;padding:5px 10px;border-bottom:1px solid #d0dce8">GoGo 2025 Actual</th>
-          <th colspan="2" style="text-align:center;background:#f0faf4;color:#1a7a4a;padding:5px 10px;border-bottom:1px solid #d0dce8">Portfolio 2025 Avg</th>
-          <th rowspan="2" style="text-align:right;vertical-align:bottom;background:#f4f6f9;padding:7px 10px;font-size:10px;color:#7f8fa4;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap">Δ GoGo<br>vs Model</th>
-          <th rowspan="2" style="text-align:right;vertical-align:bottom;background:#f4f6f9;padding:7px 10px;font-size:10px;color:#7f8fa4;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap">Δ Port<br>vs Model</th>
-        </tr>
-        <tr>
-          <th style="text-align:right;background:#fef9e7;color:#7d6608;padding:5px 10px;font-size:10px">Annual $</th>
-          <th style="text-align:right;background:#fef9e7;color:#7d6608;padding:5px 10px;font-size:10px">$/u/mo</th>
-          <th style="text-align:right;background:#eaf4fb;color:#1a5276;padding:5px 10px;font-size:10px">Annual $</th>
-          <th style="text-align:right;background:#eaf4fb;color:#1a5276;padding:5px 10px;font-size:10px">$/u/mo</th>
-          <th style="text-align:right;background:#f0faf4;color:#1a7a4a;padding:5px 10px;font-size:10px">Annual $</th>
-          <th style="text-align:right;background:#f0faf4;color:#1a7a4a;padding:5px 10px;font-size:10px">$/u/mo</th>
-        </tr>
-      </thead>
-      <tbody id="cmpRMBody"></tbody>
-      <tfoot id="cmpRMFoot"></tfoot>
-    </table>
-    </div>
-    <div style="font-size:11px;color:#7f8fa4;margin-top:10px;font-style:italic">* Portfolio includes Turns ($462k/yr, $46/u/mo) in R&amp;M operating expense. GoGo model budgets turns as CapEx. Portfolio R&amp;M excl. turns = $85/u/mo.</div>
-  </div>
-
-  <!-- CapEx + $/Unit panels -->
   <div class="two-col">
     <div class="card">
-      <div class="card-title">CapEx Comparison — Annual Totals</div>
-      <div style="font-size:11px;color:#7f8fa4;margin-bottom:14px">GoGo model vs inspection-based estimate vs McKay portfolio 2025 actual</div>
+      <div class="card-title">R&amp;M — $/Unit/Month</div>
+      <div style="font-size:11px;color:#7f8fa4;margin-bottom:12px">GoGo model · GoGo 2025 actual · McKay portfolio 2025 avg (839 units)</div>
       <div class="tbl-wrap">
       <table>
         <thead><tr>
-          <th style="text-align:left;background:#f4f6f9;padding:7px 10px">Category</th>
-          <th style="text-align:right;background:#fef9e7;color:#7d6608;padding:7px 10px">GoGo Model</th>
-          <th style="text-align:right;background:#eaf4fb;color:#1a5276;padding:7px 10px">Inspection Est</th>
-          <th style="text-align:right;background:#f0faf4;color:#1a7a4a;padding:7px 10px">Portfolio '25</th>
+          <th>Category</th>
+          <th style="text-align:right;background:#fef9e7;color:#7d6608">Model</th>
+          <th style="text-align:right;background:#eaf4fb;color:#1a5276">GoGo '25</th>
+          <th style="text-align:right;background:#f0faf4;color:#1a7a4a">Portfolio</th>
+          <th style="text-align:right">Δ vs Model</th>
+        </tr></thead>
+        <tbody id="cmpRMBody"></tbody>
+        <tfoot id="cmpRMFoot"></tfoot>
+      </table>
+      </div>
+      <div style="font-size:11px;color:#7f8fa4;margin-top:8px;font-style:italic">Portfolio $131 all-in includes $46/u/mo turns (in R&amp;M). GoGo budgets turns as CapEx.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">CapEx — Total Investment</div>
+      <div style="font-size:11px;color:#7f8fa4;margin-bottom:12px">GoGo model · Final inspection plan · Portfolio 2025 actual</div>
+      <div class="tbl-wrap">
+      <table>
+        <thead><tr>
+          <th>Category</th>
+          <th style="text-align:right;background:#fef9e7;color:#7d6608">Model</th>
+          <th style="text-align:right;background:#eaf4fb;color:#1a5276">Plan</th>
+          <th style="text-align:right;background:#f0faf4;color:#1a7a4a">Portfolio '25</th>
         </tr></thead>
         <tbody id="cmpCxBody"></tbody>
         <tfoot id="cmpCxFoot"></tfoot>
       </table>
       </div>
-    </div>
-
-    <div class="card">
-      <div class="card-title">CapEx $/Unit &amp; Portfolio Breakdown</div>
-      <div style="font-size:11px;color:#7f8fa4;margin-bottom:14px">178 units (GoGo) · 839 avg units (Portfolio)</div>
-      <div id="cmpCxKpi" class="kpi-row" style="grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px"></div>
-      <div style="font-size:11px;font-weight:700;color:#5d6d7e;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">Portfolio CapEx Breakdown</div>
-      <div id="cmpPortBreakdown"></div>
     </div>
   </div>
 
@@ -1571,186 +1505,185 @@ function buildHistTable(rows, bodyId, footId){
 }
 
 function renderRM(){
-  buildHistTable(RM_REPAIRS,'rmRepairsBody','rmRepairsFoot');
-  buildHistTable(RM_GROUNDS,'rmGroundsBody','rmGroundsFoot');
+  const fmt=v=>'$'+Math.round(v).toLocaleString();
+  const bd='border-bottom:1px solid #eef0f2';
 
-  function kpiCard(val25, val24, lbl, cls=''){
-    const d=val25-val24, pct=val24?Math.abs(d/val24*100).toFixed(0):'—';
-    const trendCls=d>0?'trend-up':'trend-dn', arrow=d>0?'▲':'▼';
-    const sub=`2024: $${Math.round(val24).toLocaleString()} <span class="${trendCls}">${arrow}${pct}%</span>`;
-    return `<div class="kpi ${cls}"><div class="kpi-yr">2025</div><div class="kpi-val">$${Math.round(val25).toLocaleString()}</div><div class="kpi-lbl">${lbl}</div><div class="kpi-sub">${sub}</div></div>`;
+  // KPI row
+  function kpi(val25,val24,lbl,cls=''){
+    const d=val25-val24,pct=val24?Math.abs(d/val24*100).toFixed(0):'—';
+    const tCls=d>0?'trend-up':'trend-dn',arr=d>0?'▲':'▼';
+    return `<div class="kpi ${cls}"><div class="kpi-yr">2025</div><div class="kpi-val">${fmt(val25)}</div><div class="kpi-lbl">${lbl}</div><div class="kpi-sub">2024: ${fmt(val24)} <span class="${tCls}">${arr}${pct}%</span></div></div>`;
   }
-  document.getElementById('rmKpiRow').innerHTML=`<div class="kpi-row" style="margin-bottom:14px">
-    ${kpiCard(RM25_REPAIRS,RM24_REPAIRS,'Repairs &amp; Maint (incl. Pest/Elec)')}
-    ${kpiCard(RM25_GROUNDS,RM24_GROUNDS,'Grounds / Landscaping')}
-    ${kpiCard(RM25_TOTAL,RM24_TOTAL,'Total R&amp;M + Grounds','good')}
-    ${kpiCard(RM25_TOTAL/RM_UNITS,RM24_TOTAL/RM_UNITS,'$/Unit/Yr (178 units)')}
-    ${kpiCard(RM25_TOTAL/RM_UNITS/12,RM24_TOTAL/RM_UNITS/12,'$/Unit/Mo')}
-  </div>`;
+  document.getElementById('rmKpiRow').innerHTML=
+    kpi(RM25_REPAIRS,RM24_REPAIRS,'Repairs &amp; Maint')+
+    kpi(RM25_GROUNDS,RM24_GROUNDS,'Grounds')+
+    kpi(RM25_TOTAL,RM24_TOTAL,'Total R&amp;M','good')+
+    kpi(RM25_TOTAL/RM_UNITS/12,RM24_TOTAL/RM_UNITS/12,'$/Unit/Mo');
 
-  segBar([
-    {label:'Repairs & Maint (2025)',   n:Math.round(RM25_REPAIRS), color:'#2e86c1'},
-    {label:'Grounds / Contracted (2025)', n:Math.round(RM25_GROUNDS), color:'#27ae60'},
-  ],'rmHistBar','rmHistLbls');
+  // Summary table (3 rows)
+  const rows=[
+    {lbl:'Repairs &amp; Maintenance',a24:RM24_REPAIRS,a25:RM25_REPAIRS},
+    {lbl:'Grounds / Landscaping',   a24:RM24_GROUNDS,a25:RM25_GROUNDS},
+  ];
+  document.getElementById('rmSummaryBody').innerHTML=rows.map(r=>{
+    const d=r.a25-r.a24;
+    return `<tr>
+      <td style="padding:6px 9px;${bd}">${r.lbl}</td>
+      <td style="text-align:right;padding:6px 9px;${bd}">${fmt(r.a24)}</td>
+      <td style="text-align:right;padding:6px 9px;${bd}">${fmt(r.a25)}</td>
+      <td style="text-align:right;padding:6px 9px;${bd}">${fmtDelta(d)}</td>
+      <td style="text-align:right;padding:6px 9px;${bd};font-weight:600;color:#1a5276">$${Math.round(r.a25/RM_UNITS/12)}</td>
+    </tr>`;
+  }).join('');
+  document.getElementById('rmSummaryFoot').innerHTML=`<tr class="total-row">
+    <td style="padding:6px 9px">Total R&amp;M</td>
+    <td style="text-align:right;padding:6px 9px">${fmt(RM24_TOTAL)}</td>
+    <td style="text-align:right;padding:6px 9px">${fmt(RM25_TOTAL)}</td>
+    <td style="text-align:right;padding:6px 9px">${fmtDelta(RM25_TOTAL-RM24_TOTAL)}</td>
+    <td style="text-align:right;padding:6px 9px;font-weight:700;color:#1a5276">$${Math.round(RM25_TOTAL/RM_UNITS/12)}</td>
+  </tr>`;
 
+  // Top accounts table (top 8 by 2025 spend)
+  const all=[...RM_REPAIRS,...RM_GROUNDS].filter(r=>r.a25>0).sort((a,b)=>b.a25-a.a25).slice(0,8);
+  document.getElementById('rmTopBody').innerHTML=all.map(r=>{
+    const d=r.a25-r.a24;
+    return `<tr>
+      <td style="padding:5px 9px;font-size:12px;${bd}">${r.name}</td>
+      <td style="text-align:right;padding:5px 9px;font-size:12px;${bd}">${r.a24?fmt(r.a24):'<span style="color:#ccc">—</span>'}</td>
+      <td style="text-align:right;padding:5px 9px;font-size:12px;${bd};font-weight:600">${fmt(r.a25)}</td>
+      <td style="text-align:right;padding:5px 9px;font-size:12px;${bd}">${fmtDelta(d)}</td>
+    </tr>`;
+  }).join('');
+
+  // Projection
   const growth=(parseFloat(document.getElementById('rm_growth').value)||3)/100;
-  const years =parseInt(document.getElementById('rm_years').value)||5;
-  let projRows=`<tr style="background:#eaf4fb">
-    <td style="padding:7px 9px;font-weight:700;color:#1a5276">2024 Actual</td>
-    <td style="text-align:right;padding:7px 9px;color:#1a5276">$${Math.round(RM24_REPAIRS).toLocaleString()}</td>
-    <td style="text-align:right;padding:7px 9px;color:#1a5276">$${Math.round(RM24_GROUNDS).toLocaleString()}</td>
-    <td style="text-align:right;padding:7px 9px;font-weight:700;color:#1a5276">$${Math.round(RM24_TOTAL).toLocaleString()}</td>
-    <td style="text-align:right;padding:7px 9px;color:#1a5276">$${Math.round(RM24_TOTAL/RM_UNITS).toLocaleString()}</td>
-    <td style="text-align:right;padding:7px 9px;color:#1a5276">$${Math.round(RM24_TOTAL/RM_UNITS/12).toLocaleString()}</td>
-  </tr>
-  <tr style="background:#f4f6f9">
-    <td style="padding:7px 9px;font-weight:700">2025 Actual</td>
-    <td style="text-align:right;padding:7px 9px">$${Math.round(RM25_REPAIRS).toLocaleString()}</td>
-    <td style="text-align:right;padding:7px 9px">$${Math.round(RM25_GROUNDS).toLocaleString()}</td>
-    <td style="text-align:right;padding:7px 9px;font-weight:700">$${Math.round(RM25_TOTAL).toLocaleString()}</td>
-    <td style="text-align:right;padding:7px 9px">$${Math.round(RM25_TOTAL/RM_UNITS).toLocaleString()}</td>
-    <td style="text-align:right;padding:7px 9px">$${Math.round(RM25_TOTAL/RM_UNITS/12).toLocaleString()}</td>
+  const years=parseInt(document.getElementById('rm_years').value)||5;
+  let proj=`<tr style="background:#eaf4fb">
+    <td style="padding:6px 9px;font-weight:700;color:#1a5276">2024</td>
+    <td style="text-align:right;padding:6px 9px">${fmt(RM24_REPAIRS)}</td>
+    <td style="text-align:right;padding:6px 9px">${fmt(RM24_GROUNDS)}</td>
+    <td style="text-align:right;padding:6px 9px;font-weight:700">${fmt(RM24_TOTAL)}</td>
+    <td style="text-align:right;padding:6px 9px">$${Math.round(RM24_TOTAL/RM_UNITS/12)}</td>
+  </tr><tr style="background:#f4f6f9">
+    <td style="padding:6px 9px;font-weight:700">2025</td>
+    <td style="text-align:right;padding:6px 9px">${fmt(RM25_REPAIRS)}</td>
+    <td style="text-align:right;padding:6px 9px">${fmt(RM25_GROUNDS)}</td>
+    <td style="text-align:right;padding:6px 9px;font-weight:700">${fmt(RM25_TOTAL)}</td>
+    <td style="text-align:right;padding:6px 9px">$${Math.round(RM25_TOTAL/RM_UNITS/12)}</td>
   </tr>`;
   for(let y=1;y<=years;y++){
-    const f=Math.pow(1+growth,y);
-    const r=RM25_REPAIRS*f, g=RM25_GROUNDS*f, t=RM25_TOTAL*f;
-    projRows+=`<tr>
-      <td style="padding:7px 9px;font-weight:600">${2025+y}</td>
-      <td style="text-align:right;padding:7px 9px">$${Math.round(r).toLocaleString()}</td>
-      <td style="text-align:right;padding:7px 9px">$${Math.round(g).toLocaleString()}</td>
-      <td style="text-align:right;padding:7px 9px;font-weight:700;color:#1a5276">$${Math.round(t).toLocaleString()}</td>
-      <td style="text-align:right;padding:7px 9px">$${Math.round(t/RM_UNITS).toLocaleString()}</td>
-      <td style="text-align:right;padding:7px 9px">$${Math.round(t/RM_UNITS/12).toLocaleString()}</td>
+    const f=Math.pow(1+growth,y),r=RM25_REPAIRS*f,g=RM25_GROUNDS*f,t=RM25_TOTAL*f;
+    proj+=`<tr><td style="padding:6px 9px;font-weight:600">${2025+y}</td>
+      <td style="text-align:right;padding:6px 9px">${fmt(r)}</td>
+      <td style="text-align:right;padding:6px 9px">${fmt(g)}</td>
+      <td style="text-align:right;padding:6px 9px;font-weight:700;color:#1a5276">${fmt(t)}</td>
+      <td style="text-align:right;padding:6px 9px">$${Math.round(t/RM_UNITS/12)}</td>
     </tr>`;
   }
-  document.getElementById('rm_proj').innerHTML=projRows;
+  document.getElementById('rm_proj').innerHTML=proj;
 }
 
 document.getElementById('s1').addEventListener('input',renderCX);
 
 // ── SUMMARY TAB ──────────────────────────────────────────────────────────────
 function renderSummary(){
-  const costs=getCostsCX();
-  const costFn=u=>unitCostsCX(u,costs);
+  const costs=getCostsCX(), costFn=u=>unitCostsCX(u,costs);
   const allDown=UNITS.filter(u=>u.status==='Down');
   const downCapex=allDown.length*DOWN_CAPEX;
-  const ratingCapex=UNITS
-    .filter(u=>u.status!=='Down'&&u.status!=='Model'&&u.avg!==null)
-    .reduce((s,u)=>s+costFn(u).tot,0);
+  const inspUnits=UNITS.filter(u=>u.status!=='Down'&&u.status!=='Model'&&u.avg!==null);
+  const ratingCapex=inspUnits.reduce((s,u)=>s+costFn(u).tot,0);
   const totalUnitCapex=ratingCapex+downCapex;
-
   const g=id=>parseFloat(document.getElementById(id)?.value)||0;
-  const otherItems=[
-    {lbl:'Plumbing Main Stacks',           val:g('oc_plumbing')},
-    {lbl:'Exterior Siding',                val:g('oc_siding')},
-    {lbl:'Interior Stairwells',            val:g('oc_stairwells')},
-    {lbl:'Water Intrusion (Bldg D)',       val:g('oc_water')},
-    {lbl:'Common Area Walkway',            val:g('oc_walkway')},
-    {lbl:'Patio Screening',                val:g('oc_patio')},
-    {lbl:'Garages',                        val:g('oc_garages')},
-    {lbl:'Landscaping &amp; Irrigation',   val:g('oc_landscape')},
-  ];
-  const totalOtherCapex=otherItems.reduce((s,i)=>s+i.val,0);
-  const totalCapex=totalUnitCapex+totalOtherCapex;
+  const extItems=[
+    {lbl:'Plumbing Main Stacks',        id:'oc_plumbing', nd:true},
+    {lbl:'Exterior Siding',              id:'oc_siding',   nd:true},
+    {lbl:'Interior Stairwells',          id:'oc_stairwells',nd:true},
+    {lbl:'Water Intrusion (Bldg D)',     id:'oc_water',    nd:true},
+    {lbl:'Common Area Walkway',          id:'oc_walkway',  nd:true},
+    {lbl:'Patio Screening',              id:'oc_patio',    nd:false},
+    {lbl:'Garages',                      id:'oc_garages',  nd:false},
+    {lbl:'Landscaping &amp; Irrigation', id:'oc_landscape',nd:false},
+  ].map(i=>({...i,val:g(i.id)}));
+  const totalExtCapex=extItems.reduce((s,i)=>s+i.val,0);
+  const totalCapex=totalUnitCapex+totalExtCapex;
 
-  // Budget inputs
   const repPU=parseFloat(document.getElementById('sum_rep_pu').value)||78;
-  const totPU=parseFloat(document.getElementById('sum_tot_pu').value)||120;
-  const grdPU=totPU-repPU;
-  document.getElementById('sum_grd_derived').textContent='$'+grdPU.toFixed(0)+' / unit / mo';
-
-  const predRepairs=repPU*RM_UNITS*12;
-  const predGrounds=grdPU*RM_UNITS*12;
-  const predTotal=totPU*RM_UNITS*12;
-  const grandTotal=predTotal+totalCapex;
-
+  const grdPU=parseFloat(document.getElementById('sum_grd_pu')?.value)||42;
+  const totPU=repPU+grdPU;
+  const predRepairs=repPU*RM_UNITS*12, predGrounds=grdPU*RM_UNITS*12, predTotal=totPU*RM_UNITS*12;
   const fmt=v=>'$'+Math.round(v).toLocaleString();
-
-  // KPI cards — 2 actuals vs budget, 2 future, 1 grand total
-  document.getElementById('sumKpi').innerHTML=[
-    {yr:'2025 Actual', val:fmt(RM25_REPAIRS),  lbl:'Repairs &amp; Maint',  sub:`Budget: ${fmt(predRepairs)} ${fmtDelta(RM25_REPAIRS-predRepairs)}`},
-    {yr:'2025 Actual', val:fmt(RM25_GROUNDS),  lbl:'Grounds',              sub:`Budget: ${fmt(predGrounds)} ${fmtDelta(RM25_GROUNDS-predGrounds)}`},
-    {yr:'Future',      val:fmt(totalUnitCapex), lbl:`Unit CapEx (${allDown.length} down + rated)`, sub:''},
-    {yr:'Future',      val:fmt(totalOtherCapex),lbl:'Other CapEx',          sub:''},
-    {yr:'All-In',      val:fmt(grandTotal),     lbl:'Budget + All CapEx',   sub:`R&amp;M: ${fmt(predTotal)} · CapEx: ${fmt(totalCapex)}`},
-  ].map(k=>`<div class="kpi${k.yr==='All-In'||k.yr==='Future'?' warn':''}">
-    <div class="kpi-yr">${k.yr}</div>
-    <div class="kpi-val">${k.val}</div>
-    <div class="kpi-lbl">${k.lbl}</div>
-    ${k.sub?`<div class="kpi-sub">${k.sub}</div>`:''}
-  </div>`).join('');
-
-  // Seg bar (budget amounts)
-  segBar([
-    {label:'R&M Budget',  n:Math.round(predRepairs),    color:'#2e86c1'},
-    {label:'Grounds Bud', n:Math.round(predGrounds),    color:'#27ae60'},
-    {label:'Unit CapEx',  n:Math.round(totalUnitCapex), color:'#e67e22'},
-    {label:'Other CapEx', n:Math.round(totalOtherCapex),color:'#9b59b6'},
-  ],'sumBar','sumLbls');
-
-  // 6-column R&M comparison table (Historical left, Budget right)
   const bd='border-bottom:1px solid #eef0f2';
-  document.getElementById('sumRMBody').innerHTML=[
-    {lbl:'Repairs &amp; Maintenance', act:RM25_REPAIRS, bud:predRepairs},
-    {lbl:'Grounds / Landscaping',     act:RM25_GROUNDS, bud:predGrounds},
-  ].map(r=>`<tr>
-    <td style="padding:5px 8px;font-size:12px;${bd}">${r.lbl}</td>
-    <td style="text-align:right;padding:5px 8px;font-size:12px;font-variant-numeric:tabular-nums;${bd}">${fmt(r.act)}</td>
-    <td style="text-align:right;padding:5px 8px;font-size:12px;font-variant-numeric:tabular-nums;${bd}">${fmt(r.act/RM_UNITS/12)}</td>
-    <td style="text-align:right;padding:5px 8px;font-size:12px;font-variant-numeric:tabular-nums;${bd}">${fmt(r.bud)}</td>
-    <td style="text-align:right;padding:5px 8px;font-size:12px;font-variant-numeric:tabular-nums;${bd}">${fmt(r.bud/RM_UNITS/12)}</td>
-    <td style="text-align:right;padding:5px 8px;font-size:12px;${bd}">${fmtDelta(r.act-r.bud)}</td>
-  </tr>`).join('');
-  document.getElementById('sumRMFoot').innerHTML=`<tr class="total-row">
-    <td style="padding:6px 8px;font-weight:700">Total R&amp;M + Grounds</td>
-    <td style="text-align:right;padding:6px 8px;font-weight:700">${fmt(RM25_TOTAL)}</td>
-    <td style="text-align:right;padding:6px 8px;font-weight:700">${fmt(RM25_TOTAL/RM_UNITS/12)}</td>
-    <td style="text-align:right;padding:6px 8px;font-weight:700">${fmt(predTotal)}</td>
-    <td style="text-align:right;padding:6px 8px;font-weight:700">${fmt(predTotal/RM_UNITS/12)}</td>
-    <td style="text-align:right;padding:6px 8px;font-weight:700">${fmtDelta(RM25_TOTAL-predTotal)}</td>
-  </tr>`;
 
-  // Unit CapEx table
-  const thR='text-align:right;padding:5px 8px;border-bottom:1px solid #eef0f2;font-size:12px;font-variant-numeric:tabular-nums';
-  const tdL='padding:5px 8px;border-bottom:1px solid #eef0f2;font-size:12px';
-  document.getElementById('sumCxBody').innerHTML=[
-    {lbl:`Rating-Based Unit CapEx (${UNITS.filter(u=>u.avg!==null&&u.status!=='Down').length} inspected units)`, val:ratingCapex},
-    {lbl:`Down Unit Rehabilitation (${allDown.length} units × $${(DOWN_CAPEX/1000).toFixed(0)}k)`,               val:downCapex},
-  ].map(r=>`<tr>
-    <td style="${tdL}">${r.lbl}</td>
-    <td style="${thR}">${fmt(r.val)}</td>
-    <td style="${thR}">${fmt(r.val/RM_UNITS)}</td>
-  </tr>`).join('');
+  // KPI cards
+  document.getElementById('sumKpi').innerHTML=[
+    {val:fmt(totalUnitCapex), lbl:`Unit CapEx (${allDown.length} down + ${inspUnits.length} rated)`, cls:'warn'},
+    {val:fmt(totalExtCapex),  lbl:'Exterior CapEx', cls:'warn'},
+    {val:fmt(totalCapex),     lbl:'Total CapEx', cls:'warn'},
+    {val:fmt(predTotal),      lbl:`Annual R&M Budget ($${totPU}/u/mo)`, cls:''},
+    {val:fmt(totalCapex+predTotal), lbl:'CapEx + Yr 1 R&M', cls:''},
+  ].map(k=>`<div class="kpi ${k.cls}"><div class="kpi-val">${k.val}</div><div class="kpi-lbl">${k.lbl}</div></div>`).join('');
+
+  // CapEx table: unit rows + exterior rows + total
+  const nInsp=inspUnits.length, nDown=allDown.length;
+  document.getElementById('sumCxBody').innerHTML=`
+    <tr><td style="padding:6px 9px;font-size:12px;${bd};color:#5d6d7e;font-style:italic" colspan="3">— Interior / Unit —</td></tr>
+    <tr><td style="padding:6px 9px;font-size:12px;${bd}">Rating-based (${nInsp} units)</td>
+      <td style="text-align:right;padding:6px 9px;${bd}">${fmt(ratingCapex)}</td>
+      <td style="text-align:right;padding:6px 9px;${bd}">${fmt(ratingCapex/RM_UNITS)}</td></tr>
+    <tr><td style="padding:6px 9px;font-size:12px;${bd}">Down unit rehab (${nDown} × $60k)</td>
+      <td style="text-align:right;padding:6px 9px;${bd}">${fmt(downCapex)}</td>
+      <td style="text-align:right;padding:6px 9px;${bd}">${fmt(downCapex/RM_UNITS)}</td></tr>
+    <tr><td style="padding:6px 9px;font-size:12px;${bd};color:#5d6d7e;font-style:italic" colspan="3">— Exterior / Common —</td></tr>
+    ${extItems.map(i=>`<tr><td style="padding:6px 9px;font-size:12px;${bd}">${i.lbl} <span style="font-size:10px;color:${i.nd?'#c0392b':'#7d6608'}">${i.nd?'ND':'D'}</span></td>
+      <td style="text-align:right;padding:6px 9px;${bd}">${fmt(i.val)}</td>
+      <td style="text-align:right;padding:6px 9px;${bd};color:#9aabba">—</td></tr>`).join('')}`;
   document.getElementById('sumCxFoot').innerHTML=`<tr class="total-row">
-    <td style="padding:6px 8px;font-weight:700">Total Unit CapEx</td>
-    <td style="text-align:right;padding:6px 8px;font-weight:700">${fmt(totalUnitCapex)}</td>
-    <td style="text-align:right;padding:6px 8px;font-weight:700">${fmt(totalUnitCapex/RM_UNITS)}</td>
-  </tr>`;
-  document.getElementById('sumOtherFoot').innerHTML=`<tr class="total-row">
-    <td style="padding:6px 8px;font-weight:700">Total Other CapEx</td>
-    <td style="text-align:right;padding:6px 8px;font-weight:700">${fmt(totalOtherCapex)}</td>
+    <td style="padding:7px 9px">Total CapEx</td>
+    <td style="text-align:right;padding:7px 9px">${fmt(totalCapex)}</td>
+    <td style="text-align:right;padding:7px 9px">${fmt(totalCapex/RM_UNITS)}/unit</td>
   </tr>`;
 
-  // All-In Budget Roll-Up (3 cols: Line Item | Basis | Amount)
-  const budBadge='<span style="background:#fef9e7;color:#7d6608;padding:2px 7px;border-radius:12px;font-size:10px;font-weight:600">Budget</span>';
-  const futBadge='<span style="background:#fef0e6;color:#9d5b1a;padding:2px 7px;border-radius:12px;font-size:10px;font-weight:600">Future Assumed</span>';
-  const rollItems=[
-    {lbl:'R&amp;M Repairs', badge:budBadge, val:predRepairs},
-    {lbl:'R&amp;M Grounds', badge:budBadge, val:predGrounds},
-    {lbl:'Unit CapEx',      badge:futBadge, val:totalUnitCapex},
-    {lbl:'Other CapEx',     badge:futBadge, val:totalOtherCapex},
+  // R&M table (simple: repairs, grounds, total)
+  const rmRows=[
+    {lbl:'Repairs &amp; Maintenance', pu:repPU, act:RM25_REPAIRS},
+    {lbl:'Grounds / Landscaping',     pu:grdPU, act:RM25_GROUNDS},
   ];
-  document.getElementById('sumRollBody').innerHTML=rollItems.map(r=>`<tr>
-    <td style="padding:5px 8px;font-size:12px;border-bottom:1px solid #eef0f2">${r.lbl}</td>
-    <td style="text-align:center;padding:5px 8px;border-bottom:1px solid #eef0f2">${r.badge}</td>
-    <td style="text-align:right;padding:5px 8px;font-size:12px;font-variant-numeric:tabular-nums;border-bottom:1px solid #eef0f2">${fmt(r.val)}</td>
-  </tr>`).join('');
-  const rollTotal=rollItems.reduce((s,r)=>s+r.val,0);
-  document.getElementById('sumRollFoot').innerHTML=`<tr class="total-row">
-    <td colspan="2" style="padding:6px 8px;font-weight:700">Grand Total (All-In)</td>
-    <td style="text-align:right;padding:6px 8px;font-weight:700">${fmt(rollTotal)}</td>
+  document.getElementById('sumRMBody').innerHTML=rmRows.map(r=>{
+    const ann=r.pu*RM_UNITS*12, d=ann-r.act;
+    return `<tr>
+      <td style="padding:6px 9px;${bd}">${r.lbl}</td>
+      <td style="text-align:right;padding:6px 9px;${bd};font-weight:700;color:#1a5276">$${Math.round(r.pu)}</td>
+      <td style="text-align:right;padding:6px 9px;${bd}">${fmt(ann)}</td>
+      <td style="text-align:right;padding:6px 9px;${bd}">${fmtDelta(r.act-ann)}</td>
+    </tr>`;
+  }).join('');
+  document.getElementById('sumRMFoot').innerHTML=`<tr class="total-row">
+    <td style="padding:6px 9px">Total R&amp;M</td>
+    <td style="text-align:right;padding:6px 9px;font-weight:700;color:#1a5276">$${Math.round(totPU)}</td>
+    <td style="text-align:right;padding:6px 9px">${fmt(predTotal)}</td>
+    <td style="text-align:right;padding:6px 9px">${fmtDelta(RM25_TOTAL-predTotal)}</td>
   </tr>`;
+
+  // Roll-up
+  const rollRows=[
+    {lbl:'R&amp;M — Repairs',  val:predRepairs},
+    {lbl:'R&amp;M — Grounds',  val:predGrounds},
+    {lbl:'Unit CapEx',         val:totalUnitCapex},
+    {lbl:'Exterior CapEx',     val:totalExtCapex},
+  ];
+  document.getElementById('sumRollBody').innerHTML=rollRows.map(r=>`<tr>
+    <td style="padding:6px 9px;font-size:12px;${bd}">${r.lbl}</td>
+    <td style="text-align:right;padding:6px 9px;font-size:12px;${bd}">${fmt(r.val)}</td>
+  </tr>`).join('');
+  const grandTotal=rollRows.reduce((s,r)=>s+r.val,0);
+  document.getElementById('sumRollFoot').innerHTML=`<tr class="total-row">
+    <td style="padding:7px 9px">Grand Total</td>
+    <td style="text-align:right;padding:7px 9px">${fmt(grandTotal)}</td>
+  </tr>`;
+
+  renderComparison();
 }
+
 
 // ── MODEL VS ACTUALS CONSTANTS ────────────────────────────────────────────────
 const MODEL_REP_PU_MO  = 78;
@@ -1791,33 +1724,60 @@ function renderComparison(){
   const gogoTotPuMo  = RM25_TOTAL   / RM_UNITS / 12;
   const modelTotPuMo = MODEL_REP_PU_MO + MODEL_GRD_PU_MO;
 
-  const fmt    = v => '$' + Math.round(v).toLocaleString();
-  const fmtPu  = v => '$' + Math.round(v);
+  const PORT_CX_UNIT    = PORT_CX_TURNS + PORT_CX_APPL;
+  const portTotalCapex  = PORT_CX_UNIT + PORT_CX_DISC + PORT_CX_NDISC;
+  const modelTotalCapex = MODEL_CAPEX_YR1 + MODEL_CAPEX_NDISC;
+
+  const fmt   = v => '$' + Math.round(v).toLocaleString();
+  const fmtPu = v => '$' + Math.round(v);
   const bd = 'border-bottom:1px solid #eef0f2';
 
-  function deltaCell(actual, model){
-    const d = actual - model;
-    if(Math.abs(d) < 0.5) return `<td style="text-align:right;padding:5px 10px;${bd}"><span style="color:#aaa">—</span></td>`;
-    const cls = d > 0 ? 'trend-up' : 'trend-dn';
-    const sign = d > 0 ? '+' : '−';
-    const pct = model ? (Math.abs(d/model)*100).toFixed(0) : '—';
-    return `<td style="text-align:right;padding:5px 10px;${bd}"><span class="${cls}">${sign}$${Math.abs(Math.round(d))}</span><br><span style="font-size:10px;color:#9aabba">${sign}${pct}%</span></td>`;
-  }
+  // ── Scenario summary cards ────────────────────────────────────────────────
+  document.getElementById('cmpScenCards').innerHTML = [
+    {
+      title:'GoGo Model', bg:'#fef9e7', hdr:'#7d6608',
+      rows:[
+        ['Repairs/u/mo', fmtPu(MODEL_REP_PU_MO)],
+        ['Grounds/u/mo', fmtPu(MODEL_GRD_PU_MO)],
+        ['Total R&M/u/mo', fmtPu(modelTotPuMo)],
+        ['Total CapEx', fmt(modelTotalCapex)],
+      ]
+    },
+    {
+      title:'GoGo Heights 2025 Actual', bg:'#eaf4fb', hdr:'#1a5276',
+      rows:[
+        ['Repairs/u/mo', fmtPu(gogoRepPuMo)],
+        ['Grounds/u/mo', fmtPu(gogoGrdPuMo)],
+        ['Total R&M/u/mo', fmtPu(gogoTotPuMo)],
+        ['Insp. CapEx Plan', fmt(inspTotalCapex)],
+      ]
+    },
+    {
+      title:'McKay Portfolio 2025', bg:'#f0faf4', hdr:'#1a7a4a',
+      rows:[
+        ['Repairs/u/mo', fmtPu(portRepPuMo)],
+        ['Grounds/u/mo', fmtPu(portGrdPuMo)],
+        ['Total R&M/u/mo', fmtPu(portTotPuMo)],
+        ['Total CapEx (839 avg units)', fmt(portTotalCapex)],
+      ]
+    },
+  ].map(s=>`<div style="background:${s.bg};border-radius:8px;border:1px solid #d0dce8;padding:16px 20px">
+    <div style="font-size:12px;font-weight:700;color:${s.hdr};text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px">${s.title}</div>
+    ${s.rows.map(([l,v])=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:4px 0;border-bottom:1px solid rgba(0,0,0,.06);font-size:12px"><span style="color:#5d6d7e">${l}</span><span style="font-weight:700;color:#1a2535">${v}</span></div>`).join('')}
+  </div>`).join('');
 
+  // ── R&M table — 5 cols: Category | Model | GoGo '25 | Portfolio | Δ vs Model ─
   function rmRow(lbl, modelPu, gogoPu, portPu){
-    const modelAnn = modelPu * RM_UNITS * 12;
-    const gogoAnn  = gogoPu  * RM_UNITS * 12;
-    const portAnn  = portPu  * PORT_UNITS_AVG * 12;
+    const d = gogoPu - modelPu;
+    const dSign = d > 0 ? '+' : '−';
+    const dCls  = d > 0 ? 'trend-up' : 'trend-dn';
+    const dPct  = modelPu ? (Math.abs(d/modelPu)*100).toFixed(0) : '—';
     return `<tr>
       <td style="padding:5px 10px;font-size:12px;${bd}">${lbl}</td>
-      <td style="text-align:right;padding:5px 10px;font-size:12px;${bd};background:#fefdf5">${fmt(modelAnn)}</td>
-      <td style="text-align:right;padding:5px 10px;font-size:12px;${bd};background:#fefdf5;color:#7d6608;font-weight:700">${fmtPu(modelPu)}</td>
-      <td style="text-align:right;padding:5px 10px;font-size:12px;${bd};background:#f5f9fd">${fmt(gogoAnn)}</td>
-      <td style="text-align:right;padding:5px 10px;font-size:12px;${bd};background:#f5f9fd;color:#1a5276;font-weight:700">${fmtPu(gogoPu)}</td>
-      <td style="text-align:right;padding:5px 10px;font-size:12px;${bd};background:#f5faf6">${fmt(portAnn)}</td>
-      <td style="text-align:right;padding:5px 10px;font-size:12px;${bd};background:#f5faf6;color:#1a7a4a;font-weight:700">${fmtPu(portPu)}</td>
-      ${deltaCell(gogoPu, modelPu)}
-      ${deltaCell(portPu, modelPu)}
+      <td style="text-align:right;padding:5px 10px;font-size:12px;${bd};background:#fefdf5;font-weight:700;color:#7d6608">${fmtPu(modelPu)}</td>
+      <td style="text-align:right;padding:5px 10px;font-size:12px;${bd};background:#eaf4fb;font-weight:700;color:#1a5276">${fmtPu(gogoPu)}</td>
+      <td style="text-align:right;padding:5px 10px;font-size:12px;${bd};background:#f0faf4;font-weight:700;color:#1a7a4a">${fmtPu(portPu)}</td>
+      <td style="text-align:right;padding:5px 10px;font-size:12px;${bd}"><span class="${dCls}">${dSign}$${Math.abs(Math.round(d))}</span><br><span style="font-size:10px;color:#9aabba">${dSign}${dPct}%</span></td>
     </tr>`;
   }
 
@@ -1826,78 +1786,36 @@ function renderComparison(){
     rmRow('Grounds / Landscaping',     MODEL_GRD_PU_MO, gogoGrdPuMo, portGrdPuMo),
   ].join('');
 
+  const totD = gogoTotPuMo - modelTotPuMo;
+  const totSign = totD > 0 ? '+' : '−';
+  const totCls  = totD > 0 ? 'trend-up' : 'trend-dn';
+  const totPct  = (Math.abs(totD/modelTotPuMo)*100).toFixed(0);
   document.getElementById('cmpRMFoot').innerHTML = `<tr class="total-row">
     <td style="padding:6px 10px;font-weight:700">Total R&amp;M (excl. turns)</td>
-    <td style="text-align:right;padding:6px 10px;background:#fefdf5">${fmt(modelTotPuMo * RM_UNITS * 12)}</td>
     <td style="text-align:right;padding:6px 10px;font-weight:700;background:#fefdf5;color:#7d6608">${fmtPu(modelTotPuMo)}</td>
-    <td style="text-align:right;padding:6px 10px;background:#f5f9fd">${fmt(RM25_TOTAL)}</td>
-    <td style="text-align:right;padding:6px 10px;font-weight:700;background:#f5f9fd;color:#1a5276">${fmtPu(gogoTotPuMo)}</td>
-    <td style="text-align:right;padding:6px 10px;background:#f5faf6">${fmt(portTotRMann)}</td>
-    <td style="text-align:right;padding:6px 10px;font-weight:700;background:#f5faf6;color:#1a7a4a">${fmtPu(portTotPuMo)}</td>
-    ${deltaCell(gogoTotPuMo, modelTotPuMo)}
-    ${deltaCell(portTotPuMo, modelTotPuMo)}
+    <td style="text-align:right;padding:6px 10px;font-weight:700;background:#eaf4fb;color:#1a5276">${fmtPu(gogoTotPuMo)}</td>
+    <td style="text-align:right;padding:6px 10px;font-weight:700;background:#f0faf4;color:#1a7a4a">${fmtPu(portTotPuMo)}</td>
+    <td style="text-align:right;padding:6px 10px"><span class="${totCls}">${totSign}$${Math.abs(Math.round(totD))}</span><br><span style="font-size:10px;color:#9aabba">${totSign}${totPct}%</span></td>
   </tr>`;
 
-  // CapEx comparison
-  const PORT_CX_UNIT = PORT_CX_TURNS + PORT_CX_APPL;
-  const portTotalCapex = PORT_CX_UNIT + PORT_CX_DISC + PORT_CX_NDISC;
-  const modelTotalCapex = MODEL_CAPEX_YR1 + MODEL_CAPEX_NDISC;
-
+  // ── CapEx table — 4 cols: Category | Model | Plan | Portfolio '25 ─────────
   document.getElementById('cmpCxBody').innerHTML = [
-    {lbl:'Unit Turns &amp; Appliances',  model:MODEL_CAPEX_YR1,  insp:inspTotalUnitCapex, port:PORT_CX_UNIT},
-    {lbl:'Non-Disc / Other Property',    model:MODEL_CAPEX_NDISC, insp:inspOtherCapex,     port:PORT_CX_NDISC},
-    {lbl:'Discretionary Renovation', model:0, insp:0, port:PORT_CX_DISC, note:'not in GoGo model scope'},
+    {lbl:'Unit Turns &amp; Appliances', model:MODEL_CAPEX_YR1,  insp:inspTotalUnitCapex, port:PORT_CX_UNIT},
+    {lbl:'Exterior / Non-Disc',         model:MODEL_CAPEX_NDISC, insp:inspOtherCapex,    port:PORT_CX_NDISC},
+    {lbl:'Disc. Renovation',            model:0,                 insp:0,                 port:PORT_CX_DISC, note:'not in GoGo model scope'},
   ].map(r=>`<tr>
     <td style="padding:5px 10px;font-size:12px;${bd}">${r.lbl}${r.note?`<br><span style="font-size:10px;color:#9aabba;font-style:italic">${r.note}</span>`:''}</td>
-    <td style="text-align:right;padding:5px 10px;font-size:12px;${bd};background:#fefdf5">${r.model?fmt(r.model):'<span style="color:#ccc">—</span>'}</td>
-    <td style="text-align:right;padding:5px 10px;font-size:12px;${bd};background:#f5f9fd">${r.insp?fmt(r.insp):'<span style="color:#ccc">—</span>'}</td>
-    <td style="text-align:right;padding:5px 10px;font-size:12px;${bd};background:#f5faf6">${fmt(r.port)}</td>
+    <td style="text-align:right;padding:5px 10px;font-size:12px;${bd};background:#fefdf5;font-weight:700;color:#7d6608">${r.model?fmt(r.model):'<span style="color:#ccc">—</span>'}</td>
+    <td style="text-align:right;padding:5px 10px;font-size:12px;${bd};background:#eaf4fb;font-weight:700;color:#1a5276">${r.insp?fmt(r.insp):'<span style="color:#ccc">—</span>'}</td>
+    <td style="text-align:right;padding:5px 10px;font-size:12px;${bd};background:#f0faf4;font-weight:700;color:#1a7a4a">${fmt(r.port)}</td>
   </tr>`).join('');
 
   document.getElementById('cmpCxFoot').innerHTML = `<tr class="total-row">
     <td style="padding:6px 10px;font-weight:700">Total CapEx</td>
-    <td style="text-align:right;padding:6px 10px;font-weight:700;background:#fefdf5">${fmt(modelTotalCapex)}</td>
-    <td style="text-align:right;padding:6px 10px;font-weight:700;background:#f5f9fd">${fmt(inspTotalCapex)}</td>
-    <td style="text-align:right;padding:6px 10px;font-weight:700;background:#f5faf6">${fmt(portTotalCapex)}</td>
+    <td style="text-align:right;padding:6px 10px;font-weight:700;background:#fefdf5;color:#7d6608">${fmt(modelTotalCapex)}</td>
+    <td style="text-align:right;padding:6px 10px;font-weight:700;background:#eaf4fb;color:#1a5276">${fmt(inspTotalCapex)}</td>
+    <td style="text-align:right;padding:6px 10px;font-weight:700;background:#f0faf4;color:#1a7a4a">${fmt(portTotalCapex)}</td>
   </tr>`;
-
-  // CapEx $/unit KPI cards
-  document.getElementById('cmpCxKpi').innerHTML = [
-    {lbl:'GoGo Model $/Unit', val:fmt(modelTotalCapex/RM_UNITS)},
-    {lbl:'Inspection Est $/Unit', val:fmt(inspTotalCapex/RM_UNITS)},
-    {lbl:'Portfolio $/Unit (all)', val:fmt(portTotalCapex/PORT_UNITS_AVG), cls:'warn'},
-    {lbl:'Portfolio $/Unit (excl disc.)', val:fmt((PORT_CX_UNIT+PORT_CX_NDISC)/PORT_UNITS_AVG)},
-  ].map(k=>`<div class="kpi ${k.cls||''}"><div class="kpi-val" style="font-size:20px">${k.val}</div><div class="kpi-lbl">${k.lbl}</div></div>`).join('');
-
-  // Portfolio CapEx breakdown list
-  document.getElementById('cmpPortBreakdown').innerHTML = [
-    {lbl:'Turns (unit prep)',  val:PORT_CX_TURNS, color:'#2e86c1'},
-    {lbl:'Appliances',        val:PORT_CX_APPL,  color:'#5dade2'},
-    {lbl:'Disc. Renovation',  val:PORT_CX_DISC,  color:'#e67e22'},
-    {lbl:'Non-Disc / Other',  val:PORT_CX_NDISC, color:'#9b59b6'},
-  ].map(r=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #eef0f2">
-    <div style="display:flex;align-items:center;gap:8px;font-size:12px"><div style="width:10px;height:10px;border-radius:2px;background:${r.color};flex-shrink:0"></div>${r.lbl}</div>
-    <div style="font-size:12px;font-weight:600;color:#1a5276">${fmt(r.val)} <span style="font-size:11px;color:#7f8fa4;font-weight:400">(${fmt(r.val/PORT_UNITS_AVG)}/u)</span></div>
-  </div>`).join('');
-
-  // KPI headline cards
-  function kpiCmp(val, model, yr, lbl){
-    const d = val - model;
-    const cls = d > 0 ? 'warn' : 'good';
-    const sign = d > 0 ? '+' : '';
-    return `<div class="kpi ${cls}">
-      <div class="kpi-yr">${yr}</div>
-      <div class="kpi-val" style="font-size:22px">$${Math.round(val)}</div>
-      <div class="kpi-lbl">${lbl}</div>
-      <div class="kpi-sub">Model: $${Math.round(model)}/u/mo &nbsp;<span class="${d>0?'trend-up':'trend-dn'}">${sign}$${Math.abs(Math.round(d))}</span></div>
-    </div>`;
-  }
-  document.getElementById('cmpKpi').innerHTML = [
-    kpiCmp(gogoRepPuMo, MODEL_REP_PU_MO,  'GoGo \'25 Actual', 'Repairs/Unit/Mo'),
-    kpiCmp(gogoGrdPuMo, MODEL_GRD_PU_MO,  'GoGo \'25 Actual', 'Grounds/Unit/Mo'),
-    kpiCmp(portRepPuMo, MODEL_REP_PU_MO,  'Portfolio \'25 Avg', 'Repairs/Unit/Mo'),
-    kpiCmp(portTotPuMo, modelTotPuMo,     'Portfolio \'25 Avg', 'Total R&M/Unit/Mo (excl turns)'),
-  ].join('');
 }
 
 // ── WORK ORDER CHARTS ─────────────────────────────────────────────────────────
