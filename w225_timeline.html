@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>W225 Rehab — Timeline</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f4f6f9;color:#2c3e50}
+.page-hdr{background:#1a5276;color:#fff;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:20;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.page-hdr h1{font-size:18px;font-weight:700}
+.page-hdr p{font-size:11px;opacity:.65;margin-top:2px}
+.today-badge{background:#e74c3c;color:#fff;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px}
+.legend{display:flex;flex-wrap:wrap;gap:8px;padding:10px 16px;background:#fff;border-bottom:1px solid #e0e8f0}
+.li{display:flex;align-items:center;gap:5px;font-size:11px;color:#5a6a7a;cursor:default}
+.ld{width:10px;height:10px;border-radius:2px;flex-shrink:0}
+.gantt-wrap{display:flex;background:#fff;box-shadow:0 1px 6px rgba(0,0,0,.1);margin:12px;border-radius:8px;overflow:hidden}
+.lbl-col{flex-shrink:0;width:270px;border-right:2px solid #d0dce8;overflow:hidden}
+.lbl-hdr{height:52px;background:#f4f6f9;border-bottom:2px solid #d0dce8;display:flex;align-items:center;padding:0 14px;font-size:11px;font-weight:700;color:#1a5276;text-transform:uppercase;letter-spacing:.5px}
+.lbl-sec{height:32px;background:#1a5276;color:#fff;display:flex;align-items:center;padding:0 10px 0 10px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;border-left-width:4px;border-left-style:solid}
+.lbl-task{height:34px;display:flex;align-items:center;padding:0 10px 0 16px;font-size:12px;color:#2c3e50;border-bottom:1px solid #f0f3f6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chart-scroll{overflow-x:auto;flex:1}
+.chart-inner{position:relative}
+.time-hdr{position:sticky;top:56px;z-index:10;height:52px}
+.mo-row{display:flex;height:28px;background:#1a5276}
+.mo-cell{display:flex;align-items:center;padding:0 10px;font-size:11px;font-weight:700;color:#fff;border-right:1px solid rgba(255,255,255,.2);flex-shrink:0}
+.wk-row{position:relative;height:24px;background:#f4f6f9;border-bottom:2px solid #d0dce8;overflow:hidden}
+.wk-cell{position:absolute;height:100%;display:flex;align-items:center;padding:0 4px;font-size:10px;color:#7f8fa4;border-right:1px solid #e0e8f0}
+.c-sec{height:32px}
+.c-task{height:34px;position:relative;border-bottom:1px solid #f0f3f6}
+.bar{position:absolute;height:20px;top:7px;border-radius:4px;display:flex;align-items:center;padding:0 7px;font-size:10px;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden;cursor:pointer;transition:filter .15s;z-index:3}
+.bar:hover{filter:brightness(1.2)}
+.ms{position:absolute;width:14px;height:14px;top:10px;transform:rotate(45deg);cursor:pointer;z-index:3;border-radius:2px}
+.ms:hover{filter:brightness(1.3)}
+.est-line{position:absolute;height:4px;top:15px;border-radius:2px;z-index:2;pointer-events:none}
+.tbd{position:absolute;top:10px;font-size:10px;color:#c0c8d0;font-style:italic}
+.gridline{position:absolute;top:0;bottom:0;width:1px;background:#eff1f4;z-index:1;pointer-events:none}
+.today-line{position:absolute;top:0;bottom:0;width:2px;background:#e74c3c;z-index:8;pointer-events:none}
+.today-tip{position:absolute;top:0;background:#e74c3c;color:#fff;font-size:9px;font-weight:700;padding:2px 4px;border-radius:0 0 3px 3px;transform:translateX(-50%);z-index:9;pointer-events:none;white-space:nowrap}
+.tt{position:fixed;background:#1a2a3a;color:#fff;border-radius:8px;padding:10px 14px;font-size:12px;pointer-events:none;opacity:0;transition:opacity .12s;z-index:200;max-width:280px;line-height:1.6;box-shadow:0 4px 20px rgba(0,0,0,.4)}
+.tt.on{opacity:1}
+.tt-name{font-weight:700;font-size:13px;margin-bottom:5px}
+.tt-row{display:flex;justify-content:space-between;gap:12px;font-size:11px;color:rgba(255,255,255,.75)}
+.tt-row span:first-child{color:rgba(255,255,255,.45)}
+</style>
+</head>
+<body>
+
+<div class="page-hdr">
+  <div>
+    <h1>W225 Rehab — Renovation Timeline</h1>
+    <p>16 phases &nbsp;·&nbsp; 46 tasks &nbsp;·&nbsp; Tri-Cities</p>
+  </div>
+  <div class="today-badge" id="todayBadge"></div>
+</div>
+<div class="legend" id="legend"></div>
+<div class="gantt-wrap">
+  <div class="lbl-col" id="lblCol">
+    <div class="lbl-hdr">Phase / Task</div>
+  </div>
+  <div class="chart-scroll" id="chartScroll">
+    <div class="chart-inner" id="chartInner"></div>
+  </div>
+</div>
+<div class="tt" id="tt"></div>
+
+<script>
+// ══════════════════════════════════════════════════════════════════════════════
+//  CONFIGURATION — change dates here; the chart redraws automatically
+// ══════════════════════════════════════════════════════════════════════════════
+const PX          = 17;                      // pixels per day (increase to zoom in)
+const ORIGIN      = new Date('2026-05-01');  // left edge of chart
+const TOTAL_DAYS  = 105;                     // May 1 → Aug 13
+const TODAY       = new Date('2026-05-06');
+
+const MONTHS = [
+  {label:'May 2026', days:31},
+  {label:'Jun 2026', days:30},
+  {label:'Jul 2026', days:31},
+  {label:'Aug 2026', days:13},
+];
+
+// ══════════════════════════════════════════════════════════════════════════════
+//  TASK DATA  — source: W225_Rehab.csv (Asana export 2026-05-06)
+//
+//  start / end  : 'YYYY-MM-DD' string, or null if unknown / TBD
+//  blockedBy    : array of task names that must finish first
+//  deps         : array of task names that this task blocks
+// ══════════════════════════════════════════════════════════════════════════════
+const SECTIONS = [
+  { name:'Drywall', color:'#2e86c1', tasks:[
+    {name:'1st Floor',  start:null, end:'2026-05-31', deps:['2nd Floor']},
+    {name:'2nd Floor',  start:null, end:'2026-05-31', deps:['3rd Floor'], blockedBy:['1st Floor']},
+    {name:'3rd Floor',  start:null, end:'2026-05-31', deps:['4th Floor'], blockedBy:['2nd Floor']},
+    {name:'4th Floor',  start:null, end:'2026-05-31', deps:['Basement'],  blockedBy:['3rd Floor']},
+    {name:'Basement',   start:null, end:'2026-05-31', blockedBy:['4th Floor']},
+  ]},
+  { name:'Electrical', color:'#e67e22', tasks:[
+    {name:'Common Area', start:'2026-05-11', end:'2026-05-22'},
+    {name:'In Unit',     start:'2026-05-25', end:'2026-06-12'},
+  ]},
+  { name:'Emergency Egress Lighting', color:'#d4ac0d', tasks:[
+    {name:'Rough Install',  start:'2026-05-11', end:'2026-05-22'},
+    {name:'Finish Install', start:'2026-06-22', end:'2026-06-26'},
+  ]},
+  { name:'Plumbing', color:'#27ae60', tasks:[
+    {name:'1st Floor Repairs',    start:null, end:'2026-06-01'},
+    {name:'2nd Floor Repairs',    start:null, end:'2026-06-05'},
+    {name:'3rd Floor Repairs',    start:null, end:'2026-06-10'},
+    {name:'4th Floor Repairs',    start:null, end:'2026-06-15'},
+    {name:'Basement Repairs',     start:null, end:'2026-06-15'},
+    {name:'Water Heater Install', start:null, end:'2026-06-30'},
+  ]},
+  { name:'Boiler', color:'#7f8c8d', tasks:[
+    {name:'Atlas Boiler Install', start:null, end:'2026-06-15'},
+  ]},
+  { name:'Fire Alarm System', color:'#e74c3c', tasks:[
+    {name:'Fire Systems West Repairs', start:null, end:'2026-06-10'},
+  ]},
+  { name:'Security', color:'#8e44ad', tasks:[
+    {name:'Re-install Alarm (before plywood off windows)', start:null, end:'2026-06-11'},
+  ]},
+  { name:'Windows', color:'#1abc9c', tasks:[
+    {name:'Replace Broken Glass',         start:null, end:'2026-06-12'},
+    {name:'Install 1hr Fire Rated Glass', start:null, end:'2026-06-30'},
+  ]},
+  { name:'Paint', color:'#9b59b6', tasks:[
+    {name:'1st Floor', start:null, end:'2026-06-04'},
+    {name:'2nd Floor', start:null, end:'2026-06-08', deps:['3rd Floor']},
+    {name:'3rd Floor', start:null, end:'2026-06-10', blockedBy:['2nd Floor']},
+    {name:'4th Floor', start:null, end:'2026-06-15'},
+    {name:'Basement',  start:null, end:'2026-06-19'},
+  ]},
+  { name:'Unit Entry Doors', color:'#16a085', tasks:[
+    {name:'1st Floor In-Unit', start:null, end:'2026-05-22'},
+    {name:'1st Floor Install', start:null, end:null},
+    {name:'2nd Floor Install', start:null, end:null},
+    {name:'3rd Floor Install', start:null, end:null},
+    {name:'4th Floor Install', start:null, end:null},
+    {name:'Basement Install',  start:null, end:null},
+  ]},
+  { name:'Interior Doors', color:'#2980b9', tasks:[
+    {name:'Repair Existing Interior Doors', start:null, end:'2026-06-30'},
+    {name:'Hang Barn Doors',                start:null, end:'2026-06-30'},
+  ]},
+  { name:'Cabinet / Countertops', color:'#d35400', tasks:[
+    {name:'Kitchen Cabinets', start:'2026-06-29', end:'2026-07-03'},
+    {name:'Bath Vanities',    start:'2026-06-29', end:'2026-07-03'},
+  ]},
+  { name:'Appliances', color:'#566573', tasks:[
+    {name:'Install Appliances', start:null, end:'2026-07-03'},
+  ]},
+  { name:'Flooring', color:'#c0392b', tasks:[
+    {name:'1st Floor Install', start:null, end:null},
+    {name:'2nd Floor Install', start:null, end:null},
+    {name:'3rd Floor Install', start:null, end:null},
+    {name:'4th Floor Install', start:null, end:null},
+    {name:'Basement Install',  start:null, end:null},
+  ]},
+  { name:'Signage / Branding', color:'#2c3e50', tasks:[
+    {name:'Interior Unit Numbers',     start:null, end:'2026-06-26'},
+    {name:'Exterior Building Signage', start:null, end:'2026-07-03'},
+  ]},
+  { name:'Exterior Egress', color:'#784212', tasks:[
+    {name:'Repair Front Entry',           start:null, end:'2026-07-01'},
+    {name:'Repair Basement Egress Steps', start:null, end:'2026-07-01'},
+    {name:'Install Cage on Fire Escape',  start:null, end:'2026-08-01'},
+  ]},
+];
+
+// ─────────────────────────────────────────────────────────────────────────────
+const W = TOTAL_DAYS * PX;
+function dOff(s){ return s ? Math.round((new Date(s)-ORIGIN)/864e5) : null; }
+function dFmt(s){ return s ? new Date(s).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}) : 'TBD'; }
+function mk(tag,cls){ const d=document.createElement(tag); if(cls) d.className=cls; return d; }
+
+const todayOff = Math.round((TODAY-ORIGIN)/864e5);
+
+function renderGantt(){
+  document.getElementById('todayBadge').textContent =
+    'Today: ' + TODAY.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
+
+  const lblCol = document.getElementById('lblCol');
+  const ci     = document.getElementById('chartInner');
+  while(lblCol.children.length>1) lblCol.removeChild(lblCol.lastChild);
+  ci.innerHTML = '';
+
+  // ── Time header ─────────────────────────────────────────────────────────────
+  const hdr = mk('div','time-hdr');
+  hdr.style.width = W+'px';
+
+  const moRow = mk('div','mo-row');
+  moRow.style.width = W+'px';
+  MONTHS.forEach(m=>{
+    const c=mk('div','mo-cell'); c.style.width=(m.days*PX)+'px'; c.textContent=m.label; moRow.appendChild(c);
+  });
+  hdr.appendChild(moRow);
+
+  const wkRow = mk('div','wk-row');
+  wkRow.style.width = W+'px';
+  for(let d=0;d<TOTAL_DAYS;d+=7){
+    const date=new Date(ORIGIN.getTime()+d*864e5);
+    const c=mk('div','wk-cell');
+    c.style.left=(d*PX)+'px'; c.style.width=(7*PX)+'px';
+    c.textContent=date.toLocaleDateString('en-US',{month:'short',day:'numeric'});
+    wkRow.appendChild(c);
+  }
+  hdr.appendChild(wkRow);
+  ci.appendChild(hdr);
+
+  // ── Today line ──────────────────────────────────────────────────────────────
+  const tl=mk('div','today-line'); tl.style.left=(todayOff*PX)+'px'; ci.appendChild(tl);
+  const tlb=mk('div','today-tip'); tlb.style.left=(todayOff*PX)+'px'; tlb.textContent='TODAY'; ci.appendChild(tlb);
+
+  // ── Grid lines ──────────────────────────────────────────────────────────────
+  for(let d=0;d<TOTAL_DAYS;d+=7){
+    const g=mk('div','gridline'); g.style.left=(d*PX)+'px'; ci.appendChild(g);
+  }
+
+  // ── Sections ────────────────────────────────────────────────────────────────
+  SECTIONS.forEach(sec=>{
+    const sLbl=mk('div','lbl-sec');
+    sLbl.style.borderLeftColor=sec.color; sLbl.textContent=sec.name; lblCol.appendChild(sLbl);
+
+    const sRow=mk('div','c-sec');
+    sRow.style.width=W+'px';
+    sRow.style.background=sec.color+'1a';
+    sRow.style.borderBottom='1px solid '+sec.color+'55';
+    ci.appendChild(sRow);
+
+    sec.tasks.forEach(task=>{
+      const s=dOff(task.start), e=dOff(task.end);
+
+      // Label
+      const tLbl=mk('div','lbl-task'); tLbl.title=task.name; tLbl.textContent=task.name; lblCol.appendChild(tLbl);
+
+      // Row
+      const row=mk('div','c-task'); row.style.width=W+'px';
+
+      if(s!==null && e!==null){
+        // Full bar (has both start and end)
+        const bw=Math.max((e-s)*PX, 16);
+        const bar=mk('div','bar');
+        bar.style.left=(s*PX)+'px'; bar.style.width=bw+'px'; bar.style.background=sec.color;
+        bar.textContent=task.name;
+        addTT(bar,task,sec); row.appendChild(bar);
+
+      } else if(e!==null){
+        // Milestone: diamond at due date + faint lead-in
+        const est=Math.max(0,e-10);
+        const line=mk('div','est-line');
+        line.style.left=(est*PX)+'px'; line.style.width=((e-est)*PX)+'px';
+        line.style.background=sec.color+'55'; row.appendChild(line);
+
+        const ms=mk('div','ms');
+        ms.style.left=(e*PX-7)+'px'; ms.style.background=sec.color;
+        addTT(ms,task,sec); row.appendChild(ms);
+
+      } else {
+        // TBD
+        const tbd=mk('div','tbd');
+        tbd.style.left=Math.max(todayOff*PX+10,8)+'px';
+        tbd.textContent='— date TBD —'; row.appendChild(tbd);
+      }
+
+      ci.appendChild(row);
+    });
+  });
+
+  // ── Legend ──────────────────────────────────────────────────────────────────
+  const leg=document.getElementById('legend'); leg.innerHTML='';
+  SECTIONS.forEach(sec=>{
+    const i=mk('div','li');
+    i.innerHTML=`<div class="ld" style="background:${sec.color}"></div>${sec.name}`;
+    leg.appendChild(i);
+  });
+
+  // Scroll to show today near left
+  document.getElementById('chartScroll').scrollLeft=Math.max(0,todayOff*PX-80);
+}
+
+// ── Tooltip ───────────────────────────────────────────────────────────────────
+const tt=document.getElementById('tt');
+function addTT(el_,task,sec){
+  el_.addEventListener('mouseenter',e=>{
+    const rows=[['Section',sec.name],['Start',dFmt(task.start)],['Due',dFmt(task.end)]];
+    if(task.blockedBy?.length) rows.push(['Blocked by',task.blockedBy.join(', ')]);
+    if(task.deps?.length)      rows.push(['Blocks',task.deps.join(', ')]);
+    tt.innerHTML=`<div class="tt-name" style="color:${sec.color}">${task.name}</div>`
+      +rows.map(r=>`<div class="tt-row"><span>${r[0]}</span><span>${r[1]}</span></div>`).join('');
+    tt.classList.add('on'); move(e);
+  });
+  el_.addEventListener('mousemove',move);
+  el_.addEventListener('mouseleave',()=>tt.classList.remove('on'));
+}
+function move(e){tt.style.left=(e.clientX+14)+'px';tt.style.top=(e.clientY-8)+'px';}
+
+renderGantt();
+</script>
+</body>
+</html>
