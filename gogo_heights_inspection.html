@@ -1,0 +1,1744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>GoGo Heights — Inspection Report</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',sans-serif;background:#f4f6f9;color:#1a2535;font-size:13px}
+.hdr{background:#1a5276;color:#fff;padding:16px 28px 0}
+.hdr-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
+.hdr h1{font-size:18px;font-weight:700}
+.hdr .meta{font-size:11px;opacity:.8;margin-top:3px}
+.hdr .stamp{font-size:11px;opacity:.7;text-align:right}
+.tabs{display:flex;gap:2px;margin-top:4px}
+.tab-btn{padding:9px 22px;border:none;background:rgba(255,255,255,.12);color:rgba(255,255,255,.75);cursor:pointer;font-size:12px;font-weight:600;border-radius:6px 6px 0 0;transition:background .15s}
+.tab-btn:hover{background:rgba(255,255,255,.2)}
+.tab-btn.active{background:#f4f6f9;color:#1a5276}
+.pane{display:none}.pane.active{display:block}
+.wrap{max-width:1540px;margin:0 auto;padding:22px 28px}
+.kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:18px}
+.kpi{background:#fff;border-radius:8px;padding:14px 16px;border:1px solid #d0dce8}
+.kpi-val{font-size:24px;font-weight:700;color:#1a5276}
+.kpi.warn .kpi-val{color:#c0392b}
+.kpi.good .kpi-val{color:#1e8449}
+.kpi-lbl{font-size:10px;color:#7f8fa4;text-transform:uppercase;letter-spacing:.5px;margin-top:3px}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px}
+.card{background:#fff;border-radius:8px;border:1px solid #d0dce8;padding:18px 20px;margin-bottom:18px}
+.card-title{font-size:12px;font-weight:700;color:#1a5276;text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px}
+.seg-bar{display:flex;height:16px;border-radius:6px;overflow:hidden;gap:2px;margin:6px 0 8px}
+.seg-labels{display:flex;flex-wrap:wrap;gap:10px}
+.seg-lbl{display:flex;align-items:center;gap:5px;font-size:11px;color:#5d6d7e}
+.seg-dot{width:9px;height:9px;border-radius:2px;flex-shrink:0}
+.controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:10px}
+.controls input,.controls select{border:1px solid #d0dce8;border-radius:6px;padding:6px 10px;font-size:12px;background:#fff}
+.controls input:focus,.controls select:focus{outline:none;border-color:#2e86c1}
+.btn{padding:6px 14px;border:none;border-radius:6px;font-size:12px;cursor:pointer;font-weight:600}
+.btn-blue{background:#2e86c1;color:#fff}
+.btn-blue:hover{background:#1a5276}
+.btn-outline{background:#fff;border:1px solid #d0dce8;color:#5d6d7e}
+.btn-outline.on{background:#fef9e7;border-color:#f39c12;color:#935116}
+.row-ct{font-size:11px;color:#7f8fa4}
+table{width:100%;border-collapse:collapse}
+th{padding:8px 9px;font-size:10px;color:#7f8fa4;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid #d0dce8;background:#f4f6f9;white-space:nowrap;cursor:pointer;user-select:none;text-align:left}
+th:hover{color:#2e86c1}
+th.asc::after{content:" ▲";font-size:8px}
+th.desc::after{content:" ▼";font-size:8px}
+td{padding:7px 9px;font-size:12px;border-bottom:1px solid #eef0f2;vertical-align:top}
+tr:hover td{background:#f0f6fb!important}
+tr.focus-row td{background:#fff8f2}
+.badge{display:inline-block;padding:1px 7px;border-radius:10px;font-size:10px;font-weight:700;white-space:nowrap}
+.c1{background:#d5f5e3;color:#1e8449}
+.c2{background:#fef9e7;color:#b7950b}
+.c3{background:#fdedec;color:#c0392b}
+.b-occ{background:#d6eaf8;color:#1a5276}
+.b-vac{background:#f3e8ff;color:#6c3483}
+.b-down{background:#eaecee;color:#5d6d7e}
+.b-model{background:#e8f8f5;color:#1a7a4a}
+.b-fut{background:#eaf4fb;color:#2471a3;font-style:italic}
+.b-focus{background:#fdedec;color:#c0392b;font-weight:800}
+.b-dq{background:#fdebd0;color:#935116}
+.dq-left td:first-child{border-left:3px solid #f39c12}
+.focus-left td:first-child{border-left:3px solid #c0392b}
+.unit-n{font-weight:700;color:#1a5276}
+.bal-pos{color:#c0392b;font-weight:600}
+.bal-neg{color:#1e8449;font-size:11px}
+.trs-n{font-size:11px;color:#5d6d7e;max-width:200px;line-height:1.4}
+.tbl-wrap{overflow-x:auto;border:1px solid #d0dce8;border-radius:8px}
+.total-row td{font-weight:700;background:#f4f6f9;border-top:2px solid #d0dce8}
+/* CapEx / R&M tabs */
+.assum-inputs{background:#fff;border-radius:8px;border:1px solid #d0dce8;padding:16px 20px;margin-bottom:18px}
+.assum-inputs h3{font-size:12px;font-weight:700;color:#1a5276;text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px}
+.input-grid{display:flex;gap:20px;flex-wrap:wrap;align-items:flex-end}
+.input-group{display:flex;flex-direction:column;gap:4px}
+.input-group label{font-size:11px;color:#5d6d7e;font-weight:600}
+.input-group input{width:110px;padding:6px 10px;border:1px solid #d0dce8;border-radius:6px;font-size:13px;font-weight:600;color:#1a5276}
+.input-note{font-size:11px;color:#9aabba;margin-top:8px;font-style:italic}
+.multiplier-note{font-size:11px;color:#5d6d7e;background:#f4f6f9;border-radius:6px;padding:8px 12px;margin-top:10px;border-left:3px solid #2e86c1}
+.assum-table{border-collapse:collapse;margin-top:4px}
+.assum-table th{background:#f4f6f9;color:#1a5276;font-size:11px;font-weight:700;padding:7px 14px;border:1px solid #d0dce8;text-align:center;white-space:nowrap}
+.assum-table td{padding:5px 10px;border:1px solid #e8edf2;font-size:12px;color:#5d6d7e;font-weight:600;vertical-align:middle}
+.assum-table input{width:90px;padding:5px 8px;border:1px solid #d0dce8;border-radius:5px;font-size:13px;font-weight:700;color:#1a5276;text-align:right}
+.cost-cell{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.cost-zero{color:#b0bec5}
+.kpi-yr{font-size:10px;font-weight:700;color:#7f8fa4;text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px}
+.kpi-sub{font-size:11px;color:#7f8fa4;margin-top:5px}
+.trend-up{color:#c0392b;font-weight:700}
+.trend-dn{color:#1e8449;font-weight:700}
+.rating-chip{display:inline-block;width:16px;height:16px;border-radius:3px;font-size:10px;font-weight:700;line-height:16px;text-align:center;margin-right:3px}
+.r1-chip{background:#d5f5e3;color:#1e8449}
+.r2-chip{background:#fef9e7;color:#b7950b}
+.r3-chip{background:#fdedec;color:#c0392b}
+@media(max-width:900px){.two-col{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div class="hdr-top">
+    <div>
+      <h1>GoGo Heights — Unit Inspection Report</h1>
+      <div class="meta">pn10031 &nbsp;·&nbsp; 178 Units · Buildings A–K &nbsp;·&nbsp; Inspected 5/4/2026 &nbsp;·&nbsp; Rent Roll as of 4/10/2026</div>
+    </div>
+    <div class="stamp">LeeRoy's Team (detailed) + Stefanie's Team (TRS)<br>Generated 5/5/2026</div>
+  </div>
+  <div class="tabs">
+    <button class="tab-btn active" onclick="showTab(0)">Rent Roll</button>
+    <button class="tab-btn" onclick="showTab(1)">CapEx Assumptions</button>
+    <button class="tab-btn" onclick="showTab(2)">R&amp;M Assumptions</button>
+    <button class="tab-btn" onclick="showTab(3)">Summary</button>
+    <button class="tab-btn" onclick="showTab(4)">Model vs Actuals</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ TAB 1: RENT ROLL ═══════════════════════════════ -->
+<div id="pane0" class="pane active">
+<div class="wrap">
+  <div class="kpi-row" id="kpi0"></div>
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">Condition Distribution (avg of 4 components)</div>
+      <div class="seg-bar" id="condBar"></div>
+      <div class="seg-labels" id="condLbls"></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Unit Type (inspected units)</div>
+      <div class="seg-bar" id="typeBar"></div>
+      <div class="seg-labels" id="typeLbls"></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="controls">
+      <input type="text" id="s0" placeholder="Search unit, name, notes…" style="width:190px" oninput="renderRR()">
+      <select id="fBldg" onchange="renderRR()"><option value="">All Buildings</option></select>
+      <select id="fFloor" onchange="renderRR()"><option value="">All Floors</option><option>1st</option><option>2nd</option><option>3rd</option><option>ADA</option></select>
+      <select id="fStatus" onchange="renderRR()"><option value="">All Status</option><option>Occupied</option><option>Vacant</option><option>Down</option><option>Model</option><option>Future</option></select>
+      <select id="fCond" onchange="renderRR()"><option value="">All Conditions</option><option value="1">Good (1)</option><option value="2">Fair (2)</option><option value="3">Poor (3)</option></select>
+      <select id="fType" onchange="renderRR()"><option value="">All Types</option><option>Classic</option><option>Partial Renovation</option><option>Renovation</option></select>
+      <button class="btn btn-outline" id="focusBtn" onclick="toggleFocus()">Focus Only</button>
+      <button class="btn btn-blue" onclick="resetRR()">Reset</button>
+      <span class="row-ct">Showing <strong id="rc0">0</strong> units</span>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr id="rrHead"></tr></thead>
+        <tbody id="rrBody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════ TAB 2: CAPEX ═══════════════════════════════ -->
+<div id="pane1" class="pane">
+<div class="wrap">
+  <div class="assum-inputs">
+    <h3>CapEx Assumptions — Full Replacement Cost &amp; Rating Multipliers by Floor Plan</h3>
+    <table class="assum-table">
+      <thead>
+        <tr>
+          <th rowspan="2" style="min-width:150px;vertical-align:middle">Category</th>
+          <th colspan="3" style="background:#eaf4fb;color:#1a5276;text-align:center">Full Replacement Cost (100%)</th>
+          <th colspan="3" style="background:#fef9e7;color:#7d6608;text-align:center">Rating Multiplier %</th>
+        </tr>
+        <tr>
+          <th style="background:#eaf4fb;color:#1a5276">3x2 &nbsp;(1,250 sqft)</th>
+          <th style="background:#eaf4fb;color:#1a5276">2x2b &nbsp;(1,140 sqft)</th>
+          <th style="background:#eaf4fb;color:#1a5276">2x2a &nbsp;(1,025 sqft)</th>
+          <th style="background:#fef9e7"><span class="rating-chip r1-chip">1</span> %</th>
+          <th style="background:#fef9e7"><span class="rating-chip r2-chip">2</span> %</th>
+          <th style="background:#fef9e7"><span class="rating-chip r3-chip">3</span> %</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Flooring</td>
+          <td><input type="number" id="cx_floor_3x2" value="4000" oninput="renderCX()"></td>
+          <td><input type="number" id="cx_floor_2x2b" value="3500" oninput="renderCX()"></td>
+          <td><input type="number" id="cx_floor_2x2a" value="3000" oninput="renderCX()"></td>
+          <td><input type="number" id="cx_floor_m1" value="0" oninput="renderCX()" style="width:62px"></td>
+          <td><input type="number" id="cx_floor_m2" value="25" oninput="renderCX()" style="width:62px"></td>
+          <td><input type="number" id="cx_floor_m3" value="100" oninput="renderCX()" style="width:62px"></td>
+        </tr>
+        <tr>
+          <td>Walls / Paint</td>
+          <td><input type="number" id="cx_walls_3x2" value="2000" oninput="renderCX()"></td>
+          <td><input type="number" id="cx_walls_2x2b" value="1700" oninput="renderCX()"></td>
+          <td><input type="number" id="cx_walls_2x2a" value="1400" oninput="renderCX()"></td>
+          <td><input type="number" id="cx_walls_m1" value="0" oninput="renderCX()" style="width:62px"></td>
+          <td><input type="number" id="cx_walls_m2" value="25" oninput="renderCX()" style="width:62px"></td>
+          <td><input type="number" id="cx_walls_m3" value="100" oninput="renderCX()" style="width:62px"></td>
+        </tr>
+        <tr>
+          <td>Appliances</td>
+          <td><input type="number" id="cx_appl_3x2" value="3500" oninput="renderCX()"></td>
+          <td><input type="number" id="cx_appl_2x2b" value="3200" oninput="renderCX()"></td>
+          <td><input type="number" id="cx_appl_2x2a" value="3000" oninput="renderCX()"></td>
+          <td><input type="number" id="cx_appl_m1" value="0" oninput="renderCX()" style="width:62px"></td>
+          <td><input type="number" id="cx_appl_m2" value="25" oninput="renderCX()" style="width:62px"></td>
+          <td><input type="number" id="cx_appl_m3" value="100" oninput="renderCX()" style="width:62px"></td>
+        </tr>
+        <tr>
+          <td>Cabinets / Countertops</td>
+          <td><input type="number" id="cx_cab_3x2" value="5500" oninput="renderCX()"></td>
+          <td><input type="number" id="cx_cab_2x2b" value="4800" oninput="renderCX()"></td>
+          <td><input type="number" id="cx_cab_2x2a" value="4000" oninput="renderCX()"></td>
+          <td><input type="number" id="cx_cab_m1" value="0" oninput="renderCX()" style="width:62px"></td>
+          <td><input type="number" id="cx_cab_m2" value="25" oninput="renderCX()" style="width:62px"></td>
+          <td><input type="number" id="cx_cab_m3" value="100" oninput="renderCX()" style="width:62px"></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="input-note">Edit any value — table and portfolio totals update instantly.</div>
+  </div>
+  <div class="kpi-row" id="kpi1"></div>
+  <div class="card">
+    <div class="controls">
+      <input type="text" id="s1" placeholder="Search unit or name…" style="width:190px" oninput="renderCX()">
+      <select id="cx_fBldg" onchange="renderCX()"><option value="">All Buildings</option></select>
+      <select id="cx_fStatus" onchange="renderCX()"><option value="">All Status</option><option>Occupied</option><option>Vacant</option><option>Down</option></select>
+      <select id="cx_fCond" onchange="renderCX()"><option value="">All Conditions</option><option value="1">Good (1)</option><option value="2">Fair (2)</option><option value="3">Poor (3)</option></select>
+      <span class="row-ct">Showing <strong id="rc1">0</strong> units</span>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr id="cxHead"></tr></thead>
+        <tbody id="cxBody"></tbody>
+        <tfoot id="cxFoot"></tfoot>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════ TAB 3: R&M ═══════════════════════════════ -->
+<div id="pane2" class="pane">
+<div class="wrap">
+
+  <!-- Historical Section -->
+  <div class="card">
+    <div class="card-title">Historical R&amp;M — 2024 vs 2025 (Accrual, Jan–Dec)</div>
+    <div id="rmKpiRow"></div>
+    <div class="seg-bar" id="rmHistBar"></div>
+    <div class="seg-labels" id="rmHistLbls" style="margin-bottom:16px"></div>
+    <div class="two-col">
+      <div>
+        <div style="font-size:11px;font-weight:700;color:#1a5276;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">Repairs &amp; Maintenance (635xxx + Pest/Electrical)</div>
+        <table style="width:100%;border-collapse:collapse">
+          <thead><tr>
+            <th style="text-align:left;padding:6px 8px;font-size:10px;color:#7f8fa4;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid #d0dce8;background:#f4f6f9">Account</th>
+            <th style="text-align:right;padding:6px 8px;font-size:10px;color:#7f8fa4;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid #d0dce8;background:#f4f6f9">2024</th>
+            <th style="text-align:right;padding:6px 8px;font-size:10px;color:#7f8fa4;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid #d0dce8;background:#f4f6f9">2025</th>
+            <th style="text-align:right;padding:6px 8px;font-size:10px;color:#7f8fa4;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid #d0dce8;background:#f4f6f9">Δ YoY</th>
+          </tr></thead>
+          <tbody id="rmRepairsBody"></tbody>
+          <tfoot id="rmRepairsFoot"></tfoot>
+        </table>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;color:#1a5276;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">Grounds / Landscaping (630xxx excl. Pest &amp; Electrical)</div>
+        <table style="width:100%;border-collapse:collapse">
+          <thead><tr>
+            <th style="text-align:left;padding:6px 8px;font-size:10px;color:#7f8fa4;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid #d0dce8;background:#f4f6f9">Account</th>
+            <th style="text-align:right;padding:6px 8px;font-size:10px;color:#7f8fa4;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid #d0dce8;background:#f4f6f9">2024</th>
+            <th style="text-align:right;padding:6px 8px;font-size:10px;color:#7f8fa4;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid #d0dce8;background:#f4f6f9">2025</th>
+            <th style="text-align:right;padding:6px 8px;font-size:10px;color:#7f8fa4;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid #d0dce8;background:#f4f6f9">Δ YoY</th>
+          </tr></thead>
+          <tbody id="rmGroundsBody"></tbody>
+          <tfoot id="rmGroundsFoot"></tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Projection Section -->
+  <div class="card">
+    <div class="card-title">Future Projection Calculator</div>
+    <div class="input-grid" style="margin-bottom:16px">
+      <div class="input-group">
+        <label>Annual Growth Rate (%)</label>
+        <input type="number" id="rm_growth" value="3" min="0" max="50" step="0.5" style="width:110px" oninput="renderRM()">
+      </div>
+      <div class="input-group">
+        <label>Projection Years</label>
+        <select id="rm_years" onchange="renderRM()" style="width:130px;padding:6px 10px;border:1px solid #d0dce8;border-radius:6px;font-size:13px;font-weight:600;color:#1a5276;background:#fff">
+          <option value="3">3 Years</option>
+          <option value="5" selected>5 Years</option>
+          <option value="10">10 Years</option>
+        </select>
+      </div>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr>
+          <th style="text-align:left">Year</th>
+          <th style="text-align:right">Repairs &amp; Maint</th>
+          <th style="text-align:right">Grounds</th>
+          <th style="text-align:right">Total R&amp;M</th>
+          <th style="text-align:right">$/Unit/Yr</th>
+          <th style="text-align:right">$/Unit/Mo</th>
+        </tr></thead>
+        <tbody id="rm_proj"></tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ═══════════════════════════════ TAB 4: SUMMARY ═══════════════════════════ -->
+<div id="pane3" class="pane">
+<div class="wrap">
+  <div class="kpi-row" id="sumKpi"></div>
+  <div style="margin-bottom:18px">
+    <div class="seg-bar" id="sumBar"></div>
+    <div class="seg-labels" id="sumLbls" style="margin-top:6px"></div>
+  </div>
+
+  <!-- R&M: Historical vs Budget (full-width) -->
+  <div class="card" style="margin-bottom:18px">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;flex-wrap:wrap;gap:10px">
+      <div>
+        <div class="card-title" style="margin-bottom:2px">Annual R&amp;M — Historical vs Budget</div>
+        <div style="font-size:11px;color:#7f8fa4">Left = 2025 Actuals &nbsp;·&nbsp; Right = Future Budget Assumptions</div>
+      </div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end">
+        <div class="input-group">
+          <label>Budget Repairs $/Unit/Mo</label>
+          <input type="number" id="sum_rep_pu" value="78" oninput="renderSummary()" style="width:88px;padding:5px 8px;border:1px solid #d0dce8;border-radius:6px;font-size:13px;font-weight:700;color:#1a5276">
+        </div>
+        <div class="input-group">
+          <label>Budget Total $/Unit/Mo</label>
+          <input type="number" id="sum_tot_pu" value="120" oninput="renderSummary()" style="width:88px;padding:5px 8px;border:1px solid #d0dce8;border-radius:6px;font-size:13px;font-weight:700;color:#1a5276">
+        </div>
+        <div class="input-group">
+          <label style="color:#9aabba;font-size:10px">Grounds = Total − Repairs</label>
+          <div id="sum_grd_derived" style="font-size:13px;font-weight:700;color:#27ae60;padding:5px 0">$42 / unit / mo</div>
+        </div>
+      </div>
+    </div>
+    <div class="tbl-wrap">
+    <table style="width:100%;border-collapse:collapse">
+      <thead>
+        <tr>
+          <th rowspan="2" style="text-align:left;padding:6px 8px;font-size:10px;color:#7f8fa4;text-transform:uppercase;letter-spacing:.5px;background:#f4f6f9;border-bottom:2px solid #d0dce8;vertical-align:bottom">Category</th>
+          <th colspan="2" style="text-align:center;padding:6px 8px;font-size:10px;font-weight:700;color:#2471a3;text-transform:uppercase;letter-spacing:.5px;background:#eaf4fb;border-bottom:1px solid #d0dce8">2025 Actual (Historical)</th>
+          <th colspan="2" style="text-align:center;padding:6px 8px;font-size:10px;font-weight:700;color:#7d6608;text-transform:uppercase;letter-spacing:.5px;background:#fef9e7;border-bottom:1px solid #d0dce8">Budget / Predicted</th>
+          <th rowspan="2" style="text-align:right;padding:6px 8px;font-size:10px;color:#7f8fa4;text-transform:uppercase;letter-spacing:.5px;background:#f4f6f9;border-bottom:2px solid #d0dce8;vertical-align:bottom">Δ Act vs Bud</th>
+        </tr>
+        <tr>
+          <th style="text-align:right;padding:5px 8px;font-size:10px;color:#2471a3;background:#eaf4fb;border-bottom:1px solid #d0dce8">Annual $</th>
+          <th style="text-align:right;padding:5px 8px;font-size:10px;color:#2471a3;background:#eaf4fb;border-bottom:1px solid #d0dce8">$/u/mo</th>
+          <th style="text-align:right;padding:5px 8px;font-size:10px;color:#7d6608;background:#fef9e7;border-bottom:1px solid #d0dce8">Annual $</th>
+          <th style="text-align:right;padding:5px 8px;font-size:10px;color:#7d6608;background:#fef9e7;border-bottom:1px solid #d0dce8">$/u/mo</th>
+        </tr>
+      </thead>
+      <tbody id="sumRMBody"></tbody>
+      <tfoot id="sumRMFoot"></tfoot>
+    </table>
+    </div>
+  </div>
+
+  <div class="two-col">
+
+    <!-- CapEx (Future Assumed) -->
+    <div class="card">
+      <div class="card-title">Unit CapEx — Future Assumed</div>
+      <table style="width:100%;border-collapse:collapse;margin-bottom:14px">
+        <thead><tr>
+          <th style="text-align:left;padding:6px 8px;font-size:10px;color:#7f8fa4;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid #d0dce8;background:#f4f6f9">Item</th>
+          <th style="text-align:right;padding:6px 8px;font-size:10px;color:#7f8fa4;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid #d0dce8;background:#f4f6f9">Amount</th>
+          <th style="text-align:right;padding:6px 8px;font-size:10px;color:#7f8fa4;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid #d0dce8;background:#f4f6f9">$/Unit</th>
+        </tr></thead>
+        <tbody id="sumCxBody"></tbody>
+        <tfoot id="sumCxFoot"></tfoot>
+      </table>
+      <div style="font-size:11px;font-weight:700;color:#1a5276;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">Other CapEx — Future Assumed (Editable)</div>
+      <table style="width:100%;border-collapse:collapse">
+        <thead><tr>
+          <th style="text-align:left;padding:5px 8px;font-size:10px;color:#7f8fa4;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid #d0dce8;background:#f4f6f9">Description</th>
+          <th style="text-align:right;padding:5px 8px;font-size:10px;color:#7f8fa4;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid #d0dce8;background:#f4f6f9">Amount</th>
+        </tr></thead>
+        <tbody>
+          <tr><td style="padding:5px 8px;font-size:12px">Misc Property Repairs (Breezeway / Sprinklers)</td><td style="text-align:right;padding:5px 8px"><input type="number" id="oc_misc" value="100000" oninput="renderSummary()" style="width:110px;padding:4px 8px;border:1px solid #d0dce8;border-radius:5px;font-size:12px;font-weight:700;color:#1a5276;text-align:right"></td></tr>
+          <tr><td style="padding:5px 8px;font-size:12px">Landscaping Restoration</td><td style="text-align:right;padding:5px 8px"><input type="number" id="oc_landscape" value="25000" oninput="renderSummary()" style="width:110px;padding:4px 8px;border:1px solid #d0dce8;border-radius:5px;font-size:12px;font-weight:700;color:#1a5276;text-align:right"></td></tr>
+          <tr><td style="padding:5px 8px;font-size:12px">Interior Common Area Walkway</td><td style="text-align:right;padding:5px 8px"><input type="number" id="oc_walkway" value="8000" oninput="renderSummary()" style="width:110px;padding:4px 8px;border:1px solid #d0dce8;border-radius:5px;font-size:12px;font-weight:700;color:#1a5276;text-align:right"></td></tr>
+          <tr><td style="padding:5px 8px;font-size:12px">Water Intrusion Remediation (Bldg D)</td><td style="text-align:right;padding:5px 8px"><input type="number" id="oc_water" value="5000" oninput="renderSummary()" style="width:110px;padding:4px 8px;border:1px solid #d0dce8;border-radius:5px;font-size:12px;font-weight:700;color:#1a5276;text-align:right"></td></tr>
+          <tr><td style="padding:5px 8px;font-size:12px">Interior Stairwells (14 × $3,000)</td><td style="text-align:right;padding:5px 8px"><input type="number" id="oc_stairwells" value="42000" oninput="renderSummary()" style="width:110px;padding:4px 8px;border:1px solid #d0dce8;border-radius:5px;font-size:12px;font-weight:700;color:#1a5276;text-align:right"></td></tr>
+        </tbody>
+        <tfoot id="sumOtherFoot"></tfoot>
+      </table>
+    </div>
+
+    <!-- All-In Budget Roll-Up -->
+    <div class="card">
+      <div class="card-title">All-In Budget Roll-Up</div>
+      <table style="width:100%;border-collapse:collapse">
+        <thead><tr>
+          <th style="text-align:left;padding:6px 8px;font-size:10px;color:#7f8fa4;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid #d0dce8;background:#f4f6f9">Line Item</th>
+          <th style="text-align:center;padding:6px 8px;font-size:10px;color:#7f8fa4;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid #d0dce8;background:#f4f6f9">Basis</th>
+          <th style="text-align:right;padding:6px 8px;font-size:10px;color:#7f8fa4;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid #d0dce8;background:#f4f6f9">Amount</th>
+        </tr></thead>
+        <tbody id="sumRollBody"></tbody>
+        <tfoot id="sumRollFoot"></tfoot>
+      </table>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════ TAB 5: MODEL VS ACTUALS ══════════════════ -->
+<div id="pane4" class="pane">
+<div class="wrap">
+
+  <div class="kpi-row" id="cmpKpi"></div>
+
+  <!-- R&M Comparison -->
+  <div class="card" style="margin-bottom:18px">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;flex-wrap:wrap;gap:8px">
+      <div>
+        <div class="card-title" style="margin-bottom:2px">R&amp;M Comparison — $/Unit/Month</div>
+        <div style="font-size:11px;color:#7f8fa4">GoGo acquisition model vs GoGo 2025 actuals vs McKay portfolio trailing 2025 (839 avg units, all funds)</div>
+      </div>
+    </div>
+    <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th rowspan="2" style="text-align:left;vertical-align:bottom;background:#f4f6f9;padding:7px 10px;min-width:160px">Category</th>
+          <th colspan="2" style="text-align:center;background:#fef9e7;color:#7d6608;padding:5px 10px;border-bottom:1px solid #d0dce8">GoGo Model (Assumed)</th>
+          <th colspan="2" style="text-align:center;background:#eaf4fb;color:#1a5276;padding:5px 10px;border-bottom:1px solid #d0dce8">GoGo 2025 Actual</th>
+          <th colspan="2" style="text-align:center;background:#f0faf4;color:#1a7a4a;padding:5px 10px;border-bottom:1px solid #d0dce8">Portfolio 2025 Avg</th>
+          <th rowspan="2" style="text-align:right;vertical-align:bottom;background:#f4f6f9;padding:7px 10px;font-size:10px;color:#7f8fa4;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap">Δ GoGo<br>vs Model</th>
+          <th rowspan="2" style="text-align:right;vertical-align:bottom;background:#f4f6f9;padding:7px 10px;font-size:10px;color:#7f8fa4;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap">Δ Port<br>vs Model</th>
+        </tr>
+        <tr>
+          <th style="text-align:right;background:#fef9e7;color:#7d6608;padding:5px 10px;font-size:10px">Annual $</th>
+          <th style="text-align:right;background:#fef9e7;color:#7d6608;padding:5px 10px;font-size:10px">$/u/mo</th>
+          <th style="text-align:right;background:#eaf4fb;color:#1a5276;padding:5px 10px;font-size:10px">Annual $</th>
+          <th style="text-align:right;background:#eaf4fb;color:#1a5276;padding:5px 10px;font-size:10px">$/u/mo</th>
+          <th style="text-align:right;background:#f0faf4;color:#1a7a4a;padding:5px 10px;font-size:10px">Annual $</th>
+          <th style="text-align:right;background:#f0faf4;color:#1a7a4a;padding:5px 10px;font-size:10px">$/u/mo</th>
+        </tr>
+      </thead>
+      <tbody id="cmpRMBody"></tbody>
+      <tfoot id="cmpRMFoot"></tfoot>
+    </table>
+    </div>
+    <div style="font-size:11px;color:#7f8fa4;margin-top:10px;font-style:italic">* Portfolio includes Turns ($462k/yr, $46/u/mo) in R&amp;M operating expense. GoGo model budgets turns as CapEx. Portfolio R&amp;M excl. turns = $85/u/mo.</div>
+  </div>
+
+  <!-- CapEx + $/Unit panels -->
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">CapEx Comparison — Annual Totals</div>
+      <div style="font-size:11px;color:#7f8fa4;margin-bottom:14px">GoGo model vs inspection-based estimate vs McKay portfolio 2025 actual</div>
+      <div class="tbl-wrap">
+      <table>
+        <thead><tr>
+          <th style="text-align:left;background:#f4f6f9;padding:7px 10px">Category</th>
+          <th style="text-align:right;background:#fef9e7;color:#7d6608;padding:7px 10px">GoGo Model</th>
+          <th style="text-align:right;background:#eaf4fb;color:#1a5276;padding:7px 10px">Inspection Est</th>
+          <th style="text-align:right;background:#f0faf4;color:#1a7a4a;padding:7px 10px">Portfolio '25</th>
+        </tr></thead>
+        <tbody id="cmpCxBody"></tbody>
+        <tfoot id="cmpCxFoot"></tfoot>
+      </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">CapEx $/Unit &amp; Portfolio Breakdown</div>
+      <div style="font-size:11px;color:#7f8fa4;margin-bottom:14px">178 units (GoGo) · 839 avg units (Portfolio)</div>
+      <div id="cmpCxKpi" class="kpi-row" style="grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px"></div>
+      <div style="font-size:11px;font-weight:700;color:#5d6d7e;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">Portfolio CapEx Breakdown</div>
+      <div id="cmpPortBreakdown"></div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<script>
+// ── TAB SWITCH ──────────────────────────────────────────────────────────────
+function showTab(i){
+  document.querySelectorAll('.pane').forEach((p,j)=>p.classList.toggle('active',i===j));
+  document.querySelectorAll('.tab-btn').forEach((b,j)=>b.classList.toggle('active',i===j));
+}
+
+// ── RENT ROLL DATA ──────────────────────────────────────────────────────────
+// [unit, plan, name, mktRent, actRent, balance, leaseExp]
+const RR = [
+  ["A101","3x2-ar","Virginia Mea",1997,1599,2413.43,"7/24/2026"],
+  ["A102","2x2a-ar","Colleen Franz",1444,1444,0,"5/31/2026"],
+  ["A103","2x2b-ar","Marley Edmiston",1614,1224,5844.67,"7/3/2024"],
+  ["A104","2x2b-ar","Jeff Gring",1614,955,0,"7/3/2025"],
+  ["A105","2x2a-ar","Shakir Abbas",1444,1304,0,"6/30/2025"],
+  ["A106","3x2-ar","Komta Takam",1997,1499,-1,"8/21/2026"],
+  ["A201","3x2-ar","Cassandra Cantrell",1997,1499,-120.39,"4/11/2027"],
+  ["A202","2x2a-ar","Katherine Ophus",1444,1239,0,"1/3/2026"],
+  ["A203","2x2b-ar","Arabella Hann",1614,1399,1541.31,"3/17/2027"],
+  ["A204","2x2b-ar","(IRC) Rezai Fardin",1614,1275,14.5,"8/31/2025"],
+  ["A205","2x2a-ar","Lea Boston",1444,1245,0,"4/15/2025"],
+  ["A206","3x2-ar","Raphella Ali",1997,1494,7033.58,"4/1/2025"],
+  ["A301","3x2-ar","(IRC) Achola Doreen",1997,1997,-10,"7/30/2025"],
+  ["A303","2x2b-ar","Christopher Odinde",1614,1275,220,"9/13/2025"],
+  ["A304","2x2b-ar","Laura Raber",1614,1399,74.5,"9/25/2026"],
+  ["A306","3x2-ar","Lauren Layne*",1997,1450,2460,"5/31/2024"],
+  ["B101","3x2-ar","Kiya Gebeke",1997,1499,-56.85,"9/28/2026"],
+  ["B102","2x2a-ar","Joel Montero",1444,1295,0,"7/25/2025"],
+  ["B103","2x2b-ar","(WRO) Khadidja Abdoulaye",1614,1562,0,"7/9/2025"],
+  ["B104","2x2b-ar","(WRO) Bakhite Daoud",1614,1383,0,"1/26/2027"],
+  ["B105","2x2a-ar","(WRO) Mohammed Saber",1444,1304,0,"2/9/2025"],
+  ["B106","3x2-ar","Haidar Afghan",1997,1333,0,"7/20/2026"],
+  ["B201","3x2-ar","Brianna Bates",1997,1499,1708.5,"10/31/2026"],
+  ["B202","2x2a-ar","Miguel Arredondo",1444,2440,36,"9/11/2025"],
+  ["B203","2x2b-ar","Jessica Fessenden",1614,1150,0,"6/25/2024"],
+  ["B204","2x2b-ar","Christopher Cooper",1614,1399,-1619.89,"5/3/2027"],
+  ["B205","2x2a-ar","Ricco Brown",1444,1150,0,"3/4/2025"],
+  ["B206","3x2-ar","Krisie Johnson",1997,1481,0,"8/4/2025"],
+  ["B301","3x2-ar","Jessica Holman",1997,1499,6365,"8/14/2026"],
+  ["B303","2x2b-ar","Quentin Hyytiainen-Jacobson",1614,1379,0,"5/31/2024"],
+  ["B304","2x2b-ar","VACANT",1614,0,0,""],
+  ["B306","3x2-ar","Asadhik Rahma",1997,1599,3.25,"8/5/2024"],
+  ["C101","3x2-ar","(IRC) Divine Musabyimana",1997,1835,0,"3/12/2025"],
+  ["C102","2x2a-ar","VACANT",1444,0,0,""],
+  ["C103","2x2b-ar","Donna Bielecki",1614,1523,0,"4/25/2025"],
+  ["C104","2x2b-ar","Linda Juitt",1614,1385,-83.5,"8/2/2024"],
+  ["C105","2x2b-ar","Ashley Colon",1614,1369,914.57,"4/25/2025"],
+  ["C106","2x2b-ar","Nikia Anthony",1614,1464,0,"4/25/2025"],
+  ["C107","2x2a-ar","Silvia Granados",1444,1175,0,"6/20/2025"],
+  ["C108","3x2-ar","Connie Brooks",1997,1474,-901,"7/3/2025"],
+  ["C201","3x2-ar","(IRC) Angesom Rezene Zewde",1997,1499,0,"2/13/2025"],
+  ["C202","2x2a-ar","Lela Slover",1444,1175,0,"8/1/2025"],
+  ["C203","2x2b-ar","Jeremy Pasquale",1614,1275,0,"5/5/2026"],
+  ["C204","2x2b-ar","Lucifer King*",1614,2403,474.65,"3/31/2027"],
+  ["C205","2x2b-ar","VACANT",1614,0,0,""],
+  ["C206","2x2b-ar","ARJEN TYPHOON",1614,1327,0,"8/15/2024"],
+  ["C207","2x2a-ar","Abdullah Shinwari",1444,1275,75,"5/26/2026"],
+  ["C208","3x2-ar","VACANT",1997,0,0,""],
+  ["C301","3x2-ar","Abdisalan Ahmed",1997,1699,4663.74,"7/7/2026"],
+  ["C303","2x2b-ar","David LaDeaux",1614,1295,75,"1/12/2027"],
+  ["C304","2x2b-ar","Sydney Davis",1614,2360,362,"9/3/2025"],
+  ["C305","2x2b-ar","(WRO) Safia Yacoub",1614,1275,0,"4/30/2026"],
+  ["C306","2x2b-ar","VACANT",1614,0,0,""],
+  ["C308","3x2-ar","David Roberts",1997,1841,310,"3/31/2027"],
+  ["D101","3x2-ar","Frank Total*",1997,1451,3163,"2/28/2025"],
+  ["D102","2x2a-ar","Cathryn Carlisle",1444,1145,459.5,"8/9/2025"],
+  ["D103","2x2b-ar","Fayazullah Amin",1614,1614,179,"2/11/2026"],
+  ["D104","2x2b-ar","Andanie Debrum",1614,1450,1686.36,"7/3/2024"],
+  ["D105","2x2b-ar","(WRO) Rahma Suleiman",1614,1396,-0.72,"4/3/2025"],
+  ["D106","2x2b-ar","(WRO) Matiullah Qaderi",1614,1275,0,"6/5/2025"],
+  ["D107","2x2a-ar","DOWN",1444,0,0,""],
+  ["D108","3x2-ar","DOWN",1997,0,0,""],
+  ["D201","3x2-ar","Joseph Motodrik*",1997,1749,3813.8,"3/21/2025"],
+  ["D202","2x2a-ar","Daniel Santiago",1444,1100,0,"6/9/2025"],
+  ["D203","2x2b-ar","Alex (Anna) Farrier",1614,1275,0,"8/14/2025"],
+  ["D204","2x2b-ar","Kelly Quercio",1614,2100,99,"9/3/2025"],
+  ["D205","2x2b-ar","(IRC) Ehsanullah Mayar",1614,1275,75,"6/2/2025"],
+  ["D206","2x2b-ar","Kaylee Catron",1614,1399,0,"3/12/2027"],
+  ["D207","2x2a-ar","DOWN",1444,0,0,""],
+  ["D208","3x2-ar","DOWN",1997,0,0,""],
+  ["D301","3x2-ar","Rachel Cabrera",1997,1499,638.5,"9/7/2026"],
+  ["D303","2x2b-ar","Stephanie Phothisat",1614,1399,-2964.85,"6/2/2027"],
+  ["D304","2x2b-ar","Roya Mohammadzai",1614,1275,-0.5,"6/30/2026"],
+  ["D305","2x2b-ar","Tawna Granger",1614,1478,-151,"3/9/2027"],
+  ["D306","2x2b-ar","(IRC) Tahira Amini",1614,1275,145,"3/6/2026"],
+  ["D308","3x2-ar","DOWN",1997,0,0,""],
+  ["E101","3x2-ar","(WRO) Phillip Wuko",1997,1699,7052.05,"5/4/2025"],
+  ["E102","2x2a-ar","MODEL",1444,0,0,""],
+  ["E103","2x2b-ar","Deborah Dorsey",1614,1616,470,"8/3/2025"],
+  ["E104","2x2b-ar","Cody Winham",1614,1396,58.87,"8/3/2025"],
+  ["E105","2x2a-ar","Edain Teague",1444,1475,0,"6/28/2024"],
+  ["E106","3x2-ar","Kerri Castillo",1997,1279,0,"6/30/2023"],
+  ["E201","3x2-ar","Shirley Bocook",1997,1599,-3810.74,"8/3/2026"],
+  ["E202","2x2a-ar","Abdul Musazai",1444,1304,0,"1/13/2026"],
+  ["E203","2x2b-ar","(WRO) Sayima Ibrahim",1614,1375,0,"6/27/2025"],
+  ["E204","2x2b-ar","Stephanie Allen",1614,1574,-1359.5,"2/27/2027"],
+  ["E205","2x2a-ar","(WRO) Javid Tarakhil",1444,1399,533.36,"12/14/2026"],
+  ["E206","3x2-ar","Lemlem Haile",1997,1699,276,"4/1/2027"],
+  ["E301","3x2-ar","(WRO) Paik Ahmed Khair Andesh",1997,1699,-24.5,"5/7/2025"],
+  ["E303","2x2b-ar","William Frantz Jr.",1614,1035,4214.36,"5/31/2025"],
+  ["E304","2x2b-ar","Derrick Celestine",1614,1399,232,"3/30/2026"],
+  ["E306","3x2-ar","Mara DeLoney",1997,1499,1585.63,"9/4/2026"],
+  ["F101","3x2-ar","Michelle Smith",1997,1067,0,"1/1/2025"],
+  ["F102","2x2a-ar","Lillianna Garibaldi",1444,1302,21.46,"5/31/2025"],
+  ["F103","2x2b-ar","Blake Kennedy",1614,2284,63,"10/3/2025"],
+  ["F104","2x2b-ar","Nickolas Jabaut-Longley",1614,1275,25,"9/19/2025"],
+  ["F105","2x2a-ar","Kathy Hernandez",1444,1275,220,"11/30/2025"],
+  ["F106","3x2-ar","(WRO) Samira Huna",1997,1835,520.28,"7/13/2025"],
+  ["F201","3x2-ar","(WRO) Sayed Safi",1997,1499,-0.5,"12/31/2026"],
+  ["F202","2x2a-ar","Anthony Poss",1444,1175,0,"8/12/2025"],
+  ["F203","2x2b-ar","Rothen Bruno",1614,1350,1006,"4/12/2025"],
+  ["F204","2x2b-ar","Rubilla Sorimle",1614,1325,0,"6/16/2025"],
+  ["F205","2x2a-ar","Nicholas Roe",1444,1304,0,"5/9/2025"],
+  ["F206","3x2-ar","Rachael Sawyer",1997,1499,0,"9/18/2026"],
+  ["F301","3x2-ar","Rimus Romak",1997,1644,0,"7/3/2025"],
+  ["F303","2x2b-ar","Patrick Schwartzkopf",1614,1577,249,"2/11/2026"],
+  ["F304","2x2b-ar","Hekmatullah Barakzai",1614,1308,-240,"12/7/2026"],
+  ["F306","3x2-ar","(WRO) Haroon Ibrahimi",1997,1499,0,"3/31/2027"],
+  ["G101","3x2-ar","Andrea Beck*",1997,2204,-2145.5,"5/31/2024"],
+  ["G102","2x2a-ar","Sydney Carrier",1444,1399,0,"5/19/2027"],
+  ["G103","2x2b-ar","Lauren Barnes",1614,1275,13.5,"9/1/2026"],
+  ["G104","2x2b-ar","Jennifer Payton",1614,1275,0,"6/30/2026"],
+  ["G105","2x2b-ar","Abrianna Taylor",1614,1314,0,"2/28/2026"],
+  ["G106","2x2b-ar","Dwayne Campbell",1614,1275,14.5,"8/29/2025"],
+  ["G107","2x2a-ar","(WRO) Simon Deng",1444,1304,-203.42,"6/19/2025"],
+  ["G108","3x2-ar","(WRO) Issakh Abakar",1997,1499,0,"1/1/2027"],
+  ["G201","3x2-ar","Omar Al Ahmad",1997,1699,160,"12/31/2025"],
+  ["G202","2x2a-ar","VACANT",1444,0,0,""],
+  ["G203","2x2b-ar","(IRC) Wahid Ghyasi",1614,1275,-3.92,"6/9/2025"],
+  ["G204","2x2b-ar","VACANT",1614,0,0,""],
+  ["G205","2x2b-ar","Aliyah Earle",1614,1275,1733.08,"1/6/2026"],
+  ["G206","2x2b-ar","VACANT",1614,0,0,""],
+  ["G207","2x2a-ar","Cody Flower",1444,1231,2969.25,"5/6/2025"],
+  ["G208","3x2-ar","Barihan Ahmad",1997,1835,0,"11/15/2024"],
+  ["G301","3x2-ar","William Davidson",1997,1499,-2086.5,"11/20/2026"],
+  ["G303","2x2b-ar","Ashley Bowie",1614,1590,-71.19,"7/23/2024"],
+  ["G304","2x2b-ar","Natalia Ordonez",1614,1399,3159,"3/31/2026"],
+  ["G305","2x2b-ar","Kim Link",1614,1080,1382.46,"6/24/2024"],
+  ["G306","2x2b-ar","Sylvia Hall",1614,1399,-563.61,"3/28/2027"],
+  ["G308","3x2-ar","Barialie Hashimi",1997,1699,0,"6/2/2025"],
+  ["H101","3x2-ar","DOWN",1997,0,0,""],
+  ["H102","2x2a-ar","VACANT",1444,0,0,""],
+  ["H103","2x2b-ar","Brandon Stevens",1614,1399,-5948.82,"5/5/2027"],
+  ["H104","2x2b-ar","James Pickard",1614,1378,0,"4/18/2027"],
+  ["H105","2x2a-ar","Brandon Kennedy",1444,1399,2170.94,"6/16/2027"],
+  ["H106","3x2-ar","(IRC) Mohammad Safai",1997,1699,3.5,"11/6/2024"],
+  ["H201","3x2-ar","Bradley Christenson",1997,3434,2195,"3/31/2026"],
+  ["H202","2x2a-ar","(IRC) Nesar Joya",1444,1444,-14,"7/14/2025"],
+  ["H203","2x2b-ar","Eduardo Ventura",1614,1275,0,"8/10/2025"],
+  ["H204","2x2b-ar","Kellie McCracken",1614,1331,1557,"4/18/2025"],
+  ["H205","2x2a-ar","Samson Langtir",1444,1544,2033.36,"4/25/2025"],
+  ["H206","3x2-ar","Frances Botchek",1997,1399,0,"9/11/2026"],
+  ["H301","3x2-ar","Dominic Richmond",1997,1499,2268,"9/30/2026"],
+  ["H303","2x2b-ar","Ezra Jieta*",1614,1203,4690.45,"7/31/2024"],
+  ["H304","2x2b-ar","Jeffrey Perez",1614,1399,-1169.82,"5/5/2027"],
+  ["H306","3x2-ar","Jose Rodriguez",1997,1818,1932.5,"6/20/2024"],
+  ["J101","3x2-ar","Alneda Taylor",1997,1340,3020.5,"8/17/2024"],
+  ["J102","2x2a-ar","Wendy Mangis*",1444,1175,73.09,"8/20/2025"],
+  ["J103","2x2b-ar","Scott Boyce",1614,1614,64.39,"6/30/2026"],
+  ["J104","2x2b-ar","Lajar Rilometo",1614,1275,0.5,"6/9/2026"],
+  ["J105","2x2a-ar","Mensur Mohammad Ahmed",1444,1444,12.1,"7/13/2025"],
+  ["J106","3x2-ar","Brian Eastman",1997,1699,0,"4/9/2026"],
+  ["J201","3x2-ar","(WRO) Hassan Abdalla",1997,1699,0,"10/12/2026"],
+  ["J202","2x2a-ar","Karen Cameron",1444,1050,-169.7,"6/2/2025"],
+  ["J203","2x2b-ar","Shannon Borum",1614,1632,0,"7/15/2024"],
+  ["J204","2x2b-ar","TyJuan Stevens*",1614,1150,2408.52,"7/3/2025"],
+  ["J205","2x2a-ar","Ingrid Hortado",1444,1100,15.41,"6/9/2025"],
+  ["J206","3x2-ar","Erica Kelly",1997,1699,185,"3/31/2026"],
+  ["J301","3x2-ar","Mileeyah Broughpeckham",1997,1699,-212.5,"4/30/2026"],
+  ["J303","2x2b-ar","Malik Abdulhuda Malik Zada",1614,1275,-26.5,"5/27/2026"],
+  ["J304","2x2b-ar","VACANT",1614,0,0,""],
+  ["J306","3x2-ar","Alexie McWhirter",1997,1699,-561.2,"6/26/2026"],
+  ["K101","3x2-ar","Rhianna Nelson",1997,1415,5082.28,"5/31/2024"],
+  ["K102","2x2a-ar","Carl Wright",1444,1011,3993.5,"1/24/2025"],
+  ["K103","2x2b-ar","Harlen Cariss",1614,1275,1608,"4/20/2026"],
+  ["K104","2x2b-ar","Serenity Harris",1614,1399,0,"3/27/2027"],
+  ["K105","2x2a-ar","Lacy Wood*",1444,1025,1483.4,"1/18/2025"],
+  ["K106","3x2-ar","Daniel Horton",1997,1499,-2531.54,"5/15/2027"],
+  ["K201","3x2-ar","Mercita Samuel*",1997,1055,-145.5,"2/18/2025"],
+  ["K202","2x2a-ar","Troy Kangas",1444,1341,0,"1/12/2025"],
+  ["K203","2x2b-ar","Richard Zigashane",1614,1399,-3025.97,"4/1/2027"],
+  ["K204","2x2b-ar","Solomon Peterson",1614,1373,0,"7/16/2024"],
+  ["K205","2x2a-ar","Darin Reynolds",1444,1399,0,"5/25/2027"],
+  ["K206","3x2-ar","Hussain Hashimi",1997,1835,75.56,"3/29/2025"],
+  ["K301","3x2-ar","Anthony Bates",1997,1499,-1384.92,"4/19/2027"],
+  ["K303","2x2b-ar","Logan McElyea",1614,1275,-526,"7/31/2026"],
+  ["K304","2x2b-ar","Magdadolia Ramirez Alvarado",1614,1399,0,"12/1/2026"],
+  ["K306","3x2-ar","Phuoc Vo",1997,1361,0,"7/3/2025"],
+  // Future move-ins
+  ["B304","2x2b-ar","Davon Johnson (future)",1614,0,0,"4/9/2027"],
+  ["C102","2x2a-ar","Ava Juliano (future)",1444,0,0,"3/19/2027"],
+  ["C205","2x2b-ar","Savannah Jansen (future)",1614,0,0,"5/4/2027"],
+  ["G202","2x2a-ar","Jolten Corinth (future)",1444,0,550,"4/6/2027"],
+  ["G206","2x2b-ar","Uriah Patterson (future)",1614,0,0,"4/21/2027"],
+  ["J304","2x2b-ar","Cari Avey (future)",1614,0,0,"9/30/2026"],
+];
+
+// Sheet 2: [unitType, renoYear, floor, floorPlan, fRating, wRating, aRating, cRating, leeNotes, vaulted]
+const DET = {
+  "A101":["Partial Renovation",2010,"1st","3x2",1,2,2,2,"Hard floor throughout.","N"],
+  "A102":["Renovation",2020,"2nd","2x2",2,2,1,1,"Pet odor","N"],
+  "A103":["Partial Renovation",2015,"1st","2x2",2,2,2,2,"Dogs and cats, pet odor","N"],
+  "A104":["Partial Renovation",2010,"1st","2x2",3,3,1,1,"Cigarette smoke, new cabinets/appliances, carpet throughout","N"],
+  "A105":["Renovation",2018,"3rd","2x2",1,2,1,1,"","Y"],
+  "A106":["Renovation",2018,"1st","2x2",1,1,1,1,"Bathroom ceiling leak, very nice unit","N"],
+  "A201":["Partial Renovation",2018,"2nd","3x2",1,2,1,2,"Messy","N"],
+  "A202":["Renovation",2020,"2nd","2x2",1,2,1,1,"Has dog","N"],
+  "A203":["Partial Renovation",2010,"2nd","2x2",3,3,3,2,"Getting evicted, in bad condition","N"],
+  "A204":["Renovation",2020,"2nd","2x2",1,1,1,1,"Bathroom ceiling leak repair in progress","N"],
+  "A206":["Renovation",2018,"2nd","3x2",1,2,1,1,"Renovated but dirty","N"],
+  "A301":["Partial Renovation",2020,"3rd","3x2",1,1,2,3,"Shower spout leaking","Y"],
+  "A303":["Partial Renovation",2018,"3rd","2x2",1,2,2,2,"","Y"],
+  "A304":["Renovation",2020,"1st","2x2",2,1,1,1,"New kitchen","Y"],
+  "A305":["Partial Renovation",2018,"3rd","2x2",1,3,1,1,"Has older wall color","Y"],
+  "B101":["Partial Renovation",2020,"1st","2x2",1,1,1,2,"","N"],
+  "B102":["Renovation",2020,"ADA","2x2",1,1,1,1,"","N"],
+  "B103":["Partial Renovation",2020,"1st","2x2",1,2,2,2,"","N"],
+  "B104":["Partial Renovation",2020,"1st","2x2",2,2,2,2,"","N"],
+  "B105":["Partial Renovation",2018,"ADA","2x2",1,3,2,3,"","N"],
+  "B106":["Partial Renovation",2020,"1st","3x2",1,1,2,1,"","N"],
+  "B201":["Renovation",2020,"2nd","3x2",1,1,1,1,"","N"],
+  "B202":["Partial Renovation",2018,"3rd","2x2",1,2,2,2,"5 yr resident, cluttered","Y"],
+  "B203":["Partial Renovation",2018,"2nd","2x2",2,2,2,2,"Dogs, dog odor, cluttered","N"],
+  "B204":["Partial Renovation",2020,"2nd","2x2",1,1,1,1,"Heavy weed smell","N"],
+  "B205":["Renovation",2020,"3rd","2x2",1,1,1,2,"","Y"],
+  "B206":["Classic",2000,"3rd","3x2",3,3,2,2,"Carpet, old unit","N"],
+  "B301":["Renovation",2020,"3rd","3x2",1,1,2,1,"","Y"],
+  "B303":["Partial Renovation",2020,"3rd","2x2",3,1,2,1,"","Y"],
+  "B304":["Partial Renovation",2024,"3rd","2x2",1,1,1,1,"Recent move in and Renovation","Y"],
+  "B306":["Partial Renovation",2020,"3rd","3x2",1,1,2,2,"","Y"],
+  "C101":["Partial Renovation",2018,"1st","3x2",1,2,2,2,"","N"],
+  "C102":["Partial Renovation",2018,"ADA","2x2",1,3,2,2,"Car drove through the wall","N"],
+  "C103":["Partial Renovation",2018,"1st","2x2",1,2,1,2,"Has dog","N"],
+  "C104":["Partial Renovation",2018,"1st","2x2",1,2,1,2,"Has dog","N"],
+  "C105":["Partial Renovation",2018,"1st","2x2",1,1,2,2,"","N"],
+  "C106":["Renovation",2023,"1st","2x2",1,2,1,1,"Kitchen fully remodeled","N"],
+  "C107":["Partial Renovation",2018,"1st","2x2",1,2,1,2,"","N"],
+  "C108":["Partial Renovation",2023,"1st","3x2",1,2,1,1,"Has new kitchen","N"],
+  "C201":["Partial Renovation",2018,"2nd","3x2",1,2,1,3,"","N"],
+  "C202":["Partial Renovation",2018,"3rd","2x2",2,2,2,2,"Very bad pet odor, cats","Y"],
+  "C203":["Partial Renovation",2020,"2nd","2x2",1,1,1,2,"Vacant","N"],
+  "C204":["Renovation",2023,"2nd","2x2",1,1,1,1,"Kitchen renovated","N"],
+  "C205":["Partial Renovation",2020,"2nd","2x2",1,1,1,2,"Vacant","N"],
+  "C206":["Partial Renovation",2018,"2nd","2x2",2,3,3,3,"","N"],
+  "C207":["Partial Renovation",2018,"3rd","2x2",1,1,2,2,"","Y"],
+  "C208":["Partial Renovation",2020,"3rd","3x2",1,1,1,2,"Vacant","N"],
+  "C301":["Partial Renovation",2018,"3rd","3x2",1,2,2,2,"Roaches","Y"],
+  "C303":["Renovation",2024,"3rd","2x2",1,2,1,1,"Full kitchen renovation","Y"],
+  "C304":["Partial Renovation",2018,"3rd","2x2",1,1,1,2,"","Y"],
+  "C305":["Renovation",2020,"3rd","2x2",1,1,1,1,"Fully renovated kitchen","Y"],
+  "C306":["Renovation",2023,"3rd","2x2",1,1,1,2,"Vacant","Y"],
+  "C308":["Partial Renovation",2018,"3rd","3x2",3,1,2,2,"","Y"],
+  "D101":["Classic",2010,"1st","3x2",3,3,2,3,"Classic unit, carpeted","N"],
+  "D102":["Partial Renovation",2018,"ADA","2x1",2,2,2,2,"Cluttered","N"],
+  "D103":["Partial Renovation",2018,"1st","2x2",1,2,2,2,"","N"],
+  "D104":["Partial Renovation",2018,"1st","2x2",1,2,1,3,"","N"],
+  "D105":["Partial Renovation",2020,"1st","2x2",1,1,1,2,"","N"],
+  "D201":["Partial Renovation",2020,"2nd","3x2",1,2,2,2,"","N"],
+  "D202":["Partial Renovation",2018,"3rd","2x2",1,1,2,2,"","N"],
+  "D203":["Partial Renovation",2020,"2nd","2x2",1,2,1,1,"Cluttered","N"],
+  "D204":["Partial Renovation",2020,"2nd","2x2",1,1,1,2,"","N"],
+  "D205":["Partial Renovation",2018,"2nd","2x2",1,1,1,2,"","N"],
+  "D206":["Partial Renovation",2020,"2nd","2x2",1,1,2,2,"","N"],
+  "D301":["Partial Renovation",2018,"3rd","3x2",1,1,2,2,"","Y"],
+  "D303":["Partial Renovation",2018,"3rd","2x2",1,1,1,2,"","Y"],
+  "D304":["Partial Renovation",2018,"3rd","2x2",1,1,1,2,"","Y"],
+  "D305":["Partial Renovation",2018,"3rd","2x2",1,2,1,3,"","N"],
+  "D306":["Partial Renovation",2020,"3rd","2x2",1,1,1,2,"","Y"],
+  "E101":["Partial Renovation",2018,"1st","2x2",1,2,2,2,"","N"],
+  "E102":["Partial Renovation",2018,"ADA","2x2",1,1,2,2,"Model unit","N"],
+  "E103":["Renovation",2024,"1st","2x2",1,2,1,1,"Cluttered","N"],
+  "E104":["Partial Renovation",2018,"1st","2x2",3,3,2,2,"Very very bad pet odor","N"],
+  "E105":["Partial Renovation",2015,"ADA","2x2",1,2,2,2,"","N"],
+  "E106":["Partial Renovation",2018,"1st","3x2",2,2,2,3,"","N"],
+  "E201":["Partial Renovation",2018,"2nd","3x2",1,1,1,2,"","N"],
+  "E202":["Partial Renovation",2018,"2nd","2x1",1,1,1,3,"","Y"],
+  "E203":["Renovation",2023,"2nd","2x2",1,1,1,1,"","N"],
+  "E204":["Partial Renovation",2016,"2nd","2x2",1,2,2,2,"","N"],
+  "E205":["Partial Renovation",2023,"3rd","2x2",1,1,1,2,"","Y"],
+  "E206":["Renovation",2022,"2nd","3x2",1,1,1,1,"","N"],
+  "E301":["Partial Renovation",2020,"3rd","3x2",1,1,2,2,"","Y"],
+  "E303":["Classic",2012,"3rd","2x2",3,3,3,3,"","Y"],
+  "E304":["Partial Renovation",2023,"3rd","2x2",1,2,1,2,"","Y"],
+  "E306":["Partial Renovation",2024,"3rd","3x2",1,1,1,2,"","Y"],
+  "F101":["Classic",2000,"1st","3x2",3,3,2,2,"Heavy turn — prev ceiling damage, MG in main bath, very messy cluttered older tenant","N"],
+  "F102":["Partial Renovation",2018,"1st","2x2",2,3,2,2,"Heavy turn — very dirty pet odors cats cluttered","N"],
+  "F103":["Partial Renovation",2018,"1st","2x2",2,2,2,3,"Med turn — cabinet door broken, cluttered but not gross","N"],
+  "F104":["Renovation",2022,"1st","2x2",1,1,1,1,"Light turn — well kept Reno no issues","N"],
+  "F105":["Renovation",2022,"ADA","2x2",1,1,1,1,"Light turn — updated fire alarm, well kept full Reno","N"],
+  "F106":["Renovation",2022,"1st","3x2",2,2,1,1,"Light turn — humid, dirty, some MG in shared bath","N"],
+  "F201":["Partial Renovation",2018,"2nd","3x2",1,2,1,2,"Light turn — humid, flooring and appliances only upgrades, old cabinets","N"],
+  "F202":["Partial Renovation",2018,"2nd","2x2",1,2,1,2,"Light turn — well kept (literal dirt bike on patio)","Y"],
+  "F203":["Partial Renovation",2018,"2nd","2x2",1,2,2,3,"Med turn — well kept no issues","N"],
+  "F204":["Partial Renovation",2018,"2nd","2x2",1,1,1,2,"Light turn — older cabinets counters, well kept","N"],
+  "F205":["Renovation",2021,"2nd","2x2",2,2,1,1,"Med turn — cats, very messy, will need paint and trim","Y"],
+  "F206":["Renovation",2021,"2nd","3x2",1,1,1,1,"Light turn — updated fire alarm, messy but not gross","N"],
+  "F303":["Renovation",2022,"3rd","2x2",1,2,1,1,"Light turn — tenant moving EOM, no major issues","Y"],
+  "F304":["Renovation",2022,"3rd","2x2",1,2,1,1,"Light turn — well kept Reno, rugs covering floors","Y"],
+  "F306":["Renovation",2021,"3rd","3x2",1,1,1,1,"Light turn — well kept, rugs covering floors","Y"],
+  "G101":["Classic",2018,"1st","3x2",3,3,3,3,"Focus tenant — Heavy turn — classic unit only some flooring updated","N"],
+  "G102":["Partial Renovation",2018,"ADA","2x2",2,1,2,2,"Light turn — well kept older cab/counter/appliances","N"],
+  "G103":["Partial Renovation",2018,"1st","2x2",1,2,1,2,"Light turn — pet odor (large dog and cat), ceiling bubble in bath","N"],
+  "G104":["Partial Renovation",2022,"1st","2x2",1,2,1,2,"Light turn — minor electric issue, toilet fitting leaking","N"],
+  "G105":["Partial Renovation",2018,"1st","2x2",1,2,2,2,"Light turn — updated flooring older cabinets vanities","N"],
+  "G106":["Renovation",2022,"1st","2x2",1,1,1,1,"Light turn — humid, clean well kept Reno unit","N"],
+  "G107":["Classic",2018,"1st","2x2",2,3,2,2,"Med turn — very humid, damaged drawers, flooring only update","N"],
+  "G108":["Renovation",2022,"1st","3x2",1,2,1,1,"Light turn — humid Reno, MG in bedroom, vanities damaged","N"],
+  "G201":["Classic",2018,"2nd","3x2",1,2,2,3,"Med turn — only flooring and fridge updated, older walls/cabinets/vanities","N"],
+  "G202":["Partial Renovation",2018,"2nd","2x2",1,2,1,2,"Vacant — mid turn (next 3 weeks), older cab/counters, broken vanity doors","Y"],
+  "G203":["Renovation",2026,"2nd","2x2",1,1,1,1,"Vacant — mid turn — next 2 weeks updated renod unit","N"],
+  "G204":["Partial Renovation",2026,"2nd","2x2",1,1,1,2,"Vacant — mid turn — finished this week","N"],
+  "G205":["Renovation",2022,"2nd","2x2",1,1,1,1,"Light turn — seemingly abandoned, well kept Reno unit, damaged cab drawer","N"],
+  "G206":["Partial Renovation",2022,"2nd","2x2",1,1,1,1,"Light turn — recent move in","N"],
+  "G207":["Renovation",2022,"2nd","2x2",1,1,1,1,"Vacant — mid turn (next 2 weeks), A/C not working","Y"],
+  "G208":["Renovation",2022,"2nd","3x2",1,3,1,1,"Med turn — water leak in shared bath, humid, MG in shared bath, stair landing needs Reno","N"],
+  "G301":["Partial Renovation",2018,"3rd","3x2",1,1,1,2,"Light turn — smoker with dogs, well kept older Reno","Y"],
+  "G303":["Renovation",2022,"3rd","2x2",1,1,1,1,"Light turn — Large dog but well kept, messy","Y"],
+  "G304":["Renovation",2023,"3rd","2x2",1,1,1,1,"Vacant — mid turn — done this week fully updated","Y"],
+  "G305":["Classic",2000,"3rd","2x2",3,2,2,2,"Med turn — all flooring needs replaced (original carpet), DW damage around tub, older everything","Y"],
+  "G306":["Partial Renovation",2018,"3rd","2x2",1,1,2,2,"Light turn — pretty empty, tidy, older cab/appliances/counters","Y"],
+  "G308":["Partial Renovation",2018,"3rd","3x2",1,1,2,2,"Light turn — well kept, rugs covering floors, some closet doors damaged","Y"],
+  "H101":["Classic",2026,"1st","3x2",3,3,3,3,"Vacant — gutted from flood damage (sewer caused)","N"],
+  "H102":["Partial Renovation",2026,"ADA","2x2",2,3,1,3,"Vacant — mid Reno from water damage","N"],
+  "H103":["Renovation",2022,"1st","2x2",1,1,1,1,"Light turn — Large dog, dirty but not gross, updated cab/counter/appliances/floor","N"],
+  "H104":["Partial Renovation",2018,"1st","2x2",3,3,2,2,"Heavy turn — bad pet odor, cluttered mess, damaged walls and cabinets","N"],
+  "H105":["Partial Renovation",2022,"1st","2x2",1,2,1,2,"Light turn — well kept, older cabinets, newer flooring","N"],
+  "H106":["Renovation",2024,"1st","3x2",1,1,1,2,"Light turn — updated counters back splash, mixed appliance, well kept","N"],
+  "H201":["Renovation",2024,"2nd","3x2",3,3,3,3,"Heavy turn — large dogs, leak in bathroom ceiling drywall, Reno but very dirty","N"],
+  "H202":["Partial Renovation",2018,"2nd","2x2",1,2,1,2,"Light turn — well kept rugs covering floors, older cab/vanities, updated appliances","Y"],
+  "H203":["Renovation",2022,"2nd","2x2",2,1,1,1,"Med turn — very humid (pepper in air), updated cab/counter/appliances, flooring wavy","N"],
+  "H204":["Renovation",2022,"2nd","2x2",1,2,1,1,"Light turn — updated cab/counter/appliances/flooring, dirty but not gross","Y"],
+  "H205":["Partial Renovation",2018,"2nd","2x2",1,2,1,2,"Light turn — Very humid, newer floors/appliances, older vanities & cabinets, some MG in bath. Stair landing damaged by car","Y"],
+  "H206":["Partial Renovation",2024,"2nd","3x2",1,1,1,1,"Light turn — 2 dogs, older cab/vanities, newer counter/appliances/flooring","N"],
+  "H301":["Renovation",2022,"3rd","3x2",1,1,1,1,"Light turn — lived in but not trashed, one broken drawer","Y"],
+  "H303":["Partial Renovation",2018,"3rd","2x2",2,3,2,3,"Med turn — cabinets covered in contact paper, walls & trim damaged, cockroaches","Y"],
+  "H304":["Partial Renovation",2022,"3rd","2x2",1,2,1,2,"Vacant — light turn (next week), roach traps, broken vanity drawer","Y"],
+  "H306":["Renovation",2022,"3rd","3x2",2,3,2,2,"Med/heavy turn — cluttered and dirty, broken drawers, flooring separating","Y"],
+  "J101":["Classic",2018,"1st","3x2",2,3,2,3,"Heavy turn — Broken cabinet doors, very messy, drywall repairs, bathroom ceiling damaged","N"],
+  "J102":["Classic",2018,"ADA","2x2",2,3,2,3,"Heavy turn — cat pee pet odor, drywall damage, cabinet door broken","N"],
+  "J103":["Renovation",2025,"1st","2x2",1,1,1,1,"Light turn — recent Reno, well kept","N"],
+  "J104":["Partial Renovation",2018,"1st","2x2",2,3,1,2,"Medium/heavy turn — broke doors, holes in walls, humid, broken drawers. Broken stair leading to unit","N"],
+  "J105":["Partial Renovation",2021,"1st","2x2",1,1,1,1,"Light turn — ceiling damaged flooring in bathrooms, DW damage by tub, newer countertops, clean","N"],
+  "J106":["Renovation",2022,"1st","3x2",2,2,1,1,"Medium turn — updated appliances/counters, messy but not gross, MG in tub","N"],
+  "J201":["Partial Renovation",2018,"2nd","3x2",2,3,2,2,"Heavy turn — VERY humid, doors off hinges, water on floors possible toilet leak, walls need repairs","N"],
+  "J202":["Classic",2018,"2nd","2x2",2,1,1,1,"Light turn — everything dated but good shape, cats but no odor, carpet needs replaced","Y"],
+  "J203":["Partial Renovation",2018,"2nd","2x2",1,2,1,2,"Medium turn — cat but no odor, clutter, MG in tub stall, need appliances, old cabinets, newer flooring","N"],
+  "J204":["Classic",2018,"2nd","2x2",3,3,3,3,"Heavy turn — damaged flooring, very messy, main bath torn up due to leak","N"],
+  "J205":["Partial Renovation",2018,"2nd","2x2",2,2,1,2,"Medium turn — VERY HUMID, tidy, newer counters, missing drawers, fireplace","Y"],
+  "J206":["Renovation",2024,"2nd","3x2",2,2,1,2,"Medium turn — pets, cluttered, kitchen cab renod, bath vanity messy doors and drawers","N"],
+  "J301":["Partial Renovation",2020,"3rd","3x2",2,3,2,2,"Medium turn — broken slider door, holes in walls, broken vanity doors, LVP flooring, front door damaged","Y"],
+  "J303":["Partial Renovation",2020,"1st","2x2",1,1,1,1,"Light turn — rugs covering all floors, fireplace, well kept","Y"],
+  "J304":["Partial Renovation",2020,"3rd","2x2",1,1,1,1,"Recent move in, still smells like paint, flooring in good shape, fireplace","Y"],
+  "J306":["Renovation",2024,"3rd","3x2",1,1,1,1,"Recent Reno — updated cabinets and vanities, well kept and updated","Y"],
+  "K101":["Partial Renovation",2018,"1st","3x2",3,3,2,3,"HEAVY TURN — lots of dog pee and poop, very cluttered, damaged cabinets","N"],
+  "K102":["Classic",2000,"ADA","2x2",3,3,3,3,"Vacant — needs full heavy turn, smoker and very dated unit","N"],
+  "K103":["Renovation",2024,"1st","2x2",1,2,1,1,"VACANT — light turn, some drywall damage, updated appliances/counters/cabinets/vanities","N"],
+  "K104":["Renovation",2024,"1st","2x2",1,1,1,1,"Light turn — very messy, one broken cabinet","N"],
+  "K105":["Partial Renovation",2018,"ADA","2x2",1,2,1,2,"Light turn — main bath dw repair, missing floor trim, messy, older cab/counters","N"],
+  "K106":["Partial Renovation",2026,"1st","3x2",1,1,1,2,"Recent move in — older cab/vanities/counters, new flooring/appliances, well kept","N"],
+  "K201":["Renovation",2024,"2nd","3x2",1,2,1,2,"Light turn — damaged drawers although they were updated","N"],
+  "K202":["Partial Renovation",2018,"2nd","2x2",1,1,2,2,"Medium turn — older cab and counter, newer flooring and vanity, well kept","Y"],
+  "K203":["Partial Renovation",2018,"2nd","2x2",1,2,1,1,"Light turn — newer floor/trim/appliances, old paint/cab/counters, well kept","N"],
+  "K204":["Classic",2018,"2nd","2x2",1,2,1,2,"Light turn — updated appliances and flooring, old paint/cab/counters, some ceiling damage in main bath","N"],
+  "K205":["Partial Renovation",2018,"2nd","2x2",1,1,1,1,"Light turn — different layout with bar/kitchen, very clean and well kept","Y"],
+  "K206":["Partial Renovation",2018,"2nd","2x2",1,2,2,2,"Light turn — unable to view most of unit but well kept, older counters/cabinets. Focus tenant not allowing access at first","N"],
+  "K301":["Classic",2018,"3rd","3x2",1,2,1,2,"Medium turn — large dog, broken drawers, older counters/paint, appliances/floors 5+ years old","Y"],
+  "K303":["Partial Renovation",2021,"3rd","2x2",1,1,1,1,"Light turn — different layout, updated flooring, well kept","Y"],
+  "K304":["Partial Renovation",2018,"3rd","2x2",1,2,1,1,"Light turn — older unit different layout, well kept","Y"],
+  "K306":["Classic",2000,"3rd","3x2",3,2,2,2,"Medium turn — needs flooring throughout, damaged vanity drawers, well kept for age","Y"],
+};
+
+// Sheet 3: Stefanie's TRS inspection
+// [rating, notes, isFocus]
+const TRS = {
+  "A101":[2,"Trash on porch",false],
+  "A102":[1,"",false],
+  "A103":[2,"Cat",false],
+  "A104":[1,"Dog and cat",false],
+  "A105":[1,"",false],
+  "A106":[1,"",false],
+  "A201":[1,"",false],
+  "A202":[1,"Correction — we did enter this unit",false],
+  "A203":[3,"Eviction unit. Tagging. Broken windows. Trashed unit.",false],
+  "A204":[2,"Shelf on porch. Bathroom ceiling open",false],
+  "A205":[1,"",false],
+  "A206":[1,"",false],
+  "A303":[2,"",false],
+  "B101":[2,"Junk under stairs outside of unit",false],
+  "B103":[3,"Smelly. Rotten food in unit",false],
+  "B105":[3,"Grimy",false],
+  "B106":[3,"Junk outside",false],
+  "B201":[1,"",false],
+  "B202":[1,"",false],
+  "B204":[2,"",false],
+  "B205":[2,"",false],
+  "B206":[2,"",false],
+  "B301":[2,"Bikes under stairs. Front door is beat up",false],
+  "B303":[2,"",false],
+  "B304":[1,"",false],
+  "B306":[1,"",false],
+  "C101":[3,"Smelly. Humid. Burn mark on kitchen floor",false],
+  "C102":[3,"Car crash unit",false],
+  "C103":[1,"Large aquatic tank",false],
+  "C104":[2,"",false],
+  "C105":[2,"Butts outside. Trash inside",false],
+  "C107":[2,"",false],
+  "C201":[2,"",false],
+  "C202":[3,"Pet smell. Dirty",false],
+  "C203":[2,"Vacant",false],
+  "C204":[1,"",false],
+  "C206":[2,"Unit in rough shape",false],
+  "C207":[1,"Shelf on porch",false],
+  "C208":[2,"Vacant. Dirty.",false],
+  "C301":[2,"",false],
+  "C303":[2,"BBQ in unit",false],
+  "C305":[1,"",false],
+  "C306":[3,"Eviction unit. No entry",false],
+  "C308":[2,"Clutter",false],
+  "D101":[2,"",false],
+  "D102":[2,"Using bathroom as storage",false],
+  "D103":[1,"",false],
+  "D104":[1,"",false],
+  "D201":[2,"",false],
+  "D202":[2,"",false],
+  "D203":[3,"Pet smell. Cats",false],
+  "D204":[1,"",false],
+  "D205":[1,"",false],
+  "D206":[1,"",false],
+  "D301":[2,"Messy. Clutter",false],
+  "D303":[2,"",false],
+  "D304":[2,"Smelly. Bikes and trash on porch",false],
+  "D305":[2,"Door damaged",false],
+  "D306":[2,"",false],
+  "E101":[3,"Humid. Very strong food smells",false],
+  "E102":[2,"Roaches. Show unit",false],
+  "E103":[2,"Clutter",false],
+  "E104":[3,"Very strong food smells. Dirty",false],
+  "E201":[2,"",false],
+  "E202":[3,"Roaches. Small maintenance issues",false],
+  "E203":[2,"",false],
+  "E204":[2,"Fingernail polish on fridge. Tape over light switches",false],
+  "E205":[2,"",false],
+  "E206":[2,"Food smells",false],
+  "E301":[2,"",false],
+  "E306":[1,"",false],
+  "F101":[2,"2 dogs, lots of clutter hard to walk through",false],
+  "F102":[2,"Clutter, cat smells, unable to open bathroom door due to blockage",false],
+  "F103":[1,"",false],
+  "F104":[1,"",false],
+  "F105":[1,"",false],
+  "F106":[1,"",false],
+  "F201":[1,"Humid",false],
+  "F202":[1,"",false],
+  "F203":[1,"",false],
+  "F204":[2,"Clean — cig smell in bathroom",false],
+  "F205":[2,"Cluttered",false],
+  "F206":[1,"",false],
+  "F303":[1,"Cats",false],
+  "F306":[1,"",false],
+  "G101":[2,"Cluttered",false],
+  "G102":[1,"",false],
+  "G103":[1,"Dog and cat",false],
+  "G104":[1,"",false],
+  "G105":[1,"",false],
+  "G106":[1,"",false],
+  "G107":[1,"Humid",false],
+  "G108":[1,"",false],
+  "G201":[1,"",false],
+  "G202":[1,"Vacant",false],
+  "G203":[1,"Vacant",false],
+  "G204":[1,"Vacant",false],
+  "G205":[1,"",false],
+  "G206":[1,"New move in",false],
+  "G208":[2,"Water leak in bathroom",false],
+  "G301":[1,"1 dog",false],
+  "G303":[2,"Cig smell",false],
+  "G304":[1,"Vacant",false],
+  "G306":[1,"",false],
+  "G308":[1,"",false],
+  "H101":[1,"Vacant flood unit",false],
+  "H102":[1,"Vacant flood unit — Reno",false],
+  "H103":[2,"ESA dog",false],
+  "H104":[3,"Focus — bad pet smell clutter",true],
+  "H105":[2,"Clean but warm and humid",false],
+  "H106":[1,"",false],
+  "H201":[2,"2 large dogs — smell",false],
+  "H202":[1,"",false],
+  "H203":[2,"Clean — extra sleeping areas in living room",false],
+  "H204":[1,"Super large fish tank",false],
+  "H205":[2,"Pot smell in master",false],
+  "H301":[2,"Clutter",false],
+  "H303":[3,"Focus — roaches",true],
+  "H304":[3,"Vacant but has roach traps throughout",false],
+  "H306":[3,"Focus — clutter and smoking/pot",true],
+  "J101":[3,"Focus — cig smell, clutter, dirty",true],
+  "J102":[2,"Focus — bad cat smell, clutter/messy",true],
+  "J104":[3,"Focus — damaged walls, doors off",true],
+  "J105":[1,"1st floor not true ADA due to raised sidewalk",false],
+  "J106":[2,"Focus — heavy cig smell in master, 2 large dogs, 1 cat — messy/dirty",true],
+  "J201":[3,"Focus — very humid, holes in wall, clutter not clean",true],
+  "J202":[1,"Resident cig smell. Cats but no smell",false],
+  "J203":[2,"",false],
+  "J204":[3,"Focus — dirty, smell, extreme clutter, dog poop on floor",true],
+  "J205":[2,"Clean but very humid",false],
+  "J206":[2,"Slight pot smell. 4ish pets — dogs and cats",false],
+  "J301":[2,"Trash outside front door, DV glass door broken",false],
+  "J303":[1,"**Stair has broken and crumbled steps",false],
+  "J304":[1,"New move in",false],
+  "J306":[1,"Evidence of cats, no smell",false],
+  "K101":[3,"Focus — 5 small dogs, BAD! Waste all over floor, dirty",true],
+  "K102":[3,"Vacant",false],
+  "K103":[1,"Vacant",false],
+  "K104":[2,"2 cats smell. Messy",false],
+  "K105":[2,"ADA",false],
+  "K106":[1,"",false],
+  "K202":[1,"",false],
+  "K203":[1,"",false],
+  "K204":[2,"Cluttered",false],
+  "K205":[1,"Clean",false],
+  "K206":[2,"Clean — wouldn't let us all the way in without taking shoes off",false],
+  "K301":[1,"",false],
+  "K303":[1,"",false],
+  "K304":[1,"",false],
+  "K306":[1,"2 cats",false],
+};
+
+// ── BUILD UNIT RECORDS ──────────────────────────────────────────────────────
+const rrMap = {};
+RR.forEach(r => {
+  // future rows override vacant placeholder for same unit
+  if (!rrMap[r[0]] || r[2].includes('(future)')) rrMap[r[0]] = r;
+});
+
+function mult(r){ return r===1?0:r===2?0.25:r===3?1:0; }
+
+function avgCond(f,w,a,c){
+  const vals = [f,w,a,c].filter(v=>v!=null&&v>0);
+  if(!vals.length) return null;
+  return vals.reduce((s,v)=>s+v,0)/vals.length;
+}
+
+function condBucket(avg){
+  if(avg===null) return null;
+  if(avg<1.5) return 1;
+  if(avg<2.5) return 2;
+  return 3;
+}
+
+function normPlan(p){
+  if(!p) return '2x2b';
+  if(p.includes('3x2')) return '3x2';
+  if(p.includes('2x2a')) return '2x2a';
+  return '2x2b';
+}
+
+const UNITS = Object.values(rrMap).map(([unit,plan,name,mktRent,actRent,bal,leaseExp])=>{
+  const det = DET[unit];
+  const trs = TRS[unit];
+  const isFuture = name.includes('(future)');
+  const cleanName = name.replace(' (future)','');
+  const uName = cleanName.toUpperCase();
+  let status = isFuture ? 'Future' : uName==='VACANT' ? 'Vacant' : uName==='DOWN' ? 'Down' : uName==='MODEL' ? 'Model' : 'Occupied';
+  const bldg = unit[0];
+  const floor = det ? det[2] : '';
+  const unitType = det ? det[0] : '';
+  const renoYear = det ? det[1] : '';
+  const fRat = det ? det[4] : null;
+  const wRat = det ? det[5] : null;
+  const aRat = det ? det[6] : null;
+  const cRat = det ? det[7] : null;
+  const avg = avgCond(fRat,wRat,aRat,cRat);
+  const condBkt = condBucket(avg);
+  const isFocus = trs ? trs[2] : false;
+  const isDQ = status==='Occupied' && bal>200;
+  const rrPlan = normPlan(plan);
+  return {unit,bldg,floor,plan:det?det[3]:plan,rrPlan,unitType,renoYear,fRat,wRat,aRat,cRat,avg,condBkt,
+          status,name:cleanName,actRent,bal,leaseExp,trsRat:trs?trs[0]:null,trsNote:trs?trs[1]:'',isFocus,isDQ};
+});
+
+// ── STATS for Tab 1 ─────────────────────────────────────────────────────────
+const total = UNITS.length;
+const nOcc = UNITS.filter(u=>u.status==='Occupied').length;
+const nVac = UNITS.filter(u=>u.status==='Vacant').length;
+const nDown = UNITS.filter(u=>u.status==='Down').length;
+const nFocus = UNITS.filter(u=>u.isFocus).length;
+const nDQ = UNITS.filter(u=>u.isDQ).length;
+const totBal = UNITS.filter(u=>u.bal>0).reduce((s,u)=>s+u.bal,0);
+const occ_pct = ((nOcc/total)*100).toFixed(1);
+
+// Condition buckets (inspected units only)
+const inspected = UNITS.filter(u=>u.avg!==null);
+const cBkts = [0,0,0]; // index 0=Good,1=Fair,2=Poor
+inspected.forEach(u=>{ if(u.condBkt===1)cBkts[0]++; else if(u.condBkt===2)cBkts[1]++; else if(u.condBkt===3)cBkts[2]++; });
+
+// Type counts (inspected units only)
+const typeCts = {};
+inspected.forEach(u=>{ if(u.unitType) typeCts[u.unitType]=(typeCts[u.unitType]||0)+1; });
+const typeTotal = Object.values(typeCts).reduce((s,v)=>s+v,0);
+
+// KPI row 0
+document.getElementById('kpi0').innerHTML = [
+  {cls:'good', val:occ_pct+'%', lbl:`Occupancy (${nOcc}/${total})`},
+  {cls:'', val:nVac, lbl:'Vacant Units'},
+  {cls:'warn', val:cBkts[2], lbl:'Poor Condition (3)'},
+  {cls:'warn', val:nFocus, lbl:'Focus Tenants'},
+  {cls:'warn', val:nDQ, lbl:'DQ Tenants (bal>$200)'},
+  {cls:'', val:'$'+Math.round(totBal).toLocaleString(), lbl:'Total Outstanding Bal'},
+  {cls:'', val:nDown, lbl:'Down / Offline'},
+].map(k=>`<div class="kpi ${k.cls}"><div class="kpi-val">${k.val}</div><div class="kpi-lbl">${k.lbl}</div></div>`).join('');
+
+// Segment bars
+function segBar(data, containerId, lblId){
+  const total = data.reduce((s,d)=>s+d.n,0)||1;
+  document.getElementById(containerId).innerHTML = data.map(d=>`<div style="flex:${d.n/total};background:${d.color};min-width:${d.n?2:0}px"></div>`).join('');
+  document.getElementById(lblId).innerHTML = data.map(d=>`<div class="seg-lbl"><div class="seg-dot" style="background:${d.color}"></div>${d.label}: ${d.n} (${Math.round(d.n/total*100)}%)</div>`).join('');
+}
+
+segBar([
+  {label:'Good (1)',n:cBkts[0],color:'#27ae60'},
+  {label:'Fair (2)',n:cBkts[1],color:'#f39c12'},
+  {label:'Poor (3)',n:cBkts[2],color:'#e74c3c'},
+],'condBar','condLbls');
+
+segBar([
+  {label:'Classic',n:typeCts['Classic']||0,color:'#7f8c8d'},
+  {label:'Partial Renovation',n:typeCts['Partial Renovation']||0,color:'#e67e22'},
+  {label:'Renovation',n:typeCts['Renovation']||0,color:'#2e86c1'},
+],'typeBar','typeLbls');
+
+// Populate building selects
+const bldgs = [...new Set(UNITS.map(u=>u.bldg))].sort();
+['fBldg','cx_fBldg'].forEach(id=>{
+  const sel = document.getElementById(id);
+  bldgs.forEach(b=>{ const o=document.createElement('option');o.value=b;o.textContent='Bldg '+b;sel.appendChild(o); });
+});
+
+// ── TAB 1: RENT ROLL TABLE ─────────────────────────────────────────────────
+const RR_COLS = ['Unit','Bldg','Floor','Plan','Type','Reno','Cond','Floor\'g','Walls','Appl','Cab/Ctr','Status','Tenant','Act Rent','Balance','Lease Exp','TRS Notes','Flags'];
+let rrSort={col:0,asc:true}, focusOnly=false;
+
+document.getElementById('rrHead').innerHTML = RR_COLS.map((c,i)=>`<th onclick="rrSortBy(${i})">${c}</th>`).join('');
+
+function condBadge(bkt,avg){
+  if(avg===null) return '<span style="color:#bbb">—</span>';
+  const cls=bkt===1?'c1':bkt===2?'c2':'c3';
+  return `<span class="badge ${cls}">${avg.toFixed(1)}</span>`;
+}
+function rchip(r){ if(!r) return '—'; return `<span class="rating-chip r${r}-chip">${r}</span>`; }
+function statusBadge(s){
+  const map={Occupied:'b-occ',Vacant:'b-vac',Down:'b-down',Model:'b-model',Future:'b-fut'};
+  return `<span class="badge ${map[s]||''}">${s}</span>`;
+}
+function fmtBal(v){
+  if(v===0) return '<span style="color:#ccc">$0</span>';
+  if(v>200) return `<span class="bal-pos">$${v.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}</span>`;
+  if(v<0) return `<span class="bal-neg">(${Math.abs(v).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})})</span>`;
+  return `<span style="color:#888">$${v.toFixed(2)}</span>`;
+}
+
+function rrFiltered(){
+  const q=(document.getElementById('s0').value||'').toLowerCase();
+  const fb=document.getElementById('fBldg').value;
+  const ff=document.getElementById('fFloor').value;
+  const fs=document.getElementById('fStatus').value;
+  const fc=document.getElementById('fCond').value;
+  const ft=document.getElementById('fType').value;
+  return UNITS.filter(u=>{
+    if(fb&&u.bldg!==fb) return false;
+    if(ff&&u.floor!==ff) return false;
+    if(fs&&u.status.toLowerCase()!==fs.toLowerCase()) return false;
+    if(fc&&u.condBkt!==parseInt(fc)) return false;
+    if(ft&&u.unitType!==ft) return false;
+    if(focusOnly&&!u.isFocus) return false;
+    if(q){const h=[u.unit,u.name,u.trsNote,u.unitType,u.status].join(' ').toLowerCase();if(!h.includes(q))return false;}
+    return true;
+  });
+}
+
+function rrSorted(data){
+  return [...data].sort((a,b)=>{
+    const vals=[a.unit,a.bldg,a.floor,a.plan,a.unitType,a.renoYear,a.avg,a.fRat,a.wRat,a.aRat,a.cRat,a.status,a.name,a.actRent,a.bal,a.leaseExp,a.trsNote,a.isFocus?1:0];
+    const bvals=[b.unit,b.bldg,b.floor,b.plan,b.unitType,b.renoYear,b.avg,b.fRat,b.wRat,b.aRat,b.cRat,b.status,b.name,b.actRent,b.bal,b.leaseExp,b.trsNote,b.isFocus?1:0];
+    let av=vals[rrSort.col]??'', bv=bvals[rrSort.col]??'';
+    if(typeof av==='number'&&typeof bv==='number') return rrSort.asc?av-bv:bv-av;
+    return rrSort.asc?String(av).localeCompare(String(bv)):String(bv).localeCompare(String(av));
+  });
+}
+
+function rrSortBy(i){
+  document.querySelectorAll('#rrHead th').forEach((th,j)=>{th.classList.remove('asc','desc');if(i===j)th.classList.add(rrSort.col===i&&rrSort.asc?'desc':'asc');});
+  if(rrSort.col===i)rrSort.asc=!rrSort.asc;else{rrSort.col=i;rrSort.asc=true;}
+  renderRR();
+}
+
+function renderRR(){
+  const data=rrSorted(rrFiltered());
+  document.getElementById('rc0').textContent=data.length;
+  document.getElementById('rrBody').innerHTML=data.map(u=>{
+    const flags=[];
+    if(u.isFocus) flags.push('<span class="badge b-focus">FOCUS</span>');
+    if(u.isDQ) flags.push('<span class="badge b-dq">DQ</span>');
+    const rent=u.actRent>0?'$'+u.actRent.toLocaleString('en-US'):'<span style="color:#ccc">—</span>';
+    const rowCls=u.isFocus?'focus-left':(u.isDQ?'dq-left':'');
+    return `<tr class="${rowCls}">
+      <td><span class="unit-n">${u.unit}</span></td>
+      <td>${u.bldg}</td>
+      <td>${u.floor||'—'}</td>
+      <td>${u.plan||'—'}</td>
+      <td style="font-size:11px;color:#555;white-space:nowrap">${u.unitType||'—'}</td>
+      <td>${u.renoYear||'—'}</td>
+      <td>${condBadge(u.condBkt,u.avg)}</td>
+      <td>${rchip(u.fRat)}</td>
+      <td>${rchip(u.wRat)}</td>
+      <td>${rchip(u.aRat)}</td>
+      <td>${rchip(u.cRat)}</td>
+      <td>${statusBadge(u.status)}</td>
+      <td style="font-size:11px;max-width:120px">${u.name}</td>
+      <td>${rent}</td>
+      <td>${fmtBal(u.bal)}</td>
+      <td style="font-size:11px;color:#888;white-space:nowrap">${u.leaseExp||'—'}</td>
+      <td class="trs-n">${u.trsNote||'—'}</td>
+      <td>${flags.join(' ')}</td>
+    </tr>`;
+  }).join('');
+}
+
+function toggleFocus(){
+  focusOnly=!focusOnly;
+  document.getElementById('focusBtn').classList.toggle('on',focusOnly);
+  renderRR();
+}
+
+function resetRR(){
+  document.getElementById('s0').value='';
+  ['fBldg','fFloor','fStatus','fCond','fType'].forEach(id=>document.getElementById(id).value='');
+  focusOnly=false; document.getElementById('focusBtn').classList.remove('on');
+  renderRR();
+}
+
+// ── CAPEX COST LOGIC ─────────────────────────────────────────────────────────
+function getCostsCX(){
+  const g=(id)=>parseFloat(document.getElementById(id).value)||0;
+  const p=['3x2','2x2b','2x2a'];
+  const mk=(cat)=>({
+    base:Object.fromEntries(p.map(pl=>[pl,g(`cx_${cat}_${pl}`)])),
+    m1:g(`cx_${cat}_m1`)/100, m2:g(`cx_${cat}_m2`)/100, m3:g(`cx_${cat}_m3`)/100
+  });
+  return {floor:mk('floor'),walls:mk('walls'),appl:mk('appl'),cab:mk('cab')};
+}
+
+function unitCostsCX(u, c){
+  const pl=u.rrPlan;
+  const m=(cat,r)=>r===1?cat.m1:r===2?cat.m2:r===3?cat.m3:0;
+  const f=(c.floor.base[pl]||0)*m(c.floor,u.fRat), w=(c.walls.base[pl]||0)*m(c.walls,u.wRat),
+        a=(c.appl.base[pl]||0)*m(c.appl,u.aRat),   cv=(c.cab.base[pl]||0)*m(c.cab,u.cRat);
+  return {f,w,a,c:cv,tot:f+w+a+cv};
+}
+
+function fmtDol(v){ return v===0?'<span class="cost-zero">—</span>':'$'+Math.round(v).toLocaleString('en-US'); }
+
+const DOWN_CAPEX = 60000;
+
+function unitCapexAmt(u, costFn){
+  if(u.status==='Down') return {f:0,w:0,a:0,c:0,tot:DOWN_CAPEX,isDown:true};
+  if(u.avg===null)      return {f:0,w:0,a:0,c:0,tot:0,isDown:false};
+  return {...costFn(u),isDown:false};
+}
+
+function buildCostTable(data, costFn, bodyId, footId, rcId){
+  const rows=data.filter(u=>u.status!=='Model');
+  document.getElementById(rcId).textContent=rows.length;
+  let totF=0,totW=0,totA=0,totC=0,totAll=0,totTurn=0;
+  document.getElementById(bodyId).innerHTML = rows.map(u=>{
+    const {f,w,a,c,tot,isDown}=unitCapexAmt(u,costFn);
+    const turn=isDown?DOWN_CAPEX:f+w+c;
+    totF+=f;totW+=w;totA+=a;totC+=c;totAll+=tot;totTurn+=turn;
+    const rowStyle=isDown?'style="background:#fff8f2"':'';
+    const turnCell=isDown
+      ?`<td class="cost-cell" style="font-weight:700;color:#c0392b;background:#fff3f3">$60,000</td>`
+      :`<td class="cost-cell" style="font-weight:700;background:#f4faff;color:${turn>8000?'#c0392b':turn>4000?'#e67e22':'#1a5276'}">${turn>0?'$'+Math.round(turn).toLocaleString('en-US'):'<span class="cost-zero">—</span>'}</td>`;
+    const catCells=isDown
+      ?`<td class="cost-cell" style="color:#9aabba;text-align:center" colspan="4">— gut rehab —</td>
+        <td class="cost-cell" style="font-weight:700;color:#c0392b">$60,000</td>`
+      :`<td class="cost-cell">${rchip(u.fRat)} ${fmtDol(f)}</td>
+        <td class="cost-cell">${rchip(u.wRat)} ${fmtDol(w)}</td>
+        <td class="cost-cell">${rchip(u.aRat)} ${fmtDol(a)}</td>
+        <td class="cost-cell">${rchip(u.cRat)} ${fmtDol(c)}</td>
+        <td class="cost-cell" style="font-weight:700;color:${tot>8000?'#c0392b':tot>4000?'#e67e22':'#1a5276'}">${tot>0?'$'+Math.round(tot).toLocaleString('en-US'):'<span class="cost-zero">—</span>'}</td>`;
+    return `<tr ${rowStyle}>
+      <td><span class="unit-n">${u.unit}</span></td>
+      <td>${u.bldg}</td>
+      <td>${u.floor||'—'}</td>
+      <td style="font-size:11px">${isDown?'<span style="color:#e67e22;font-weight:600">Gut Rehab</span>':(u.unitType||'—')}</td>
+      <td>${condBadge(u.condBkt,u.avg)}</td>
+      <td>${statusBadge(u.status)}</td>
+      <td style="font-size:11px;max-width:110px">${u.name}</td>
+      ${catCells}
+      ${turnCell}
+    </tr>`;
+  }).join('');
+  const nInsp=rows.filter(u=>u.avg!==null&&u.status!=='Down').length;
+  const nDown=rows.filter(u=>u.status==='Down').length;
+  document.getElementById(footId).innerHTML=`<tr class="total-row">
+    <td colspan="7"><strong>Total — ${nInsp} inspected + ${nDown} down units</strong></td>
+    <td class="cost-cell">$${Math.round(totF).toLocaleString()}</td>
+    <td class="cost-cell">$${Math.round(totW).toLocaleString()}</td>
+    <td class="cost-cell">$${Math.round(totA).toLocaleString()}</td>
+    <td class="cost-cell">$${Math.round(totC).toLocaleString()}</td>
+    <td class="cost-cell" style="font-weight:700;color:#c0392b">$${Math.round(totAll).toLocaleString()}</td>
+    <td class="cost-cell" style="font-weight:700;color:#1a5276;background:#eaf4fb">$${Math.round(totTurn).toLocaleString()}</td>
+  </tr>`;
+  return {totF,totW,totA,totC,totAll,totTurn,rows,nInsp,nDown};
+}
+
+const COST_HEADS = `<th>Unit</th><th>Bldg</th><th>Floor</th><th>Type</th><th>Cond</th><th>Status</th><th>Tenant</th><th class="cost-cell">Flooring</th><th class="cost-cell">Walls</th><th class="cost-cell">Appliances</th><th class="cost-cell">Cabinets</th><th class="cost-cell">Total</th><th class="cost-cell" style="background:#eaf4fb;color:#1a5276">Turn<br><span style="font-size:9px;font-weight:400;color:#5a85a8">floor+walls+cab</span></th>`;
+document.getElementById('cxHead').innerHTML = COST_HEADS;
+
+function getFilteredCX(){
+  const q=(document.getElementById('s1').value||'').toLowerCase();
+  const fb=document.getElementById('cx_fBldg').value;
+  const fs=document.getElementById('cx_fStatus').value;
+  const fc=document.getElementById('cx_fCond').value;
+  return UNITS.filter(u=>{
+    if(fb&&u.bldg!==fb) return false;
+    if(fs&&u.status.toLowerCase()!==fs.toLowerCase()) return false;
+    if(fc&&u.condBkt!==parseInt(fc)) return false;
+    if(q){const h=[u.unit,u.name].join(' ').toLowerCase();if(!h.includes(q))return false;}
+    return true;
+  });
+}
+
+function renderCX(){
+  const costs=getCostsCX();
+  const costFn=u=>unitCostsCX(u,costs);
+  const data=getFilteredCX();
+  const {totAll,rows,nInsp,nDown}=buildCostTable(data,costFn,'cxBody','cxFoot','rc1');
+  const nWork=rows.filter(u=>u.status!=='Down'&&u.avg!==null&&costFn(u).tot>0).length;
+  const nHeavy=rows.filter(u=>u.status!=='Down'&&u.avg!==null&&costFn(u).tot>8000).length;
+  const inspOnly=rows.filter(u=>u.status!=='Down'&&u.avg!==null);
+  const avg=inspOnly.length?(totAll-nDown*DOWN_CAPEX)/inspOnly.length:0;
+  document.getElementById('kpi1').innerHTML=[
+    {cls:'warn',val:'$'+Math.round(totAll).toLocaleString(),lbl:'Total Portfolio CapEx'},
+    {cls:'warn',val:nDown,lbl:`Down Units (${nDown}×$${(DOWN_CAPEX/1000).toFixed(0)}k)`},
+    {cls:'',val:'$'+Math.round(avg).toLocaleString(),lbl:'Avg CapEx / Inspected Unit'},
+    {cls:'warn',val:nHeavy,lbl:'Heavy CapEx >$8k (excl. down)'},
+  ].map(k=>`<div class="kpi ${k.cls}"><div class="kpi-val">${k.val}</div><div class="kpi-lbl">${k.lbl}</div></div>`).join('');
+  renderSummary();
+}
+
+// ── R&M HISTORICAL + PROJECTION ─────────────────────────────────────────────
+const RM_UNITS = 178;
+
+const RM_REPAIRS = [
+  {code:'635065',name:'Electrical',             a24:9426.77,    a25:5049.15},
+  {code:'635075',name:'Electrical Supplies',    a24:768.21,     a25:307.44},
+  {code:'635105',name:'Plumbing',               a24:25201.73,   a25:28535.39},
+  {code:'635115',name:'Plumbing Supplies',      a24:2810.03,    a25:5204.39},
+  {code:'635145',name:'HVAC',                   a24:2445.96,    a25:0},
+  {code:'635155',name:'HVAC Supplies',          a24:0,          a25:43.81},
+  {code:'635185',name:'Appliances/Equipment',   a24:21456.66,   a25:19342.77},
+  {code:'635225',name:'Interior',               a24:82687.36,   a25:39808.10},
+  {code:'635265',name:'Exterior',               a24:-24882.18,  a25:5676.82},
+  {code:'635385',name:'Pool & Spa',             a24:6256.81,    a25:6347.17},
+  {code:'635395',name:'Pool Supplies',          a24:58.83,      a25:0},
+  {code:'635405',name:'Lighting',               a24:261.52,     a25:0},
+  {code:'635470',name:'Grounds (635)',          a24:1842.90,    a25:1018.62},
+  {code:'635545',name:'Windows/Screens/Doors',  a24:19439.14,   a25:9746.33},
+  {code:'635555',name:'Door Repairs',           a24:6.22,       a25:0},
+  {code:'635565',name:'Carpet/Vinyl Replace',   a24:0,          a25:10035.40},
+  {code:'635585',name:'General Supplies',       a24:450.94,     a25:1690.69},
+  {code:'635605',name:'Tools/Equipment',        a24:2931.36,    a25:2922.65},
+  {code:'635625',name:'Parking & Garage',       a24:8961.48,    a25:5453.44},
+  {code:'635665',name:'Cleaning & Supplies',    a24:80.32,      a25:171.95},
+  {code:'635705',name:'Fire/Life Safety',       a24:25543.26,   a25:17494.91},
+  {code:'635825',name:'Painting Supplies',      a24:184.03,     a25:65.58},
+  {code:'635835',name:'Locks & Keys',           a24:571.51,     a25:537.09},
+  {code:'635855',name:'Public Area R&M',        a24:0,          a25:938.88},
+  {code:'630475',name:'Pest Control',           a24:31369.10,   a25:29176.28},
+  {code:'630655',name:'Electrical Contract',    a24:5598.22,    a25:0},
+];
+const RM_GROUNDS = [
+  {code:'630075',name:'Landscape Contract',     a24:17210.51,   a25:29626.65},
+  {code:'630375',name:'Courtesy Patrol',        a24:1100.00,    a25:0},
+  {code:'630425',name:'Alarms & Monitoring',    a24:0,          a25:180.02},
+  {code:'630575',name:'Snow Removal',           a24:261.60,     a25:7253.84},
+];
+
+const RM24_REPAIRS = RM_REPAIRS.reduce((s,r)=>s+r.a24,0); // 186,502.86
+const RM25_REPAIRS = RM_REPAIRS.reduce((s,r)=>s+r.a25,0); // 160,390.58
+const RM24_GROUNDS = RM_GROUNDS.reduce((s,r)=>s+r.a24,0); // 55,539.43
+const RM25_GROUNDS = RM_GROUNDS.reduce((s,r)=>s+r.a25,0); // 66,236.79
+const RM24_TOTAL   = RM24_REPAIRS + RM24_GROUNDS;
+const RM25_TOTAL   = RM25_REPAIRS + RM25_GROUNDS;
+
+function fmtAmt(v){
+  const s='$'+Math.abs(v).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+  return v<0?`<span style="color:#c0392b">(${s})</span>`:s;
+}
+function fmtDelta(d){
+  if(Math.abs(d)<0.005) return '<span style="color:#aaa">—</span>';
+  const s='$'+Math.abs(d).toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:0});
+  return d>0?`<span class="trend-up">+${s}</span>`:`<span class="trend-dn">-${s}</span>`;
+}
+
+function buildHistTable(rows, bodyId, footId){
+  const tot24=rows.reduce((s,r)=>s+r.a24,0), tot25=rows.reduce((s,r)=>s+r.a25,0);
+  const bd='border-bottom:1px solid #eef0f2';
+  document.getElementById(bodyId).innerHTML=rows.map(r=>{
+    const d=r.a25-r.a24;
+    const v24=r.a24===0?'<span style="color:#ccc">—</span>':fmtAmt(r.a24);
+    const v25=r.a25===0?'<span style="color:#ccc">—</span>':fmtAmt(r.a25);
+    return `<tr>
+      <td style="font-size:11px;padding:5px 8px;${bd}">${r.name}<br><span style="color:#9aabba;font-size:10px">${r.code}</span></td>
+      <td style="text-align:right;padding:5px 8px;font-size:12px;font-variant-numeric:tabular-nums;${bd}">${v24}</td>
+      <td style="text-align:right;padding:5px 8px;font-size:12px;font-variant-numeric:tabular-nums;${bd}">${v25}</td>
+      <td style="text-align:right;padding:5px 8px;font-size:12px;${bd}">${fmtDelta(d)}</td>
+    </tr>`;
+  }).join('');
+  document.getElementById(footId).innerHTML=`<tr class="total-row">
+    <td style="padding:6px 8px;font-weight:700">Total</td>
+    <td style="text-align:right;padding:6px 8px;font-weight:700">${fmtAmt(tot24)}</td>
+    <td style="text-align:right;padding:6px 8px;font-weight:700">${fmtAmt(tot25)}</td>
+    <td style="text-align:right;padding:6px 8px;font-weight:700">${fmtDelta(tot25-tot24)}</td>
+  </tr>`;
+}
+
+function renderRM(){
+  buildHistTable(RM_REPAIRS,'rmRepairsBody','rmRepairsFoot');
+  buildHistTable(RM_GROUNDS,'rmGroundsBody','rmGroundsFoot');
+
+  function kpiCard(val25, val24, lbl, cls=''){
+    const d=val25-val24, pct=val24?Math.abs(d/val24*100).toFixed(0):'—';
+    const trendCls=d>0?'trend-up':'trend-dn', arrow=d>0?'▲':'▼';
+    const sub=`2024: $${Math.round(val24).toLocaleString()} <span class="${trendCls}">${arrow}${pct}%</span>`;
+    return `<div class="kpi ${cls}"><div class="kpi-yr">2025</div><div class="kpi-val">$${Math.round(val25).toLocaleString()}</div><div class="kpi-lbl">${lbl}</div><div class="kpi-sub">${sub}</div></div>`;
+  }
+  document.getElementById('rmKpiRow').innerHTML=`<div class="kpi-row" style="margin-bottom:14px">
+    ${kpiCard(RM25_REPAIRS,RM24_REPAIRS,'Repairs &amp; Maint (incl. Pest/Elec)')}
+    ${kpiCard(RM25_GROUNDS,RM24_GROUNDS,'Grounds / Landscaping')}
+    ${kpiCard(RM25_TOTAL,RM24_TOTAL,'Total R&amp;M + Grounds','good')}
+    ${kpiCard(RM25_TOTAL/RM_UNITS,RM24_TOTAL/RM_UNITS,'$/Unit/Yr (178 units)')}
+    ${kpiCard(RM25_TOTAL/RM_UNITS/12,RM24_TOTAL/RM_UNITS/12,'$/Unit/Mo')}
+  </div>`;
+
+  segBar([
+    {label:'Repairs & Maint (2025)',   n:Math.round(RM25_REPAIRS), color:'#2e86c1'},
+    {label:'Grounds / Contracted (2025)', n:Math.round(RM25_GROUNDS), color:'#27ae60'},
+  ],'rmHistBar','rmHistLbls');
+
+  const growth=(parseFloat(document.getElementById('rm_growth').value)||3)/100;
+  const years =parseInt(document.getElementById('rm_years').value)||5;
+  let projRows=`<tr style="background:#eaf4fb">
+    <td style="padding:7px 9px;font-weight:700;color:#1a5276">2024 Actual</td>
+    <td style="text-align:right;padding:7px 9px;color:#1a5276">$${Math.round(RM24_REPAIRS).toLocaleString()}</td>
+    <td style="text-align:right;padding:7px 9px;color:#1a5276">$${Math.round(RM24_GROUNDS).toLocaleString()}</td>
+    <td style="text-align:right;padding:7px 9px;font-weight:700;color:#1a5276">$${Math.round(RM24_TOTAL).toLocaleString()}</td>
+    <td style="text-align:right;padding:7px 9px;color:#1a5276">$${Math.round(RM24_TOTAL/RM_UNITS).toLocaleString()}</td>
+    <td style="text-align:right;padding:7px 9px;color:#1a5276">$${Math.round(RM24_TOTAL/RM_UNITS/12).toLocaleString()}</td>
+  </tr>
+  <tr style="background:#f4f6f9">
+    <td style="padding:7px 9px;font-weight:700">2025 Actual</td>
+    <td style="text-align:right;padding:7px 9px">$${Math.round(RM25_REPAIRS).toLocaleString()}</td>
+    <td style="text-align:right;padding:7px 9px">$${Math.round(RM25_GROUNDS).toLocaleString()}</td>
+    <td style="text-align:right;padding:7px 9px;font-weight:700">$${Math.round(RM25_TOTAL).toLocaleString()}</td>
+    <td style="text-align:right;padding:7px 9px">$${Math.round(RM25_TOTAL/RM_UNITS).toLocaleString()}</td>
+    <td style="text-align:right;padding:7px 9px">$${Math.round(RM25_TOTAL/RM_UNITS/12).toLocaleString()}</td>
+  </tr>`;
+  for(let y=1;y<=years;y++){
+    const f=Math.pow(1+growth,y);
+    const r=RM25_REPAIRS*f, g=RM25_GROUNDS*f, t=RM25_TOTAL*f;
+    projRows+=`<tr>
+      <td style="padding:7px 9px;font-weight:600">${2025+y}</td>
+      <td style="text-align:right;padding:7px 9px">$${Math.round(r).toLocaleString()}</td>
+      <td style="text-align:right;padding:7px 9px">$${Math.round(g).toLocaleString()}</td>
+      <td style="text-align:right;padding:7px 9px;font-weight:700;color:#1a5276">$${Math.round(t).toLocaleString()}</td>
+      <td style="text-align:right;padding:7px 9px">$${Math.round(t/RM_UNITS).toLocaleString()}</td>
+      <td style="text-align:right;padding:7px 9px">$${Math.round(t/RM_UNITS/12).toLocaleString()}</td>
+    </tr>`;
+  }
+  document.getElementById('rm_proj').innerHTML=projRows;
+}
+
+document.getElementById('s1').addEventListener('input',renderCX);
+
+// ── SUMMARY TAB ──────────────────────────────────────────────────────────────
+function renderSummary(){
+  const costs=getCostsCX();
+  const costFn=u=>unitCostsCX(u,costs);
+  const allDown=UNITS.filter(u=>u.status==='Down');
+  const downCapex=allDown.length*DOWN_CAPEX;
+  const ratingCapex=UNITS
+    .filter(u=>u.status!=='Down'&&u.status!=='Model'&&u.avg!==null)
+    .reduce((s,u)=>s+costFn(u).tot,0);
+  const totalUnitCapex=ratingCapex+downCapex;
+
+  const g=id=>parseFloat(document.getElementById(id)?.value)||0;
+  const otherItems=[
+    {lbl:'Misc Property Repairs',    val:g('oc_misc')},
+    {lbl:'Landscaping Restoration',  val:g('oc_landscape')},
+    {lbl:'Common Area Walkway',      val:g('oc_walkway')},
+    {lbl:'Water Intrusion (Bldg D)', val:g('oc_water')},
+    {lbl:'Interior Stairwells',      val:g('oc_stairwells')},
+  ];
+  const totalOtherCapex=otherItems.reduce((s,i)=>s+i.val,0);
+  const totalCapex=totalUnitCapex+totalOtherCapex;
+
+  // Budget inputs
+  const repPU=parseFloat(document.getElementById('sum_rep_pu').value)||78;
+  const totPU=parseFloat(document.getElementById('sum_tot_pu').value)||120;
+  const grdPU=totPU-repPU;
+  document.getElementById('sum_grd_derived').textContent='$'+grdPU.toFixed(0)+' / unit / mo';
+
+  const predRepairs=repPU*RM_UNITS*12;
+  const predGrounds=grdPU*RM_UNITS*12;
+  const predTotal=totPU*RM_UNITS*12;
+  const grandTotal=predTotal+totalCapex;
+
+  const fmt=v=>'$'+Math.round(v).toLocaleString();
+
+  // KPI cards — 2 actuals vs budget, 2 future, 1 grand total
+  document.getElementById('sumKpi').innerHTML=[
+    {yr:'2025 Actual', val:fmt(RM25_REPAIRS),  lbl:'Repairs &amp; Maint',  sub:`Budget: ${fmt(predRepairs)} ${fmtDelta(RM25_REPAIRS-predRepairs)}`},
+    {yr:'2025 Actual', val:fmt(RM25_GROUNDS),  lbl:'Grounds',              sub:`Budget: ${fmt(predGrounds)} ${fmtDelta(RM25_GROUNDS-predGrounds)}`},
+    {yr:'Future',      val:fmt(totalUnitCapex), lbl:`Unit CapEx (${allDown.length} down + rated)`, sub:''},
+    {yr:'Future',      val:fmt(totalOtherCapex),lbl:'Other CapEx',          sub:''},
+    {yr:'All-In',      val:fmt(grandTotal),     lbl:'Budget + All CapEx',   sub:`R&amp;M: ${fmt(predTotal)} · CapEx: ${fmt(totalCapex)}`},
+  ].map(k=>`<div class="kpi${k.yr==='All-In'||k.yr==='Future'?' warn':''}">
+    <div class="kpi-yr">${k.yr}</div>
+    <div class="kpi-val">${k.val}</div>
+    <div class="kpi-lbl">${k.lbl}</div>
+    ${k.sub?`<div class="kpi-sub">${k.sub}</div>`:''}
+  </div>`).join('');
+
+  // Seg bar (budget amounts)
+  segBar([
+    {label:'R&M Budget',  n:Math.round(predRepairs),    color:'#2e86c1'},
+    {label:'Grounds Bud', n:Math.round(predGrounds),    color:'#27ae60'},
+    {label:'Unit CapEx',  n:Math.round(totalUnitCapex), color:'#e67e22'},
+    {label:'Other CapEx', n:Math.round(totalOtherCapex),color:'#9b59b6'},
+  ],'sumBar','sumLbls');
+
+  // 6-column R&M comparison table (Historical left, Budget right)
+  const bd='border-bottom:1px solid #eef0f2';
+  document.getElementById('sumRMBody').innerHTML=[
+    {lbl:'Repairs &amp; Maintenance', act:RM25_REPAIRS, bud:predRepairs},
+    {lbl:'Grounds / Landscaping',     act:RM25_GROUNDS, bud:predGrounds},
+  ].map(r=>`<tr>
+    <td style="padding:5px 8px;font-size:12px;${bd}">${r.lbl}</td>
+    <td style="text-align:right;padding:5px 8px;font-size:12px;font-variant-numeric:tabular-nums;${bd}">${fmt(r.act)}</td>
+    <td style="text-align:right;padding:5px 8px;font-size:12px;font-variant-numeric:tabular-nums;${bd}">${fmt(r.act/RM_UNITS/12)}</td>
+    <td style="text-align:right;padding:5px 8px;font-size:12px;font-variant-numeric:tabular-nums;${bd}">${fmt(r.bud)}</td>
+    <td style="text-align:right;padding:5px 8px;font-size:12px;font-variant-numeric:tabular-nums;${bd}">${fmt(r.bud/RM_UNITS/12)}</td>
+    <td style="text-align:right;padding:5px 8px;font-size:12px;${bd}">${fmtDelta(r.act-r.bud)}</td>
+  </tr>`).join('');
+  document.getElementById('sumRMFoot').innerHTML=`<tr class="total-row">
+    <td style="padding:6px 8px;font-weight:700">Total R&amp;M + Grounds</td>
+    <td style="text-align:right;padding:6px 8px;font-weight:700">${fmt(RM25_TOTAL)}</td>
+    <td style="text-align:right;padding:6px 8px;font-weight:700">${fmt(RM25_TOTAL/RM_UNITS/12)}</td>
+    <td style="text-align:right;padding:6px 8px;font-weight:700">${fmt(predTotal)}</td>
+    <td style="text-align:right;padding:6px 8px;font-weight:700">${fmt(predTotal/RM_UNITS/12)}</td>
+    <td style="text-align:right;padding:6px 8px;font-weight:700">${fmtDelta(RM25_TOTAL-predTotal)}</td>
+  </tr>`;
+
+  // Unit CapEx table
+  const thR='text-align:right;padding:5px 8px;border-bottom:1px solid #eef0f2;font-size:12px;font-variant-numeric:tabular-nums';
+  const tdL='padding:5px 8px;border-bottom:1px solid #eef0f2;font-size:12px';
+  document.getElementById('sumCxBody').innerHTML=[
+    {lbl:`Rating-Based Unit CapEx (${UNITS.filter(u=>u.avg!==null&&u.status!=='Down').length} inspected units)`, val:ratingCapex},
+    {lbl:`Down Unit Rehabilitation (${allDown.length} units × $${(DOWN_CAPEX/1000).toFixed(0)}k)`,               val:downCapex},
+  ].map(r=>`<tr>
+    <td style="${tdL}">${r.lbl}</td>
+    <td style="${thR}">${fmt(r.val)}</td>
+    <td style="${thR}">${fmt(r.val/RM_UNITS)}</td>
+  </tr>`).join('');
+  document.getElementById('sumCxFoot').innerHTML=`<tr class="total-row">
+    <td style="padding:6px 8px;font-weight:700">Total Unit CapEx</td>
+    <td style="text-align:right;padding:6px 8px;font-weight:700">${fmt(totalUnitCapex)}</td>
+    <td style="text-align:right;padding:6px 8px;font-weight:700">${fmt(totalUnitCapex/RM_UNITS)}</td>
+  </tr>`;
+  document.getElementById('sumOtherFoot').innerHTML=`<tr class="total-row">
+    <td style="padding:6px 8px;font-weight:700">Total Other CapEx</td>
+    <td style="text-align:right;padding:6px 8px;font-weight:700">${fmt(totalOtherCapex)}</td>
+  </tr>`;
+
+  // All-In Budget Roll-Up (3 cols: Line Item | Basis | Amount)
+  const budBadge='<span style="background:#fef9e7;color:#7d6608;padding:2px 7px;border-radius:12px;font-size:10px;font-weight:600">Budget</span>';
+  const futBadge='<span style="background:#fef0e6;color:#9d5b1a;padding:2px 7px;border-radius:12px;font-size:10px;font-weight:600">Future Assumed</span>';
+  const rollItems=[
+    {lbl:'R&amp;M Repairs', badge:budBadge, val:predRepairs},
+    {lbl:'R&amp;M Grounds', badge:budBadge, val:predGrounds},
+    {lbl:'Unit CapEx',      badge:futBadge, val:totalUnitCapex},
+    {lbl:'Other CapEx',     badge:futBadge, val:totalOtherCapex},
+  ];
+  document.getElementById('sumRollBody').innerHTML=rollItems.map(r=>`<tr>
+    <td style="padding:5px 8px;font-size:12px;border-bottom:1px solid #eef0f2">${r.lbl}</td>
+    <td style="text-align:center;padding:5px 8px;border-bottom:1px solid #eef0f2">${r.badge}</td>
+    <td style="text-align:right;padding:5px 8px;font-size:12px;font-variant-numeric:tabular-nums;border-bottom:1px solid #eef0f2">${fmt(r.val)}</td>
+  </tr>`).join('');
+  const rollTotal=rollItems.reduce((s,r)=>s+r.val,0);
+  document.getElementById('sumRollFoot').innerHTML=`<tr class="total-row">
+    <td colspan="2" style="padding:6px 8px;font-weight:700">Grand Total (All-In)</td>
+    <td style="text-align:right;padding:6px 8px;font-weight:700">${fmt(rollTotal)}</td>
+  </tr>`;
+}
+
+// ── MODEL VS ACTUALS CONSTANTS ────────────────────────────────────────────────
+const MODEL_REP_PU_MO  = 78;
+const MODEL_GRD_PU_MO  = 42;
+const MODEL_CAPEX_YR1  = 699000;
+const MODEL_CAPEX_NDISC = 50000;
+
+const PORT_UNITS_AVG  = 839.25;
+const PORT_REP_ANNUAL = 626048.33;
+const PORT_GRD_ANNUAL = 235094.82;
+const PORT_TRN_ANNUAL = 461709.47;
+const PORT_CX_TURNS   = 133028.07;
+const PORT_CX_APPL    = 98865.37;
+const PORT_CX_DISC    = 1058314.50;
+const PORT_CX_NDISC   = 252831.48;
+
+// ── MODEL VS ACTUALS RENDER ───────────────────────────────────────────────────
+function renderComparison(){
+  const costs = getCostsCX();
+  const costFn = u => unitCostsCX(u, costs);
+
+  const allDown = UNITS.filter(u => u.status === 'Down');
+  const downCapex = allDown.length * DOWN_CAPEX;
+  const inspUnits = UNITS.filter(u => u.status !== 'Down' && u.status !== 'Model' && u.avg !== null);
+  const ratingCapex = inspUnits.reduce((s,u) => s + costFn(u).tot, 0);
+  const g = id => parseFloat(document.getElementById(id)?.value) || 0;
+  const inspOtherCapex = g('oc_misc') + g('oc_landscape') + g('oc_walkway') + g('oc_water') + g('oc_stairwells');
+  const inspTotalUnitCapex = ratingCapex + downCapex;
+  const inspTotalCapex = inspTotalUnitCapex + inspOtherCapex;
+
+  const portTotRMann = PORT_REP_ANNUAL + PORT_GRD_ANNUAL;
+  const portRepPuMo  = PORT_REP_ANNUAL / PORT_UNITS_AVG / 12;
+  const portGrdPuMo  = PORT_GRD_ANNUAL / PORT_UNITS_AVG / 12;
+  const portTotPuMo  = portTotRMann / PORT_UNITS_AVG / 12;
+
+  const gogoRepPuMo  = RM25_REPAIRS / RM_UNITS / 12;
+  const gogoGrdPuMo  = RM25_GROUNDS / RM_UNITS / 12;
+  const gogoTotPuMo  = RM25_TOTAL   / RM_UNITS / 12;
+  const modelTotPuMo = MODEL_REP_PU_MO + MODEL_GRD_PU_MO;
+
+  const fmt    = v => '$' + Math.round(v).toLocaleString();
+  const fmtPu  = v => '$' + Math.round(v);
+  const bd = 'border-bottom:1px solid #eef0f2';
+
+  function deltaCell(actual, model){
+    const d = actual - model;
+    if(Math.abs(d) < 0.5) return `<td style="text-align:right;padding:5px 10px;${bd}"><span style="color:#aaa">—</span></td>`;
+    const cls = d > 0 ? 'trend-up' : 'trend-dn';
+    const sign = d > 0 ? '+' : '−';
+    const pct = model ? (Math.abs(d/model)*100).toFixed(0) : '—';
+    return `<td style="text-align:right;padding:5px 10px;${bd}"><span class="${cls}">${sign}$${Math.abs(Math.round(d))}</span><br><span style="font-size:10px;color:#9aabba">${sign}${pct}%</span></td>`;
+  }
+
+  function rmRow(lbl, modelPu, gogoPu, portPu){
+    const modelAnn = modelPu * RM_UNITS * 12;
+    const gogoAnn  = gogoPu  * RM_UNITS * 12;
+    const portAnn  = portPu  * PORT_UNITS_AVG * 12;
+    return `<tr>
+      <td style="padding:5px 10px;font-size:12px;${bd}">${lbl}</td>
+      <td style="text-align:right;padding:5px 10px;font-size:12px;${bd};background:#fefdf5">${fmt(modelAnn)}</td>
+      <td style="text-align:right;padding:5px 10px;font-size:12px;${bd};background:#fefdf5;color:#7d6608;font-weight:700">${fmtPu(modelPu)}</td>
+      <td style="text-align:right;padding:5px 10px;font-size:12px;${bd};background:#f5f9fd">${fmt(gogoAnn)}</td>
+      <td style="text-align:right;padding:5px 10px;font-size:12px;${bd};background:#f5f9fd;color:#1a5276;font-weight:700">${fmtPu(gogoPu)}</td>
+      <td style="text-align:right;padding:5px 10px;font-size:12px;${bd};background:#f5faf6">${fmt(portAnn)}</td>
+      <td style="text-align:right;padding:5px 10px;font-size:12px;${bd};background:#f5faf6;color:#1a7a4a;font-weight:700">${fmtPu(portPu)}</td>
+      ${deltaCell(gogoPu, modelPu)}
+      ${deltaCell(portPu, modelPu)}
+    </tr>`;
+  }
+
+  document.getElementById('cmpRMBody').innerHTML = [
+    rmRow('Repairs &amp; Maintenance', MODEL_REP_PU_MO, gogoRepPuMo, portRepPuMo),
+    rmRow('Grounds / Landscaping',     MODEL_GRD_PU_MO, gogoGrdPuMo, portGrdPuMo),
+  ].join('');
+
+  document.getElementById('cmpRMFoot').innerHTML = `<tr class="total-row">
+    <td style="padding:6px 10px;font-weight:700">Total R&amp;M (excl. turns)</td>
+    <td style="text-align:right;padding:6px 10px;background:#fefdf5">${fmt(modelTotPuMo * RM_UNITS * 12)}</td>
+    <td style="text-align:right;padding:6px 10px;font-weight:700;background:#fefdf5;color:#7d6608">${fmtPu(modelTotPuMo)}</td>
+    <td style="text-align:right;padding:6px 10px;background:#f5f9fd">${fmt(RM25_TOTAL)}</td>
+    <td style="text-align:right;padding:6px 10px;font-weight:700;background:#f5f9fd;color:#1a5276">${fmtPu(gogoTotPuMo)}</td>
+    <td style="text-align:right;padding:6px 10px;background:#f5faf6">${fmt(portTotRMann)}</td>
+    <td style="text-align:right;padding:6px 10px;font-weight:700;background:#f5faf6;color:#1a7a4a">${fmtPu(portTotPuMo)}</td>
+    ${deltaCell(gogoTotPuMo, modelTotPuMo)}
+    ${deltaCell(portTotPuMo, modelTotPuMo)}
+  </tr>`;
+
+  // CapEx comparison
+  const PORT_CX_UNIT = PORT_CX_TURNS + PORT_CX_APPL;
+  const portTotalCapex = PORT_CX_UNIT + PORT_CX_DISC + PORT_CX_NDISC;
+  const modelTotalCapex = MODEL_CAPEX_YR1 + MODEL_CAPEX_NDISC;
+
+  document.getElementById('cmpCxBody').innerHTML = [
+    {lbl:'Unit Turns &amp; Appliances',  model:MODEL_CAPEX_YR1,  insp:inspTotalUnitCapex, port:PORT_CX_UNIT},
+    {lbl:'Non-Disc / Other Property',    model:MODEL_CAPEX_NDISC, insp:inspOtherCapex,     port:PORT_CX_NDISC},
+    {lbl:'Discretionary Renovation', model:0, insp:0, port:PORT_CX_DISC, note:'not in GoGo model scope'},
+  ].map(r=>`<tr>
+    <td style="padding:5px 10px;font-size:12px;${bd}">${r.lbl}${r.note?`<br><span style="font-size:10px;color:#9aabba;font-style:italic">${r.note}</span>`:''}</td>
+    <td style="text-align:right;padding:5px 10px;font-size:12px;${bd};background:#fefdf5">${r.model?fmt(r.model):'<span style="color:#ccc">—</span>'}</td>
+    <td style="text-align:right;padding:5px 10px;font-size:12px;${bd};background:#f5f9fd">${r.insp?fmt(r.insp):'<span style="color:#ccc">—</span>'}</td>
+    <td style="text-align:right;padding:5px 10px;font-size:12px;${bd};background:#f5faf6">${fmt(r.port)}</td>
+  </tr>`).join('');
+
+  document.getElementById('cmpCxFoot').innerHTML = `<tr class="total-row">
+    <td style="padding:6px 10px;font-weight:700">Total CapEx</td>
+    <td style="text-align:right;padding:6px 10px;font-weight:700;background:#fefdf5">${fmt(modelTotalCapex)}</td>
+    <td style="text-align:right;padding:6px 10px;font-weight:700;background:#f5f9fd">${fmt(inspTotalCapex)}</td>
+    <td style="text-align:right;padding:6px 10px;font-weight:700;background:#f5faf6">${fmt(portTotalCapex)}</td>
+  </tr>`;
+
+  // CapEx $/unit KPI cards
+  document.getElementById('cmpCxKpi').innerHTML = [
+    {lbl:'GoGo Model $/Unit', val:fmt(modelTotalCapex/RM_UNITS)},
+    {lbl:'Inspection Est $/Unit', val:fmt(inspTotalCapex/RM_UNITS)},
+    {lbl:'Portfolio $/Unit (all)', val:fmt(portTotalCapex/PORT_UNITS_AVG), cls:'warn'},
+    {lbl:'Portfolio $/Unit (excl disc.)', val:fmt((PORT_CX_UNIT+PORT_CX_NDISC)/PORT_UNITS_AVG)},
+  ].map(k=>`<div class="kpi ${k.cls||''}"><div class="kpi-val" style="font-size:20px">${k.val}</div><div class="kpi-lbl">${k.lbl}</div></div>`).join('');
+
+  // Portfolio CapEx breakdown list
+  document.getElementById('cmpPortBreakdown').innerHTML = [
+    {lbl:'Turns (unit prep)',  val:PORT_CX_TURNS, color:'#2e86c1'},
+    {lbl:'Appliances',        val:PORT_CX_APPL,  color:'#5dade2'},
+    {lbl:'Disc. Renovation',  val:PORT_CX_DISC,  color:'#e67e22'},
+    {lbl:'Non-Disc / Other',  val:PORT_CX_NDISC, color:'#9b59b6'},
+  ].map(r=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #eef0f2">
+    <div style="display:flex;align-items:center;gap:8px;font-size:12px"><div style="width:10px;height:10px;border-radius:2px;background:${r.color};flex-shrink:0"></div>${r.lbl}</div>
+    <div style="font-size:12px;font-weight:600;color:#1a5276">${fmt(r.val)} <span style="font-size:11px;color:#7f8fa4;font-weight:400">(${fmt(r.val/PORT_UNITS_AVG)}/u)</span></div>
+  </div>`).join('');
+
+  // KPI headline cards
+  function kpiCmp(val, model, yr, lbl){
+    const d = val - model;
+    const cls = d > 0 ? 'warn' : 'good';
+    const sign = d > 0 ? '+' : '';
+    return `<div class="kpi ${cls}">
+      <div class="kpi-yr">${yr}</div>
+      <div class="kpi-val" style="font-size:22px">$${Math.round(val)}</div>
+      <div class="kpi-lbl">${lbl}</div>
+      <div class="kpi-sub">Model: $${Math.round(model)}/u/mo &nbsp;<span class="${d>0?'trend-up':'trend-dn'}">${sign}$${Math.abs(Math.round(d))}</span></div>
+    </div>`;
+  }
+  document.getElementById('cmpKpi').innerHTML = [
+    kpiCmp(gogoRepPuMo, MODEL_REP_PU_MO,  'GoGo \'25 Actual', 'Repairs/Unit/Mo'),
+    kpiCmp(gogoGrdPuMo, MODEL_GRD_PU_MO,  'GoGo \'25 Actual', 'Grounds/Unit/Mo'),
+    kpiCmp(portRepPuMo, MODEL_REP_PU_MO,  'Portfolio \'25 Avg', 'Repairs/Unit/Mo'),
+    kpiCmp(portTotPuMo, modelTotPuMo,     'Portfolio \'25 Avg', 'Total R&M/Unit/Mo (excl turns)'),
+  ].join('');
+}
+
+// Init
+renderRR();
+renderCX();
+renderRM();
+renderSummary();
+renderComparison();
+</script>
+</body>
+</html>
