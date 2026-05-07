@@ -1069,7 +1069,7 @@ function buildCostsTab() {
     else if (vac.effectiveRentReady === 'Yes') { status = 'Complete'; turnStart = vac.last_move_out; }
     else { status = 'Active'; turnStart = vac.last_move_out; }
 
-    if (total === 0 && status !== 'Active') continue;
+    if (total === 0 && !u.estimate && status !== 'Active') continue;
     costsRows.push({ code, prop: u.prop, unitNum: u.unitNum, status, turnStart, totalLabor, totalMats, total, estimate: u.estimate || 0, labor, materials });
   }
 

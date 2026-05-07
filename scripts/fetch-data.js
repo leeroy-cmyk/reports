@@ -419,11 +419,14 @@ function buildTurnCosts() {
   if (fs.existsSync(woPath)) {
     const wo = JSON.parse(fs.readFileSync(woPath, 'utf8'));
     for (const r of (wo.rows || [])) {
-      if (r.work_order_type !== 'Unit Turn') continue;
+      if (!['Unit Turn', 'Internal'].includes(r.work_order_type)) continue;
       const est = parseFloat(r.estimate_amount) || 0;
       if (est <= 0) continue;
-      const code = r.property_name + '-' + (r.unit_name || '').trim();
-      if (!code.includes('-') || code.endsWith('-')) continue;
+      const unitName = (r.unit_name || '').trim();
+      if (!unitName) continue;
+      const propMatch = (r.property_name || '').match(/([a-z]{1,3}\d{2,3})/i);
+      if (!propMatch) continue;
+      const code = propMatch[1].toLowerCase() + '-' + unitName;
       ensureUnit(code).estimate = Math.round(((units[code].estimate || 0) + est) * 100) / 100;
     }
   }
@@ -535,14 +538,21 @@ async function syncVacanciesToFirebase() {
 }
 
 // FETCH_ONLY env var controls what runs:
-//   'appfolio'  → turnvac + workorders + budget (every 5 min)
-//   'qbt-only'  → QBTime + audit.json only
-//   'ramp-only' → Ramp only
-//   'qbt-ramp'  → QBTime + Ramp (legacy, local use)
-//   unset/'all' → everything
+//   'appfolio'    → turnvac + workorders + budget (every 5 min)
+//   'qbt-only'    → QBTime + audit.json only
+//   'ramp-only'   → Ramp only
+//   'qbt-ramp'    → QBTime + Ramp (legacy, local use)
+//   'costs-only'  → rebuild turn_costs.json from local files only (no network)
+//   unset/'all'   → everything
 const FETCH_ONLY = process.env.FETCH_ONLY || 'all';
 
 (async () => {
+  if (FETCH_ONLY === 'costs-only') {
+    buildTurnCosts();
+    console.log('Done.');
+    return;
+  }
+
   const runAppFolio = FETCH_ONLY === 'all' || FETCH_ONLY === 'appfolio';
   const runQBT      = FETCH_ONLY === 'all' || FETCH_ONLY === 'qbt-ramp' || FETCH_ONLY === 'qbt-only';
   const runRamp     = FETCH_ONLY === 'all' || FETCH_ONLY === 'qbt-ramp' || FETCH_ONLY === 'ramp-only';
