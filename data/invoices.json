@@ -1,10 +1,10 @@
 {
   "ok": true,
-  "fetched_at": "2026-05-10T09:04:48.273Z",
+  "fetched_at": "2026-05-10T17:10:41.582Z",
   "period_days": 60,
   "totals": {
-    "unpaid_count": 61,
-    "unpaid_amount_confirmed": 7355.4,
+    "unpaid_count": 63,
+    "unpaid_amount_confirmed": 7925.4,
     "paid_count": 27,
     "vendor_count": 19
   },
@@ -125,6 +125,34 @@
       "reminder_count": 1,
       "is_reminder": true,
       "ramp": null
+    },
+    {
+      "vendor": "Duo Cleaning Company LLC",
+      "invoice_num": "23334579",
+      "amount": 220,
+      "invoice_date": "2026-05-10",
+      "subject": "Reminder: Invoice 23334579 is due from Duo Cleaning Company LLC - $220.00",
+      "gmail_id": "19e12c798c39d061",
+      "reminder_count": 1,
+      "is_reminder": true,
+      "ramp": {
+        "total": 78725,
+        "count": 223
+      }
+    },
+    {
+      "vendor": "Duo Cleaning Company LLC",
+      "invoice_num": "23334444",
+      "amount": 350,
+      "invoice_date": "2026-05-10",
+      "subject": "Reminder: Invoice 23334444 is due from Duo Cleaning Company LLC - $350.00",
+      "gmail_id": "19e12c798356b34f",
+      "reminder_count": 1,
+      "is_reminder": true,
+      "ramp": {
+        "total": 78725,
+        "count": 223
+      }
     },
     {
       "vendor": "Shaw Plumbing, Heating & Air Conditioning",
