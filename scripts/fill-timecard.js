@@ -172,12 +172,36 @@ async function processDay(date, label, fillGaps) {
 
 (async () => {
   const today = localToday();
-  const dow = new Date(today + 'T12:00:00Z').getUTCDay();
-  if (dow === 0 || dow === 6) { console.log('Weekend (' + today + ') — skipping'); process.exit(0); }
+  console.log('QBT fill | today=' + today + ' tz=' + TZ);
 
-  const yesterday = prevWeekday(today);
-  console.log('QBT fill | today=' + today + ' yesterday=' + yesterday + ' tz=' + TZ);
+  // Build list of past 5 weekdays + today
+  const days = [];
+  const dt = new Date(today + 'T12:00:00Z');
+  while (days.length < 6) {
+    const dow = dt.getUTCDay();
+    if (dow !== 0 && dow !== 6) days.unshift(dt.toISOString().slice(0, 10));
+    dt.setUTCDate(dt.getUTCDate() - 1);
+  }
 
-  await processDay(yesterday, 'Yesterday (' + yesterday + ')', false); // fix oversized only
-  await processDay(today, 'Today (' + today + ')', true);              // fix oversized + fill gaps
+  // Fetch all entries for the window with pagination
+  let page = 1, allSheets = {};
+  while (true) {
+    const r = await api('GET', '/api/v1/timesheets?start_date=' + days[0] + '&end_date=' + today + '&user_ids=' + USER_ID + '&on_the_clock=no&per_page=200&page=' + page);
+    Object.assign(allSheets, r.results?.timesheets || {});
+    if (!r.more) break;
+    page++; await sleep(150);
+  }
+  const hoursByDate = {};
+  for (const t of Object.values(allSheets)) {
+    hoursByDate[t.date] = (hoursByDate[t.date] || 0) + t.duration / 3600;
+  }
+
+  for (const d of days) {
+    const h = hoursByDate[d] || 0;
+    const isToday = d === today;
+    const label = (isToday ? 'Today' : d) + ' (' + h.toFixed(1) + 'h)';
+    if (h >= 7 && !isToday) { console.log(label + ': OK — skip'); continue; }
+    await processDay(d, label, true);
+    await sleep(300);
+  }
 })().catch(e => { console.error('Fatal:', e.message); process.exit(1); });
