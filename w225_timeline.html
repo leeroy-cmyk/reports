@@ -162,13 +162,14 @@ const MONTHS = [
 // ══════════════════════════════════════════════════════════════════════════════
 const SECTIONS = [
   { name:'Drywall', color:'#2e86c1', tasks:[
-    {name:'1st Floor', start:null, end:'2026-05-31', deps:['Drywall — 2nd Floor','Paint — 1st Floor']},
-    {name:'2nd Floor', start:null, end:'2026-05-31', blockedBy:['Drywall — 1st Floor'], deps:['Drywall — 3rd Floor','Paint — 2nd Floor']},
-    {name:'3rd Floor', start:null, end:'2026-05-31', blockedBy:['Drywall — 2nd Floor'], deps:['Drywall — 4th Floor','Paint — 3rd Floor']},
-    {name:'4th Floor', start:null, end:'2026-05-31', blockedBy:['Drywall — 3rd Floor'], deps:['Drywall — Basement','Paint — 4th Floor']},
-    {name:'Basement',  start:null, end:'2026-05-31', blockedBy:['Drywall — 4th Floor'], deps:['Paint — Basement']},
+    {name:'1st Floor', start:null, end:'2026-05-25', deps:['Drywall — 2nd Floor','Paint — 1st Floor']},
+    {name:'2nd Floor', start:null, end:'2026-06-01', blockedBy:['Drywall — 1st Floor'], deps:['Drywall — 3rd Floor','Paint — 2nd Floor']},
+    {name:'3rd Floor', start:null, end:'2026-06-08', blockedBy:['Drywall — 2nd Floor'], deps:['Drywall — 4th Floor','Paint — 3rd Floor']},
+    {name:'4th Floor', start:null, end:'2026-06-15', blockedBy:['Drywall — 3rd Floor'], deps:['Drywall — Basement','Paint — 4th Floor']},
+    {name:'Basement',  start:null, end:'2026-06-22', blockedBy:['Drywall — 4th Floor'], deps:['Paint — Basement']},
   ]},
   { name:'Electrical', color:'#e67e22', tasks:[
+    {name:'Remove HVAC + Fans (Main Floor)', start:'2026-05-12', end:'2026-05-20'},
     {name:'Common Area', start:'2026-05-11', end:'2026-05-22'},
     {name:'In Unit',     start:'2026-05-25', end:'2026-06-12'},
   ]},
@@ -178,10 +179,10 @@ const SECTIONS = [
   ]},
   { name:'Plumbing', color:'#27ae60', tasks:[
     {name:'1st Floor Repairs',    start:null, end:'2026-06-01'},
-    {name:'2nd Floor Repairs',    start:null, end:'2026-06-05'},
-    {name:'3rd Floor Repairs',    start:null, end:'2026-06-10'},
-    {name:'4th Floor Repairs',    start:null, end:'2026-06-15'},
-    {name:'Basement Repairs',     start:null, end:'2026-06-15'},
+    {name:'2nd Floor Repairs',    start:null, end:'2026-06-08'},
+    {name:'3rd Floor Repairs',    start:null, end:'2026-06-15'},
+    {name:'4th Floor Repairs',    start:null, end:'2026-06-22'},
+    {name:'Basement Repairs',     start:null, end:'2026-06-22'},
     {name:'Water Heater Install', start:null, end:'2026-06-30'},
   ]},
   { name:'Boiler', color:'#7f8c8d', tasks:[
@@ -198,11 +199,11 @@ const SECTIONS = [
     {name:'Install 1hr Fire Rated Glass', start:null, end:'2026-06-30'},
   ]},
   { name:'Paint', color:'#9b59b6', tasks:[
-    {name:'1st Floor', start:null, end:'2026-06-04', blockedBy:['Drywall — 1st Floor'],                              deps:['Paint — 2nd Floor','Entry Doors — 1st Floor']},
-    {name:'2nd Floor', start:null, end:'2026-06-08', blockedBy:['Drywall — 2nd Floor','Paint — 1st Floor'],          deps:['Paint — 3rd Floor','Entry Doors — 2nd Floor']},
-    {name:'3rd Floor', start:null, end:'2026-06-10', blockedBy:['Drywall — 3rd Floor','Paint — 2nd Floor'],          deps:['Paint — 4th Floor','Entry Doors — 3rd Floor']},
-    {name:'4th Floor', start:null, end:'2026-06-15', blockedBy:['Drywall — 4th Floor','Paint — 3rd Floor'],          deps:['Paint — Basement','Entry Doors — 4th Floor']},
-    {name:'Basement',  start:null, end:'2026-06-19', blockedBy:['Drywall — Basement', 'Paint — 4th Floor'],          deps:['Entry Doors — Basement','Interior Doors','Cabinets']},
+    {name:'1st Floor', start:null, end:'2026-06-08', blockedBy:['Drywall — 1st Floor'],                              deps:['Paint — 2nd Floor','Entry Doors — 1st Floor']},
+    {name:'2nd Floor', start:null, end:'2026-06-15', blockedBy:['Drywall — 2nd Floor','Paint — 1st Floor'],          deps:['Paint — 3rd Floor','Entry Doors — 2nd Floor']},
+    {name:'3rd Floor', start:null, end:'2026-06-22', blockedBy:['Drywall — 3rd Floor','Paint — 2nd Floor'],          deps:['Paint — 4th Floor','Entry Doors — 3rd Floor']},
+    {name:'4th Floor', start:null, end:'2026-06-29', blockedBy:['Drywall — 4th Floor','Paint — 3rd Floor'],          deps:['Paint — Basement','Entry Doors — 4th Floor']},
+    {name:'Basement',  start:null, end:'2026-07-06', blockedBy:['Drywall — Basement', 'Paint — 4th Floor'],          deps:['Entry Doors — Basement','Interior Doors','Cabinets']},
   ]},
   { name:'Unit Entry Doors', color:'#16a085', tasks:[
     {name:'1st Floor In-Unit', start:null, end:'2026-05-22'},
@@ -213,15 +214,15 @@ const SECTIONS = [
     {name:'Basement Install',  start:null, end:null, blockedBy:['Paint — Basement', 'Entry Doors — 4th Floor']},
   ]},
   { name:'Interior Doors', color:'#2980b9', tasks:[
-    {name:'Repair Existing Interior Doors', start:null, end:'2026-06-30', blockedBy:['Paint — Basement'], deps:['Hang Barn Doors']},
-    {name:'Hang Barn Doors',                start:null, end:'2026-06-30', blockedBy:['Repair Existing Interior Doors']},
+    {name:'Repair Existing Interior Doors', start:null, end:'2026-07-13', blockedBy:['Paint — Basement'], deps:['Hang Barn Doors']},
+    {name:'Hang Barn Doors',                start:null, end:'2026-07-13', blockedBy:['Repair Existing Interior Doors']},
   ]},
   { name:'Cabinet / Countertops', color:'#d35400', tasks:[
-    {name:'Kitchen Cabinets', start:'2026-06-29', end:'2026-07-03', blockedBy:['Paint — Basement'], deps:['Bath Vanities']},
-    {name:'Bath Vanities',    start:'2026-06-29', end:'2026-07-03', blockedBy:['Kitchen Cabinets']},
+    {name:'Kitchen Cabinets', start:'2026-07-13', end:'2026-07-17', blockedBy:['Paint — Basement'], deps:['Bath Vanities']},
+    {name:'Bath Vanities',    start:'2026-07-13', end:'2026-07-17', blockedBy:['Kitchen Cabinets']},
   ]},
   { name:'Appliances', color:'#566573', tasks:[
-    {name:'Install Appliances', start:null, end:'2026-07-03'},
+    {name:'Install Appliances', start:null, end:'2026-07-20'},
   ]},
   { name:'Flooring', color:'#c0392b', tasks:[
     {name:'1st Floor Install', start:null, end:null},
