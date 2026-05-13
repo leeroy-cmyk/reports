@@ -346,6 +346,7 @@ const TC_RAMP_CATS = {
   '52000':'R&M','52001':'R&M','52002':'R&M','52003':'R&M','67800':'R&M',
   '53000':'Turn','53001':'Turn','53002':'Turn','53003':'Turn',
   '54000':'Grounds','54001':'Grounds','54002':'Grounds','54003':'Grounds',
+  '80121':'CapEx','80122':'CapEx','80130':'CapEx','80140':'CapEx',
 };
 
 function extractUnitCode(propField) {
@@ -398,7 +399,7 @@ function buildTurnCosts() {
       empName = raw;
     }
     const cat = qbtToCat(t.customfields?.['25056'] || '');
-    if (cat !== 'Turn') continue; // Turn class only
+    if (cat !== 'Turn' && cat !== 'CapEx') continue; // Turn + CapEx Turn labor
     const hrs = Math.round(t.duration / 3600 * 100) / 100;
     ensureUnit(unitCode).labor.push({ d: t.date, emp: empName, hrs, cost: Math.round(hrs * wage * 100) / 100, cat });
   }
@@ -409,7 +410,7 @@ function buildTurnCosts() {
       const unitCode = extractUnitCode(tx.dept);
       if (!unitCode) continue;
       const cat = TC_RAMP_CATS[tx.gl];
-      if (cat !== 'Turn') continue; // Turn GL only (53xxx)
+      if (cat !== 'Turn' && cat !== 'CapEx') continue; // Turn + CapEx Turn materials
       ensureUnit(unitCode).materials.push({ d: tx.d, amt: tx.amt, cat, ln: tx.ln });
     }
   }
@@ -563,6 +564,7 @@ const FETCH_ONLY = process.env.FETCH_ONLY || 'all';
       await fetchWorkOrders();
       await fetchBudget();
       await syncVacanciesToFirebase();
+      buildTurnCosts(); // keep estimates fresh every 5 min
     } catch(e) {
       console.error('AppFolio fetch failed:', e.message);
       process.exit(1);
