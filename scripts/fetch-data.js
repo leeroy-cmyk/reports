@@ -3,6 +3,7 @@ const fs = require('fs');
 const path = require('path');
 
 const AF_HOST = 'mckay.appfolio.com';
+const EXCLUDED_PROPERTIES = ['Easy Street']; // test properties
 const AUTH = 'Basic ' + Buffer.from(
   process.env.AF_USERNAME + ':' + process.env.AF_PASSWORD
 ).toString('base64');
@@ -44,14 +45,14 @@ function save(name, obj) {
 async function fetchTurnVac() {
   console.log('Fetching unit_vacancy...');
   const raw = await fetchAF('/api/v2/reports/unit_vacancy.json', {});
-  const rows = Array.isArray(raw) ? raw : (raw.results || []);
+  const rows = (Array.isArray(raw) ? raw : (raw.results || [])).filter(r => !EXCLUDED_PROPERTIES.includes(r.property_name));
   save('turnvac.json', { ok: true, count: rows.length, fetched_at: new Date().toISOString(), rows });
 }
 
 async function fetchWorkOrders() {
   console.log('Fetching work_order...');
   const raw = await fetchAF('/api/v2/reports/work_order.json', { property_visibility: 'active' });
-  const rows = Array.isArray(raw) ? raw : (raw.results || raw.work_orders || []);
+  const rows = (Array.isArray(raw) ? raw : (raw.results || raw.work_orders || [])).filter(r => !EXCLUDED_PROPERTIES.includes(r.property_name));
   save('workorders.json', { ok: true, count: rows.length, fetched_at: new Date().toISOString(), rows });
 }
 
@@ -62,7 +63,7 @@ async function fetchBudget() {
 
   const propData = await fetchAF('/api/v2/reports/property_directory.json', { property_visibility: 'active' });
   const allProps = Array.isArray(propData) ? propData : (propData.results || []);
-  const realProps = allProps.filter(p => p.property_id && p.property_city !== '*');
+  const realProps = allProps.filter(p => p.property_id && p.property_city !== '*' && !EXCLUDED_PROPERTIES.includes(p.property_name));
   console.log('Fetching budget for ' + realProps.length + ' properties...');
 
   const portfolioRaw = await fetchAF('/api/v2/reports/annual_budget_comparative.json', {
