@@ -255,9 +255,8 @@
 
 <div id="turnCosts" class="panel">
   <div class="cost-period-row">
-    <button class="cpb" onclick="setCostPeriod('thisMo',this)">This Month</button>
+    <button class="cpb active" onclick="setCostPeriod('thisMo',this)">This Month</button>
     <button class="cpb" onclick="setCostPeriod('lastMo',this)">Last Month</button>
-    <button class="cpb active" id="cpbSinceApr15" onclick="setCostPeriod('sinceApr15',this)">Since Apr 15</button>
     <div class="cost-sep"></div>
     <input type="date" id="costDateFrom" class="cost-date-input">
     <span style="color:#bdc3c7;font-size:0.8rem">–</span>
@@ -427,9 +426,9 @@ async function loadData() {
     buildDetailFilters();
     filterTable();
 
-    // Initialize Costs tab — default to Apr 15, 2026 forward
+    // Initialize Costs tab — default to This Month
     const now2 = new Date();
-    COST_FROM = '2026-04-15';
+    COST_FROM = new Date(now2.getFullYear(), now2.getMonth(), 1).toISOString().slice(0, 10);
     COST_TO   = now2.toISOString().slice(0, 10);
     document.getElementById('costDateFrom').value = COST_FROM;
     document.getElementById('costDateTo').value   = COST_TO;
@@ -868,9 +867,6 @@ function setCostPeriod(mode, btn) {
     const last  = new Date(now.getFullYear(), now.getMonth(), 0);
     COST_FROM = new Date(last.getFullYear(), last.getMonth(), 1).toISOString().slice(0,10);
     COST_TO   = last.toISOString().slice(0,10);
-  } else if (mode === 'sinceApr15') {
-    COST_FROM = '2026-04-15';
-    COST_TO   = now.toISOString().slice(0,10);
   } else if (mode === 'custom') {
     const f = document.getElementById('costDateFrom').value;
     const t = document.getElementById('costDateTo').value;
