@@ -2,9 +2,7 @@ name: Refresh QBTime and Ramp
 
 on:
   schedule:
-    - cron: '0 14 * * *'   # 7am Pacific
-    - cron: '0 20 * * *'   # 1pm Pacific
-    - cron: '0 2  * * *'   # 7pm Pacific
+    - cron: '0 * * * *'   # every hour
   workflow_dispatch:
 
 jobs:
