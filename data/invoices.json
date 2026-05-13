@@ -1,9 +1,9 @@
 {
   "ok": true,
-  "fetched_at": "2026-05-12T11:35:05.906Z",
+  "fetched_at": "2026-05-13T18:44:09.313Z",
   "period_days": 60,
   "totals": {
-    "unpaid_count": 64,
+    "unpaid_count": 65,
     "unpaid_amount_confirmed": 8104.92,
     "paid_count": 27,
     "vendor_count": 19
@@ -94,6 +94,34 @@
       }
     },
     {
+      "vendor": "Duo Cleaning Company LLC",
+      "invoice_num": "23334579",
+      "amount": 220,
+      "invoice_date": "2026-05-12",
+      "subject": "Reminder: Invoice 23334579 is due from Duo Cleaning Company LLC - $220.00",
+      "gmail_id": "19e1d15132673c48",
+      "reminder_count": 2,
+      "is_reminder": true,
+      "ramp": {
+        "total": 78725,
+        "count": 223
+      }
+    },
+    {
+      "vendor": "Duo Cleaning Company LLC",
+      "invoice_num": "23334444",
+      "amount": 350,
+      "invoice_date": "2026-05-12",
+      "subject": "Reminder: Invoice 23334444 is due from Duo Cleaning Company LLC - $350.00",
+      "gmail_id": "19e1d1510bb5a124",
+      "reminder_count": 2,
+      "is_reminder": true,
+      "ramp": {
+        "total": 78725,
+        "count": 223
+      }
+    },
+    {
       "vendor": "TAYLOR'D SYSTEMS LLC is due",
       "invoice_num": "Reminder",
       "amount": null,
@@ -125,34 +153,6 @@
       "reminder_count": 1,
       "is_reminder": true,
       "ramp": null
-    },
-    {
-      "vendor": "Duo Cleaning Company LLC",
-      "invoice_num": "23334579",
-      "amount": 220,
-      "invoice_date": "2026-05-10",
-      "subject": "Reminder: Invoice 23334579 is due from Duo Cleaning Company LLC - $220.00",
-      "gmail_id": "19e12c798c39d061",
-      "reminder_count": 1,
-      "is_reminder": true,
-      "ramp": {
-        "total": 78725,
-        "count": 223
-      }
-    },
-    {
-      "vendor": "Duo Cleaning Company LLC",
-      "invoice_num": "23334444",
-      "amount": 350,
-      "invoice_date": "2026-05-10",
-      "subject": "Reminder: Invoice 23334444 is due from Duo Cleaning Company LLC - $350.00",
-      "gmail_id": "19e12c798356b34f",
-      "reminder_count": 1,
-      "is_reminder": true,
-      "ramp": {
-        "total": 78725,
-        "count": 223
-      }
     },
     {
       "vendor": "Shaw Plumbing, Heating & Air Conditioning",
@@ -696,6 +696,16 @@
       "invoice_date": "2026-05-11",
       "subject": "Balance on Invoice $179.52 - PNW | Central WA",
       "gmail_id": "19e18932e0e29e2e",
+      "reminder_count": 0,
+      "ramp": null
+    },
+    {
+      "vendor": "Quality Commercial & Residential Cleaning LLC",
+      "invoice_num": null,
+      "amount": null,
+      "invoice_date": "2026-05-13",
+      "subject": "Invoice from Quality Commercial & Residential Cleaning LLC",
+      "gmail_id": "19e1fd9aba5be083",
       "reminder_count": 0,
       "ramp": null
     }
