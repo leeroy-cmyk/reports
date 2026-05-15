@@ -1,12 +1,12 @@
 {
   "ok": true,
-  "fetched_at": "2026-05-14T17:07:26.715Z",
+  "fetched_at": "2026-05-15T00:45:10.456Z",
   "period_days": 60,
   "totals": {
-    "unpaid_count": 68,
-    "unpaid_amount_confirmed": 8104.92,
+    "unpaid_count": 71,
+    "unpaid_amount_confirmed": 8804.92,
     "paid_count": 27,
-    "vendor_count": 19
+    "vendor_count": 20
   },
   "unpaid": [
     {
@@ -153,6 +153,34 @@
       "reminder_count": 1,
       "is_reminder": true,
       "ramp": null
+    },
+    {
+      "vendor": "Duo Cleaning Company LLC",
+      "invoice_num": "23334446",
+      "amount": 350,
+      "invoice_date": "2026-05-14",
+      "subject": "Reminder: Invoice 23334446 is due from Duo Cleaning Company LLC - $350.00",
+      "gmail_id": "19e286658939d62f",
+      "reminder_count": 1,
+      "is_reminder": true,
+      "ramp": {
+        "total": 78725,
+        "count": 223
+      }
+    },
+    {
+      "vendor": "Duo Cleaning Company LLC",
+      "invoice_num": "23334445",
+      "amount": 350,
+      "invoice_date": "2026-05-14",
+      "subject": "Reminder: Invoice 23334445 is due from Duo Cleaning Company LLC - $350.00",
+      "gmail_id": "19e28665367b98cf",
+      "reminder_count": 1,
+      "is_reminder": true,
+      "ramp": {
+        "total": 78725,
+        "count": 223
+      }
     },
     {
       "vendor": "Shaw Plumbing, Heating & Air Conditioning",
@@ -706,6 +734,16 @@
       "invoice_date": "2026-05-13",
       "subject": "Invoice from Quality Commercial & Residential Cleaning LLC",
       "gmail_id": "19e1fd9aba5be083",
+      "reminder_count": 0,
+      "ramp": null
+    },
+    {
+      "vendor": "Silverline",
+      "invoice_num": "237399",
+      "amount": null,
+      "invoice_date": "2026-05-14",
+      "subject": "Your Invoice from Silverline! PAST DUE - Invoice #237399",
+      "gmail_id": "19e2832b31725c8b",
       "reminder_count": 0,
       "ramp": null
     },
