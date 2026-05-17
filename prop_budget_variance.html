@@ -117,7 +117,7 @@
 <body>
 <header>
   <h1>Property Budget Variance — Jan–Apr 2026</h1>
-  <div class="sub">Repairs · Turns · Grounds &nbsp;|&nbsp; Budget &amp; Spend: AppFolio Actuals &nbsp;|&nbsp; Generated 5/14/2026, 1:54:05 PM</div>
+  <div class="sub">Repairs · Turns · Grounds &nbsp;|&nbsp; Budget &amp; Spend: AppFolio Actuals &nbsp;|&nbsp; Generated 5/17/2026, 11:02:30 AM</div>
 </header>
 <div class="legend">
   <span><span class="dot" style="background:#1e8449"></span>Positive variance = under budget</span>
@@ -2596,21 +2596,32 @@
   <div class="proj-top-row">
     <div class="proj-card">
       <div class="opex-card-title">Ridgeview Projection — May–Dec 2026</div>
-      <div class="ctrl-grid-3" style="margin-top:14px">
+      <div style="font-size:11px;color:#777;margin:6px 0 12px">Revenue = labor × 1.5 + pass-through · Gross profit = labor × 50% markup only</div>
+      <div class="ctrl-grid-3" style="margin-top:4px">
         <div class="ctrl-item">
-          <label>Monthly Revenue</label>
-          <div class="ctrl-desc">Ridgeview billings to properties · run rate ≈ $312K/mo</div>
-          <div class="slider-row"><input type="range" id="rp-rev" min="100000" max="700000" step="5000" value="312029" oninput="buildRidgeviewProj()"><span class="slider-val" id="rp-rev-lbl">—</span></div>
+          <label>Monthly Labor Cost</label>
+          <div class="ctrl-desc">Employee hours billed to properties (50% markup) · run rate ≈ $37K/mo</div>
+          <div class="slider-row"><input type="range" id="rp-labor" min="10000" max="150000" step="1000" value="37346" oninput="buildRidgeviewProj()"><span class="slider-val" id="rp-labor-lbl">—</span></div>
         </div>
         <div class="ctrl-item">
-          <label>COGS Rate</label>
-          <div class="ctrl-desc">Run rate ≈ 94% · reduce via better pricing or efficiency</div>
-          <div class="slider-row"><input type="range" id="rp-cogs" min="60" max="100" step="0.5" value="94" oninput="buildRidgeviewProj()"><span class="slider-val" id="rp-cogs-lbl">—</span></div>
+          <label>Monthly Pass-through COGS</label>
+          <div class="ctrl-desc">Materials + contractor work (no markup) · run rate ≈ $202K/mo</div>
+          <div class="slider-row"><input type="range" id="rp-pass" min="50000" max="600000" step="5000" value="202472" oninput="buildRidgeviewProj()"><span class="slider-val" id="rp-pass-lbl">—</span></div>
         </div>
         <div class="ctrl-item">
-          <label>Monthly Gross OpEx</label>
-          <div class="ctrl-desc">Total Ridgeview overhead before allocation · run rate ≈ $49K/mo</div>
-          <div class="slider-row"><input type="range" id="rp-opex" min="10000" max="100000" step="500" value="48951" oninput="buildRidgeviewProj()"><span class="slider-val" id="rp-opex-lbl">—</span></div>
+          <label>Monthly Subcontractor OpEx (67310)</label>
+          <div class="ctrl-desc">67310 subcontractor overhead before property allocation · run rate ≈ $25K/mo · fixed non-sub OpEx (~$15K/mo) baked in</div>
+          <div class="slider-row"><input type="range" id="rp-opex" min="0" max="80000" step="500" value="25275" oninput="buildRidgeviewProj()"><span class="slider-val" id="rp-opex-lbl">—</span></div>
+        </div>
+        <div class="ctrl-item">
+          <label>Sub Contractor Allocation (67310)</label>
+          <div class="ctrl-desc">Subcontractor OpEx billed to properties by spend % · run rate ≈ $25K/mo</div>
+          <div class="slider-row"><input type="range" id="rp-sub" min="0" max="60000" step="500" value="25275" oninput="buildRidgeviewProj()"><span class="slider-val" id="rp-sub-lbl">—</span></div>
+        </div>
+        <div class="ctrl-item" style="align-self:end;padding-bottom:4px">
+          <label>Derived Monthly Revenue</label>
+          <div style="font-size:18px;font-weight:700;color:#1a5276;margin-top:6px" id="rp-rev-derived">—</div>
+          <div style="font-size:11px;color:#777;margin-top:2px">= labor × 1.5 + pass-through</div>
         </div>
       </div>
     </div>
@@ -2623,7 +2634,7 @@
         <div class="gpr-field"><label>Apr GPR</label><span class="dollar-wrap"><span class="dollar-sign">$</span><input type="number" id="gpr-apr" value="1312720" oninput="buildRidgeviewProj()"></span></div>
         <div class="gpr-field" style="grid-column:1/-1"><label>May–Dec Monthly GPR</label><span class="dollar-wrap"><span class="dollar-sign">$</span><input type="number" id="gpr-proj" value="1312720" oninput="buildRidgeviewProj()"></span></div>
       </div>
-      <div style="margin-top:10px;font-size:11px;color:#777">Maintenance % of GPR = (R&M + Grounds + Turns COGS) ÷ GPR</div>
+      <div style="margin-top:10px;font-size:11px;color:#777">Maintenance % of GPR = (R&M + Grounds + Turns COGS + total OpEx) ÷ GPR</div>
     </div>
   </div>
 
@@ -2643,7 +2654,7 @@
       <thead><tr>
         <th style="text-align:left;min-width:70px">Month</th>
         <th>Revenue</th><th>COGS</th><th>Gross Profit</th><th>GP%</th>
-        <th>OpEx</th>
+        <th>Gross OpEx</th><th class="alloc-out">Sub Alloc'd</th><th>Net OpEx</th>
         <th>Net Income</th><th>Cumulative</th>
       </tr></thead>
       <tbody id="proj-main-tbody"></tbody>
@@ -2656,7 +2667,7 @@
     <table class="proj-tbl" id="proj-gpr-table">
       <thead><tr>
         <th style="text-align:left;min-width:70px">Month</th>
-        <th>R&amp;M / Grounds / Turns</th><th>GPR</th><th>% GPR</th>
+        <th>R&amp;M / Grounds / Turns COGS</th><th>+ Total OpEx</th><th>Total Maint Cost</th><th>GPR</th><th>% GPR</th>
       </tr></thead>
       <tbody id="proj-gpr-tbody"></tbody>
       <tfoot id="proj-gpr-tfoot"></tfoot>
@@ -2713,8 +2724,9 @@ document.querySelectorAll('th.sortable').forEach(th => {
 });
 
 // ── Ridgeview Projection ──────────────────────────────────────────────────────
-const RV_ACTUALS     = [{"month":"Jan","income":193875,"cogs":179565,"gp":14310,"opex":32520,"net":-18210,"cogsRM":75895},{"month":"Feb","income":223903,"cogs":193603,"gp":30300,"opex":31246,"net":-946,"cogsRM":90744},{"month":"Mar","income":266843,"cogs":250518,"gp":16326,"opex":48422,"net":-22639,"cogsRM":73977},{"month":"Apr","income":357214,"cogs":335583,"gp":21631,"opex":49479,"net":-27848,"cogsRM":111561}];
+const RV_ACTUALS     = [{"month":"Jan","income":193875,"cogs":179565,"gp":14310,"opex":32520,"net":-18210,"cogsRM":75895,"laborCogs":35453,"subAlloc":21011},{"month":"Feb","income":223903,"cogs":193603,"gp":30300,"opex":31246,"net":-946,"cogsRM":90744,"laborCogs":33437,"subAlloc":19909},{"month":"Mar","income":266843,"cogs":250518,"gp":16326,"opex":48422,"net":-22639,"cogsRM":73977,"laborCogs":32273,"subAlloc":27101},{"month":"Apr","income":357214,"cogs":335583,"gp":21631,"opex":49479,"net":-27848,"cogsRM":111561,"laborCogs":48220,"subAlloc":33077}];
 const MONTHS_12      = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const FIXED_OPEX     = 15142;
 const GPR_IDS        = ['gpr-jan','gpr-feb','gpr-mar','gpr-apr'];
 
 function fmtD(n)   { return n===0?'$0':'$'+Math.abs(Math.round(n)).toLocaleString(); }
@@ -2723,16 +2735,20 @@ function fmtPN(n)  { return (n<0?'(':'')+'$'+Math.abs(Math.round(n)).toLocaleStr
 function negCls(n) { return n<0?'neg-v':n>0?'pos-v':''; }
 
 function buildRidgeviewProj() {
-  const rev    = parseFloat(document.getElementById('rp-rev').value)||0;
-  const cogsR  = parseFloat(document.getElementById('rp-cogs').value)/100;
-  const opexG  = parseFloat(document.getElementById('rp-opex').value)||0;
-  const gprProj= parseFloat(document.getElementById('gpr-proj').value)||0;
+  const labor   = parseFloat(document.getElementById('rp-labor').value)||0;
+  const passThru= parseFloat(document.getElementById('rp-pass').value)||0;
+  const opexG   = parseFloat(document.getElementById('rp-opex').value)||0;
+  const subAlloc= parseFloat(document.getElementById('rp-sub').value)||0;
+  const gprProj = parseFloat(document.getElementById('gpr-proj').value)||0;
 
-  document.getElementById('rp-rev-lbl').textContent  = '$'+Math.round(rev).toLocaleString();
-  document.getElementById('rp-cogs-lbl').textContent = fmtPct(cogsR);
-  document.getElementById('rp-opex-lbl').textContent = '$'+Math.round(opexG).toLocaleString();
+  const derivedRev = Math.round(labor * 1.5 + passThru);
+  document.getElementById('rp-labor-lbl').textContent = '$'+Math.round(labor).toLocaleString();
+  document.getElementById('rp-pass-lbl').textContent  = '$'+Math.round(passThru).toLocaleString();
+  document.getElementById('rp-opex-lbl').textContent  = '$'+Math.round(opexG).toLocaleString();
+  document.getElementById('rp-sub-lbl').textContent   = '$'+Math.round(subAlloc).toLocaleString();
+  document.getElementById('rp-rev-derived').textContent = '$'+derivedRev.toLocaleString();
 
-  // Build rows
+  // Build rows — gross profit comes only from the 50% labor markup
   const rows = [];
   let cum = 0;
   for (let i=0; i<12; i++) {
@@ -2741,14 +2757,16 @@ function buildRidgeviewProj() {
       const a = RV_ACTUALS[i];
       cum += a.net;
       rows.push({ month: MONTHS_12[i], income: a.income, cogs: a.cogs, gp: a.gp,
-                  opex: a.opex, net: a.net, cum, actual: true });
+                  grossOpex: a.opex, subAlloc: a.subAlloc||0, netOpex: a.opex, net: a.net, cum, actual: true });
     } else {
-      const income = rev;
-      const cogs   = Math.round(income * cogsR);
-      const gp     = income - cogs;
-      const net    = gp - opexG;
+      const income    = Math.round(labor * 1.5 + passThru);
+      const cogs      = Math.round(labor + passThru);
+      const gp        = Math.round(labor * 0.5);
+      const grossOpex = opexG + FIXED_OPEX;
+      const netOpex   = FIXED_OPEX + Math.max(0, opexG - subAlloc);
+      const net       = gp - netOpex;
       cum += net;
-      rows.push({ month: MONTHS_12[i], income, cogs, gp, opex: opexG, net, cum, actual: false });
+      rows.push({ month: MONTHS_12[i], income, cogs, gp, grossOpex, subAlloc, netOpex, net, cum, actual: false });
     }
   }
 
@@ -2774,13 +2792,13 @@ function buildRidgeviewProj() {
     ri.textContent  = 'Gap: '+fmtPN(-fullYearNet);
   } else {
     bar.className += 'off-track'; icon.textContent='❌';
-    st.textContent = 'Not on track — adjust revenue, COGS, or OpEx sliders';
+    st.textContent = 'Not on track — increase labor volume or reduce OpEx';
     det.textContent = 'YTD actual: '+fmtPN(ytdNet)+' · Full-year projected: '+fmtPN(fullYearNet);
     ri.textContent  = 'Gap to close: '+fmtPN(-fullYearNet);
   }
 
   // Main projection table
-  let html='', ytdInc=0, ytdCogs=0, ytdGP=0, ytdOpex=0, ytdNet2=0;
+  let html='', ytdInc=0, ytdCogs=0, ytdGP=0, ytdGrossOpex=0, ytdSubAlloc=0, ytdNet2=0;
   for (const r of rows) {
     const gpPct = r.income>0?r.gp/r.income:0;
     const gpCls = gpPct>=0.1?'pos-v':gpPct>=0.05?'warn-v':'neg-v';
@@ -2789,11 +2807,14 @@ function buildRidgeviewProj() {
       <td>${fmtD(r.income)}</td><td>${fmtD(r.cogs)}</td>
       <td class="${r.gp<0?'neg-v':''}">${fmtPN(r.gp)}</td>
       <td class="${gpCls}">${fmtPct(gpPct)}</td>
-      <td>${fmtD(r.opex)}</td>
+      <td>${fmtD(r.grossOpex)}</td>
+      <td class="alloc-out">${r.subAlloc>0?fmtD(r.subAlloc):'-'}</td>
+      <td>${fmtD(r.netOpex)}</td>
       <td class="${negCls(r.net)}">${fmtPN(r.net)}</td>
       <td class="${negCls(r.cum)}">${fmtPN(r.cum)}</td>
     </tr>`;
-    ytdInc+=r.income; ytdCogs+=r.cogs; ytdGP+=r.gp; ytdOpex+=r.opex; ytdNet2+=r.net;
+    ytdInc+=r.income; ytdCogs+=r.cogs; ytdGP+=r.gp;
+    ytdGrossOpex+=r.grossOpex; ytdSubAlloc+=r.subAlloc; ytdNet2+=r.net;
   }
   drawRVChart(rows);
   document.getElementById('proj-main-tbody').innerHTML = html;
@@ -2802,39 +2823,47 @@ function buildRidgeviewProj() {
     <td>${fmtD(ytdInc)}</td><td>${fmtD(ytdCogs)}</td>
     <td class="${negCls(ytdGP)}">${fmtPN(ytdGP)}</td>
     <td>${fmtPct(ytdGP/ytdInc)}</td>
-    <td>${fmtD(ytdOpex)}</td>
+    <td>${fmtD(ytdGrossOpex)}</td>
+    <td class="alloc-out">${fmtD(ytdSubAlloc)}</td>
+    <td>${fmtD(ytdGrossOpex-ytdSubAlloc)}</td>
     <td class="${negCls(ytdNet2)}" style="font-size:14px">${fmtPN(ytdNet2)}</td><td></td>
   </tr>`;
 
   // GPR table
   const gprVals = [...GPR_IDS.map(id=>parseFloat(document.getElementById(id).value)||0),
                    ...Array(8).fill(gprProj)];
-  const avgCogsRM = RV_ACTUALS.length ? Math.round(RV_ACTUALS.reduce((s,r)=>s+(r.cogsRM||0),0)/RV_ACTUALS.length) : 0;
-  let gprHtml='', totRM=0, totGPR=0;
+  const avgCogsRM  = RV_ACTUALS.length ? Math.round(RV_ACTUALS.reduce((s,r)=>s+(r.cogsRM||0),0)/RV_ACTUALS.length) : 0;
+  let gprHtml='', totRM=0, totSub=0, totTotal=0, totGPR=0;
   for (let i=0; i<12; i++) {
-    const portRM = i<RV_ACTUALS.length ? (RV_ACTUALS[i].cogsRM||0) : avgCogsRM;
-    const gpr    = gprVals[i] || gprProj;
-    const pct    = gpr>0 ? portRM/gpr : 0;
-    const actual = i<4;
-    const pctCls = pct>0.15?'neg-v':pct>0.10?'warn-v':'pos-v';
+    const portRM  = i<RV_ACTUALS.length ? (RV_ACTUALS[i].cogsRM||0) : avgCogsRM;
+    const subAmt  = i<RV_ACTUALS.length ? (RV_ACTUALS[i].opex||0) : (opexG + FIXED_OPEX);
+    const total   = portRM + subAmt;
+    const gpr     = gprVals[i] || gprProj;
+    const pct     = gpr>0 ? total/gpr : 0;
+    const actual  = i<4;
+    const pctCls  = pct>0.15?'neg-v':pct>0.10?'warn-v':'pos-v';
     gprHtml+=`<tr class="${actual?'actual-row':'proj-row'}">
       <td style="text-align:left">${MONTHS_12[i]}${actual?' <span style="font-size:9px;background:#d6eaf8;color:#1a5276;padding:1px 4px;border-radius:3px">actual</span>':''}</td>
       <td>${fmtD(portRM)}</td>
+      <td class="alloc-out">${subAmt>0?fmtD(subAmt):'-'}</td>
+      <td>${fmtD(total)}</td>
       <td>${fmtD(gpr)}</td>
       <td class="${pctCls}">${fmtPct(pct)}</td>
     </tr>`;
-    totRM+=portRM; totGPR+=gpr;
+    totRM+=portRM; totSub+=subAmt; totTotal+=total; totGPR+=gpr;
   }
   document.getElementById('proj-gpr-tbody').innerHTML = gprHtml;
-  const avgPct = totGPR>0?totRM/totGPR:0;
+  const avgPct = totGPR>0?totTotal/totGPR:0;
   document.getElementById('proj-gpr-tfoot').innerHTML = `<tr>
     <td style="text-align:left"><strong>Total/Avg</strong></td>
-    <td>${fmtD(totRM)}</td><td>—</td>
+    <td>${fmtD(totRM)}</td>
+    <td class="alloc-out">${fmtD(totSub)}</td>
+    <td>${fmtD(totTotal)}</td><td>—</td>
     <td class="${avgPct>0.15?'neg-v':avgPct>0.10?'warn-v':'pos-v'}">${fmtPct(avgPct)}</td>
   </tr>`;
 }
 
-['rp-rev','rp-cogs','rp-opex'].forEach(id=>document.getElementById(id).addEventListener('input',buildRidgeviewProj));
+['rp-labor','rp-pass','rp-opex','rp-sub'].forEach(id=>document.getElementById(id).addEventListener('input',buildRidgeviewProj));
 
 function drawRVChart(rows) {
   const canvas = document.getElementById('rv-chart');
