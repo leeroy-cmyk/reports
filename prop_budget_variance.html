@@ -1,0 +1,3026 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Property Budget Variance — Jan–Apr 2026</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f4f6f9;color:#2c3e50;font-size:13px}
+  header{background:#1a5276;color:#fff;padding:18px 28px}
+  header h1{font-size:20px;font-weight:600}
+  header .sub{font-size:12px;opacity:.75;margin-top:4px}
+  .tabs{display:flex;background:#fff;border-bottom:2px solid #2e86c1;padding:0 24px;position:sticky;top:0;z-index:10;box-shadow:0 2px 6px rgba(0,0,0,.08)}
+  .tab-btn{padding:12px 22px;cursor:pointer;border:none;background:none;font-size:13px;font-weight:500;color:#555;border-bottom:3px solid transparent;margin-bottom:-2px}
+  .tab-btn:hover{color:#2e86c1;background:#f0f7ff}
+  .tab-btn.active{color:#1a5276;border-bottom:3px solid #2e86c1;background:#f0f7ff}
+  .tab-content{display:none;padding:20px 24px;overflow-x:auto}
+  .tab-content.active{display:block}
+  table{width:100%;border-collapse:collapse;min-width:1100px;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.1)}
+  th,td{padding:7px 10px;text-align:right;white-space:nowrap}
+  th{background:#1a5276;color:#fff;font-weight:600;font-size:12px;user-select:none}
+  th.prop-name,td.prop-name{text-align:left;font-weight:600;color:#1a5276;min-width:130px;position:sticky;left:0;background:#fff;z-index:1}
+  th.prop-name{background:#1a5276;color:#fff;z-index:2}
+  th.cat-head{border-right:2px solid rgba(255,255,255,.3)}
+  th.cat-head.repairs{background:#1a5276}
+  th.cat-head.turns{background:#1f618d}
+  th.cat-head.grounds{background:#196f3d}
+  th.cat-head.total{background:#7d3c98}
+  tbody tr:nth-child(even){background:#f8f9fa}
+  tbody tr:hover{background:#eaf4fb}
+  td.pos{color:#1e8449;font-weight:600}
+  td.neg{color:#c0392b;font-weight:600}
+  td.neutral{color:#7f8c8d}
+  td.total-bud{font-weight:600;color:#1a5276}
+  td.total-spe{font-weight:600;color:#2e86c1}
+  td.total-var{font-weight:700;border-left:2px solid #e0e0e0}
+  tfoot tr.total-row td{background:#eaf0f8;font-weight:700;border-top:2px solid #2e86c1}
+  th.sortable{cursor:pointer}
+  th.sortable:hover{background:#154360}
+  th.sort-asc .sort-icon::after{content:'▲';margin-left:3px}
+  th.sort-desc .sort-icon::after{content:'▼';margin-left:3px}
+  .sort-icon{font-size:10px;opacity:.6}
+  th.sort-asc .sort-icon,th.sort-desc .sort-icon{opacity:1}
+  tr.zero-row td{color:#bbb}
+  .legend{display:flex;gap:16px;padding:10px 24px 0;font-size:11px;color:#555}
+  .legend span{display:inline-flex;align-items:center;gap:5px}
+  .legend .dot{width:10px;height:10px;border-radius:50%}
+  .note{font-size:11px;color:#888;padding:6px 24px 4px}
+  /* ── OpEx Allocation tab ── */
+  .opex-wrap{padding:20px 24px}
+  .opex-top-row{display:flex;gap:18px;margin-bottom:20px;flex-wrap:wrap}
+  .opex-card{background:#fff;border-radius:8px;padding:18px 20px;box-shadow:0 1px 4px rgba(0,0,0,.1);flex:1;min-width:300px}
+  .opex-mode-card{flex:0 0 340px}
+  .opex-card-title{font-size:12px;font-weight:700;color:#1a5276;text-transform:uppercase;letter-spacing:.5px;margin-bottom:14px;border-bottom:2px solid #eaf0f8;padding-bottom:8px}
+  .opex-fields{display:grid;grid-template-columns:1fr 1fr;gap:10px 18px}
+  .opex-field{display:flex;flex-direction:column;gap:4px}
+  .opex-field label{font-size:11px;font-weight:600;color:#555;text-transform:uppercase;letter-spacing:.3px}
+  .dollar-wrap{display:flex;align-items:center;border:1px solid #d5d8dc;border-radius:5px;overflow:hidden;background:#fafafa}
+  .dollar-sign{padding:0 8px;font-size:13px;color:#555;background:#f0f3f7;border-right:1px solid #d5d8dc;line-height:32px}
+  .dollar-wrap input{border:none;background:transparent;padding:6px 8px;font-size:13px;width:100%;outline:none}
+  .opex-grand{margin-top:14px;font-size:13px;color:#555;border-top:1px solid #eaf0f8;padding-top:10px}
+  .opex-grand strong{font-size:16px;color:#1a5276;margin-left:6px}
+  .mode-radio{display:flex;gap:10px;align-items:flex-start;padding:10px;border-radius:6px;cursor:pointer;margin-bottom:6px;border:2px solid transparent;transition:border-color .15s}
+  .mode-radio:has(input:checked){border-color:#2e86c1;background:#f0f7ff}
+  .mode-radio input{margin-top:3px;accent-color:#2e86c1}
+  .mode-radio strong{font-size:13px;color:#1a5276}
+  .mode-radio p{font-size:11px;color:#777;margin-top:3px;line-height:1.4}
+  #manual-sum-warn{font-size:11px;color:#c0392b;font-weight:600;min-height:16px;margin-top:4px}
+  .opex-table-scroll{overflow-x:auto}
+  #opex-alloc-table{width:100%;border-collapse:collapse;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.1);min-width:900px}
+  #opex-alloc-table th,#opex-alloc-table td{padding:7px 10px;text-align:right;white-space:nowrap}
+  #opex-alloc-table th{background:#1a5276;color:#fff;font-size:12px;font-weight:600}
+  #opex-alloc-table th.prop-name,#opex-alloc-table td.prop-name{text-align:left;color:#1a5276;font-weight:600;min-width:120px;position:sticky;left:0;background:#fff;z-index:1}
+  #opex-alloc-table th.prop-name{background:#1a5276;color:#fff;z-index:2}
+  #opex-alloc-table tbody tr:nth-child(even){background:#f8f9fa}
+  #opex-alloc-table tbody tr:hover{background:#eaf4fb}
+  #opex-alloc-table tfoot td{background:#eaf0f8;font-weight:700;border-top:2px solid #2e86c1}
+  #opex-alloc-table tr.zero-row td{color:#ccc}
+  td.alloc-cell{color:#1e8449;font-weight:600}
+  td.eff-total{font-weight:700;color:#1a5276;border-left:2px solid #e0e0e0}
+  .pct-cell{color:#7d3c98;font-size:11px}
+  .mpct-input{width:58px;border:1px solid #aaa;border-radius:4px;padding:3px 5px;font-size:12px;text-align:right}
+  /* ── Ridgeview Projection tab ── */
+  .proj-outer{padding:18px 0}
+  .proj-top-row{display:flex;gap:16px;margin-bottom:16px;flex-wrap:wrap}
+  .proj-card{background:#fff;border-radius:8px;padding:16px 20px;box-shadow:0 1px 4px rgba(0,0,0,.1);flex:1;min-width:300px}
+  .proj-gpr-card{flex:0 0 340px}
+  .ctrl-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px 18px}
+  @media(max-width:800px){.ctrl-grid-3{grid-template-columns:1fr}}
+  .ctrl-item label{font-size:11px;font-weight:600;text-transform:uppercase;color:#555;letter-spacing:.3px;display:block;margin-bottom:4px}
+  .ctrl-item .ctrl-desc{font-size:11px;color:#888;margin-bottom:6px}
+  .slider-row{display:flex;align-items:center;gap:8px}
+  .slider-row input[type=range]{flex:1;accent-color:#2e86c1}
+  .slider-val{font-size:12px;font-weight:700;color:#1a5276;min-width:64px;text-align:right}
+  .link-bar{background:#eaf4fb;border:1px solid #aed6f1;border-radius:6px;padding:8px 12px;font-size:12px;color:#2c3e50}
+  .link-bar strong{color:#1a5276}
+  .gpr-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 14px;margin-top:10px}
+  .gpr-field{display:flex;flex-direction:column;gap:3px}
+  .gpr-field label{font-size:11px;font-weight:600;color:#555;text-transform:uppercase;letter-spacing:.3px}
+  .gpr-field .dollar-wrap input{padding:5px 8px;font-size:12px}
+  .be-bar{border-radius:8px;padding:12px 18px;display:flex;align-items:center;gap:14px;font-size:13px}
+  .be-bar.on-track{background:#eafaf1;border:1px solid #1e8449}
+  .be-bar.off-track{background:#fdedec;border:1px solid #c0392b}
+  .be-bar.close{background:#fef9e7;border:1px solid #e67e22}
+  table.proj-tbl{width:100%;border-collapse:collapse;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.1);min-width:800px;font-size:12px}
+  table.proj-tbl th,table.proj-tbl td{padding:7px 11px;text-align:right;white-space:nowrap}
+  table.proj-tbl th{background:#1a5276;color:#fff;font-size:11px;font-weight:600}
+  table.proj-tbl tbody tr.actual-row{background:#f0f7ff}
+  table.proj-tbl tbody tr.proj-row{background:#fff}
+  table.proj-tbl tbody tr:hover{background:#eaf4fb}
+  table.proj-tbl tfoot td{background:#eaf0f8;font-weight:700;border-top:2px solid #2e86c1}
+  table.proj-tbl td.neg-v{color:#c0392b;font-weight:700}
+  table.proj-tbl td.pos-v{color:#1e8449;font-weight:700}
+  table.proj-tbl td.warn-v{color:#e67e22;font-weight:700}
+  td.alloc-out{color:#9b59b6;font-weight:600}
+</style>
+</head>
+<body>
+<header>
+  <h1>Property Budget Variance — Jan–Apr 2026</h1>
+  <div class="sub">Repairs · Turns · Grounds &nbsp;|&nbsp; Budget &amp; Spend: AppFolio Actuals &nbsp;|&nbsp; Generated 5/14/2026, 1:54:05 PM</div>
+</header>
+<div class="legend">
+  <span><span class="dot" style="background:#1e8449"></span>Positive variance = under budget</span>
+  <span><span class="dot" style="background:#c0392b"></span>Negative variance = over budget</span>
+</div>
+<p class="note">Budget &amp; Spend = AppFolio Accrual actuals (52001 Repairs / 52002 Turns / 52003 Grounds) · tc68 acquired Mar 15 · Click any column header to sort</p>
+<div class="tabs">
+  <button class="tab-btn active" onclick="showTab('jan',this)">January</button>
+  <button class="tab-btn" onclick="showTab('feb',this)">February</button>
+  <button class="tab-btn" onclick="showTab('mar',this)">March</button>
+  <button class="tab-btn" onclick="showTab('apr',this)">April</button>
+  <button class="tab-btn" onclick="showTab('ytd',this)">YTD Total</button>
+  <button class="tab-btn" onclick="showTab('opex',this)">OpEx Allocation</button>
+  <button class="tab-btn" onclick="showTab('proj',this)">Ridgeview / Projection</button>
+</div>
+<div id="tab-jan" class="tab-content"><table><thead>
+      <tr>
+        <th rowspan="2" class="prop-name sortable" data-col="0">Property <span class="sort-icon">↕</span></th>
+        <th colspan="3" class="cat-head repairs">Repairs (52001)</th>
+        <th colspan="3" class="cat-head turns">Turns (52002)</th>
+        <th colspan="3" class="cat-head grounds">Grounds (52003)</th>
+        <th colspan="3" class="cat-head total">Total</th>
+      </tr>
+      <tr>
+        <th class="sortable" data-col="1">Budget <span class="sort-icon">↕</span></th>
+        <th class="sortable" data-col="2">Spend <span class="sort-icon">↕</span></th>
+        <th class="sortable" data-col="3">Var <span class="sort-icon">↕</span></th>
+        <th class="sortable" data-col="4">Budget <span class="sort-icon">↕</span></th>
+        <th class="sortable" data-col="5">Spend <span class="sort-icon">↕</span></th>
+        <th class="sortable" data-col="6">Var <span class="sort-icon">↕</span></th>
+        <th class="sortable" data-col="7">Budget <span class="sort-icon">↕</span></th>
+        <th class="sortable" data-col="8">Spend <span class="sort-icon">↕</span></th>
+        <th class="sortable" data-col="9">Var <span class="sort-icon">↕</span></th>
+        <th class="sortable" data-col="10">Budget <span class="sort-icon">↕</span></th>
+        <th class="sortable" data-col="11">Spend <span class="sort-icon">↕</span></th>
+        <th class="sortable" data-col="12">Var <span class="sort-icon">↕</span></th>
+      </tr>
+    </thead><tbody><tr
+      data-v0="a210"
+      data-v1="439" data-v2="345" data-v3="94"
+      data-v4="549" data-v5="0" data-v6="549"
+      data-v7="220" data-v8="584" data-v9="-365"
+      data-v10="1207" data-v11="929" data-v12="278">
+      <td class="prop-name">a210</td>
+      <td>$439</td><td>$345</td><td class="pos">$94</td>
+      <td>$549</td><td>$0</td><td class="pos">$549</td>
+      <td>$220</td><td>$584</td><td class="neg">$-365</td>
+      <td class="total-bud">$1,207</td><td class="total-spe">$929</td>
+      <td class="pos total-var">$278</td>
+    </tr>
+<tr
+      data-v0="a511"
+      data-v1="755" data-v2="358" data-v3="397"
+      data-v4="177" data-v5="0" data-v6="177"
+      data-v7="716" data-v8="590" data-v9="126"
+      data-v10="1648" data-v11="947" data-v12="700">
+      <td class="prop-name">a511</td>
+      <td>$755</td><td>$358</td><td class="pos">$397</td>
+      <td>$177</td><td>$0</td><td class="pos">$177</td>
+      <td>$716</td><td>$590</td><td class="pos">$126</td>
+      <td class="total-bud">$1,648</td><td class="total-spe">$947</td>
+      <td class="pos total-var">$700</td>
+    </tr>
+<tr
+      data-v0="a916"
+      data-v1="509" data-v2="101" data-v3="409"
+      data-v4="637" data-v5="827" data-v6="-191"
+      data-v7="255" data-v8="888" data-v9="-634"
+      data-v10="1401" data-v11="1816" data-v12="-416">
+      <td class="prop-name">a916</td>
+      <td>$509</td><td>$101</td><td class="pos">$409</td>
+      <td>$637</td><td>$827</td><td class="neg">$-191</td>
+      <td>$255</td><td>$888</td><td class="neg">$-634</td>
+      <td class="total-bud">$1,401</td><td class="total-spe">$1,816</td>
+      <td class="neg total-var">$-416</td>
+    </tr>
+<tr
+      data-v0="b101"
+      data-v1="663" data-v2="918" data-v3="-255"
+      data-v4="829" data-v5="1701" data-v6="-872"
+      data-v7="332" data-v8="448" data-v9="-117"
+      data-v10="1824" data-v11="3067" data-v12="-1243">
+      <td class="prop-name">b101</td>
+      <td>$663</td><td>$918</td><td class="neg">$-255</td>
+      <td>$829</td><td>$1,701</td><td class="neg">$-872</td>
+      <td>$332</td><td>$448</td><td class="neg">$-117</td>
+      <td class="total-bud">$1,824</td><td class="total-spe">$3,067</td>
+      <td class="neg total-var">$-1,243</td>
+    </tr>
+<tr
+      data-v0="c302"
+      data-v1="806" data-v2="0" data-v3="806"
+      data-v4="1007" data-v5="0" data-v6="1007"
+      data-v7="403" data-v8="91" data-v9="312"
+      data-v10="2215" data-v11="91" data-v12="2124">
+      <td class="prop-name">c302</td>
+      <td>$806</td><td>$0</td><td class="pos">$806</td>
+      <td>$1,007</td><td>$0</td><td class="pos">$1,007</td>
+      <td>$403</td><td>$91</td><td class="pos">$312</td>
+      <td class="total-bud">$2,215</td><td class="total-spe">$91</td>
+      <td class="pos total-var">$2,124</td>
+    </tr>
+<tr
+      data-v0="c313"
+      data-v1="2089" data-v2="1086" data-v3="1002"
+      data-v4="1287" data-v5="183" data-v6="1104"
+      data-v7="882" data-v8="1113" data-v9="-231"
+      data-v10="4257" data-v11="2382" data-v12="1876">
+      <td class="prop-name">c313</td>
+      <td>$2,089</td><td>$1,086</td><td class="pos">$1,002</td>
+      <td>$1,287</td><td>$183</td><td class="pos">$1,104</td>
+      <td>$882</td><td>$1,113</td><td class="neg">$-231</td>
+      <td class="total-bud">$4,257</td><td class="total-spe">$2,382</td>
+      <td class="pos total-var">$1,876</td>
+    </tr>
+<tr
+      data-v0="e328"
+      data-v1="239" data-v2="125" data-v3="114"
+      data-v4="308" data-v5="0" data-v6="308"
+      data-v7="318" data-v8="339" data-v9="-21"
+      data-v10="865" data-v11="464" data-v12="401">
+      <td class="prop-name">e328</td>
+      <td>$239</td><td>$125</td><td class="pos">$114</td>
+      <td>$308</td><td>$0</td><td class="pos">$308</td>
+      <td>$318</td><td>$339</td><td class="neutral">$-21</td>
+      <td class="total-bud">$865</td><td class="total-spe">$464</td>
+      <td class="pos total-var">$401</td>
+    </tr>
+<tr
+      data-v0="h604"
+      data-v1="0" data-v2="0" data-v3="0"
+      data-v4="0" data-v5="196" data-v6="-196"
+      data-v7="0" data-v8="0" data-v9="0"
+      data-v10="0" data-v11="196" data-v12="-196">
+      <td class="prop-name">h604</td>
+      <td>$0</td><td>$0</td><td class="neutral">$0</td>
+      <td>$0</td><td>$196</td><td class="neg">$-196</td>
+      <td>$0</td><td>$0</td><td class="neutral">$0</td>
+      <td class="total-bud">$0</td><td class="total-spe">$196</td>
+      <td class="neg total-var">$-196</td>
+    </tr>
+<tr
+      data-v0="h731"
+      data-v1="417" data-v2="56" data-v3="361"
+      data-v4="522" data-v5="0" data-v6="522"
+      data-v7="209" data-v8="147" data-v9="62"
+      data-v10="1148" data-v11="203" data-v12="944">
+      <td class="prop-name">h731</td>
+      <td>$417</td><td>$56</td><td class="pos">$361</td>
+      <td>$522</td><td>$0</td><td class="pos">$522</td>
+      <td>$209</td><td>$147</td><td class="pos">$62</td>
+      <td class="total-bud">$1,148</td><td class="total-spe">$203</td>
+      <td class="pos total-var">$944</td>
+    </tr>
+<tr
+      data-v0="hl65"
+      data-v1="493" data-v2="0" data-v3="493"
+      data-v4="617" data-v5="43" data-v6="574"
+      data-v7="247" data-v8="238" data-v9="9"
+      data-v10="1356" data-v11="281" data-v12="1075">
+      <td class="prop-name">hl65</td>
+      <td>$493</td><td>$0</td><td class="pos">$493</td>
+      <td>$617</td><td>$43</td><td class="pos">$574</td>
+      <td>$247</td><td>$238</td><td class="neutral">$9</td>
+      <td class="total-bud">$1,356</td><td class="total-spe">$281</td>
+      <td class="pos total-var">$1,075</td>
+    </tr>
+<tr
+      data-v0="hl73"
+      data-v1="226" data-v2="115" data-v3="111"
+      data-v4="283" data-v5="0" data-v6="283"
+      data-v7="113" data-v8="592" data-v9="-479"
+      data-v10="622" data-v11="707" data-v12="-85">
+      <td class="prop-name">hl73</td>
+      <td>$226</td><td>$115</td><td class="pos">$111</td>
+      <td>$283</td><td>$0</td><td class="pos">$283</td>
+      <td>$113</td><td>$592</td><td class="neg">$-479</td>
+      <td class="total-bud">$622</td><td class="total-spe">$707</td>
+      <td class="neg total-var">$-85</td>
+    </tr>
+<tr
+      data-v0="j312"
+      data-v1="579" data-v2="333" data-v3="246"
+      data-v4="792" data-v5="686" data-v6="106"
+      data-v7="326" data-v8="684" data-v9="-358"
+      data-v10="1697" data-v11="1703" data-v12="-7">
+      <td class="prop-name">j312</td>
+      <td>$579</td><td>$333</td><td class="pos">$246</td>
+      <td>$792</td><td>$686</td><td class="pos">$106</td>
+      <td>$326</td><td>$684</td><td class="neg">$-358</td>
+      <td class="total-bud">$1,697</td><td class="total-spe">$1,703</td>
+      <td class="neutral total-var">$-7</td>
+    </tr>
+<tr
+      data-v0="k104- LeFevre"
+      data-v1="3052" data-v2="1383" data-v3="1669"
+      data-v4="3815" data-v5="358" data-v6="3456"
+      data-v7="1526" data-v8="734" data-v9="792"
+      data-v10="8392" data-v11="2476" data-v12="5917">
+      <td class="prop-name">k104- LeFevre</td>
+      <td>$3,052</td><td>$1,383</td><td class="pos">$1,669</td>
+      <td>$3,815</td><td>$358</td><td class="pos">$3,456</td>
+      <td>$1,526</td><td>$734</td><td class="pos">$792</td>
+      <td class="total-bud">$8,392</td><td class="total-spe">$2,476</td>
+      <td class="pos total-var">$5,917</td>
+    </tr>
+<tr
+      data-v0="k308"
+      data-v1="287" data-v2="0" data-v3="287"
+      data-v4="206" data-v5="0" data-v6="206"
+      data-v7="126" data-v8="0" data-v9="126"
+      data-v10="620" data-v11="0" data-v12="620">
+      <td class="prop-name">k308</td>
+      <td>$287</td><td>$0</td><td class="pos">$287</td>
+      <td>$206</td><td>$0</td><td class="pos">$206</td>
+      <td>$126</td><td>$0</td><td class="pos">$126</td>
+      <td class="total-bud">$620</td><td class="total-spe">$0</td>
+      <td class="pos total-var">$620</td>
+    </tr>
+<tr
+      data-v0="kn47"
+      data-v1="22160" data-v2="12194" data-v3="9967"
+      data-v4="5222" data-v5="1602" data-v6="3620"
+      data-v7="6156" data-v8="6003" data-v9="153"
+      data-v10="33538" data-v11="19798" data-v12="13740">
+      <td class="prop-name">kn47</td>
+      <td>$22,160</td><td>$12,194</td><td class="pos">$9,967</td>
+      <td>$5,222</td><td>$1,602</td><td class="pos">$3,620</td>
+      <td>$6,156</td><td>$6,003</td><td class="pos">$153</td>
+      <td class="total-bud">$33,538</td><td class="total-spe">$19,798</td>
+      <td class="pos total-var">$13,740</td>
+    </tr>
+<tr
+      data-v0="m221"
+      data-v1="672" data-v2="605" data-v3="67"
+      data-v4="840" data-v5="77" data-v6="763"
+      data-v7="336" data-v8="447" data-v9="-111"
+      data-v10="1848" data-v11="1128" data-v12="719">
+      <td class="prop-name">m221</td>
+      <td>$672</td><td>$605</td><td class="pos">$67</td>
+      <td>$840</td><td>$77</td><td class="pos">$763</td>
+      <td>$336</td><td>$447</td><td class="neg">$-111</td>
+      <td class="total-bud">$1,848</td><td class="total-spe">$1,128</td>
+      <td class="pos total-var">$719</td>
+    </tr>
+<tr
+      data-v0="m405"
+      data-v1="1079" data-v2="293" data-v3="786"
+      data-v4="1349" data-v5="350" data-v6="998"
+      data-v7="539" data-v8="563" data-v9="-24"
+      data-v10="2967" data-v11="1207" data-v12="1760">
+      <td class="prop-name">m405</td>
+      <td>$1,079</td><td>$293</td><td class="pos">$786</td>
+      <td>$1,349</td><td>$350</td><td class="pos">$998</td>
+      <td>$539</td><td>$563</td><td class="neutral">$-24</td>
+      <td class="total-bud">$2,967</td><td class="total-spe">$1,207</td>
+      <td class="pos total-var">$1,760</td>
+    </tr>
+<tr
+      data-v0="m608"
+      data-v1="444" data-v2="683" data-v3="-239"
+      data-v4="555" data-v5="0" data-v6="555"
+      data-v7="222" data-v8="294" data-v9="-72"
+      data-v10="1221" data-v11="978" data-v12="244">
+      <td class="prop-name">m608</td>
+      <td>$444</td><td>$683</td><td class="neg">$-239</td>
+      <td>$555</td><td>$0</td><td class="pos">$555</td>
+      <td>$222</td><td>$294</td><td class="neg">$-72</td>
+      <td class="total-bud">$1,221</td><td class="total-spe">$978</td>
+      <td class="pos total-var">$244</td>
+    </tr>
+<tr
+      data-v0="ms22"
+      data-v1="312" data-v2="1410" data-v3="-1098"
+      data-v4="390" data-v5="0" data-v6="390"
+      data-v7="156" data-v8="0" data-v9="156"
+      data-v10="858" data-v11="1410" data-v12="-552">
+      <td class="prop-name">ms22</td>
+      <td>$312</td><td>$1,410</td><td class="neg">$-1,098</td>
+      <td>$390</td><td>$0</td><td class="pos">$390</td>
+      <td>$156</td><td>$0</td><td class="pos">$156</td>
+      <td class="total-bud">$858</td><td class="total-spe">$1,410</td>
+      <td class="neg total-var">$-552</td>
+    </tr>
+<tr
+      data-v0="ms43"
+      data-v1="722" data-v2="3085" data-v3="-2363"
+      data-v4="903" data-v5="0" data-v6="903"
+      data-v7="361" data-v8="0" data-v9="361"
+      data-v10="1986" data-v11="3085" data-v12="-1099">
+      <td class="prop-name">ms43</td>
+      <td>$722</td><td>$3,085</td><td class="neg">$-2,363</td>
+      <td>$903</td><td>$0</td><td class="pos">$903</td>
+      <td>$361</td><td>$0</td><td class="pos">$361</td>
+      <td class="total-bud">$1,986</td><td class="total-spe">$3,085</td>
+      <td class="neg total-var">$-1,099</td>
+    </tr>
+<tr
+      data-v0="o155"
+      data-v1="5185" data-v2="4970" data-v3="215"
+      data-v4="696" data-v5="598" data-v6="98"
+      data-v7="3575" data-v8="865" data-v9="2710"
+      data-v10="9456" data-v11="6433" data-v12="3023">
+      <td class="prop-name">o155</td>
+      <td>$5,185</td><td>$4,970</td><td class="pos">$215</td>
+      <td>$696</td><td>$598</td><td class="pos">$98</td>
+      <td>$3,575</td><td>$865</td><td class="pos">$2,710</td>
+      <td class="total-bud">$9,456</td><td class="total-spe">$6,433</td>
+      <td class="pos total-var">$3,023</td>
+    </tr>
+<tr
+      data-v0="p705"
+      data-v1="1108" data-v2="4510" data-v3="-3402"
+      data-v4="1385" data-v5="0" data-v6="1385"
+      data-v7="554" data-v8="823" data-v9="-269"
+      data-v10="3046" data-v11="5333" data-v12="-2287">
+      <td class="prop-name">p705</td>
+      <td>$1,108</td><td>$4,510</td><td class="neg">$-3,402</td>
+      <td>$1,385</td><td>$0</td><td class="pos">$1,385</td>
+      <td>$554</td><td>$823</td><td class="neg">$-269</td>
+      <td class="total-bud">$3,046</td><td class="total-spe">$5,333</td>
+      <td class="neg total-var">$-2,287</td>
+    </tr>
+<tr
+      data-v0="ps17"
+      data-v1="723" data-v2="162" data-v3="561"
+      data-v4="904" data-v5="26" data-v6="878"
+      data-v7="362" data-v8="1186" data-v9="-824"
+      data-v10="1989" data-v11="1374" data-v12="614">
+      <td class="prop-name">ps17</td>
+      <td>$723</td><td>$162</td><td class="pos">$561</td>
+      <td>$904</td><td>$26</td><td class="pos">$878</td>
+      <td>$362</td><td>$1,186</td><td class="neg">$-824</td>
+      <td class="total-bud">$1,989</td><td class="total-spe">$1,374</td>
+      <td class="pos total-var">$614</td>
+    </tr>
+<tr
+      data-v0="ps25"
+      data-v1="2401" data-v2="2513" data-v3="-112"
+      data-v4="3001" data-v5="422" data-v6="2579"
+      data-v7="1201" data-v8="1173" data-v9="28"
+      data-v10="6603" data-v11="4107" data-v12="2496">
+      <td class="prop-name">ps25</td>
+      <td>$2,401</td><td>$2,513</td><td class="neg">$-112</td>
+      <td>$3,001</td><td>$422</td><td class="pos">$2,579</td>
+      <td>$1,201</td><td>$1,173</td><td class="neutral">$28</td>
+      <td class="total-bud">$6,603</td><td class="total-spe">$4,107</td>
+      <td class="pos total-var">$2,496</td>
+    </tr>
+<tr
+      data-v0="ps91"
+      data-v1="671" data-v2="949" data-v3="-278"
+      data-v4="839" data-v5="0" data-v6="839"
+      data-v7="336" data-v8="329" data-v9="7"
+      data-v10="1846" data-v11="1278" data-v12="568">
+      <td class="prop-name">ps91</td>
+      <td>$671</td><td>$949</td><td class="neg">$-278</td>
+      <td>$839</td><td>$0</td><td class="pos">$839</td>
+      <td>$336</td><td>$329</td><td class="neutral">$7</td>
+      <td class="total-bud">$1,846</td><td class="total-spe">$1,278</td>
+      <td class="pos total-var">$568</td>
+    </tr>
+<tr
+      data-v0="rl16"
+      data-v1="7776" data-v2="10425" data-v3="-2649"
+      data-v4="4224" data-v5="332" data-v6="3892"
+      data-v7="2500" data-v8="3917" data-v9="-1417"
+      data-v10="14500" data-v11="14674" data-v12="-174">
+      <td class="prop-name">rl16</td>
+      <td>$7,776</td><td>$10,425</td><td class="neg">$-2,649</td>
+      <td>$4,224</td><td>$332</td><td class="pos">$3,892</td>
+      <td>$2,500</td><td>$3,917</td><td class="neg">$-1,417</td>
+      <td class="total-bud">$14,500</td><td class="total-spe">$14,674</td>
+      <td class="neg total-var">$-174</td>
+    </tr>
+<tr
+      data-v0="rl21"
+      data-v1="1100" data-v2="5915" data-v3="-4815"
+      data-v4="625" data-v5="0" data-v6="625"
+      data-v7="220" data-v8="100" data-v9="120"
+      data-v10="1945" data-v11="6015" data-v12="-4070">
+      <td class="prop-name">rl21</td>
+      <td>$1,100</td><td>$5,915</td><td class="neg">$-4,815</td>
+      <td>$625</td><td>$0</td><td class="pos">$625</td>
+      <td>$220</td><td>$100</td><td class="pos">$120</td>
+      <td class="total-bud">$1,945</td><td class="total-spe">$6,015</td>
+      <td class="neg total-var">$-4,070</td>
+    </tr>
+<tr
+      data-v0="s129"
+      data-v1="1200" data-v2="1104" data-v3="96"
+      data-v4="660" data-v5="0" data-v6="660"
+      data-v7="200" data-v8="191" data-v9="9"
+      data-v10="2060" data-v11="1295" data-v12="765">
+      <td class="prop-name">s129</td>
+      <td>$1,200</td><td>$1,104</td><td class="pos">$96</td>
+      <td>$660</td><td>$0</td><td class="pos">$660</td>
+      <td>$200</td><td>$191</td><td class="neutral">$9</td>
+      <td class="total-bud">$2,060</td><td class="total-spe">$1,295</td>
+      <td class="pos total-var">$765</td>
+    </tr>
+<tr
+      data-v0="s300"
+      data-v1="568" data-v2="130" data-v3="439"
+      data-v4="710" data-v5="55" data-v6="656"
+      data-v7="284" data-v8="897" data-v9="-613"
+      data-v10="1563" data-v11="1081" data-v12="482">
+      <td class="prop-name">s300</td>
+      <td>$568</td><td>$130</td><td class="pos">$439</td>
+      <td>$710</td><td>$55</td><td class="pos">$656</td>
+      <td>$284</td><td>$897</td><td class="neg">$-613</td>
+      <td class="total-bud">$1,563</td><td class="total-spe">$1,081</td>
+      <td class="pos total-var">$482</td>
+    </tr>
+<tr
+      data-v0="tc34"
+      data-v1="1438" data-v2="1960" data-v3="-522"
+      data-v4="512" data-v5="935" data-v6="-423"
+      data-v7="390" data-v8="636" data-v9="-246"
+      data-v10="2339" data-v11="3530" data-v12="-1191">
+      <td class="prop-name">tc34</td>
+      <td>$1,438</td><td>$1,960</td><td class="neg">$-522</td>
+      <td>$512</td><td>$935</td><td class="neg">$-423</td>
+      <td>$390</td><td>$636</td><td class="neg">$-246</td>
+      <td class="total-bud">$2,339</td><td class="total-spe">$3,530</td>
+      <td class="neg total-var">$-1,191</td>
+    </tr>
+<tr class="zero-row"
+      data-v0="tc68"
+      data-v1="0" data-v2="0" data-v3="0"
+      data-v4="0" data-v5="0" data-v6="0"
+      data-v7="0" data-v8="0" data-v9="0"
+      data-v10="0" data-v11="0" data-v12="0">
+      <td class="prop-name">tc68</td>
+      <td>$0</td><td>$0</td><td class="neutral">$0</td>
+      <td>$0</td><td>$0</td><td class="neutral">$0</td>
+      <td>$0</td><td>$0</td><td class="neutral">$0</td>
+      <td class="total-bud">$0</td><td class="total-spe">$0</td>
+      <td class="neutral total-var">$0</td>
+    </tr>
+<tr
+      data-v0="v202"
+      data-v1="403" data-v2="365" data-v3="37"
+      data-v4="320" data-v5="0" data-v6="320"
+      data-v7="598" data-v8="190" data-v9="408"
+      data-v10="1320" data-v11="555" data-v12="765">
+      <td class="prop-name">v202</td>
+      <td>$403</td><td>$365</td><td class="neutral">$37</td>
+      <td>$320</td><td>$0</td><td class="pos">$320</td>
+      <td>$598</td><td>$190</td><td class="pos">$408</td>
+      <td class="total-bud">$1,320</td><td class="total-spe">$555</td>
+      <td class="pos total-var">$765</td>
+    </tr>
+<tr
+      data-v0="w117"
+      data-v1="410" data-v2="518" data-v3="-108"
+      data-v4="513" data-v5="1572" data-v6="-1059"
+      data-v7="205" data-v8="252" data-v9="-46"
+      data-v10="1128" data-v11="2342" data-v12="-1213">
+      <td class="prop-name">w117</td>
+      <td>$410</td><td>$518</td><td class="neg">$-108</td>
+      <td>$513</td><td>$1,572</td><td class="neg">$-1,059</td>
+      <td>$205</td><td>$252</td><td class="neutral">$-46</td>
+      <td class="total-bud">$1,128</td><td class="total-spe">$2,342</td>
+      <td class="neg total-var">$-1,213</td>
+    </tr>
+<tr
+      data-v0="w225"
+      data-v1="0" data-v2="80" data-v3="-80"
+      data-v4="0" data-v5="0" data-v6="0"
+      data-v7="0" data-v8="345" data-v9="-345"
+      data-v10="0" data-v11="425" data-v12="-425">
+      <td class="prop-name">w225</td>
+      <td>$0</td><td>$80</td><td class="neg">$-80</td>
+      <td>$0</td><td>$0</td><td class="neutral">$0</td>
+      <td>$0</td><td>$345</td><td class="neg">$-345</td>
+      <td class="total-bud">$0</td><td class="total-spe">$425</td>
+      <td class="neg total-var">$-425</td>
+    </tr>
+<tr
+      data-v0="w226"
+      data-v1="540" data-v2="1482" data-v3="-942"
+      data-v4="675" data-v5="77" data-v6="598"
+      data-v7="270" data-v8="700" data-v9="-430"
+      data-v10="1485" data-v11="2259" data-v12="-774">
+      <td class="prop-name">w226</td>
+      <td>$540</td><td>$1,482</td><td class="neg">$-942</td>
+      <td>$675</td><td>$77</td><td class="pos">$598</td>
+      <td>$270</td><td>$700</td><td class="neg">$-430</td>
+      <td class="total-bud">$1,485</td><td class="total-spe">$2,259</td>
+      <td class="neg total-var">$-774</td>
+    </tr></tbody><tfoot><tr class="total-row">
+      <td><strong>TOTAL</strong></td>
+      <td>$59,466</td><td>$58,174</td><td class="pos">$1,292</td>
+      <td>$35,349</td><td>$10,039</td><td class="pos">$25,310</td>
+      <td>$24,133</td><td>$25,357</td><td class="neg">$-1,224</td>
+      <td class="total-bud">$118,949</td>
+      <td class="total-spe">$93,571</td>
+      <td class="pos total-var">$25,378</td>
+    </tr></tfoot></table></div>
+<div id="tab-feb" class="tab-content"><table><thead>
+      <tr>
+        <th rowspan="2" class="prop-name sortable" data-col="0">Property <span class="sort-icon">↕</span></th>
+        <th colspan="3" class="cat-head repairs">Repairs (52001)</th>
+        <th colspan="3" class="cat-head turns">Turns (52002)</th>
+        <th colspan="3" class="cat-head grounds">Grounds (52003)</th>
+        <th colspan="3" class="cat-head total">Total</th>
+      </tr>
+      <tr>
+        <th class="sortable" data-col="1">Budget <span class="sort-icon">↕</span></th>
+        <th class="sortable" data-col="2">Spend <span class="sort-icon">↕</span></th>
+        <th class="sortable" data-col="3">Var <span class="sort-icon">↕</span></th>
+        <th class="sortable" data-col="4">Budget <span class="sort-icon">↕</span></th>
+        <th class="sortable" data-col="5">Spend <span class="sort-icon">↕</span></th>
+        <th class="sortable" data-col="6">Var <span class="sort-icon">↕</span></th>
+        <th class="sortable" data-col="7">Budget <span class="sort-icon">↕</span></th>
+        <th class="sortable" data-col="8">Spend <span class="sort-icon">↕</span></th>
+        <th class="sortable" data-col="9">Var <span class="sort-icon">↕</span></th>
+        <th class="sortable" data-col="10">Budget <span class="sort-icon">↕</span></th>
+        <th class="sortable" data-col="11">Spend <span class="sort-icon">↕</span></th>
+        <th class="sortable" data-col="12">Var <span class="sort-icon">↕</span></th>
+      </tr>
+    </thead><tbody><tr
+      data-v0="a210"
+      data-v1="440" data-v2="26" data-v3="413"
+      data-v4="550" data-v5="0" data-v6="550"
+      data-v7="220" data-v8="255" data-v9="-35"
+      data-v10="1210" data-v11="282" data-v12="928">
+      <td class="prop-name">a210</td>
+      <td>$440</td><td>$26</td><td class="pos">$413</td>
+      <td>$550</td><td>$0</td><td class="pos">$550</td>
+      <td>$220</td><td>$255</td><td class="neutral">$-35</td>
+      <td class="total-bud">$1,210</td><td class="total-spe">$282</td>
+      <td class="pos total-var">$928</td>
+    </tr>
+<tr
+      data-v0="a511"
+      data-v1="352" data-v2="170" data-v3="182"
+      data-v4="415" data-v5="0" data-v6="415"
+      data-v7="251" data-v8="232" data-v9="20"
+      data-v10="1018" data-v11="401" data-v12="616">
+      <td class="prop-name">a511</td>
+      <td>$352</td><td>$170</td><td class="pos">$182</td>
+      <td>$415</td><td>$0</td><td class="pos">$415</td>
+      <td>$251</td><td>$232</td><td class="neutral">$20</td>
+      <td class="total-bud">$1,018</td><td class="total-spe">$401</td>
+      <td class="pos total-var">$616</td>
+    </tr>
+<tr
+      data-v0="a916"
+      data-v1="511" data-v2="1016" data-v3="-506"
+      data-v4="638" data-v5="261" data-v6="377"
+      data-v7="255" data-v8="360" data-v9="-105"
+      data-v10="1404" data-v11="1637" data-v12="-233">
+      <td class="prop-name">a916</td>
+      <td>$511</td><td>$1,016</td><td class="neg">$-506</td>
+      <td>$638</td><td>$261</td><td class="pos">$377</td>
+      <td>$255</td><td>$360</td><td class="neg">$-105</td>
+      <td class="total-bud">$1,404</td><td class="total-spe">$1,637</td>
+      <td class="neg total-var">$-233</td>
+    </tr>
+<tr
+      data-v0="b101"
+      data-v1="665" data-v2="1181" data-v3="-516"
+      data-v4="831" data-v5="337" data-v6="493"
+      data-v7="332" data-v8="401" data-v9="-69"
+      data-v10="1828" data-v11="1919" data-v12="-91">
+      <td class="prop-name">b101</td>
+      <td>$665</td><td>$1,181</td><td class="neg">$-516</td>
+      <td>$831</td><td>$337</td><td class="pos">$493</td>
+      <td>$332</td><td>$401</td><td class="neg">$-69</td>
+      <td class="total-bud">$1,828</td><td class="total-spe">$1,919</td>
+      <td class="neg total-var">$-91</td>
+    </tr>
+<tr
+      data-v0="c302"
+      data-v1="807" data-v2="300" data-v3="507"
+      data-v4="1009" data-v5="0" data-v6="1009"
+      data-v7="404" data-v8="324" data-v9="79"
+      data-v10="2220" data-v11="624" data-v12="1596">
+      <td class="prop-name">c302</td>
+      <td>$807</td><td>$300</td><td class="pos">$507</td>
+      <td>$1,009</td><td>$0</td><td class="pos">$1,009</td>
+      <td>$404</td><td>$324</td><td class="pos">$79</td>
+      <td class="total-bud">$2,220</td><td class="total-spe">$624</td>
+      <td class="pos total-var">$1,596</td>
+    </tr>
+<tr
+      data-v0="c313"
+      data-v1="2094" data-v2="514" data-v3="1580"
+      data-v4="1290" data-v5="0" data-v6="1290"
+      data-v7="884" data-v8="599" data-v9="285"
+      data-v10="4268" data-v11="1113" data-v12="3155">
+      <td class="prop-name">c313</td>
+      <td>$2,094</td><td>$514</td><td class="pos">$1,580</td>
+      <td>$1,290</td><td>$0</td><td class="pos">$1,290</td>
+      <td>$884</td><td>$599</td><td class="pos">$285</td>
+      <td class="total-bud">$4,268</td><td class="total-spe">$1,113</td>
+      <td class="pos total-var">$3,155</td>
+    </tr>
+<tr
+      data-v0="e328"
+      data-v1="240" data-v2="239" data-v3="2"
+      data-v4="309" data-v5="0" data-v6="309"
+      data-v7="319" data-v8="260" data-v9="59"
+      data-v10="868" data-v11="498" data-v12="369">
+      <td class="prop-name">e328</td>
+      <td>$240</td><td>$239</td><td class="neutral">$2</td>
+      <td>$309</td><td>$0</td><td class="pos">$309</td>
+      <td>$319</td><td>$260</td><td class="pos">$59</td>
+      <td class="total-bud">$868</td><td class="total-spe">$498</td>
+      <td class="pos total-var">$369</td>
+    </tr>
+<tr class="zero-row"
+      data-v0="h604"
+      data-v1="0" data-v2="0" data-v3="0"
+      data-v4="0" data-v5="0" data-v6="0"
+      data-v7="0" data-v8="0" data-v9="0"
+      data-v10="0" data-v11="0" data-v12="0">
+      <td class="prop-name">h604</td>
+      <td>$0</td><td>$0</td><td class="neutral">$0</td>
+      <td>$0</td><td>$0</td><td class="neutral">$0</td>
+      <td>$0</td><td>$0</td><td class="neutral">$0</td>
+      <td class="total-bud">$0</td><td class="total-spe">$0</td>
+      <td class="neutral total-var">$0</td>
+    </tr>
+<tr
+      data-v0="h731"
+      data-v1="418" data-v2="392" data-v3="26"
+      data-v4="523" data-v5="0" data-v6="523"
+      data-v7="209" data-v8="90" data-v9="119"
+      data-v10="1150" data-v11="482" data-v12="668">
+      <td class="prop-name">h731</td>
+      <td>$418</td><td>$392</td><td class="neutral">$26</td>
+      <td>$523</td><td>$0</td><td class="pos">$523</td>
+      <td>$209</td><td>$90</td><td class="pos">$119</td>
+      <td class="total-bud">$1,150</td><td class="total-spe">$482</td>
+      <td class="pos total-var">$668</td>
+    </tr>
+<tr
+      data-v0="hl65"
+      data-v1="494" data-v2="0" data-v3="494"
+      data-v4="618" data-v5="0" data-v6="618"
+      data-v7="247" data-v8="0" data-v9="247"
+      data-v10="1360" data-v11="0" data-v12="1360">
+      <td class="prop-name">hl65</td>
+      <td>$494</td><td>$0</td><td class="pos">$494</td>
+      <td>$618</td><td>$0</td><td class="pos">$618</td>
+      <td>$247</td><td>$0</td><td class="pos">$247</td>
+      <td class="total-bud">$1,360</td><td class="total-spe">$0</td>
+      <td class="pos total-var">$1,360</td>
+    </tr>
+<tr
+      data-v0="hl73"
+      data-v1="227" data-v2="0" data-v3="227"
+      data-v4="283" data-v5="0" data-v6="283"
+      data-v7="113" data-v8="0" data-v9="113"
+      data-v10="623" data-v11="0" data-v12="623">
+      <td class="prop-name">hl73</td>
+      <td>$227</td><td>$0</td><td class="pos">$227</td>
+      <td>$283</td><td>$0</td><td class="pos">$283</td>
+      <td>$113</td><td>$0</td><td class="pos">$113</td>
+      <td class="total-bud">$623</td><td class="total-spe">$0</td>
+      <td class="pos total-var">$623</td>
+    </tr>
+<tr
+      data-v0="j312"
+      data-v1="580" data-v2="790" data-v3="-210"
+      data-v4="794" data-v5="999" data-v6="-205"
+      data-v7="326" data-v8="669" data-v9="-343"
+      data-v10="1701" data-v11="2458" data-v12="-757">
+      <td class="prop-name">j312</td>
+      <td>$580</td><td>$790</td><td class="neg">$-210</td>
+      <td>$794</td><td>$999</td><td class="neg">$-205</td>
+      <td>$326</td><td>$669</td><td class="neg">$-343</td>
+      <td class="total-bud">$1,701</td><td class="total-spe">$2,458</td>
+      <td class="neg total-var">$-757</td>
+    </tr>
+<tr
+      data-v0="k104- LeFevre"
+      data-v1="3059" data-v2="864" data-v3="2195"
+      data-v4="3823" data-v5="341" data-v6="3482"
+      data-v7="1529" data-v8="1367" data-v9="162"
+      data-v10="8411" data-v11="2572" data-v12="5839">
+      <td class="prop-name">k104- LeFevre</td>
+      <td>$3,059</td><td>$864</td><td class="pos">$2,195</td>
+      <td>$3,823</td><td>$341</td><td class="pos">$3,482</td>
+      <td>$1,529</td><td>$1,367</td><td class="pos">$162</td>
+      <td class="total-bud">$8,411</td><td class="total-spe">$2,572</td>
+      <td class="pos total-var">$5,839</td>
+    </tr>
+<tr
+      data-v0="k308"
+      data-v1="288" data-v2="85" data-v3="203"
+      data-v4="207" data-v5="0" data-v6="207"
+      data-v7="126" data-v8="0" data-v9="126"
+      data-v10="621" data-v11="85" data-v12="536">
+      <td class="prop-name">k308</td>
+      <td>$288</td><td>$85</td><td class="pos">$203</td>
+      <td>$207</td><td>$0</td><td class="pos">$207</td>
+      <td>$126</td><td>$0</td><td class="pos">$126</td>
+      <td class="total-bud">$621</td><td class="total-spe">$85</td>
+      <td class="pos total-var">$536</td>
+    </tr>
+<tr
+      data-v0="kn47"
+      data-v1="22216" data-v2="26501" data-v3="-4286"
+      data-v4="5235" data-v5="4828" data-v6="407"
+      data-v7="6171" data-v8="4205" data-v9="1966"
+      data-v10="33622" data-v11="35534" data-v12="-1913">
+      <td class="prop-name">kn47</td>
+      <td>$22,216</td><td>$26,501</td><td class="neg">$-4,286</td>
+      <td>$5,235</td><td>$4,828</td><td class="pos">$407</td>
+      <td>$6,171</td><td>$4,205</td><td class="pos">$1,966</td>
+      <td class="total-bud">$33,622</td><td class="total-spe">$35,534</td>
+      <td class="neg total-var">$-1,913</td>
+    </tr>
+<tr
+      data-v0="m221"
+      data-v1="673" data-v2="0" data-v3="673"
+      data-v4="842" data-v5="0" data-v6="842"
+      data-v7="337" data-v8="424" data-v9="-87"
+      data-v10="1852" data-v11="424" data-v12="1428">
+      <td class="prop-name">m221</td>
+      <td>$673</td><td>$0</td><td class="pos">$673</td>
+      <td>$842</td><td>$0</td><td class="pos">$842</td>
+      <td>$337</td><td>$424</td><td class="neg">$-87</td>
+      <td class="total-bud">$1,852</td><td class="total-spe">$424</td>
+      <td class="pos total-var">$1,428</td>
+    </tr>
+<tr
+      data-v0="m405"
+      data-v1="1081" data-v2="1011" data-v3="71"
+      data-v4="1351" data-v5="193" data-v6="1159"
+      data-v7="541" data-v8="845" data-v9="-305"
+      data-v10="2973" data-v11="2048" data-v12="925">
+      <td class="prop-name">m405</td>
+      <td>$1,081</td><td>$1,011</td><td class="pos">$71</td>
+      <td>$1,351</td><td>$193</td><td class="pos">$1,159</td>
+      <td>$541</td><td>$845</td><td class="neg">$-305</td>
+      <td class="total-bud">$2,973</td><td class="total-spe">$2,048</td>
+      <td class="pos total-var">$925</td>
+    </tr>
+<tr
+      data-v0="m608"
+      data-v1="445" data-v2="1305" data-v3="-860"
+      data-v4="556" data-v5="0" data-v6="556"
+      data-v7="223" data-v8="257" data-v9="-34"
+      data-v10="1224" data-v11="1562" data-v12="-338">
+      <td class="prop-name">m608</td>
+      <td>$445</td><td>$1,305</td><td class="neg">$-860</td>
+      <td>$556</td><td>$0</td><td class="pos">$556</td>
+      <td>$223</td><td>$257</td><td class="neutral">$-34</td>
+      <td class="total-bud">$1,224</td><td class="total-spe">$1,562</td>
+      <td class="neg total-var">$-338</td>
+    </tr>
+<tr
+      data-v0="ms22"
+      data-v1="313" data-v2="885" data-v3="-572"
+      data-v4="391" data-v5="0" data-v6="391"
+      data-v7="156" data-v8="0" data-v9="156"
+      data-v10="860" data-v11="885" data-v12="-25">
+      <td class="prop-name">ms22</td>
+      <td>$313</td><td>$885</td><td class="neg">$-572</td>
+      <td>$391</td><td>$0</td><td class="pos">$391</td>
+      <td>$156</td><td>$0</td><td class="pos">$156</td>
+      <td class="total-bud">$860</td><td class="total-spe">$885</td>
+      <td class="neutral total-var">$-25</td>
+    </tr>
+<tr
+      data-v0="ms43"
+      data-v1="724" data-v2="0" data-v3="724"
+      data-v4="905" data-v5="0" data-v6="905"
+      data-v7="362" data-v8="0" data-v9="362"
+      data-v10="1990" data-v11="0" data-v12="1990">
+      <td class="prop-name">ms43</td>
+      <td>$724</td><td>$0</td><td class="pos">$724</td>
+      <td>$905</td><td>$0</td><td class="pos">$905</td>
+      <td>$362</td><td>$0</td><td class="pos">$362</td>
+      <td class="total-bud">$1,990</td><td class="total-spe">$0</td>
+      <td class="pos total-var">$1,990</td>
+    </tr>
+<tr
+      data-v0="o155"
+      data-v1="5198" data-v2="1790" data-v3="3407"
+      data-v4="698" data-v5="67" data-v6="631"
+      data-v7="3584" data-v8="1745" data-v9="1839"
+      data-v10="9480" data-v11="3602" data-v12="5877">
+      <td class="prop-name">o155</td>
+      <td>$5,198</td><td>$1,790</td><td class="pos">$3,407</td>
+      <td>$698</td><td>$67</td><td class="pos">$631</td>
+      <td>$3,584</td><td>$1,745</td><td class="pos">$1,839</td>
+      <td class="total-bud">$9,480</td><td class="total-spe">$3,602</td>
+      <td class="pos total-var">$5,877</td>
+    </tr>
+<tr
+      data-v0="p705"
+      data-v1="1110" data-v2="1006" data-v3="104"
+      data-v4="1388" data-v5="39" data-v6="1349"
+      data-v7="555" data-v8="381" data-v9="174"
+      data-v10="3053" data-v11="1426" data-v12="1627">
+      <td class="prop-name">p705</td>
+      <td>$1,110</td><td>$1,006</td><td class="pos">$104</td>
+      <td>$1,388</td><td>$39</td><td class="pos">$1,349</td>
+      <td>$555</td><td>$381</td><td class="pos">$174</td>
+      <td class="total-bud">$3,053</td><td class="total-spe">$1,426</td>
+      <td class="pos total-var">$1,627</td>
+    </tr>
+<tr
+      data-v0="ps17"
+      data-v1="725" data-v2="1045" data-v3="-320"
+      data-v4="906" data-v5="0" data-v6="906"
+      data-v7="362" data-v8="460" data-v9="-98"
+      data-v10="1993" data-v11="1505" data-v12="488">
+      <td class="prop-name">ps17</td>
+      <td>$725</td><td>$1,045</td><td class="neg">$-320</td>
+      <td>$906</td><td>$0</td><td class="pos">$906</td>
+      <td>$362</td><td>$460</td><td class="neg">$-98</td>
+      <td class="total-bud">$1,993</td><td class="total-spe">$1,505</td>
+      <td class="pos total-var">$488</td>
+    </tr>
+<tr
+      data-v0="ps25"
+      data-v1="2407" data-v2="2055" data-v3="352"
+      data-v4="3008" data-v5="64" data-v6="2944"
+      data-v7="1203" data-v8="417" data-v9="787"
+      data-v10="6618" data-v11="2535" data-v12="4083">
+      <td class="prop-name">ps25</td>
+      <td>$2,407</td><td>$2,055</td><td class="pos">$352</td>
+      <td>$3,008</td><td>$64</td><td class="pos">$2,944</td>
+      <td>$1,203</td><td>$417</td><td class="pos">$787</td>
+      <td class="total-bud">$6,618</td><td class="total-spe">$2,535</td>
+      <td class="pos total-var">$4,083</td>
+    </tr>
+<tr
+      data-v0="ps91"
+      data-v1="673" data-v2="9867" data-v3="-9194"
+      data-v4="841" data-v5="0" data-v6="841"
+      data-v7="336" data-v8="141" data-v9="195"
+      data-v10="1850" data-v11="10008" data-v12="-8158">
+      <td class="prop-name">ps91</td>
+      <td>$673</td><td>$9,867</td><td class="neg">$-9,194</td>
+      <td>$841</td><td>$0</td><td class="pos">$841</td>
+      <td>$336</td><td>$141</td><td class="pos">$195</td>
+      <td class="total-bud">$1,850</td><td class="total-spe">$10,008</td>
+      <td class="neg total-var">$-8,158</td>
+    </tr>
+<tr
+      data-v0="rl16"
+      data-v1="7795" data-v2="6819" data-v3="976"
+      data-v4="4235" data-v5="369" data-v6="3865"
+      data-v7="2506" data-v8="2173" data-v9="334"
+      data-v10="14536" data-v11="9361" data-v12="5175">
+      <td class="prop-name">rl16</td>
+      <td>$7,795</td><td>$6,819</td><td class="pos">$976</td>
+      <td>$4,235</td><td>$369</td><td class="pos">$3,865</td>
+      <td>$2,506</td><td>$2,173</td><td class="pos">$334</td>
+      <td class="total-bud">$14,536</td><td class="total-spe">$9,361</td>
+      <td class="pos total-var">$5,175</td>
+    </tr>
+<tr
+      data-v0="rl21"
+      data-v1="1103" data-v2="4703" data-v3="-3600"
+      data-v4="627" data-v5="350" data-v6="277"
+      data-v7="221" data-v8="177" data-v9="44"
+      data-v10="1950" data-v11="5230" data-v12="-3280">
+      <td class="prop-name">rl21</td>
+      <td>$1,103</td><td>$4,703</td><td class="neg">$-3,600</td>
+      <td>$627</td><td>$350</td><td class="pos">$277</td>
+      <td>$221</td><td>$177</td><td class="neutral">$44</td>
+      <td class="total-bud">$1,950</td><td class="total-spe">$5,230</td>
+      <td class="neg total-var">$-3,280</td>
+    </tr>
+<tr
+      data-v0="s129"
+      data-v1="1203" data-v2="1560" data-v3="-357"
+      data-v4="662" data-v5="0" data-v6="662"
+      data-v7="201" data-v8="87" data-v9="113"
+      data-v10="2065" data-v11="1648" data-v12="418">
+      <td class="prop-name">s129</td>
+      <td>$1,203</td><td>$1,560</td><td class="neg">$-357</td>
+      <td>$662</td><td>$0</td><td class="pos">$662</td>
+      <td>$201</td><td>$87</td><td class="pos">$113</td>
+      <td class="total-bud">$2,065</td><td class="total-spe">$1,648</td>
+      <td class="pos total-var">$418</td>
+    </tr>
+<tr
+      data-v0="s300"
+      data-v1="570" data-v2="229" data-v3="340"
+      data-v4="712" data-v5="0" data-v6="712"
+      data-v7="285" data-v8="680" data-v9="-395"
+      data-v10="1566" data-v11="910" data-v12="657">
+      <td class="prop-name">s300</td>
+      <td>$570</td><td>$229</td><td class="pos">$340</td>
+      <td>$712</td><td>$0</td><td class="pos">$712</td>
+      <td>$285</td><td>$680</td><td class="neg">$-395</td>
+      <td class="total-bud">$1,566</td><td class="total-spe">$910</td>
+      <td class="pos total-var">$657</td>
+    </tr>
+<tr
+      data-v0="tc34"
+      data-v1="1442" data-v2="1776" data-v3="-334"
+      data-v4="513" data-v5="110" data-v6="403"
+      data-v7="391" data-v8="513" data-v9="-122"
+      data-v10="2345" data-v11="2399" data-v12="-54">
+      <td class="prop-name">tc34</td>
+      <td>$1,442</td><td>$1,776</td><td class="neg">$-334</td>
+      <td>$513</td><td>$110</td><td class="pos">$403</td>
+      <td>$391</td><td>$513</td><td class="neg">$-122</td>
+      <td class="total-bud">$2,345</td><td class="total-spe">$2,399</td>
+      <td class="neg total-var">$-54</td>
+    </tr>
+<tr class="zero-row"
+      data-v0="tc68"
+      data-v1="0" data-v2="0" data-v3="0"
+      data-v4="0" data-v5="0" data-v6="0"
+      data-v7="0" data-v8="0" data-v9="0"
+      data-v10="0" data-v11="0" data-v12="0">
+      <td class="prop-name">tc68</td>
+      <td>$0</td><td>$0</td><td class="neutral">$0</td>
+      <td>$0</td><td>$0</td><td class="neutral">$0</td>
+      <td>$0</td><td>$0</td><td class="neutral">$0</td>
+      <td class="total-bud">$0</td><td class="total-spe">$0</td>
+      <td class="neutral total-var">$0</td>
+    </tr>
+<tr
+      data-v0="v202"
+      data-v1="404" data-v2="124" data-v3="280"
+      data-v4="321" data-v5="0" data-v6="321"
+      data-v7="599" data-v8="506" data-v9="93"
+      data-v10="1324" data-v11="630" data-v12="694">
+      <td class="prop-name">v202</td>
+      <td>$404</td><td>$124</td><td class="pos">$280</td>
+      <td>$321</td><td>$0</td><td class="pos">$321</td>
+      <td>$599</td><td>$506</td><td class="pos">$93</td>
+      <td class="total-bud">$1,324</td><td class="total-spe">$630</td>
+      <td class="pos total-var">$694</td>
+    </tr>
+<tr
+      data-v0="w117"
+      data-v1="411" data-v2="823" data-v3="-411"
+      data-v4="514" data-v5="231" data-v6="283"
+      data-v7="206" data-v8="456" data-v9="-250"
+      data-v10="1131" data-v11="1510" data-v12="-379">
+      <td class="prop-name">w117</td>
+      <td>$411</td><td>$823</td><td class="neg">$-411</td>
+      <td>$514</td><td>$231</td><td class="pos">$283</td>
+      <td>$206</td><td>$456</td><td class="neg">$-250</td>
+      <td class="total-bud">$1,131</td><td class="total-spe">$1,510</td>
+      <td class="neg total-var">$-379</td>
+    </tr>
+<tr
+      data-v0="w225"
+      data-v1="0" data-v2="613" data-v3="-613"
+      data-v4="0" data-v5="0" data-v6="0"
+      data-v7="0" data-v8="314" data-v9="-314"
+      data-v10="0" data-v11="927" data-v12="-927">
+      <td class="prop-name">w225</td>
+      <td>$0</td><td>$613</td><td class="neg">$-613</td>
+      <td>$0</td><td>$0</td><td class="neutral">$0</td>
+      <td>$0</td><td>$314</td><td class="neg">$-314</td>
+      <td class="total-bud">$0</td><td class="total-spe">$927</td>
+      <td class="neg total-var">$-927</td>
+    </tr>
+<tr
+      data-v0="w226"
+      data-v1="541" data-v2="6017" data-v3="-5476"
+      data-v4="676" data-v5="804" data-v6="-128"
+      data-v7="271" data-v8="376" data-v9="-105"
+      data-v10="1488" data-v11="7197" data-v12="-5709">
+      <td class="prop-name">w226</td>
+      <td>$541</td><td>$6,017</td><td class="neg">$-5,476</td>
+      <td>$676</td><td>$804</td><td class="neg">$-128</td>
+      <td>$271</td><td>$376</td><td class="neg">$-105</td>
+      <td class="total-bud">$1,488</td><td class="total-spe">$7,197</td>
+      <td class="neg total-var">$-5,709</td>
+    </tr></tbody><tfoot><tr class="total-row">
+      <td><strong>TOTAL</strong></td>
+      <td>$59,206</td><td>$73,707</td><td class="neg">$-14,501</td>
+      <td>$35,668</td><td>$8,993</td><td class="pos">$26,675</td>
+      <td>$23,725</td><td>$18,714</td><td class="pos">$5,011</td>
+      <td class="total-bud">$118,599</td>
+      <td class="total-spe">$101,414</td>
+      <td class="pos total-var">$17,185</td>
+    </tr></tfoot></table></div>
+<div id="tab-mar" class="tab-content"><table><thead>
+      <tr>
+        <th rowspan="2" class="prop-name sortable" data-col="0">Property <span class="sort-icon">↕</span></th>
+        <th colspan="3" class="cat-head repairs">Repairs (52001)</th>
+        <th colspan="3" class="cat-head turns">Turns (52002)</th>
+        <th colspan="3" class="cat-head grounds">Grounds (52003)</th>
+        <th colspan="3" class="cat-head total">Total</th>
+      </tr>
+      <tr>
+        <th class="sortable" data-col="1">Budget <span class="sort-icon">↕</span></th>
+        <th class="sortable" data-col="2">Spend <span class="sort-icon">↕</span></th>
+        <th class="sortable" data-col="3">Var <span class="sort-icon">↕</span></th>
+        <th class="sortable" data-col="4">Budget <span class="sort-icon">↕</span></th>
+        <th class="sortable" data-col="5">Spend <span class="sort-icon">↕</span></th>
+        <th class="sortable" data-col="6">Var <span class="sort-icon">↕</span></th>
+        <th class="sortable" data-col="7">Budget <span class="sort-icon">↕</span></th>
+        <th class="sortable" data-col="8">Spend <span class="sort-icon">↕</span></th>
+        <th class="sortable" data-col="9">Var <span class="sort-icon">↕</span></th>
+        <th class="sortable" data-col="10">Budget <span class="sort-icon">↕</span></th>
+        <th class="sortable" data-col="11">Spend <span class="sort-icon">↕</span></th>
+        <th class="sortable" data-col="12">Var <span class="sort-icon">↕</span></th>
+      </tr>
+    </thead><tbody><tr
+      data-v0="a210"
+      data-v1="441" data-v2="365" data-v3="75"
+      data-v4="551" data-v5="1095" data-v6="-543"
+      data-v7="221" data-v8="278" data-v9="-57"
+      data-v10="1213" data-v11="1738" data-v12="-525">
+      <td class="prop-name">a210</td>
+      <td>$441</td><td>$365</td><td class="pos">$75</td>
+      <td>$551</td><td>$1,095</td><td class="neg">$-543</td>
+      <td>$221</td><td>$278</td><td class="neg">$-57</td>
+      <td class="total-bud">$1,213</td><td class="total-spe">$1,738</td>
+      <td class="neg total-var">$-525</td>
+    </tr>
+<tr
+      data-v0="a511"
+      data-v1="353" data-v2="78" data-v3="274"
+      data-v4="416" data-v5="0" data-v6="416"
+      data-v7="252" data-v8="555" data-v9="-303"
+      data-v10="1020" data-v11="634" data-v12="387">
+      <td class="prop-name">a511</td>
+      <td>$353</td><td>$78</td><td class="pos">$274</td>
+      <td>$416</td><td>$0</td><td class="pos">$416</td>
+      <td>$252</td><td>$555</td><td class="neg">$-303</td>
+      <td class="total-bud">$1,020</td><td class="total-spe">$634</td>
+      <td class="pos total-var">$387</td>
+    </tr>
+<tr
+      data-v0="a916"
+      data-v1="512" data-v2="501" data-v3="10"
+      data-v4="639" data-v5="504" data-v6="136"
+      data-v7="256" data-v8="350" data-v9="-94"
+      data-v10="1407" data-v11="1355" data-v12="51">
+      <td class="prop-name">a916</td>
+      <td>$512</td><td>$501</td><td class="neutral">$10</td>
+      <td>$639</td><td>$504</td><td class="pos">$136</td>
+      <td>$256</td><td>$350</td><td class="neg">$-94</td>
+      <td class="total-bud">$1,407</td><td class="total-spe">$1,355</td>
+      <td class="pos total-var">$51</td>
+    </tr>
+<tr
+      data-v0="b101"
+      data-v1="666" data-v2="439" data-v3="227"
+      data-v4="833" data-v5="1193" data-v6="-360"
+      data-v7="333" data-v8="337" data-v9="-4"
+      data-v10="1832" data-v11="1968" data-v12="-137">
+      <td class="prop-name">b101</td>
+      <td>$666</td><td>$439</td><td class="pos">$227</td>
+      <td>$833</td><td>$1,193</td><td class="neg">$-360</td>
+      <td>$333</td><td>$337</td><td class="neutral">$-4</td>
+      <td class="total-bud">$1,832</td><td class="total-spe">$1,968</td>
+      <td class="neg total-var">$-137</td>
+    </tr>
+<tr
+      data-v0="c302"
+      data-v1="809" data-v2="323" data-v3="486"
+      data-v4="1011" data-v5="36" data-v6="976"
+      data-v7="405" data-v8="0" data-v9="405"
+      data-v10="2225" data-v11="359" data-v12="1866">
+      <td class="prop-name">c302</td>
+      <td>$809</td><td>$323</td><td class="pos">$486</td>
+      <td>$1,011</td><td>$36</td><td class="pos">$976</td>
+      <td>$405</td><td>$0</td><td class="pos">$405</td>
+      <td class="total-bud">$2,225</td><td class="total-spe">$359</td>
+      <td class="pos total-var">$1,866</td>
+    </tr>
+<tr
+      data-v0="c313"
+      data-v1="2099" data-v2="1822" data-v3="277"
+      data-v4="1293" data-v5="0" data-v6="1293"
+      data-v7="886" data-v8="893" data-v9="-7"
+      data-v10="4279" data-v11="2715" data-v12="1564">
+      <td class="prop-name">c313</td>
+      <td>$2,099</td><td>$1,822</td><td class="pos">$277</td>
+      <td>$1,293</td><td>$0</td><td class="pos">$1,293</td>
+      <td>$886</td><td>$893</td><td class="neutral">$-7</td>
+      <td class="total-bud">$4,279</td><td class="total-spe">$2,715</td>
+      <td class="pos total-var">$1,564</td>
+    </tr>
+<tr
+      data-v0="e328"
+      data-v1="241" data-v2="1355" data-v3="-1114"
+      data-v4="310" data-v5="0" data-v6="310"
+      data-v7="320" data-v8="346" data-v9="-26"
+      data-v10="870" data-v11="1701" data-v12="-831">
+      <td class="prop-name">e328</td>
+      <td>$241</td><td>$1,355</td><td class="neg">$-1,114</td>
+      <td>$310</td><td>$0</td><td class="pos">$310</td>
+      <td>$320</td><td>$346</td><td class="neutral">$-26</td>
+      <td class="total-bud">$870</td><td class="total-spe">$1,701</td>
+      <td class="neg total-var">$-831</td>
+    </tr>
+<tr
+      data-v0="h604"
+      data-v1="0" data-v2="146" data-v3="-146"
+      data-v4="0" data-v5="0" data-v6="0"
+      data-v7="0" data-v8="277" data-v9="-277"
+      data-v10="0" data-v11="423" data-v12="-423">
+      <td class="prop-name">h604</td>
+      <td>$0</td><td>$146</td><td class="neg">$-146</td>
+      <td>$0</td><td>$0</td><td class="neutral">$0</td>
+      <td>$0</td><td>$277</td><td class="neg">$-277</td>
+      <td class="total-bud">$0</td><td class="total-spe">$423</td>
+      <td class="neg total-var">$-423</td>
+    </tr>
+<tr
+      data-v0="h731"
+      data-v1="419" data-v2="253" data-v3="166"
+      data-v4="524" data-v5="0" data-v6="524"
+      data-v7="210" data-v8="0" data-v9="210"
+      data-v10="1153" data-v11="253" data-v12="900">
+      <td class="prop-name">h731</td>
+      <td>$419</td><td>$253</td><td class="pos">$166</td>
+      <td>$524</td><td>$0</td><td class="pos">$524</td>
+      <td>$210</td><td>$0</td><td class="pos">$210</td>
+      <td class="total-bud">$1,153</td><td class="total-spe">$253</td>
+      <td class="pos total-var">$900</td>
+    </tr>
+<tr
+      data-v0="hl65"
+      data-v1="496" data-v2="0" data-v3="496"
+      data-v4="620" data-v5="0" data-v6="620"
+      data-v7="248" data-v8="313" data-v9="-65"
+      data-v10="1363" data-v11="313" data-v12="1050">
+      <td class="prop-name">hl65</td>
+      <td>$496</td><td>$0</td><td class="pos">$496</td>
+      <td>$620</td><td>$0</td><td class="pos">$620</td>
+      <td>$248</td><td>$313</td><td class="neg">$-65</td>
+      <td class="total-bud">$1,363</td><td class="total-spe">$313</td>
+      <td class="pos total-var">$1,050</td>
+    </tr>
+<tr
+      data-v0="hl73"
+      data-v1="227" data-v2="175" data-v3="52"
+      data-v4="284" data-v5="0" data-v6="284"
+      data-v7="114" data-v8="283" data-v9="-169"
+      data-v10="625" data-v11="458" data-v12="167">
+      <td class="prop-name">hl73</td>
+      <td>$227</td><td>$175</td><td class="pos">$52</td>
+      <td>$284</td><td>$0</td><td class="pos">$284</td>
+      <td>$114</td><td>$283</td><td class="neg">$-169</td>
+      <td class="total-bud">$625</td><td class="total-spe">$458</td>
+      <td class="pos total-var">$167</td>
+    </tr>
+<tr
+      data-v0="j312"
+      data-v1="582" data-v2="1335" data-v3="-753"
+      data-v4="796" data-v5="0" data-v6="796"
+      data-v7="327" data-v8="988" data-v9="-661"
+      data-v10="1705" data-v11="2323" data-v12="-618">
+      <td class="prop-name">j312</td>
+      <td>$582</td><td>$1,335</td><td class="neg">$-753</td>
+      <td>$796</td><td>$0</td><td class="pos">$796</td>
+      <td>$327</td><td>$988</td><td class="neg">$-661</td>
+      <td class="total-bud">$1,705</td><td class="total-spe">$2,323</td>
+      <td class="neg total-var">$-618</td>
+    </tr>
+<tr
+      data-v0="k104- LeFevre"
+      data-v1="3065" data-v2="2674" data-v3="392"
+      data-v4="3832" data-v5="188" data-v6="3644"
+      data-v7="1533" data-v8="714" data-v9="819"
+      data-v10="8430" data-v11="3576" data-v12="4854">
+      <td class="prop-name">k104- LeFevre</td>
+      <td>$3,065</td><td>$2,674</td><td class="pos">$392</td>
+      <td>$3,832</td><td>$188</td><td class="pos">$3,644</td>
+      <td>$1,533</td><td>$714</td><td class="pos">$819</td>
+      <td class="total-bud">$8,430</td><td class="total-spe">$3,576</td>
+      <td class="pos total-var">$4,854</td>
+    </tr>
+<tr
+      data-v0="k308"
+      data-v1="289" data-v2="214" data-v3="75"
+      data-v4="207" data-v5="0" data-v6="207"
+      data-v7="127" data-v8="58" data-v9="68"
+      data-v10="623" data-v11="272" data-v12="350">
+      <td class="prop-name">k308</td>
+      <td>$289</td><td>$214</td><td class="pos">$75</td>
+      <td>$207</td><td>$0</td><td class="pos">$207</td>
+      <td>$127</td><td>$58</td><td class="pos">$68</td>
+      <td class="total-bud">$623</td><td class="total-spe">$272</td>
+      <td class="pos total-var">$350</td>
+    </tr>
+<tr
+      data-v0="kn47"
+      data-v1="22271" data-v2="13884" data-v3="8387"
+      data-v4="5248" data-v5="4171" data-v6="1077"
+      data-v7="6187" data-v8="3011" data-v9="3176"
+      data-v10="33706" data-v11="21066" data-v12="12639">
+      <td class="prop-name">kn47</td>
+      <td>$22,271</td><td>$13,884</td><td class="pos">$8,387</td>
+      <td>$5,248</td><td>$4,171</td><td class="pos">$1,077</td>
+      <td>$6,187</td><td>$3,011</td><td class="pos">$3,176</td>
+      <td class="total-bud">$33,706</td><td class="total-spe">$21,066</td>
+      <td class="pos total-var">$12,639</td>
+    </tr>
+<tr
+      data-v0="m221"
+      data-v1="675" data-v2="1269" data-v3="-595"
+      data-v4="844" data-v5="0" data-v6="844"
+      data-v7="337" data-v8="983" data-v9="-645"
+      data-v10="1856" data-v11="2252" data-v12="-396">
+      <td class="prop-name">m221</td>
+      <td>$675</td><td>$1,269</td><td class="neg">$-595</td>
+      <td>$844</td><td>$0</td><td class="pos">$844</td>
+      <td>$337</td><td>$983</td><td class="neg">$-645</td>
+      <td class="total-bud">$1,856</td><td class="total-spe">$2,252</td>
+      <td class="neg total-var">$-396</td>
+    </tr>
+<tr
+      data-v0="m405"
+      data-v1="1083" data-v2="690" data-v3="393"
+      data-v4="1354" data-v5="1384" data-v6="-30"
+      data-v7="542" data-v8="789" data-v9="-247"
+      data-v10="2979" data-v11="2863" data-v12="116">
+      <td class="prop-name">m405</td>
+      <td>$1,083</td><td>$690</td><td class="pos">$393</td>
+      <td>$1,354</td><td>$1,384</td><td class="neutral">$-30</td>
+      <td>$542</td><td>$789</td><td class="neg">$-247</td>
+      <td class="total-bud">$2,979</td><td class="total-spe">$2,863</td>
+      <td class="pos total-var">$116</td>
+    </tr>
+<tr
+      data-v0="m608"
+      data-v1="446" data-v2="0" data-v3="446"
+      data-v4="558" data-v5="0" data-v6="558"
+      data-v7="223" data-v8="200" data-v9="23"
+      data-v10="1227" data-v11="200" data-v12="1027">
+      <td class="prop-name">m608</td>
+      <td>$446</td><td>$0</td><td class="pos">$446</td>
+      <td>$558</td><td>$0</td><td class="pos">$558</td>
+      <td>$223</td><td>$200</td><td class="neutral">$23</td>
+      <td class="total-bud">$1,227</td><td class="total-spe">$200</td>
+      <td class="pos total-var">$1,027</td>
+    </tr>
+<tr
+      data-v0="ms22"
+      data-v1="313" data-v2="0" data-v3="313"
+      data-v4="392" data-v5="0" data-v6="392"
+      data-v7="157" data-v8="0" data-v9="157"
+      data-v10="862" data-v11="0" data-v12="862">
+      <td class="prop-name">ms22</td>
+      <td>$313</td><td>$0</td><td class="pos">$313</td>
+      <td>$392</td><td>$0</td><td class="pos">$392</td>
+      <td>$157</td><td>$0</td><td class="pos">$157</td>
+      <td class="total-bud">$862</td><td class="total-spe">$0</td>
+      <td class="pos total-var">$862</td>
+    </tr>
+<tr
+      data-v0="ms43"
+      data-v1="725" data-v2="47" data-v3="678"
+      data-v4="907" data-v5="0" data-v6="907"
+      data-v7="363" data-v8="0" data-v9="363"
+      data-v10="1994" data-v11="47" data-v12="1947">
+      <td class="prop-name">ms43</td>
+      <td>$725</td><td>$47</td><td class="pos">$678</td>
+      <td>$907</td><td>$0</td><td class="pos">$907</td>
+      <td>$363</td><td>$0</td><td class="pos">$363</td>
+      <td class="total-bud">$1,994</td><td class="total-spe">$47</td>
+      <td class="pos total-var">$1,947</td>
+    </tr>
+<tr
+      data-v0="o155"
+      data-v1="5211" data-v2="4365" data-v3="845"
+      data-v4="700" data-v5="209" data-v6="491"
+      data-v7="3593" data-v8="602" data-v9="2991"
+      data-v10="9503" data-v11="5176" data-v12="4327">
+      <td class="prop-name">o155</td>
+      <td>$5,211</td><td>$4,365</td><td class="pos">$845</td>
+      <td>$700</td><td>$209</td><td class="pos">$491</td>
+      <td>$3,593</td><td>$602</td><td class="pos">$2,991</td>
+      <td class="total-bud">$9,503</td><td class="total-spe">$5,176</td>
+      <td class="pos total-var">$4,327</td>
+    </tr>
+<tr
+      data-v0="p705"
+      data-v1="1113" data-v2="764" data-v3="349"
+      data-v4="1391" data-v5="847" data-v6="544"
+      data-v7="556" data-v8="1032" data-v9="-476"
+      data-v10="3060" data-v11="2643" data-v12="417">
+      <td class="prop-name">p705</td>
+      <td>$1,113</td><td>$764</td><td class="pos">$349</td>
+      <td>$1,391</td><td>$847</td><td class="pos">$544</td>
+      <td>$556</td><td>$1,032</td><td class="neg">$-476</td>
+      <td class="total-bud">$3,060</td><td class="total-spe">$2,643</td>
+      <td class="pos total-var">$417</td>
+    </tr>
+<tr
+      data-v0="ps17"
+      data-v1="726" data-v2="659" data-v3="67"
+      data-v4="908" data-v5="0" data-v6="908"
+      data-v7="363" data-v8="444" data-v9="-81"
+      data-v10="1997" data-v11="1103" data-v12="894">
+      <td class="prop-name">ps17</td>
+      <td>$726</td><td>$659</td><td class="pos">$67</td>
+      <td>$908</td><td>$0</td><td class="pos">$908</td>
+      <td>$363</td><td>$444</td><td class="neg">$-81</td>
+      <td class="total-bud">$1,997</td><td class="total-spe">$1,103</td>
+      <td class="pos total-var">$894</td>
+    </tr>
+<tr
+      data-v0="ps25"
+      data-v1="2412" data-v2="2009" data-v3="403"
+      data-v4="3015" data-v5="918" data-v6="2097"
+      data-v7="1206" data-v8="451" data-v9="755"
+      data-v10="6633" data-v11="3378" data-v12="3255">
+      <td class="prop-name">ps25</td>
+      <td>$2,412</td><td>$2,009</td><td class="pos">$403</td>
+      <td>$3,015</td><td>$918</td><td class="pos">$2,097</td>
+      <td>$1,206</td><td>$451</td><td class="pos">$755</td>
+      <td class="total-bud">$6,633</td><td class="total-spe">$3,378</td>
+      <td class="pos total-var">$3,255</td>
+    </tr>
+<tr
+      data-v0="ps91"
+      data-v1="674" data-v2="961" data-v3="-287"
+      data-v4="843" data-v5="0" data-v6="843"
+      data-v7="337" data-v8="219" data-v9="118"
+      data-v10="1854" data-v11="1180" data-v12="674">
+      <td class="prop-name">ps91</td>
+      <td>$674</td><td>$961</td><td class="neg">$-287</td>
+      <td>$843</td><td>$0</td><td class="pos">$843</td>
+      <td>$337</td><td>$219</td><td class="pos">$118</td>
+      <td class="total-bud">$1,854</td><td class="total-spe">$1,180</td>
+      <td class="pos total-var">$674</td>
+    </tr>
+<tr
+      data-v0="rl16"
+      data-v1="7815" data-v2="11638" data-v3="-3823"
+      data-v4="4245" data-v5="1326" data-v6="2919"
+      data-v7="2513" data-v8="1296" data-v9="1216"
+      data-v10="14572" data-v11="14260" data-v12="312">
+      <td class="prop-name">rl16</td>
+      <td>$7,815</td><td>$11,638</td><td class="neg">$-3,823</td>
+      <td>$4,245</td><td>$1,326</td><td class="pos">$2,919</td>
+      <td>$2,513</td><td>$1,296</td><td class="pos">$1,216</td>
+      <td class="total-bud">$14,572</td><td class="total-spe">$14,260</td>
+      <td class="pos total-var">$312</td>
+    </tr>
+<tr
+      data-v0="rl21"
+      data-v1="1106" data-v2="1915" data-v3="-809"
+      data-v4="628" data-v5="51" data-v6="577"
+      data-v7="221" data-v8="74" data-v9="147"
+      data-v10="1955" data-v11="2040" data-v12="-85">
+      <td class="prop-name">rl21</td>
+      <td>$1,106</td><td>$1,915</td><td class="neg">$-809</td>
+      <td>$628</td><td>$51</td><td class="pos">$577</td>
+      <td>$221</td><td>$74</td><td class="pos">$147</td>
+      <td class="total-bud">$1,955</td><td class="total-spe">$2,040</td>
+      <td class="neg total-var">$-85</td>
+    </tr>
+<tr
+      data-v0="s129"
+      data-v1="1206" data-v2="238" data-v3="968"
+      data-v4="663" data-v5="0" data-v6="663"
+      data-v7="201" data-v8="44" data-v9="157"
+      data-v10="2070" data-v11="283" data-v12="1788">
+      <td class="prop-name">s129</td>
+      <td>$1,206</td><td>$238</td><td class="pos">$968</td>
+      <td>$663</td><td>$0</td><td class="pos">$663</td>
+      <td>$201</td><td>$44</td><td class="pos">$157</td>
+      <td class="total-bud">$2,070</td><td class="total-spe">$283</td>
+      <td class="pos total-var">$1,788</td>
+    </tr>
+<tr
+      data-v0="s300"
+      data-v1="571" data-v2="7" data-v3="564"
+      data-v4="714" data-v5="0" data-v6="714"
+      data-v7="285" data-v8="306" data-v9="-20"
+      data-v10="1570" data-v11="312" data-v12="1258">
+      <td class="prop-name">s300</td>
+      <td>$571</td><td>$7</td><td class="pos">$564</td>
+      <td>$714</td><td>$0</td><td class="pos">$714</td>
+      <td>$285</td><td>$306</td><td class="neutral">$-20</td>
+      <td class="total-bud">$1,570</td><td class="total-spe">$312</td>
+      <td class="pos total-var">$1,258</td>
+    </tr>
+<tr
+      data-v0="tc34"
+      data-v1="1445" data-v2="799" data-v3="647"
+      data-v4="514" data-v5="654" data-v6="-140"
+      data-v7="392" data-v8="513" data-v9="-121"
+      data-v10="2351" data-v11="1966" data-v12="385">
+      <td class="prop-name">tc34</td>
+      <td>$1,445</td><td>$799</td><td class="pos">$647</td>
+      <td>$514</td><td>$654</td><td class="neg">$-140</td>
+      <td>$392</td><td>$513</td><td class="neg">$-121</td>
+      <td class="total-bud">$2,351</td><td class="total-spe">$1,966</td>
+      <td class="pos total-var">$385</td>
+    </tr>
+<tr
+      data-v0="tc68"
+      data-v1="0" data-v2="3467" data-v3="-3467"
+      data-v4="0" data-v5="4123" data-v6="-4123"
+      data-v7="0" data-v8="0" data-v9="0"
+      data-v10="0" data-v11="7591" data-v12="-7591">
+      <td class="prop-name">tc68</td>
+      <td>$0</td><td>$3,467</td><td class="neg">$-3,467</td>
+      <td>$0</td><td>$4,123</td><td class="neg">$-4,123</td>
+      <td>$0</td><td>$0</td><td class="neutral">$0</td>
+      <td class="total-bud">$0</td><td class="total-spe">$7,591</td>
+      <td class="neg total-var">$-7,591</td>
+    </tr>
+<tr
+      data-v0="v202"
+      data-v1="405" data-v2="4842" data-v3="-4437"
+      data-v4="322" data-v5="0" data-v6="322"
+      data-v7="601" data-v8="690" data-v9="-90"
+      data-v10="1327" data-v11="5532" data-v12="-4205">
+      <td class="prop-name">v202</td>
+      <td>$405</td><td>$4,842</td><td class="neg">$-4,437</td>
+      <td>$322</td><td>$0</td><td class="pos">$322</td>
+      <td>$601</td><td>$690</td><td class="neg">$-90</td>
+      <td class="total-bud">$1,327</td><td class="total-spe">$5,532</td>
+      <td class="neg total-var">$-4,205</td>
+    </tr>
+<tr
+      data-v0="w117"
+      data-v1="412" data-v2="726" data-v3="-314"
+      data-v4="515" data-v5="0" data-v6="515"
+      data-v7="206" data-v8="383" data-v9="-177"
+      data-v10="1133" data-v11="1109" data-v12="24">
+      <td class="prop-name">w117</td>
+      <td>$412</td><td>$726</td><td class="neg">$-314</td>
+      <td>$515</td><td>$0</td><td class="pos">$515</td>
+      <td>$206</td><td>$383</td><td class="neg">$-177</td>
+      <td class="total-bud">$1,133</td><td class="total-spe">$1,109</td>
+      <td class="neutral total-var">$24</td>
+    </tr>
+<tr
+      data-v0="w225"
+      data-v1="0" data-v2="933" data-v3="-933"
+      data-v4="0" data-v5="0" data-v6="0"
+      data-v7="0" data-v8="541" data-v9="-541"
+      data-v10="0" data-v11="1475" data-v12="-1475">
+      <td class="prop-name">w225</td>
+      <td>$0</td><td>$933</td><td class="neg">$-933</td>
+      <td>$0</td><td>$0</td><td class="neutral">$0</td>
+      <td>$0</td><td>$541</td><td class="neg">$-541</td>
+      <td class="total-bud">$0</td><td class="total-spe">$1,475</td>
+      <td class="neg total-var">$-1,475</td>
+    </tr>
+<tr
+      data-v0="w226"
+      data-v1="542" data-v2="1535" data-v3="-993"
+      data-v4="678" data-v5="0" data-v6="678"
+      data-v7="271" data-v8="576" data-v9="-305"
+      data-v10="1491" data-v11="2111" data-v12="-620">
+      <td class="prop-name">w226</td>
+      <td>$542</td><td>$1,535</td><td class="neg">$-993</td>
+      <td>$678</td><td>$0</td><td class="pos">$678</td>
+      <td>$271</td><td>$576</td><td class="neg">$-305</td>
+      <td class="total-bud">$1,491</td><td class="total-spe">$2,111</td>
+      <td class="neg total-var">$-620</td>
+    </tr></tbody><tfoot><tr class="total-row">
+      <td><strong>TOTAL</strong></td>
+      <td>$59,349</td><td>$60,427</td><td class="neg">$-1,078</td>
+      <td>$35,752</td><td>$16,699</td><td class="pos">$19,052</td>
+      <td>$23,782</td><td>$17,547</td><td class="pos">$6,235</td>
+      <td class="total-bud">$118,883</td>
+      <td class="total-spe">$94,674</td>
+      <td class="pos total-var">$24,209</td>
+    </tr></tfoot></table></div>
+<div id="tab-apr" class="tab-content"><table><thead>
+      <tr>
+        <th rowspan="2" class="prop-name sortable" data-col="0">Property <span class="sort-icon">↕</span></th>
+        <th colspan="3" class="cat-head repairs">Repairs (52001)</th>
+        <th colspan="3" class="cat-head turns">Turns (52002)</th>
+        <th colspan="3" class="cat-head grounds">Grounds (52003)</th>
+        <th colspan="3" class="cat-head total">Total</th>
+      </tr>
+      <tr>
+        <th class="sortable" data-col="1">Budget <span class="sort-icon">↕</span></th>
+        <th class="sortable" data-col="2">Spend <span class="sort-icon">↕</span></th>
+        <th class="sortable" data-col="3">Var <span class="sort-icon">↕</span></th>
+        <th class="sortable" data-col="4">Budget <span class="sort-icon">↕</span></th>
+        <th class="sortable" data-col="5">Spend <span class="sort-icon">↕</span></th>
+        <th class="sortable" data-col="6">Var <span class="sort-icon">↕</span></th>
+        <th class="sortable" data-col="7">Budget <span class="sort-icon">↕</span></th>
+        <th class="sortable" data-col="8">Spend <span class="sort-icon">↕</span></th>
+        <th class="sortable" data-col="9">Var <span class="sort-icon">↕</span></th>
+        <th class="sortable" data-col="10">Budget <span class="sort-icon">↕</span></th>
+        <th class="sortable" data-col="11">Spend <span class="sort-icon">↕</span></th>
+        <th class="sortable" data-col="12">Var <span class="sort-icon">↕</span></th>
+      </tr>
+    </thead><tbody><tr
+      data-v0="a210"
+      data-v1="442" data-v2="2445" data-v3="-2003"
+      data-v4="552" data-v5="0" data-v6="552"
+      data-v7="221" data-v8="375" data-v9="-154"
+      data-v10="1215" data-v11="2820" data-v12="-1605">
+      <td class="prop-name">a210</td>
+      <td>$442</td><td>$2,445</td><td class="neg">$-2,003</td>
+      <td>$552</td><td>$0</td><td class="pos">$552</td>
+      <td>$221</td><td>$375</td><td class="neg">$-154</td>
+      <td class="total-bud">$1,215</td><td class="total-spe">$2,820</td>
+      <td class="neg total-var">$-1,605</td>
+    </tr>
+<tr
+      data-v0="a511"
+      data-v1="354" data-v2="172" data-v3="182"
+      data-v4="417" data-v5="0" data-v6="417"
+      data-v7="253" data-v8="355" data-v9="-102"
+      data-v10="1023" data-v11="526" data-v12="496">
+      <td class="prop-name">a511</td>
+      <td>$354</td><td>$172</td><td class="pos">$182</td>
+      <td>$417</td><td>$0</td><td class="pos">$417</td>
+      <td>$253</td><td>$355</td><td class="neg">$-102</td>
+      <td class="total-bud">$1,023</td><td class="total-spe">$526</td>
+      <td class="pos total-var">$496</td>
+    </tr>
+<tr
+      data-v0="a916"
+      data-v1="513" data-v2="360" data-v3="152"
+      data-v4="641" data-v5="188" data-v6="452"
+      data-v7="256" data-v8="259" data-v9="-3"
+      data-v10="1410" data-v11="808" data-v12="601">
+      <td class="prop-name">a916</td>
+      <td>$513</td><td>$360</td><td class="pos">$152</td>
+      <td>$641</td><td>$188</td><td class="pos">$452</td>
+      <td>$256</td><td>$259</td><td class="neutral">$-3</td>
+      <td class="total-bud">$1,410</td><td class="total-spe">$808</td>
+      <td class="pos total-var">$601</td>
+    </tr>
+<tr
+      data-v0="b101"
+      data-v1="668" data-v2="0" data-v3="668"
+      data-v4="834" data-v5="56" data-v6="778"
+      data-v7="334" data-v8="417" data-v9="-83"
+      data-v10="1836" data-v11="473" data-v12="1362">
+      <td class="prop-name">b101</td>
+      <td>$668</td><td>$0</td><td class="pos">$668</td>
+      <td>$834</td><td>$56</td><td class="pos">$778</td>
+      <td>$334</td><td>$417</td><td class="neg">$-83</td>
+      <td class="total-bud">$1,836</td><td class="total-spe">$473</td>
+      <td class="pos total-var">$1,362</td>
+    </tr>
+<tr
+      data-v0="c302"
+      data-v1="811" data-v2="1319" data-v3="-508"
+      data-v4="1014" data-v5="0" data-v6="1014"
+      data-v7="406" data-v8="213" data-v9="193"
+      data-v10="2230" data-v11="1532" data-v12="698">
+      <td class="prop-name">c302</td>
+      <td>$811</td><td>$1,319</td><td class="neg">$-508</td>
+      <td>$1,014</td><td>$0</td><td class="pos">$1,014</td>
+      <td>$406</td><td>$213</td><td class="pos">$193</td>
+      <td class="total-bud">$2,230</td><td class="total-spe">$1,532</td>
+      <td class="pos total-var">$698</td>
+    </tr>
+<tr
+      data-v0="c313"
+      data-v1="2104" data-v2="1524" data-v3="580"
+      data-v4="1297" data-v5="1052" data-v6="245"
+      data-v7="888" data-v8="1101" data-v9="-212"
+      data-v10="4289" data-v11="3677" data-v12="612">
+      <td class="prop-name">c313</td>
+      <td>$2,104</td><td>$1,524</td><td class="pos">$580</td>
+      <td>$1,297</td><td>$1,052</td><td class="pos">$245</td>
+      <td>$888</td><td>$1,101</td><td class="neg">$-212</td>
+      <td class="total-bud">$4,289</td><td class="total-spe">$3,677</td>
+      <td class="pos total-var">$612</td>
+    </tr>
+<tr
+      data-v0="e328"
+      data-v1="241" data-v2="0" data-v3="241"
+      data-v4="310" data-v5="0" data-v6="310"
+      data-v7="320" data-v8="647" data-v9="-326"
+      data-v10="872" data-v11="647" data-v12="225">
+      <td class="prop-name">e328</td>
+      <td>$241</td><td>$0</td><td class="pos">$241</td>
+      <td>$310</td><td>$0</td><td class="pos">$310</td>
+      <td>$320</td><td>$647</td><td class="neg">$-326</td>
+      <td class="total-bud">$872</td><td class="total-spe">$647</td>
+      <td class="pos total-var">$225</td>
+    </tr>
+<tr
+      data-v0="h604"
+      data-v1="0" data-v2="0" data-v3="0"
+      data-v4="0" data-v5="52" data-v6="-52"
+      data-v7="0" data-v8="204" data-v9="-204"
+      data-v10="0" data-v11="256" data-v12="-256">
+      <td class="prop-name">h604</td>
+      <td>$0</td><td>$0</td><td class="neutral">$0</td>
+      <td>$0</td><td>$52</td><td class="neg">$-52</td>
+      <td>$0</td><td>$204</td><td class="neg">$-204</td>
+      <td class="total-bud">$0</td><td class="total-spe">$256</td>
+      <td class="neg total-var">$-256</td>
+    </tr>
+<tr
+      data-v0="h731"
+      data-v1="420" data-v2="457" data-v3="-37"
+      data-v4="525" data-v5="0" data-v6="525"
+      data-v7="210" data-v8="0" data-v9="210"
+      data-v10="1155" data-v11="457" data-v12="698">
+      <td class="prop-name">h731</td>
+      <td>$420</td><td>$457</td><td class="neutral">$-37</td>
+      <td>$525</td><td>$0</td><td class="pos">$525</td>
+      <td>$210</td><td>$0</td><td class="pos">$210</td>
+      <td class="total-bud">$1,155</td><td class="total-spe">$457</td>
+      <td class="pos total-var">$698</td>
+    </tr>
+<tr
+      data-v0="hl65"
+      data-v1="497" data-v2="303" data-v3="194"
+      data-v4="621" data-v5="0" data-v6="621"
+      data-v7="248" data-v8="238" data-v9="10"
+      data-v10="1366" data-v11="541" data-v12="825">
+      <td class="prop-name">hl65</td>
+      <td>$497</td><td>$303</td><td class="pos">$194</td>
+      <td>$621</td><td>$0</td><td class="pos">$621</td>
+      <td>$248</td><td>$238</td><td class="neutral">$10</td>
+      <td class="total-bud">$1,366</td><td class="total-spe">$541</td>
+      <td class="pos total-var">$825</td>
+    </tr>
+<tr
+      data-v0="hl73"
+      data-v1="228" data-v2="0" data-v3="228"
+      data-v4="285" data-v5="0" data-v6="285"
+      data-v7="114" data-v8="170" data-v9="-56"
+      data-v10="626" data-v11="170" data-v12="456">
+      <td class="prop-name">hl73</td>
+      <td>$228</td><td>$0</td><td class="pos">$228</td>
+      <td>$285</td><td>$0</td><td class="pos">$285</td>
+      <td>$114</td><td>$170</td><td class="neg">$-56</td>
+      <td class="total-bud">$626</td><td class="total-spe">$170</td>
+      <td class="pos total-var">$456</td>
+    </tr>
+<tr
+      data-v0="j312"
+      data-v1="583" data-v2="855" data-v3="-272"
+      data-v4="798" data-v5="0" data-v6="798"
+      data-v7="328" data-v8="787" data-v9="-459"
+      data-v10="1709" data-v11="1642" data-v12="68">
+      <td class="prop-name">j312</td>
+      <td>$583</td><td>$855</td><td class="neg">$-272</td>
+      <td>$798</td><td>$0</td><td class="pos">$798</td>
+      <td>$328</td><td>$787</td><td class="neg">$-459</td>
+      <td class="total-bud">$1,709</td><td class="total-spe">$1,642</td>
+      <td class="pos total-var">$68</td>
+    </tr>
+<tr
+      data-v0="k104- LeFevre"
+      data-v1="3072" data-v2="2165" data-v3="907"
+      data-v4="3840" data-v5="681" data-v6="3159"
+      data-v7="1536" data-v8="1338" data-v9="198"
+      data-v10="8448" data-v11="4184" data-v12="4264">
+      <td class="prop-name">k104- LeFevre</td>
+      <td>$3,072</td><td>$2,165</td><td class="pos">$907</td>
+      <td>$3,840</td><td>$681</td><td class="pos">$3,159</td>
+      <td>$1,536</td><td>$1,338</td><td class="pos">$198</td>
+      <td class="total-bud">$8,448</td><td class="total-spe">$4,184</td>
+      <td class="pos total-var">$4,264</td>
+    </tr>
+<tr
+      data-v0="k308"
+      data-v1="289" data-v2="174" data-v3="116"
+      data-v4="208" data-v5="0" data-v6="208"
+      data-v7="127" data-v8="801" data-v9="-674"
+      data-v10="624" data-v11="975" data-v12="-351">
+      <td class="prop-name">k308</td>
+      <td>$289</td><td>$174</td><td class="pos">$116</td>
+      <td>$208</td><td>$0</td><td class="pos">$208</td>
+      <td>$127</td><td>$801</td><td class="neg">$-674</td>
+      <td class="total-bud">$624</td><td class="total-spe">$975</td>
+      <td class="neg total-var">$-351</td>
+    </tr>
+<tr
+      data-v0="kn47"
+      data-v1="22327" data-v2="25140" data-v3="-2813"
+      data-v4="5261" data-v5="1460" data-v6="3801"
+      data-v7="6202" data-v8="16157" data-v9="-9955"
+      data-v10="33790" data-v11="42757" data-v12="-8968">
+      <td class="prop-name">kn47</td>
+      <td>$22,327</td><td>$25,140</td><td class="neg">$-2,813</td>
+      <td>$5,261</td><td>$1,460</td><td class="pos">$3,801</td>
+      <td>$6,202</td><td>$16,157</td><td class="neg">$-9,955</td>
+      <td class="total-bud">$33,790</td><td class="total-spe">$42,757</td>
+      <td class="neg total-var">$-8,968</td>
+    </tr>
+<tr
+      data-v0="m221"
+      data-v1="676" data-v2="621" data-v3="55"
+      data-v4="846" data-v5="0" data-v6="846"
+      data-v7="338" data-v8="497" data-v9="-159"
+      data-v10="1860" data-v11="1118" data-v12="742">
+      <td class="prop-name">m221</td>
+      <td>$676</td><td>$621</td><td class="pos">$55</td>
+      <td>$846</td><td>$0</td><td class="pos">$846</td>
+      <td>$338</td><td>$497</td><td class="neg">$-159</td>
+      <td class="total-bud">$1,860</td><td class="total-spe">$1,118</td>
+      <td class="pos total-var">$742</td>
+    </tr>
+<tr
+      data-v0="m405"
+      data-v1="1086" data-v2="2839" data-v3="-1753"
+      data-v4="1357" data-v5="0" data-v6="1357"
+      data-v7="543" data-v8="638" data-v9="-95"
+      data-v10="2986" data-v11="3477" data-v12="-491">
+      <td class="prop-name">m405</td>
+      <td>$1,086</td><td>$2,839</td><td class="neg">$-1,753</td>
+      <td>$1,357</td><td>$0</td><td class="pos">$1,357</td>
+      <td>$543</td><td>$638</td><td class="neg">$-95</td>
+      <td class="total-bud">$2,986</td><td class="total-spe">$3,477</td>
+      <td class="neg total-var">$-491</td>
+    </tr>
+<tr
+      data-v0="m608"
+      data-v1="447" data-v2="130" data-v3="317"
+      data-v4="559" data-v5="0" data-v6="559"
+      data-v7="224" data-v8="302" data-v9="-78"
+      data-v10="1229" data-v11="432" data-v12="797">
+      <td class="prop-name">m608</td>
+      <td>$447</td><td>$130</td><td class="pos">$317</td>
+      <td>$559</td><td>$0</td><td class="pos">$559</td>
+      <td>$224</td><td>$302</td><td class="neg">$-78</td>
+      <td class="total-bud">$1,229</td><td class="total-spe">$432</td>
+      <td class="pos total-var">$797</td>
+    </tr>
+<tr
+      data-v0="ms22"
+      data-v1="314" data-v2="0" data-v3="314"
+      data-v4="393" data-v5="0" data-v6="393"
+      data-v7="157" data-v8="0" data-v9="157"
+      data-v10="864" data-v11="0" data-v12="864">
+      <td class="prop-name">ms22</td>
+      <td>$314</td><td>$0</td><td class="pos">$314</td>
+      <td>$393</td><td>$0</td><td class="pos">$393</td>
+      <td>$157</td><td>$0</td><td class="pos">$157</td>
+      <td class="total-bud">$864</td><td class="total-spe">$0</td>
+      <td class="pos total-var">$864</td>
+    </tr>
+<tr
+      data-v0="ms43"
+      data-v1="727" data-v2="721" data-v3="6"
+      data-v4="909" data-v5="0" data-v6="909"
+      data-v7="363" data-v8="0" data-v9="363"
+      data-v10="1999" data-v11="721" data-v12="1278">
+      <td class="prop-name">ms43</td>
+      <td>$727</td><td>$721</td><td class="neutral">$6</td>
+      <td>$909</td><td>$0</td><td class="pos">$909</td>
+      <td>$363</td><td>$0</td><td class="pos">$363</td>
+      <td class="total-bud">$1,999</td><td class="total-spe">$721</td>
+      <td class="pos total-var">$1,278</td>
+    </tr>
+<tr
+      data-v0="o155"
+      data-v1="5224" data-v2="4530" data-v3="694"
+      data-v4="702" data-v5="763" data-v6="-61"
+      data-v7="3602" data-v8="930" data-v9="2672"
+      data-v10="9527" data-v11="6222" data-v12="3305">
+      <td class="prop-name">o155</td>
+      <td>$5,224</td><td>$4,530</td><td class="pos">$694</td>
+      <td>$702</td><td>$763</td><td class="neg">$-61</td>
+      <td>$3,602</td><td>$930</td><td class="pos">$2,672</td>
+      <td class="total-bud">$9,527</td><td class="total-spe">$6,222</td>
+      <td class="pos total-var">$3,305</td>
+    </tr>
+<tr
+      data-v0="p705"
+      data-v1="1115" data-v2="1112" data-v3="3"
+      data-v4="1394" data-v5="0" data-v6="1394"
+      data-v7="558" data-v8="987" data-v9="-430"
+      data-v10="3067" data-v11="2099" data-v12="967">
+      <td class="prop-name">p705</td>
+      <td>$1,115</td><td>$1,112</td><td class="neutral">$3</td>
+      <td>$1,394</td><td>$0</td><td class="pos">$1,394</td>
+      <td>$558</td><td>$987</td><td class="neg">$-430</td>
+      <td class="total-bud">$3,067</td><td class="total-spe">$2,099</td>
+      <td class="pos total-var">$967</td>
+    </tr>
+<tr
+      data-v0="ps17"
+      data-v1="728" data-v2="240" data-v3="488"
+      data-v4="910" data-v5="0" data-v6="910"
+      data-v7="364" data-v8="860" data-v9="-496"
+      data-v10="2002" data-v11="1100" data-v12="902">
+      <td class="prop-name">ps17</td>
+      <td>$728</td><td>$240</td><td class="pos">$488</td>
+      <td>$910</td><td>$0</td><td class="pos">$910</td>
+      <td>$364</td><td>$860</td><td class="neg">$-496</td>
+      <td class="total-bud">$2,002</td><td class="total-spe">$1,100</td>
+      <td class="pos total-var">$902</td>
+    </tr>
+<tr
+      data-v0="ps25"
+      data-v1="2417" data-v2="5348" data-v3="-2931"
+      data-v4="3022" data-v5="900" data-v6="2122"
+      data-v7="1209" data-v8="942" data-v9="267"
+      data-v10="6648" data-v11="7190" data-v12="-542">
+      <td class="prop-name">ps25</td>
+      <td>$2,417</td><td>$5,348</td><td class="neg">$-2,931</td>
+      <td>$3,022</td><td>$900</td><td class="pos">$2,122</td>
+      <td>$1,209</td><td>$942</td><td class="pos">$267</td>
+      <td class="total-bud">$6,648</td><td class="total-spe">$7,190</td>
+      <td class="neg total-var">$-542</td>
+    </tr>
+<tr
+      data-v0="ps91"
+      data-v1="676" data-v2="373" data-v3="303"
+      data-v4="845" data-v5="0" data-v6="845"
+      data-v7="338" data-v8="525" data-v9="-188"
+      data-v10="1858" data-v11="898" data-v12="960">
+      <td class="prop-name">ps91</td>
+      <td>$676</td><td>$373</td><td class="pos">$303</td>
+      <td>$845</td><td>$0</td><td class="pos">$845</td>
+      <td>$338</td><td>$525</td><td class="neg">$-188</td>
+      <td class="total-bud">$1,858</td><td class="total-spe">$898</td>
+      <td class="pos total-var">$960</td>
+    </tr>
+<tr
+      data-v0="rl16"
+      data-v1="7834" data-v2="11073" data-v3="-3239"
+      data-v4="4256" data-v5="2456" data-v6="1800"
+      data-v7="2519" data-v8="3104" data-v9="-585"
+      data-v10="14609" data-v11="16633" data-v12="-2024">
+      <td class="prop-name">rl16</td>
+      <td>$7,834</td><td>$11,073</td><td class="neg">$-3,239</td>
+      <td>$4,256</td><td>$2,456</td><td class="pos">$1,800</td>
+      <td>$2,519</td><td>$3,104</td><td class="neg">$-585</td>
+      <td class="total-bud">$14,609</td><td class="total-spe">$16,633</td>
+      <td class="neg total-var">$-2,024</td>
+    </tr>
+<tr
+      data-v0="rl21"
+      data-v1="1108" data-v2="1072" data-v3="37"
+      data-v4="630" data-v5="0" data-v6="630"
+      data-v7="222" data-v8="0" data-v9="222"
+      data-v10="1960" data-v11="1072" data-v12="888">
+      <td class="prop-name">rl21</td>
+      <td>$1,108</td><td>$1,072</td><td class="neutral">$37</td>
+      <td>$630</td><td>$0</td><td class="pos">$630</td>
+      <td>$222</td><td>$0</td><td class="pos">$222</td>
+      <td class="total-bud">$1,960</td><td class="total-spe">$1,072</td>
+      <td class="pos total-var">$888</td>
+    </tr>
+<tr
+      data-v0="s129"
+      data-v1="1209" data-v2="1208" data-v3="1"
+      data-v4="665" data-v5="0" data-v6="665"
+      data-v7="202" data-v8="88" data-v9="113"
+      data-v10="2076" data-v11="1296" data-v12="780">
+      <td class="prop-name">s129</td>
+      <td>$1,209</td><td>$1,208</td><td class="neutral">$1</td>
+      <td>$665</td><td>$0</td><td class="pos">$665</td>
+      <td>$202</td><td>$88</td><td class="pos">$113</td>
+      <td class="total-bud">$2,076</td><td class="total-spe">$1,296</td>
+      <td class="pos total-var">$780</td>
+    </tr>
+<tr
+      data-v0="s300"
+      data-v1="572" data-v2="0" data-v3="572"
+      data-v4="715" data-v5="0" data-v6="715"
+      data-v7="286" data-v8="180" data-v9="106"
+      data-v10="1574" data-v11="180" data-v12="1394">
+      <td class="prop-name">s300</td>
+      <td>$572</td><td>$0</td><td class="pos">$572</td>
+      <td>$715</td><td>$0</td><td class="pos">$715</td>
+      <td>$286</td><td>$180</td><td class="pos">$106</td>
+      <td class="total-bud">$1,574</td><td class="total-spe">$180</td>
+      <td class="pos total-var">$1,394</td>
+    </tr>
+<tr
+      data-v0="tc34"
+      data-v1="1449" data-v2="1053" data-v3="396"
+      data-v4="515" data-v5="116" data-v6="400"
+      data-v7="393" data-v8="533" data-v9="-140"
+      data-v10="2357" data-v11="1702" data-v12="655">
+      <td class="prop-name">tc34</td>
+      <td>$1,449</td><td>$1,053</td><td class="pos">$396</td>
+      <td>$515</td><td>$116</td><td class="pos">$400</td>
+      <td>$393</td><td>$533</td><td class="neg">$-140</td>
+      <td class="total-bud">$2,357</td><td class="total-spe">$1,702</td>
+      <td class="pos total-var">$655</td>
+    </tr>
+<tr
+      data-v0="tc68"
+      data-v1="7287" data-v2="6176" data-v3="1110"
+      data-v4="5249" data-v5="8727" data-v6="-3479"
+      data-v7="5107" data-v8="4367" data-v9="739"
+      data-v10="17642" data-v11="19271" data-v12="-1629">
+      <td class="prop-name">tc68</td>
+      <td>$7,287</td><td>$6,176</td><td class="pos">$1,110</td>
+      <td>$5,249</td><td>$8,727</td><td class="neg">$-3,479</td>
+      <td>$5,107</td><td>$4,367</td><td class="pos">$739</td>
+      <td class="total-bud">$17,642</td><td class="total-spe">$19,271</td>
+      <td class="neg total-var">$-1,629</td>
+    </tr>
+<tr
+      data-v0="v202"
+      data-v1="406" data-v2="100" data-v3="305"
+      data-v4="322" data-v5="494" data-v6="-172"
+      data-v7="602" data-v8="508" data-v9="95"
+      data-v10="1330" data-v11="1102" data-v12="228">
+      <td class="prop-name">v202</td>
+      <td>$406</td><td>$100</td><td class="pos">$305</td>
+      <td>$322</td><td>$494</td><td class="neg">$-172</td>
+      <td>$602</td><td>$508</td><td class="pos">$95</td>
+      <td class="total-bud">$1,330</td><td class="total-spe">$1,102</td>
+      <td class="pos total-var">$228</td>
+    </tr>
+<tr
+      data-v0="w117"
+      data-v1="413" data-v2="0" data-v3="413"
+      data-v4="516" data-v5="0" data-v6="516"
+      data-v7="207" data-v8="305" data-v9="-99"
+      data-v10="1136" data-v11="305" data-v12="830">
+      <td class="prop-name">w117</td>
+      <td>$413</td><td>$0</td><td class="pos">$413</td>
+      <td>$516</td><td>$0</td><td class="pos">$516</td>
+      <td>$207</td><td>$305</td><td class="neg">$-99</td>
+      <td class="total-bud">$1,136</td><td class="total-spe">$305</td>
+      <td class="pos total-var">$830</td>
+    </tr>
+<tr
+      data-v0="w225"
+      data-v1="0" data-v2="6482" data-v3="-6482"
+      data-v4="0" data-v5="0" data-v6="0"
+      data-v7="0" data-v8="199" data-v9="-199"
+      data-v10="0" data-v11="6680" data-v12="-6680">
+      <td class="prop-name">w225</td>
+      <td>$0</td><td>$6,482</td><td class="neg">$-6,482</td>
+      <td>$0</td><td>$0</td><td class="neutral">$0</td>
+      <td>$0</td><td>$199</td><td class="neg">$-199</td>
+      <td class="total-bud">$0</td><td class="total-spe">$6,680</td>
+      <td class="neg total-var">$-6,680</td>
+    </tr>
+<tr
+      data-v0="w226"
+      data-v1="543" data-v2="1142" data-v3="-599"
+      data-v4="679" data-v5="0" data-v6="679"
+      data-v7="272" data-v8="831" data-v9="-559"
+      data-v10="1494" data-v11="1973" data-v12="-479">
+      <td class="prop-name">w226</td>
+      <td>$543</td><td>$1,142</td><td class="neg">$-599</td>
+      <td>$679</td><td>$0</td><td class="pos">$679</td>
+      <td>$272</td><td>$831</td><td class="neg">$-559</td>
+      <td class="total-bud">$1,494</td><td class="total-spe">$1,973</td>
+      <td class="neg total-var">$-479</td>
+    </tr></tbody><tfoot><tr class="total-row">
+      <td><strong>TOTAL</strong></td>
+      <td>$66,779</td><td>$79,134</td><td class="neg">$-12,354</td>
+      <td>$41,084</td><td>$16,946</td><td class="pos">$24,138</td>
+      <td>$28,946</td><td>$38,858</td><td class="neg">$-9,913</td>
+      <td class="total-bud">$136,809</td>
+      <td class="total-spe">$134,938</td>
+      <td class="pos total-var">$1,871</td>
+    </tr></tfoot></table></div>
+<div id="tab-ytd" class="tab-content"><table><thead>
+      <tr>
+        <th rowspan="2" class="prop-name sortable" data-col="0">Property <span class="sort-icon">↕</span></th>
+        <th colspan="3" class="cat-head repairs">Repairs (52001)</th>
+        <th colspan="3" class="cat-head turns">Turns (52002)</th>
+        <th colspan="3" class="cat-head grounds">Grounds (52003)</th>
+        <th colspan="3" class="cat-head total">Total</th>
+      </tr>
+      <tr>
+        <th class="sortable" data-col="1">Budget <span class="sort-icon">↕</span></th>
+        <th class="sortable" data-col="2">Spend <span class="sort-icon">↕</span></th>
+        <th class="sortable" data-col="3">Var <span class="sort-icon">↕</span></th>
+        <th class="sortable" data-col="4">Budget <span class="sort-icon">↕</span></th>
+        <th class="sortable" data-col="5">Spend <span class="sort-icon">↕</span></th>
+        <th class="sortable" data-col="6">Var <span class="sort-icon">↕</span></th>
+        <th class="sortable" data-col="7">Budget <span class="sort-icon">↕</span></th>
+        <th class="sortable" data-col="8">Spend <span class="sort-icon">↕</span></th>
+        <th class="sortable" data-col="9">Var <span class="sort-icon">↕</span></th>
+        <th class="sortable" data-col="10">Budget <span class="sort-icon">↕</span></th>
+        <th class="sortable" data-col="11">Spend <span class="sort-icon">↕</span></th>
+        <th class="sortable" data-col="12">Var <span class="sort-icon">↕</span></th>
+      </tr>
+    </thead><tbody><tr
+      data-v0="a210"
+      data-v1="1762" data-v2="3181" data-v3="-1420"
+      data-v4="2202" data-v5="1095" data-v6="1108"
+      data-v7="881" data-v8="1493" data-v9="-612"
+      data-v10="4845" data-v11="5769" data-v12="-924">
+      <td class="prop-name">a210</td>
+      <td>$1,762</td><td>$3,181</td><td class="neg">$-1,420</td>
+      <td>$2,202</td><td>$1,095</td><td class="pos">$1,108</td>
+      <td>$881</td><td>$1,493</td><td class="neg">$-612</td>
+      <td class="total-bud">$4,845</td><td class="total-spe">$5,769</td>
+      <td class="neg total-var">$-924</td>
+    </tr>
+<tr
+      data-v0="a511"
+      data-v1="1813" data-v2="777" data-v3="1035"
+      data-v4="1424" data-v5="0" data-v6="1424"
+      data-v7="1472" data-v8="1731" data-v9="-260"
+      data-v10="4708" data-v11="2509" data-v12="2200">
+      <td class="prop-name">a511</td>
+      <td>$1,813</td><td>$777</td><td class="pos">$1,035</td>
+      <td>$1,424</td><td>$0</td><td class="pos">$1,424</td>
+      <td>$1,472</td><td>$1,731</td><td class="neg">$-260</td>
+      <td class="total-bud">$4,708</td><td class="total-spe">$2,509</td>
+      <td class="pos total-var">$2,200</td>
+    </tr>
+<tr
+      data-v0="a916"
+      data-v1="2044" data-v2="1979" data-v3="65"
+      data-v4="2555" data-v5="1780" data-v6="775"
+      data-v7="1022" data-v8="1858" data-v9="-836"
+      data-v10="5621" data-v11="5617" data-v12="4">
+      <td class="prop-name">a916</td>
+      <td>$2,044</td><td>$1,979</td><td class="pos">$65</td>
+      <td>$2,555</td><td>$1,780</td><td class="pos">$775</td>
+      <td>$1,022</td><td>$1,858</td><td class="neg">$-836</td>
+      <td class="total-bud">$5,621</td><td class="total-spe">$5,617</td>
+      <td class="neutral total-var">$4</td>
+    </tr>
+<tr
+      data-v0="b101"
+      data-v1="2661" data-v2="2538" data-v3="124"
+      data-v4="3327" data-v5="3287" data-v6="40"
+      data-v7="1331" data-v8="1603" data-v9="-272"
+      data-v10="7319" data-v11="7427" data-v12="-109">
+      <td class="prop-name">b101</td>
+      <td>$2,661</td><td>$2,538</td><td class="pos">$124</td>
+      <td>$3,327</td><td>$3,287</td><td class="neutral">$40</td>
+      <td>$1,331</td><td>$1,603</td><td class="neg">$-272</td>
+      <td class="total-bud">$7,319</td><td class="total-spe">$7,427</td>
+      <td class="neg total-var">$-109</td>
+    </tr>
+<tr
+      data-v0="c302"
+      data-v1="3233" data-v2="1942" data-v3="1291"
+      data-v4="4041" data-v5="36" data-v6="4005"
+      data-v7="1617" data-v8="628" data-v9="989"
+      data-v10="8891" data-v11="2606" data-v12="6285">
+      <td class="prop-name">c302</td>
+      <td>$3,233</td><td>$1,942</td><td class="pos">$1,291</td>
+      <td>$4,041</td><td>$36</td><td class="pos">$4,005</td>
+      <td>$1,617</td><td>$628</td><td class="pos">$989</td>
+      <td class="total-bud">$8,891</td><td class="total-spe">$2,606</td>
+      <td class="pos total-var">$6,285</td>
+    </tr>
+<tr
+      data-v0="c313"
+      data-v1="8386" data-v2="4947" data-v3="3439"
+      data-v4="5167" data-v5="1235" data-v6="3932"
+      data-v7="3540" data-v8="3706" data-v9="-165"
+      data-v10="17093" data-v11="9887" data-v12="7206">
+      <td class="prop-name">c313</td>
+      <td>$8,386</td><td>$4,947</td><td class="pos">$3,439</td>
+      <td>$5,167</td><td>$1,235</td><td class="pos">$3,932</td>
+      <td>$3,540</td><td>$3,706</td><td class="neg">$-165</td>
+      <td class="total-bud">$17,093</td><td class="total-spe">$9,887</td>
+      <td class="pos total-var">$7,206</td>
+    </tr>
+<tr
+      data-v0="e328"
+      data-v1="961" data-v2="1718" data-v3="-757"
+      data-v4="1237" data-v5="0" data-v6="1237"
+      data-v7="1277" data-v8="1592" data-v9="-315"
+      data-v10="3475" data-v11="3310" data-v12="165">
+      <td class="prop-name">e328</td>
+      <td>$961</td><td>$1,718</td><td class="neg">$-757</td>
+      <td>$1,237</td><td>$0</td><td class="pos">$1,237</td>
+      <td>$1,277</td><td>$1,592</td><td class="neg">$-315</td>
+      <td class="total-bud">$3,475</td><td class="total-spe">$3,310</td>
+      <td class="pos total-var">$165</td>
+    </tr>
+<tr
+      data-v0="h604"
+      data-v1="0" data-v2="146" data-v3="-146"
+      data-v4="0" data-v5="248" data-v6="-248"
+      data-v7="0" data-v8="480" data-v9="-480"
+      data-v10="0" data-v11="874" data-v12="-874">
+      <td class="prop-name">h604</td>
+      <td>$0</td><td>$146</td><td class="neg">$-146</td>
+      <td>$0</td><td>$248</td><td class="neg">$-248</td>
+      <td>$0</td><td>$480</td><td class="neg">$-480</td>
+      <td class="total-bud">$0</td><td class="total-spe">$874</td>
+      <td class="neg total-var">$-874</td>
+    </tr>
+<tr
+      data-v0="h731"
+      data-v1="1675" data-v2="1158" data-v3="516"
+      data-v4="2093" data-v5="0" data-v6="2093"
+      data-v7="837" data-v8="237" data-v9="600"
+      data-v10="4605" data-v11="1396" data-v12="3210">
+      <td class="prop-name">h731</td>
+      <td>$1,675</td><td>$1,158</td><td class="pos">$516</td>
+      <td>$2,093</td><td>$0</td><td class="pos">$2,093</td>
+      <td>$837</td><td>$237</td><td class="pos">$600</td>
+      <td class="total-bud">$4,605</td><td class="total-spe">$1,396</td>
+      <td class="pos total-var">$3,210</td>
+    </tr>
+<tr
+      data-v0="hl65"
+      data-v1="1980" data-v2="303" data-v3="1677"
+      data-v4="2475" data-v5="43" data-v6="2432"
+      data-v7="990" data-v8="789" data-v9="201"
+      data-v10="5445" data-v11="1135" data-v12="4310">
+      <td class="prop-name">hl65</td>
+      <td>$1,980</td><td>$303</td><td class="pos">$1,677</td>
+      <td>$2,475</td><td>$43</td><td class="pos">$2,432</td>
+      <td>$990</td><td>$789</td><td class="pos">$201</td>
+      <td class="total-bud">$5,445</td><td class="total-spe">$1,135</td>
+      <td class="pos total-var">$4,310</td>
+    </tr>
+<tr
+      data-v0="hl73"
+      data-v1="908" data-v2="290" data-v3="618"
+      data-v4="1135" data-v5="0" data-v6="1135"
+      data-v7="454" data-v8="1045" data-v9="-591"
+      data-v10="2496" data-v11="1335" data-v12="1161">
+      <td class="prop-name">hl73</td>
+      <td>$908</td><td>$290</td><td class="pos">$618</td>
+      <td>$1,135</td><td>$0</td><td class="pos">$1,135</td>
+      <td>$454</td><td>$1,045</td><td class="neg">$-591</td>
+      <td class="total-bud">$2,496</td><td class="total-spe">$1,335</td>
+      <td class="pos total-var">$1,161</td>
+    </tr>
+<tr
+      data-v0="j312"
+      data-v1="2324" data-v2="3313" data-v3="-988"
+      data-v4="3180" data-v5="1685" data-v6="1495"
+      data-v7="1307" data-v8="3128" data-v9="-1821"
+      data-v10="6812" data-v11="8126" data-v12="-1314">
+      <td class="prop-name">j312</td>
+      <td>$2,324</td><td>$3,313</td><td class="neg">$-988</td>
+      <td>$3,180</td><td>$1,685</td><td class="pos">$1,495</td>
+      <td>$1,307</td><td>$3,128</td><td class="neg">$-1,821</td>
+      <td class="total-bud">$6,812</td><td class="total-spe">$8,126</td>
+      <td class="neg total-var">$-1,314</td>
+    </tr>
+<tr
+      data-v0="k104- LeFevre"
+      data-v1="12248" data-v2="7085" data-v3="5162"
+      data-v4="15310" data-v5="1569" data-v6="13741"
+      data-v7="6124" data-v8="4154" data-v9="1970"
+      data-v10="33682" data-v11="12808" data-v12="20874">
+      <td class="prop-name">k104- LeFevre</td>
+      <td>$12,248</td><td>$7,085</td><td class="pos">$5,162</td>
+      <td>$15,310</td><td>$1,569</td><td class="pos">$13,741</td>
+      <td>$6,124</td><td>$4,154</td><td class="pos">$1,970</td>
+      <td class="total-bud">$33,682</td><td class="total-spe">$12,808</td>
+      <td class="pos total-var">$20,874</td>
+    </tr>
+<tr
+      data-v0="k308"
+      data-v1="1153" data-v2="473" data-v3="680"
+      data-v4="828" data-v5="0" data-v6="828"
+      data-v7="506" data-v8="859" data-v9="-353"
+      data-v10="2487" data-v11="1332" data-v12="1155">
+      <td class="prop-name">k308</td>
+      <td>$1,153</td><td>$473</td><td class="pos">$680</td>
+      <td>$828</td><td>$0</td><td class="pos">$828</td>
+      <td>$506</td><td>$859</td><td class="neg">$-353</td>
+      <td class="total-bud">$2,487</td><td class="total-spe">$1,332</td>
+      <td class="pos total-var">$1,155</td>
+    </tr>
+<tr
+      data-v0="kn47"
+      data-v1="88975" data-v2="77720" data-v3="11254"
+      data-v4="20965" data-v5="12061" data-v6="8904"
+      data-v7="24715" data-v8="29375" data-v9="-4660"
+      data-v10="134654" data-v11="119156" data-v12="15498">
+      <td class="prop-name">kn47</td>
+      <td>$88,975</td><td>$77,720</td><td class="pos">$11,254</td>
+      <td>$20,965</td><td>$12,061</td><td class="pos">$8,904</td>
+      <td>$24,715</td><td>$29,375</td><td class="neg">$-4,660</td>
+      <td class="total-bud">$134,654</td><td class="total-spe">$119,156</td>
+      <td class="pos total-var">$15,498</td>
+    </tr>
+<tr
+      data-v0="m221"
+      data-v1="2696" data-v2="2495" data-v3="201"
+      data-v4="3371" data-v5="77" data-v6="3294"
+      data-v7="1348" data-v8="2351" data-v9="-1003"
+      data-v10="7415" data-v11="4923" data-v12="2492">
+      <td class="prop-name">m221</td>
+      <td>$2,696</td><td>$2,495</td><td class="pos">$201</td>
+      <td>$3,371</td><td>$77</td><td class="pos">$3,294</td>
+      <td>$1,348</td><td>$2,351</td><td class="neg">$-1,003</td>
+      <td class="total-bud">$7,415</td><td class="total-spe">$4,923</td>
+      <td class="pos total-var">$2,492</td>
+    </tr>
+<tr
+      data-v0="m405"
+      data-v1="4329" data-v2="4833" data-v3="-504"
+      data-v4="5411" data-v5="1927" data-v6="3484"
+      data-v7="2164" data-v8="2835" data-v9="-671"
+      data-v10="11905" data-v11="9595" data-v12="2310">
+      <td class="prop-name">m405</td>
+      <td>$4,329</td><td>$4,833</td><td class="neg">$-504</td>
+      <td>$5,411</td><td>$1,927</td><td class="pos">$3,484</td>
+      <td>$2,164</td><td>$2,835</td><td class="neg">$-671</td>
+      <td class="total-bud">$11,905</td><td class="total-spe">$9,595</td>
+      <td class="pos total-var">$2,310</td>
+    </tr>
+<tr
+      data-v0="m608"
+      data-v1="1782" data-v2="2118" data-v3="-336"
+      data-v4="2228" data-v5="0" data-v6="2228"
+      data-v7="891" data-v8="1053" data-v9="-162"
+      data-v10="4901" data-v11="3171" data-v12="1730">
+      <td class="prop-name">m608</td>
+      <td>$1,782</td><td>$2,118</td><td class="neg">$-336</td>
+      <td>$2,228</td><td>$0</td><td class="pos">$2,228</td>
+      <td>$891</td><td>$1,053</td><td class="neg">$-162</td>
+      <td class="total-bud">$4,901</td><td class="total-spe">$3,171</td>
+      <td class="pos total-var">$1,730</td>
+    </tr>
+<tr
+      data-v0="ms22"
+      data-v1="1252" data-v2="2295" data-v3="-1043"
+      data-v4="1565" data-v5="0" data-v6="1565"
+      data-v7="626" data-v8="0" data-v9="626"
+      data-v10="3444" data-v11="2295" data-v12="1148">
+      <td class="prop-name">ms22</td>
+      <td>$1,252</td><td>$2,295</td><td class="neg">$-1,043</td>
+      <td>$1,565</td><td>$0</td><td class="pos">$1,565</td>
+      <td>$626</td><td>$0</td><td class="pos">$626</td>
+      <td class="total-bud">$3,444</td><td class="total-spe">$2,295</td>
+      <td class="pos total-var">$1,148</td>
+    </tr>
+<tr
+      data-v0="ms43"
+      data-v1="2898" data-v2="3853" data-v3="-955"
+      data-v4="3622" data-v5="0" data-v6="3622"
+      data-v7="1449" data-v8="0" data-v9="1449"
+      data-v10="7968" data-v11="3853" data-v12="4115">
+      <td class="prop-name">ms43</td>
+      <td>$2,898</td><td>$3,853</td><td class="neg">$-955</td>
+      <td>$3,622</td><td>$0</td><td class="pos">$3,622</td>
+      <td>$1,449</td><td>$0</td><td class="pos">$1,449</td>
+      <td class="total-bud">$7,968</td><td class="total-spe">$3,853</td>
+      <td class="pos total-var">$4,115</td>
+    </tr>
+<tr
+      data-v0="o155"
+      data-v1="20817" data-v2="15655" data-v3="5162"
+      data-v4="2796" data-v5="1637" data-v6="1159"
+      data-v7="14354" data-v8="4142" data-v9="10212"
+      data-v10="37966" data-v11="21434" data-v12="16532">
+      <td class="prop-name">o155</td>
+      <td>$20,817</td><td>$15,655</td><td class="pos">$5,162</td>
+      <td>$2,796</td><td>$1,637</td><td class="pos">$1,159</td>
+      <td>$14,354</td><td>$4,142</td><td class="pos">$10,212</td>
+      <td class="total-bud">$37,966</td><td class="total-spe">$21,434</td>
+      <td class="pos total-var">$16,532</td>
+    </tr>
+<tr
+      data-v0="p705"
+      data-v1="4446" data-v2="7391" data-v3="-2946"
+      data-v4="5557" data-v5="886" data-v6="4671"
+      data-v7="2223" data-v8="3223" data-v9="-1001"
+      data-v10="12225" data-v11="11501" data-v12="724">
+      <td class="prop-name">p705</td>
+      <td>$4,446</td><td>$7,391</td><td class="neg">$-2,946</td>
+      <td>$5,557</td><td>$886</td><td class="pos">$4,671</td>
+      <td>$2,223</td><td>$3,223</td><td class="neg">$-1,001</td>
+      <td class="total-bud">$12,225</td><td class="total-spe">$11,501</td>
+      <td class="pos total-var">$724</td>
+    </tr>
+<tr
+      data-v0="ps17"
+      data-v1="2902" data-v2="2106" data-v3="796"
+      data-v4="3627" data-v5="26" data-v6="3602"
+      data-v7="1451" data-v8="2951" data-v9="-1500"
+      data-v10="7980" data-v11="5082" data-v12="2898">
+      <td class="prop-name">ps17</td>
+      <td>$2,902</td><td>$2,106</td><td class="pos">$796</td>
+      <td>$3,627</td><td>$26</td><td class="pos">$3,602</td>
+      <td>$1,451</td><td>$2,951</td><td class="neg">$-1,500</td>
+      <td class="total-bud">$7,980</td><td class="total-spe">$5,082</td>
+      <td class="pos total-var">$2,898</td>
+    </tr>
+<tr
+      data-v0="ps25"
+      data-v1="9637" data-v2="11924" data-v3="-2287"
+      data-v4="12046" data-v5="2304" data-v6="9742"
+      data-v7="4819" data-v8="2982" data-v9="1836"
+      data-v10="26501" data-v11="17210" data-v12="9291">
+      <td class="prop-name">ps25</td>
+      <td>$9,637</td><td>$11,924</td><td class="neg">$-2,287</td>
+      <td>$12,046</td><td>$2,304</td><td class="pos">$9,742</td>
+      <td>$4,819</td><td>$2,982</td><td class="pos">$1,836</td>
+      <td class="total-bud">$26,501</td><td class="total-spe">$17,210</td>
+      <td class="pos total-var">$9,291</td>
+    </tr>
+<tr
+      data-v0="ps91"
+      data-v1="2694" data-v2="12150" data-v3="-9456"
+      data-v4="3367" data-v5="0" data-v6="3367"
+      data-v7="1347" data-v8="1214" data-v9="132"
+      data-v10="7408" data-v11="13364" data-v12="-5957">
+      <td class="prop-name">ps91</td>
+      <td>$2,694</td><td>$12,150</td><td class="neg">$-9,456</td>
+      <td>$3,367</td><td>$0</td><td class="pos">$3,367</td>
+      <td>$1,347</td><td>$1,214</td><td class="pos">$132</td>
+      <td class="total-bud">$7,408</td><td class="total-spe">$13,364</td>
+      <td class="neg total-var">$-5,957</td>
+    </tr>
+<tr
+      data-v0="rl16"
+      data-v1="31220" data-v2="39956" data-v3="-8736"
+      data-v4="16960" data-v5="4483" data-v6="12476"
+      data-v7="10038" data-v8="10490" data-v9="-452"
+      data-v10="58218" data-v11="54929" data-v12="3289">
+      <td class="prop-name">rl16</td>
+      <td>$31,220</td><td>$39,956</td><td class="neg">$-8,736</td>
+      <td>$16,960</td><td>$4,483</td><td class="pos">$12,476</td>
+      <td>$10,038</td><td>$10,490</td><td class="neg">$-452</td>
+      <td class="total-bud">$58,218</td><td class="total-spe">$54,929</td>
+      <td class="pos total-var">$3,289</td>
+    </tr>
+<tr
+      data-v0="rl21"
+      data-v1="4417" data-v2="13604" data-v3="-9188"
+      data-v4="2510" data-v5="401" data-v6="2109"
+      data-v7="883" data-v8="351" data-v9="533"
+      data-v10="7810" data-v11="14356" data-v12="-6546">
+      <td class="prop-name">rl21</td>
+      <td>$4,417</td><td>$13,604</td><td class="neg">$-9,188</td>
+      <td>$2,510</td><td>$401</td><td class="pos">$2,109</td>
+      <td>$883</td><td>$351</td><td class="pos">$533</td>
+      <td class="total-bud">$7,810</td><td class="total-spe">$14,356</td>
+      <td class="neg total-var">$-6,546</td>
+    </tr>
+<tr
+      data-v0="s129"
+      data-v1="4818" data-v2="4110" data-v3="708"
+      data-v4="2650" data-v5="0" data-v6="2650"
+      data-v7="803" data-v8="411" data-v9="392"
+      data-v10="8271" data-v11="4521" data-v12="3750">
+      <td class="prop-name">s129</td>
+      <td>$4,818</td><td>$4,110</td><td class="pos">$708</td>
+      <td>$2,650</td><td>$0</td><td class="pos">$2,650</td>
+      <td>$803</td><td>$411</td><td class="pos">$392</td>
+      <td class="total-bud">$8,271</td><td class="total-spe">$4,521</td>
+      <td class="pos total-var">$3,750</td>
+    </tr>
+<tr
+      data-v0="s300"
+      data-v1="2281" data-v2="366" data-v3="1915"
+      data-v4="2851" data-v5="55" data-v6="2797"
+      data-v7="1141" data-v8="2062" data-v9="-922"
+      data-v10="6273" data-v11="2483" data-v12="3790">
+      <td class="prop-name">s300</td>
+      <td>$2,281</td><td>$366</td><td class="pos">$1,915</td>
+      <td>$2,851</td><td>$55</td><td class="pos">$2,797</td>
+      <td>$1,141</td><td>$2,062</td><td class="neg">$-922</td>
+      <td class="total-bud">$6,273</td><td class="total-spe">$2,483</td>
+      <td class="pos total-var">$3,790</td>
+    </tr>
+<tr
+      data-v0="tc34"
+      data-v1="5774" data-v2="5588" data-v3="186"
+      data-v4="2054" data-v5="1815" data-v6="239"
+      data-v7="1565" data-v8="2195" data-v9="-630"
+      data-v10="9393" data-v11="9598" data-v12="-205">
+      <td class="prop-name">tc34</td>
+      <td>$5,774</td><td>$5,588</td><td class="pos">$186</td>
+      <td>$2,054</td><td>$1,815</td><td class="pos">$239</td>
+      <td>$1,565</td><td>$2,195</td><td class="neg">$-630</td>
+      <td class="total-bud">$9,393</td><td class="total-spe">$9,598</td>
+      <td class="neg total-var">$-205</td>
+    </tr>
+<tr
+      data-v0="tc68"
+      data-v1="7287" data-v2="9643" data-v3="-2357"
+      data-v4="5249" data-v5="12851" data-v6="-7602"
+      data-v7="5107" data-v8="4367" data-v9="739"
+      data-v10="17642" data-v11="26862" data-v12="-9220">
+      <td class="prop-name">tc68</td>
+      <td>$7,287</td><td>$9,643</td><td class="neg">$-2,357</td>
+      <td>$5,249</td><td>$12,851</td><td class="neg">$-7,602</td>
+      <td>$5,107</td><td>$4,367</td><td class="pos">$739</td>
+      <td class="total-bud">$17,642</td><td class="total-spe">$26,862</td>
+      <td class="neg total-var">$-9,220</td>
+    </tr>
+<tr
+      data-v0="v202"
+      data-v1="1616" data-v2="5431" data-v3="-3815"
+      data-v4="1285" data-v5="494" data-v6="790"
+      data-v7="2400" data-v8="1895" data-v9="506"
+      data-v10="5301" data-v11="7820" data-v12="-2519">
+      <td class="prop-name">v202</td>
+      <td>$1,616</td><td>$5,431</td><td class="neg">$-3,815</td>
+      <td>$1,285</td><td>$494</td><td class="pos">$790</td>
+      <td>$2,400</td><td>$1,895</td><td class="pos">$506</td>
+      <td class="total-bud">$5,301</td><td class="total-spe">$7,820</td>
+      <td class="neg total-var">$-2,519</td>
+    </tr>
+<tr
+      data-v0="w117"
+      data-v1="1647" data-v2="2066" data-v3="-420"
+      data-v4="2058" data-v5="1803" data-v6="255"
+      data-v7="823" data-v8="1396" data-v9="-573"
+      data-v10="4528" data-v11="5266" data-v12="-738">
+      <td class="prop-name">w117</td>
+      <td>$1,647</td><td>$2,066</td><td class="neg">$-420</td>
+      <td>$2,058</td><td>$1,803</td><td class="pos">$255</td>
+      <td>$823</td><td>$1,396</td><td class="neg">$-573</td>
+      <td class="total-bud">$4,528</td><td class="total-spe">$5,266</td>
+      <td class="neg total-var">$-738</td>
+    </tr>
+<tr
+      data-v0="w225"
+      data-v1="0" data-v2="8109" data-v3="-8109"
+      data-v4="0" data-v5="0" data-v6="0"
+      data-v7="0" data-v8="1399" data-v9="-1399"
+      data-v10="0" data-v11="9508" data-v12="-9508">
+      <td class="prop-name">w225</td>
+      <td>$0</td><td>$8,109</td><td class="neg">$-8,109</td>
+      <td>$0</td><td>$0</td><td class="neutral">$0</td>
+      <td>$0</td><td>$1,399</td><td class="neg">$-1,399</td>
+      <td class="total-bud">$0</td><td class="total-spe">$9,508</td>
+      <td class="neg total-var">$-9,508</td>
+    </tr>
+<tr
+      data-v0="w226"
+      data-v1="2167" data-v2="10176" data-v3="-8009"
+      data-v4="2708" data-v5="881" data-v6="1827"
+      data-v7="1083" data-v8="2483" data-v9="-1400"
+      data-v10="5958" data-v11="13540" data-v12="-7583">
+      <td class="prop-name">w226</td>
+      <td>$2,167</td><td>$10,176</td><td class="neg">$-8,009</td>
+      <td>$2,708</td><td>$881</td><td class="pos">$1,827</td>
+      <td>$1,083</td><td>$2,483</td><td class="neg">$-1,400</td>
+      <td class="total-bud">$5,958</td><td class="total-spe">$13,540</td>
+      <td class="neg total-var">$-7,583</td>
+    </tr></tbody><tfoot><tr class="total-row">
+      <td><strong>TOTAL</strong></td>
+      <td>$244,800</td><td>$271,442</td><td class="neg">$-26,642</td>
+      <td>$147,853</td><td>$52,677</td><td class="pos">$95,176</td>
+      <td>$100,586</td><td>$100,477</td><td class="pos">$109</td>
+      <td class="total-bud">$493,239</td>
+      <td class="total-spe">$424,596</td>
+      <td class="pos total-var">$68,643</td>
+    </tr></tfoot></table></div>
+<div id="tab-opex" class="tab-content">
+  <div class="opex-wrap">
+    <div class="opex-top-row">
+      <div class="opex-card">
+        <div class="opex-card-title">Ridgeview Overhead — Enter OpEx Totals (YTD Jan–Apr 2026)</div>
+        <div class="opex-fields">
+          <div class="opex-field"><label>Subcontractor Repairs</label><span class="dollar-wrap"><span class="dollar-sign">$</span><input type="number" id="opex-r" min="0" step="500" value="0" oninput="calcOpex()"></span></div>
+          <div class="opex-field"><label>Subcontractor Turns</label><span class="dollar-wrap"><span class="dollar-sign">$</span><input type="number" id="opex-t" min="0" step="500" value="0" oninput="calcOpex()"></span></div>
+          <div class="opex-field"><label>Subcontractor Grounds</label><span class="dollar-wrap"><span class="dollar-sign">$</span><input type="number" id="opex-g" min="0" step="500" value="0" oninput="calcOpex()"></span></div>
+          <div class="opex-field"><label>Other OpEx</label><span class="dollar-wrap"><span class="dollar-sign">$</span><input type="number" id="opex-o" min="0" step="500" value="0" oninput="calcOpex()"></span></div>
+        </div>
+        <div class="opex-grand">Total Overhead: <strong id="opex-grand-lbl">$0</strong></div>
+      </div>
+      <div class="opex-card opex-mode-card">
+        <div class="opex-card-title">Allocation Method</div>
+        <label class="mode-radio"><input type="radio" name="opex-mode" value="auto" checked onchange="calcOpex()">
+          <div><strong>Auto — by spend %</strong><p>Each property's share of overhead = their % of total portfolio spend per category (repairs opex splits by repair spend share, etc.)</p></div>
+        </label>
+        <label class="mode-radio"><input type="radio" name="opex-mode" value="manual" onchange="calcOpex()">
+          <div><strong>Manual %</strong><p>Enter a custom allocation % per property — all OpEx categories share that same %</p></div>
+        </label>
+        <div id="manual-sum-warn"></div>
+      </div>
+    </div>
+    <div class="opex-table-scroll">
+      <table id="opex-alloc-table">
+        <thead id="opex-thead"></thead>
+        <tbody id="opex-tbody"></tbody>
+        <tfoot id="opex-tfoot"></tfoot>
+      </table>
+    </div>
+  </div>
+</div>
+<div id="tab-proj" class="tab-content">
+<div class="proj-outer">
+  <div class="proj-top-row">
+    <div class="proj-card">
+      <div class="opex-card-title">Ridgeview Projection — May–Dec 2026</div>
+      <div class="ctrl-grid-3" style="margin-top:14px">
+        <div class="ctrl-item">
+          <label>Monthly Revenue</label>
+          <div class="ctrl-desc">Ridgeview billings to properties · run rate ≈ $312K/mo</div>
+          <div class="slider-row"><input type="range" id="rp-rev" min="100000" max="700000" step="5000" value="312029" oninput="buildRidgeviewProj()"><span class="slider-val" id="rp-rev-lbl">—</span></div>
+        </div>
+        <div class="ctrl-item">
+          <label>COGS Rate</label>
+          <div class="ctrl-desc">Run rate ≈ 94% · reduce via better pricing or efficiency</div>
+          <div class="slider-row"><input type="range" id="rp-cogs" min="60" max="100" step="0.5" value="94" oninput="buildRidgeviewProj()"><span class="slider-val" id="rp-cogs-lbl">—</span></div>
+        </div>
+        <div class="ctrl-item">
+          <label>Monthly Gross OpEx</label>
+          <div class="ctrl-desc">Total Ridgeview overhead before allocation · run rate ≈ $49K/mo</div>
+          <div class="slider-row"><input type="range" id="rp-opex" min="10000" max="100000" step="500" value="48951" oninput="buildRidgeviewProj()"><span class="slider-val" id="rp-opex-lbl">—</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="proj-card proj-gpr-card">
+      <div class="opex-card-title">GPR Inputs — Maintenance Cost as % of GPR</div>
+      <div class="gpr-grid">
+        <div class="gpr-field"><label>Jan GPR</label><span class="dollar-wrap"><span class="dollar-sign">$</span><input type="number" id="gpr-jan" value="1126551" oninput="buildRidgeviewProj()"></span></div>
+        <div class="gpr-field"><label>Feb GPR</label><span class="dollar-wrap"><span class="dollar-sign">$</span><input type="number" id="gpr-feb" value="1126551" oninput="buildRidgeviewProj()"></span></div>
+        <div class="gpr-field"><label>Mar GPR</label><span class="dollar-wrap"><span class="dollar-sign">$</span><input type="number" id="gpr-mar" value="1312720" oninput="buildRidgeviewProj()"></span></div>
+        <div class="gpr-field"><label>Apr GPR</label><span class="dollar-wrap"><span class="dollar-sign">$</span><input type="number" id="gpr-apr" value="1312720" oninput="buildRidgeviewProj()"></span></div>
+        <div class="gpr-field" style="grid-column:1/-1"><label>May–Dec Monthly GPR</label><span class="dollar-wrap"><span class="dollar-sign">$</span><input type="number" id="gpr-proj" value="1312720" oninput="buildRidgeviewProj()"></span></div>
+      </div>
+      <div style="margin-top:10px;font-size:11px;color:#777">Maintenance % of GPR = (R&M + Grounds + Turns COGS) ÷ GPR</div>
+    </div>
+  </div>
+
+  <div class="be-bar off-track" id="proj-be-bar" style="margin:16px 0">
+    <span style="font-size:22px" id="proj-be-icon">—</span>
+    <div><strong id="proj-be-status">—</strong><span id="proj-be-detail" style="font-size:11px;color:#777;display:block;margin-top:2px"></span></div>
+    <div style="margin-left:auto;text-align:right;font-size:12px;font-weight:600" id="proj-be-right"></div>
+  </div>
+
+  <div style="background:#fff;border-radius:8px;padding:14px 16px;box-shadow:0 1px 4px rgba(0,0,0,.1);margin-bottom:20px">
+    <div style="font-size:11px;font-weight:700;color:#1a5276;text-transform:uppercase;letter-spacing:.4px;margin-bottom:10px">Monthly Net Income — Actuals vs Projection</div>
+    <canvas id="rv-chart" style="width:100%;display:block"></canvas>
+  </div>
+  <div class="opex-card-title" style="margin-bottom:8px">Ridgeview Full-Year P&L Projection</div>
+  <div style="overflow-x:auto;margin-bottom:24px">
+    <table class="proj-tbl" id="proj-main-table">
+      <thead><tr>
+        <th style="text-align:left;min-width:70px">Month</th>
+        <th>Revenue</th><th>COGS</th><th>Gross Profit</th><th>GP%</th>
+        <th>OpEx</th>
+        <th>Net Income</th><th>Cumulative</th>
+      </tr></thead>
+      <tbody id="proj-main-tbody"></tbody>
+      <tfoot id="proj-main-tfoot"></tfoot>
+    </table>
+  </div>
+
+  <div class="opex-card-title" style="margin-bottom:8px">Maintenance Cost as % of GPR</div>
+  <div style="overflow-x:auto">
+    <table class="proj-tbl" id="proj-gpr-table">
+      <thead><tr>
+        <th style="text-align:left;min-width:70px">Month</th>
+        <th>R&amp;M / Grounds / Turns</th><th>GPR</th><th>% GPR</th>
+      </tr></thead>
+      <tbody id="proj-gpr-tbody"></tbody>
+      <tfoot id="proj-gpr-tfoot"></tfoot>
+    </table>
+  </div>
+</div>
+</div>
+<script>
+function showTab(key, btn) {
+  document.querySelectorAll('.tab-content').forEach(e => e.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(e => e.classList.remove('active'));
+  document.getElementById('tab-' + key).classList.add('active');
+  btn.classList.add('active');
+}
+document.getElementById('tab-jan').classList.add('active');
+
+// ── Sorting ──────────────────────────────────────────────────────────────────
+let sortState = {}; // tabId -> {col, dir}
+
+document.querySelectorAll('th.sortable').forEach(th => {
+  th.addEventListener('click', () => {
+    const table = th.closest('table');
+    const tabId = table.closest('.tab-content').id;
+    const col = parseInt(th.dataset.col);
+    const prev = sortState[tabId] || {};
+    const dir = (prev.col === col && prev.dir === 'asc') ? 'desc' : 'asc';
+    sortState[tabId] = {col, dir};
+
+    // Update header icons
+    table.querySelectorAll('th.sortable').forEach(h => {
+      h.classList.remove('sort-asc','sort-desc');
+    });
+    th.classList.add(dir === 'asc' ? 'sort-asc' : 'sort-desc');
+
+    const tbody = table.querySelector('tbody');
+    const rows = Array.from(tbody.querySelectorAll('tr'));
+    rows.sort((a, b) => {
+      const av = a.dataset['v' + col], bv = b.dataset['v' + col];
+      let cmp;
+      if (col === 0) {
+        cmp = av.localeCompare(bv);
+      } else {
+        cmp = parseFloat(av) - parseFloat(bv);
+      }
+      return dir === 'asc' ? cmp : -cmp;
+    });
+    rows.forEach(r => tbody.appendChild(r));
+
+    // Re-stripe
+    rows.forEach((r, i) => {
+      r.style.background = '';
+    });
+  });
+});
+
+// ── Ridgeview Projection ──────────────────────────────────────────────────────
+const RV_ACTUALS     = [{"month":"Jan","income":193875,"cogs":179565,"gp":14310,"opex":32520,"net":-18210,"cogsRM":75895},{"month":"Feb","income":223903,"cogs":193603,"gp":30300,"opex":31246,"net":-946,"cogsRM":90744},{"month":"Mar","income":266843,"cogs":250518,"gp":16326,"opex":48422,"net":-22639,"cogsRM":73977},{"month":"Apr","income":357214,"cogs":335583,"gp":21631,"opex":49479,"net":-27848,"cogsRM":111561}];
+const MONTHS_12      = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const GPR_IDS        = ['gpr-jan','gpr-feb','gpr-mar','gpr-apr'];
+
+function fmtD(n)   { return n===0?'$0':'$'+Math.abs(Math.round(n)).toLocaleString(); }
+function fmtPct(n) { return (n*100).toFixed(1)+'%'; }
+function fmtPN(n)  { return (n<0?'(':'')+'$'+Math.abs(Math.round(n)).toLocaleString()+(n<0?')':''); }
+function negCls(n) { return n<0?'neg-v':n>0?'pos-v':''; }
+
+function buildRidgeviewProj() {
+  const rev    = parseFloat(document.getElementById('rp-rev').value)||0;
+  const cogsR  = parseFloat(document.getElementById('rp-cogs').value)/100;
+  const opexG  = parseFloat(document.getElementById('rp-opex').value)||0;
+  const gprProj= parseFloat(document.getElementById('gpr-proj').value)||0;
+
+  document.getElementById('rp-rev-lbl').textContent  = '$'+Math.round(rev).toLocaleString();
+  document.getElementById('rp-cogs-lbl').textContent = fmtPct(cogsR);
+  document.getElementById('rp-opex-lbl').textContent = '$'+Math.round(opexG).toLocaleString();
+
+  // Build rows
+  const rows = [];
+  let cum = 0;
+  for (let i=0; i<12; i++) {
+    const isActual = i < RV_ACTUALS.length;
+    if (isActual) {
+      const a = RV_ACTUALS[i];
+      cum += a.net;
+      rows.push({ month: MONTHS_12[i], income: a.income, cogs: a.cogs, gp: a.gp,
+                  opex: a.opex, net: a.net, cum, actual: true });
+    } else {
+      const income = rev;
+      const cogs   = Math.round(income * cogsR);
+      const gp     = income - cogs;
+      const net    = gp - opexG;
+      cum += net;
+      rows.push({ month: MONTHS_12[i], income, cogs, gp, opex: opexG, net, cum, actual: false });
+    }
+  }
+
+  const ytdNet = RV_ACTUALS.reduce((s,a)=>s+a.net, 0);
+  const fullYearNet = rows.reduce((s,r)=>s+(r.actual?r.net:r.net), 0);
+
+  // Break-even bar
+  const bar = document.getElementById('proj-be-bar');
+  bar.className = 'be-bar ';
+  const icon = document.getElementById('proj-be-icon');
+  const st   = document.getElementById('proj-be-status');
+  const det  = document.getElementById('proj-be-detail');
+  const ri   = document.getElementById('proj-be-right');
+  if (fullYearNet >= 0) {
+    bar.className += 'on-track'; icon.textContent='✅';
+    st.textContent = 'On track to break even for 2026';
+    det.textContent = 'Full-year net: '+fmtPN(fullYearNet);
+    ri.textContent  = 'Surplus: '+fmtPN(fullYearNet);
+  } else if (fullYearNet >= -25000) {
+    bar.className += 'close'; icon.textContent='🔶';
+    st.textContent = 'Close — small adjustments needed';
+    det.textContent = 'Full-year net: '+fmtPN(fullYearNet);
+    ri.textContent  = 'Gap: '+fmtPN(-fullYearNet);
+  } else {
+    bar.className += 'off-track'; icon.textContent='❌';
+    st.textContent = 'Not on track — adjust revenue, COGS, or OpEx sliders';
+    det.textContent = 'YTD actual: '+fmtPN(ytdNet)+' · Full-year projected: '+fmtPN(fullYearNet);
+    ri.textContent  = 'Gap to close: '+fmtPN(-fullYearNet);
+  }
+
+  // Main projection table
+  let html='', ytdInc=0, ytdCogs=0, ytdGP=0, ytdOpex=0, ytdNet2=0;
+  for (const r of rows) {
+    const gpPct = r.income>0?r.gp/r.income:0;
+    const gpCls = gpPct>=0.1?'pos-v':gpPct>=0.05?'warn-v':'neg-v';
+    html+=`<tr class="${r.actual?'actual-row':'proj-row'}">
+      <td style="text-align:left">${r.month}${r.actual?' <span style="font-size:9px;background:#d6eaf8;color:#1a5276;padding:1px 4px;border-radius:3px">actual</span>':''}</td>
+      <td>${fmtD(r.income)}</td><td>${fmtD(r.cogs)}</td>
+      <td class="${r.gp<0?'neg-v':''}">${fmtPN(r.gp)}</td>
+      <td class="${gpCls}">${fmtPct(gpPct)}</td>
+      <td>${fmtD(r.opex)}</td>
+      <td class="${negCls(r.net)}">${fmtPN(r.net)}</td>
+      <td class="${negCls(r.cum)}">${fmtPN(r.cum)}</td>
+    </tr>`;
+    ytdInc+=r.income; ytdCogs+=r.cogs; ytdGP+=r.gp; ytdOpex+=r.opex; ytdNet2+=r.net;
+  }
+  drawRVChart(rows);
+  document.getElementById('proj-main-tbody').innerHTML = html;
+  document.getElementById('proj-main-tfoot').innerHTML = `<tr>
+    <td style="text-align:left"><strong>Full Year</strong></td>
+    <td>${fmtD(ytdInc)}</td><td>${fmtD(ytdCogs)}</td>
+    <td class="${negCls(ytdGP)}">${fmtPN(ytdGP)}</td>
+    <td>${fmtPct(ytdGP/ytdInc)}</td>
+    <td>${fmtD(ytdOpex)}</td>
+    <td class="${negCls(ytdNet2)}" style="font-size:14px">${fmtPN(ytdNet2)}</td><td></td>
+  </tr>`;
+
+  // GPR table
+  const gprVals = [...GPR_IDS.map(id=>parseFloat(document.getElementById(id).value)||0),
+                   ...Array(8).fill(gprProj)];
+  const avgCogsRM = RV_ACTUALS.length ? Math.round(RV_ACTUALS.reduce((s,r)=>s+(r.cogsRM||0),0)/RV_ACTUALS.length) : 0;
+  let gprHtml='', totRM=0, totGPR=0;
+  for (let i=0; i<12; i++) {
+    const portRM = i<RV_ACTUALS.length ? (RV_ACTUALS[i].cogsRM||0) : avgCogsRM;
+    const gpr    = gprVals[i] || gprProj;
+    const pct    = gpr>0 ? portRM/gpr : 0;
+    const actual = i<4;
+    const pctCls = pct>0.15?'neg-v':pct>0.10?'warn-v':'pos-v';
+    gprHtml+=`<tr class="${actual?'actual-row':'proj-row'}">
+      <td style="text-align:left">${MONTHS_12[i]}${actual?' <span style="font-size:9px;background:#d6eaf8;color:#1a5276;padding:1px 4px;border-radius:3px">actual</span>':''}</td>
+      <td>${fmtD(portRM)}</td>
+      <td>${fmtD(gpr)}</td>
+      <td class="${pctCls}">${fmtPct(pct)}</td>
+    </tr>`;
+    totRM+=portRM; totGPR+=gpr;
+  }
+  document.getElementById('proj-gpr-tbody').innerHTML = gprHtml;
+  const avgPct = totGPR>0?totRM/totGPR:0;
+  document.getElementById('proj-gpr-tfoot').innerHTML = `<tr>
+    <td style="text-align:left"><strong>Total/Avg</strong></td>
+    <td>${fmtD(totRM)}</td><td>—</td>
+    <td class="${avgPct>0.15?'neg-v':avgPct>0.10?'warn-v':'pos-v'}">${fmtPct(avgPct)}</td>
+  </tr>`;
+}
+
+['rp-rev','rp-cogs','rp-opex'].forEach(id=>document.getElementById(id).addEventListener('input',buildRidgeviewProj));
+
+function drawRVChart(rows) {
+  const canvas = document.getElementById('rv-chart');
+  if (!canvas) return;
+  const dpr = window.devicePixelRatio||1;
+  const W = canvas.offsetWidth||800, H = 300;
+  canvas.width = W*dpr; canvas.height = H*dpr;
+  const ctx = canvas.getContext('2d');
+  ctx.scale(dpr, dpr);
+
+  const PAD = {top:30, right:20, bottom:38, left:72};
+  const cW = W-PAD.left-PAD.right, cH = H-PAD.top-PAD.bottom, n = rows.length;
+  const barW = Math.max(10, cW/n*0.55);
+
+  const allV = rows.flatMap(r=>[r.net, r.cum]);
+  const minV = Math.min(0,...allV), maxV = Math.max(0,...allV);
+  const rng  = maxV-minV||1, pd = rng*0.12;
+  const lo=minV-pd, hi=maxV+pd;
+  const yS = cH/(hi-lo);
+  const y0 = PAD.top+(hi-0)*yS;
+
+  ctx.clearRect(0,0,W,H);
+
+  // Grid lines
+  for (let i=0;i<=5;i++) {
+    const v=lo+(hi-lo)*i/5, y=PAD.top+(hi-v)*yS;
+    ctx.strokeStyle='#e8ecf0'; ctx.lineWidth=1;
+    ctx.beginPath(); ctx.moveTo(PAD.left,y); ctx.lineTo(PAD.left+cW,y); ctx.stroke();
+    ctx.fillStyle='#999'; ctx.font='10px sans-serif'; ctx.textAlign='right';
+    ctx.fillText((v>=0?'$':'-$')+Math.abs(Math.round(v/1000))+'K', PAD.left-6, y+3);
+  }
+
+  // Zero line
+  ctx.strokeStyle='#2c3e50'; ctx.lineWidth=1.5;
+  ctx.beginPath(); ctx.moveTo(PAD.left,y0); ctx.lineTo(PAD.left+cW,y0); ctx.stroke();
+
+  // Bars
+  rows.forEach((r,i) => {
+    const x = PAD.left+(i+0.5)*cW/n-barW/2;
+    const bH = Math.abs(r.net)*yS;
+    const yT = r.net>=0?y0-bH:y0;
+    ctx.fillStyle   = r.actual ? (r.net<0?'#e8a0a0':'#a8d8a0') : (r.net<0?'#f4cccc':'#c8ecc8');
+    ctx.strokeStyle = r.actual ? (r.net<0?'#c0392b':'#1e8449') : (r.net<0?'#e67e7e':'#6abf6a');
+    ctx.lineWidth=1.5;
+    ctx.fillRect(x,yT,barW,bH); ctx.strokeRect(x,yT,barW,bH);
+    ctx.fillStyle='#555'; ctx.font='10px sans-serif'; ctx.textAlign='center';
+    ctx.fillText(r.month, x+barW/2, H-PAD.bottom+13);
+    if (bH>14) {
+      ctx.fillStyle=r.actual?'#fff':'#999'; ctx.font='9px sans-serif';
+      const lbl=(r.net<0?'-':'+')+'$'+Math.abs(Math.round(r.net/1000))+'K';
+      ctx.fillText(lbl, x+barW/2, r.net<0?yT+bH-4:yT+10);
+    }
+  });
+
+  // Cumulative dashed line
+  ctx.strokeStyle='#1a5276'; ctx.lineWidth=2.5; ctx.setLineDash([4,3]);
+  ctx.beginPath();
+  rows.forEach((r,i)=>{ const x=PAD.left+(i+0.5)*cW/n, y=PAD.top+(hi-r.cum)*yS; i===0?ctx.moveTo(x,y):ctx.lineTo(x,y); });
+  ctx.stroke(); ctx.setLineDash([]);
+
+  // Dots
+  rows.forEach((r,i)=>{ const x=PAD.left+(i+0.5)*cW/n, y=PAD.top+(hi-r.cum)*yS;
+    ctx.beginPath(); ctx.arc(x,y,3.5,0,Math.PI*2);
+    ctx.fillStyle=r.cum>=0?'#1e8449':'#c0392b'; ctx.fill();
+    ctx.strokeStyle='#fff'; ctx.lineWidth=1.5; ctx.stroke();
+  });
+
+  // Legend
+  const lx=PAD.left; const ly=PAD.top-18;
+  ctx.fillStyle='#c0392b'; ctx.fillRect(lx,ly,12,10);
+  ctx.fillStyle='#555'; ctx.font='10px sans-serif'; ctx.textAlign='left'; ctx.fillText('Actual (loss)',lx+15,ly+9);
+  ctx.fillStyle='#1e8449'; ctx.fillRect(lx+108,ly,12,10); ctx.fillStyle='#555'; ctx.fillText('Actual (profit)',lx+123,ly+9);
+  ctx.fillStyle='#f4cccc'; ctx.fillRect(lx+232,ly,12,10); ctx.strokeStyle='#e67e7e'; ctx.lineWidth=1; ctx.strokeRect(lx+232,ly,12,10);
+  ctx.fillStyle='#555'; ctx.fillText('Projected',lx+248,ly+9);
+  ctx.strokeStyle='#1a5276'; ctx.setLineDash([4,3]); ctx.lineWidth=2;
+  ctx.beginPath(); ctx.moveTo(lx+335,ly+5); ctx.lineTo(lx+357,ly+5); ctx.stroke(); ctx.setLineDash([]);
+  ctx.fillStyle='#555'; ctx.fillText('Cumulative NI',lx+361,ly+9);
+}
+
+window.addEventListener('resize', buildRidgeviewProj);
+
+// ── OpEx Allocation ───────────────────────────────────────────────────────────
+const propSpendData = [{"name":"a210","sr":3181.35,"st":1094.67,"sg":1492.73},{"name":"a511","sr":777.49,"st":0,"sg":1731.05},{"name":"a916","sr":1978.99,"st":1780.38,"sg":1857.77},{"name":"b101","sr":2537.72,"st":3286.94,"sg":1602.61},{"name":"c302","sr":1942.34,"st":35.69,"sg":627.92},{"name":"c313","sr":4946.54,"st":1234.87,"sg":3705.65},{"name":"e328","sr":1718.33,"st":0,"sg":1591.53},{"name":"h604","sr":146.02,"st":247.83,"sg":480.48},{"name":"h731","sr":1158.36,"st":0,"sg":237.44},{"name":"hl65","sr":303.04,"st":42.97,"sg":789},{"name":"hl73","sr":290,"st":0,"sg":1045.09},{"name":"j312","sr":3312.63,"st":1685.03,"sg":3127.9},{"name":"k104- LeFevre","sr":7085.44,"st":1568.52,"sg":4153.73},{"name":"k308","sr":473.21,"st":0,"sg":859.17},{"name":"kn47","sr":77720.01,"st":12060.97,"sg":29375.03},{"name":"m221","sr":2495.19,"st":77,"sg":2350.79},{"name":"m405","sr":4832.93,"st":1926.74,"sg":2835.05},{"name":"m608","sr":2118.17,"st":0,"sg":1052.71},{"name":"ms22","sr":2295.43,"st":0,"sg":0},{"name":"ms43","sr":3852.94,"st":0,"sg":0},{"name":"o155","sr":15655.11,"st":1636.51,"sg":4142.14},{"name":"p705","sr":7391.28,"st":886.14,"sg":3223.45},{"name":"ps17","sr":2105.68,"st":25.76,"sg":2950.57},{"name":"ps25","sr":11924.08,"st":2303.88,"sg":2982.13},{"name":"ps91","sr":12150.06,"st":0,"sg":1214.4},{"name":"rl16","sr":39956.21,"st":4483.1,"sg":10489.51},{"name":"rl21","sr":13604.32,"st":401.11,"sg":350.56},{"name":"s129","sr":4110.21,"st":0,"sg":410.72},{"name":"s300","sr":365.69,"st":54.63,"sg":2062.23},{"name":"tc34","sr":5587.93,"st":1814.87,"sg":2194.8},{"name":"tc68","sr":9643.43,"st":12850.84,"sg":4367.46},{"name":"v202","sr":5431.31,"st":494.36,"sg":1894.52},{"name":"w117","sr":2066.3,"st":1802.97,"sg":1396.4},{"name":"w225","sr":8108.55,"st":0,"sg":1399.01},{"name":"w226","sr":10175.9,"st":881.44,"sg":2483.14}];
+
+function fmtD(n) { return n===0?'$0':'$'+Math.round(n).toLocaleString(); }
+function fmtPct(n) { return (n*100).toFixed(1)+'%'; }
+
+function calcOpex() {
+  const opexR = parseFloat(document.getElementById('opex-r').value)||0;
+  const opexT = parseFloat(document.getElementById('opex-t').value)||0;
+  const opexG = parseFloat(document.getElementById('opex-g').value)||0;
+  const opexO = parseFloat(document.getElementById('opex-o').value)||0;
+  const grand = opexR+opexT+opexG+opexO;
+  document.getElementById('opex-grand-lbl').textContent = '$'+Math.round(grand).toLocaleString();
+
+  const isManual = document.querySelector('[name=opex-mode]:checked').value === 'manual';
+  const totR = propSpendData.reduce((s,p)=>s+p.sr,0);
+  const totT = propSpendData.reduce((s,p)=>s+p.st,0);
+  const totG = propSpendData.reduce((s,p)=>s+p.sg,0);
+  const totAll = totR+totT+totG;
+
+  // Build header
+  document.getElementById('opex-thead').innerHTML = `<tr>
+    <th rowspan="2" class="prop-name">Property</th>
+    <th colspan="${isManual?2:3}" class="cat-head repairs">Repairs</th>
+    <th colspan="${isManual?2:3}" class="cat-head turns">Turns</th>
+    <th colspan="${isManual?2:3}" class="cat-head grounds">Grounds</th>
+    ${isManual?'<th class="cat-head" style="background:#6c3483">Manual %</th>':''}
+    <th colspan="3" class="cat-head total">Portfolio Total</th>
+  </tr><tr>
+    <th>Actual</th>${isManual?'':'<th class="pct-cell">%</th>'}<th>+OpEx</th>
+    <th>Actual</th>${isManual?'':'<th class="pct-cell">%</th>'}<th>+OpEx</th>
+    <th>Actual</th>${isManual?'':'<th class="pct-cell">%</th>'}<th>+OpEx</th>
+    ${isManual?'<th></th>':''}
+    <th>Actual</th><th>+Total OpEx</th><th>Effective</th>
+  </tr>`;
+
+  let html = '';
+  let totActR=0,totActT=0,totActG=0,totAllocAll=0;
+
+  for (const p of propSpendData) {
+    const pctR = totR>0?p.sr/totR:0;
+    const pctT = totT>0?p.st/totT:0;
+    const pctG = totG>0?p.sg/totG:0;
+    const pctAll = totAll>0?(p.sr+p.st+p.sg)/totAll:0;
+
+    let allocR,allocT,allocG,allocO,usedPct;
+    if (isManual) {
+      const inp = document.getElementById('mpct_'+p.name.replace(/[^a-zA-Z0-9]/g,'_'));
+      usedPct = inp ? (parseFloat(inp.value)||0)/100 : pctAll;
+      allocR = opexR*usedPct; allocT = opexT*usedPct; allocG = opexG*usedPct; allocO = opexO*usedPct;
+    } else {
+      allocR = opexR*pctR; allocT = opexT*pctT; allocG = opexG*pctG; allocO = opexO*pctAll;
+      usedPct = pctAll;
+    }
+
+    const totalAlloc = allocR+allocT+allocG+allocO;
+    const actual = p.sr+p.st+p.sg;
+    const effective = actual+totalAlloc;
+    const allZero = actual===0;
+    const mpctId = 'mpct_'+p.name.replace(/[^a-zA-Z0-9]/g,'_');
+
+    totActR+=p.sr; totActT+=p.st; totActG+=p.sg; totAllocAll+=totalAlloc;
+
+    html += `<tr${allZero?' class="zero-row"':''}>
+      <td class="prop-name">${p.name}</td>
+      <td>${fmtD(p.sr)}</td>${isManual?'':('<td class="pct-cell">'+fmtPct(pctR)+'</td>')}
+      <td class="alloc-cell">${allocR>0?fmtD(allocR):'-'}</td>
+      <td>${fmtD(p.st)}</td>${isManual?'':('<td class="pct-cell">'+fmtPct(pctT)+'</td>')}
+      <td class="alloc-cell">${allocT>0?fmtD(allocT):'-'}</td>
+      <td>${fmtD(p.sg)}</td>${isManual?'':('<td class="pct-cell">'+fmtPct(pctG)+'</td>')}
+      <td class="alloc-cell">${allocG>0?fmtD(allocG):'-'}</td>
+      ${isManual?('<td><input class="mpct-input" id="'+mpctId+'" type="number" min="0" max="100" step="0.1" value="'+(usedPct*100).toFixed(1)+'" oninput="calcOpex()">%</td>'):''}
+      <td class="total-spe">${fmtD(actual)}</td>
+      <td class="alloc-cell">${totalAlloc>0?fmtD(totalAlloc):'-'}</td>
+      <td class="eff-total">${fmtD(effective)}</td>
+    </tr>`;
+  }
+
+  document.getElementById('opex-tbody').innerHTML = html;
+
+  const totAct = totActR+totActT+totActG;
+  document.getElementById('opex-tfoot').innerHTML = `<tr class="total-row">
+    <td><strong>TOTAL</strong></td>
+    <td>${fmtD(totActR)}</td>${isManual?'':'<td></td>'}<td>${fmtD(opexR)}</td>
+    <td>${fmtD(totActT)}</td>${isManual?'':'<td></td>'}<td>${fmtD(opexT)}</td>
+    <td>${fmtD(totActG)}</td>${isManual?'':'<td></td>'}<td>${fmtD(opexG)}</td>
+    ${isManual?'<td></td>':''}
+    <td class="total-spe">${fmtD(totAct)}</td>
+    <td class="alloc-cell">${fmtD(totAllocAll)}</td>
+    <td class="eff-total">${fmtD(totAct+totAllocAll)}</td>
+  </tr>`;
+
+  // Manual % sum warning
+  if (isManual) {
+    const inputs = document.querySelectorAll('.mpct-input');
+    let sum = 0; inputs.forEach(el => sum += parseFloat(el.value)||0);
+    const warn = document.getElementById('manual-sum-warn');
+    warn.textContent = Math.abs(sum-100)>0.5 ? `⚠ Manual % total = ${sum.toFixed(1)}% (target: 100%)` : '';
+  } else {
+    document.getElementById('manual-sum-warn').textContent = '';
+  }
+}
+
+calcOpex();
+buildRidgeviewProj();
+</script>
+</body>
+</html>
