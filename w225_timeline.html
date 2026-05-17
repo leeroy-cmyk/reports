@@ -9,7 +9,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .page-hdr{background:#1a5276;color:#fff;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:20;box-shadow:0 2px 8px rgba(0,0,0,.25)}
 .page-hdr h1{font-size:18px;font-weight:700}
 .page-hdr p{font-size:11px;opacity:.65;margin-top:2px}
-.today-badge{background:#e74c3c;color:#fff;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px}
 .edit-bar{background:#fef9e7;border-bottom:2px solid #f9ca24;padding:0 24px;display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:12px;color:#7d6608}
 .edit-bar strong{color:#6d5a00}
 .edit-btn{background:#f9ca24;color:#3d2f00;border:none;padding:6px 14px;border-radius:6px;font-size:12px;font-weight:700;cursor:pointer}
@@ -51,8 +50,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .est-line{position:absolute;height:4px;top:15px;border-radius:2px;z-index:2;pointer-events:none}
 .tbd{position:absolute;top:10px;font-size:10px;color:#c0c8d0;font-style:italic}
 .gridline{position:absolute;top:0;bottom:0;width:1px;background:#eff1f4;z-index:1;pointer-events:none}
-.today-line{position:absolute;top:0;bottom:0;width:2px;background:#e74c3c;z-index:8;pointer-events:none}
-.today-tip{position:absolute;top:0;background:#e74c3c;color:#fff;font-size:9px;font-weight:700;padding:2px 4px;border-radius:0 0 3px 3px;transform:translateX(-50%);z-index:9;pointer-events:none;white-space:nowrap}
 .tt{position:fixed;background:#1a2a3a;color:#fff;border-radius:8px;padding:10px 14px;font-size:12px;pointer-events:none;opacity:0;transition:opacity .12s;z-index:200;max-width:280px;line-height:1.6;box-shadow:0 4px 20px rgba(0,0,0,.4)}
 .tt.on{opacity:1}
 .tt-name{font-weight:700;font-size:13px;margin-bottom:5px}
@@ -124,7 +121,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <h1>W225 Rehab — Renovation Timeline</h1>
     <p>16 phases &nbsp;·&nbsp; 46 tasks &nbsp;·&nbsp; Tri-Cities</p>
   </div>
-  <div class="today-badge" id="todayBadge"></div>
 </div>
 <div class="legend" id="legend"></div>
 <div class="gantt-wrap">
@@ -144,7 +140,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 const PX          = 17;                      // pixels per day (increase to zoom in)
 const ORIGIN      = new Date('2026-05-01');  // left edge of chart
 const TOTAL_DAYS  = 105;                     // May 1 → Aug 13
-const TODAY       = new Date('2026-05-06');
 
 const MONTHS = [
   {label:'May 2026', days:31},
@@ -248,12 +243,7 @@ function dOff(s){ return s ? Math.round((new Date(s)-ORIGIN)/864e5) : null; }
 function dFmt(s){ return s ? new Date(s).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}) : 'TBD'; }
 function mk(tag,cls){ const d=document.createElement(tag); if(cls) d.className=cls; return d; }
 
-const todayOff = Math.round((TODAY-ORIGIN)/864e5);
-
 function renderGantt(){
-  document.getElementById('todayBadge').textContent =
-    'Today: ' + TODAY.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
-
   const lblCol = document.getElementById('lblCol');
   const ci     = document.getElementById('chartInner');
   while(lblCol.children.length>1) lblCol.removeChild(lblCol.lastChild);
@@ -281,10 +271,6 @@ function renderGantt(){
   }
   hdr.appendChild(wkRow);
   ci.appendChild(hdr);
-
-  // ── Today line ──────────────────────────────────────────────────────────────
-  const tl=mk('div','today-line'); tl.style.left=(todayOff*PX)+'px'; ci.appendChild(tl);
-  const tlb=mk('div','today-tip'); tlb.style.left=(todayOff*PX)+'px'; tlb.textContent='TODAY'; ci.appendChild(tlb);
 
   // ── Grid lines ──────────────────────────────────────────────────────────────
   for(let d=0;d<TOTAL_DAYS;d+=7){
@@ -335,7 +321,7 @@ function renderGantt(){
       } else {
         // TBD
         const tbd=mk('div','tbd');
-        tbd.style.left=Math.max(todayOff*PX+10,8)+'px';
+        tbd.style.left='8px';
         tbd.textContent='— date TBD —'; row.appendChild(tbd);
       }
 
@@ -351,8 +337,6 @@ function renderGantt(){
     leg.appendChild(i);
   });
 
-  // Scroll to show today near left
-  document.getElementById('chartScroll').scrollLeft=Math.max(0,todayOff*PX-80);
 }
 
 // ── Edit guide toggle ─────────────────────────────────────────────────────────
