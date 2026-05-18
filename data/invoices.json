@@ -1,10 +1,10 @@
 {
   "ok": true,
-  "fetched_at": "2026-05-18T00:40:19.351Z",
+  "fetched_at": "2026-05-18T05:16:43.518Z",
   "period_days": 60,
   "totals": {
-    "unpaid_count": 91,
-    "unpaid_amount_confirmed": 12874.92,
+    "unpaid_count": 94,
+    "unpaid_amount_confirmed": 13224.92,
     "paid_count": 29,
     "vendor_count": 22
   },
@@ -343,6 +343,20 @@
       "invoice_date": "2026-05-17",
       "subject": "Reminder: Invoice 23334448 is due from Duo Cleaning Company LLC - $350.00",
       "gmail_id": "19e33e070048af27",
+      "reminder_count": 1,
+      "is_reminder": true,
+      "ramp": {
+        "total": 79645,
+        "count": 226
+      }
+    },
+    {
+      "vendor": "Duo Cleaning Company LLC",
+      "invoice_num": "23334773",
+      "amount": 350,
+      "invoice_date": "2026-05-18",
+      "subject": "Reminder: Invoice 23334773 is due from Duo Cleaning Company LLC - $350.00",
+      "gmail_id": "19e39224cf73b991",
       "reminder_count": 1,
       "is_reminder": true,
       "ramp": {
@@ -1042,6 +1056,26 @@
         "total": 86838.81,
         "count": 72
       }
+    },
+    {
+      "vendor": "Spo Cleaning Maids LLC",
+      "invoice_num": "1355",
+      "amount": null,
+      "invoice_date": "2026-05-18",
+      "subject": "New payment request from Spo Cleaning Maids LLC - invoice 1355",
+      "gmail_id": "19e392466762d833",
+      "reminder_count": 0,
+      "ramp": null
+    },
+    {
+      "vendor": "Spo Cleaning Maids LLC",
+      "invoice_num": "1354",
+      "amount": null,
+      "invoice_date": "2026-05-18",
+      "subject": "New payment request from Spo Cleaning Maids LLC - invoice 1354",
+      "gmail_id": "19e3923cf69fa649",
+      "reminder_count": 0,
+      "ramp": null
     }
   ],
   "ramp_vendor_summary": {
