@@ -117,7 +117,7 @@
 <body>
 <header>
   <h1>Property Budget Variance — Jan–Apr 2026</h1>
-  <div class="sub">Repairs · Turns · Grounds &nbsp;|&nbsp; Budget &amp; Spend: AppFolio Actuals &nbsp;|&nbsp; Generated 5/17/2026, 11:02:30 AM</div>
+  <div class="sub">Repairs · Turns · Grounds &nbsp;|&nbsp; Budget &amp; Spend: AppFolio Actuals &nbsp;|&nbsp; Generated 5/18/2026, 9:48:52 AM</div>
 </header>
 <div class="legend">
   <span><span class="dot" style="background:#1e8449"></span>Positive variance = under budget</span>
@@ -2596,7 +2596,7 @@
   <div class="proj-top-row">
     <div class="proj-card">
       <div class="opex-card-title">Ridgeview Projection — May–Dec 2026</div>
-      <div style="font-size:11px;color:#777;margin:6px 0 12px">Revenue = labor × 1.5 + pass-through · Gross profit = labor × 50% markup only</div>
+      <div style="font-size:11px;color:#777;margin:6px 0 12px">Revenue = (labor + sub alloc) × 1.5 + pass-through · Gross profit = (labor + sub alloc) × 50% markup</div>
       <div class="ctrl-grid-3" style="margin-top:4px">
         <div class="ctrl-item">
           <label>Monthly Labor Cost</label>
@@ -2741,7 +2741,7 @@ function buildRidgeviewProj() {
   const subAlloc= parseFloat(document.getElementById('rp-sub').value)||0;
   const gprProj = parseFloat(document.getElementById('gpr-proj').value)||0;
 
-  const derivedRev = Math.round(labor * 1.5 + passThru);
+  const derivedRev = Math.round((labor + subAlloc) * 1.5 + passThru);
   document.getElementById('rp-labor-lbl').textContent = '$'+Math.round(labor).toLocaleString();
   document.getElementById('rp-pass-lbl').textContent  = '$'+Math.round(passThru).toLocaleString();
   document.getElementById('rp-opex-lbl').textContent  = '$'+Math.round(opexG).toLocaleString();
@@ -2759,9 +2759,9 @@ function buildRidgeviewProj() {
       rows.push({ month: MONTHS_12[i], income: a.income, cogs: a.cogs, gp: a.gp,
                   grossOpex: a.opex, subAlloc: a.subAlloc||0, netOpex: a.opex, net: a.net, cum, actual: true });
     } else {
-      const income    = Math.round(labor * 1.5 + passThru);
-      const cogs      = Math.round(labor + passThru);
-      const gp        = Math.round(labor * 0.5);
+      const income    = Math.round((labor + subAlloc) * 1.5 + passThru);
+      const cogs      = Math.round(labor + subAlloc + passThru);
+      const gp        = Math.round((labor + subAlloc) * 0.5);
       const grossOpex = opexG + FIXED_OPEX;
       const netOpex   = FIXED_OPEX + Math.max(0, opexG - subAlloc);
       const net       = gp - netOpex;
