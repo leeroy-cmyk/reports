@@ -1,9 +1,9 @@
 {
   "ok": true,
-  "fetched_at": "2026-05-20T02:19:37.076Z",
+  "fetched_at": "2026-05-20T06:42:06.785Z",
   "period_days": 60,
   "totals": {
-    "unpaid_count": 100,
+    "unpaid_count": 103,
     "unpaid_amount_confirmed": 13224.92,
     "paid_count": 29,
     "vendor_count": 24
@@ -304,6 +304,20 @@
       }
     },
     {
+      "vendor": "Duo Cleaning Company LLC",
+      "invoice_num": "23334773",
+      "amount": 350,
+      "invoice_date": "2026-05-20",
+      "subject": "Reminder: Invoice 23334773 is due from Duo Cleaning Company LLC - $350.00",
+      "gmail_id": "19e436f21d378fb2",
+      "reminder_count": 2,
+      "is_reminder": true,
+      "ramp": {
+        "total": 79645,
+        "count": 226
+      }
+    },
+    {
       "vendor": "TAYLOR'D SYSTEMS LLC is due",
       "invoice_num": "Reminder",
       "amount": null,
@@ -382,20 +396,6 @@
       "reminder_count": 1,
       "is_reminder": true,
       "ramp": null
-    },
-    {
-      "vendor": "Duo Cleaning Company LLC",
-      "invoice_num": "23334773",
-      "amount": 350,
-      "invoice_date": "2026-05-18",
-      "subject": "Reminder: Invoice 23334773 is due from Duo Cleaning Company LLC - $350.00",
-      "gmail_id": "19e39224cf73b991",
-      "reminder_count": 1,
-      "is_reminder": true,
-      "ramp": {
-        "total": 79645,
-        "count": 226
-      }
     },
     {
       "vendor": "Spo Cleaning Maids LLC is due",
@@ -1141,6 +1141,42 @@
       "invoice_date": "2026-05-18",
       "subject": "New payment request from Spo Cleaning Maids LLC - invoice 1354",
       "gmail_id": "19e3923cf69fa649",
+      "reminder_count": 0,
+      "ramp": null
+    },
+    {
+      "vendor": "Virtel Flooring Services LLC",
+      "invoice_num": "1206",
+      "amount": null,
+      "invoice_date": "2026-05-20",
+      "subject": "New payment request from Virtel Flooring Services LLC - invoice 1206",
+      "gmail_id": "19e43bb403db0f11",
+      "reminder_count": 0,
+      "ramp": {
+        "total": 86838.81,
+        "count": 72
+      }
+    },
+    {
+      "vendor": "Virtel Flooring Services LLC",
+      "invoice_num": "1205",
+      "amount": null,
+      "invoice_date": "2026-05-20",
+      "subject": "New payment request from Virtel Flooring Services LLC - invoice 1205",
+      "gmail_id": "19e43b96fca096b0",
+      "reminder_count": 0,
+      "ramp": {
+        "total": 86838.81,
+        "count": 72
+      }
+    },
+    {
+      "vendor": "Spo Cleaning Maids LLC",
+      "invoice_num": "1358",
+      "amount": null,
+      "invoice_date": "2026-05-20",
+      "subject": "New payment request from Spo Cleaning Maids LLC - invoice 1358",
+      "gmail_id": "19e43844dfa01f61",
       "reminder_count": 0,
       "ramp": null
     }
