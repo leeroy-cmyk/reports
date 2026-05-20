@@ -147,9 +147,10 @@ function propCode(raw) {
 function normProp(p) {
   if (!p) return '';
   if (p.startsWith('o155')) return 'o155';
+  if (p.startsWith('kn47')) return 'kn47';
   return p;
 }
-const EXCL_PROPS = new Set(['r203','ex','h604','w225']);
+const EXCL_PROPS = new Set(['r203','ex','h604','w225','l925']);
 function isExcluded(p) {
   return !p || EXCL_PROPS.has(p) || p.startsWith('l912') || p.startsWith('w225');
 }
