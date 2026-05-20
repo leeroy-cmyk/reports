@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>R&amp;M Report — McKay PM</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Segoe UI', sans-serif; background: #f4f6f9; color: #1a2535; min-height: 100vh; }
+header { background: #fff; border-bottom: 2px solid #d0dce8; padding: 16px 32px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 1px 4px rgba(0,0,0,.06); }
+header h1 { font-size: 1.4rem; color: #1a5276; }
+.header-sub { font-size: 0.8rem; color: #7f8fa4; margin-top: 3px; }
+.loading-bar { height: 3px; background: #e8edf2; }
+.loading-bar-fill { height: 3px; background: #2e86c1; width: 0; transition: width 0.4s ease; }
+.error-bar { background: #fdf2f2; border: 1px solid #e8b4b4; color: #922b21; padding: 12px 20px; margin: 16px 32px; border-radius: 6px; font-size: 0.85rem; display: none; }
+.tabs { display: flex; background: #fff; border-bottom: 1px solid #d0dce8; padding: 0 24px; }
+.tab { padding: 12px 24px; cursor: pointer; font-size: 0.9rem; color: #7f8fa4; border-bottom: 3px solid transparent; transition: all .2s; }
+.tab:hover { color: #1a5276; }
+.tab.active { color: #1a5276; border-bottom-color: #2e86c1; font-weight: 600; }
+.panel { display: none; padding: 28px 32px; }
+.panel.active { display: block; }
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin-bottom: 28px; }
+.kpi-card { background: #fff; border: 1px solid #d0dce8; border-left: 4px solid #2e86c1; border-radius: 8px; padding: 16px 20px; box-shadow: 0 1px 3px rgba(0,0,0,.05); }
+.kpi-card .kpi-label { font-size: 0.72rem; color: #7f8fa4; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 6px; }
+.kpi-card .kpi-value { font-size: 1.65rem; font-weight: 700; color: #1a5276; line-height: 1.1; }
+.kpi-card .kpi-sub { font-size: 0.73rem; color: #a0aebb; margin-top: 5px; }
+.kpi-card.good { border-left-color: #1e8449; } .kpi-card.good .kpi-value { color: #1e8449; }
+.kpi-card.warn { border-left-color: #ca6f1e; } .kpi-card.warn .kpi-value { color: #ca6f1e; }
+.kpi-card.bad  { border-left-color: #c0392b; } .kpi-card.bad  .kpi-value { color: #c0392b; }
+.section-title { font-size: 1rem; color: #1a5276; font-weight: 600; margin: 24px 0 14px; padding-bottom: 6px; border-bottom: 2px solid #d0dce8; }
+.data-table { width: 100%; border-collapse: collapse; }
+.data-table th { text-align: left; padding: 10px 12px; font-size: 0.72rem; color: #7f8fa4; text-transform: uppercase; letter-spacing: 0.7px; border-bottom: 2px solid #d0dce8; background: #f4f6f9; white-space: nowrap; cursor: pointer; user-select: none; }
+.data-table th:hover { color: #1a5276; }
+.data-table th.sorted { color: #2e86c1; }
+.data-table td { padding: 9px 12px; font-size: 0.85rem; border-bottom: 1px solid #e8edf2; background: #fff; white-space: nowrap; }
+.data-table tr:hover td { background: #eaf2f8; }
+.data-table tr.over-budget td { background: #fdf5f5; }
+.data-table tr.over-budget:hover td { background: #fce8e8; }
+.badge { display: inline-block; padding: 2px 9px; border-radius: 12px; font-size: 0.72rem; font-weight: 600; }
+.badge.new      { background: #d6eaf8; color: #1a5276; }
+.badge.assigned { background: #fdebd0; color: #ca6f1e; }
+.badge.scheduled{ background: #fef9e7; color: #b7950b; }
+.badge.estimated{ background: #e8d5f5; color: #6c3483; }
+.badge.completed{ background: #d5f5e3; color: #1e8449; }
+.badge.canceled { background: #edf0f3; color: #a0aebb; }
+.badge.low    { background: #edf0f3; color: #7f8fa4; }
+.badge.normal { background: #d6eaf8; color: #1a5276; }
+.badge.high   { background: #fdebd0; color: #ca6f1e; }
+.badge.urgent { background: #fadbd8; color: #c0392b; }
+.var-bar-wrap { display: flex; align-items: center; gap: 8px; }
+.var-bar { height: 7px; border-radius: 4px; background: #d0dce8; flex: 1; min-width: 60px; overflow: hidden; }
+.var-bar-fill { height: 100%; border-radius: 4px; background: #2e86c1; }
+.var-bar-fill.warn { background: #ca6f1e; }
+.var-bar-fill.over { background: #c0392b; }
+.controls { display: flex; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; align-items: center; }
+.controls input, .controls select { background: #fff; border: 1px solid #c8d6e0; color: #1a2535; padding: 7px 11px; border-radius: 6px; font-size: 0.83rem; outline: none; }
+.controls input { width: 220px; }
+.controls input:focus, .controls select:focus { border-color: #2e86c1; box-shadow: 0 0 0 2px #d6eaf8; }
+.row-count { font-size: 0.78rem; color: #7f8fa4; margin-bottom: 10px; }
+.period-row { display: flex; gap: 6px; margin-bottom: 20px; align-items: center; flex-wrap: wrap; }
+.pb { padding: 6px 16px; font-size: 0.83rem; font-weight: 600; border-radius: 20px; border: 1px solid #d0dce8; background: #fff; color: #7f8fa4; cursor: pointer; transition: all 0.15s; }
+.pb:hover { border-color: #2e86c1; color: #2e86c1; }
+.pb.active { background: #1a5276; border-color: #1a5276; color: #fff; }
+.period-sep { width: 1px; height: 22px; background: #d0dce8; margin: 0 4px; }
+.date-input { background: #fff; border: 1px solid #c8d6e0; padding: 6px 10px; border-radius: 6px; font-size: 0.83rem; outline: none; }
+.cat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 24px; }
+.cat-card { background: #fff; border: 1px solid #d0dce8; border-radius: 8px; padding: 14px 16px; }
+.cat-card .cat-label { font-size: 0.72rem; color: #7f8fa4; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 6px; }
+.cat-card .cat-value { font-size: 1.3rem; font-weight: 700; color: #1a5276; }
+.cat-card .cat-sub { font-size: 0.72rem; color: #a0aebb; margin-top: 3px; }
+.detail-row { display: none; }
+.detail-row.open { display: table-row; }
+.detail-inner { padding: 12px 16px; background: #f8fafc; border-top: 1px solid #e8edf2; font-size: 0.82rem; color: #444; line-height: 1.6; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <h1>R&amp;M Report</h1>
+    <div class="header-sub">McKay Property Management — Repairs Only (excl. Turn, Grounds, CapEx)</div>
+  </div>
+  <div style="font-size:0.78rem;color:#7f8fa4;" id="dataAge">—</div>
+</header>
+<div class="loading-bar"><div class="loading-bar-fill" id="loadingBar"></div></div>
+<div class="error-bar" id="errorBar"></div>
+
+<div style="background:#fff;border-bottom:1px solid #d0dce8;padding:12px 32px;">
+  <div class="period-row" style="margin-bottom:0;">
+    <button class="pb active" onclick="setPeriod('thisMo',this)">This Month</button>
+    <button class="pb" onclick="setPeriod('lastMo',this)">Last Month</button>
+    <button class="pb" onclick="setPeriod('ytd',this)">YTD</button>
+    <div class="period-sep"></div>
+    <input type="date" id="dateFrom" class="date-input">
+    <span style="color:#bdc3c7;font-size:0.8rem">–</span>
+    <input type="date" id="dateTo" class="date-input">
+    <button class="pb" onclick="setPeriod('custom',null)">Go</button>
+  </div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="showTab('spendBudget',this)">Spend vs Budget</div>
+  <div class="tab" onclick="showTab('workOrderCost',this)">By Work Order</div>
+  <div class="tab" onclick="showTab('workOrders',this)">Work Order List</div>
+</div>
+
+<div id="spendBudget" class="panel active">
+  <div id="spendContent"><p style="color:#7f8fa4;padding:20px;">Loading…</p></div>
+</div>
+
+<div id="workOrderCost" class="panel">
+  <div id="wocContent"><p style="color:#7f8fa4;padding:20px;">Loading…</p></div>
+</div>
+
+<div id="workOrders" class="panel">
+  <div id="woContent"><p style="color:#7f8fa4;padding:20px;">Loading…</p></div>
+</div>
+
+<script>
+// ── CONSTANTS ────────────────────────────────────────────────────────────────
+const WAGES = {leeroy:50,outright:50,hippen:28.44,hoard:27,lakins:24,leonides:25,magoon:25,
+  mcquaid:25,miller:28.09,mitchell:27,robson:23,saldana:28.40,sanchez:25.50,
+  uttke:34,chavez:27,cramer:25.75,deckard:22,dunlap:23,gutierrez:25,higley:31.99};
+
+const RM_CLASSES = ['R&M-Appliance','R&M-Electrical','R&M-Hardware','R&M-Pest Control','R&M-Plumbing'];
+
+let QBT = null, RAMP = null, BUDGET = null, WO_DATA = null;
+let PERIOD_FROM = '', PERIOD_TO = '';
+let woSortCol = 11, woSortAsc = false;
+let woFiltered = [];
+
+// ── HELPERS ──────────────────────────────────────────────────────────────────
+function fmtC(n) { return '$' + Math.round(n).toLocaleString('en-US'); }
+function fmtD(s) {
+  if (!s) return '—';
+  const [y,m,d] = s.split('-');
+  return m + '/' + d + '/' + y;
+}
+function daysSince(s) {
+  if (!s) return null;
+  return Math.floor((new Date() - new Date(s + 'T00:00:00')) / 86400000);
+}
+
+function propCode(raw) {
+  if (!raw) return '';
+  return raw.split(' (')[0].split(':')[0].trim().toLowerCase().replace(/\s+/g,'');
+}
+
+function wage(userId) {
+  if (!QBT) return 0;
+  const u = QBT.users[userId];
+  if (!u) return 0;
+  const ln = (u.last_name || '').toLowerCase().replace(/[^a-z]/g, '');
+  return WAGES[ln] || 0;
+}
+
+function statusBadge(s) {
+  const cls = (s||'').toLowerCase().replace(/[^a-z]/g,'');
+  const map = {new:'new',assigned:'assigned',scheduled:'scheduled',estimated:'estimated',
+    completed:'completed',complete:'completed',canceled:'canceled',cancelled:'canceled'};
+  return `<span class="badge ${map[cls]||'new'}">${s||'—'}</span>`;
+}
+function priorityBadge(s) {
+  const cls = (s||'').toLowerCase();
+  return `<span class="badge ${cls}">${s||'—'}</span>`;
+}
+
+// ── PERIOD ───────────────────────────────────────────────────────────────────
+function setPeriod(mode, btn) {
+  document.querySelectorAll('.pb').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  const now = new Date();
+  const pad = n => String(n).padStart(2,'0');
+  if (mode === 'thisMo') {
+    PERIOD_FROM = now.getFullYear() + '-' + pad(now.getMonth()+1) + '-01';
+    PERIOD_TO   = now.toISOString().slice(0,10);
+  } else if (mode === 'lastMo') {
+    const last = new Date(now.getFullYear(), now.getMonth(), 0);
+    PERIOD_FROM = last.getFullYear() + '-' + pad(last.getMonth()+1) + '-01';
+    PERIOD_TO   = last.toISOString().slice(0,10);
+  } else if (mode === 'ytd') {
+    PERIOD_FROM = now.getFullYear() + '-01-01';
+    PERIOD_TO   = now.toISOString().slice(0,10);
+  } else if (mode === 'custom') {
+    const f = document.getElementById('dateFrom').value;
+    const t = document.getElementById('dateTo').value;
+    if (!f || !t) { alert('Enter both dates.'); return; }
+    if (f > t) { alert('Start must be before end.'); return; }
+    PERIOD_FROM = f; PERIOD_TO = t;
+  }
+  if (mode !== 'custom') {
+    document.getElementById('dateFrom').value = PERIOD_FROM;
+    document.getElementById('dateTo').value   = PERIOD_TO;
+  }
+  if (QBT && RAMP && BUDGET) { buildSpendBudget(); buildByWorkOrder(); }
+}
+
+// ── LOAD DATA ────────────────────────────────────────────────────────────────
+async function loadAll() {
+  const bar = document.getElementById('loadingBar');
+  bar.style.width = '20%';
+  try {
+    const [qbtR, rampR, budgetR, woR] = await Promise.all([
+      fetch('./data/qbtime.json'),
+      fetch('./data/ramp_processed.json'),
+      fetch('./data/budget.json'),
+      fetch('./data/workorders.json'),
+    ]);
+    bar.style.width = '70%';
+    [QBT, RAMP, BUDGET, WO_DATA] = await Promise.all([qbtR.json(), rampR.json(), budgetR.json(), woR.json()]);
+    bar.style.width = '100%';
+    setTimeout(() => { bar.style.width = '0'; bar.style.transition='none'; setTimeout(()=>bar.style.transition='width 0.4s ease',50); }, 500);
+
+    // Show data freshness
+    const ages = [RAMP.fetched_at, BUDGET.fetched_at, WO_DATA.fetched_at].filter(Boolean).map(d => new Date(d));
+    const oldest = new Date(Math.min(...ages));
+    document.getElementById('dataAge').textContent = 'Data as of ' + oldest.toLocaleDateString();
+
+    setPeriod('ytd', document.querySelector('.pb'));
+    buildWorkOrders();
+  } catch(e) {
+    bar.style.width = '0';
+    document.getElementById('errorBar').style.display = 'block';
+    document.getElementById('errorBar').textContent = '⚠ Failed to load data: ' + e.message;
+  }
+}
+
+// ── SPEND VS BUDGET ──────────────────────────────────────────────────────────
+function buildSpendBudget() {
+  const FROM = PERIOD_FROM, TO = PERIOD_TO;
+
+  // Determine budget column to use
+  const now = new Date();
+  const isThisMo = FROM === now.getFullYear() + '-' + String(now.getMonth()+1).padStart(2,'0') + '-01';
+  const isYTD    = FROM === now.getFullYear() + '-01-01';
+
+  // QBTime labor by property
+  const laborByProp = {};
+  const catTotals   = {};
+  RM_CLASSES.forEach(c => catTotals[c] = { cost: 0, hrs: 0 });
+
+  Object.values(QBT.timesheets).forEach(t => {
+    if (t.date < FROM || t.date > TO) return;
+    const cls = t.customfields?.['25056'] || '';
+    const cat = RM_CLASSES.find(c => cls.includes(c));
+    if (!cat) return;
+    const prop = propCode(t.customfields?.['25068']);
+    if (!prop) return;
+    const hrs  = t.duration / 3600;
+    const cost = hrs * wage(t.user_id);
+    if (!laborByProp[prop]) laborByProp[prop] = { cost: 0, hrs: 0 };
+    laborByProp[prop].cost += cost;
+    laborByProp[prop].hrs  += hrs;
+    catTotals[cat].cost += cost;
+    catTotals[cat].hrs  += hrs;
+  });
+
+  // Ramp materials by property (all R&M GLs)
+  const RM_GLS = ['52000','52001','52002','52003','67800'];
+  const matsbyProp = {};
+  RAMP.transactions.forEach(t => {
+    if (!RM_GLS.includes(t.gl)) return;
+    if (t.d < FROM || t.d > TO) return;
+    const prop = propCode(t.dept);
+    if (!prop) return;
+    if (!matsbyProp[prop]) matsbyProp[prop] = 0;
+    matsbyProp[prop] += t.amt;
+  });
+
+  // Build budget map keyed by normalized property name
+  const budgetMap = {};
+  Object.values(BUDGET.properties).forEach(p => {
+    const acc = p.accounts?.['52001'];
+    if (!acc) return;
+    const key = propCode(p.property_name);
+    budgetMap[key] = {
+      displayName: p.property_name,
+      city:        p.city,
+      annual:      parseFloat(acc.annual  || 0),
+      ytd_budget:  parseFloat(acc.ytd_budget  || 0),
+      mtd_budget:  parseFloat(acc.mtd_budget  || 0),
+    };
+  });
+
+  // Merge all properties
+  const allProps = new Set([...Object.keys(laborByProp), ...Object.keys(matsbyProp), ...Object.keys(budgetMap)]);
+
+  const rows = [];
+  allProps.forEach(prop => {
+    const labor  = laborByProp[prop]?.cost  || 0;
+    const mats   = matsbyProp[prop]         || 0;
+    const total  = labor + mats;
+    const bInfo  = budgetMap[prop];
+    const budget = isThisMo ? (bInfo?.mtd_budget || 0)
+                 : isYTD    ? (bInfo?.ytd_budget  || 0)
+                 :             (bInfo?.annual      || 0);
+    const variance = budget - total;
+    const pctUsed  = budget > 0 ? total / budget * 100 : null;
+    rows.push({ prop, displayName: bInfo?.displayName || prop, city: bInfo?.city || '—',
+      labor, mats, total, budget, variance, pctUsed });
+  });
+  rows.sort((a,b) => b.total - a.total);
+
+  const totLabor  = rows.reduce((s,r) => s + r.labor,  0);
+  const totMats   = rows.reduce((s,r) => s + r.mats,   0);
+  const totActual = rows.reduce((s,r) => s + r.total,  0);
+  const totBudget = rows.reduce((s,r) => s + r.budget, 0);
+  const totVar    = totBudget - totActual;
+  const totPct    = totBudget > 0 ? totActual / totBudget * 100 : null;
+
+  const kpiCls = totVar < 0 ? 'bad' : totPct > 80 ? 'warn' : '';
+  const periodLabel = isThisMo ? 'MTD Budget' : isYTD ? 'YTD Budget' : 'Budget';
+
+  const kpiHtml = `
+    <div class="kpi-card"><div class="kpi-label">${periodLabel}</div><div class="kpi-value">${fmtC(totBudget)}</div><div class="kpi-sub">account 52001 — R&amp;M Repairs</div></div>
+    <div class="kpi-card"><div class="kpi-label">Labor (QBTime)</div><div class="kpi-value">${fmtC(totLabor)}</div><div class="kpi-sub">R&amp;M class only · ${rows.filter(r=>r.labor>0).length} properties</div></div>
+    <div class="kpi-card"><div class="kpi-label">Materials (Ramp)</div><div class="kpi-value">${fmtC(totMats)}</div><div class="kpi-sub">GLs 52000–52003, 67800 · repair purchases</div></div>
+    <div class="kpi-card"><div class="kpi-label">Total Actual</div><div class="kpi-value">${fmtC(totActual)}</div><div class="kpi-sub">labor + materials</div></div>
+    <div class="kpi-card ${kpiCls}"><div class="kpi-label">Variance (Budget − Actual)</div><div class="kpi-value">${totVar >= 0 ? '+' : ''}${fmtC(totVar)}</div><div class="kpi-sub">${totPct !== null ? Math.round(totPct) + '% of budget used' : '—'}</div></div>`;
+
+  const catHtml = RM_CLASSES.map(c => {
+    const v = catTotals[c];
+    return `<div class="cat-card">
+      <div class="cat-label">${c.replace('R&M-','')}</div>
+      <div class="cat-value">${fmtC(v.cost)}</div>
+      <div class="cat-sub">${v.hrs.toFixed(0)}h labor</div>
+    </div>`;
+  }).join('');
+
+  const tableRows = rows.map((r, i) => {
+    const pct = r.pctUsed;
+    const overBudget = r.variance < 0;
+    const barPct = pct !== null ? Math.min(pct, 100) : 0;
+    const barCls  = pct === null ? '' : pct > 100 ? 'over' : pct > 80 ? 'warn' : '';
+    const varColor = r.variance >= 0 ? '#1e8449' : '#c0392b';
+    return `<tr class="${overBudget ? 'over-budget' : ''}" onclick="toggleSpendDetail(${i})" style="cursor:pointer;">
+      <td><strong>${r.displayName}</strong></td>
+      <td style="color:#7f8fa4;font-size:0.8rem;">${r.city}</td>
+      <td style="text-align:right;">${r.budget > 0 ? fmtC(r.budget) : '—'}</td>
+      <td style="text-align:right;">${r.labor > 0 ? fmtC(r.labor) : '—'}</td>
+      <td style="text-align:right;">${r.mats > 0 ? fmtC(r.mats) : '—'}</td>
+      <td style="text-align:right;font-weight:600;">${r.total > 0 ? fmtC(r.total) : '—'}</td>
+      <td style="text-align:right;color:${varColor};font-weight:600;">${r.budget > 0 ? (r.variance >= 0 ? '+' : '') + fmtC(r.variance) : '—'}</td>
+      <td style="min-width:130px;">
+        ${pct !== null ? `<div class="var-bar-wrap"><div class="var-bar"><div class="var-bar-fill ${barCls}" style="width:${barPct}%"></div></div><span style="font-size:0.78rem;color:#7f8fa4;">${Math.round(pct)}%</span></div>` : '—'}
+      </td>
+    </tr>
+    <tr class="detail-row" id="sdet-${i}">
+      <td colspan="8">
+        <div class="detail-inner">
+          <div><strong>Labor breakdown</strong> — QBTime R&amp;M classes<br>
+            ${RM_CLASSES.map(c => {
+              const lc = {};
+              Object.values(QBT.timesheets).filter(t => {
+                const cls = t.customfields?.['25056']||'';
+                return cls.includes(c) && t.date>=FROM && t.date<=TO && propCode(t.customfields?.['25068'])===r.prop;
+              }).forEach(t => { lc[c] = (lc[c]||0) + t.duration/3600*wage(t.user_id); });
+              return lc[c] > 0 ? `${c.replace('R&M-','')}: ${fmtC(lc[c])}` : null;
+            }).filter(Boolean).join(' · ') || 'No labor'}
+          </div>
+          <div><strong>Materials breakdown</strong> — Ramp GLs 52000–52003, 67800<br>
+            ${r.mats > 0 ? fmtC(r.mats) + ' in repair materials/contractor purchases' : 'No material spend'}
+          </div>
+        </div>
+      </td>
+    </tr>`;
+  }).join('');
+
+  document.getElementById('spendContent').innerHTML = `
+    <div class="kpi-grid">${kpiHtml}</div>
+    <div class="section-title">Labor by Category (${PERIOD_FROM.slice(0,7)} – ${PERIOD_TO.slice(0,7)})</div>
+    <div class="cat-grid">${catHtml}</div>
+    <div class="section-title">Spend vs Budget by Property</div>
+    <div style="overflow-x:auto;border:1px solid #d0dce8;border-radius:8px;">
+    <table class="data-table">
+      <thead><tr>
+        <th>Property</th><th>City</th>
+        <th style="text-align:right;">${periodLabel}</th>
+        <th style="text-align:right;">Labor</th>
+        <th style="text-align:right;">Materials</th>
+        <th style="text-align:right;">Total</th>
+        <th style="text-align:right;">Variance</th>
+        <th>% Used</th>
+      </tr></thead>
+      <tbody>${tableRows}</tbody>
+    </table>
+    </div>
+    <div style="font-size:0.75rem;color:#a0aebb;margin-top:10px;">Labor = QBTime hours × wage (R&amp;M class only). Materials = Ramp card purchases (GLs 52000–52003, 67800). Click a row to expand detail.</div>`;
+}
+
+function toggleSpendDetail(i) {
+  const row = document.getElementById('sdet-' + i);
+  if (row) row.classList.toggle('open');
+}
+
+// ── BY WORK ORDER ─────────────────────────────────────────────────────────────
+function buildByWorkOrder() {
+  if (!QBT || !RAMP) return;
+  const FROM = PERIOD_FROM, TO = PERIOD_TO;
+  const RM_GLS = ['52000','52001','52002','52003','67800'];
+  const map = {}; // wo → { desc, prop, labor, hrs, mats }
+
+  function ensureWO(wo, desc, prop) {
+    if (!map[wo]) map[wo] = { desc: desc || '—', prop: prop || '—', labor: 0, hrs: 0, mats: 0 };
+    if (!map[wo].prop || map[wo].prop === '—') map[wo].prop = prop || '—';
+    if (!map[wo].desc || map[wo].desc === '—') map[wo].desc = desc || '—';
+  }
+
+  // QBTime R&M labor by WO
+  Object.values(QBT.timesheets).forEach(t => {
+    if (t.date < FROM || t.date > TO) return;
+    const cls = t.customfields?.['25056'] || '';
+    if (!RM_CLASSES.find(c => cls.includes(c))) return;
+    const woRaw = t.customfields?.['2748416'] || '';
+    if (!woRaw) return;
+    const parts = woRaw.split(' - ');
+    const wo    = parts[parts.length - 1].trim();
+    const desc  = parts.slice(0, -1).join(' - ').trim();
+    const prop  = propCode(t.customfields?.['25068'] || '');
+    const hrs   = t.duration / 3600;
+    const cost  = hrs * wage(t.user_id);
+    ensureWO(wo, desc, prop);
+    map[wo].labor += cost;
+    map[wo].hrs   += hrs;
+  });
+
+  // Ramp R&M materials by WO
+  RAMP.transactions.forEach(t => {
+    if (!t.wo || !RM_GLS.includes(t.gl)) return;
+    if (t.d < FROM || t.d > TO) return;
+    const prop = propCode(t.dept || '');
+    ensureWO(t.wo, null, prop);
+    map[t.wo].mats += t.amt;
+  });
+
+  const rows = Object.entries(map)
+    .map(([wo, d]) => ({ wo, ...d, total: d.labor + d.mats }))
+    .filter(r => r.total > 0)
+    .sort((a, b) => b.total - a.total);
+
+  const totLabor  = rows.reduce((s, r) => s + r.labor, 0);
+  const totMats   = rows.reduce((s, r) => s + r.mats,  0);
+  const totActual = totLabor + totMats;
+  const labWOs    = rows.filter(r => r.labor > 0).length;
+  const matWOs    = rows.filter(r => r.mats  > 0).length;
+
+  const tableRows = rows.map(r => {
+    const laborPct = r.total > 0 ? r.labor / r.total * 100 : 0;
+    return `<tr>
+      <td><span style="font-family:monospace;font-size:0.82rem;color:#2e86c1;font-weight:600;">${r.wo}</span></td>
+      <td style="max-width:240px;overflow:hidden;text-overflow:ellipsis;color:#555;" title="${r.desc}">${r.desc}</td>
+      <td><strong>${r.prop || '—'}</strong></td>
+      <td style="text-align:right;">${r.labor > 0 ? fmtC(r.labor) + '<span style="color:#a0aebb;font-size:0.75rem;margin-left:4px;">' + r.hrs.toFixed(1) + 'h</span>' : '—'}</td>
+      <td style="text-align:right;">${r.mats > 0 ? fmtC(r.mats) : '—'}</td>
+      <td style="text-align:right;font-weight:600;">${fmtC(r.total)}</td>
+      <td style="min-width:100px;">
+        <div class="var-bar-wrap">
+          <div class="var-bar" style="background:#e8edf2;">
+            <div class="var-bar-fill" style="width:${laborPct.toFixed(0)}%;background:#2e86c1;"></div>
+          </div>
+          <span style="font-size:0.72rem;color:#7f8fa4;white-space:nowrap;">${laborPct.toFixed(0)}% labor</span>
+        </div>
+      </td>
+    </tr>`;
+  }).join('');
+
+  document.getElementById('wocContent').innerHTML = `
+    <div class="kpi-grid">
+      <div class="kpi-card"><div class="kpi-label">Work Orders Tracked</div><div class="kpi-value">${rows.length}</div><div class="kpi-sub">with any R&amp;M cost in period</div></div>
+      <div class="kpi-card"><div class="kpi-label">Total Labor</div><div class="kpi-value">${fmtC(totLabor)}</div><div class="kpi-sub">${labWOs} WOs with labor · QBTime</div></div>
+      <div class="kpi-card"><div class="kpi-label">Total Materials</div><div class="kpi-value">${fmtC(totMats)}</div><div class="kpi-sub">${matWOs} WOs with materials · Ramp</div></div>
+      <div class="kpi-card"><div class="kpi-label">Total Spend</div><div class="kpi-value">${fmtC(totActual)}</div><div class="kpi-sub">${FROM.slice(0,7)} – ${TO.slice(0,7)}</div></div>
+    </div>
+    ${rows.length === 0 ? '<p style="color:#7f8fa4;padding:20px;">No work orders with R&amp;M costs in this period.</p>' : `
+    <div style="overflow-x:auto;border:1px solid #d0dce8;border-radius:8px;">
+    <table class="data-table">
+      <thead><tr>
+        <th>WO #</th>
+        <th>Description</th>
+        <th>Property</th>
+        <th style="text-align:right;">Labor</th>
+        <th style="text-align:right;">Materials</th>
+        <th style="text-align:right;">Total</th>
+        <th>Mix</th>
+      </tr></thead>
+      <tbody>${tableRows}</tbody>
+    </table>
+    </div>
+    <div style="font-size:0.75rem;color:#a0aebb;margin-top:10px;">
+      WO codes sourced from QBTime "Work Order #" field and Ramp "Customer/Job" field. Only WOs with R&amp;M class labor or R&amp;M GL materials are shown. Not all transactions have WO codes assigned.
+    </div>`}`;
+}
+
+// ── WORK ORDER LIST ────────────────────────────────────────────────────────────
+function buildWorkOrders() {
+  const rows = (WO_DATA.rows || []).filter(r => r.work_order_type === 'Internal');
+
+  const byStatus = {};
+  rows.forEach(r => { byStatus[r.status] = (byStatus[r.status]||0)+1; });
+  const open  = (byStatus['New']||0) + (byStatus['Assigned']||0) + (byStatus['Scheduled']||0);
+  const estCt = byStatus['Estimated'] || 0;
+  const compCt = (byStatus['Completed']||0) + (byStatus['Complete']||0);
+  const totalEst = rows.reduce((s,r) => s + parseFloat(r.estimate_amount||0), 0);
+
+  // Populate filters
+  const props = [...new Set(rows.map(r => r.property_name).filter(Boolean))].sort();
+  const assigned = [...new Set(rows.map(r => r.assigned_user).filter(Boolean))].sort();
+  const propOpts = props.map(p => `<option value="${p}">${p}</option>`).join('');
+  const assignOpts = assigned.map(a => `<option value="${a}">${a}</option>`).join('');
+
+  woFiltered = rows;
+  document.getElementById('woContent').innerHTML = `
+    <div class="kpi-grid">
+      <div class="kpi-card warn"><div class="kpi-label">Open</div><div class="kpi-value">${open}</div><div class="kpi-sub">New / Assigned / Scheduled</div></div>
+      <div class="kpi-card"><div class="kpi-label">Estimated</div><div class="kpi-value">${estCt}</div><div class="kpi-sub">${fmtC(totalEst)} total estimates</div></div>
+      <div class="kpi-card good"><div class="kpi-label">Completed</div><div class="kpi-value">${compCt}</div><div class="kpi-sub">this dataset</div></div>
+      <div class="kpi-card"><div class="kpi-label">Total WOs</div><div class="kpi-value">${rows.length}</div><div class="kpi-sub">Internal (repair) type only</div></div>
+    </div>
+    <div class="controls">
+      <input type="text" id="woSearch" placeholder="Search property, WO#, description…" oninput="filterWOs()">
+      <select id="woProp" onchange="filterWOs()"><option value="">All Properties</option>${propOpts}</select>
+      <select id="woStatus" onchange="filterWOs()">
+        <option value="">All Statuses</option>
+        <option value="New">New</option>
+        <option value="Assigned">Assigned</option>
+        <option value="Scheduled">Scheduled</option>
+        <option value="Estimated">Estimated</option>
+        <option value="Completed">Completed</option>
+        <option value="Canceled">Canceled</option>
+      </select>
+      <select id="woPriority" onchange="filterWOs()">
+        <option value="">All Priorities</option>
+        <option value="Urgent">Urgent</option>
+        <option value="High">High</option>
+        <option value="Normal">Normal</option>
+        <option value="Low">Low</option>
+      </select>
+      <select id="woAssigned" onchange="filterWOs()"><option value="">All Assigned</option>${assignOpts}</select>
+    </div>
+    <div class="row-count" id="woCount"></div>
+    <div style="overflow-x:auto;border:1px solid #d0dce8;border-radius:8px;">
+    <table class="data-table" id="woTable">
+      <thead><tr>
+        <th onclick="sortWOs(0)">WO # <span>⇅</span></th>
+        <th onclick="sortWOs(1)">Property <span>⇅</span></th>
+        <th onclick="sortWOs(2)">Unit <span>⇅</span></th>
+        <th onclick="sortWOs(3)">Status <span>⇅</span></th>
+        <th onclick="sortWOs(4)">Priority <span>⇅</span></th>
+        <th onclick="sortWOs(5)">Estimate <span>⇅</span></th>
+        <th onclick="sortWOs(6)">Billed <span>⇅</span></th>
+        <th onclick="sortWOs(7)">Assigned To <span>⇅</span></th>
+        <th onclick="sortWOs(8)">Created <span>⇅</span></th>
+        <th onclick="sortWOs(9)">Age <span>⇅</span></th>
+        <th onclick="sortWOs(10)">Completed <span>⇅</span></th>
+        <th>Description</th>
+      </tr></thead>
+      <tbody id="woTbody"></tbody>
+    </table>
+    </div>`;
+
+  filterWOs();
+}
+
+function filterWOs() {
+  if (!WO_DATA) return;
+  const rows = (WO_DATA.rows || []).filter(r => r.work_order_type === 'Internal');
+  const search   = (document.getElementById('woSearch')?.value   || '').toLowerCase();
+  const propF    = document.getElementById('woProp')?.value     || '';
+  const statusF  = document.getElementById('woStatus')?.value   || '';
+  const prioF    = document.getElementById('woPriority')?.value || '';
+  const assignF  = document.getElementById('woAssigned')?.value || '';
+
+  woFiltered = rows.filter(r => {
+    if (propF   && r.property_name !== propF)   return false;
+    if (statusF && r.status !== statusF)         return false;
+    if (prioF   && r.priority !== prioF)         return false;
+    if (assignF && r.assigned_user !== assignF)  return false;
+    if (search) {
+      const hay = [r.work_order_number, r.property_name, r.unit_name,
+        r.service_request_description, r.work_order_issue, r.assigned_user].join(' ').toLowerCase();
+      if (!hay.includes(search)) return false;
+    }
+    return true;
+  });
+  renderWOs();
+}
+
+function getWoVal(r, col) {
+  const fields = ['work_order_number','property_name','unit_name','status','priority',
+    'estimate_amount','amount','assigned_user','created_at','_age','work_completed_on'];
+  if (col === 9) return daysSince(r.created_at) || 0;
+  const v = r[fields[col]];
+  if (v === null || v === undefined || v === '') return col >= 5 ? -1 : '';
+  if (typeof v === 'string' && !isNaN(v)) return parseFloat(v);
+  return v;
+}
+
+function sortWOs(col) {
+  if (woSortCol === col) { woSortAsc = !woSortAsc; } else { woSortCol = col; woSortAsc = col < 5; }
+  document.querySelectorAll('#woTable th').forEach((th, i) => {
+    th.classList.toggle('sorted', i === col);
+    const sp = th.querySelector('span');
+    if (sp) sp.textContent = i === col ? (woSortAsc ? ' ↑' : ' ↓') : ' ⇅';
+  });
+  renderWOs();
+}
+
+function renderWOs() {
+  const sorted = [...woFiltered].sort((a, b) => {
+    const va = getWoVal(a, woSortCol), vb = getWoVal(b, woSortCol);
+    if (va < vb) return woSortAsc ? -1 : 1;
+    if (va > vb) return woSortAsc ? 1 : -1;
+    return 0;
+  });
+
+  const tbody = document.getElementById('woTbody');
+  const count = document.getElementById('woCount');
+  if (!tbody) return;
+
+  tbody.innerHTML = sorted.map(r => {
+    const age     = daysSince(r.created_at);
+    const ageStr  = age !== null ? age + 'd' : '—';
+    const ageCls  = age > 30 ? 'color:#c0392b;font-weight:600' : age > 14 ? 'color:#ca6f1e' : '';
+    const est     = parseFloat(r.estimate_amount || 0);
+    const billed  = parseFloat(r.amount || 0);
+    const desc    = (r.service_request_description || r.work_order_issue || '—').slice(0, 60).replace(/\n/g,' ');
+    return `<tr>
+      <td><span style="font-family:monospace;font-size:0.82rem;color:#2e86c1;">${r.work_order_number||'—'}</span></td>
+      <td><strong>${r.property_name||'—'}</strong></td>
+      <td>${r.unit_name||'—'}</td>
+      <td>${statusBadge(r.status)}</td>
+      <td>${priorityBadge(r.priority)}</td>
+      <td style="text-align:right;">${est > 0 ? fmtC(est) : '—'}</td>
+      <td style="text-align:right;">${billed > 0 ? fmtC(billed) : '—'}</td>
+      <td style="color:#7f8fa4;font-size:0.82rem;">${r.assigned_user||'—'}</td>
+      <td style="color:#7f8fa4;">${fmtD(r.created_at)}</td>
+      <td style="${ageCls}">${ageStr}</td>
+      <td style="color:#7f8fa4;">${fmtD(r.work_completed_on)}</td>
+      <td style="max-width:220px;overflow:hidden;text-overflow:ellipsis;color:#555;">${desc}</td>
+    </tr>`;
+  }).join('') || '<tr><td colspan="12" style="text-align:center;padding:28px;color:#7f8fa4;">No matching work orders</td></tr>';
+
+  if (count) count.textContent = sorted.length + ' of ' + ((WO_DATA.rows||[]).filter(r=>r.work_order_type==='Internal').length) + ' work orders';
+}
+
+function showTab(id, el) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  el.classList.add('active');
+}
+
+loadAll();
+</script>
+</body>
+</html>

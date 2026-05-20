@@ -323,12 +323,16 @@ function buildRampProcessed() {
   const slim = transactions.map(t => {
     const dept = (t.accounting_categories || []).find(c => c.tracking_category_remote_id === 'QuickbooksDepartment');
     const cat  = (t.accounting_categories || []).find(c => c.tracking_category_remote_id === 'QuickbooksCategory');
+    const cust = (t.accounting_categories || []).find(c => c.tracking_category_remote_id === 'QuickbooksCustomer');
+    const custParts = (cust?.category_name || '').split(':');
+    const wo = custParts.length >= 3 ? custParts[custParts.length - 1].trim() : null;
     return {
       d:    t.user_transaction_time.slice(0, 10),
       ln:   (t.card_holder?.last_name || '').toLowerCase().replace(/[^a-z]/g, ''),
       amt:  t.amount,
       dept: dept?.category_name || null,
       gl:   cat?.category_id    || null,
+      wo:   wo || null,
     };
   });
 
@@ -550,6 +554,14 @@ const FETCH_ONLY = process.env.FETCH_ONLY || 'all';
 
 (async () => {
   if (FETCH_ONLY === 'costs-only') {
+    buildTurnCosts();
+    console.log('Done.');
+    return;
+  }
+
+  if (FETCH_ONLY === 'processed-only') {
+    buildRampProcessed();
+    buildAuditData();
     buildTurnCosts();
     console.log('Done.');
     return;
