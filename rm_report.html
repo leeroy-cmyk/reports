@@ -144,6 +144,15 @@ function propCode(raw) {
   if (!raw) return '';
   return raw.split(' (')[0].split(':')[0].trim().toLowerCase().replace(/\s+/g,'');
 }
+function normProp(p) {
+  if (!p) return '';
+  if (p.startsWith('o155')) return 'o155';
+  return p;
+}
+const EXCL_PROPS = new Set(['r203','ex','h604','w225']);
+function isExcluded(p) {
+  return !p || EXCL_PROPS.has(p) || p.startsWith('l912') || p.startsWith('w225');
+}
 
 function wage(userId) {
   if (!QBT) return 0;
@@ -242,8 +251,8 @@ function buildSpendBudget() {
     if (t.date < FROM || t.date > TO) return;
     const cls = t.customfields?.['25056'] || '';
     if (!RM_CLASSES.find(c => cls.includes(c))) return;
-    const prop = propCode(t.customfields?.['25068']);
-    if (!prop) return;
+    const prop = normProp(propCode(t.customfields?.['25068']));
+    if (!prop || isExcluded(prop)) return;
     const hrs  = t.duration / 3600;
     const cost = hrs * wage(t.user_id);
     if (!laborByProp[prop]) laborByProp[prop] = { cost: 0, hrs: 0 };
@@ -257,8 +266,8 @@ function buildSpendBudget() {
   RAMP.transactions.forEach(t => {
     if (!RM_GLS.includes(t.gl)) return;
     if (t.d < FROM || t.d > TO) return;
-    const prop = propCode(t.dept);
-    if (!prop) return;
+    const prop = normProp(propCode(t.dept));
+    if (!prop || isExcluded(prop)) return;
     if (!matsbyProp[prop]) matsbyProp[prop] = 0;
     matsbyProp[prop] += t.amt;
   });
@@ -268,7 +277,8 @@ function buildSpendBudget() {
   Object.values(BUDGET.properties).forEach(p => {
     const acc = p.accounts?.['52001'];
     if (!acc) return;
-    const key = propCode(p.property_name);
+    const key = normProp(propCode(p.property_name));
+    if (isExcluded(key)) return;
     budgetMap[key] = {
       displayName: p.property_name,
       city:        p.city,
@@ -341,7 +351,7 @@ function buildSpendBudget() {
               const lc = {};
               Object.values(QBT.timesheets).filter(t => {
                 const cls = t.customfields?.['25056']||'';
-                return cls.includes(c) && t.date>=FROM && t.date<=TO && propCode(t.customfields?.['25068'])===r.prop;
+                return cls.includes(c) && t.date>=FROM && t.date<=TO && normProp(propCode(t.customfields?.['25068']))===r.prop;
               }).forEach(t => { lc[c] = (lc[c]||0) + t.duration/3600*wage(t.user_id); });
               return lc[c] > 0 ? `${c.replace('R&M-','')}: ${fmtC(lc[c])}` : null;
             }).filter(Boolean).join(' · ') || 'No labor'}
@@ -408,7 +418,8 @@ function buildByWorkOrder() {
     const path = getJcPath(t.jobcode_id);
     if (path.length < 3) return;
     const wo   = path[path.length - 1];
-    const prop = propCode(path[path.length - 2]);
+    const prop = normProp(propCode(path[path.length - 2]));
+    if (isExcluded(prop)) return;
     const hrs  = t.duration / 3600;
     const cost = hrs * wage(t.user_id);
     ensureWO(wo, prop);
@@ -420,7 +431,9 @@ function buildByWorkOrder() {
   RAMP.transactions.forEach(t => {
     if (!t.wo || !RM_GLS.includes(t.gl)) return;
     if (t.d < FROM || t.d > TO) return;
-    ensureWO(t.wo, propCode(t.dept || ''));
+    const prop = normProp(propCode(t.dept || ''));
+    if (isExcluded(prop)) return;
+    ensureWO(t.wo, prop);
     map[t.wo].mats += t.amt;
   });
 
@@ -476,7 +489,7 @@ function buildByWorkOrder() {
     </table>
     </div>
     <div style="font-size:0.75rem;color:#a0aebb;margin-top:10px;">
-      WO codes from QBTime "Work Order #" field and Ramp "Customer/Job" field. Only entries where a WO# was entered are shown — timesheets or purchases with a blank WO# field are excluded. If no rows appear for a period, workers likely did not fill in the WO# field on those entries.
+      Labor = QBTime timesheets where WO# is the 3rd level of the jobcode path (Customer &gt; Property &gt; WO#). Materials = Ramp purchases where Customer/Job was tagged with a specific WO code. Most Ramp purchases are not tagged to a WO — full material spend by property is on the Spend vs Budget tab.
     </div>`}`;
 }
 
