@@ -205,15 +205,17 @@ function setPeriod(mode, btn) {
 }
 
 // ── LOAD DATA ────────────────────────────────────────────────────────────────
-async function loadAll() {
+async function loadAll(preservePeriod) {
   const bar = document.getElementById('loadingBar');
   bar.style.width = '20%';
+  const savedFrom = PERIOD_FROM, savedTo = PERIOD_TO;
   try {
+    const ts = Date.now();
     const [qbtR, rampR, budgetR, woR] = await Promise.all([
-      fetch('./data/qbtime.json'),
-      fetch('./data/ramp_processed.json'),
-      fetch('./data/budget.json'),
-      fetch('./data/workorders.json'),
+      fetch('./data/qbtime.json?_=' + ts),
+      fetch('./data/ramp_processed.json?_=' + ts),
+      fetch('./data/budget.json?_=' + ts),
+      fetch('./data/workorders.json?_=' + ts),
     ]);
     bar.style.width = '70%';
     [QBT, RAMP, BUDGET, WO_DATA] = await Promise.all([qbtR.json(), rampR.json(), budgetR.json(), woR.json()]);
@@ -223,9 +225,14 @@ async function loadAll() {
     // Show data freshness
     const ages = [RAMP.fetched_at, BUDGET.fetched_at, WO_DATA.fetched_at].filter(Boolean).map(d => new Date(d));
     const oldest = new Date(Math.min(...ages));
-    document.getElementById('dataAge').textContent = 'Data as of ' + oldest.toLocaleDateString();
+    document.getElementById('dataAge').textContent = 'Data as of ' + oldest.toLocaleString('en-US', {month:'short',day:'numeric',hour:'numeric',minute:'2-digit'});
 
-    setPeriod('ytd', document.querySelector('.pb'));
+    if (preservePeriod && savedFrom) {
+      PERIOD_FROM = savedFrom; PERIOD_TO = savedTo;
+      buildSpendBudget(); buildByWorkOrder();
+    } else {
+      setPeriod('ytd', document.querySelector('.pb'));
+    }
     buildWorkOrders();
   } catch(e) {
     bar.style.width = '0';
@@ -654,6 +661,7 @@ function showTab(id, el) {
 }
 
 loadAll();
+setInterval(() => loadAll(true), 5 * 60 * 1000);
 </script>
 </body>
 </html>
