@@ -229,20 +229,16 @@ function buildSpendBudget() {
   const FROM = PERIOD_FROM, TO = PERIOD_TO;
 
   // Determine budget column to use
-  const now = new Date();
-  const isThisMo = FROM === now.getFullYear() + '-' + String(now.getMonth()+1).padStart(2,'0') + '-01';
-  const isYTD    = FROM === now.getFullYear() + '-01-01';
+  const isMonthPeriod = FROM.slice(8) === '01' && TO.slice(0, 7) === FROM.slice(0, 7);
+  const isYTD    = FROM === new Date().getFullYear() + '-01-01';
 
   // QBTime labor by property
   const laborByProp = {};
-  const catTotals   = {};
-  RM_CLASSES.forEach(c => catTotals[c] = { cost: 0, hrs: 0 });
 
   Object.values(QBT.timesheets).forEach(t => {
     if (t.date < FROM || t.date > TO) return;
     const cls = t.customfields?.['25056'] || '';
-    const cat = RM_CLASSES.find(c => cls.includes(c));
-    if (!cat) return;
+    if (!RM_CLASSES.find(c => cls.includes(c))) return;
     const prop = propCode(t.customfields?.['25068']);
     if (!prop) return;
     const hrs  = t.duration / 3600;
@@ -250,8 +246,6 @@ function buildSpendBudget() {
     if (!laborByProp[prop]) laborByProp[prop] = { cost: 0, hrs: 0 };
     laborByProp[prop].cost += cost;
     laborByProp[prop].hrs  += hrs;
-    catTotals[cat].cost += cost;
-    catTotals[cat].hrs  += hrs;
   });
 
   // Ramp materials by property (all R&M GLs)
@@ -290,9 +284,9 @@ function buildSpendBudget() {
     const mats   = matsbyProp[prop]         || 0;
     const total  = labor + mats;
     const bInfo  = budgetMap[prop];
-    const budget = isThisMo ? (bInfo?.mtd_budget || 0)
-                 : isYTD    ? (bInfo?.ytd_budget  || 0)
-                 :             (bInfo?.annual      || 0);
+    const budget = isYTD         ? (bInfo?.ytd_budget  || 0)
+                 : isMonthPeriod ? (bInfo?.mtd_budget   || 0)
+                 :                 (bInfo?.annual        || 0);
     const variance = budget - total;
     const pctUsed  = budget > 0 ? total / budget * 100 : null;
     rows.push({ prop, displayName: bInfo?.displayName || prop, city: bInfo?.city || '—',
@@ -308,7 +302,7 @@ function buildSpendBudget() {
   const totPct    = totBudget > 0 ? totActual / totBudget * 100 : null;
 
   const kpiCls = totVar < 0 ? 'bad' : totPct > 80 ? 'warn' : '';
-  const periodLabel = isThisMo ? 'MTD Budget' : isYTD ? 'YTD Budget' : 'Budget';
+  const periodLabel = isYTD ? 'YTD Budget' : isMonthPeriod ? 'Monthly Budget' : 'Budget';
 
   const kpiHtml = `
     <div class="kpi-card"><div class="kpi-label">${periodLabel}</div><div class="kpi-value">${fmtC(totBudget)}</div><div class="kpi-sub">account 52001 — R&amp;M Repairs</div></div>
@@ -316,15 +310,6 @@ function buildSpendBudget() {
     <div class="kpi-card"><div class="kpi-label">Materials (Ramp)</div><div class="kpi-value">${fmtC(totMats)}</div><div class="kpi-sub">GLs 52000–52003, 67800 · repair purchases</div></div>
     <div class="kpi-card"><div class="kpi-label">Total Actual</div><div class="kpi-value">${fmtC(totActual)}</div><div class="kpi-sub">labor + materials</div></div>
     <div class="kpi-card ${kpiCls}"><div class="kpi-label">Variance (Budget − Actual)</div><div class="kpi-value">${totVar >= 0 ? '+' : ''}${fmtC(totVar)}</div><div class="kpi-sub">${totPct !== null ? Math.round(totPct) + '% of budget used' : '—'}</div></div>`;
-
-  const catHtml = RM_CLASSES.map(c => {
-    const v = catTotals[c];
-    return `<div class="cat-card">
-      <div class="cat-label">${c.replace('R&M-','')}</div>
-      <div class="cat-value">${fmtC(v.cost)}</div>
-      <div class="cat-sub">${v.hrs.toFixed(0)}h labor</div>
-    </div>`;
-  }).join('');
 
   const tableRows = rows.map((r, i) => {
     const pct = r.pctUsed;
@@ -367,8 +352,6 @@ function buildSpendBudget() {
 
   document.getElementById('spendContent').innerHTML = `
     <div class="kpi-grid">${kpiHtml}</div>
-    <div class="section-title">Labor by Category (${PERIOD_FROM.slice(0,7)} – ${PERIOD_TO.slice(0,7)})</div>
-    <div class="cat-grid">${catHtml}</div>
     <div class="section-title">Spend vs Budget by Property</div>
     <div style="overflow-x:auto;border:1px solid #d0dce8;border-radius:8px;">
     <table class="data-table">
@@ -486,7 +469,7 @@ function buildByWorkOrder() {
     </table>
     </div>
     <div style="font-size:0.75rem;color:#a0aebb;margin-top:10px;">
-      WO codes sourced from QBTime "Work Order #" field and Ramp "Customer/Job" field. Only WOs with R&amp;M class labor or R&amp;M GL materials are shown. Not all transactions have WO codes assigned.
+      WO codes from QBTime "Work Order #" field and Ramp "Customer/Job" field. Only entries where a WO# was entered are shown — timesheets or purchases with a blank WO# field are excluded. If no rows appear for a period, workers likely did not fill in the WO# field on those entries.
     </div>`}`;
 }
 
