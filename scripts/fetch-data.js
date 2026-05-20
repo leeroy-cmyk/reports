@@ -249,9 +249,10 @@ async function fetchRampTransactions() {
     } catch(e) { console.log('  Could not load existing ramp.json, starting fresh'); }
   }
 
-  // On first run fetch 5 months; on subsequent runs fetch since last 2 days (overlap for safety)
+  // On first run fetch 5 months; on subsequent runs use 60-day window so recently-tagged
+  // WO codes on older transactions (added in Ramp after the transaction date) get picked up.
   const hasExisting = Object.keys(existing).length > 0;
-  const lookbackDays = hasExisting ? 2 : 150;
+  const lookbackDays = hasExisting ? 60 : 150;
   const fromTime = new Date(Date.now() - lookbackDays * 86400000).toISOString();
 
   let newCount = 0, nextPage = null, page = 1;
@@ -546,9 +547,11 @@ async function syncVacanciesToFirebase() {
 // FETCH_ONLY env var controls what runs:
 //   'appfolio'    → turnvac + workorders + budget (every 5 min)
 //   'qbt-only'    → QBTime + audit.json only
-//   'ramp-only'   → Ramp only
+//   'ramp-only'   → Ramp only (incremental 60-day window)
+//   'ramp-full'   → Ramp full re-fetch (150 days, ignores existing cache) + processed rebuild
 //   'qbt-ramp'    → QBTime + Ramp (legacy, local use)
 //   'costs-only'  → rebuild turn_costs.json from local files only (no network)
+//   'processed-only' → rebuild ramp_processed + audit + turn_costs from local files only
 //   unset/'all'   → everything
 const FETCH_ONLY = process.env.FETCH_ONLY || 'all';
 
@@ -560,6 +563,21 @@ const FETCH_ONLY = process.env.FETCH_ONLY || 'all';
   }
 
   if (FETCH_ONLY === 'processed-only') {
+    buildRampProcessed();
+    buildAuditData();
+    buildTurnCosts();
+    console.log('Done.');
+    return;
+  }
+
+  if (FETCH_ONLY === 'ramp-full') {
+    // Wipe existing ramp.json so fetchRampTransactions() does a fresh 150-day fetch
+    const rampPath = path.join(DATA_DIR, 'ramp.json');
+    if (fs.existsSync(rampPath)) {
+      fs.unlinkSync(rampPath);
+      console.log('Deleted existing ramp.json — will fetch full 150-day history');
+    }
+    await fetchRampTransactions();
     buildRampProcessed();
     buildAuditData();
     buildTurnCosts();
