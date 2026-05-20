@@ -229,8 +229,11 @@ function buildSpendBudget() {
   const FROM = PERIOD_FROM, TO = PERIOD_TO;
 
   // Determine budget column to use
+  const _now = new Date();
+  const _thisMoStr = _now.getFullYear() + '-' + String(_now.getMonth()+1).padStart(2,'0');
+  const isThisMonth  = FROM.slice(0,7) === _thisMoStr;
   const isMonthPeriod = FROM.slice(8) === '01' && TO.slice(0, 7) === FROM.slice(0, 7);
-  const isYTD    = FROM === new Date().getFullYear() + '-01-01';
+  const isYTD    = FROM === _now.getFullYear() + '-01-01';
 
   // QBTime labor by property
   const laborByProp = {};
@@ -284,8 +287,9 @@ function buildSpendBudget() {
     const mats   = matsbyProp[prop]         || 0;
     const total  = labor + mats;
     const bInfo  = budgetMap[prop];
-    const budget = isYTD         ? (bInfo?.ytd_budget  || 0)
-                 : isMonthPeriod ? (bInfo?.mtd_budget   || 0)
+    const budget = isYTD        ? (bInfo?.ytd_budget  || 0)
+                 : isThisMonth ? (bInfo?.mtd_budget   || 0)
+                 : isMonthPeriod ? ((bInfo?.annual || 0) / 12)
                  :                 (bInfo?.annual        || 0);
     const variance = budget - total;
     const pctUsed  = budget > 0 ? total / budget * 100 : null;
@@ -302,7 +306,7 @@ function buildSpendBudget() {
   const totPct    = totBudget > 0 ? totActual / totBudget * 100 : null;
 
   const kpiCls = totVar < 0 ? 'bad' : totPct > 80 ? 'warn' : '';
-  const periodLabel = isYTD ? 'YTD Budget' : isMonthPeriod ? 'Monthly Budget' : 'Budget';
+  const periodLabel = isYTD ? 'YTD Budget' : isMonthPeriod ? (isThisMonth ? 'MTD Budget' : 'Monthly Budget') : 'Budget';
 
   const kpiHtml = `
     <div class="kpi-card"><div class="kpi-label">${periodLabel}</div><div class="kpi-value">${fmtC(totBudget)}</div><div class="kpi-sub">account 52001 — R&amp;M Repairs</div></div>
@@ -376,42 +380,47 @@ function toggleSpendDetail(i) {
 }
 
 // ── BY WORK ORDER ─────────────────────────────────────────────────────────────
+const _jcCache = {};
+function getJcPath(id) {
+  if (_jcCache[id] !== undefined) return _jcCache[id];
+  const j = QBT?.jobcodes?.[id];
+  if (!j) return (_jcCache[id] = []);
+  if (j.parent_id === 0) return (_jcCache[id] = [j.name]);
+  return (_jcCache[id] = [...getJcPath(j.parent_id), j.name]);
+}
+
 function buildByWorkOrder() {
   if (!QBT || !RAMP) return;
   const FROM = PERIOD_FROM, TO = PERIOD_TO;
   const RM_GLS = ['52000','52001','52002','52003','67800'];
-  const map = {}; // wo → { desc, prop, labor, hrs, mats }
+  const map = {}; // wo → { prop, labor, hrs, mats }
 
-  function ensureWO(wo, desc, prop) {
-    if (!map[wo]) map[wo] = { desc: desc || '—', prop: prop || '—', labor: 0, hrs: 0, mats: 0 };
-    if (!map[wo].prop || map[wo].prop === '—') map[wo].prop = prop || '—';
-    if (!map[wo].desc || map[wo].desc === '—') map[wo].desc = desc || '—';
+  function ensureWO(wo, prop) {
+    if (!map[wo]) map[wo] = { prop: prop || '—', labor: 0, hrs: 0, mats: 0 };
+    if ((!map[wo].prop || map[wo].prop === '—') && prop) map[wo].prop = prop;
   }
 
-  // QBTime R&M labor by WO
+  // QBTime R&M labor by WO — WO# is 3rd level of jobcode path: Customer > Property > WO#
   Object.values(QBT.timesheets).forEach(t => {
     if (t.date < FROM || t.date > TO) return;
     const cls = t.customfields?.['25056'] || '';
     if (!RM_CLASSES.find(c => cls.includes(c))) return;
-    const woRaw = t.customfields?.['2748416'] || '';
-    if (!woRaw) return;
-    const parts = woRaw.split(' - ');
-    const wo    = parts[parts.length - 1].trim();
-    const desc  = parts.slice(0, -1).join(' - ').trim();
-    const prop  = propCode(t.customfields?.['25068'] || '');
-    const hrs   = t.duration / 3600;
-    const cost  = hrs * wage(t.user_id);
-    ensureWO(wo, desc, prop);
+    const path = getJcPath(t.jobcode_id);
+    if (path.length < 3) return;
+    const wo   = path[path.length - 1];
+    const prop = propCode(path[path.length - 2]);
+    const hrs  = t.duration / 3600;
+    const cost = hrs * wage(t.user_id);
+    ensureWO(wo, prop);
     map[wo].labor += cost;
     map[wo].hrs   += hrs;
   });
 
-  // Ramp R&M materials by WO
+  // Ramp R&M materials by WO — wo field from Customer/Job accounting category
   RAMP.transactions.forEach(t => {
     if (!t.wo || !RM_GLS.includes(t.gl)) return;
     if (t.d < FROM || t.d > TO) return;
-    const prop = propCode(t.dept || '');
-    ensureWO(t.wo, null, prop);
+    ensureWO(t.wo, propCode(t.dept || ''));
     map[t.wo].mats += t.amt;
   });
 
@@ -430,7 +439,6 @@ function buildByWorkOrder() {
     const laborPct = r.total > 0 ? r.labor / r.total * 100 : 0;
     return `<tr>
       <td><span style="font-family:monospace;font-size:0.82rem;color:#2e86c1;font-weight:600;">${r.wo}</span></td>
-      <td style="max-width:240px;overflow:hidden;text-overflow:ellipsis;color:#555;" title="${r.desc}">${r.desc}</td>
       <td><strong>${r.prop || '—'}</strong></td>
       <td style="text-align:right;">${r.labor > 0 ? fmtC(r.labor) + '<span style="color:#a0aebb;font-size:0.75rem;margin-left:4px;">' + r.hrs.toFixed(1) + 'h</span>' : '—'}</td>
       <td style="text-align:right;">${r.mats > 0 ? fmtC(r.mats) : '—'}</td>
@@ -458,7 +466,6 @@ function buildByWorkOrder() {
     <table class="data-table">
       <thead><tr>
         <th>WO #</th>
-        <th>Description</th>
         <th>Property</th>
         <th style="text-align:right;">Labor</th>
         <th style="text-align:right;">Materials</th>
