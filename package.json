@@ -1,0 +1,13 @@
+{
+  "name": "reports",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "lockbox:probe":    "node scripts/lockbox-update.js --probe",
+    "lockbox:dry-run":  "node scripts/lockbox-update.js --dry-run",
+    "lockbox":          "node scripts/lockbox-update.js"
+  },
+  "dependencies": {
+    "playwright": "^1.44.0"
+  }
+}
