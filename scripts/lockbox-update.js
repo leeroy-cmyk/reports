@@ -1,18 +1,14 @@
 'use strict';
-// Bulk-create AppFolio lockboxes for vacant units.
+// AppFolio lockbox bulk upsert.
 //
-// Setup (one time):
-//   npm install
-//   npx playwright install chromium
-//   copy .env.lockbox.example .env.lockbox   ← fill in your credentials
-//
-// Run:
-//   node scripts/lockbox-update.js --probe      ← screenshot first form + dump field names, then exit
-//   node scripts/lockbox-update.js --dry-run    ← navigate all forms, screenshot, no submit
-//   node scripts/lockbox-update.js              ← live run
+// Modes:
+//   node scripts/lockbox-update.js --probe       ← screenshot first form + dump field names
+//   node scripts/lockbox-update.js --delete-all  ← delete every existing lockbox, then exit
+//   node scripts/lockbox-update.js --dry-run     ← visit all forms, screenshot, no submit
+//   node scripts/lockbox-update.js --retry       ← re-run only units that failed in last run
+//   node scripts/lockbox-update.js               ← live run: create lockboxes for all units
 
 const { chromium } = require('playwright');
-const https        = require('https');
 const fs           = require('fs');
 const path         = require('path');
 
@@ -25,23 +21,21 @@ if (fs.existsSync(envPath)) {
   });
 }
 
-const AF_HOST     = 'https://mckay.appfolio.com';
-const AF_USERNAME = process.env.AF_USERNAME;    // API basic-auth user
-const AF_PASSWORD = process.env.AF_PASSWORD;    // API basic-auth password
-const AF_EMAIL    = process.env.AF_EMAIL;       // web login email
-const AF_WEB_PASS = process.env.AF_WEB_PASSWORD;// web login password
-const DRY_RUN     = process.argv.includes('--dry-run') || process.argv.includes('--probe');
-const PROBE       = process.argv.includes('--probe');
-const SS_DIR      = path.join(__dirname, '..', 'lockbox-screenshots');
+const AF_HOST  = 'https://mckay.appfolio.com';
+const DRY_RUN  = process.argv.includes('--dry-run') || process.argv.includes('--probe');
+const PROBE    = process.argv.includes('--probe');
+const DEL_ALL  = process.argv.includes('--delete-all');
+const RETRY    = process.argv.includes('--retry');
+const SS_DIR   = path.join(__dirname, '..', 'lockbox-screenshots');
 fs.mkdirSync(SS_DIR, { recursive: true });
 
-// ── REGION / UNIT CODES ───────────────────────────────────────────────────────
+// ── REGION CODES ──────────────────────────────────────────────────────────────
 // 1507 = Tri-Cities, Tacoma, Missoula, Helena  |  0517 = Spokane/Valley/Medical Lake
 const UNIT_CODE_1507 = new Set([
   'kn47','ps17','ps25','ps91','rl16','rl21','tc34','tc68','ms43','ms22','hl65','hl73',
 ]);
 
-// ── BUILDING ACCESS CODES (null = no building entry door) ────────────────────
+// ── BUILDING ACCESS CODES ─────────────────────────────────────────────────────
 const BUILDING_CODES = {
   a511: '4323', a916: '1916', b101: '2947', c313: '3141',
   m221: '7017', m405: '3829', m608: '8061', w226: '5443',
@@ -67,274 +61,221 @@ function unlockCode(propertyName) {
 
 function lockboxName(propertyName, unitNum) {
   let prop = (propertyName || '').toLowerCase()
-    .replace(/\s+/g, '')           // remove spaces
-    .replace(/[^a-z0-9-]/g, '');  // strip non-alphanumeric (except dash)
+    .replace(/\s+/g, '').replace(/[^a-z0-9-]/g, '');
+  if (prop.startsWith('kn47')) prop = 'kn47';
   if (prop.startsWith('o155')) prop = 'o155';
   if (prop.startsWith('k104')) prop = 'k104';
   return `${prop}-${String(unitNum).replace(/\s+/g, '')}`;
 }
 
-// ── UNIT LIST (deduplicated from spreadsheet) ─────────────────────────────────
-const UNITS = [
-  { property: 'a511',      unit: '102'     },
-  { property: 'a916',      unit: '8'       },
-  { property: 'b101',      unit: '3'       },
-  { property: 'b101',      unit: '8'       },
-  { property: 'c302',      unit: '1'       },
-  { property: 'c302',      unit: '5'       },
-  { property: 'c302',      unit: '6'       },
-  { property: 'c302',      unit: '7'       },
-  { property: 'c302',      unit: '8'       },
-  { property: 'c313',      unit: '6'       },
-  { property: 'c313',      unit: '12'      },
-  { property: 'c313',      unit: '18'      },
-  { property: 'c313',      unit: '21'      },
-  { property: 'c313',      unit: '24'      },
-  { property: 'c313',      unit: '26'      },
-  { property: 'c313',      unit: '27'      },
-  { property: 'c313',      unit: '30'      },
-  { property: 'c313',      unit: '33'      },
-  { property: 'e328',      unit: '1'       },
-  { property: 'e328',      unit: '4'       },
-  { property: 'h731',      unit: '737B'    },
-  { property: 'j312',      unit: '3104'    },
-  { property: 'k104- LeFevre', unit: '101-1'  },
-  { property: 'k104- LeFevre', unit: '107-7'  },
-  { property: 'k104- LeFevre', unit: '314-12' },
-  { property: 'k104- LeFevre', unit: '506-3'  },
-  { property: 'k104- LeFevre', unit: '519-104'},
-  { property: 'kn47 K1',   unit: 'A103'   },
-  { property: 'kn47 K1',   unit: 'A104'   },
-  { property: 'kn47 K1',   unit: 'A201'   },
-  { property: 'kn47 K1',   unit: 'B102'   },
-  { property: 'kn47 K1',   unit: 'C109'   },
-  { property: 'kn47 K1',   unit: 'D104'   },
-  { property: 'kn47 K1',   unit: 'D107'   },
-  { property: 'kn47 K1',   unit: 'D202'   },
-  { property: 'kn47 K1',   unit: 'E204'   },
-  { property: 'kn47 K1',   unit: 'E207'   },
-  { property: 'kn47 K1',   unit: 'F202'   },
-  { property: 'kn47 K1',   unit: 'H101'   },
-  { property: 'kn47 K1',   unit: 'H105'   },
-  { property: 'kn47 K1',   unit: 'H201'   },
-  { property: 'kn47 K1',   unit: 'H202'   },
-  { property: 'kn47 K1',   unit: 'H204'   },
-  { property: 'kn47 K1',   unit: 'J101'   },
-  { property: 'kn47 K1',   unit: 'J205'   },
-  { property: 'kn47 K1',   unit: 'J207'   },
-  { property: 'kn47 K1',   unit: 'L105'   },
-  { property: 'kn47 K1',   unit: 'L203'   },
-  { property: 'kn47 K1',   unit: 'M205'   },
-  { property: 'kn47 K1',   unit: 'M206'   },
-  { property: 'kn47 K2',   unit: 'A102'   },
-  { property: 'kn47 K2',   unit: 'A205'   },
-  { property: 'kn47 K2',   unit: 'B201'   },
-  { property: 'kn47 K2',   unit: 'B205'   },
-  { property: 'kn47 K2',   unit: 'D104'   },
-  { property: 'kn47 K2',   unit: 'D108'   },
-  { property: 'kn47-k3',   unit: 'K101'   },
-  { property: 'm221',      unit: '2'       },
-  { property: 'm221',      unit: '31'      },
-  { property: 'm405',      unit: '24'      },
-  { property: 'm405',      unit: '25'      },
-  { property: 'm608',      unit: '2'       },
-  { property: 'ms43',      unit: '444'     },
-  { property: 'o155-Elm',  unit: 'J'       },
-  { property: 'o155-Oak',  unit: 'B6'      },
-  { property: 'o155-Oak',  unit: 'C9'      },
-  { property: 'o155-Oak',  unit: 'D6'      },
-  { property: 'p705',      unit: '3'       },
-  { property: 'p705',      unit: '17'      },
-  { property: 'ps17',      unit: 'A3'      },
-  { property: 'ps17',      unit: 'A5'      },
-  { property: 'ps17',      unit: 'A8'      },
-  { property: 'ps17',      unit: 'A10'     },
-  { property: 'ps17',      unit: 'B3'      },
-  { property: 'ps17',      unit: 'B4'      },
-  { property: 'ps25',      unit: 'A4'      },
-  { property: 'ps25',      unit: 'A8'      },
-  { property: 'ps25',      unit: 'B9'      },
-  { property: 'ps25',      unit: 'B14'     },
-  { property: 'ps25',      unit: 'C22'     },
-  { property: 'ps25',      unit: 'D23'     },
-  { property: 'ps25',      unit: 'E32'     },
-  { property: 'ps25',      unit: 'F37'     },
-  { property: 'ps25',      unit: 'F43'     },
-  { property: 'ps91',      unit: '2'       },
-  { property: 'ps91',      unit: '918'     },
-  { property: 'rl16',      unit: 'A02'     },
-  { property: 'rl16',      unit: 'A03'     },
-  { property: 'rl16',      unit: 'A04'     },
-  { property: 'rl16',      unit: 'A11'     },
-  { property: 'rl16',      unit: 'A15'     },
-  { property: 'rl16',      unit: 'A17'     },
-  { property: 'rl16',      unit: 'A21'     },
-  { property: 'rl16',      unit: 'B04'     },
-  { property: 'rl16',      unit: 'B22'     },
-  { property: 'rl16',      unit: 'C02'     },
-  { property: 'rl16',      unit: 'C08'     },
-  { property: 'rl16',      unit: 'C13'     },
-  { property: 'rl16',      unit: 'C17'     },
-  { property: 'rl16',      unit: 'D10'     },
-  { property: 'rl16',      unit: 'D19'     },
-  { property: 'rl21',      unit: '9'       },
-  { property: 'rl21',      unit: '16'      },
-  { property: 's129',      unit: '10'      },
-  { property: 's300',      unit: '12'      },
-  { property: 'tc34',      unit: 'A105'    },
-  { property: 'tc34',      unit: 'A106'    },
-  { property: 'tc34',      unit: 'B112'    },
-  { property: 'tc68',      unit: 'A02'     },
-  { property: 'tc68',      unit: 'A07'     },
-  { property: 'tc68',      unit: 'A13'     },
-  { property: 'tc68',      unit: 'A18'     },
-  { property: 'tc68',      unit: 'A24'     },
-  { property: 'tc68',      unit: 'A27'     },
-  { property: 'tc68',      unit: 'A28'     },
-  { property: 'tc68',      unit: 'A30'     },
-  { property: 'tc68',      unit: 'B32'     },
-  { property: 'tc68',      unit: 'B51'     },
-  { property: 'tc68',      unit: 'B54'     },
-  { property: 'tc68',      unit: 'C64'     },
-  { property: 'tc68',      unit: 'C65'     },
-  { property: 'tc68',      unit: 'C67'     },
-  { property: 'tc68',      unit: 'C71'     },
-  { property: 'tc68',      unit: 'C75'     },
-  { property: 'tc68',      unit: 'C76'     },
-  { property: 'tc68',      unit: 'D080'    },
-  { property: 'tc68',      unit: 'D081'    },
-  { property: 'tc68',      unit: 'D088'    },
-  { property: 'tc68',      unit: 'D091'    },
-  { property: 'v202',      unit: '1'       },
-  { property: 'v202',      unit: '2'       },
-  { property: 'v202',      unit: '6'       },
-  { property: 'w117',      unit: '3'       },
-  { property: 'w117',      unit: '10'      },
-  { property: 'w226',      unit: '4'       },
-  { property: 'w226',      unit: '5'       },
-  { property: 'w226',      unit: '9'       },
-];
-
-// ── APPFOLIO API: UNIT DIRECTORY ──────────────────────────────────────────────
-async function fetchUnitIds() {
-  console.log('Fetching unit directory from AppFolio API...');
-  return new Promise((resolve, reject) => {
-    const auth = 'Basic ' + Buffer.from(`${AF_USERNAME}:${AF_PASSWORD}`).toString('base64');
-    const body = JSON.stringify({ property_visibility: 'active' });
-    const req  = https.request({
-      hostname: 'mckay.appfolio.com', path: '/api/v2/reports/unit_directory.json', method: 'POST',
-      headers: { 'Authorization': auth, 'Content-Type': 'application/json',
-                 'Content-Length': Buffer.byteLength(body), 'Accept': 'application/json' }
-    }, res => {
-      let d = ''; res.on('data', c => d += c);
-      res.on('end', () => {
-        try { resolve(JSON.parse(d)); }
-        catch(e) { reject(new Error('Parse error: ' + d.slice(0, 300))); }
-      });
-    });
-    req.on('error', reject); req.write(body); req.end();
-  });
-}
-
-function buildUnitLookup(data) {
-  const rows = Array.isArray(data) ? data : (data.results || []);
-  if (rows.length === 0) { console.warn('  Warning: unit directory returned 0 rows'); return {}; }
-
-  // Print first row so we can see field names if probe
-  if (PROBE) console.log('  Sample unit row fields:', Object.keys(rows[0]));
-
-  const map = {};
-  rows.forEach(r => {
-    // AppFolio may use different field names — try common variants
-    const prop   = (r.property_name || r.property || '').toLowerCase().trim();
-    const unit   = (r.unit_name || r.unit || r.unit_number || '').toLowerCase().trim();
-    const unitId = r.unit_id || r.id;
-    if (prop && unit && unitId) map[`${prop}|${unit}`] = String(unitId);
-  });
-  console.log(`  Lookup built: ${Object.keys(map).length} units`);
-  return map;
-}
-
-function findUnitId(lookup, propertyName, unitNum) {
-  const unit = String(unitNum).toLowerCase().trim();
-  // Try progressively looser property name matches
-  const propVariants = [
-    propertyName,
-    propertyName.replace(/\s+k[123]$/i, '').trim(),      // "kn47 K1" → "kn47"
-    propertyName.replace(/\s*-\s*/g, '-').trim(),         // "k104- LeFevre" → "k104-LeFevre"
-    propertyName.split('-')[0].trim(),                     // "o155-Oak" → "o155"
-    propertyName.split('-')[0].trim() + '-Oak',
-    propertyName.split('-')[0].trim() + '-Elm',
-  ];
-  for (const p of propVariants) {
-    const key = p.toLowerCase().trim() + '|' + unit;
-    if (lookup[key]) return lookup[key];
-  }
-  return null;
-}
+// ── LOAD FULL UNIT LIST ───────────────────────────────────────────────────────
+const unitsPath = path.join(__dirname, '..', 'data', 'units-all.json');
+const ALL_UNITS = JSON.parse(fs.readFileSync(unitsPath, 'utf8').replace(/^﻿/, ''));
+// units-all.json is an array of {unit_id, unit_name, property_name}
 
 // ── LOGIN ─────────────────────────────────────────────────────────────────────
 async function login(page) {
-  console.log('Logging in to AppFolio...');
-  await page.goto(AF_HOST, { waitUntil: 'networkidle', timeout: 30000 });
-  // Keycloak login page
-  await page.waitForSelector('input[type="email"], input[name="username"], #username', { timeout: 15000 });
-  await page.fill('input[type="email"], input[name="username"], #username', AF_EMAIL);
-  const pwNow = await page.locator('input[type="password"]').isVisible().catch(() => false);
-  if (!pwNow) {
-    await page.click('button[type="submit"]');
-    await page.waitForSelector('input[type="password"]', { timeout: 10000 });
+  console.log('Opening AppFolio...');
+  await page.goto(AF_HOST, { waitUntil: 'domcontentloaded', timeout: 30000 });
+  if (page.url().startsWith('https://mckay.appfolio.com')) {
+    await page.waitForLoadState('networkidle', { timeout: 30000 }).catch(() => {});
+    console.log('  Already logged in:', page.url());
+    return;
   }
-  await page.fill('input[type="password"]', AF_WEB_PASS);
-  await Promise.all([
-    page.waitForNavigation({ timeout: 30000 }),
-    page.click('button[type="submit"]'),
-  ]);
+  // Auto-fill credentials are in the browser — just click the login button
+  const loginBtn = page.locator('#kc-login, button:has-text("Sign in"), button:has-text("Log in"), input[type="submit"]').first();
+  if (await loginBtn.count() > 0 && await loginBtn.isVisible().catch(() => false)) {
+    console.log('  Auto-clicking login button...');
+    await loginBtn.click({ timeout: 5000 }).catch(() => {});
+  } else {
+    console.log('  Waiting for manual login (click Log In in the browser)...');
+  }
+  await page.waitForURL(/^https:\/\/mckay\.appfolio\.com/, { timeout: 120000 });
+  await page.waitForLoadState('networkidle', { timeout: 30000 }).catch(() => {});
   console.log('  Logged in:', page.url());
 }
 
-// ── PROBE: dump form fields ───────────────────────────────────────────────────
+// ── PROBE ─────────────────────────────────────────────────────────────────────
 async function probeForm(page, unitId, prop, unit) {
   const uname = encodeURIComponent(`${prop} - ${unit}`);
   const url   = `${AF_HOST}/manage_devices/lockboxes/new?unit_id=${unitId}&unit_name=${uname}`;
   console.log('\nPROBE navigating to:', url);
-  await page.goto(url, { waitUntil: 'networkidle', timeout: 20000 });
+  await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 20000 });
+  await page.waitForTimeout(1500);
   await page.screenshot({ path: path.join(SS_DIR, 'probe-form.png'), fullPage: true });
-  console.log('Screenshot → lockbox-screenshots/probe-form.png');
 
   const fields = await page.evaluate(() =>
-    Array.from(document.querySelectorAll('input,select,textarea')).map(el => ({
-      tag: el.tagName, type: el.type || '', name: el.name || '',
-      id: el.id || '', placeholder: el.placeholder || '',
-      label: document.querySelector(`label[for="${el.id}"]`)?.textContent?.trim() || '',
+    Array.from(document.querySelectorAll('input,select,textarea,button')).map(el => ({
+      tag: el.tagName, type: el.type || '', name: el.name || '', id: el.id || '',
+      value: el.value || '', text: el.textContent?.trim().slice(0,40) || '',
+      visible: el.offsetParent !== null,
     }))
   );
-  console.log('\n── Form fields ──');
+  console.log('\n── All interactive elements ──');
   fields.forEach(f => console.log(JSON.stringify(f)));
+}
+
+// ── DELETE ALL LOCKBOXES ──────────────────────────────────────────────────────
+async function deleteAllLockboxes(page) {
+  console.log('\nLoading lockboxes list at /manage_devices...');
+  await page.goto(`${AF_HOST}/manage_devices`, { waitUntil: 'domcontentloaded', timeout: 20000 });
+  await page.waitForTimeout(3000);
+
+  let deleted = 0, stuckCount = 0, lastRowName = null;
+  const permanentSkip = new Set();
+
+  while (true) {
+    if (deleted > 2000) { console.log('  Safety stop (2000).'); break; }
+
+    // Reload page every 50 deletions to keep DOM clean
+    if (deleted > 0 && deleted % 50 === 0) {
+      await page.goto(`${AF_HOST}/manage_devices`, { waitUntil: 'domcontentloaded', timeout: 20000 });
+      await page.waitForTimeout(2500);
+      stuckCount = 0; lastRowName = null;
+    }
+
+    const mainRows = page.locator('tbody tr').filter({ has: page.locator('button') });
+    const count    = await mainRows.count();
+    if (count === 0) { console.log('  No more lockboxes.'); break; }
+
+    const firstRow = mainRows.first();
+    const lbName   = (await firstRow.locator('td').first().textContent().catch(() => '?')).trim();
+
+    // Detect stuck: same row appearing repeatedly → reload, then permanently skip
+    if (lbName === lastRowName) {
+      stuckCount++;
+      if (stuckCount === 4) {
+        console.log(`  Stuck on "${lbName}" — reloading page...`);
+        await page.goto(`${AF_HOST}/manage_devices`, { waitUntil: 'domcontentloaded', timeout: 20000 });
+        await page.waitForTimeout(2500);
+        stuckCount = 0;
+        continue;
+      }
+      if (stuckCount >= 8) {
+        console.log(`  Permanently skipping "${lbName}" (not deletable)`);
+        permanentSkip.add(lbName);
+        stuckCount = 0; lastRowName = null;
+        continue;
+      }
+    } else {
+      stuckCount = 0;
+      lastRowName = lbName;
+    }
+
+    // Skip rows flagged as permanently un-deletable
+    if (permanentSkip.has(lbName)) {
+      // Scroll past / find next row — just reload to get fresh list without this row at top
+      // We need to move past it; click its toggle to collapse if expanded, then the NEXT row becomes first
+      const toggle = firstRow.locator('button').last();
+      await toggle.click({ timeout: 3000 }).catch(() => {});
+      await page.waitForTimeout(500);
+      continue;
+    }
+
+    // If Delete already visible (row pre-expanded), skip the toggle click
+    const delLink   = page.locator('tbody a:has-text("Delete"), tbody button:has-text("Delete")').first();
+    let   delVisible = await delLink.isVisible().catch(() => false);
+
+    if (!delVisible) {
+      const toggle = firstRow.locator('button').last();
+      await toggle.click({ timeout: 5000 });
+      // Wait for Delete to appear rather than a fixed timeout
+      await delLink.waitFor({ state: 'visible', timeout: 3000 }).catch(() => {});
+      delVisible = await delLink.isVisible().catch(() => false);
+    }
+
+    if (deleted === 0) {
+      await page.screenshot({ path: path.join(SS_DIR, 'delete-dropdown.png') });
+      console.log('  Screenshot → lockbox-screenshots/delete-dropdown.png');
+    }
+
+    if (!delVisible) {
+      await page.screenshot({ path: path.join(SS_DIR, `no-delete-${deleted}-${stuckCount}.png`) });
+      console.log(`  ? Delete not visible for "${lbName}" (stuck=${stuckCount})`);
+      continue;
+    }
+
+    // AppFolio uses window.confirm() — accept before the click triggers it
+    page.once('dialog', dialog => dialog.accept());
+    await delLink.click({ timeout: 5000 });
+    await page.waitForTimeout(2000);
+
+    deleted++;
+    lastRowName = null; // reset after successful deletion
+    process.stdout.write(`  ✗  ${lbName} (${deleted})\n`);
+  }
+
+  console.log(`\n── Delete done: ${deleted} deleted`);
+}
+
+// ── DELETE LOCKBOX FOR A SPECIFIC UNIT ───────────────────────────────────────
+async function deleteUnitLockbox(page, unitId, unitName, propName) {
+  await page.goto(`${AF_HOST}/manage_devices`, { waitUntil: 'domcontentloaded', timeout: 20000 });
+  await page.waitForTimeout(2000);
+
+  // Try matching by unit ID in href first, fall back to unit name text in td
+  let unitRow = page.locator('tbody tr').filter({
+    has: page.locator(`a[href*="/${unitId}"]`)
+  }).first();
+
+  if ((await unitRow.count()) === 0) {
+    // Fallback: scan rows matching by lockbox name (first td) or unit column text (second td)
+    const expectedName = lockboxName(propName, unitName).toLowerCase();
+    const allRows      = page.locator('tbody tr').filter({ has: page.locator('button') });
+    const count        = await allRows.count();
+    for (let i = 0; i < count; i++) {
+      const row      = allRows.nth(i);
+      const nameCell = (await row.locator('td').first().textContent().catch(() => '')).toLowerCase().trim();
+      const unitCell = (await row.locator('td').nth(1).textContent().catch(() => '')).toLowerCase();
+      const nameMatch = nameCell === expectedName || nameCell.includes(expectedName);
+      const unitMatch = unitCell.includes(String(unitName).toLowerCase()) &&
+                        unitCell.includes(propName.split(/[\s-]/)[0].toLowerCase());
+      if (nameMatch || unitMatch) { unitRow = row; break; }
+    }
+  }
+
+  if ((await unitRow.count()) === 0) return false;
+
+  const lbName = (await unitRow.locator('td').first().textContent().catch(() => '?')).trim();
+
+  // Check if Delete already visible (row pre-expanded)
+  const delLink = page.locator('tbody a:has-text("Delete"), tbody button:has-text("Delete")').first();
+  if (!(await delLink.isVisible().catch(() => false))) {
+    await unitRow.locator('button').last().click({ timeout: 5000 });
+    await delLink.waitFor({ state: 'visible', timeout: 3000 }).catch(() => {});
+  }
+
+  if (!(await delLink.isVisible().catch(() => false))) return false;
+
+  page.once('dialog', d => d.accept());
+  await delLink.click({ timeout: 5000 });
+  await page.waitForTimeout(2000);
+  console.log(`  ✗  deleted existing lockbox "${lbName}" for unit ${unitId}`);
+  return true;
 }
 
 // ── CREATE LOCKBOX ────────────────────────────────────────────────────────────
 async function createLockbox(page, unitId, prop, unit) {
-  const name = lockboxName(prop, unit);
-  const code = unlockCode(prop);
+  const name  = lockboxName(prop, unit);
+  const code  = unlockCode(prop);
   const uname = encodeURIComponent(`${prop} - ${unit}`);
   const url   = `${AF_HOST}/manage_devices/lockboxes/new?unit_id=${unitId}&unit_name=${uname}`;
 
-  await page.goto(url, { waitUntil: 'networkidle', timeout: 20000 });
+  await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 20000 });
+  await page.locator('[name="name"]').waitFor({ state: 'visible', timeout: 10000 }).catch(() => {});
+  await page.waitForTimeout(600);
 
-  // ── Fill name field ──────────────────────────────────────────────────────
-  // Try the selectors most likely used by AppFolio — adjust after --probe if needed
-  const nameSelectors = ['[name="lockbox[name]"]', '#lockbox_name', '[placeholder*="name" i]'];
+  // Fill name
+  const nameSelectors = ['[name="name"]', '[name="lockbox[name]"]', '#lockbox_name'];
   for (const sel of nameSelectors) {
     const el = page.locator(sel).first();
     if (await el.count() > 0 && await el.isVisible()) { await el.fill(name); break; }
   }
 
-  // ── Fill unlock code / combination ──────────────────────────────────────
+  // Fill unlock code
   const codeSelectors = [
-    '[name="lockbox[combination]"]', '[name="lockbox[unlock_code]"]',
-    '[name="lockbox[code]"]', '#lockbox_combination',
-    '#lockbox_unlock_code', '[placeholder*="code" i]', '[placeholder*="combination" i]',
+    '[name="unlockCode"]', '[name="lockbox[combination]"]', '[name="lockbox[unlock_code]"]',
+    '[name="lockbox[code]"]', '#lockbox_combination', '#lockbox_unlock_code',
   ];
   for (const sel of codeSelectors) {
     const el = page.locator(sel).first();
@@ -343,81 +284,131 @@ async function createLockbox(page, unitId, prop, unit) {
 
   if (DRY_RUN) {
     await page.screenshot({ path: path.join(SS_DIR, `${name}.png`) });
-    console.log(`  [DRY] ${name.padEnd(20)} ${code}`);
+    console.log(`  [DRY] ${name.padEnd(24)} ${code}`);
     return 'dry_run';
   }
 
-  await page.click('button[type="submit"], input[type="submit"]');
-  await page.waitForTimeout(1500);
+  await page.locator('button:has-text("Save")').click({ timeout: 8000 });
+  await page.waitForTimeout(2000);
 
-  const success = !page.url().includes('/new') ||
-    (await page.locator('.flash-success,.notice,.alert-success').count()) > 0;
-  return success ? 'ok' : 'check';
+  // If URL changed away from /new the save succeeded — check errors only if still on /new
+  const urlChanged = !page.url().includes('/new');
+  if (urlChanged) return 'ok';
+
+  const errMsg = await page.locator(
+    '.flash-error,.alert-danger'
+  ).first().textContent().catch(() => '');
+  if (errMsg && errMsg.trim()) {
+    await page.screenshot({ path: path.join(SS_DIR, `ERR-${name}.png`) });
+    return `error: ${errMsg.trim().slice(0, 80)}`;
+  }
+
+  const hasSuccess  = (await page.locator(
+    '.flash-success,.notice,.alert-success,.toast-success,[class*="success"],[class*="notice"]'
+  ).count()) > 0;
+  const nameCleared = (await page.locator('[name="name"]').inputValue().catch(() => '')) === '';
+  return (hasSuccess || nameCleared) ? 'ok' : 'check';
 }
 
 // ── MAIN ──────────────────────────────────────────────────────────────────────
 (async () => {
-  if (!AF_EMAIL || !AF_WEB_PASS) {
-    console.error('Missing credentials in .env.lockbox — need AF_EMAIL and AF_WEB_PASSWORD at minimum.');
-    process.exit(1);
-  }
-
-  // Step 1: get unit IDs via API
-  let lookup = {};
-  if (AF_USERNAME && AF_PASSWORD) {
-    try { lookup = buildUnitLookup(await fetchUnitIds()); }
-    catch(e) { console.warn('Unit directory fetch failed:', e.message, '\n  Will skip units with missing IDs.'); }
-  } else {
-    console.warn('AF_USERNAME / AF_PASSWORD not set — skipping API unit lookup.');
-  }
-
-  // Step 2: browser
-  const browser = await chromium.launch({ headless: false, slowMo: 80 });
-  const page    = await browser.newPage();
+  // Persistent context saves login cookies to disk — only need to log in once
+  const sessionDir = path.join(__dirname, '..', '.browser-session');
+  const context    = await chromium.launchPersistentContext(sessionDir, { headless: false, slowMo: 60 });
+  const page       = context.pages()[0] || await context.newPage();
   page.setDefaultTimeout(15000);
 
   try {
     await login(page);
 
+    // ── PROBE mode ──────────────────────────────────────────────────────────
     if (PROBE) {
-      const first  = UNITS[0];
-      const unitId = findUnitId(lookup, first.property, first.unit);
-      if (!unitId) console.log('Could not find unit_id for', first.property, first.unit, '— check lookup output above.');
-      else         await probeForm(page, unitId, first.property, first.unit);
-      await browser.close(); return;
+      // Also check the manage_devices index for lockbox list structure
+      console.log('\nProbing /manage_devices index...');
+      await page.goto(`${AF_HOST}/manage_devices`, { waitUntil: 'domcontentloaded', timeout: 20000 });
+      await page.waitForTimeout(2000);
+      await page.screenshot({ path: path.join(SS_DIR, 'probe-manage-devices.png'), fullPage: true });
+      const mdLinks = await page.evaluate(() =>
+        Array.from(document.querySelectorAll('a[href*="lockbox"]')).map(a => ({
+          text: a.textContent.trim().slice(0,60), href: a.getAttribute('href')
+        }))
+      );
+      console.log('Lockbox links on /manage_devices:', JSON.stringify(mdLinks));
+
+      const first = ALL_UNITS[0];
+      console.log(`\nProbing lockbox form for ${first.property_name} / ${first.unit_name} (id=${first.unit_id})`);
+      await probeForm(page, first.unit_id, first.property_name, first.unit_name);
+      return;
     }
 
+    // ── DELETE-ALL mode ──────────────────────────────────────────────────────
+    if (DEL_ALL) {
+      await deleteAllLockboxes(page);
+      return;
+    }
+
+    // ── RETRY mode ──────────────────────────────────────────────────────────
+    if (RETRY) {
+      const resultsPath = path.join(__dirname, '..', 'lockbox-results.json');
+      const prev        = JSON.parse(fs.readFileSync(resultsPath, 'utf8'));
+      const failed      = prev.filter(r => r.status !== 'ok');
+      console.log(`\nRetrying ${failed.length} failed units...`);
+      const results = [];
+      for (const { unit_id, property, unit } of failed) {
+        try {
+          await deleteUnitLockbox(page, unit_id, unit, property);
+          const status = await createLockbox(page, unit_id, property, unit);
+          const icon   = status === 'ok' ? '✓' : '✗';
+          console.log(`  ${icon}  ${lockboxName(property, unit).padEnd(26)} ${unlockCode(property)}`);
+          results.push({ unit_id, property, unit,
+                         name: lockboxName(property, unit),
+                         code: unlockCode(property), status });
+        } catch(e) {
+          console.error(`  ERR  ${property} ${unit}:`, e.message.slice(0, 80));
+          results.push({ unit_id, property, unit,
+                         name: lockboxName(property, unit), status: 'error', error: e.message });
+        }
+        await page.waitForTimeout(300);
+      }
+      const counts = results.reduce((a, r) => { a[r.status] = (a[r.status] || 0) + 1; return a; }, {});
+      console.log('\n── Retry done:', JSON.stringify(counts));
+      // Merge back into results file
+      const merged = prev.map(r => {
+        const fix = results.find(x => x.unit_id === r.unit_id);
+        return fix || r;
+      });
+      fs.writeFileSync(resultsPath, JSON.stringify(merged, null, 2));
+      return;
+    }
+
+    // ── CREATE mode (default) ────────────────────────────────────────────────
+    console.log(`\nCreating lockboxes for ${ALL_UNITS.length} units...`);
     const results = [];
-    for (const { property, unit } of UNITS) {
-      const unitId = findUnitId(lookup, property, unit);
-      if (!unitId) {
-        console.log(`  SKIP  ${lockboxName(property, unit).padEnd(22)} — unit_id not found`);
-        results.push({ property, unit, name: lockboxName(property, unit), status: 'not_found' });
-        continue;
-      }
+    for (const { unit_id, unit_name, property_name } of ALL_UNITS) {
       try {
-        const status = await createLockbox(page, unitId, property, unit);
-        const icon = status === 'ok' ? '✓' : status === 'dry_run' ? '·' : '?';
-        console.log(`  ${icon}  ${lockboxName(property, unit).padEnd(22)} ${unlockCode(property)}`);
-        results.push({ property, unit, name: lockboxName(property, unit), code: unlockCode(property), status });
+        const status = await createLockbox(page, unit_id, property_name, unit_name);
+        const icon = status === 'ok' ? '✓' : status === 'dry_run' ? '·' : status === 'check' ? '?' : '✗';
+        console.log(`  ${icon}  ${lockboxName(property_name, unit_name).padEnd(26)} ${unlockCode(property_name)}`);
+        results.push({ unit_id, property: property_name, unit: unit_name,
+                       name: lockboxName(property_name, unit_name),
+                       code: unlockCode(property_name), status });
       } catch(e) {
-        console.error(`  ERR  ${property} ${unit}:`, e.message);
-        await page.screenshot({ path: path.join(SS_DIR, `ERR-${lockboxName(property, unit)}.png`) }).catch(()=>{});
-        results.push({ property, unit, name: lockboxName(property, unit), status: 'error', error: e.message });
+        console.error(`  ERR  ${property_name} ${unit_name}:`, e.message.slice(0, 80));
+        await page.screenshot({ path: path.join(SS_DIR, `ERR-${lockboxName(property_name, unit_name)}.png`) }).catch(() => {});
+        results.push({ unit_id, property: property_name, unit: unit_name,
+                       name: lockboxName(property_name, unit_name), status: 'error', error: e.message });
       }
-      await page.waitForTimeout(400);
+      await page.waitForTimeout(300);
     }
 
-    const ok   = results.filter(r => ['ok','dry_run'].includes(r.status)).length;
-    const skip = results.filter(r => r.status === 'not_found').length;
-    const err  = results.filter(r => r.status === 'error').length;
-    console.log(`\n── ${DRY_RUN ? 'Dry run' : 'Done'}: ${ok} ${DRY_RUN?'previewed':'created'}, ${skip} skipped (no unit_id), ${err} errors`);
-
-    const resultFile = path.join(__dirname, '..', 'lockbox-results.json');
-    fs.writeFileSync(resultFile, JSON.stringify(results, null, 2));
-    console.log('Results →', resultFile);
+    const counts = results.reduce((a, r) => {
+      a[r.status] = (a[r.status] || 0) + 1; return a;
+    }, {});
+    console.log('\n── Done:', JSON.stringify(counts));
+    fs.writeFileSync(path.join(__dirname, '..', 'lockbox-results.json'), JSON.stringify(results, null, 2));
+    console.log('Results → lockbox-results.json');
 
   } finally {
-    await browser.close();
+    await context.close();
   }
 })();

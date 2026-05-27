@@ -5,6 +5,7 @@
   "scripts": {
     "lockbox:probe":    "node scripts/lockbox-update.js --probe",
     "lockbox:dry-run":  "node scripts/lockbox-update.js --dry-run",
+    "lockbox:retry":    "node scripts/lockbox-update.js --retry",
     "lockbox":          "node scripts/lockbox-update.js"
   },
   "dependencies": {
