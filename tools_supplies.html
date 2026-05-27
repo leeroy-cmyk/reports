@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tools &amp; Supplies — R203</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f4f6f9; color: #2c3e50; min-height: 100vh; }
+
+    /* ── Header ── */
+    header { background: #1a5276; color: white; padding: 20px 32px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px; }
+    .header-left h1 { font-size: 1.5rem; font-weight: 700; display: flex; align-items: center; gap: 10px; }
+    .header-left p  { font-size: 0.8rem; opacity: 0.65; margin-top: 4px; }
+    .updated-chip { font-size: 0.78rem; background: rgba(255,255,255,0.15); padding: 4px 12px; border-radius: 20px; white-space: nowrap; align-self: center; }
+
+    /* ── Main ── */
+    main { max-width: 1100px; margin: 0 auto; padding: 24px; }
+
+    /* ── Stats row ── */
+    .stats-row { display: flex; gap: 14px; margin-bottom: 28px; flex-wrap: wrap; }
+    .stat-card { background: white; border-radius: 10px; padding: 16px 22px; flex: 1; min-width: 130px; box-shadow: 0 1px 4px rgba(0,0,0,0.07); border: 1px solid #e8ecf0; }
+    .stat-value { font-size: 1.55rem; font-weight: 700; color: #1a5276; line-height: 1; }
+    .stat-label { font-size: 0.72rem; color: #7f8c8d; margin-top: 5px; text-transform: uppercase; letter-spacing: 0.05em; }
+
+    /* ── Section title ── */
+    .section-title { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #7f8c8d; margin: 24px 0 12px; }
+
+    /* ── Monthly breakdown ── */
+    .month-row { display: flex; gap: 12px; margin-bottom: 28px; flex-wrap: wrap; }
+    .month-chip { background: white; border-radius: 8px; padding: 10px 18px; border: 1px solid #e8ecf0; box-shadow: 0 1px 3px rgba(0,0,0,0.06); display: flex; align-items: center; gap: 16px; }
+    .month-name { font-weight: 600; font-size: 0.9rem; color: #2c3e50; min-width: 70px; }
+    .month-amount { font-weight: 700; font-size: 1.05rem; color: #1a5276; }
+    .month-count  { font-size: 0.78rem; color: #95a5a6; }
+
+    /* ── Person grid ── */
+    .person-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(185px, 1fr)); gap: 12px; margin-bottom: 28px; }
+    .person-card { background: white; border-radius: 10px; padding: 15px 18px; cursor: pointer; border: 2px solid transparent; box-shadow: 0 1px 4px rgba(0,0,0,0.07); transition: all 0.14s; }
+    .person-card:hover { border-color: #2e86c1; box-shadow: 0 4px 14px rgba(46,134,193,0.14); transform: translateY(-2px); }
+    .person-card.active { border-color: #1a5276; background: #eaf4fb; }
+    .person-name  { font-weight: 600; font-size: 0.9rem; color: #1a5276; margin-bottom: 7px; }
+    .person-total { font-size: 1.25rem; font-weight: 700; color: #2c3e50; }
+    .person-meta  { font-size: 0.72rem; color: #95a5a6; margin-top: 4px; }
+    .person-bar   { height: 3px; border-radius: 2px; background: #d6eaf8; margin-top: 10px; }
+    .person-bar-fill { height: 3px; border-radius: 2px; background: #2e86c1; }
+
+    /* ── Filter bar ── */
+    .filter-bar { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .filter-label { font-size: 0.83rem; color: #5d6d7e; }
+    .clear-btn { font-size: 0.75rem; padding: 3px 11px; border: 1px solid #bdc3c7; border-radius: 20px; cursor: pointer; background: white; color: #5d6d7e; line-height: 1.6; }
+    .clear-btn:hover { background: #f0f3f6; border-color: #95a5a6; }
+
+    /* ── Table ── */
+    .table-wrap { background: white; border-radius: 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.07); overflow: hidden; border: 1px solid #e8ecf0; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.86rem; }
+    th { background: #f8fafc; padding: 10px 14px; text-align: left; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #7f8c8d; border-bottom: 1px solid #e8ecf0; white-space: nowrap; }
+    td { padding: 10px 14px; border-bottom: 1px solid #f0f3f6; vertical-align: middle; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: #fafcfe; }
+
+    .date-cell   { white-space: nowrap; color: #7f8c8d; font-size: 0.81rem; }
+    .name-cell   { font-weight: 500; white-space: nowrap; }
+    .merchant-cell { font-weight: 500; }
+    .memo-cell   { color: #5d6d7e; font-size: 0.82rem; max-width: 220px; }
+    .dept-badge  { display: inline-block; background: #d6eaf8; color: #1a5276; border-radius: 20px; padding: 2px 9px; font-size: 0.7rem; font-weight: 600; white-space: nowrap; }
+    .dept-badge.overhead { background: #fdebd0; color: #a04000; }
+    .amt-cell    { text-align: right; font-weight: 600; white-space: nowrap; font-variant-numeric: tabular-nums; }
+    .amt-pos     { color: #2c3e50; }
+    .amt-neg     { color: #e74c3c; }
+
+    .empty-msg { padding: 40px; text-align: center; color: #aab; font-size: 0.9rem; }
+
+    /* ── Top merchants ── */
+    .merchant-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 28px; }
+    .merchant-row  { background: white; border-radius: 8px; padding: 10px 16px; display: flex; align-items: center; gap: 14px; border: 1px solid #e8ecf0; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+    .merchant-rank { font-size: 0.75rem; font-weight: 700; color: #bdc3c7; min-width: 20px; }
+    .merchant-name { font-weight: 500; flex: 1; font-size: 0.9rem; }
+    .merchant-amt  { font-weight: 700; color: #1a5276; font-size: 0.95rem; }
+    .merchant-cnt  { font-size: 0.75rem; color: #95a5a6; min-width: 50px; text-align: right; }
+    .merchant-track { flex: 0 0 100px; }
+    .merchant-track-bg   { height: 4px; border-radius: 2px; background: #eaf4fb; }
+    .merchant-track-fill { height: 4px; border-radius: 2px; background: #2e86c1; }
+
+    footer { text-align: center; padding: 28px; font-size: 0.74rem; color: #bdc3c7; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-left">
+    <h1>🔧 Tools &amp; Supplies</h1>
+    <p>Ramp card spend · GL 67800 · Since Apr 1, 2026</p>
+  </div>
+  <div class="updated-chip" id="updated-ts">Loading…</div>
+</header>
+
+<main>
+
+  <!-- Stats row -->
+  <div class="stats-row" id="stats-row">
+    <div class="stat-card"><div class="stat-value" id="s-total">—</div><div class="stat-label">Total Spend</div></div>
+    <div class="stat-card"><div class="stat-value" id="s-txns">—</div><div class="stat-label">Transactions</div></div>
+    <div class="stat-card"><div class="stat-value" id="s-people">—</div><div class="stat-label">Team Members</div></div>
+    <div class="stat-card"><div class="stat-value" id="s-avg">—</div><div class="stat-label">Avg per Txn</div></div>
+  </div>
+
+  <!-- Monthly breakdown -->
+  <div class="section-title">By Month</div>
+  <div class="month-row" id="month-row"></div>
+
+  <!-- Team member cards -->
+  <div class="section-title">By Team Member</div>
+  <div class="person-grid" id="person-grid"></div>
+
+  <!-- Top merchants -->
+  <div class="section-title">Top Merchants</div>
+  <div class="merchant-list" id="merchant-list"></div>
+
+  <!-- Transaction table -->
+  <div class="section-title">All Transactions</div>
+  <div class="filter-bar" id="filter-bar" style="display:none">
+    <span class="filter-label" id="filter-label"></span>
+    <button class="clear-btn" onclick="clearFilter()">✕ Show All</button>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Person</th>
+          <th>Merchant</th>
+          <th>Memo</th>
+          <th>Property</th>
+          <th style="text-align:right">Amount</th>
+        </tr>
+      </thead>
+      <tbody id="txn-body">
+        <tr><td colspan="6" class="empty-msg">Loading…</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</main>
+
+<footer>R203 · leeroy-cmyk.github.io/reports</footer>
+
+<script>
+  // ── Helpers ────────────────────────────────────────────────────────────────
+  const FMT = new Intl.NumberFormat('en-US', { style:'currency', currency:'USD' });
+  const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+  function fmt$(n)    { return FMT.format(n); }
+  function titleCase(s) {
+    return (s || '').replace(/\b\w+/g, w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase());
+  }
+  function fmtDate(d) {
+    // '2026-04-17' → 'Apr 17'
+    const [, m, day] = d.split('-');
+    return MONTHS[+m - 1] + ' ' + +day;
+  }
+  function monthLabel(d) {
+    const [y, m] = d.split('-');
+    return MONTHS[+m - 1] + ' ' + y;
+  }
+  function propLabel(dept) {
+    if (!dept) return '';
+    const m = dept.match(/([a-z]{1,3}\d{2,3})/i);
+    return m ? m[1].toLowerCase() : dept.slice(0, 20);
+  }
+  function isOverhead(dept) { return !dept || /^r203$/i.test(dept.trim()); }
+
+  let allTxns    = [];
+  let activeFilter = null;
+
+  // ── Render transactions table ──────────────────────────────────────────────
+  function renderTable(txns) {
+    const tbody = document.getElementById('txn-body');
+    if (!txns.length) {
+      tbody.innerHTML = '<tr><td colspan="6" class="empty-msg">No transactions.</td></tr>';
+      return;
+    }
+    tbody.innerHTML = txns.map(t => {
+      const name = titleCase(t.full_name);
+      const dept = t.dept || '';
+      const prop = propLabel(dept);
+      const overhead = isOverhead(dept);
+      const amtClass = t.amount < 0 ? 'amt-neg' : 'amt-pos';
+      const amtStr  = t.amount < 0
+        ? '(' + fmt$(Math.abs(t.amount)) + ')'
+        : fmt$(t.amount);
+      const badgeClass = overhead ? 'dept-badge overhead' : 'dept-badge';
+      const badgeLabel = overhead ? (dept ? 'overhead' : '—') : prop;
+      return `<tr>
+        <td class="date-cell">${fmtDate(t.date)}</td>
+        <td class="name-cell">${name}</td>
+        <td class="merchant-cell">${t.merchant || '—'}</td>
+        <td class="memo-cell">${t.memo || '—'}</td>
+        <td>${dept ? `<span class="${badgeClass}">${badgeLabel}</span>` : '<span style="color:#bdc3c7">—</span>'}</td>
+        <td class="amt-cell ${amtClass}">${amtStr}</td>
+      </tr>`;
+    }).join('');
+  }
+
+  // ── Build person cards ─────────────────────────────────────────────────────
+  function buildPersonGrid(txns) {
+    const byPerson = {};
+    txns.forEach(t => {
+      const name = titleCase(t.full_name);
+      if (!byPerson[name]) byPerson[name] = { total: 0, count: 0, last: '' };
+      byPerson[name].total += t.amount;
+      byPerson[name].count++;
+      if (t.date > byPerson[name].last) byPerson[name].last = t.date;
+    });
+
+    const sorted  = Object.entries(byPerson).sort((a, b) => b[1].total - a[1].total);
+    const maxAmt  = sorted.length ? Math.max(...sorted.map(([,v]) => v.total)) : 1;
+    const grid    = document.getElementById('person-grid');
+
+    grid.innerHTML = sorted.map(([name, info]) => {
+      const pct = Math.max(0, (info.total / maxAmt) * 100).toFixed(1);
+      return `
+      <div class="person-card" id="pc-${CSS.escape(name)}" onclick="filterPerson(${JSON.stringify(name)})">
+        <div class="person-name">${name}</div>
+        <div class="person-total">${fmt$(info.total)}</div>
+        <div class="person-meta">${info.count} txn${info.count !== 1 ? 's' : ''} · last ${fmtDate(info.last)}</div>
+        <div class="person-bar"><div class="person-bar-fill" style="width:${pct}%"></div></div>
+      </div>`;
+    }).join('');
+
+    return byPerson;
+  }
+
+  // ── Monthly breakdown ──────────────────────────────────────────────────────
+  function buildMonths(txns) {
+    const byMonth = {};
+    txns.forEach(t => {
+      const mk = t.date.slice(0, 7); // 'YYYY-MM'
+      if (!byMonth[mk]) byMonth[mk] = { total: 0, count: 0 };
+      byMonth[mk].total += t.amount;
+      byMonth[mk].count++;
+    });
+
+    const row = document.getElementById('month-row');
+    row.innerHTML = Object.entries(byMonth)
+      .sort((a, b) => a[0].localeCompare(b[0]))
+      .map(([mk, info]) => {
+        const label = MONTHS[+mk.slice(5, 7) - 1] + ' ' + mk.slice(0, 4);
+        return `
+        <div class="month-chip">
+          <span class="month-name">${label}</span>
+          <span class="month-amount">${fmt$(info.total)}</span>
+          <span class="month-count">${info.count} txn${info.count !== 1 ? 's' : ''}</span>
+        </div>`;
+      }).join('');
+  }
+
+  // ── Top merchants ──────────────────────────────────────────────────────────
+  function buildMerchants(txns) {
+    const byM = {};
+    txns.forEach(t => {
+      const m = (t.merchant || 'Unknown').trim();
+      if (!byM[m]) byM[m] = { total: 0, count: 0 };
+      byM[m].total += t.amount;
+      byM[m].count++;
+    });
+
+    const sorted = Object.entries(byM)
+      .filter(([, v]) => v.total > 0)
+      .sort((a, b) => b[1].total - a[1].total)
+      .slice(0, 8);
+
+    const maxAmt = sorted.length ? sorted[0][1].total : 1;
+    const list   = document.getElementById('merchant-list');
+
+    list.innerHTML = sorted.map(([name, info], i) => {
+      const pct = ((info.total / maxAmt) * 100).toFixed(1);
+      return `
+      <div class="merchant-row">
+        <span class="merchant-rank">${i + 1}</span>
+        <span class="merchant-name">${name}</span>
+        <div class="merchant-track">
+          <div class="merchant-track-bg">
+            <div class="merchant-track-fill" style="width:${pct}%"></div>
+          </div>
+        </div>
+        <span class="merchant-cnt">${info.count} txn${info.count !== 1 ? 's' : ''}</span>
+        <span class="merchant-amt">${fmt$(info.total)}</span>
+      </div>`;
+    }).join('');
+  }
+
+  // ── Summary stats ──────────────────────────────────────────────────────────
+  function updateStats(txns) {
+    const people = new Set(txns.map(t => titleCase(t.full_name)));
+    const total  = txns.reduce((s, t) => s + t.amount, 0);
+    document.getElementById('s-total').textContent  = fmt$(total);
+    document.getElementById('s-txns').textContent   = txns.length;
+    document.getElementById('s-people').textContent = people.size;
+    document.getElementById('s-avg').textContent    = txns.length ? fmt$(total / txns.length) : '—';
+  }
+
+  // ── Filter by person ───────────────────────────────────────────────────────
+  function filterPerson(name) {
+    activeFilter = name;
+    document.querySelectorAll('.person-card').forEach(el => {
+      el.classList.toggle('active', el.querySelector('.person-name').textContent === name);
+    });
+    const filtered = allTxns.filter(t => titleCase(t.full_name) === name);
+    renderTable(filtered);
+    const fb = document.getElementById('filter-bar');
+    fb.style.display = 'flex';
+    document.getElementById('filter-label').textContent =
+      `${filtered.length} transaction${filtered.length !== 1 ? 's' : ''} for ${name} · ${fmt$(filtered.reduce((s,t)=>s+t.amount,0))} total`;
+  }
+
+  function clearFilter() {
+    activeFilter = null;
+    document.querySelectorAll('.person-card').forEach(el => el.classList.remove('active'));
+    document.getElementById('filter-bar').style.display = 'none';
+    renderTable(allTxns);
+  }
+
+  // ── Load data ──────────────────────────────────────────────────────────────
+  fetch('./data/tools_supplies.json?_=' + Date.now())
+    .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+    .then(data => {
+      allTxns = (data.transactions || []).sort((a, b) => b.date.localeCompare(a.date));
+
+      // Updated timestamp
+      if (data.fetched_at) {
+        const ts = new Date(data.fetched_at);
+        document.getElementById('updated-ts').textContent =
+          'Updated ' +
+          ts.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) +
+          ' · ' +
+          ts.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+      } else {
+        document.getElementById('updated-ts').textContent = '';
+      }
+
+      updateStats(allTxns);
+      buildMonths(allTxns);
+      buildPersonGrid(allTxns);
+      buildMerchants(allTxns);
+      renderTable(allTxns);
+    })
+    .catch(err => {
+      document.getElementById('updated-ts').textContent = 'Error loading data';
+      document.getElementById('txn-body').innerHTML =
+        `<tr><td colspan="6" class="empty-msg">⚠ Failed to load data: ${err.message}</td></tr>`;
+    });
+</script>
+</body>
+</html>

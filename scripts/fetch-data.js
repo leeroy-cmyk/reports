@@ -447,6 +447,41 @@ function buildTurnCosts() {
   console.log('turn_costs.json: ' + Object.keys(units).length + ' units');
 }
 
+// ── TOOLS & SUPPLIES ─────────────────────────────────────────────────────────
+function buildToolsSupplies() {
+  const rampPath = path.join(DATA_DIR, 'ramp.json');
+  if (!fs.existsSync(rampPath)) { console.log('buildToolsSupplies: ramp.json not found, skipping.'); return; }
+  console.log('Building tools_supplies.json...');
+  const { transactions, fetched_at } = JSON.parse(fs.readFileSync(rampPath, 'utf8'));
+
+  const SINCE = '2026-04-01';
+
+  const result = transactions
+    .filter(t => {
+      const d = t.user_transaction_time.slice(0, 10);
+      if (d < SINCE) return false;
+      const cat = (t.accounting_categories || []).find(c => c.tracking_category_remote_id === 'QuickbooksCategory');
+      return cat && cat.category_id === '67800';
+    })
+    .map(t => {
+      const dept = (t.accounting_categories || []).find(c => c.tracking_category_remote_id === 'QuickbooksDepartment');
+      const fn = (t.card_holder?.first_name || '').trim();
+      const ln = (t.card_holder?.last_name  || '').trim();
+      return {
+        date:      t.user_transaction_time.slice(0, 10),
+        full_name: (fn + ' ' + ln).trim() || 'Unknown',
+        amount:    t.amount,
+        merchant:  t.merchant_name || '',
+        memo:      t.memo || '',
+        dept:      dept?.category_name || '',
+      };
+    })
+    .sort((a, b) => b.date.localeCompare(a.date));
+
+  save('tools_supplies.json', { ok: true, fetched_at, since: SINCE, transactions: result });
+  console.log('tools_supplies.json: ' + result.length + ' transactions');
+}
+
 const FIREBASE_API_KEY = 'AIzaSyAMAicBq6GIvo7p6s67n0wGoi1zuX21ybw';
 const FIREBASE_PROJECT = 'ridgeview-estimates';
 const FIRESTORE_BASE   = `https://firestore.googleapis.com/v1/projects/${FIREBASE_PROJECT}/databases/(default)/documents`;
@@ -566,6 +601,7 @@ const FETCH_ONLY = process.env.FETCH_ONLY || 'all';
     buildRampProcessed();
     buildAuditData();
     buildTurnCosts();
+    buildToolsSupplies();
     console.log('Done.');
     return;
   }
@@ -581,6 +617,7 @@ const FETCH_ONLY = process.env.FETCH_ONLY || 'all';
     buildRampProcessed();
     buildAuditData();
     buildTurnCosts();
+    buildToolsSupplies();
     console.log('Done.');
     return;
   }
@@ -608,7 +645,7 @@ const FETCH_ONLY = process.env.FETCH_ONLY || 'all';
   }
 
   if (runRamp) {
-    try { await fetchRampTransactions(); buildRampProcessed(); buildTurnCosts(); }
+    try { await fetchRampTransactions(); buildRampProcessed(); buildTurnCosts(); buildToolsSupplies(); }
     catch(e) { console.error('Ramp fetch failed:', e.message); if (FETCH_ONLY === 'ramp-only') process.exit(1); }
   }
 
