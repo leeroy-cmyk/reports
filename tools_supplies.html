@@ -60,7 +60,11 @@
     .table-section-title { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #7f8c8d; margin: 24px 0 8px; }
     .table-wrap { background: white; border-radius: 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.07); overflow: hidden; border: 1px solid #e8ecf0; }
     table { width: 100%; border-collapse: collapse; font-size: 0.86rem; }
-    th { background: #f8fafc; padding: 10px 14px; text-align: left; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #7f8c8d; border-bottom: 1px solid #e8ecf0; white-space: nowrap; }
+    th { background: #f8fafc; padding: 10px 14px; text-align: left; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #7f8c8d; border-bottom: 1px solid #e8ecf0; white-space: nowrap; cursor: pointer; user-select: none; }
+    th:hover { background: #eef2f7; color: #2e86c1; }
+    th.sort-asc::after  { content: ' ▲'; font-size: 0.65rem; }
+    th.sort-desc::after { content: ' ▼'; font-size: 0.65rem; }
+    th.sort-asc, th.sort-desc { color: #1a5276; background: #eaf4fb; }
     td { padding: 10px 14px; border-bottom: 1px solid #f0f3f6; vertical-align: middle; }
     tr:last-child td { border-bottom: none; }
     tr:hover td { background: #fafcfe; }
@@ -130,12 +134,12 @@
     <table>
       <thead>
         <tr>
-          <th>Date</th>
-          <th>Person</th>
-          <th>Merchant</th>
-          <th>Memo</th>
-          <th>Property</th>
-          <th style="text-align:right">Amount</th>
+          <th data-col="date"     onclick="sortBy('date')">Date</th>
+          <th data-col="person"   onclick="sortBy('person')">Person</th>
+          <th data-col="merchant" onclick="sortBy('merchant')">Merchant</th>
+          <th data-col="memo"     onclick="sortBy('memo')">Memo</th>
+          <th data-col="dept"     onclick="sortBy('dept')">Property</th>
+          <th data-col="amount"   onclick="sortBy('amount')" style="text-align:right">Amount</th>
         </tr>
       </thead>
       <tbody id="txn-body">
@@ -164,9 +168,11 @@
   const isOverhead = dept => !dept || /^r203$/i.test(dept.trim());
 
   // ── State ──────────────────────────────────────────────────────────────────
-  let allTxns     = [];
+  let allTxns      = [];
   let activePerson = null;   // titleCase name or null
   let activeMonth  = null;   // 'YYYY-MM' or null
+  let sortCol      = 'date'; // date | person | merchant | memo | dept | amount
+  let sortDir      = 'desc'; // asc | desc
 
   // Compute the set of transactions matching all active filters
   function filtered() {
@@ -175,6 +181,45 @@
       if (activeMonth  && t.date.slice(0,7) !== activeMonth)  return false;
       return true;
     });
+  }
+
+  // Sort a copy of txns by current sortCol / sortDir
+  function sortTxns(txns) {
+    const dir = sortDir === 'asc' ? 1 : -1;
+    return [...txns].sort((a, b) => {
+      let av, bv;
+      switch (sortCol) {
+        case 'date':     av = a.date;              bv = b.date;              break;
+        case 'person':   av = tc(a.full_name);     bv = tc(b.full_name);     break;
+        case 'merchant': av = a.merchant||'';       bv = b.merchant||'';      break;
+        case 'memo':     av = a.memo||'';           bv = b.memo||'';          break;
+        case 'dept':     av = propLabel(a.dept||'');bv = propLabel(b.dept||'');break;
+        case 'amount':   return (a.amount - b.amount) * dir;
+        default:         av = a.date; bv = b.date;
+      }
+      return av.localeCompare(bv) * dir;
+    });
+  }
+
+  // Update sort indicator classes on headers
+  function updateSortHeaders() {
+    document.querySelectorAll('th[data-col]').forEach(th => {
+      const col = th.dataset.col;
+      th.classList.toggle('sort-asc',  col === sortCol && sortDir === 'asc');
+      th.classList.toggle('sort-desc', col === sortCol && sortDir === 'desc');
+    });
+  }
+
+  // Called when a header is clicked
+  function sortBy(col) {
+    if (sortCol === col) {
+      sortDir = sortDir === 'asc' ? 'desc' : 'asc';
+    } else {
+      sortCol = col;
+      sortDir = col === 'amount' ? 'desc' : 'asc';
+    }
+    updateSortHeaders();
+    renderTable(sortTxns(filtered()));
   }
 
   // ── Master update — call after any filter change ───────────────────────────
@@ -304,6 +349,7 @@
 
   // ── Transaction table ──────────────────────────────────────────────────────
   function renderTable(txns) {
+    txns = sortTxns(txns);
     if (!txns.length) {
       document.getElementById('txn-body').innerHTML = '<tr><td colspan="6" class="empty-msg">No transactions match the current filters.</td></tr>';
       return;
@@ -361,6 +407,7 @@
       } else {
         document.getElementById('updated-ts').textContent = '';
       }
+      updateSortHeaders();
       applyFilters();
     })
     .catch(err => {
