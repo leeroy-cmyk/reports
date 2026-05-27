@@ -31,14 +31,16 @@ jobs:
           path: data/ramp.json
           key: ramp-data-v1
 
-      # ── Step 1: QBTime + Audit ────────────────────────────────────────────
+      # ── Step 1: QBTime + Audit (non-fatal — Ramp runs regardless) ──────────
       - name: Fetch QBTime + build audit.json
+        continue-on-error: true
         env:
           QBT_TOKEN: ${{ secrets.QBT_TOKEN }}
           FETCH_ONLY: qbt-only
         run: node scripts/fetch-data.js
 
       - name: Commit QBTime data
+        continue-on-error: true
         run: |
           git add data/qbtime.json data/audit.json data/turn_costs.json
           git diff --cached --quiet && { echo "No QBTime changes"; exit 0; }
@@ -50,7 +52,7 @@ jobs:
           done
           exit 1
 
-      # ── Step 2: Ramp (failure here does NOT affect QBTime) ───────────────
+      # ── Step 2: Ramp (always runs, even if QBTime failed) ────────────────
       - name: Fetch Ramp + build ramp_processed.json
         continue-on-error: true
         env:
