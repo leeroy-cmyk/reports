@@ -43,14 +43,7 @@
         <span class="badge badge-maintenance">Maintenance</span>
       </a>
 
-      <a class="card" href="work_order_live.html">
-        <div class="card-title">Work Orders</div>
-        <div class="card-date">April 17, 2026</div>
-        <div class="card-desc">Live work order data from AppFolio.</div>
-        <span class="badge badge-maintenance">Maintenance</span>
-      </a>
-
-      <a class="card" href="rm_report.html">
+<a class="card" href="rm_report.html">
         <div class="card-title">R&amp;M Report</div>
         <div class="card-date" id="rm-date">—</div>
         <div class="card-desc">Repairs spend vs budget by property. By work order with labor + materials. Live AppFolio WO list.</div>
@@ -71,14 +64,7 @@
         <span class="badge badge-maintenance">Maintenance</span>
       </a>
 
-      <a class="card" href="invoices_report.html">
-        <div class="card-title">Unpaid Vendor Invoices</div>
-        <div class="card-date" id="invoices-date">—</div>
-        <div class="card-desc">Gmail invoice scan vs. Ramp card spend — vendor invoices without a payment confirmation.</div>
-        <span class="badge badge-finance">Finance</span>
-      </a>
-
-      <a class="card" href="r203_pl_detail.html">
+<a class="card" href="r203_pl_detail.html">
         <div class="card-title">R203 P&amp;L Detail</div>
         <div class="card-date">May 12, 2026</div>
         <div class="card-desc">Jan–Apr 2026 P&amp;L breakdown — repairs, grounds, turns, CapEx projects and appliances by property.</div>
@@ -115,14 +101,7 @@
   </main>
   <footer>R203 · leeroy-cmyk.github.io/reports</footer>
 <script>
-  fetch('./data/invoices.json').then(r=>r.json()).then(d=>{
-    const el = document.getElementById('invoices-date');
-    if (el && d.fetched_at) {
-      const ts = new Date(d.fetched_at);
-      el.textContent = ts.toLocaleDateString('en-US', { month:'long', day:'numeric', year:'numeric' });
-    }
-  }).catch(()=>{});
-  fetch('./data/ramp_processed.json').then(r=>r.json()).then(d=>{
+fetch('./data/ramp_processed.json').then(r=>r.json()).then(d=>{
     const el = document.getElementById('rm-date');
     if (el && d.fetched_at) {
       const ts = new Date(d.fetched_at);
