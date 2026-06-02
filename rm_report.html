@@ -127,6 +127,7 @@ let QBT = null, RAMP = null, BUDGET = null, WO_DATA = null;
 let PERIOD_FROM = '', PERIOD_TO = '';
 let woSortCol = 11, woSortAsc = false;
 let woFiltered = [];
+let sbSortCol = 5, sbSortAsc = false, sbRows = [], sbPeriodLabel = '';
 
 // ── HELPERS ──────────────────────────────────────────────────────────────────
 function fmtC(n) { return '$' + Math.round(n).toLocaleString('en-US'); }
@@ -315,7 +316,7 @@ function buildSpendBudget() {
     rows.push({ prop, displayName: bInfo?.displayName || prop, city: bInfo?.city || '—',
       labor, mats, total, budget, variance, pctUsed });
   });
-  rows.sort((a,b) => b.total - a.total);
+  sbRows = rows;
 
   const totLabor  = rows.reduce((s,r) => s + r.labor,  0);
   const totMats   = rows.reduce((s,r) => s + r.mats,   0);
@@ -326,6 +327,7 @@ function buildSpendBudget() {
 
   const kpiCls = totVar < 0 ? 'bad' : totPct > 80 ? 'warn' : '';
   const periodLabel = isYTD ? 'YTD Budget' : isMonthPeriod ? (isThisMonth ? 'MTD Budget' : 'Monthly Budget') : 'Budget';
+  sbPeriodLabel = periodLabel;
 
   const kpiHtml = `
     <div class="kpi-card"><div class="kpi-label">${periodLabel}</div><div class="kpi-value">${fmtC(totBudget)}</div><div class="kpi-sub">account 52001 — R&amp;M Repairs</div></div>
@@ -334,7 +336,44 @@ function buildSpendBudget() {
     <div class="kpi-card"><div class="kpi-label">Total Actual</div><div class="kpi-value">${fmtC(totActual)}</div><div class="kpi-sub">labor + materials</div></div>
     <div class="kpi-card ${kpiCls}"><div class="kpi-label">Variance (Budget − Actual)</div><div class="kpi-value">${totVar >= 0 ? '+' : ''}${fmtC(totVar)}</div><div class="kpi-sub">${totPct !== null ? Math.round(totPct) + '% of budget used' : '—'}</div></div>`;
 
-  const tableRows = rows.map((r, i) => {
+  document.getElementById('spendContent').innerHTML = `
+    <div class="kpi-grid">${kpiHtml}</div>
+    <div class="section-title">Spend vs Budget by Property</div>
+    <div id="sbTableWrap"></div>
+    <div style="font-size:0.75rem;color:#a0aebb;margin-top:10px;">Labor = QBTime hours × wage (R&amp;M class only). Materials = Ramp card purchases (GLs 52000–52003, 67800). Click a row to expand detail.</div>`;
+  renderSpendBudgetTable();
+}
+
+function renderSpendBudgetTable() {
+  const wrap = document.getElementById('sbTableWrap');
+  if (!wrap) return;
+  const FROM = PERIOD_FROM, TO = PERIOD_TO;
+  const keys = ['displayName','city','budget','labor','mats','total','variance','pctUsed'];
+  const sorted = [...sbRows].sort((a, b) => {
+    let va = a[keys[sbSortCol]], vb = b[keys[sbSortCol]];
+    if (va == null && vb == null) return 0;
+    if (va == null) return 1;
+    if (vb == null) return -1;
+    if (va < vb) return sbSortAsc ? -1 : 1;
+    if (va > vb) return sbSortAsc ? 1 : -1;
+    return 0;
+  });
+  const hdrs = [
+    {label:'Property', align:''},
+    {label:'City', align:''},
+    {label:sbPeriodLabel, align:'text-align:right;'},
+    {label:'Labor', align:'text-align:right;'},
+    {label:'Materials', align:'text-align:right;'},
+    {label:'Total', align:'text-align:right;'},
+    {label:'Variance', align:'text-align:right;'},
+    {label:'% Used', align:''},
+  ];
+  const theadCells = hdrs.map((h, i) => {
+    const isSorted = i === sbSortCol;
+    const arrow = isSorted ? (sbSortAsc ? ' ↑' : ' ↓') : ' ⇅';
+    return `<th style="${h.align}" onclick="sortSpendBudget(${i})"${isSorted ? ' class="sorted"' : ''}>${h.label}<span>${arrow}</span></th>`;
+  }).join('');
+  const tableRows = sorted.map((r, i) => {
     const pct = r.pctUsed;
     const overBudget = r.variance < 0;
     const barPct = pct !== null ? Math.min(pct, 100) : 0;
@@ -372,25 +411,16 @@ function buildSpendBudget() {
       </td>
     </tr>`;
   }).join('');
-
-  document.getElementById('spendContent').innerHTML = `
-    <div class="kpi-grid">${kpiHtml}</div>
-    <div class="section-title">Spend vs Budget by Property</div>
-    <div style="overflow-x:auto;border:1px solid #d0dce8;border-radius:8px;">
+  wrap.innerHTML = `<div style="overflow-x:auto;border:1px solid #d0dce8;border-radius:8px;">
     <table class="data-table">
-      <thead><tr>
-        <th>Property</th><th>City</th>
-        <th style="text-align:right;">${periodLabel}</th>
-        <th style="text-align:right;">Labor</th>
-        <th style="text-align:right;">Materials</th>
-        <th style="text-align:right;">Total</th>
-        <th style="text-align:right;">Variance</th>
-        <th>% Used</th>
-      </tr></thead>
+      <thead><tr>${theadCells}</tr></thead>
       <tbody>${tableRows}</tbody>
-    </table>
-    </div>
-    <div style="font-size:0.75rem;color:#a0aebb;margin-top:10px;">Labor = QBTime hours × wage (R&amp;M class only). Materials = Ramp card purchases (GLs 52000–52003, 67800). Click a row to expand detail.</div>`;
+    </table></div>`;
+}
+
+function sortSpendBudget(col) {
+  if (sbSortCol === col) { sbSortAsc = !sbSortAsc; } else { sbSortCol = col; sbSortAsc = col <= 1; }
+  renderSpendBudgetTable();
 }
 
 function toggleSpendDetail(i) {
