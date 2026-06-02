@@ -127,6 +127,8 @@ let QBT = null, RAMP = null, BUDGET = null, WO_DATA = null;
 let PERIOD_FROM = '', PERIOD_TO = '';
 let woSortCol = 11, woSortAsc = false;
 let woFiltered = [];
+let wocSortCol = 4, wocSortAsc = false;
+let wocRows = [], wocFiltered = [];
 let sbSortCol = 5, sbSortAsc = false, sbRows = [], sbPeriodLabel = '';
 
 // ── HELPERS ──────────────────────────────────────────────────────────────────
@@ -476,60 +478,48 @@ function buildByWorkOrder() {
     map[t.wo].mats += t.amt;
   });
 
-  const rows = Object.entries(map)
+  wocRows = Object.entries(map)
     .map(([wo, d]) => ({ wo, ...d, total: d.labor + d.mats }))
-    .filter(r => r.total > 0)
-    .sort((a, b) => b.total - a.total);
+    .filter(r => r.total > 0);
 
-  const totLabor  = rows.reduce((s, r) => s + r.labor, 0);
-  const totMats   = rows.reduce((s, r) => s + r.mats,  0);
+  const totLabor  = wocRows.reduce((s, r) => s + r.labor, 0);
+  const totMats   = wocRows.reduce((s, r) => s + r.mats,  0);
   const totActual = totLabor + totMats;
-  const labWOs    = rows.filter(r => r.labor > 0).length;
-  const matWOs    = rows.filter(r => r.mats  > 0).length;
-
-  const tableRows = rows.map(r => {
-    const laborPct = r.total > 0 ? r.labor / r.total * 100 : 0;
-    return `<tr>
-      <td><span style="font-family:monospace;font-size:0.82rem;color:#2e86c1;font-weight:600;">${r.wo}</span></td>
-      <td><strong>${r.prop || '—'}</strong></td>
-      <td style="text-align:right;">${r.labor > 0 ? fmtC(r.labor) + '<span style="color:#a0aebb;font-size:0.75rem;margin-left:4px;">' + r.hrs.toFixed(1) + 'h</span>' : '—'}</td>
-      <td style="text-align:right;">${r.mats > 0 ? fmtC(r.mats) : '—'}</td>
-      <td style="text-align:right;font-weight:600;">${fmtC(r.total)}</td>
-      <td style="min-width:100px;">
-        <div class="var-bar-wrap">
-          <div class="var-bar" style="background:#e8edf2;">
-            <div class="var-bar-fill" style="width:${laborPct.toFixed(0)}%;background:#2e86c1;"></div>
-          </div>
-          <span style="font-size:0.72rem;color:#7f8fa4;white-space:nowrap;">${laborPct.toFixed(0)}% labor</span>
-        </div>
-      </td>
-    </tr>`;
-  }).join('');
+  const labWOs    = wocRows.filter(r => r.labor > 0).length;
+  const matWOs    = wocRows.filter(r => r.mats  > 0).length;
 
   document.getElementById('wocContent').innerHTML = `
     <div class="kpi-grid">
-      <div class="kpi-card"><div class="kpi-label">Work Orders Tracked</div><div class="kpi-value">${rows.length}</div><div class="kpi-sub">with any R&amp;M cost in period</div></div>
+      <div class="kpi-card"><div class="kpi-label">Work Orders Tracked</div><div class="kpi-value">${wocRows.length}</div><div class="kpi-sub">with any R&amp;M cost in period</div></div>
       <div class="kpi-card"><div class="kpi-label">Total Labor</div><div class="kpi-value">${fmtC(totLabor)}</div><div class="kpi-sub">${labWOs} WOs with labor · QBTime</div></div>
       <div class="kpi-card"><div class="kpi-label">Total Materials</div><div class="kpi-value">${fmtC(totMats)}</div><div class="kpi-sub">${matWOs} WOs with materials · Ramp</div></div>
       <div class="kpi-card"><div class="kpi-label">Total Spend</div><div class="kpi-value">${fmtC(totActual)}</div><div class="kpi-sub">${FROM.slice(0,7)} – ${TO.slice(0,7)}</div></div>
     </div>
-    ${rows.length === 0 ? '<p style="color:#7f8fa4;padding:20px;">No work orders with R&amp;M costs in this period.</p>' : `
+    ${wocRows.length === 0 ? '<p style="color:#7f8fa4;padding:20px;">No work orders with R&amp;M costs in this period.</p>' : `
+    <div class="controls">
+      <input type="text" id="wocSearch" placeholder="Search WO # or property…" oninput="filterWoc()">
+    </div>
+    <div class="row-count" id="wocCount"></div>
     <div style="overflow-x:auto;border:1px solid #d0dce8;border-radius:8px;">
-    <table class="data-table">
+    <table class="data-table" id="wocTable">
       <thead><tr>
-        <th>WO #</th>
-        <th>Property</th>
-        <th style="text-align:right;">Labor</th>
-        <th style="text-align:right;">Materials</th>
-        <th style="text-align:right;">Total</th>
+        <th onclick="sortWoc(0)">WO # <span>⇅</span></th>
+        <th onclick="sortWoc(1)">Property <span>⇅</span></th>
+        <th style="text-align:right;" onclick="sortWoc(2)">Labor <span>⇅</span></th>
+        <th style="text-align:right;" onclick="sortWoc(3)">Materials <span>⇅</span></th>
+        <th style="text-align:right;" onclick="sortWoc(4)">Total <span>⇅</span></th>
         <th>Mix</th>
       </tr></thead>
-      <tbody>${tableRows}</tbody>
+      <tbody id="wocTbody"></tbody>
     </table>
     </div>
     <div style="font-size:0.75rem;color:#a0aebb;margin-top:10px;">
       Labor = QBTime timesheets where WO# is the 3rd level of the jobcode path (Customer &gt; Property &gt; WO#). Materials = Ramp purchases where Customer/Job was tagged with a specific WO code. Most Ramp purchases are not tagged to a WO — full material spend by property is on the Spend vs Budget tab.
     </div>`}`;
+
+  wocFiltered = [...wocRows];
+  wocSortCol = 4; wocSortAsc = false;
+  renderWoc();
 }
 
 // ── WORK ORDER LIST ────────────────────────────────────────────────────────────
@@ -682,6 +672,63 @@ function renderWOs() {
   }).join('') || '<tr><td colspan="12" style="text-align:center;padding:28px;color:#7f8fa4;">No matching work orders</td></tr>';
 
   if (count) count.textContent = sorted.length + ' of ' + ((WO_DATA.rows||[]).filter(r=>r.work_order_type==='Internal').length) + ' work orders';
+}
+
+function filterWoc() {
+  const search = (document.getElementById('wocSearch')?.value || '').toLowerCase();
+  wocFiltered = search
+    ? wocRows.filter(r => (r.wo + ' ' + r.prop).toLowerCase().includes(search))
+    : [...wocRows];
+  renderWoc();
+}
+
+function sortWoc(col) {
+  if (wocSortCol === col) { wocSortAsc = !wocSortAsc; } else { wocSortCol = col; wocSortAsc = col < 2; }
+  document.querySelectorAll('#wocTable th').forEach((th, i) => {
+    th.classList.toggle('sorted', i === col);
+    const sp = th.querySelector('span');
+    if (sp) sp.textContent = i === col ? (wocSortAsc ? ' ↑' : ' ↓') : ' ⇅';
+  });
+  renderWoc();
+}
+
+function renderWoc() {
+  const tbody = document.getElementById('wocTbody');
+  const count = document.getElementById('wocCount');
+  if (!tbody) return;
+
+  const sorted = [...wocFiltered].sort((a, b) => {
+    let va, vb;
+    if      (wocSortCol === 0) { va = a.wo;    vb = b.wo; }
+    else if (wocSortCol === 1) { va = a.prop;  vb = b.prop; }
+    else if (wocSortCol === 2) { va = a.labor; vb = b.labor; }
+    else if (wocSortCol === 3) { va = a.mats;  vb = b.mats; }
+    else                       { va = a.total; vb = b.total; }
+    if (va < vb) return wocSortAsc ? -1 : 1;
+    if (va > vb) return wocSortAsc ? 1 : -1;
+    return 0;
+  });
+
+  tbody.innerHTML = sorted.map(r => {
+    const laborPct = r.total > 0 ? r.labor / r.total * 100 : 0;
+    return `<tr>
+      <td><span style="font-family:monospace;font-size:0.82rem;color:#2e86c1;font-weight:600;">${r.wo}</span></td>
+      <td><strong>${r.prop || '—'}</strong></td>
+      <td style="text-align:right;">${r.labor > 0 ? fmtC(r.labor) + '<span style="color:#a0aebb;font-size:0.75rem;margin-left:4px;">' + r.hrs.toFixed(1) + 'h</span>' : '—'}</td>
+      <td style="text-align:right;">${r.mats > 0 ? fmtC(r.mats) : '—'}</td>
+      <td style="text-align:right;font-weight:600;">${fmtC(r.total)}</td>
+      <td style="min-width:100px;">
+        <div class="var-bar-wrap">
+          <div class="var-bar" style="background:#e8edf2;">
+            <div class="var-bar-fill" style="width:${laborPct.toFixed(0)}%;background:#2e86c1;"></div>
+          </div>
+          <span style="font-size:0.72rem;color:#7f8fa4;white-space:nowrap;">${laborPct.toFixed(0)}% labor</span>
+        </div>
+      </td>
+    </tr>`;
+  }).join('') || '<tr><td colspan="6" style="text-align:center;padding:28px;color:#7f8fa4;">No matching work orders</td></tr>';
+
+  if (count) count.textContent = sorted.length + ' of ' + wocRows.length + ' work orders';
 }
 
 function showTab(id, el) {
