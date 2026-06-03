@@ -189,14 +189,17 @@ const PRIORITY_ORDER = {Emergency:0, Urgent:0, High:1, Normal:2, Medium:2, Low:3
 // Duration estimates based on brief description keywords (hours)
 function estimateDuration(brief) {
   const b = (brief || '').toLowerCase();
-  if (/photo|picture|inspection|check|verify|walkthrough|estimate|pickup|cleanup|litter|pet waste/.test(b)) return 0.5;
-  if (/key|lock|mailbox|bulb|filter|replace filter/.test(b)) return 1;
+  // 30-min photo/quick tasks (confirmed by management notes)
+  if (/lawn maintenance|litter pick|office cleaning|internal office/.test(b)) return 0.5;
+  // Other quick tasks
+  if (/photo|picture|walkthrough|estimate|pet waste/.test(b)) return 0.5;
+  if (/key|lock|mailbox|bulb|filter/.test(b)) return 1;
+  if (/inspection|check|verify|lighting check/.test(b)) return 1.5;
   if (/leak|water|plumb|toilet|drain|flood/.test(b)) return 2;
   if (/paint|drywall|patch|hole|ceiling/.test(b)) return 3;
   if (/appliance|stove|refrigerator|hvac|heat|ac/.test(b)) return 2;
-  if (/lawn|mow|weed|bed|fertiliz/.test(b)) return 2;
-  if (/clean|office/.test(b)) return 1.5;
-  if (/safety|inspection|quarterly/.test(b)) return 2;
+  if (/bed weed|weed|fertiliz/.test(b)) return 2;
+  if (/safety|quarterly/.test(b)) return 2;
   if (/irrigation/.test(b)) return 1;
   return 1.5; // default
 }
@@ -387,9 +390,26 @@ async function main() {
     }
 
     if (!newSlot) {
-      // Find next available slot by priority (higher priority gets sooner slots)
+      // Litter pickup: always schedule first thing (force 8am slot)
+      const isLitter = /litter pick/i.test(brief);
       const startSearch = action === 'shorten' ? (apptEvt?.dtstart?.slice(0,10) || today) : today;
-      newSlot = findNextSlot(busyBlocks, durHrs, startSearch);
+      if (isLitter) {
+        // Find next available date where 8am is free
+        let d = new Date(startSearch+'T12:00:00-07:00');
+        for (let i = 0; i < 21; i++) {
+          d.setDate(d.getDate()+1);
+          const ds = d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+          if (d.getDay() === 1 || ds <= today) continue; // skip Mon
+          const busy = (busyBlocks[ds] || []);
+          const slotEnd = 8 + durHrs;
+          if (!busy.some(b => 8 < b.end + 0.25 && slotEnd + 0.25 > b.start)) {
+            newSlot = {date: ds, startHr: 8, startMin: 0, durationHrs: durHrs};
+            break;
+          }
+        }
+      } else {
+        newSlot = findNextSlot(busyBlocks, durHrs, startSearch);
+      }
     }
 
     if (!newSlot) {
