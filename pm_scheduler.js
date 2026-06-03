@@ -78,7 +78,7 @@ function nextAvailableDate(afterDate, skipDates = []) {
   d.setDate(d.getDate() + 1);
   for (let i = 0; i < 30; i++) {
     const ds = d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
-    if (d.getDay() !== 1 && !skipDates.includes(ds)) return ds;
+    if (d.getDay() !== 0 && d.getDay() !== 1 && d.getDay() !== 6 && !skipDates.includes(ds)) return ds;
     d.setDate(d.getDate() + 1);
   }
   return null;
@@ -234,7 +234,7 @@ function findNextSlot(busyBlocks, durationHrs, startingFrom, bufferHrs = 0.5) {
   for (let i = 0; i < 21; i++) {
     const dateStr = d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
     // Skip Mondays and today
-    if (d.getDay() === 1 || dateStr <= today) { d.setDate(d.getDate()+1); continue; }
+    if (d.getDay() === 0 || d.getDay() === 1 || d.getDay() === 6 || dateStr <= today) { d.setDate(d.getDate()+1); continue; }
 
     const busy = (busyBlocks[dateStr] || []).sort((a,b)=>a.start-b.start);
     // Try slots from 8am to 5pm
@@ -399,7 +399,7 @@ async function main() {
         for (let i = 0; i < 21; i++) {
           d.setDate(d.getDate()+1);
           const ds = d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
-          if (d.getDay() === 1 || ds <= today) continue; // skip Mon
+          if (d.getDay() === 0 || d.getDay() === 1 || d.getDay() === 6 || ds <= today) continue; // skip Mon + weekends
           const busy = (busyBlocks[ds] || []);
           const slotEnd = 8 + durHrs;
           if (!busy.some(b => 8 < b.end + 0.25 && slotEnd + 0.25 > b.start)) {
