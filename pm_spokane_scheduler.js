@@ -185,6 +185,64 @@ async function main() {
   const justinBusy = buildBusy(justinMelds);
 
   const twoHoursAgo = new Date(Date.now()-2*3600000);
+  const RESCHEDULE_KW = /reschedule|different (time|day|date)|can'?t make|not available|won'?t be home|conflict|push|postpone/i;
+  const ACCOMMODATE_KW = /available (at|after|before|on)|prefer|better (time|day)|can (you|we) (come|do it)|i'?ll be home|good time|works for me|please come/i;
+  const DURATION_KW = /(\d+)\s*(min|minute|minutes|hr|hour)/i;
+  const TIME_KW = /\b(\d{1,2})(?::(\d{2}))?\s*(am|pm)\b/i;
+  const DAY_KW = /\b(monday|tuesday|wednesday|thursday|friday|mon|tue|wed|thu|fri)\b/i;
+
+  function parseChatAction(messages, apptCreated) {
+    // Only look at messages newer than the current appointment (or last 48h if no appt)
+    const cutoff = apptCreated ? new Date(apptCreated) : new Date(Date.now()-48*3600000);
+    const fresh = messages.filter(function(msg){ return msg.created && new Date(msg.created) > cutoff; });
+    if (!fresh.length) return null;
+    // Most recent first
+    const sorted = fresh.slice().sort(function(a,b){ return b.created.localeCompare(a.created); });
+    for (let i=0; i<Math.min(sorted.length,8); i++) {
+      const msg = sorted[i];
+      const text = msg.text || '';
+      const isTenant = !!(msg.tenant) || msg.clazz === 't';
+      const isAgent  = !!(msg.agent)  || msg.clazz === 'm';
+      const sender = msg.tenant ? ((msg.tenant.first_name||'')+' '+(msg.tenant.last_name||'')).trim()
+                   : msg.agent  ? ((msg.agent.user&&msg.agent.user.first_name||'')+' '+(msg.agent.user&&msg.agent.user.last_name||'')).trim()
+                   : (msg.commenter_name||'unknown');
+      const msgDate = (msg.created||'').slice(0,10);
+      // Duration hint from agent
+      const durMatch = DURATION_KW.exec(text);
+      if (durMatch && isAgent) {
+        const num = parseFloat(durMatch[1]);
+        const unit = durMatch[2].toLowerCase();
+        const hrs = unit.startsWith('h') ? num : num/60;
+        return {action:'shorten', durationHrs:hrs, note:text.slice(0,80), sender:sender, msgDate:msgDate};
+      }
+      // Reschedule request
+      if (RESCHEDULE_KW.test(text)) {
+        const dayM = DAY_KW.exec(text), timeM = TIME_KW.exec(text);
+        return {action:'reschedule', requestedDay:dayM?dayM[1]:null, requestedTime:timeM?timeM[0]:null, isTenant:isTenant, note:text.slice(0,80), sender:sender, msgDate:msgDate};
+      }
+      // Resident time preference
+      if (isTenant && ACCOMMODATE_KW.test(text)) {
+        const dayM = DAY_KW.exec(text), timeM = TIME_KW.exec(text);
+        return {action:'accommodate_resident', requestedDay:dayM?dayM[1]:null, requestedTime:timeM?timeM[0]:null, note:text.slice(0,80), sender:sender, msgDate:msgDate};
+      }
+    }
+    return null;
+  }
+
+  function nextDayOccurrence(dayName, afterDate) {
+    const DAYS = {monday:1,tuesday:2,wednesday:3,thursday:4,friday:5,mon:1,tue:2,wed:3,thu:4,fri:5};
+    const target = DAYS[dayName.toLowerCase()];
+    if (target===undefined) return null;
+    let d = new Date(afterDate+'T12:00:00-07:00');
+    for (let i=0; i<14; i++) {
+      d.setDate(d.getDate()+1);
+      if (d.getDay()===target && d.getDay()!==1 && d.getDay()!==0 && d.getDay()!==6) {
+        return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+      }
+    }
+    return null;
+  }
+
   const toSchedule = [];
 
   for (let mi=0; mi<melds.length; mi++) {
@@ -194,8 +252,31 @@ async function main() {
     const isPastDue = apptEvt && new Date(apptEvt.dtend)<twoHoursAgo && apptEvt.dtstart.slice(0,10)!==today;
     const isUnscheduled = !apptEvt;
     const isWade = m.in_house_servicers && m.in_house_servicers.some(function(s){return s.agent&&s.agent.id===WADE_ID;});
-    if (isPastDue || isUnscheduled) {
-      toSchedule.push({m:m, reason:isPastDue?'past-due ('+apptEvt.dtstart.slice(0,10)+')':'unscheduled', isWade:isWade});
+
+    // Read chat for ALL melds — check for requests even on already-scheduled ones
+    var chatAction = null;
+    try {
+      const rc = await api('GET', '/api/comments/?meld='+m.id+'&limit=50&ordering=created', sc, csrf);
+      if (rc.status===200) {
+        var msgs = JSON.parse(rc.body);
+        if (!Array.isArray(msgs)) msgs = msgs.results||[];
+        chatAction = parseChatAction(msgs, appt&&appt.created);
+        if (chatAction) console.log(m.reference_id+' chat action detected: '+chatAction.action+' from '+chatAction.sender+': '+chatAction.note);
+      }
+    } catch(e) { /* no chat */ }
+
+    // Decide: chat requests override schedule status; past-due/unscheduled are fallbacks
+    if (chatAction && (chatAction.action==='reschedule'||chatAction.action==='accommodate_resident')) {
+      toSchedule.push({m:m, reason:'chat ('+chatAction.sender+'): '+chatAction.note.slice(0,50), isWade:isWade, chatAction:chatAction});
+    } else if (chatAction && chatAction.action==='shorten' && apptEvt) {
+      const curDur = (new Date(apptEvt.dtend)-new Date(apptEvt.dtstart))/3600000;
+      if (curDur > chatAction.durationHrs+0.1) {
+        toSchedule.push({m:m, reason:'shorten to '+chatAction.durationHrs+'h per '+chatAction.sender, isWade:isWade, chatAction:chatAction, shorten:true});
+      }
+    } else if (isPastDue) {
+      toSchedule.push({m:m, reason:'past-due ('+apptEvt.dtstart.slice(0,10)+')', isWade:isWade});
+    } else if (isUnscheduled) {
+      toSchedule.push({m:m, reason:'unscheduled', isWade:isWade});
     }
   }
 
@@ -206,10 +287,39 @@ async function main() {
   for (let ti=0; ti<toSchedule.length; ti++) {
     const item = toSchedule[ti];
     const m = item.m;
-    const dur = estimateDuration(m.brief_description);
+    const ca = item.chatAction;
     const busy = item.isWade ? wadeBusy : justinBusy;
     const techName = item.isWade ? 'Wade' : 'Justin';
-    const slot = findSlot(busy, dur, today);
+
+    // For shorten: keep same date, just trim end time
+    if (item.shorten && ca) {
+      const appt = m.managementappointment.find(function(a){return a.availability_segment&&a.availability_segment.event;});
+      const evt = appt && appt.availability_segment.event;
+      if (evt) {
+        const sameDay = evt.dtstart.slice(0,10);
+        const startHr = new Date(evt.dtstart).getUTCHours()-7;
+        const startMin = new Date(evt.dtstart).getUTCMinutes();
+        const times = slotStr(sameDay, startHr, startMin, ca.durationHrs);
+        process.stdout.write(m.reference_id+' ['+m.priority+'] '+techName+' shorten to '+ca.durationHrs+'h same day... ');
+        const r = await schedMeld(m.id, times.dtstart, times.dtend, m.started, sc, csrf);
+        console.log(r.status<300?'OK':'FAIL '+r.status+' '+r.body.slice(0,80));
+      }
+      continue;
+    }
+
+    var dur = estimateDuration(m.brief_description);
+    if (ca && ca.action==='shorten') dur = ca.durationHrs;
+
+    // Try to honor requested day/time from chat
+    var slot = null;
+    if (ca && ca.requestedDay) {
+      const prefDay = nextDayOccurrence(ca.requestedDay, today);
+      if (prefDay) {
+        const candidate = findSlot(Object.assign({},busy), dur, new Date(prefDay+'T12:00:00-07:00').toISOString().slice(0,10));
+        if (candidate && candidate.date===prefDay) { slot=candidate; console.log('  Honoring chat day request: '+prefDay); }
+      }
+    }
+    if (!slot) slot = findSlot(busy, dur, today);
     if (!slot) { console.log('No slot for '+m.reference_id); continue; }
     const times = slotStr(slot.date, slot.startHr, slot.startMin, dur);
     process.stdout.write(m.reference_id+' ['+m.priority+'] '+techName+' '+fmt(times.dtstart)+' ('+dur+'h) ['+item.reason+']... ');

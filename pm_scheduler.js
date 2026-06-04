@@ -322,7 +322,7 @@ async function main() {
     // Check if unscheduled
     const isUnscheduled = !apptEvt;
 
-    // Get chat messages
+    // Get chat messages — always check for ALL melds, scheduled or not
     let messages = [];
     try {
       const rc = await apiGet('/api/comments/?meld='+m.id+'&limit=50&ordering=created', sc, csrf);
@@ -330,8 +330,16 @@ async function main() {
       if (!Array.isArray(messages)) messages = messages.results || [];
     } catch(e) { /* no chat */ }
 
-    // Parse chat for scheduling actions
-    const chatAction = parseSchedulingRequest(messages, brief);
+    // Only act on chat messages that are NEW — newer than the current appointment creation,
+    // or within the last 48 hours if no appointment exists. This prevents re-triggering on old messages.
+    const apptCreated = appt?.created || null;
+    const lookbackCutoff = apptCreated
+      ? new Date(apptCreated)
+      : new Date(Date.now() - 48 * 3600000);
+    const newMessages = messages.filter(msg => msg.created && new Date(msg.created) > lookbackCutoff);
+
+    // Parse chat for scheduling actions (only from new messages)
+    const chatAction = newMessages.length > 0 ? parseSchedulingRequest(newMessages, brief) : null;
 
     // Decide what to do
     let action = null;
@@ -345,10 +353,16 @@ async function main() {
           action = 'shorten';
           reason = chatAction.note + ' (from '+chatAction.sender+')';
         }
+      } else if (!apptEvt) {
+        // No appointment yet — shorten hint gives us the duration, schedule it
+        action = 'schedule_new';
+        reason = 'Unscheduled + duration hint from '+chatAction.sender+': '+chatAction.durationHrs+'h';
       }
     } else if (chatAction?.action === 'reschedule' || chatAction?.action === 'accommodate_resident') {
+      // Act on chat request whether meld is scheduled or not
       action = chatAction.action;
       reason = chatAction.note + ' (from '+chatAction.sender+' on '+chatAction.msgDate+')';
+      if (apptEvt) log('  Chat request on already-scheduled meld — will reschedule: '+ref);
     } else if (isPastDue) {
       action = 'reschedule_pastdue';
       reason = 'Past due: was '+apptEvt.dtend.slice(0,10);
