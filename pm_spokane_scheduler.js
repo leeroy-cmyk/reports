@@ -38,7 +38,9 @@ async function api(method, path, sc, csrf, body) {
 }
 
 function isSpokaneRepair(m) {
-  const pg = m.unit?.prop?.denormalized_property_groups || [];
+  // Fall back to m.prop if m.unit is null (building-level melds have no unit)
+  const propObj = (m.unit && m.unit.prop) ? m.unit.prop : m.prop;
+  const pg = (propObj && propObj.denormalized_property_groups) || [];
   return pg.includes(SPOKANE_GROUP) &&
     m.work_type !== 'ENVIRONMENTAL' &&
     !m.project &&

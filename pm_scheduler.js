@@ -287,7 +287,9 @@ async function main() {
       const r = await apiGet('/api/melds/?limit=200&offset='+offset+'&status='+s, sc, csrf);
       const d = JSON.parse(r.body);
       const jonas = (d.results||[]).filter(m => {
-        const prop = m.unit?.prop?.property_name?.toLowerCase() || '';
+        // Fall back to m.prop if m.unit is null (building-level melds have no unit)
+        const propObj = (m.unit && m.unit.prop) ? m.unit.prop : m.prop;
+        const prop = (propObj?.property_name || '').toLowerCase();
         return (prop.startsWith('tc68') || prop.startsWith('tc34')) &&
                m.in_house_servicers?.some(s => s.agent?.id === JONAS_ID);
       });
