@@ -37,23 +37,12 @@ async function api(method, path, sc, csrf, body) {
   return httpreq(method, BASE+'/'+MGMT+'/m/'+MGMT+path, h, bodyStr);
 }
 
-function isWadeJustinMeld(m) {
-  // Catch ALL melds assigned to Wade or Justin, regardless of property group.
-  // Reason: they sometimes handle properties outside the Spokane group (e.g. Our Natural Homes 25115).
-  // Still exclude: Environmental, projects, pest control.
-  const assignedToTeam = m.in_house_servicers && m.in_house_servicers.some(function(s){ return s.agent && (s.agent.id===WADE_ID||s.agent.id===JUSTIN_ID); });
-  if (!assignedToTeam) return false;
-  return m.work_type !== 'ENVIRONMENTAL' &&
-    !m.project &&
-    !PEST_PATTERN.test(m.brief_description||'');
-}
-
 function isSpokaneRepair(m) {
-  // Also catch unassigned Spokane-group melds so we can assign + schedule them
+  // Spokane group (25113) + Our Natural Homes (25115) treated as same region
   const propObj = (m.unit && m.unit.prop) ? m.unit.prop : m.prop;
   const pg = (propObj && propObj.denormalized_property_groups) || [];
-  if (!pg.includes(SPOKANE_GROUP)) return false;
-  return m.work_type !== 'ENVIRONMENTAL' &&
+  return (pg.includes(SPOKANE_GROUP) || pg.includes(25115)) &&
+    m.work_type !== 'ENVIRONMENTAL' &&
     !m.project &&
     !PEST_PATTERN.test(m.brief_description||'');
 }
@@ -165,8 +154,7 @@ async function main() {
       if (r.status!==200) break;
       const d = JSON.parse(r.body);
       const filtered = (d.results||[]).filter(function(m) {
-        // Catch: (1) assigned to Wade/Justin any property, OR (2) Spokane-group unassigned
-        return isWadeJustinMeld(m) || isSpokaneRepair(m);
+        return isSpokaneRepair(m) && m.in_house_servicers && m.in_house_servicers.some(function(s){ return s.agent && (s.agent.id===WADE_ID||s.agent.id===JUSTIN_ID); });
       });
       melds = melds.concat(filtered);
       if (!d.next||!d.results||!d.results.length) break;
