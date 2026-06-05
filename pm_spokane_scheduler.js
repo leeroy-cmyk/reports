@@ -232,13 +232,15 @@ async function main() {
   }
 
   function nextDayOccurrence(dayName, afterDate) {
-    const DAYS = {monday:1,tuesday:2,wednesday:3,thursday:4,friday:5,mon:1,tue:2,wed:3,thu:4,fri:5};
+    const DAYS = {monday:1,tuesday:2,wednesday:3,thursday:4,friday:5,saturday:6,sunday:0,mon:1,tue:2,wed:3,thu:4,fri:5,sat:6,sun:0};
     const target = DAYS[dayName.toLowerCase()];
     if (target===undefined) return null;
+    // Weekends allowed if explicitly requested in chat
+    const isWeekend = target===0||target===6;
     let d = new Date(afterDate+'T12:00:00-07:00');
     for (let i=0; i<14; i++) {
       d.setDate(d.getDate()+1);
-      if (d.getDay()===target && d.getDay()!==1 && d.getDay()!==0 && d.getDay()!==6) {
+      if (d.getDay()===target && (isWeekend || (d.getDay()!==1 && d.getDay()!==0 && d.getDay()!==6))) {
         return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
       }
     }

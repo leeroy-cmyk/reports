@@ -94,7 +94,7 @@ function parseSchedulingRequest(messages, meldBrief) {
   const ACCOMMODATE_KEYWORDS = /available (at|after|before|on)|prefer|better (time|day)|can (you|we) (come|do it)|i'?ll be home|good time|works for me|please come|sometime (on|around)/i;
   const SHORTEN_KEYWORDS = /(\d+)\s*(min|minute|minutes|hr|hour)/i;
   const TIME_PATTERN = /\b(\d{1,2})(?::(\d{2}))?\s*(am|pm)\b/i;
-  const DAY_PATTERN = /\b(monday|tuesday|wednesday|thursday|friday|saturday|sunday|mon|tue|wed|thu|fri|sat|sun)\b/i;
+  const DAY_PATTERN = /\b(monday|tuesday|wednesday|thursday|friday|saturday|sunday|mon|tue|wed|thu|fri|sat|sun|weekday|weekend)\b/i;
   const NEXT_PATTERN = /\bnext\s+(week|monday|tuesday|wednesday|thursday|friday)\b/i;
 
   // Sort messages by created desc — look at most recent ones first
@@ -168,13 +168,15 @@ function parseTime(timeStr) {
 
 // Parse a day name to the next occurrence of that day (PDT)
 function nextOccurrenceOfDay(dayName, afterDate) {
-  const DAYS = {sunday:0,monday:1,tuesday:2,wednesday:3,thursday:4,friday:5,saturday:6,sun:0,mon:1,tue:2,wed:3,thu:4,fri:5,sat:6};
+  const DAYS = {sunday:0,monday:1,tuesday:2,wednesday:3,thursday:4,friday:5,saturday:6,sun:0,mon:1,tue:2,wed:3,thu:4,fri:5,sat:6,saturday:6,sat:6};
   const targetDay = DAYS[dayName.toLowerCase()];
   if (targetDay === undefined) return null;
+  // Saturday (6) and Sunday (0) are normally blocked, but if explicitly requested in chat — allow it
+  const isWeekend = targetDay === 0 || targetDay === 6;
   let d = new Date(afterDate+'T12:00:00-07:00');
   d.setDate(d.getDate() + 1);
   for (let i = 0; i < 14; i++) {
-    if (d.getDay() === targetDay && d.getDay() !== 1) { // skip Mondays
+    if (d.getDay() === targetDay && (isWeekend || d.getDay() !== 1)) {
       return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
     }
     d.setDate(d.getDate() + 1);
