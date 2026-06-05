@@ -2073,27 +2073,31 @@
       <td class="total-spe">$134,938</td>
       <td class="pos total-var">$1,871</td>
     </tr></tfoot></table></div>
-<div id="tab-ytd" class="tab-content"><table><thead>
+<div id="tab-ytd" class="tab-content"><table id="ytd-table"><thead>
       <tr>
         <th rowspan="2" class="prop-name sortable" data-col="0">Property <span class="sort-icon">↕</span></th>
-        <th colspan="3" class="cat-head repairs">Repairs (52001)</th>
-        <th colspan="3" class="cat-head turns">Turns (52002)</th>
-        <th colspan="3" class="cat-head grounds">Grounds (52003)</th>
-        <th colspan="3" class="cat-head total">Total</th>
+        <th colspan="4" class="cat-head repairs">Repairs (52001)</th>
+        <th colspan="4" class="cat-head turns">Turns (52002)</th>
+        <th colspan="4" class="cat-head grounds">Grounds (52003)</th>
+        <th colspan="4" class="cat-head total">Total</th>
       </tr>
       <tr>
         <th class="sortable" data-col="1">Budget <span class="sort-icon">↕</span></th>
         <th class="sortable" data-col="2">Spend <span class="sort-icon">↕</span></th>
         <th class="sortable" data-col="3">Var <span class="sort-icon">↕</span></th>
+        <th style="background:#0e6655;font-size:11px;white-space:nowrap">% GPR <span style="font-size:10px;opacity:.7">5%</span></th>
         <th class="sortable" data-col="4">Budget <span class="sort-icon">↕</span></th>
         <th class="sortable" data-col="5">Spend <span class="sort-icon">↕</span></th>
         <th class="sortable" data-col="6">Var <span class="sort-icon">↕</span></th>
+        <th style="background:#1a5499;font-size:11px;white-space:nowrap">% GPR <span style="font-size:10px;opacity:.7">5%</span></th>
         <th class="sortable" data-col="7">Budget <span class="sort-icon">↕</span></th>
         <th class="sortable" data-col="8">Spend <span class="sort-icon">↕</span></th>
         <th class="sortable" data-col="9">Var <span class="sort-icon">↕</span></th>
+        <th style="background:#145a32;font-size:11px;white-space:nowrap">% GPR <span style="font-size:10px;opacity:.7">5%</span></th>
         <th class="sortable" data-col="10">Budget <span class="sort-icon">↕</span></th>
         <th class="sortable" data-col="11">Spend <span class="sort-icon">↕</span></th>
         <th class="sortable" data-col="12">Var <span class="sort-icon">↕</span></th>
+        <th style="background:#512e5f;font-size:11px;white-space:nowrap">% GPR <span style="font-size:10px;opacity:.7">15%</span></th>
       </tr>
     </thead><tbody><tr
       data-v0="a210"
@@ -3050,6 +3054,83 @@ function calcOpex() {
 
 calcOpex();
 buildRidgeviewProj();
+
+// ── YTD % of GPR columns ─────────────────────────────────────────────────────
+(function() {
+  // Jan–Apr 2026 Gross Potential Rent per property (from AppFolio income statement)
+  const GPR = {
+    'a210':42112,'a511':46595,'a916':48044,'b101':60616,
+    'c302':79578,'c313':232946,'e328':35094,'h604':6780,'h731':41872,
+    'hl65':54424,'hl73':24692,'j312':92823,'k104- LeFevre':291493,'k308':50280,
+    'kn47':1089622,'m221':64121,'m405':99028,'m608':42588,
+    'ms22':31344,'ms43':70188,'o155':238462,'p705':105180,
+    'ps17':68832,'ps25':233600,'ps91':66012,'rl16':556335,'rl21':74800,
+    's129':102433,'s300':54864,'tc34':121465,'tc68':369960,
+    'v202':93790,'w117':26985,'w225':0,'w226':0
+  };
+
+  function pctCell(spend, gpr, target) {
+    if (!gpr) return '<td style="color:#aaa;text-align:right;font-size:11px">—</td>';
+    const pct = spend / gpr * 100;
+    const str = pct.toFixed(1) + '%';
+    let color, bg;
+    if (pct <= target)               { color = '#1e8449'; bg = '#eafaf1'; }
+    else if (pct <= target * 1.4)    { color = '#ca6f1e'; bg = '#fef9e7'; }
+    else                              { color = '#c0392b'; bg = '#fdedec'; }
+    return '<td style="text-align:right;font-size:11px;font-weight:600;color:'+color+';background:'+bg+'">'+str+'</td>';
+  }
+
+  const table = document.getElementById('ytd-table');
+  if (!table) return;
+
+  let totR=0, totT=0, totG=0, totTot=0, totGPR=0;
+
+  // Add % GPR cells to each body row
+  table.querySelectorAll('tbody tr').forEach(function(tr) {
+    const name = tr.getAttribute('data-v0') || '';
+    const gpr  = GPR[name] || 0;
+    const r    = parseFloat(tr.getAttribute('data-v2') || 0);
+    const t    = parseFloat(tr.getAttribute('data-v5') || 0);
+    const g    = parseFloat(tr.getAttribute('data-v8') || 0);
+    const tot  = parseFloat(tr.getAttribute('data-v11') || 0);
+
+    // Insert % GPR cells after col 3 (var repairs), col 6 (var turns), col 9 (var grounds), col 12 (var total)
+    // The cells need to be inserted at the right positions
+    const cells = tr.querySelectorAll('td');
+    // cells[0]=prop, [1]=r-bud, [2]=r-spe, [3]=r-var, [4]=t-bud, [5]=t-spe, [6]=t-var,
+    //          [7]=g-bud, [8]=g-spe, [9]=g-var, [10]=tot-bud, [11]=tot-spe, [12]=tot-var
+
+    function insertAfter(afterCell, html) {
+      const td = document.createElement('td');
+      td.outerHTML; // trigger
+      const tmp = document.createElement('tbody');
+      tmp.innerHTML = '<tr>'+html+'</tr>';
+      afterCell.after(tmp.querySelector('td'));
+    }
+
+    // Work backwards to avoid index shift
+    const c12 = cells[12]; if(c12) { const d=document.createElement('td'); d.outerHTML; const t2=document.createElement('tbody'); t2.innerHTML='<tr>'+pctCell(tot,gpr,15)+'</tr>'; c12.after(t2.querySelector('td')); }
+    const c9  = cells[9];  if(c9)  { const t2=document.createElement('tbody'); t2.innerHTML='<tr>'+pctCell(g,gpr,5)+'</tr>'; c9.after(t2.querySelector('td')); }
+    const c6  = cells[6];  if(c6)  { const t2=document.createElement('tbody'); t2.innerHTML='<tr>'+pctCell(t,gpr,5)+'</tr>'; c6.after(t2.querySelector('td')); }
+    const c3  = cells[3];  if(c3)  { const t2=document.createElement('tbody'); t2.innerHTML='<tr>'+pctCell(r,gpr,5)+'</tr>'; c3.after(t2.querySelector('td')); }
+
+    if(gpr>0){ totR+=r; totT+=t; totG+=g; totTot+=tot; totGPR+=gpr; }
+  });
+
+  // Add % GPR to footer row
+  table.querySelectorAll('tfoot tr').forEach(function(tr) {
+    const cells = tr.querySelectorAll('td');
+    function mkCell(spend, gpr, target) {
+      const t2=document.createElement('tbody');
+      t2.innerHTML='<tr>'+pctCell(spend,gpr,target)+'</tr>';
+      return t2.querySelector('td');
+    }
+    if(cells[12]) cells[12].after(mkCell(totTot,totGPR,15));
+    if(cells[9])  cells[9].after(mkCell(totG,totGPR,5));
+    if(cells[6])  cells[6].after(mkCell(totT,totGPR,5));
+    if(cells[3])  cells[3].after(mkCell(totR,totGPR,5));
+  });
+})();
 </script>
 </body>
 </html>
