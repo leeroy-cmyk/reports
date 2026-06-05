@@ -453,6 +453,14 @@ async function main() {
         new_segments: [{ event: { dtstart, dtend } }]
       });
     } else {
+      // Cancel any phantom appointments (have id but no availability_segment/event)
+      // before calling accept, otherwise accept may be rejected
+      for (const a of (m.managementappointment||[])) {
+        if (!a.availability_segment || !a.availability_segment.event) {
+          await apiPatch('/api/management-appointments/'+a.id+'/cancel/', sc, csrf, {});
+          log('  Cleared phantom appointment '+a.id+' on '+ref);
+        }
+      }
       result = await apiPatch('/api/melds/'+m.id+'/accept/', sc, csrf, {
         mark_scheduled: true, segments_to_keep: [],
         management_availability_segments: [{ event: { dtstart, dtend } }]

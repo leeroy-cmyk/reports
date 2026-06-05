@@ -324,6 +324,14 @@ async function main() {
     if (!slot) slot = findSlot(busy, dur, today);
     if (!slot) { console.log('No slot for '+m.reference_id); continue; }
     const times = slotStr(slot.date, slot.startHr, slot.startMin, dur);
+    // Cancel phantom appointments before scheduling
+    for (var pi=0; pi<(m.managementappointment||[]).length; pi++) {
+      var pa = m.managementappointment[pi];
+      if (!pa.availability_segment || !pa.availability_segment.event) {
+        await api('PATCH', '/api/management-appointments/'+pa.id+'/cancel/', sc, csrf, {});
+        console.log('  Cleared phantom appt '+pa.id+' on '+m.reference_id);
+      }
+    }
     process.stdout.write(m.reference_id+' ['+m.priority+'] '+techName+' '+fmt(times.dtstart)+' ('+dur+'h) ['+item.reason+']... ');
     const r = await schedMeld(m.id, times.dtstart, times.dtend, m.started, sc, csrf);
     if (r.status<300) {
