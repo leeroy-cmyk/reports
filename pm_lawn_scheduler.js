@@ -67,20 +67,30 @@ async function api(method, path, sc, csrf, body) {
   return httpreq(method, BASE+'/'+MGMT+'/m/'+MGMT+path, h, bodyStr);
 }
 
-// Get next occurrence of a given day-of-week on or after a reference date, in the next N weeks
+// Get the date for targetDay in the NEXT calendar week after today.
+// "Next week" = the week starting the Monday after the current week.
+// This ensures recurring melds always land on the same relative day next week,
+// mirroring the current week's schedule exactly (+7 days).
 function nextOccurrence(targetDay, afterDate, weeksAhead) {
-  // Find the Monday of the week that is weeksAhead weeks after the afterDate week
   const ref = new Date(afterDate + 'T12:00:00-07:00');
-  // Start from next day
-  const start = new Date(ref);
-  start.setDate(start.getDate() + 1);
-  // Move forward until we hit targetDay
+  // Find the Monday of the current week
+  const dayOfWeek = ref.getDay(); // 0=Sun, 1=Mon, ...
+  const daysToMonday = dayOfWeek === 0 ? -6 : 1 - dayOfWeek;
+  const monday = new Date(ref);
+  monday.setDate(monday.getDate() + daysToMonday);
+  // Next week's Monday = +7 days
+  monday.setDate(monday.getDate() + 7);
+  // targetDay offset from Monday: Mon=1 → 0, Tue=2 → 1, ... Sun=0 → 6
+  const offset = targetDay === 0 ? 6 : targetDay - 1;
+  monday.setDate(monday.getDate() + offset);
+  const ds = monday.getFullYear()+'-'+String(monday.getMonth()+1).padStart(2,'0')+'-'+String(monday.getDate()).padStart(2,'0');
+  return ds;
+  // (unreachable fallback)
   for (let i = 0; i < 14; i++) {
-    if (start.getDay() === targetDay) {
-      const ds = start.getFullYear()+'-'+String(start.getMonth()+1).padStart(2,'0')+'-'+String(start.getDate()).padStart(2,'0');
+    if (monday.getDay() === targetDay) {
       return ds;
     }
-    start.setDate(start.getDate() + 1);
+    monday.setDate(monday.getDate() + 1);
   }
   return null;
 }
@@ -132,25 +142,76 @@ async function main() {
   const unscheduled = melds.filter(m => !m.managementappointment?.find(a=>a.availability_segment?.event));
   console.log('Lawn service melds assigned to David/Alexander:', melds.length, '| Unscheduled:', unscheduled.length);
 
+  // Build a map of all currently scheduled lawn melds by recurring_meld ID
+  // so we can find a sibling's appointment and offset by +7 days
+  const siblingAppts = {};
+  const scheduledLawnMelds = melds.filter(m => m.managementappointment?.find(a=>a.availability_segment?.event));
+  scheduledLawnMelds.forEach(m => {
+    const recurId = m.recurring_meld;
+    if (!recurId) return;
+    const appt = m.managementappointment.find(a=>a.availability_segment?.event).availability_segment.event;
+    if (!siblingAppts[recurId]) siblingAppts[recurId] = appt;
+  });
+  // Also scan PENDING_COMPLETION for recently scheduled siblings
+  const pcR = await api('GET', '/api/melds/?limit=200&status=PENDING_COMPLETION', sc, csrf);
+  if (pcR.status === 200) {
+    (JSON.parse(pcR.body).results||[]).filter(m => /lawn service/i.test(m.brief_description||'')).forEach(m => {
+      const recurId = m.recurring_meld;
+      if (!recurId || siblingAppts[recurId]) return;
+      const appt = m.managementappointment?.find(a=>a.availability_segment?.event)?.availability_segment?.event;
+      if (appt) siblingAppts[recurId] = appt;
+    });
+  }
+
   for (const m of unscheduled) {
     const recurId = m.recurring_meld;
-    const tmpl = recurId ? TEMPLATE[recurId] : null;
+    const propObj = (m.unit && m.unit.prop) ? m.unit.prop : m.prop;
+    const propName = propObj?.property_name || '?';
 
-    if (!tmpl) {
-      // Unknown recurring rule — log and skip
-      const propObj = (m.unit && m.unit.prop) ? m.unit.prop : m.prop;
-      console.log('UNKNOWN template for', m.reference_id, '| prop:', propObj?.property_name, '| recurring_meld:', recurId);
-      unknown++;
-      continue;
+    let dtstart, dtend;
+
+    // Strategy 1: find a sibling already scheduled and add +7 days (mirrors current week exactly)
+    const sibling = recurId ? siblingAppts[recurId] : null;
+    if (sibling) {
+      const sibStart = new Date(sibling.dtstart);
+      const sibEnd   = new Date(sibling.dtend);
+      sibStart.setDate(sibStart.getDate() + 7);
+      sibEnd.setDate(sibEnd.getDate() + 7);
+      const pad = n => String(n).padStart(2,'0');
+      const fmt8601 = d => {
+        const pdt = new Date(d.toLocaleString('en-US',{timeZone:'America/Los_Angeles'}));
+        return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())+'T'+
+          pad(pdt.getHours())+':'+pad(pdt.getMinutes())+':00-07:00';
+      };
+      dtstart = sibling.dtstart.slice(0,10).replace(
+        /(\d{4}-\d{2}-)(\d{2})/,
+        (_, prefix, day) => prefix + pad(parseInt(day)+7)
+      ) + sibling.dtstart.slice(10);
+      dtend = sibling.dtend.slice(0,10).replace(
+        /(\d{4}-\d{2}-)(\d{2})/,
+        (_, prefix, day) => prefix + pad(parseInt(day)+7)
+      ) + sibling.dtend.slice(10);
+      // Handle month rollover properly
+      const s2 = new Date(sibling.dtstart); s2.setDate(s2.getDate()+7);
+      const e2 = new Date(sibling.dtend);   e2.setDate(e2.getDate()+7);
+      dtstart = s2.getFullYear()+'-'+pad(s2.getMonth()+1)+'-'+pad(s2.getDate())+sibling.dtstart.slice(10);
+      dtend   = e2.getFullYear()+'-'+pad(e2.getMonth()+1)+'-'+pad(e2.getDate())+sibling.dtend.slice(10);
+    } else {
+      // Strategy 2: fall back to TEMPLATE map if no sibling found
+      const tmpl = recurId ? TEMPLATE[recurId] : null;
+      if (!tmpl) {
+        console.log('UNKNOWN: no sibling or template for', m.reference_id, '| prop:', propName, '| recurring_meld:', recurId);
+        unknown++;
+        continue;
+      }
+      const targetDate = nextOccurrence(tmpl.day, today, 1);
+      if (!targetDate) { skipped++; continue; }
+      const s = slotStr(targetDate, tmpl.hr, tmpl.min, tmpl.dur);
+      dtstart = s.dtstart; dtend = s.dtend;
     }
 
-    // Find the next occurrence of the target day-of-week
-    const targetDate = nextOccurrence(tmpl.day, today, 1);
-    if (!targetDate) { console.log('Could not find date for', m.reference_id); skipped++; continue; }
-
-    const {dtstart, dtend} = slotStr(targetDate, tmpl.hr, tmpl.min, tmpl.dur);
-
-    process.stdout.write(`${m.reference_id} [${tmpl.prop}] → ${fmt(dtstart)} (${tmpl.dur}h) ... `);
+    const durHrs = (new Date(dtend) - new Date(dtstart)) / 3600000;
+    process.stdout.write(`${m.reference_id} [${propName}] → ${fmt(dtstart)} (${durHrs.toFixed(1)}h) ... `);
 
     // Schedule via accept endpoint
     const r = await api('PATCH', '/api/melds/'+m.id+'/accept/', sc, csrf, {
