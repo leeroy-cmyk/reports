@@ -212,7 +212,6 @@ async function main() {
   const wadeBusy   = buildBusy(wadeMelds);
   const justinBusy = buildBusy(justinMelds);
 
-  const twoHoursAgo = new Date(Date.now()-2*3600000);
   const RESCHEDULE_KW = /reschedule|different (time|day|date)|can'?t make|not available|won'?t be home|conflict|push|postpone/i;
   const ACCOMMODATE_KW = /available (at|after|before|on)|prefer|better (time|day)|can (you|we) (come|do it)|i'?ll be home|good time|works for me|please come/i;
   const DURATION_KW = /(\d+)\s*(min|minute|minutes|hr|hour)/i;
@@ -279,7 +278,7 @@ async function main() {
     const m = melds[mi];
     const appt = m.managementappointment && m.managementappointment.find(function(a){return a.availability_segment&&a.availability_segment.event;});
     const apptEvt = appt && appt.availability_segment.event;
-    const isPastDue = apptEvt && new Date(apptEvt.dtend)<twoHoursAgo && apptEvt.dtstart.slice(0,10)!==today;
+    const isPastDue = apptEvt && apptEvt.dtstart.slice(0,10) < today;
     const isUnscheduled = !apptEvt;
     const isWade = m.in_house_servicers && m.in_house_servicers.some(function(s){return s.agent&&s.agent.id===WADE_ID;});
 
@@ -384,7 +383,7 @@ async function main() {
     const apptEvt = appt && appt.availability_segment.event;
     const tech = m.in_house_servicers && m.in_house_servicers.map(function(s){return s.agent&&s.agent.first_name;}).filter(Boolean).join('+');
     const apptStr = apptEvt ? fmt(apptEvt.dtstart) : 'NO APPT';
-    const isPastDue = apptEvt && new Date(apptEvt.dtend)<twoHoursAgo && apptEvt.dtstart.slice(0,10)!==today;
+    const isPastDue = apptEvt && apptEvt.dtstart.slice(0,10) < today;
     const flag = isPastDue?' PAST-DUE':(!apptEvt?' UNSCHEDULED':'');
     console.log((m.reference_id||'').padEnd(11)+'|'+(m.priority||'?').padEnd(9)+'|'+(tech||'?').padEnd(8)+'|'+(m.brief_description||'').slice(0,30).padEnd(31)+'| '+apptStr+flag);
   });

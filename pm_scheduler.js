@@ -336,11 +336,11 @@ async function main() {
     const apptEvt = appt?.availability_segment?.event;
     const apptId = appt?.id;
 
-    // Check if past-due — appointment ended MORE than 2 hours ago (not still in progress today)
+    // Check if past-due — appointment date is strictly before today (not today, not future)
+    // Using date comparison instead of 2-hour window to catch anything from yesterday or earlier
     const apptEndTime = apptEvt ? new Date(apptEvt.dtend) : null;
-    const twoHoursAgo = new Date(Date.now() - 2 * 3600000);
-    const isPastDue = apptEvt && apptEndTime < twoHoursAgo && m.status !== 'COMPLETED'
-                   && apptEvt.dtstart.slice(0,10) !== today; // don't reschedule same-day appts
+    const apptDate = apptEvt ? apptEvt.dtstart.slice(0,10) : null;
+    const isPastDue = apptEvt && apptDate < today && m.status !== 'COMPLETED';
 
     // Check if unscheduled
     const isUnscheduled = !apptEvt;
