@@ -154,7 +154,11 @@ async function main() {
       if (r.status!==200) break;
       const d = JSON.parse(r.body);
       const filtered = (d.results||[]).filter(function(m) {
-        return isSpokaneRepair(m) && m.in_house_servicers && m.in_house_servicers.some(function(s){ return s.agent && (s.agent.id===WADE_ID||s.agent.id===JUSTIN_ID); });
+        // Include: assigned to Wade/Justin OR completely unassigned Spokane repair melds
+        if (!isSpokaneRepair(m)) return false;
+        var assignedToTeam = m.in_house_servicers && m.in_house_servicers.some(function(s){ return s.agent && (s.agent.id===WADE_ID||s.agent.id===JUSTIN_ID); });
+        var unassigned = !m.in_house_servicers || m.in_house_servicers.length===0;
+        return assignedToTeam || unassigned;
       });
       melds = melds.concat(filtered);
       if (!d.next||!d.results||!d.results.length) break;
@@ -163,6 +167,28 @@ async function main() {
   }
   const seen=new Set();
   melds=melds.filter(function(m){if(seen.has(m.id))return false;seen.add(m.id);return true;});
+
+  // Auto-assign unassigned Spokane melds — split between Wade and Justin by current load
+  var unassigned = melds.filter(function(m){ return !m.in_house_servicers||!m.in_house_servicers.length; });
+  if (unassigned.length) {
+    // Count current load to balance
+    var wadeCount = melds.filter(function(m){return m.in_house_servicers&&m.in_house_servicers.some(function(s){return s.agent&&s.agent.id===WADE_ID;});}).length;
+    var justinCount = melds.filter(function(m){return m.in_house_servicers&&m.in_house_servicers.some(function(s){return s.agent&&s.agent.id===JUSTIN_ID;});}).length;
+    for (var ui=0; ui<unassigned.length; ui++) {
+      var um = unassigned[ui];
+      // Assign to whoever has fewer melds (priority goes to Wade if equal)
+      var assignTo = justinCount < wadeCount ? JUSTIN_ID : WADE_ID;
+      var assignName = assignTo===WADE_ID ? 'Wade' : 'Justin';
+      process.stdout.write('Auto-assigning '+um.reference_id+' to '+assignName+'... ');
+      var ra = await api('PATCH','/api/melds/'+um.id+'/assign-maintenance/',sc,csrf,{maintenance:[{id:assignTo,type:'ManagementAgent'}],user_groups:[]});
+      console.log(ra.status<300?'OK':'FAIL '+ra.status);
+      if (ra.status<300) {
+        um.in_house_servicers=[{agent:{id:assignTo,first_name:assignName}}];
+        if (assignTo===WADE_ID) wadeCount++; else justinCount++;
+      }
+    }
+  }
+
   console.log('Loaded '+melds.length+' Wade/Justin Spokane melds');
 
   // Also reassign TCDYN9AB (Scott back door repair) to Justin

@@ -280,7 +280,7 @@ async function main() {
     process.exit(1);
   }
 
-  // 1. Get all open Jonas melds at tc68/tc34
+  // 1. Get all open tc68/tc34 melds — both Jonas-assigned AND unassigned non-project repair melds
   const statuses = ['PENDING_ASSIGNMENT','PENDING_MORE_MANAGEMENT_AVAILABILITY','PENDING_COMPLETION'];
   let melds = [];
   for (const s of statuses) {
@@ -288,19 +288,38 @@ async function main() {
     while(true) {
       const r = await apiGet('/api/melds/?limit=200&offset='+offset+'&status='+s, sc, csrf);
       const d = JSON.parse(r.body);
-      const jonas = (d.results||[]).filter(m => {
-        // Fall back to m.prop if m.unit is null (building-level melds have no unit)
+      const tc = (d.results||[]).filter(m => {
         const propObj = (m.unit && m.unit.prop) ? m.unit.prop : m.prop;
         const prop = (propObj?.property_name || '').toLowerCase();
         return (prop.startsWith('tc68') || prop.startsWith('tc34')) &&
-               m.in_house_servicers?.some(s => s.agent?.id === JONAS_ID);
+               m.work_type !== 'ENVIRONMENTAL' && !m.project;
       });
-      melds.push(...jonas);
+      melds.push(...tc);
       if (!d.next || !d.results?.length) break;
       offset += 200;
     }
   }
   const seen = new Set(); melds = melds.filter(m=>{if(seen.has(m.id))return false;seen.add(m.id);return true;});
+
+  // Auto-assign unassigned melds to Jonas (skip pest control and turn-only work)
+  const PEST_RE = /pest|bed.?bug|termite|rodent|mice|mouse|trap|exterminate|infest/i;
+  for (const m of melds) {
+    const hasJonas = m.in_house_servicers?.some(s => s.agent?.id === JONAS_ID);
+    const hasAnyTech = m.in_house_servicers?.length > 0;
+    if (!hasJonas && !hasAnyTech && !PEST_RE.test(m.brief_description||'')) {
+      log('Auto-assigning '+m.reference_id+' to Jonas (was unassigned)');
+      const ra = await apiPatch('/api/melds/'+m.id+'/assign-maintenance/', sc, csrf,
+        {maintenance:[{id:JONAS_ID,type:'ManagementAgent'}],user_groups:[]});
+      if (ra.status < 300) {
+        m.in_house_servicers = [{agent:{id:JONAS_ID,first_name:'Jonas',last_name:'Hoard'}}];
+      } else {
+        log('  Failed to assign: '+ra.status);
+      }
+    }
+  }
+
+  // Keep only Jonas melds for scheduling
+  melds = melds.filter(m => m.in_house_servicers?.some(s => s.agent?.id === JONAS_ID));
   log('Jonas tc68/tc34 melds: '+melds.length);
 
   const today = localDate();
