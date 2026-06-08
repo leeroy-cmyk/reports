@@ -579,15 +579,200 @@ async function syncVacanciesToFirebase() {
   console.log(`Firebase sync: ${added} new move-out(s) added, ${vacantUnits.length - added} already listed`);
 }
 
+// ── PROPERTY MELD ─────────────────────────────────────────────────────────────
+const PM_EMAIL    = process.env.PROPERTYMELD_EMAIL;
+const PM_PASSWORD = process.env.PROPERTYMELD_PASSWORD;
+const PM_HOST     = 'app.propertymeld.com';
+const PM_MGMT     = '2975';
+
+function pmReq(opts) {
+  return new Promise((resolve, reject) => {
+    const hdrs = { 'User-Agent': 'Mozilla/5.0', 'Accept': opts.accept || 'application/json' };
+    if (opts.cookie)  hdrs['Cookie']       = opts.cookie;
+    if (opts.csrf)    hdrs['X-CSRFToken']  = opts.csrf;
+    if (opts.ctype)   hdrs['Content-Type'] = opts.ctype;
+    if (opts.referer) hdrs['Referer']      = opts.referer;
+    const body = opts.body ? Buffer.from(opts.body) : null;
+    if (body) hdrs['Content-Length'] = body.length;
+    const req = https.request(
+      { hostname: PM_HOST, path: opts.path, method: opts.method || 'GET', timeout: 30000, headers: hdrs },
+      res => { let d = ''; res.on('data', c => d += c); res.on('end', () => resolve({ status: res.statusCode, headers: res.headers, body: d })); }
+    );
+    req.on('timeout', () => req.destroy(new Error('PM timeout')));
+    req.on('error', reject);
+    if (body) req.write(body);
+    req.end();
+  });
+}
+
+function pmParseCookies(sc) {
+  const jar = {};
+  [].concat(sc || []).forEach(c => { const p = c.split(';')[0]; const eq = p.indexOf('='); if (eq > 0) jar[p.slice(0, eq).trim()] = p.slice(eq + 1).trim(); });
+  return jar;
+}
+function pmCookieStr(jar) { return Object.entries(jar).map(([k, v]) => `${k}=${v}`).join('; '); }
+
+async function pmLogin() {
+  if (!PM_EMAIL || !PM_PASSWORD) throw new Error('PROPERTYMELD_EMAIL/PASSWORD not set');
+  const r1 = await pmReq({ path: '/login/?next=/', accept: 'text/html' });
+  const csrf1 = (r1.body.match(/name="csrfmiddlewaretoken"\s+value="([^"]+)"/) || [])[1];
+  if (!csrf1) throw new Error('PM login: no CSRF token found');
+  let jar = pmParseCookies(r1.headers['set-cookie']);
+  const loginBody = new URLSearchParams({ csrfmiddlewaretoken: csrf1, email: PM_EMAIL, password: PM_PASSWORD }).toString();
+  const r2 = await pmReq({
+    path: '/login/?next=/', method: 'POST', accept: 'text/html',
+    ctype: 'application/x-www-form-urlencoded',
+    referer: 'https://app.propertymeld.com/login/?next=/',
+    cookie: pmCookieStr(jar), body: loginBody,
+  });
+  Object.assign(jar, pmParseCookies(r2.headers['set-cookie']));
+  if (r2.status !== 302) throw new Error('PM login failed: status ' + r2.status);
+  const r3 = await pmReq({ path: `/${PM_MGMT}/m/${PM_MGMT}/dashboard/`, accept: 'text/html', cookie: pmCookieStr(jar) });
+  const csrf2 = (r3.body.match(/window\.PM\.csrf_token\s*=\s*"([^"]+)"/) || [])[1];
+  return { cookie: pmCookieStr(jar), csrf: csrf2 || csrf1 };
+}
+
+async function pmGet(apiPath, session) {
+  const r = await pmReq({ path: `/${PM_MGMT}/m/${PM_MGMT}${apiPath}`, cookie: session.cookie, csrf: session.csrf });
+  if (r.status >= 400) throw new Error('PM ' + apiPath + ' status ' + r.status);
+  return JSON.parse(r.body);
+}
+
+async function fetchPropertyMeldWOs() {
+  if (!PM_EMAIL || !PM_PASSWORD) { console.log('PM credentials not set, skipping.'); return; }
+  const qbtPath  = path.join(DATA_DIR, 'qbtime.json');
+  const rampPath = path.join(DATA_DIR, 'ramp_processed.json');
+  if (!fs.existsSync(qbtPath)) { console.log('fetchPropertyMeldWOs: qbtime.json missing, skipping.'); return; }
+
+  // Collect WO reference IDs from QBT timesheets (R&M classes only)
+  const qbt = JSON.parse(fs.readFileSync(qbtPath, 'utf8'));
+  const RM_CLS_PM = ['R&M-Appliance', 'R&M-Electrical', 'R&M-Hardware', 'R&M-Pest Control', 'R&M-Plumbing'];
+  const jcs = qbt.jobcodes || {};
+  const woRefs = new Set();
+  const jcCache = {};
+  function getJcPathPM(id) {
+    if (jcCache[id] !== undefined) return jcCache[id];
+    const j = jcs[id];
+    if (!j) return (jcCache[id] = []);
+    if (j.parent_id === 0) return (jcCache[id] = [j.name]);
+    return (jcCache[id] = [...getJcPathPM(j.parent_id), j.name]);
+  }
+  Object.values(qbt.timesheets || {}).forEach(t => {
+    const cls = t.customfields?.['25056'] || '';
+    if (!RM_CLS_PM.find(c => cls.includes(c))) return;
+    const p = getJcPathPM(t.jobcode_id);
+    if (p.length >= 3) woRefs.add(p[p.length - 1]);
+  });
+  if (fs.existsSync(rampPath)) {
+    const ramp = JSON.parse(fs.readFileSync(rampPath, 'utf8'));
+    (ramp.transactions || []).forEach(t => { if (t.wo) woRefs.add(t.wo); });
+  }
+  console.log(`PropertyMeld: ${woRefs.size} unique WO refs from QBT+Ramp`);
+  if (woRefs.size === 0) return;
+
+  // Load existing pm_wos.json for incremental merge
+  const pmPath = path.join(DATA_DIR, 'pm_wos.json');
+  let existing = {};
+  if (fs.existsSync(pmPath)) {
+    try { existing = JSON.parse(fs.readFileSync(pmPath, 'utf8')).melds || {}; }
+    catch(e) { existing = {}; }
+  }
+
+  // Login
+  console.log('PropertyMeld: logging in...');
+  const session = await pmLogin();
+  console.log('PropertyMeld: logged in');
+
+  // Paginate all melds, collect those matching our WO refs
+  const meldByRef = {};
+  let offset = 0, total = '?', noNewStreak = 0;
+  while (true) {
+    const res = await pmGet(`/api/melds/?limit=100&offset=${offset}`, session);
+    if (offset === 0 && res.count) { total = res.count; console.log(`PropertyMeld: ${total} total melds`); }
+    const before = Object.keys(meldByRef).length;
+    for (const m of (res.results || [])) {
+      if (woRefs.has(m.reference_id)) meldByRef[m.reference_id] = m;
+    }
+    const found = Object.keys(meldByRef).length;
+    process.stdout.write(`  melds offset=${offset}/${total} matched=${found}/${woRefs.size}\r`);
+    if (found === before) { noNewStreak++; } else { noNewStreak = 0; }
+    // Stop if: no more pages, no results, found everything, or 2000+ melds scanned with no new matches
+    if (!res.next || (res.results || []).length === 0) break;
+    if (found >= woRefs.size) break;
+    if (noNewStreak >= 20) { process.stdout.write('\n'); console.log('PM: no new matches in 2000 melds, stopping early'); break; }
+    offset += 100;
+    await sleep(150);
+  }
+  console.log(`\nPropertyMeld: matched ${Object.keys(meldByRef).length}/${woRefs.size} WO references`);
+
+  // Fetch comments for matched melds, 5 at a time concurrently.
+  // Skip melds already COMPLETED+cached — their status & comments won't change.
+  const result = { ...existing };
+  const entries = Object.entries(meldByRef);
+  const toFetch = entries.filter(([ref, m]) => {
+    const ex = existing[ref];
+    if (!ex) return true;
+    if (m.status !== 'COMPLETED') return true;
+    return false;
+  });
+  const skipped = entries.length - toFetch.length;
+  console.log(`PM comments: fetching ${toFetch.length} (${skipped} completed+cached skipped)`);
+
+  // Copy cached entries for melds we're skipping
+  entries.forEach(([ref, meld]) => {
+    if (!toFetch.find(([r]) => r === ref) && existing[ref]) result[ref] = existing[ref];
+  });
+
+  const BATCH = 5;
+  let done = 0;
+  for (let i = 0; i < toFetch.length; i += BATCH) {
+    const chunk = toFetch.slice(i, i + BATCH);
+    await Promise.all(chunk.map(async ([ref, meld]) => {
+      let comments = [];
+      try {
+        const raw = await pmGet(`/api/comments/?meld=${meld.id}&limit=100`, session);
+        const arr = Array.isArray(raw) ? raw : (raw.results || []);
+        comments = arr.map(c => {
+          const by = c.tenant
+            ? ((c.tenant.first_name || '') + ' ' + (c.tenant.last_name || '')).trim()
+            : c.agent
+              ? ((c.agent?.user?.first_name || '') + ' ' + (c.agent?.user?.last_name || '')).trim()
+              : (c.commenter_name || 'Unknown');
+          return { by, type: c.clazz || 'm', text: (c.text || '').trim(), date: c.created };
+        }).filter(c => c.text);
+      } catch(e) {
+        console.error(`\n  comments error ${ref}: ${e.message}`);
+      }
+      result[ref] = {
+        id:          meld.id,
+        ref:         meld.reference_id,
+        description: meld.brief_description || '',
+        status:      meld.status || '',
+        completed:   meld.completed || null,
+        property:    meld.unit?.prop?.property_name || '',
+        unit:        meld.unit?.name || '',
+        url:         `https://app.propertymeld.com/${PM_MGMT}/m/${PM_MGMT}/meld/${meld.id}/summary/`,
+        comments,
+      };
+      done++;
+    }));
+    process.stdout.write(`  comments ${Math.min(done, toFetch.length)}/${toFetch.length}\r`);
+    if (i + BATCH < toFetch.length) await sleep(50);
+  }
+  console.log(`\nPropertyMeld: saved ${Object.keys(result).length} total melds`);
+  save('pm_wos.json', { ok: true, fetched_at: new Date().toISOString(), melds: result });
+}
+
 // FETCH_ONLY env var controls what runs:
-//   'appfolio'    → turnvac + workorders + budget (every 5 min)
-//   'qbt-only'    → QBTime + audit.json only
-//   'ramp-only'   → Ramp only (incremental 60-day window)
-//   'ramp-full'   → Ramp full re-fetch (150 days, ignores existing cache) + processed rebuild
-//   'qbt-ramp'    → QBTime + Ramp (legacy, local use)
-//   'costs-only'  → rebuild turn_costs.json from local files only (no network)
+//   'appfolio'      → turnvac + workorders + budget (every 5 min)
+//   'qbt-only'      → QBTime + audit.json only
+//   'ramp-only'     → Ramp only (incremental 60-day window)
+//   'ramp-full'     → Ramp full re-fetch (150 days, ignores existing cache) + processed rebuild
+//   'pm-only'       → PropertyMeld WO lookup only (reads local qbtime + ramp_processed)
+//   'qbt-ramp'      → QBTime + Ramp (legacy, local use)
+//   'costs-only'    → rebuild turn_costs.json from local files only (no network)
 //   'processed-only' → rebuild ramp_processed + audit + turn_costs from local files only
-//   unset/'all'   → everything
+//   unset/'all'     → everything
 const FETCH_ONLY = process.env.FETCH_ONLY || 'all';
 
 (async () => {
@@ -602,6 +787,12 @@ const FETCH_ONLY = process.env.FETCH_ONLY || 'all';
     buildAuditData();
     buildTurnCosts();
     buildToolsSupplies();
+    console.log('Done.');
+    return;
+  }
+
+  if (FETCH_ONLY === 'pm-only') {
+    await fetchPropertyMeldWOs();
     console.log('Done.');
     return;
   }
@@ -625,6 +816,7 @@ const FETCH_ONLY = process.env.FETCH_ONLY || 'all';
   const runAppFolio = FETCH_ONLY === 'all' || FETCH_ONLY === 'appfolio';
   const runQBT      = FETCH_ONLY === 'all' || FETCH_ONLY === 'qbt-ramp' || FETCH_ONLY === 'qbt-only';
   const runRamp     = FETCH_ONLY === 'all' || FETCH_ONLY === 'qbt-ramp' || FETCH_ONLY === 'ramp-only';
+  const runPM       = FETCH_ONLY === 'all' || FETCH_ONLY === 'qbt-ramp';
 
   if (runAppFolio) {
     try {
@@ -647,6 +839,11 @@ const FETCH_ONLY = process.env.FETCH_ONLY || 'all';
   if (runRamp) {
     try { await fetchRampTransactions(); buildRampProcessed(); buildTurnCosts(); buildToolsSupplies(); }
     catch(e) { console.error('Ramp fetch failed:', e.message); if (FETCH_ONLY === 'ramp-only') process.exit(1); }
+  }
+
+  if (runPM) {
+    try { await fetchPropertyMeldWOs(); }
+    catch(e) { console.error('PropertyMeld fetch failed:', e.message); }
   }
 
   console.log('Done.');

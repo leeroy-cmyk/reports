@@ -74,4 +74,26 @@ jobs:
           done
           exit 1
 
+      # ── Step 3: PropertyMeld WO enrichment (non-fatal) ───────────────────
+      - name: Fetch PropertyMeld WO details
+        continue-on-error: true
+        env:
+          PROPERTYMELD_EMAIL:    ${{ secrets.PROPERTYMELD_EMAIL }}
+          PROPERTYMELD_PASSWORD: ${{ secrets.PROPERTYMELD_PASSWORD }}
+          FETCH_ONLY: pm-only
+        run: node scripts/fetch-data.js
+
+      - name: Commit PropertyMeld data
+        continue-on-error: true
+        run: |
+          git add data/pm_wos.json
+          git diff --cached --quiet && { echo "No PM changes"; exit 0; }
+          git commit -m "chore: refresh PropertyMeld WOs $(date -u '+%Y-%m-%d %H:%M UTC')"
+          for i in 1 2 3 4 5; do
+            git pull --rebase origin main && git push && exit 0
+            echo "Push attempt $i failed, retrying in $((i * 5))s..."
+            sleep $((i * 5))
+          done
+          exit 1
+
       # Cache is saved automatically by actions/cache when the job ends

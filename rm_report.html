@@ -123,7 +123,7 @@ const WAGES = {leeroy:50,outright:50,hippen:28.44,hoard:27,lakins:24,leonides:25
 
 const RM_CLASSES = ['R&M-Appliance','R&M-Electrical','R&M-Hardware','R&M-Pest Control','R&M-Plumbing'];
 
-let QBT = null, RAMP = null, BUDGET = null, WO_DATA = null;
+let QBT = null, RAMP = null, BUDGET = null, WO_DATA = null, PM_WOS = null;
 let PERIOD_FROM = '', PERIOD_TO = '';
 let woSortCol = 11, woSortAsc = false;
 let woFiltered = [];
@@ -177,6 +177,33 @@ function priorityBadge(s) {
   const cls = (s||'').toLowerCase();
   return `<span class="badge ${cls}">${s||'—'}</span>`;
 }
+function escHtml(s) { return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function fmtDT(iso) {
+  if (!iso) return '—';
+  const d = new Date(iso);
+  if (isNaN(d)) return iso.slice(0,10);
+  return d.toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'});
+}
+function pmStatusBadge(s) {
+  const map = {
+    'COMPLETED':                              ['completed','Completed'],
+    'PENDING_COMPLETION':                     ['assigned','In Progress'],
+    'PENDING_ASSIGNMENT':                     ['new','Unassigned'],
+    'PENDING_MORE_MANAGEMENT_AVAILABILITY':   ['scheduled','Needs Scheduling'],
+    'MANAGER_CANCELED':                       ['canceled','Canceled'],
+    'TENANT_CANCELED':                        ['canceled','Tenant Canceled'],
+  };
+  const [cls, label] = map[s] || ['new', s ? s.replace(/_/g,' ').toLowerCase() : '—'];
+  return `<span class="badge ${cls}">${label}</span>`;
+}
+function togglePMComments(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const btn = document.getElementById(id + '-btn');
+  const open = el.style.display !== 'none';
+  el.style.display = open ? 'none' : 'block';
+  if (btn) btn.textContent = (open ? '▸' : '▾') + btn.textContent.slice(1);
+}
 
 // ── PERIOD ───────────────────────────────────────────────────────────────────
 function setPeriod(mode, btn) {
@@ -215,14 +242,16 @@ async function loadAll(preservePeriod) {
   const savedFrom = PERIOD_FROM, savedTo = PERIOD_TO;
   try {
     const ts = Date.now();
-    const [qbtR, rampR, budgetR, woR] = await Promise.all([
+    const [qbtR, rampR, budgetR, woR, pmR] = await Promise.all([
       fetch('./data/qbtime.json?_=' + ts),
       fetch('./data/ramp_processed.json?_=' + ts),
       fetch('./data/budget.json?_=' + ts),
       fetch('./data/workorders.json?_=' + ts),
+      fetch('./data/pm_wos.json?_=' + ts),
     ]);
     bar.style.width = '70%';
     [QBT, RAMP, BUDGET, WO_DATA] = await Promise.all([qbtR.json(), rampR.json(), budgetR.json(), woR.json()]);
+    try { PM_WOS = pmR.ok ? await pmR.json() : null; } catch(e) { PM_WOS = null; }
     bar.style.width = '100%';
     setTimeout(() => { bar.style.width = '0'; bar.style.transition='none'; setTimeout(()=>bar.style.transition='width 0.4s ease',50); }, 500);
 
@@ -430,6 +459,74 @@ function toggleSpendDetail(i) {
   if (row) row.classList.toggle('open');
 }
 
+// ── TOP 10 WORK ORDERS ────────────────────────────────────────────────────────
+function buildTop10(rows, periodLabel) {
+  const top10 = [...rows].sort((a, b) => b.total - a.total).slice(0, 10);
+  if (top10.length === 0) return '';
+
+  const cards = top10.map((r, idx) => {
+    const pm = PM_WOS?.melds?.[r.wo];
+    const statusBadge = pm ? pmStatusBadge(pm.status) : '';
+    const lastCmt = (pm?.comments || []).reduce((best, c) => (!best || c.date > best ? c.date : best), null);
+    const completedStr = lastCmt ? fmtDT(lastCmt) : '—';
+    const desc = pm?.description
+      ? `<div style="color:#444;font-size:0.85rem;margin:5px 0 4px;line-height:1.45;">${escHtml(pm.description)}</div>`
+      : '';
+    const pmLink = pm
+      ? `<a href="${pm.url}" target="_blank" rel="noopener" style="font-size:0.75rem;color:#2e86c1;text-decoration:none;white-space:nowrap;">View in PM ↗</a>`
+      : '';
+    const propInfo  = r.prop || pm?.property || '—';
+    const unitSuffix = pm?.unit ? ` · Unit ${escHtml(pm.unit)}` : '';
+    const laborStr  = r.labor > 0 ? `Labor: ${fmtC(r.labor)} (${r.hrs.toFixed(1)}h)` : '';
+    const matsStr   = r.mats  > 0 ? `Materials: ${fmtC(r.mats)}` : '';
+    const costBreak = [laborStr, matsStr].filter(Boolean).join(' · ');
+    const comments  = pm?.comments || [];
+    const commentHtml = comments.length > 0
+      ? `<button id="cmt${idx}-btn" onclick="togglePMComments('cmt${idx}')" style="background:none;border:1px solid #c8d6e0;border-radius:12px;padding:2px 12px;font-size:0.75rem;color:#7f8fa4;cursor:pointer;margin-top:6px;">▸ Notes (${comments.length})</button>
+         <div id="cmt${idx}" style="display:none;margin-top:8px;padding-top:8px;border-top:1px solid #e8edf2;">` +
+        comments.map(c => {
+          const isTenant = c.type === 'TenantComment' || c.type === 't';
+          const isVendor = c.type === 'VendorComment'  || c.type === 'v';
+          const typeLabel = isTenant ? 'Tenant' : isVendor ? 'Vendor' : 'Manager';
+          const typeColor = isTenant ? '#1e8449' : isVendor ? '#6c3483' : '#1a5276';
+          return `<div style="display:flex;gap:8px;margin-bottom:7px;font-size:0.8rem;align-items:flex-start;">
+            <span style="white-space:nowrap;color:#a0aebb;min-width:76px;">${fmtDT(c.date)}</span>
+            <span style="white-space:nowrap;color:${typeColor};font-weight:600;min-width:58px;">${typeLabel}</span>
+            <span style="white-space:nowrap;color:#1a2535;font-weight:500;min-width:100px;">${escHtml(c.by)}</span>
+            <span style="color:#444;flex:1;">${escHtml(c.text)}</span>
+          </div>`;
+        }).join('') +
+        `</div>`
+      : '';
+    const noPMNote = !pm
+      ? `<span style="font-size:0.72rem;color:#c8d6e0;font-style:italic;">PM details not yet synced</span>`
+      : '';
+
+    return `<div style="background:#fff;border:1px solid #d0dce8;border-radius:8px;padding:14px 18px;">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;min-width:0;">
+          <span style="background:#1a5276;color:#fff;border-radius:50%;width:24px;height:24px;display:inline-flex;align-items:center;justify-content:center;font-size:0.72rem;font-weight:700;flex-shrink:0;">${idx+1}</span>
+          <span style="font-family:monospace;font-weight:700;color:#2e86c1;font-size:0.95rem;">${r.wo}</span>
+          <span style="font-weight:600;color:#1a2535;">${escHtml(propInfo)}${unitSuffix}</span>
+          ${statusBadge}
+        </div>
+        <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;flex-shrink:0;">
+          ${pm ? `<span style="font-size:0.78rem;color:#7f8fa4;">Last activity: ${completedStr}</span>` : ''}
+          <span style="font-size:1.1rem;font-weight:700;color:#1a5276;">${fmtC(r.total)}</span>
+          ${pmLink}
+        </div>
+      </div>
+      ${costBreak ? `<div style="font-size:0.77rem;color:#a0aebb;margin-top:4px;">${costBreak}</div>` : ''}
+      ${desc}
+      ${noPMNote}
+      ${commentHtml}
+    </div>`;
+  }).join('');
+
+  return `<div class="section-title" style="margin-top:0;">Top 10 Work Orders by Cost — ${escHtml(periodLabel)}</div>
+    <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:28px;">${cards}</div>`;
+}
+
 // ── BY WORK ORDER ─────────────────────────────────────────────────────────────
 const _jcCache = {};
 function getJcPath(id) {
@@ -488,14 +585,19 @@ function buildByWorkOrder() {
   const labWOs    = wocRows.filter(r => r.labor > 0).length;
   const matWOs    = wocRows.filter(r => r.mats  > 0).length;
 
+  const periodLabel = FROM.slice(0,7) + ' – ' + TO.slice(0,7);
+  const top10Html = buildTop10(wocRows, periodLabel);
+
   document.getElementById('wocContent').innerHTML = `
     <div class="kpi-grid">
       <div class="kpi-card"><div class="kpi-label">Work Orders Tracked</div><div class="kpi-value">${wocRows.length}</div><div class="kpi-sub">with any R&amp;M cost in period</div></div>
       <div class="kpi-card"><div class="kpi-label">Total Labor</div><div class="kpi-value">${fmtC(totLabor)}</div><div class="kpi-sub">${labWOs} WOs with labor · QBTime</div></div>
       <div class="kpi-card"><div class="kpi-label">Total Materials</div><div class="kpi-value">${fmtC(totMats)}</div><div class="kpi-sub">${matWOs} WOs with materials · Ramp</div></div>
-      <div class="kpi-card"><div class="kpi-label">Total Spend</div><div class="kpi-value">${fmtC(totActual)}</div><div class="kpi-sub">${FROM.slice(0,7)} – ${TO.slice(0,7)}</div></div>
+      <div class="kpi-card"><div class="kpi-label">Total Spend</div><div class="kpi-value">${fmtC(totActual)}</div><div class="kpi-sub">${periodLabel}</div></div>
     </div>
-    ${wocRows.length === 0 ? '<p style="color:#7f8fa4;padding:20px;">No work orders with R&amp;M costs in this period.</p>' : `
+    ${top10Html}
+    ${wocRows.length === 0 ? '' : `
+    <div class="section-title">All Work Orders by Cost</div>
     <div class="controls">
       <input type="text" id="wocSearch" placeholder="Search WO # or property…" oninput="filterWoc()">
     </div>
