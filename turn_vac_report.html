@@ -884,6 +884,10 @@ function buildKPIs() {
   const avgDurationStd  = pct(durStd);
   const avgStartLeadAll = pct(leadAll);
   const avgStartLeadStd = pct(leadStd);
+  // Median is more representative than mean for turn duration
+  const durSorted = [...durAll].sort((a,b)=>a-b);
+  const medianDuration = durSorted.length ? durSorted[Math.floor(durSorted.length/2)] : null;
+  const pct14d = durAll.length ? Math.round(durAll.filter(d=>d<=14).length/durAll.length*100) : null;
 
   const fmtC = n => '$' + Math.round(n).toLocaleString('en-US');
   const card = (cls, label, val, sub) =>
@@ -901,7 +905,7 @@ function buildKPIs() {
   // Color helpers
   const ttC = avgTurnTime===null?'':avgTurnTime<=14?'good':avgTurnTime<=21?'warn':'bad';
   const slC = avgStartLeadAll===null?'':avgStartLeadAll<=3?'good':avgStartLeadAll<=7?'warn':'bad';
-  const dC  = avgDurationAll===null?'':avgDurationAll<=14?'good':avgDurationAll<=21?'warn':'bad';
+  const dC  = medianDuration===null?'':medianDuration<=10?'good':medianDuration<=14?'warn':'bad';
 
   // Per-property table
   const propRows = Object.entries(byProp)
@@ -937,7 +941,14 @@ function buildKPIs() {
       <div class="kpi-grid" style="margin-bottom:16px">
         ${card(ttC,  'Avg Turn Time',    avgTurnTime!==null ? avgTurnTime+'d' : '—',        'move-out → rent ready (AppFolio, '+completedTurns.length+' turns)')}
         ${cardDual(slC, 'Avg Start Lead Time', avgStartLeadAll, avgStartLeadStd, leadAll.length, leadStd.length, 'move-out → 1st maintenance appt (PM, '+leadAll.length+' turns)')}
-        ${cardDual(dC,  'Avg Turn Duration',   avgDurationAll,  avgDurationStd,  durAll.length,  durStd.length,  '1st maintenance → final walkthrough (PM, '+durAll.length+' turns)')}
+        <div class="kpi-card ${dC}">
+          <div class="kpi-label">Turn Duration</div>
+          <div class="kpi-value">${medianDuration !== null ? medianDuration+'d' : '—'}</div>
+          <div class="kpi-sub">median · 1st maint → final walkthrough (${durAll.length} turns)</div>
+          <div style="margin-top:6px;padding:5px 8px;background:#f4f6f9;border-radius:4px;font-size:0.72rem;color:#555">
+            ${pct14d !== null ? `<strong style="color:#1e8449">${pct14d}%</strong> complete in ≤14d &nbsp;·&nbsp; ` : ''}avg ${avgDurationAll}d ${durOutliers.length ? `(${avgDurationStd}d excl. ${durOutliers.length} outliers)` : ''}
+          </div>
+        </div>
         ${card(avgCostPerTurn!==null?(avgCostPerTurn>2000?'warn':'good'):'', 'Avg Cost / Turn', avgCostPerTurn!==null ? fmtC(avgCostPerTurn) : '—', 'labor + materials (QBT+Ramp, '+costCount+' turns)')}
       </div>
       ${(durOutliers.length || leadOutliers.length) ? `
