@@ -796,30 +796,31 @@ async function fetchPropertyMeldTurns() {
         const meldRes = await pmGet(`/api/melds/?project=${proj.id}&limit=50`, session);
         const melds = meldRes.results || [];
 
-        // Find initial and final walkthrough melds
-        const byBrief = (pattern) => melds.find(m => pattern.test(m.brief_description || ''));
-        const initialWO  = byBrief(/^A\s*[-–]\s*initial|initial\s*walkthrough/i);
-        const finalWO    = byBrief(/final\s*walkthrough/i);
+        // Find the first MAINTENANCE or PAINT meld appointment (whichever is earliest)
+        // and the FINAL WALKTHROUGH scheduled date.
+        // Maintenance = melds with "maintenance", "repair", or "B -" / "D -" prefix
+        // Paint       = melds with "paint" or "C -" prefix
+        const isMaintOrPaint = (brief) => {
+          const b = (brief || '').toLowerCase();
+          return /^[bd]\s*[-–]/.test(brief) || /paint|maintenance|repair/.test(b);
+        };
+        const isFinalWalk = (brief) => /final\s*walk/i.test(brief || '');
 
-        // Get first appointment date (any meld in project with a scheduled appointment)
-        let firstApptDate = null;
-        let finalWalkDate = null;
+        let firstApptDate = null;   // first maintenance/paint appt = turn work start
+        let finalWalkDate = null;   // final walkthrough scheduled date = turn work end
 
         for (const m of melds) {
-          const appt = (m.managementappointment || []).find(a => a.availability_segment?.event);
-          if (appt) {
-            const apptDate = appt.availability_segment.event.dtstart.slice(0, 10);
+          const appts = m.managementappointment || [];
+          const appt = appts.find(a => a.availability_segment?.event);
+          if (!appt) continue;
+          const apptDate = appt.availability_segment.event.dtstart.slice(0, 10);
+
+          if (isMaintOrPaint(m.brief_description)) {
             if (!firstApptDate || apptDate < firstApptDate) firstApptDate = apptDate;
           }
-        }
-
-        // Final walkthrough: use completed date or latest appointment
-        if (finalWO) {
-          if (finalWO.work_completed_on) {
-            finalWalkDate = finalWO.work_completed_on.slice(0, 10);
-          } else {
-            const appt = (finalWO.managementappointment || []).find(a => a.availability_segment?.event);
-            if (appt) finalWalkDate = appt.availability_segment.event.dtstart.slice(0, 10);
+          if (isFinalWalk(m.brief_description)) {
+            // Use scheduled appointment date for final walkthrough
+            if (!finalWalkDate || apptDate > finalWalkDate) finalWalkDate = apptDate;
           }
         }
 
