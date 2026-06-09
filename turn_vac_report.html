@@ -812,9 +812,6 @@ function buildKPIs() {
   const completedTurns = d.filter(r => r.isVacant && r.availOnD && r.availOnD <= TODAY && r.moveOutD);
   const avgTurnTime   = completedTurns.length
     ? Math.round(completedTurns.reduce((s,r) => s + daysBetween(r.moveOutD, r.availOnD), 0) / completedTurns.length) : null;
-  const onTimeBase    = completedTurns.filter(r => r.turnTargD);
-  const onTimePct     = onTimeBase.length
-    ? Math.round(onTimeBase.filter(r => r.availOnD <= r.turnTargD).length / onTimeBase.length * 100) : null;
 
   // ── New KPIs using turn_costs.json ──────────────────────────────────────────
   const vacMap = buildVacMap();
@@ -879,7 +876,6 @@ function buildKPIs() {
 
   // Color helpers
   const ttC = avgTurnTime===null?'':avgTurnTime<=14?'good':avgTurnTime<=21?'warn':'bad';
-  const otC = onTimePct===null?'':onTimePct>=80?'good':onTimePct>=60?'warn':'bad';
   const slC = avgStartLead===null?'':avgStartLead<=3?'good':avgStartLead<=7?'warn':'bad';
   const dC  = avgDuration===null?'':avgDuration<=10?'good':avgDuration<=18?'warn':'bad';
 
@@ -916,7 +912,6 @@ function buildKPIs() {
       <div class="section-title" style="margin-bottom:14px">Turn Performance</div>
       <div class="kpi-grid" style="margin-bottom:28px">
         ${card(ttC,  'Avg Turn Time',       avgTurnTime!==null ? avgTurnTime+'d' : '—', 'move-out → rent ready ('+completedTurns.length+' turns)')}
-        ${card(otC,  'On-Time Rate',        onTimePct!==null ? onTimePct+'%' : '—',     'completed by target date ('+onTimeBase.length+' w/ targets)')}
         ${card(slC,  'Avg Start Lead Time', avgStartLead!==null ? avgStartLead+'d' : '—', 'move-out → first maintenance day ('+startLeadCount+' turns)')}
         ${card(dC,   'Avg Turn Duration',   avgDuration!==null ? avgDuration+'d' : '—',  'first maintenance → rent ready ('+durationCount+' turns)')}
         ${card(avgCostPerTurn!==null?(avgCostPerTurn>2000?'warn':'good'):'', 'Avg Cost / Turn', avgCostPerTurn!==null ? fmtC(avgCostPerTurn) : '—', 'labor + materials ('+costCount+' completed turns)')}
