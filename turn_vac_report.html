@@ -194,6 +194,7 @@
 
 <div class="tabs">
   <div class="tab active" onclick="showTab('overview',this)">Overview</div>
+  <div class="tab" onclick="showTab('kpis',this)">KPIs</div>
   <div class="tab" onclick="showTab('turnsDue',this)">Turns Due</div>
   <div class="tab" onclick="showTab('recentlyAdded',this)">Recently Added <span id="recentBadge" style="display:none;background:#e74c3c;color:#fff;border-radius:10px;font-size:0.7rem;font-weight:700;padding:1px 7px;margin-left:4px;vertical-align:middle;"></span></div>
   <div class="tab" onclick="showTab('byProperty',this)">By Property</div>
@@ -202,6 +203,7 @@
 </div>
 
 <div id="overview" class="panel active"><div id="overviewContent"><p style="color:#7f8fa4;padding:20px;">Loading…</p></div></div>
+<div id="kpis" class="panel"><div id="kpisContent"><p style="color:#7f8fa4;padding:20px;">Loading…</p></div></div>
 <div id="turnsDue" class="panel"><div id="turnsDueContent"><p style="color:#7f8fa4;padding:20px;">Loading…</p></div></div>
 <div id="recentlyAdded" class="panel"><div id="recentContent"><p style="color:#7f8fa4;padding:20px;">Loading…</p></div></div>
 <div id="byProperty" class="panel"><div id="propContent"></div></div>
@@ -519,38 +521,8 @@ function buildOverview() {
       <div class="card yellow"><div class="label">Move-In Scheduled</div><div class="value">${hasMI}</div><div class="sub">${miThisMonth} this month</div></div>
       <div class="card"><div class="label">Avg Days Vacant</div><div class="value">${avgV}</div><div class="sub">across vacant units</div></div>
     </div>
-    <div class="section-title">Performance KPIs</div>
-    <div class="kpi-grid">
-      <div class="kpi-card ${turnTimeColor}">
-        <div class="kpi-label">Avg Turn Time</div>
-        <div class="kpi-value">${avgTurnTime !== null ? avgTurnTime + 'd' : '—'}</div>
-        <div class="kpi-sub">move-out → available (${completedTurns.length} completed turns)</div>
-      </div>
-      <div class="kpi-card ${onTimeColor}">
-        <div class="kpi-label">On-Time Rate</div>
-        <div class="kpi-value">${onTimePct !== null ? onTimePct + '%' : '—'}</div>
-        <div class="kpi-sub">turns completed by target date (${onTimeBase.length} with targets set)</div>
-      </div>
-      <div class="kpi-card ${activeTurns > 5 ? 'warn' : ''}">
-        <div class="kpi-label">Active Turns</div>
-        <div class="kpi-value">${activeTurns}</div>
-        <div class="kpi-sub">vacant, in-progress, no move-in yet</div>
-      </div>
-      <div class="kpi-card ${dueThisWeek > 0 ? 'warn' : ''}">
-        <div class="kpi-label">Due This Week</div>
-        <div class="kpi-value">${dueThisWeek}</div>
-        <div class="kpi-sub">available dates in next 7 days</div>
-      </div>
-      <div class="kpi-card ${dailyLoss > 500 ? 'bad' : dailyLoss > 200 ? 'warn' : ''}">
-        <div class="kpi-label">Daily Revenue at Risk</div>
-        <div class="kpi-value">$${dailyLoss.toLocaleString()}</div>
-        <div class="kpi-sub">lost/day from ${atRisk.length} vacant-unrented units</div>
-      </div>
-      <div class="kpi-card bad">
-        <div class="kpi-label">Total Lost to Date</div>
-        <div class="kpi-value">$${totalLost.toLocaleString()}</div>
-        <div class="kpi-sub">est. rent lost while vacant-unrented</div>
-      </div>
+    <div style="font-size:0.8rem;color:#7f8fa4;background:#f0f7ff;border:1px solid #d0dce8;border-radius:6px;padding:8px 14px;margin-bottom:16px;">
+      📊 Performance KPIs have moved to the <strong style="color:#1a5276;">KPIs tab</strong>
     </div>
     <div class="section-title">Availability by Month</div>
     <div class="timeline">${months.map(m => {
@@ -820,6 +792,154 @@ function showTab(id, el) {
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   el.classList.add('active');
+  if (id === 'kpis') buildKPIs();
+}
+
+// ── KPIs TAB ─────────────────────────────────────────────────────────────────
+function buildKPIs() {
+  const el = document.getElementById('kpisContent');
+  if (!el) return;
+
+  const d = allData;
+
+  // ── Existing overview KPIs ──────────────────────────────────────────────────
+  const vacantUnrented = d.filter(r => r.unit_status === 'Vacant-Unrented').length;
+  const activeTurns   = d.filter(r => r.isVacant && r.effectiveRentReady !== 'Yes' && !r.nextMIDate).length;
+  const dueThisWeek   = d.filter(r => r.availOnD && r.availOnD > TODAY && daysBetween(TODAY, r.availOnD) <= 7).length;
+  const atRisk        = d.filter(r => r.unit_status === 'Vacant-Unrented' && !r.nextMIDate && r.schd_rent);
+  const dailyLoss     = Math.round(atRisk.reduce((s,r) => s + parseFloat(r.schd_rent||0)/30, 0));
+  const totalLost     = Math.round(atRisk.reduce((s,r) => s + (parseFloat(r.schd_rent||0)/30) * (r.dv||0), 0));
+  const completedTurns = d.filter(r => r.isVacant && r.availOnD && r.availOnD <= TODAY && r.moveOutD);
+  const avgTurnTime   = completedTurns.length
+    ? Math.round(completedTurns.reduce((s,r) => s + daysBetween(r.moveOutD, r.availOnD), 0) / completedTurns.length) : null;
+  const onTimeBase    = completedTurns.filter(r => r.turnTargD);
+  const onTimePct     = onTimeBase.length
+    ? Math.round(onTimeBase.filter(r => r.availOnD <= r.turnTargD).length / onTimeBase.length * 100) : null;
+
+  // ── New KPIs using turn_costs.json ──────────────────────────────────────────
+  const vacMap = buildVacMap();
+  let sumCost = 0, costCount = 0;
+  let sumStartLead = 0, startLeadCount = 0;
+  let sumDuration = 0, durationCount = 0;
+
+  // Per-property accumulators
+  const byProp = {};
+
+  if (RAW_COSTS) {
+    for (const [code, u] of Object.entries(RAW_COSTS.units)) {
+      const vac = vacMap[code];
+      if (!vac) continue;
+
+      const labor = u.labor || [];
+      if (!labor.length) continue;
+
+      const totalCost = labor.reduce((s,e) => s+e.cost, 0) +
+                        (u.materials||[]).reduce((s,e) => s+e.amt, 0);
+      const firstLaborD = labor.map(e=>e.d).sort()[0]; // earliest labor date = maintenance start
+      const lastLaborD  = labor.map(e=>e.d).sort().slice(-1)[0];
+
+      const prop = u.prop || code.split('-')[0];
+      if (!byProp[prop]) byProp[prop] = {cost:0,costN:0,lead:0,leadN:0,dur:0,durN:0};
+
+      // Avg cost per completed turn (status = complete or occupied, has cost)
+      const isComplete = vac.effectiveRentReady === 'Yes' || !vac.isVacant;
+      if (isComplete && totalCost > 0) {
+        sumCost += totalCost; costCount++;
+        byProp[prop].cost += totalCost; byProp[prop].costN++;
+      }
+
+      // Start lead time: move-out → first labor (only if move-out known)
+      const moveOutStr = vac.last_move_out;
+      if (moveOutStr && firstLaborD && firstLaborD >= moveOutStr) {
+        const lead = daysBetween(new Date(moveOutStr), new Date(firstLaborD));
+        if (lead >= 0 && lead <= 90) { // sanity check
+          sumStartLead += lead; startLeadCount++;
+          byProp[prop].lead += lead; byProp[prop].leadN++;
+        }
+      }
+
+      // Turn duration: first labor → available_on (only for completed turns with both dates)
+      if (vac.availOnD && firstLaborD && isComplete) {
+        const dur = daysBetween(new Date(firstLaborD), vac.availOnD);
+        if (dur >= 0 && dur <= 120) {
+          sumDuration += dur; durationCount++;
+          byProp[prop].dur += dur; byProp[prop].durN++;
+        }
+      }
+    }
+  }
+
+  const avgCostPerTurn = costCount > 0 ? sumCost / costCount : null;
+  const avgStartLead   = startLeadCount > 0 ? Math.round(sumStartLead / startLeadCount) : null;
+  const avgDuration    = durationCount > 0 ? Math.round(sumDuration / durationCount) : null;
+
+  const fmtC = n => '$' + Math.round(n).toLocaleString('en-US');
+  const card = (cls, label, val, sub) =>
+    `<div class="kpi-card ${cls}"><div class="kpi-label">${label}</div><div class="kpi-value">${val}</div><div class="kpi-sub">${sub}</div></div>`;
+
+  // Color helpers
+  const ttC = avgTurnTime===null?'':avgTurnTime<=14?'good':avgTurnTime<=21?'warn':'bad';
+  const otC = onTimePct===null?'':onTimePct>=80?'good':onTimePct>=60?'warn':'bad';
+  const slC = avgStartLead===null?'':avgStartLead<=3?'good':avgStartLead<=7?'warn':'bad';
+  const dC  = avgDuration===null?'':avgDuration<=10?'good':avgDuration<=18?'warn':'bad';
+
+  // Per-property table
+  const propRows = Object.entries(byProp)
+    .filter(([,v]) => v.costN > 0 || v.leadN > 0 || v.durN > 0)
+    .sort((a,b) => b[1].costN - a[1].costN)
+    .map(([prop,v]) => {
+      const avgC = v.costN > 0 ? fmtC(v.cost/v.costN) : '—';
+      const avgL = v.leadN > 0 ? Math.round(v.lead/v.leadN)+'d' : '—';
+      const avgD = v.durN  > 0 ? Math.round(v.dur/v.durN)+'d' : '—';
+      const slColor = v.leadN>0 ? (v.lead/v.leadN<=3?'color:#1e8449':v.lead/v.leadN<=7?'color:#ca6f1e':'color:#c0392b') : '';
+      const dColor  = v.durN>0  ? (v.dur/v.durN<=10?'color:#1e8449':v.dur/v.durN<=18?'color:#ca6f1e':'color:#c0392b') : '';
+      return `<tr>
+        <td style="font-weight:600;color:#1a5276">${prop}</td>
+        <td style="text-align:center">${v.costN}</td>
+        <td style="text-align:right">${avgC}</td>
+        <td style="text-align:center;font-weight:600;${slColor}">${avgL}</td>
+        <td style="text-align:center;font-weight:600;${dColor}">${avgD}</td>
+      </tr>`;
+    }).join('');
+
+  el.innerHTML = `
+    <div style="padding:20px 28px">
+
+      <div class="section-title" style="margin-bottom:14px">Vacancy & Pipeline</div>
+      <div class="kpi-grid" style="margin-bottom:28px">
+        ${card('',        'Active Turns',         activeTurns,                    'vacant, in-progress, no move-in')}
+        ${card(dueThisWeek>0?'warn':'', 'Due This Week', dueThisWeek,            'available dates in next 7 days')}
+        ${card(dailyLoss>500?'bad':dailyLoss>200?'warn':'', 'Daily Revenue at Risk', '$'+dailyLoss.toLocaleString(), atRisk.length+' vacant-unrented, no move-in')}
+        ${card('bad',     'Total Lost to Date',   '$'+totalLost.toLocaleString(), 'est. rent lost while vacant-unrented')}
+      </div>
+
+      <div class="section-title" style="margin-bottom:14px">Turn Performance</div>
+      <div class="kpi-grid" style="margin-bottom:28px">
+        ${card(ttC,  'Avg Turn Time',       avgTurnTime!==null ? avgTurnTime+'d' : '—', 'move-out → rent ready ('+completedTurns.length+' turns)')}
+        ${card(otC,  'On-Time Rate',        onTimePct!==null ? onTimePct+'%' : '—',     'completed by target date ('+onTimeBase.length+' w/ targets)')}
+        ${card(slC,  'Avg Start Lead Time', avgStartLead!==null ? avgStartLead+'d' : '—', 'move-out → first maintenance day ('+startLeadCount+' turns)')}
+        ${card(dC,   'Avg Turn Duration',   avgDuration!==null ? avgDuration+'d' : '—',  'first maintenance → rent ready ('+durationCount+' turns)')}
+        ${card(avgCostPerTurn!==null?(avgCostPerTurn>2000?'warn':'good'):'', 'Avg Cost / Turn', avgCostPerTurn!==null ? fmtC(avgCostPerTurn) : '—', 'labor + materials ('+costCount+' completed turns)')}
+      </div>
+
+      <div class="section-title" style="margin-bottom:10px">By Property</div>
+      <div style="overflow-x:auto;border:1px solid #d0dce8;border-radius:8px">
+        <table class="prop-table" style="min-width:500px">
+          <thead><tr>
+            <th>Property</th>
+            <th style="text-align:center">Turns</th>
+            <th style="text-align:right">Avg Cost</th>
+            <th style="text-align:center">Start Lead</th>
+            <th style="text-align:center">Duration</th>
+          </tr></thead>
+          <tbody>${propRows || '<tr><td colspan="5" style="text-align:center;color:#a0aebb;padding:20px">Loading cost data…</td></tr>'}</tbody>
+        </table>
+      </div>
+      <div style="font-size:0.73rem;color:#a0aebb;margin-top:8px;padding-left:4px">
+        Cost = QBTime turn labor + Ramp turn materials · Start Lead = move-out → first labor day · Duration = first labor day → rent-ready date
+      </div>
+    </div>
+  `;
 }
 
 loadData();
