@@ -203,7 +203,23 @@
 </div>
 
 <div id="overview" class="panel active"><div id="overviewContent"><p style="color:#7f8fa4;padding:20px;">Loading…</p></div></div>
-<div id="kpis" class="panel"><div id="kpisContent"><p style="color:#7f8fa4;padding:20px;">Loading…</p></div></div>
+<div id="kpis" class="panel">
+  <div style="padding:16px 28px 0;background:#fff;border-bottom:1px solid #e8edf2">
+    <div class="cost-period-row" style="margin-bottom:14px">
+      <button class="cpb active" onclick="setKPIPeriod('all',this)">All Time</button>
+      <button class="cpb" onclick="setKPIPeriod('ytd',this)">YTD</button>
+      <button class="cpb" onclick="setKPIPeriod('thisMo',this)">This Month</button>
+      <button class="cpb" onclick="setKPIPeriod('lastMo',this)">Last Month</button>
+      <button class="cpb" onclick="setKPIPeriod('last3mo',this)">Last 3 Mo</button>
+      <div class="cost-sep"></div>
+      <input type="date" id="kpiDateFrom" class="cost-date-input">
+      <span style="color:#bdc3c7;font-size:0.8rem">–</span>
+      <input type="date" id="kpiDateTo" class="cost-date-input">
+      <button class="cpb" onclick="setKPIPeriod('custom',null)">Go</button>
+    </div>
+  </div>
+  <div id="kpisContent"><p style="color:#7f8fa4;padding:20px;">Loading…</p></div>
+</div>
 <div id="turnsDue" class="panel"><div id="turnsDueContent"><p style="color:#7f8fa4;padding:20px;">Loading…</p></div></div>
 <div id="recentlyAdded" class="panel"><div id="recentContent"><p style="color:#7f8fa4;padding:20px;">Loading…</p></div></div>
 <div id="byProperty" class="panel"><div id="propContent"></div></div>
@@ -800,20 +816,67 @@ function showTab(id, el) {
 }
 
 // ── KPIs TAB ─────────────────────────────────────────────────────────────────
+function setKPIPeriod(mode, btn) {
+  document.querySelectorAll('#kpis .cpb').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  const now = new Date();
+  const pad = n => String(n).padStart(2,'0');
+  const ymd = d => d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
+  if (mode === 'all') {
+    KPI_FROM = ''; KPI_TO = '';
+  } else if (mode === 'ytd') {
+    KPI_FROM = now.getFullYear()+'-01-01'; KPI_TO = ymd(now);
+  } else if (mode === 'thisMo') {
+    KPI_FROM = now.getFullYear()+'-'+pad(now.getMonth()+1)+'-01'; KPI_TO = ymd(now);
+  } else if (mode === 'lastMo') {
+    const last = new Date(now.getFullYear(), now.getMonth(), 0);
+    KPI_FROM = last.getFullYear()+'-'+pad(last.getMonth()+1)+'-01'; KPI_TO = ymd(last);
+  } else if (mode === 'last3mo') {
+    const from = new Date(now); from.setMonth(from.getMonth()-3);
+    KPI_FROM = ymd(from); KPI_TO = ymd(now);
+  } else if (mode === 'custom') {
+    const f = document.getElementById('kpiDateFrom').value;
+    const t = document.getElementById('kpiDateTo').value;
+    if (!f || !t) return;
+    KPI_FROM = f; KPI_TO = t;
+  }
+  if (mode !== 'custom') {
+    document.getElementById('kpiDateFrom').value = KPI_FROM;
+    document.getElementById('kpiDateTo').value   = KPI_TO;
+  }
+  buildKPIs();
+}
+
 function buildKPIs() {
   const el = document.getElementById('kpisContent');
   if (!el) return;
 
   const d = allData;
 
-  // ── Existing overview KPIs ──────────────────────────────────────────────────
+  // ── Period filter helpers ────────────────────────────────────────────────────
+  const inPeriod = (dateStr) => {
+    if (!dateStr) return false;
+    if (KPI_FROM && dateStr < KPI_FROM) return false;
+    if (KPI_TO   && dateStr > KPI_TO)   return false;
+    return true;
+  };
+  const periodLabel = KPI_FROM
+    ? (KPI_FROM === KPI_TO ? KPI_FROM : KPI_FROM + ' – ' + KPI_TO)
+    : 'All Time';
+
+  // ── Vacancy KPIs (always current, not date-filtered) ────────────────────────
   const vacantUnrented = d.filter(r => r.unit_status === 'Vacant-Unrented').length;
   const activeTurns   = d.filter(r => r.isVacant && r.effectiveRentReady !== 'Yes' && !r.nextMIDate).length;
   const dueThisWeek   = d.filter(r => r.availOnD && r.availOnD > TODAY && daysBetween(TODAY, r.availOnD) <= 7).length;
   const atRisk        = d.filter(r => r.unit_status === 'Vacant-Unrented' && !r.nextMIDate && r.schd_rent);
   const dailyLoss     = Math.round(atRisk.reduce((s,r) => s + parseFloat(r.schd_rent||0)/30, 0));
   const totalLost     = Math.round(atRisk.reduce((s,r) => s + (parseFloat(r.schd_rent||0)/30) * (r.dv||0), 0));
-  const completedTurns = d.filter(r => r.isVacant && r.availOnD && r.availOnD <= TODAY && r.moveOutD);
+  // Avg Turn Time: filter by available_on date within period
+  const completedTurns = d.filter(r => {
+    if (!r.isVacant || !r.availOnD || r.availOnD > TODAY || !r.moveOutD) return false;
+    const avail = r.availOnD.toISOString().slice(0,10);
+    return KPI_FROM ? inPeriod(avail) : true;
+  });
   const avgTurnTime   = completedTurns.length
     ? Math.round(completedTurns.reduce((s,r) => s + daysBetween(r.moveOutD, r.availOnD), 0) / completedTurns.length) : null;
 
@@ -826,9 +889,11 @@ function buildKPIs() {
     for (const [code, u] of Object.entries(RAW_COSTS.units)) {
       const vac = vacMap[code];
       if (!vac) continue;
-      const labor = u.labor || [];
-      if (!labor.length) continue;
-      const totalCost = labor.reduce((s,e) => s+e.cost, 0) + (u.materials||[]).reduce((s,e) => s+e.amt, 0);
+      // Filter labor entries by period date
+      const labor = (u.labor || []).filter(e => KPI_FROM ? inPeriod(e.d) : true);
+      const mats  = (u.materials || []).filter(e => KPI_FROM ? inPeriod(e.d) : true);
+      if (!labor.length && !mats.length) continue;
+      const totalCost = labor.reduce((s,e) => s+e.cost, 0) + mats.reduce((s,e) => s+e.amt, 0);
       const prop = u.prop || code.split('-')[0];
       if (!byProp[prop]) byProp[prop] = {cost:0,costN:0,lead:0,leadN:0,dur:0,durN:0};
       const isComplete = vac.effectiveRentReady === 'Yes' || !vac.isVacant;
@@ -852,7 +917,11 @@ function buildKPIs() {
   }
 
   if (RAW_TURNS) {
-    const completeTurns = RAW_TURNS.turns.filter(t => t.first_appt && t.final_walk && t.status === 'COMPLETE');
+    // Filter by first_appt date within period
+    const completeTurns = RAW_TURNS.turns.filter(t =>
+      t.first_appt && t.final_walk && t.status === 'COMPLETE' &&
+      (KPI_FROM ? inPeriod(t.first_appt) : true)
+    );
     completeTurns.forEach(t => {
       const dur = daysBetween(new Date(t.first_appt), new Date(t.final_walk));
       if (dur < 0 || dur > 365) return;
@@ -929,6 +998,11 @@ function buildKPIs() {
   el.innerHTML = `
     <div style="padding:20px 28px">
 
+      <div style="font-size:0.78rem;color:#7f8fa4;margin-bottom:16px">
+        Showing: <strong style="color:#1a5276">${periodLabel}</strong>
+        ${KPI_FROM ? ' · Turn performance filtered by first maintenance appointment date' : ''}
+      </div>
+
       <div class="section-title" style="margin-bottom:14px">Vacancy & Pipeline</div>
       <div class="kpi-grid" style="margin-bottom:28px">
         ${card('',        'Active Turns',         activeTurns,                    'vacant, in-progress, no move-in')}
@@ -991,6 +1065,8 @@ loadData();
 // ── TURN COSTS TAB ──────────────────────────────────────────────────────────
 let RAW_COSTS  = null;
 let RAW_TURNS  = null;
+let KPI_FROM   = '';   // '' = all time
+let KPI_TO     = '';
 let COST_FROM  = '';
 let COST_TO    = '';
 let costsRows  = [];
