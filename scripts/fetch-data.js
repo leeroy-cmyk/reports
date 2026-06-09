@@ -808,12 +808,20 @@ async function fetchPropertyMeldTurns() {
         let lastMaintPaint   = null;  // last maint OR paint appt → handoff to cleaners
         let lastClean        = null;  // last cleaning OR carpet  → cleaning done
 
+        // Helper: get the scheduled date from either management or vendor appointment
+        function getApptDate(m) {
+          const mgmtAppt = (m.managementappointment || []).find(a => a.availability_segment?.event);
+          if (mgmtAppt) return mgmtAppt.availability_segment.event.dtstart.slice(0, 10);
+          // Vendor appointments for cleaning/carpet melds
+          const vendAppt = (m.vendorappointment || []).find(a => a.availability_segment?.event);
+          if (vendAppt) return vendAppt.availability_segment.event.dtstart.slice(0, 10);
+          return null;
+        }
+
         for (const m of melds) {
-          const brief = m.brief_description || '';
-          const appts = m.managementappointment || [];
-          const appt  = appts.find(a => a.availability_segment?.event);
-          if (!appt) continue;
-          const apptDate = appt.availability_segment.event.dtstart.slice(0, 10);
+          const brief    = m.brief_description || '';
+          const apptDate = getApptDate(m);
+          if (!apptDate) continue;
 
           if (isMaint(brief) || isPaint(brief)) {
             if (!firstApptDate  || apptDate < firstApptDate)  firstApptDate  = apptDate;

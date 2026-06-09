@@ -925,7 +925,7 @@ function buildKPIs() {
   }
 
   if (RAW_TURNS) {
-    // Filter by first_appt date within period
+    // Duration & Start Lead: filtered by first_appt date (when turn work started)
     const completeTurns = RAW_TURNS.turns.filter(t =>
       t.first_appt && t.final_walk && t.status === 'COMPLETE' &&
       (KPI_FROM ? inPeriod(t.first_appt) : true)
@@ -936,23 +936,9 @@ function buildKPIs() {
       const isOutlier = dur > 60;
       durAll.push(dur);
       if (!isOutlier) durStd.push(dur); else durOutliers.push({dur, prop:t.property, unit:t.unit, first:t.first_appt, final:t.final_walk});
-
-      // Per-property
       const prop = propCodeKPI(t.property) || t.property;
       if (!byProp[prop]) byProp[prop] = {cost:0,costN:0,lead:0,leadN:0,dur:0,durN:0};
       byProp[prop].dur += dur; byProp[prop].durN++;
-
-      // Time to clean: last maint/paint → last cleaning/carpet
-      if (t.last_maint_paint && t.last_clean && t.last_clean >= t.last_maint_paint) {
-        const gap = daysBetween(new Date(t.last_maint_paint), new Date(t.last_clean));
-        if (gap >= 0 && gap <= 90) {
-          cleanAll.push(gap);
-          if (gap <= 21) cleanStd.push(gap);
-          else cleanOutliers.push({gap, prop:t.property, unit:t.unit, maint:t.last_maint_paint, clean:t.last_clean});
-          byProp[prop].clean = (byProp[prop].clean||0) + gap;
-          byProp[prop].cleanN = (byProp[prop].cleanN||0) + 1;
-        }
-      }
 
       // Start lead: match to AppFolio vacancy for move-out date
       const pc = propCodeKPI(t.property);
@@ -966,6 +952,25 @@ function buildKPIs() {
           byProp[prop].lead += lead; byProp[prop].leadN++;
         }
       }
+    });
+
+    // Time to Clean: filtered by last_clean date (when cleaning actually happened)
+    // This gives "for turns cleaned in this period, how long did they wait after maint/paint?"
+    const cleanTurns = RAW_TURNS.turns.filter(t =>
+      t.last_maint_paint && t.last_clean &&
+      t.last_clean >= t.last_maint_paint &&
+      (KPI_FROM ? inPeriod(t.last_clean) : true)
+    );
+    cleanTurns.forEach(t => {
+      const gap = daysBetween(new Date(t.last_maint_paint), new Date(t.last_clean));
+      if (gap < 0 || gap > 90) return;
+      cleanAll.push(gap);
+      if (gap <= 21) cleanStd.push(gap);
+      else cleanOutliers.push({gap, prop:t.property, unit:t.unit, maint:t.last_maint_paint, clean:t.last_clean});
+      const prop = propCodeKPI(t.property) || t.property;
+      if (!byProp[prop]) byProp[prop] = {cost:0,costN:0,lead:0,leadN:0,dur:0,durN:0};
+      byProp[prop].clean = (byProp[prop].clean||0) + gap;
+      byProp[prop].cleanN = (byProp[prop].cleanN||0) + 1;
     });
   }
 
@@ -1054,7 +1059,7 @@ function buildKPIs() {
         <div class="kpi-card ${cC}">
           <div class="kpi-label">Time to Clean</div>
           <div class="kpi-value">${medianClean !== null ? medianClean+'d' : '—'}</div>
-          <div class="kpi-sub">median · last maint/paint → last cleaning/carpet (${cleanAll.length} turns)</div>
+          <div class="kpi-sub">median · last maint/paint → last cleaning/carpet (${cleanAll.length} turns cleaned in period)</div>
           <div style="margin-top:6px;padding:5px 8px;background:#f4f6f9;border-radius:4px;font-size:0.72rem;color:#555">
             avg ${avgCleanAll !== null ? avgCleanAll+'d' : '—'} ${cleanOutliers.length ? `(${avgCleanStd}d excl. ${cleanOutliers.length} outliers)` : ''}
           </div>
