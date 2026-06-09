@@ -909,6 +909,7 @@ function buildKPIs() {
   const pct = (a) => a.length ? Math.round(a.reduce((s,x)=>s+x,0)/a.length) : null;
   const durAll = [], durStd = [], durOutliers = [];
   const leadAll = [], leadStd = [], leadOutliers = [];
+  const cleanAll = [], cleanStd = [], cleanOutliers = [];
 
   function propCodeKPI(str) {
     if(!str) return null;
@@ -934,6 +935,18 @@ function buildKPIs() {
       if (!byProp[prop]) byProp[prop] = {cost:0,costN:0,lead:0,leadN:0,dur:0,durN:0};
       byProp[prop].dur += dur; byProp[prop].durN++;
 
+      // Time to clean: last maint/paint → last cleaning/carpet
+      if (t.last_maint_paint && t.last_clean && t.last_clean >= t.last_maint_paint) {
+        const gap = daysBetween(new Date(t.last_maint_paint), new Date(t.last_clean));
+        if (gap >= 0 && gap <= 90) {
+          cleanAll.push(gap);
+          if (gap <= 21) cleanStd.push(gap);
+          else cleanOutliers.push({gap, prop:t.property, unit:t.unit, maint:t.last_maint_paint, clean:t.last_clean});
+          byProp[prop].clean = (byProp[prop].clean||0) + gap;
+          byProp[prop].cleanN = (byProp[prop].cleanN||0) + 1;
+        }
+      }
+
       // Start lead: match to AppFolio vacancy for move-out date
       const pc = propCodeKPI(t.property);
       const key = pc ? (pc + '-' + t.unit.trim()).toLowerCase() : null;
@@ -953,10 +966,14 @@ function buildKPIs() {
   const avgDurationStd  = pct(durStd);
   const avgStartLeadAll = pct(leadAll);
   const avgStartLeadStd = pct(leadStd);
+  const avgCleanAll     = pct(cleanAll);
+  const avgCleanStd     = pct(cleanStd);
   // Median is more representative than mean for turn duration
   const durSorted = [...durAll].sort((a,b)=>a-b);
   const medianDuration = durSorted.length ? durSorted[Math.floor(durSorted.length/2)] : null;
   const pct14d = durAll.length ? Math.round(durAll.filter(d=>d<=14).length/durAll.length*100) : null;
+  const cleanSorted = [...cleanAll].sort((a,b)=>a-b);
+  const medianClean = cleanSorted.length ? cleanSorted[Math.floor(cleanSorted.length/2)] : null;
 
   const fmtC = n => '$' + Math.round(n).toLocaleString('en-US');
   const card = (cls, label, val, sub) =>
@@ -975,6 +992,7 @@ function buildKPIs() {
   const ttC = avgTurnTime===null?'':avgTurnTime<=14?'good':avgTurnTime<=21?'warn':'bad';
   const slC = avgStartLeadAll===null?'':avgStartLeadAll<=3?'good':avgStartLeadAll<=7?'warn':'bad';
   const dC  = medianDuration===null?'':medianDuration<=10?'good':medianDuration<=14?'warn':'bad';
+  const cC  = medianClean===null?'':medianClean<=3?'good':medianClean<=7?'warn':'bad';
 
   // Per-property table
   const propRows = Object.entries(byProp)
@@ -986,12 +1004,15 @@ function buildKPIs() {
       const avgD = v.durN  > 0 ? Math.round(v.dur/v.durN)+'d' : '—';
       const slColor = v.leadN>0 ? (v.lead/v.leadN<=3?'color:#1e8449':v.lead/v.leadN<=7?'color:#ca6f1e':'color:#c0392b') : '';
       const dColor  = v.durN>0  ? (v.dur/v.durN<=14?'color:#1e8449':v.dur/v.durN<=21?'color:#ca6f1e':'color:#c0392b') : '';
+      const avgCl = v.cleanN > 0 ? Math.round(v.clean/v.cleanN)+'d' : '—';
+      const clColor = v.cleanN>0 ? (v.clean/v.cleanN<=3?'color:#1e8449':v.clean/v.cleanN<=7?'color:#ca6f1e':'color:#c0392b') : '';
       return `<tr>
         <td style="font-weight:600;color:#1a5276">${prop}</td>
         <td style="text-align:center">${v.costN}</td>
         <td style="text-align:right">${avgC}</td>
         <td style="text-align:center;font-weight:600;${slColor}">${avgL}</td>
         <td style="text-align:center;font-weight:600;${dColor}">${avgD}</td>
+        <td style="text-align:center;font-weight:600;${clColor}">${avgCl}</td>
       </tr>`;
     }).join('');
 
@@ -1023,9 +1044,17 @@ function buildKPIs() {
             ${pct14d !== null ? `<strong style="color:#1e8449">${pct14d}%</strong> complete in ≤14d &nbsp;·&nbsp; ` : ''}avg ${avgDurationAll}d ${durOutliers.length ? `(${avgDurationStd}d excl. ${durOutliers.length} outliers)` : ''}
           </div>
         </div>
+        <div class="kpi-card ${cC}">
+          <div class="kpi-label">Time to Clean</div>
+          <div class="kpi-value">${medianClean !== null ? medianClean+'d' : '—'}</div>
+          <div class="kpi-sub">median · last maint/paint → last cleaning/carpet (${cleanAll.length} turns)</div>
+          <div style="margin-top:6px;padding:5px 8px;background:#f4f6f9;border-radius:4px;font-size:0.72rem;color:#555">
+            avg ${avgCleanAll !== null ? avgCleanAll+'d' : '—'} ${cleanOutliers.length ? `(${avgCleanStd}d excl. ${cleanOutliers.length} outliers)` : ''}
+          </div>
+        </div>
         ${card(avgCostPerTurn!==null?(avgCostPerTurn>2000?'warn':'good'):'', 'Avg Cost / Turn', avgCostPerTurn!==null ? fmtC(avgCostPerTurn) : '—', 'labor + materials (QBT+Ramp, '+costCount+' turns)')}
       </div>
-      ${(durOutliers.length || leadOutliers.length) ? `
+      ${(durOutliers.length || leadOutliers.length || cleanOutliers.length) ? `
       <div style="background:#fffbf0;border:1px solid #fdebd0;border-radius:6px;padding:12px 16px;margin-bottom:20px;font-size:0.8rem;">
         <div style="font-weight:700;color:#ca6f1e;margin-bottom:8px">⚠ Outliers &gt;60 days (excluded from adjusted avg)</div>
         ${durOutliers.map(o => `<div style="color:#555;margin-bottom:3px">
@@ -1035,6 +1064,10 @@ function buildKPIs() {
         ${leadOutliers.map(o => `<div style="color:#555;margin-bottom:3px">
           <strong style="color:#1a5276">${o.prop} ${o.unit}</strong> — ${o.lead}d start lead
           <span style="color:#a0aebb">(move-out ${o.moveOut} → first appt ${o.appt})</span>
+        </div>`).join('')}
+        ${cleanOutliers.map(o => `<div style="color:#555;margin-bottom:3px">
+          <strong style="color:#1a5276">${o.prop} ${o.unit}</strong> — ${o.gap}d time-to-clean
+          <span style="color:#a0aebb">(maint done ${o.maint} → cleaning ${o.clean})</span>
         </div>`).join('')}
         <div style="color:#a0aebb;margin-top:6px;font-style:italic">Note: kn47 cluster (Oct 2025) and similar are likely CapEx renovation projects — atypical for standard turns.</div>
       </div>` : ''}
@@ -1049,8 +1082,9 @@ function buildKPIs() {
             <th style="text-align:right">Avg Cost</th>
             <th style="text-align:center">Start Lead</th>
             <th style="text-align:center">Duration</th>
+            <th style="text-align:center">Time to Clean</th>
           </tr></thead>
-          <tbody>${propRows || '<tr><td colspan="5" style="text-align:center;color:#a0aebb;padding:20px">Loading cost data…</td></tr>'}</tbody>
+          <tbody>${propRows || '<tr><td colspan="6" style="text-align:center;color:#a0aebb;padding:20px">Loading cost data…</td></tr>'}</tbody>
         </table>
       </div>
       <div style="font-size:0.73rem;color:#a0aebb;margin-top:8px;padding-left:4px">

@@ -796,31 +796,34 @@ async function fetchPropertyMeldTurns() {
         const meldRes = await pmGet(`/api/melds/?project=${proj.id}&limit=50`, session);
         const melds = meldRes.results || [];
 
-        // Find the first MAINTENANCE or PAINT meld appointment (whichever is earliest)
-        // and the FINAL WALKTHROUGH scheduled date.
-        // Maintenance = melds with "maintenance", "repair", or "B -" / "D -" prefix
-        // Paint       = melds with "paint" or "C -" prefix
-        const isMaintOrPaint = (brief) => {
-          const b = (brief || '').toLowerCase();
-          return /^[bd]\s*[-–]/.test(brief) || /paint|maintenance|repair/.test(b);
-        };
-        const isFinalWalk = (brief) => /final\s*walk/i.test(brief || '');
+        // Meld classifiers
+        const isMaint     = (b) => /^[bd]\s*[-–]/i.test(b) || /\bmaintenance\b|\brepair\b/i.test(b);
+        const isPaint     = (b) => /^c\s*[-–]/i.test(b)    || /\bpaint\b/i.test(b);
+        const isCleaning  = (b) => /^f\s*[-–]/i.test(b)    || (/\bcleaning\b/i.test(b) && !/carpet/i.test(b));
+        const isCarpet    = (b) => /^e\s*[-–]/i.test(b)    || /carpet.*clean|clean.*carpet/i.test(b);
+        const isFinalWalk = (b) => /final\s*walk/i.test(b);
 
-        let firstApptDate = null;   // first maintenance/paint appt = turn work start
-        let finalWalkDate = null;   // final walkthrough scheduled date = turn work end
+        let firstApptDate    = null;  // first maint/paint appt  → turn work START
+        let finalWalkDate    = null;  // final walkthrough appt   → turn work END
+        let lastMaintPaint   = null;  // last maint OR paint appt → handoff to cleaners
+        let lastClean        = null;  // last cleaning OR carpet  → cleaning done
 
         for (const m of melds) {
+          const brief = m.brief_description || '';
           const appts = m.managementappointment || [];
-          const appt = appts.find(a => a.availability_segment?.event);
+          const appt  = appts.find(a => a.availability_segment?.event);
           if (!appt) continue;
           const apptDate = appt.availability_segment.event.dtstart.slice(0, 10);
 
-          if (isMaintOrPaint(m.brief_description)) {
-            if (!firstApptDate || apptDate < firstApptDate) firstApptDate = apptDate;
+          if (isMaint(brief) || isPaint(brief)) {
+            if (!firstApptDate  || apptDate < firstApptDate)  firstApptDate  = apptDate;
+            if (!lastMaintPaint || apptDate > lastMaintPaint) lastMaintPaint = apptDate;
           }
-          if (isFinalWalk(m.brief_description)) {
-            // Use scheduled appointment date for final walkthrough
+          if (isFinalWalk(brief)) {
             if (!finalWalkDate || apptDate > finalWalkDate) finalWalkDate = apptDate;
+          }
+          if (isCleaning(brief) || isCarpet(brief)) {
+            if (!lastClean || apptDate > lastClean) lastClean = apptDate;
           }
         }
 
@@ -836,8 +839,10 @@ async function fetchPropertyMeldTurns() {
           status:       proj.total_completed_melds === proj.total_melds ? 'COMPLETE' : 'ACTIVE',
           start_date:   proj.start_date ? proj.start_date.slice(0, 10) : null,
           due_date:     proj.due_date   ? proj.due_date.slice(0, 10)   : null,
-          first_appt:   firstApptDate,
-          final_walk:   finalWalkDate,
+          first_appt:      firstApptDate,
+          final_walk:      finalWalkDate,
+          last_maint_paint: lastMaintPaint,
+          last_clean:       lastClean,
           total_melds:  proj.total_melds,
           done_melds:   proj.total_completed_melds,
         });
