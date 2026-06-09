@@ -763,6 +763,95 @@ async function fetchPropertyMeldWOs() {
   save('pm_wos.json', { ok: true, fetched_at: new Date().toISOString(), melds: result });
 }
 
+// ── PropertyMeld Turn Projects ────────────────────────────────────────────────
+// Fetches TURN-type projects with their melds and appointment dates.
+// Used for KPI tab: start lead time (move-out → first maintenance appt)
+// and turn duration (first maint appt → final walkthrough).
+async function fetchPropertyMeldTurns() {
+  if (!PM_EMAIL || !PM_PASSWORD) { console.log('PM credentials not set, skipping turns fetch.'); return; }
+  console.log('PropertyMeld turns: logging in...');
+  const session = await pmLogin();
+  console.log('PropertyMeld turns: logged in');
+
+  const projects = [];
+  let offset = 0;
+  while (true) {
+    const res = await pmGet(`/api/projects/?project_type=TURN&limit=100&offset=${offset}`, session);
+    const rows = res.results || [];
+    projects.push(...rows);
+    process.stdout.write(`  projects ${projects.length}/${res.count || '?'}\r`);
+    if (!res.next || rows.length === 0) break;
+    offset += 100;
+    await sleep(150);
+  }
+  console.log(`\nPropertyMeld turns: ${projects.length} TURN projects fetched`);
+
+  const turns = [];
+  let done = 0;
+  const BATCH = 5;
+  for (let i = 0; i < projects.length; i += BATCH) {
+    const chunk = projects.slice(i, i + BATCH);
+    await Promise.all(chunk.map(async (proj) => {
+      try {
+        const meldRes = await pmGet(`/api/melds/?project=${proj.id}&limit=50`, session);
+        const melds = meldRes.results || [];
+
+        // Find initial and final walkthrough melds
+        const byBrief = (pattern) => melds.find(m => pattern.test(m.brief_description || ''));
+        const initialWO  = byBrief(/^A\s*[-–]\s*initial|initial\s*walkthrough/i);
+        const finalWO    = byBrief(/final\s*walkthrough/i);
+
+        // Get first appointment date (any meld in project with a scheduled appointment)
+        let firstApptDate = null;
+        let finalWalkDate = null;
+
+        for (const m of melds) {
+          const appt = (m.managementappointment || []).find(a => a.availability_segment?.event);
+          if (appt) {
+            const apptDate = appt.availability_segment.event.dtstart.slice(0, 10);
+            if (!firstApptDate || apptDate < firstApptDate) firstApptDate = apptDate;
+          }
+        }
+
+        // Final walkthrough: use completed date or latest appointment
+        if (finalWO) {
+          if (finalWO.work_completed_on) {
+            finalWalkDate = finalWO.work_completed_on.slice(0, 10);
+          } else {
+            const appt = (finalWO.managementappointment || []).find(a => a.availability_segment?.event);
+            if (appt) finalWalkDate = appt.availability_segment.event.dtstart.slice(0, 10);
+          }
+        }
+
+        const unit = proj.unit;
+        const propObj = unit?.prop || {};
+
+        turns.push({
+          id:           proj.id,
+          name:         proj.name,
+          property:     propObj.property_name || '',
+          unit:         unit?.unit || unit?.display_address?.line_2 || '',
+          unit_id:      unit?.id || null,
+          status:       proj.total_completed_melds === proj.total_melds ? 'COMPLETE' : 'ACTIVE',
+          start_date:   proj.start_date ? proj.start_date.slice(0, 10) : null,
+          due_date:     proj.due_date   ? proj.due_date.slice(0, 10)   : null,
+          first_appt:   firstApptDate,
+          final_walk:   finalWalkDate,
+          total_melds:  proj.total_melds,
+          done_melds:   proj.total_completed_melds,
+        });
+      } catch(e) {
+        console.error(`\n  project ${proj.id} error: ${e.message}`);
+      }
+      done++;
+    }));
+    process.stdout.write(`  project melds ${Math.min(done, projects.length)}/${projects.length}\r`);
+    await sleep(150);
+  }
+  console.log(`\nPropertyMeld turns: saved ${turns.length} turn records`);
+  save('pm_turns.json', { ok: true, fetched_at: new Date().toISOString(), turns });
+}
+
 // FETCH_ONLY env var controls what runs:
 //   'appfolio'      → turnvac + workorders + budget (every 5 min)
 //   'qbt-only'      → QBTime + audit.json only
@@ -793,6 +882,7 @@ const FETCH_ONLY = process.env.FETCH_ONLY || 'all';
 
   if (FETCH_ONLY === 'pm-only') {
     await fetchPropertyMeldWOs();
+    await fetchPropertyMeldTurns();
     console.log('Done.');
     return;
   }
@@ -842,7 +932,7 @@ const FETCH_ONLY = process.env.FETCH_ONLY || 'all';
   }
 
   if (runPM) {
-    try { await fetchPropertyMeldWOs(); }
+    try { await fetchPropertyMeldWOs(); await fetchPropertyMeldTurns(); }
     catch(e) { console.error('PropertyMeld fetch failed:', e.message); }
   }
 

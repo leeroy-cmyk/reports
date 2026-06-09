@@ -375,9 +375,10 @@ async function loadData() {
   errBar.style.display = 'none';
 
   try {
-    const [resp, costsResp] = await Promise.all([
+    const [resp, costsResp, turnsResp] = await Promise.all([
       fetch('./data/turnvac.json'),
       fetch('./data/turn_costs.json').catch(() => null),
+      fetch('./data/pm_turns.json').catch(() => null),
     ]);
     bar.style.width = '80%';
     if (!resp.ok) throw new Error('HTTP ' + resp.status);
@@ -386,6 +387,9 @@ async function loadData() {
 
     if (costsResp && costsResp.ok) {
       try { RAW_COSTS = await costsResp.json(); } catch(e) { /* ignore */ }
+    }
+    if (turnsResp && turnsResp.ok) {
+      try { RAW_TURNS = await turnsResp.json(); } catch(e) { /* ignore */ }
     }
 
     allData = json.rows.map(r => {
@@ -813,71 +817,91 @@ function buildKPIs() {
   const avgTurnTime   = completedTurns.length
     ? Math.round(completedTurns.reduce((s,r) => s + daysBetween(r.moveOutD, r.availOnD), 0) / completedTurns.length) : null;
 
-  // ── New KPIs using turn_costs.json ──────────────────────────────────────────
+  // ── Cost KPI from turn_costs.json ──────────────────────────────────────────
   const vacMap = buildVacMap();
   let sumCost = 0, costCount = 0;
-  let sumStartLead = 0, startLeadCount = 0;
-  let sumDuration = 0, durationCount = 0;
-
-  // Per-property accumulators
   const byProp = {};
 
   if (RAW_COSTS) {
     for (const [code, u] of Object.entries(RAW_COSTS.units)) {
       const vac = vacMap[code];
       if (!vac) continue;
-
       const labor = u.labor || [];
       if (!labor.length) continue;
-
-      const totalCost = labor.reduce((s,e) => s+e.cost, 0) +
-                        (u.materials||[]).reduce((s,e) => s+e.amt, 0);
-      const firstLaborD = labor.map(e=>e.d).sort()[0]; // earliest labor date = maintenance start
-      const lastLaborD  = labor.map(e=>e.d).sort().slice(-1)[0];
-
+      const totalCost = labor.reduce((s,e) => s+e.cost, 0) + (u.materials||[]).reduce((s,e) => s+e.amt, 0);
       const prop = u.prop || code.split('-')[0];
       if (!byProp[prop]) byProp[prop] = {cost:0,costN:0,lead:0,leadN:0,dur:0,durN:0};
-
-      // Avg cost per completed turn (status = complete or occupied, has cost)
       const isComplete = vac.effectiveRentReady === 'Yes' || !vac.isVacant;
       if (isComplete && totalCost > 0) {
         sumCost += totalCost; costCount++;
         byProp[prop].cost += totalCost; byProp[prop].costN++;
       }
+    }
+  }
+  const avgCostPerTurn = costCount > 0 ? sumCost / costCount : null;
 
-      // Start lead time: move-out → first labor (only if move-out known)
-      const moveOutStr = vac.last_move_out;
-      if (moveOutStr && firstLaborD && firstLaborD >= moveOutStr) {
-        const lead = daysBetween(new Date(moveOutStr), new Date(firstLaborD));
-        if (lead >= 0 && lead <= 90) { // sanity check
-          sumStartLead += lead; startLeadCount++;
+  // ── Start Lead Time & Turn Duration from PropertyMeld pm_turns.json ─────────
+  const pct = (a) => a.length ? Math.round(a.reduce((s,x)=>s+x,0)/a.length) : null;
+  const durAll = [], durStd = [], durOutliers = [];
+  const leadAll = [], leadStd = [], leadOutliers = [];
+
+  function propCodeKPI(str) {
+    if(!str) return null;
+    const m = str.match(/([a-z]{1,3}\d{2,3})/i);
+    return m ? m[1].toLowerCase() : null;
+  }
+
+  if (RAW_TURNS) {
+    const completeTurns = RAW_TURNS.turns.filter(t => t.first_appt && t.final_walk && t.status === 'COMPLETE');
+    completeTurns.forEach(t => {
+      const dur = daysBetween(new Date(t.first_appt), new Date(t.final_walk));
+      if (dur < 0 || dur > 365) return;
+      const isOutlier = dur > 60;
+      durAll.push(dur);
+      if (!isOutlier) durStd.push(dur); else durOutliers.push({dur, prop:t.property, unit:t.unit, first:t.first_appt, final:t.final_walk});
+
+      // Per-property
+      const prop = propCodeKPI(t.property) || t.property;
+      if (!byProp[prop]) byProp[prop] = {cost:0,costN:0,lead:0,leadN:0,dur:0,durN:0};
+      byProp[prop].dur += dur; byProp[prop].durN++;
+
+      // Start lead: match to AppFolio vacancy for move-out date
+      const pc = propCodeKPI(t.property);
+      const key = pc ? (pc + '-' + t.unit.trim()).toLowerCase() : null;
+      const vac = key ? vacMap[key] : null;
+      if (vac && vac.last_move_out && t.first_appt >= vac.last_move_out) {
+        const lead = daysBetween(new Date(vac.last_move_out), new Date(t.first_appt));
+        if (lead >= 0 && lead <= 365) {
+          leadAll.push(lead);
+          if (lead <= 60) leadStd.push(lead); else leadOutliers.push({lead, prop:t.property, unit:t.unit, moveOut:vac.last_move_out, appt:t.first_appt});
           byProp[prop].lead += lead; byProp[prop].leadN++;
         }
       }
-
-      // Turn duration: first labor → available_on (only for completed turns with both dates)
-      if (vac.availOnD && firstLaborD && isComplete) {
-        const dur = daysBetween(new Date(firstLaborD), vac.availOnD);
-        if (dur >= 0 && dur <= 120) {
-          sumDuration += dur; durationCount++;
-          byProp[prop].dur += dur; byProp[prop].durN++;
-        }
-      }
-    }
+    });
   }
 
-  const avgCostPerTurn = costCount > 0 ? sumCost / costCount : null;
-  const avgStartLead   = startLeadCount > 0 ? Math.round(sumStartLead / startLeadCount) : null;
-  const avgDuration    = durationCount > 0 ? Math.round(sumDuration / durationCount) : null;
+  const avgDurationAll  = pct(durAll);
+  const avgDurationStd  = pct(durStd);
+  const avgStartLeadAll = pct(leadAll);
+  const avgStartLeadStd = pct(leadStd);
 
   const fmtC = n => '$' + Math.round(n).toLocaleString('en-US');
   const card = (cls, label, val, sub) =>
     `<div class="kpi-card ${cls}"><div class="kpi-label">${label}</div><div class="kpi-value">${val}</div><div class="kpi-sub">${sub}</div></div>`;
+  const cardDual = (cls, label, valAll, valStd, nAll, nStd, sub) => `
+    <div class="kpi-card ${cls}">
+      <div class="kpi-label">${label}</div>
+      <div class="kpi-value">${valAll !== null ? valAll+'d' : '—'}</div>
+      <div class="kpi-sub" style="margin-top:4px">${sub}</div>
+      ${valStd !== valAll && valStd !== null ? `<div style="margin-top:6px;padding:5px 8px;background:#f4f6f9;border-radius:4px;font-size:0.72rem;color:#555">
+        <span style="font-weight:600;color:#1a5276">${valStd}d</span> excl. outliers (${nAll-nStd} turns &gt;60d)
+      </div>` : ''}
+    </div>`;
 
   // Color helpers
   const ttC = avgTurnTime===null?'':avgTurnTime<=14?'good':avgTurnTime<=21?'warn':'bad';
-  const slC = avgStartLead===null?'':avgStartLead<=3?'good':avgStartLead<=7?'warn':'bad';
-  const dC  = avgDuration===null?'':avgDuration<=10?'good':avgDuration<=18?'warn':'bad';
+  const slC = avgStartLeadAll===null?'':avgStartLeadAll<=3?'good':avgStartLeadAll<=7?'warn':'bad';
+  const dC  = avgDurationAll===null?'':avgDurationAll<=14?'good':avgDurationAll<=21?'warn':'bad';
 
   // Per-property table
   const propRows = Object.entries(byProp)
@@ -888,7 +912,7 @@ function buildKPIs() {
       const avgL = v.leadN > 0 ? Math.round(v.lead/v.leadN)+'d' : '—';
       const avgD = v.durN  > 0 ? Math.round(v.dur/v.durN)+'d' : '—';
       const slColor = v.leadN>0 ? (v.lead/v.leadN<=3?'color:#1e8449':v.lead/v.leadN<=7?'color:#ca6f1e':'color:#c0392b') : '';
-      const dColor  = v.durN>0  ? (v.dur/v.durN<=10?'color:#1e8449':v.dur/v.durN<=18?'color:#ca6f1e':'color:#c0392b') : '';
+      const dColor  = v.durN>0  ? (v.dur/v.durN<=14?'color:#1e8449':v.dur/v.durN<=21?'color:#ca6f1e':'color:#c0392b') : '';
       return `<tr>
         <td style="font-weight:600;color:#1a5276">${prop}</td>
         <td style="text-align:center">${v.costN}</td>
@@ -910,12 +934,26 @@ function buildKPIs() {
       </div>
 
       <div class="section-title" style="margin-bottom:14px">Turn Performance</div>
-      <div class="kpi-grid" style="margin-bottom:28px">
-        ${card(ttC,  'Avg Turn Time',       avgTurnTime!==null ? avgTurnTime+'d' : '—', 'move-out → rent ready ('+completedTurns.length+' turns)')}
-        ${card(slC,  'Avg Start Lead Time', avgStartLead!==null ? avgStartLead+'d' : '—', 'move-out → first maintenance day ('+startLeadCount+' turns)')}
-        ${card(dC,   'Avg Turn Duration',   avgDuration!==null ? avgDuration+'d' : '—',  'first maintenance → rent ready ('+durationCount+' turns)')}
-        ${card(avgCostPerTurn!==null?(avgCostPerTurn>2000?'warn':'good'):'', 'Avg Cost / Turn', avgCostPerTurn!==null ? fmtC(avgCostPerTurn) : '—', 'labor + materials ('+costCount+' completed turns)')}
+      <div class="kpi-grid" style="margin-bottom:16px">
+        ${card(ttC,  'Avg Turn Time',    avgTurnTime!==null ? avgTurnTime+'d' : '—',        'move-out → rent ready (AppFolio, '+completedTurns.length+' turns)')}
+        ${cardDual(slC, 'Avg Start Lead Time', avgStartLeadAll, avgStartLeadStd, leadAll.length, leadStd.length, 'move-out → 1st maintenance appt (PM, '+leadAll.length+' turns)')}
+        ${cardDual(dC,  'Avg Turn Duration',   avgDurationAll,  avgDurationStd,  durAll.length,  durStd.length,  '1st maintenance → final walkthrough (PM, '+durAll.length+' turns)')}
+        ${card(avgCostPerTurn!==null?(avgCostPerTurn>2000?'warn':'good'):'', 'Avg Cost / Turn', avgCostPerTurn!==null ? fmtC(avgCostPerTurn) : '—', 'labor + materials (QBT+Ramp, '+costCount+' turns)')}
       </div>
+      ${(durOutliers.length || leadOutliers.length) ? `
+      <div style="background:#fffbf0;border:1px solid #fdebd0;border-radius:6px;padding:12px 16px;margin-bottom:20px;font-size:0.8rem;">
+        <div style="font-weight:700;color:#ca6f1e;margin-bottom:8px">⚠ Outliers &gt;60 days (excluded from adjusted avg)</div>
+        ${durOutliers.map(o => `<div style="color:#555;margin-bottom:3px">
+          <strong style="color:#1a5276">${o.prop} ${o.unit}</strong> — ${o.dur}d duration
+          <span style="color:#a0aebb">(${o.first} → ${o.final})</span>
+        </div>`).join('')}
+        ${leadOutliers.map(o => `<div style="color:#555;margin-bottom:3px">
+          <strong style="color:#1a5276">${o.prop} ${o.unit}</strong> — ${o.lead}d start lead
+          <span style="color:#a0aebb">(move-out ${o.moveOut} → first appt ${o.appt})</span>
+        </div>`).join('')}
+        <div style="color:#a0aebb;margin-top:6px;font-style:italic">Note: kn47 cluster (Oct 2025) and similar are likely CapEx renovation projects — atypical for standard turns.</div>
+      </div>` : ''}
+
 
       <div class="section-title" style="margin-bottom:10px">By Property</div>
       <div style="overflow-x:auto;border:1px solid #d0dce8;border-radius:8px">
@@ -941,6 +979,7 @@ loadData();
 
 // ── TURN COSTS TAB ──────────────────────────────────────────────────────────
 let RAW_COSTS  = null;
+let RAW_TURNS  = null;
 let COST_FROM  = '';
 let COST_TO    = '';
 let costsRows  = [];
