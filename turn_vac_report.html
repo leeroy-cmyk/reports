@@ -851,6 +851,13 @@ function buildKPIs() {
   const el = document.getElementById('kpisContent');
   if (!el) return;
 
+  if (!allData || !allData.length) {
+    el.innerHTML = '<p style="color:#7f8fa4;padding:20px;">Loading data…</p>';
+    return;
+  }
+
+  try {
+
   const d = allData;
 
   // ── Period filter helpers ────────────────────────────────────────────────────
@@ -1088,10 +1095,15 @@ function buildKPIs() {
         </table>
       </div>
       <div style="font-size:0.73rem;color:#a0aebb;margin-top:8px;padding-left:4px">
-        Cost = QBTime turn labor + Ramp turn materials · Start Lead = move-out → first labor day · Duration = first labor day → rent-ready date
+        Cost = QBTime turn labor + Ramp turn materials · Start Lead = move-out → first maint appt · Duration = first maint appt → final walkthrough · Time to Clean = last maint/paint → last cleaning/carpet
       </div>
     </div>
   `;
+
+  } catch(e) {
+    el.innerHTML = '<div style="padding:20px;color:#c0392b;font-size:0.85rem">⚠ Error building KPIs: ' + e.message + '</div>';
+    console.error('buildKPIs error:', e);
+  }
 }
 
 loadData();
