@@ -3,7 +3,7 @@ const BASE = 'https://app.propertymeld.com', MGMT = '2975';
 const WADE_ID = 48355, JUSTIN_ID = 59624;
 const SPOKANE_GROUP = 25113;
 
-// Pest control is handled in-house by Wade + Justin — not excluded
+const PEST_PATTERN = /pest|bed.?bug|termite|rodent|mice|mouse|trap|exterminate|infest/i;
 const PRI = {Emergency:0,Urgent:0,High:1,Normal:2,Medium:2,Low:3};
 
 async function httpreq(method, urlStr, headers, bodyStr) {
@@ -41,9 +41,13 @@ function isSpokaneRepair(m) {
   // Spokane group (25113) + Our Natural Homes (25115) treated as same region
   const propObj = (m.unit && m.unit.prop) ? m.unit.prop : m.prop;
   const pg = (propObj && propObj.denormalized_property_groups) || [];
-  return (pg.includes(SPOKANE_GROUP) || pg.includes(25115)) &&
-    m.work_type !== 'ENVIRONMENTAL' &&
-    !m.project;
+  if (!(pg.includes(SPOKANE_GROUP) || pg.includes(25115))) return false;
+  if (m.work_type === 'ENVIRONMENTAL' || m.project) return false;
+  // Pest: don't auto-pick up unassigned pest melds — but if already assigned, leave them alone
+  if (PEST_PATTERN.test(m.brief_description || '')) {
+    return !!(m.in_house_servicers && m.in_house_servicers.length > 0);
+  }
+  return true;
 }
 
 function estimateDuration(brief) {
