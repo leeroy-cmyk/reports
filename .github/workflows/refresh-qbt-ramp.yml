@@ -86,7 +86,7 @@ jobs:
       - name: Commit PropertyMeld data
         continue-on-error: true
         run: |
-          git add data/pm_wos.json
+          git add data/pm_wos.json data/pm_tech_metrics.json
           git diff --cached --quiet && { echo "No PM changes"; exit 0; }
           git commit -m "chore: refresh PropertyMeld WOs $(date -u '+%Y-%m-%d %H:%M UTC')"
           for i in 1 2 3 4 5; do

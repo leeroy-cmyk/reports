@@ -866,16 +866,112 @@ async function fetchPropertyMeldTurns() {
   save('pm_turns.json', { ok: true, fetched_at: new Date().toISOString(), turns });
 }
 
+// ── PropertyMeld Tech Metrics ────────────────────────────────────────────────
+// Fetches repair melds for Wade, Justin, Jonas — saves slim records for KPI HTML.
+async function fetchPMTechMetrics() {
+  if (!PM_EMAIL || !PM_PASSWORD) { console.log('PM credentials not set, skipping tech metrics.'); return; }
+
+  const TECHS = [
+    { name: 'Jonas Hoard',      id: 59983, key: 'jonas'  },
+    { name: 'Wade Hippen',      id: 48355, key: 'wade'   },
+    { name: 'Justin Gutierrez', id: 59624, key: 'justin' },
+  ];
+  const SIX_MONTHS_AGO = new Date(Date.now() - 190 * 86400000).toISOString().slice(0, 10);
+
+  console.log('PM tech metrics: logging in...');
+  const session = await pmLogin();
+  console.log('PM tech metrics: logged in');
+
+  const techMelds = { jonas: [], wade: [], justin: [] };
+
+  function tmGetAppt(m) {
+    for (const a of (m.managementappointment || [])) {
+      if (a.dtstart) return a.dtstart.slice(0, 10);
+      if (a.availability_segment?.event?.dtstart) return a.availability_segment.event.dtstart.slice(0, 10);
+    }
+    return null;
+  }
+  function tmPriority(m) {
+    if (m.management_is_emergency) return 'Emergency';
+    const p = (m.management_priority || '').toLowerCase();
+    if (p === 'high') return 'High';
+    if (p === 'low')  return 'Low';
+    return 'Normal';
+  }
+  function slim(m, status) {
+    return {
+      id:        m.id,
+      ref:       m.reference_id,
+      brief:     (m.brief_description || '').slice(0, 80),
+      status,
+      priority:  tmPriority(m),
+      created:   (m.created_date_time || '').slice(0, 10),
+      completed: (m.completed || '').slice(0, 10) || null,
+      first_appt: tmGetAppt(m),
+      property:  m.unit?.prop?.property_name || m.prop?.property_name || '',
+      work_type: m.work_type || '',
+    };
+  }
+
+  // COMPLETED melds — paginate newest first, stop when older than ~6 months
+  let offset = 0, total = '?', hitOld = false;
+  while (!hitOld) {
+    const res = await pmGet(`/api/melds/?status=COMPLETED&limit=100&offset=${offset}`, session);
+    if (offset === 0) { total = res.count || '?'; console.log(`PM tech metrics: ${total} COMPLETED melds total`); }
+    const rows = res.results || [];
+    if (rows.length === 0) break;
+    for (const m of rows) {
+      const created = (m.created_date_time || '').slice(0, 10);
+      if (created && created < SIX_MONTHS_AGO) { hitOld = true; break; }
+      const ids = (m.in_house_servicers || []).filter(s => s.agent).map(s => s.agent.id);
+      for (const t of TECHS) {
+        if (ids.includes(t.id)) techMelds[t.key].push(slim(m, 'COMPLETED'));
+      }
+    }
+    process.stdout.write(`  completed offset=${offset}/${total} j=${techMelds.jonas.length} w=${techMelds.wade.length} jg=${techMelds.justin.length}\r`);
+    if (!res.next || rows.length < 100) break;
+    offset += 100;
+    await sleep(150);
+  }
+  console.log(`\nPM tech metrics: complete pass done`);
+
+  // Active melds
+  for (const status of ['PENDING_ASSIGNMENT','PENDING_COMPLETION','PENDING_MORE_MANAGEMENT_AVAILABILITY']) {
+    let off = 0;
+    while (true) {
+      const res = await pmGet(`/api/melds/?status=${status}&limit=100&offset=${off}`, session);
+      const rows = res.results || [];
+      if (rows.length === 0) break;
+      for (const m of rows) {
+        const ids = (m.in_house_servicers || []).filter(s => s.agent).map(s => s.agent.id);
+        for (const t of TECHS) {
+          if (ids.includes(t.id)) techMelds[t.key].push(slim(m, status));
+        }
+      }
+      if (!res.next || rows.length < 100) break;
+      off += 100;
+      await sleep(150);
+    }
+  }
+
+  save('pm_tech_metrics.json', {
+    ok: true, fetched_at: new Date().toISOString(), since: SIX_MONTHS_AGO,
+    techs: TECHS, melds: techMelds,
+  });
+  console.log(`PM tech metrics: jonas=${techMelds.jonas.length} wade=${techMelds.wade.length} justin=${techMelds.justin.length}`);
+}
+
 // FETCH_ONLY env var controls what runs:
-//   'appfolio'      → turnvac + workorders + budget (every 5 min)
-//   'qbt-only'      → QBTime + audit.json only
-//   'ramp-only'     → Ramp only (incremental 60-day window)
-//   'ramp-full'     → Ramp full re-fetch (150 days, ignores existing cache) + processed rebuild
-//   'pm-only'       → PropertyMeld WO lookup only (reads local qbtime + ramp_processed)
-//   'qbt-ramp'      → QBTime + Ramp (legacy, local use)
-//   'costs-only'    → rebuild turn_costs.json from local files only (no network)
+//   'appfolio'       → turnvac + workorders + budget (every 5 min)
+//   'qbt-only'       → QBTime + audit.json only
+//   'ramp-only'      → Ramp only (incremental 60-day window)
+//   'ramp-full'      → Ramp full re-fetch (150 days, ignores existing cache) + processed rebuild
+//   'pm-only'        → PropertyMeld WOs + turns + tech metrics
+//   'pm-tech-only'   → PropertyMeld tech metrics only (pm_tech_metrics.json)
+//   'qbt-ramp'       → QBTime + Ramp (legacy, local use)
+//   'costs-only'     → rebuild turn_costs.json from local files only (no network)
 //   'processed-only' → rebuild ramp_processed + audit + turn_costs from local files only
-//   unset/'all'     → everything
+//   unset/'all'      → everything
 const FETCH_ONLY = process.env.FETCH_ONLY || 'all';
 
 (async () => {
@@ -897,6 +993,13 @@ const FETCH_ONLY = process.env.FETCH_ONLY || 'all';
   if (FETCH_ONLY === 'pm-only') {
     await fetchPropertyMeldWOs();
     await fetchPropertyMeldTurns();
+    await fetchPMTechMetrics();
+    console.log('Done.');
+    return;
+  }
+
+  if (FETCH_ONLY === 'pm-tech-only') {
+    await fetchPMTechMetrics();
     console.log('Done.');
     return;
   }

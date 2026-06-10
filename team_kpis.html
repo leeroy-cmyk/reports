@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Team Performance KPIs</title>
+<style>
+  :root {
+    --navy:   #1a5276;
+    --blue:   #2e86c1;
+    --light:  #d6eaf8;
+    --bg:     #f4f6f9;
+    --card:   #ffffff;
+    --border: #dde3ea;
+    --text:   #2c3e50;
+    --muted:  #7f8c8d;
+    --green:  #1e8449;
+    --red:    #c0392b;
+    --yellow: #d68910;
+    --purple: #7d3c98;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); font-size: 14px; }
+
+  .header { background: linear-gradient(135deg, var(--navy), var(--blue)); color: #fff; padding: 20px 28px 16px; display: flex; align-items: flex-end; justify-content: space-between; }
+  .header h1 { font-size: 22px; font-weight: 700; }
+  .header .sub { font-size: 12px; opacity: .8; margin-top: 4px; }
+  .header .updated { font-size: 11px; opacity: .65; text-align: right; }
+
+  .filter-bar { background: var(--navy); padding: 8px 28px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .filter-bar .period-btn { background: transparent; border: 1px solid rgba(255,255,255,.35); color: #fff; border-radius: 4px; padding: 4px 10px; font-size: 12px; cursor: pointer; transition: all .15s; }
+  .filter-bar .period-btn:hover, .filter-bar .period-btn.active { background: rgba(255,255,255,.2); border-color: #fff; }
+  .filter-bar input[type=date] { background: transparent; border: 1px solid rgba(255,255,255,.35); color: #fff; border-radius: 4px; padding: 3px 7px; font-size: 12px; cursor: pointer; }
+  .filter-bar input[type=date]::-webkit-calendar-picker-indicator { filter: invert(1); opacity: .7; }
+  .filter-bar .sep { color: rgba(255,255,255,.4); margin: 0 2px; }
+
+  .main { padding: 20px 28px; max-width: 1400px; margin: 0 auto; }
+
+  /* Summary row */
+  .summary-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 20px; }
+  .sum-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 14px 18px; display: flex; align-items: center; gap: 14px; }
+  .sum-icon { font-size: 22px; width: 40px; text-align: center; }
+  .sum-val { font-size: 26px; font-weight: 700; color: var(--navy); line-height: 1; }
+  .sum-label { font-size: 11px; color: var(--muted); margin-top: 3px; }
+
+  /* Tech cards */
+  .tech-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
+  .tech-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .tech-header { padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; }
+  .tech-name { font-size: 15px; font-weight: 700; }
+  .tech-region { font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .tech-badge { font-size: 11px; padding: 3px 8px; border-radius: 12px; font-weight: 600; }
+  .badge-green { background: #d5f5e3; color: var(--green); }
+  .badge-yellow { background: #fef9e7; color: var(--yellow); }
+  .badge-red { background: #fadbd8; color: var(--red); }
+
+  .kpi-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px; background: var(--border); border-top: 1px solid var(--border); }
+  .kpi-cell { background: var(--card); padding: 12px 14px; }
+  .kpi-val { font-size: 22px; font-weight: 700; color: var(--navy); }
+  .kpi-lbl { font-size: 10px; color: var(--muted); margin-top: 2px; text-transform: uppercase; letter-spacing: .4px; }
+  .kpi-note { font-size: 10px; color: var(--muted); margin-top: 1px; }
+
+  .priority-bar-wrap { padding: 10px 14px 0; }
+  .priority-bar-wrap .lbl { font-size: 10px; color: var(--muted); margin-bottom: 4px; text-transform: uppercase; letter-spacing: .4px; }
+  .priority-bar { height: 8px; border-radius: 4px; overflow: hidden; display: flex; }
+  .priority-bar .seg { height: 100%; }
+  .seg-emerg  { background: #e74c3c; }
+  .seg-high   { background: #e67e22; }
+  .seg-normal { background: #3498db; }
+  .seg-low    { background: #bdc3c7; }
+  .priority-legend { display: flex; gap: 10px; margin-top: 5px; }
+  .pleg { font-size: 10px; color: var(--muted); display: flex; align-items: center; gap: 3px; }
+  .pleg-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+  .tech-table-wrap { border-top: 1px solid var(--border); margin-top: 10px; }
+  .tech-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .tech-table th { background: var(--bg); padding: 6px 10px; text-align: left; color: var(--muted); font-weight: 600; font-size: 10px; text-transform: uppercase; letter-spacing: .4px; }
+  .tech-table td { padding: 5px 10px; border-top: 1px solid var(--border); }
+  .tech-table tr:last-child td { border-bottom: none; }
+
+  /* Comparison table */
+  .section-title { font-size: 16px; font-weight: 700; color: var(--navy); margin: 0 0 12px; }
+  .comparison-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 24px; }
+  .comp-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .comp-table th { background: var(--navy); color: #fff; padding: 10px 16px; text-align: left; font-weight: 600; }
+  .comp-table th:not(:first-child) { text-align: center; }
+  .comp-table td { padding: 9px 16px; border-top: 1px solid var(--border); }
+  .comp-table td:not(:first-child) { text-align: center; }
+  .comp-table tr:nth-child(even) td { background: var(--bg); }
+  .comp-table .metric-name { font-weight: 600; color: var(--navy); }
+  .comp-table .metric-desc { font-size: 10px; color: var(--muted); font-weight: 400; }
+  .best { color: var(--green); font-weight: 700; }
+  .worst { color: var(--red); }
+
+  .loading { padding: 60px; text-align: center; color: var(--muted); font-size: 14px; }
+  .error { padding: 20px; background: #fadbd8; border: 1px solid #e74c3c; border-radius: 8px; color: var(--red); margin: 20px 0; }
+
+  @media (max-width: 900px) {
+    .tech-grid { grid-template-columns: 1fr; }
+    .summary-row { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <h1>Team Performance KPIs</h1>
+    <div class="sub">Wade Hippen &nbsp;·&nbsp; Justin Gutierrez &nbsp;·&nbsp; Jonas Hoard</div>
+  </div>
+  <div class="updated" id="hdr-updated">Loading...</div>
+</div>
+
+<div class="filter-bar">
+  <button class="period-btn" onclick="setPeriod('tm')">This Month</button>
+  <button class="period-btn active" onclick="setPeriod('lm')">Last Month</button>
+  <button class="period-btn" onclick="setPeriod('l3')">Last 3 Mo</button>
+  <button class="period-btn" onclick="setPeriod('ytd')">YTD</button>
+  <button class="period-btn" onclick="setPeriod('all')">All Time</button>
+  <span class="sep">|</span>
+  <input type="date" id="date-from" onchange="setPeriodCustom()">
+  <span style="color:rgba(255,255,255,.5);font-size:11px">to</span>
+  <input type="date" id="date-to" onchange="setPeriodCustom()">
+</div>
+
+<div class="main" id="main">
+  <div class="loading">Loading team KPI data...</div>
+</div>
+
+<script>
+// ── Data loaders ──────────────────────────────────────────────────────────────
+const DATA_BASE = 'data/';
+let RAW_TECH = null;
+let RAW_RAMP = null;
+
+async function loadData() {
+  const [techRes, rampRes] = await Promise.allSettled([
+    fetch(DATA_BASE + 'pm_tech_metrics.json?_=' + Date.now()).then(r => r.json()),
+    fetch(DATA_BASE + 'ramp_processed.json?_=' + Date.now()).then(r => r.json()),
+  ]);
+  RAW_TECH = techRes.status === 'fulfilled' ? techRes.value : null;
+  RAW_RAMP = rampRes.status === 'fulfilled' ? rampRes.value : null;
+  if (!RAW_TECH) {
+    document.getElementById('main').innerHTML = '<div class="error">pm_tech_metrics.json not found — data fetch may still be running. Refresh in a minute.</div>';
+    return;
+  }
+  document.getElementById('hdr-updated').textContent = 'Updated: ' + new Date(RAW_TECH.fetched_at).toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'});
+  render();
+}
+
+// ── Period filter ─────────────────────────────────────────────────────────────
+let KPI_FROM = '', KPI_TO = '';
+
+function isoMonth(d) {
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  return d.getFullYear() + '-' + m;
+}
+
+function setPeriod(code) {
+  document.querySelectorAll('.period-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  const now = new Date();
+  const y = now.getFullYear(), m = now.getMonth();
+  if (code === 'tm') {
+    KPI_FROM = y + '-' + String(m + 1).padStart(2, '0') + '-01';
+    KPI_TO   = '';
+  } else if (code === 'lm') {
+    const lm = new Date(y, m, 0);
+    KPI_FROM = lm.getFullYear() + '-' + String(lm.getMonth() + 1).padStart(2, '0') + '-01';
+    KPI_TO   = lm.getFullYear() + '-' + String(lm.getMonth() + 1).padStart(2, '0') + '-' + String(lm.getDate()).padStart(2, '0');
+  } else if (code === 'l3') {
+    const l3 = new Date(y, m - 3, 1);
+    KPI_FROM = l3.getFullYear() + '-' + String(l3.getMonth() + 1).padStart(2, '0') + '-01';
+    KPI_TO   = '';
+  } else if (code === 'ytd') {
+    KPI_FROM = y + '-01-01';
+    KPI_TO   = '';
+  } else {
+    KPI_FROM = '';
+    KPI_TO   = '';
+  }
+  document.getElementById('date-from').value = KPI_FROM;
+  document.getElementById('date-to').value   = KPI_TO;
+  render();
+}
+
+function setPeriodCustom() {
+  document.querySelectorAll('.period-btn').forEach(b => b.classList.remove('active'));
+  KPI_FROM = document.getElementById('date-from').value;
+  KPI_TO   = document.getElementById('date-to').value;
+  render();
+}
+
+function inPeriod(dateStr) {
+  if (!dateStr) return false;
+  if (KPI_FROM && dateStr < KPI_FROM) return false;
+  if (KPI_TO   && dateStr > KPI_TO)   return false;
+  return true;
+}
+
+// ── KPI helpers ───────────────────────────────────────────────────────────────
+function daysBetween(a, b) {
+  return Math.round((new Date(b) - new Date(a)) / 86400000);
+}
+
+function median(arr) {
+  if (!arr.length) return null;
+  const s = [...arr].sort((a, b) => a - b);
+  const m = Math.floor(s.length / 2);
+  return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2;
+}
+
+function avg(arr) {
+  if (!arr.length) return null;
+  return arr.reduce((s, v) => s + v, 0) / arr.length;
+}
+
+function fmtDays(d) {
+  if (d === null || d === undefined) return '—';
+  return d.toFixed(1) + 'd';
+}
+
+function fmtDollar(n) {
+  if (!n) return '—';
+  return '$' + n.toLocaleString('en-US', { maximumFractionDigits: 0 });
+}
+
+// ── Ramp materials cost per tech ──────────────────────────────────────────────
+const RAMP_LN_MAP = { jonas: 'hoard', wade: 'hippen', justin: 'gutierrez' };
+const RM_GL = new Set(['52000','52001','52002','52003','67800','52100','52200','52300']);
+
+function getRampSpend(key) {
+  if (!RAW_RAMP) return 0;
+  const ln = RAMP_LN_MAP[key];
+  return (RAW_RAMP.transactions || [])
+    .filter(t => t.ln === ln && RM_GL.has(String(t.gl)) && inPeriod(t.d))
+    .reduce((s, t) => s + (t.amt || 0), 0);
+}
+
+// ── Per-tech metric computation ───────────────────────────────────────────────
+function computeMetrics(melds) {
+  const completed = melds.filter(m => m.status === 'COMPLETED' && inPeriod(m.completed || m.created));
+  const active    = melds.filter(m => m.status !== 'COMPLETED');
+
+  // Days to schedule: created → first_appt
+  const schedDays = [];
+  completed.forEach(m => {
+    if (!m.created || !m.first_appt) return;
+    const d = daysBetween(m.created, m.first_appt);
+    if (d >= 0 && d <= 60) schedDays.push(d);
+  });
+
+  // Days to complete: first_appt → completed
+  const completeDays = [];
+  completed.forEach(m => {
+    if (!m.first_appt || !m.completed) return;
+    const d = daysBetween(m.first_appt, m.completed);
+    if (d >= 0 && d <= 90) completeDays.push(d);
+  });
+
+  // Days open (for active backlog)
+  const activeDays = [];
+  const today = new Date().toISOString().slice(0, 10);
+  active.forEach(m => {
+    if (!m.created) return;
+    const d = daysBetween(m.created, today);
+    if (d >= 0 && d <= 365) activeDays.push(d);
+  });
+
+  // Priority mix
+  const priCount = { Emergency: 0, High: 0, Normal: 0, Low: 0 };
+  completed.forEach(m => { priCount[m.priority] = (priCount[m.priority] || 0) + 1; });
+
+  // Property breakdown
+  const byProp = {};
+  completed.forEach(m => {
+    if (!m.property) return;
+    byProp[m.property] = (byProp[m.property] || 0) + 1;
+  });
+  const topProps = Object.entries(byProp).sort((a, b) => b[1] - a[1]).slice(0, 8);
+
+  // WOs per week
+  let weeks = 4;
+  if (KPI_FROM) {
+    const fromD = new Date(KPI_FROM);
+    const toD   = KPI_TO ? new Date(KPI_TO) : new Date();
+    weeks = Math.max(1, (toD - fromD) / (7 * 86400000));
+  }
+
+  return {
+    completed:    completed.length,
+    active:       active.length,
+    wosPerWeek:   weeks > 0 ? completed.length / weeks : 0,
+    avgSched:     avg(schedDays),
+    medSched:     median(schedDays),
+    avgComplete:  avg(completeDays),
+    medComplete:  median(completeDays),
+    avgActiveAge: avg(activeDays),
+    priCount,
+    topProps,
+  };
+}
+
+// ── Render ────────────────────────────────────────────────────────────────────
+const TECH_DEFS = [
+  { key: 'jonas',  name: 'Jonas Hoard',      region: 'Tacoma (tc68/tc34)', color: '#1a5276' },
+  { key: 'wade',   name: 'Wade Hippen',       region: 'Spokane Repairs',    color: '#1e8449' },
+  { key: 'justin', name: 'Justin Gutierrez',  region: 'Spokane Repairs',    color: '#7d3c98' },
+];
+
+function render() {
+  if (!RAW_TECH) return;
+  const main = document.getElementById('main');
+  const meldsByKey = RAW_TECH.melds || {};
+
+  // Compute metrics for all techs
+  const metrics = {};
+  TECH_DEFS.forEach(t => {
+    metrics[t.key] = computeMetrics(meldsByKey[t.key] || []);
+  });
+
+  // Period label
+  let periodLabel = 'All Time';
+  if (KPI_FROM && KPI_TO) periodLabel = KPI_FROM + ' to ' + KPI_TO;
+  else if (KPI_FROM)      periodLabel = 'From ' + KPI_FROM;
+
+  // Summary totals
+  const totalCompleted = TECH_DEFS.reduce((s, t) => s + metrics[t.key].completed, 0);
+  const totalActive    = TECH_DEFS.reduce((s, t) => s + metrics[t.key].active, 0);
+  const allSched  = TECH_DEFS.flatMap(t => {
+    const ms = meldsByKey[t.key] || [];
+    return ms.filter(m => m.status === 'COMPLETE' && inPeriod(m.completed || m.created) && m.created && m.first_appt)
+      .map(m => { const d = daysBetween(m.created, m.first_appt); return (d >= 0 && d <= 60) ? d : null; })
+      .filter(d => d !== null);
+  });
+  const avgSchedAll = avg(allSched);
+
+  const html = [];
+
+  // ── Summary row ────────────────────────────────────────────────────────
+  html.push(`<div class="summary-row">`);
+  html.push(sumCard('📋', totalCompleted, 'WOs Completed', periodLabel));
+  html.push(sumCard('⏳', totalActive, 'Open Backlog', 'All techs'));
+  html.push(sumCard('📅', avgSchedAll !== null ? avgSchedAll.toFixed(1) + 'd' : '—', 'Avg Days to Schedule', 'Across all techs'));
+  const totalPerWeek = TECH_DEFS.reduce((s, t) => s + metrics[t.key].wosPerWeek, 0);
+  html.push(sumCard('⚡', totalPerWeek.toFixed(1), 'WOs/Week (Team)', 'Combined throughput'));
+  html.push(`</div>`);
+
+  // ── Tech cards ─────────────────────────────────────────────────────────
+  html.push(`<div class="tech-grid">`);
+  TECH_DEFS.forEach(t => {
+    const m = metrics[t.key];
+    const rampSpend = getRampSpend(t.key);
+    const avgCostPerWO = m.completed > 0 ? rampSpend / m.completed : null;
+    html.push(techCard(t, m, rampSpend, avgCostPerWO));
+  });
+  html.push(`</div>`);
+
+  // ── Comparison table ───────────────────────────────────────────────────
+  html.push(`<div class="section-title">Comparison — ${periodLabel}</div>`);
+  html.push(`<div class="comparison-wrap"><table class="comp-table">`);
+  html.push(`<thead><tr>
+    <th>Metric</th>
+    <th>Jonas Hoard<br><span style="font-weight:400;font-size:10px;opacity:.8">Tacoma</span></th>
+    <th>Wade Hippen<br><span style="font-weight:400;font-size:10px;opacity:.8">Spokane</span></th>
+    <th>Justin Gutierrez<br><span style="font-weight:400;font-size:10px;opacity:.8">Spokane</span></th>
+  </tr></thead><tbody>`);
+
+  const rows = [
+    { label: 'WOs Completed', desc: 'Period total', fn: m => m.completed, fmt: v => v, higherBetter: true },
+    { label: 'Open Backlog',  desc: 'Active unfinished', fn: m => m.active, fmt: v => v, higherBetter: false },
+    { label: 'WOs / Week',    desc: 'Throughput', fn: m => m.wosPerWeek, fmt: v => v.toFixed(1), higherBetter: true },
+    { label: 'Avg Days to Schedule', desc: 'Created → appt', fn: m => m.avgSched, fmt: fmtDays, higherBetter: false, nullLabel: '—' },
+    { label: 'Avg Time to Complete', desc: 'Appt → done', fn: m => m.avgComplete, fmt: fmtDays, higherBetter: false, nullLabel: '—' },
+    { label: 'Avg Backlog Age', desc: 'Open WO age', fn: m => m.avgActiveAge, fmt: fmtDays, higherBetter: false, nullLabel: '—' },
+    { label: 'Materials Spend', desc: 'Ramp R&M cards', fn: (m, key) => getRampSpend(key), fmt: fmtDollar, higherBetter: null },
+    { label: 'Avg Cost/WO',   desc: 'Materials only', fn: (m, key) => { const s = getRampSpend(key); return m.completed > 0 ? s / m.completed : null; }, fmt: fmtDollar, higherBetter: false, nullLabel: '—' },
+    { label: 'High/Emergency %', desc: 'Priority mix', fn: m => m.completed > 0 ? (m.priCount.Emergency + m.priCount.High) / m.completed * 100 : null, fmt: v => v.toFixed(0) + '%', higherBetter: null, nullLabel: '—' },
+  ];
+
+  rows.forEach(row => {
+    const vals = TECH_DEFS.map(t => row.fn(metrics[t.key], t.key));
+    const numeric = vals.filter(v => v !== null && !isNaN(v));
+    const best  = row.higherBetter === true  ? Math.max(...numeric) : row.higherBetter === false ? Math.min(...numeric) : null;
+    const worst = row.higherBetter === true  ? Math.min(...numeric) : row.higherBetter === false ? Math.max(...numeric) : null;
+
+    html.push(`<tr><td><span class="metric-name">${row.label}</span><br><span class="metric-desc">${row.desc}</span></td>`);
+    TECH_DEFS.forEach((t, i) => {
+      const v = vals[i];
+      const display = v === null || isNaN(v) ? (row.nullLabel || '—') : row.fmt(v, t.key);
+      const cls = v !== null && !isNaN(v) && v === best ? 'best' : v !== null && !isNaN(v) && v === worst && best !== worst ? 'worst' : '';
+      html.push(`<td class="${cls}">${display}</td>`);
+    });
+    html.push(`</tr>`);
+  });
+
+  html.push(`</tbody></table></div>`);
+
+  main.innerHTML = html.join('');
+}
+
+function sumCard(icon, val, label, sub) {
+  return `<div class="sum-card">
+    <div class="sum-icon">${icon}</div>
+    <div>
+      <div class="sum-val">${val}</div>
+      <div class="sum-label">${label}</div>
+      <div class="sum-label" style="font-size:10px;color:#aaa;margin-top:1px">${sub}</div>
+    </div>
+  </div>`;
+}
+
+function techCard(t, m, rampSpend, avgCostPerWO) {
+  // Backlog badge
+  let badgeCls = 'badge-green', badgeTxt = 'On Track';
+  if (m.active > 10) { badgeCls = 'badge-red'; badgeTxt = m.active + ' backlog'; }
+  else if (m.active > 5) { badgeCls = 'badge-yellow'; badgeTxt = m.active + ' backlog'; }
+  else if (m.active > 0) { badgeTxt = m.active + ' active'; }
+
+  // Priority bar widths
+  const total = m.completed || 1;
+  const pE = (m.priCount.Emergency / total * 100).toFixed(0);
+  const pH = (m.priCount.High / total * 100).toFixed(0);
+  const pN = (m.priCount.Normal / total * 100).toFixed(0);
+  const pL = Math.max(0, 100 - +pE - +pH - +pN);
+
+  // Top properties
+  let propRows = '';
+  m.topProps.forEach(([prop, cnt]) => {
+    const pct = (cnt / m.completed * 100).toFixed(0);
+    propRows += `<tr><td>${prop}</td><td style="text-align:right">${cnt}</td><td style="text-align:right;color:var(--muted)">${pct}%</td></tr>`;
+  });
+
+  return `<div class="tech-card">
+    <div class="tech-header" style="border-bottom:3px solid ${t.color}">
+      <div>
+        <div class="tech-name" style="color:${t.color}">${t.name}</div>
+        <div class="tech-region">${t.region}</div>
+      </div>
+      <span class="tech-badge ${badgeCls}">${badgeTxt}</span>
+    </div>
+
+    <div class="kpi-grid">
+      <div class="kpi-cell">
+        <div class="kpi-val">${m.completed}</div>
+        <div class="kpi-lbl">Completed</div>
+      </div>
+      <div class="kpi-cell">
+        <div class="kpi-val">${m.wosPerWeek.toFixed(1)}</div>
+        <div class="kpi-lbl">WOs / Week</div>
+      </div>
+      <div class="kpi-cell">
+        <div class="kpi-val">${m.active}</div>
+        <div class="kpi-lbl">Open Backlog</div>
+      </div>
+      <div class="kpi-cell">
+        <div class="kpi-val">${fmtDays(m.avgSched)}</div>
+        <div class="kpi-lbl">Avg to Schedule</div>
+        <div class="kpi-note">med ${fmtDays(m.medSched)}</div>
+      </div>
+      <div class="kpi-cell">
+        <div class="kpi-val">${fmtDays(m.avgComplete)}</div>
+        <div class="kpi-lbl">Avg to Complete</div>
+        <div class="kpi-note">med ${fmtDays(m.medComplete)}</div>
+      </div>
+      <div class="kpi-cell">
+        <div class="kpi-val">${fmtDollar(avgCostPerWO)}</div>
+        <div class="kpi-lbl">Materials / WO</div>
+        <div class="kpi-note">${fmtDollar(rampSpend)} total</div>
+      </div>
+    </div>
+
+    <div class="priority-bar-wrap" style="padding:10px 14px 6px">
+      <div class="lbl">Priority Mix (completed WOs)</div>
+      <div class="priority-bar">
+        ${pE > 0 ? `<div class="seg seg-emerg" style="width:${pE}%" title="Emergency: ${m.priCount.Emergency}"></div>` : ''}
+        ${pH > 0 ? `<div class="seg seg-high" style="width:${pH}%" title="High: ${m.priCount.High}"></div>` : ''}
+        ${pN > 0 ? `<div class="seg seg-normal" style="width:${pN}%" title="Normal: ${m.priCount.Normal}"></div>` : ''}
+        ${pL > 0 ? `<div class="seg seg-low" style="width:${pL}%" title="Low: ${m.priCount.Low}"></div>` : ''}
+      </div>
+      <div class="priority-legend">
+        <span class="pleg"><span class="pleg-dot" style="background:#e74c3c"></span> Emerg ${m.priCount.Emergency}</span>
+        <span class="pleg"><span class="pleg-dot" style="background:#e67e22"></span> High ${m.priCount.High}</span>
+        <span class="pleg"><span class="pleg-dot" style="background:#3498db"></span> Normal ${m.priCount.Normal}</span>
+        <span class="pleg"><span class="pleg-dot" style="background:#bdc3c7"></span> Low ${m.priCount.Low}</span>
+      </div>
+    </div>
+
+    ${m.topProps.length > 0 ? `
+    <div class="tech-table-wrap">
+      <table class="tech-table">
+        <thead><tr><th>Property</th><th style="text-align:right">WOs</th><th style="text-align:right">%</th></tr></thead>
+        <tbody>${propRows}</tbody>
+      </table>
+    </div>` : ''}
+  </div>`;
+}
+
+// ── Boot ──────────────────────────────────────────────────────────────────────
+(async () => {
+  // Default to last month
+  const now = new Date();
+  const y = now.getFullYear(), m = now.getMonth();
+  const lm = new Date(y, m, 0);
+  KPI_FROM = lm.getFullYear() + '-' + String(lm.getMonth() + 1).padStart(2, '0') + '-01';
+  KPI_TO   = lm.getFullYear() + '-' + String(lm.getMonth() + 1).padStart(2, '0') + '-' + String(lm.getDate()).padStart(2, '0');
+  document.getElementById('date-from').value = KPI_FROM;
+  document.getElementById('date-to').value   = KPI_TO;
+  await loadData();
+})();
+</script>
+</body>
+</html>
