@@ -68,35 +68,61 @@ function localDate(offset) {
   return pdt.getFullYear()+'-'+String(pdt.getMonth()+1).padStart(2,'0')+'-'+String(pdt.getDate()).padStart(2,'0');
 }
 
+// Extract appointment event from a meld's managementappointment array.
+// The list API returns dtstart/dtend directly on the appointment object.
+function getMeldAppt(m) {
+  for (var i = 0; i < (m.managementappointment||[]).length; i++) {
+    var a = m.managementappointment[i];
+    if (a.dtstart && a.dtend) return a;
+    if (a.availability_segment && a.availability_segment.event && a.availability_segment.event.dtstart) return a.availability_segment.event;
+  }
+  return null;
+}
+
+function pdtDate(iso) {
+  var d = new Date(iso);
+  var l = new Date(d.toLocaleString('en-US', {timeZone: 'America/Los_Angeles'}));
+  return l.getFullYear()+'-'+String(l.getMonth()+1).padStart(2,'0')+'-'+String(l.getDate()).padStart(2,'0');
+}
+
+function pdtHr(iso) {
+  var d = new Date(iso);
+  var l = new Date(d.toLocaleString('en-US', {timeZone: 'America/Los_Angeles'}));
+  return l.getHours() + l.getMinutes()/60;
+}
+
 function buildBusy(melds) {
   const byDate = {};
   melds.forEach(function(m) {
-    const appt = m.managementappointment && m.managementappointment.find(function(a){ return a.availability_segment && a.availability_segment.event; });
-    if (!appt) return;
-    const evt = appt.availability_segment.event;
-    const date = evt.dtstart.slice(0,10);
+    var apptEvt = getMeldAppt(m);
+    if (!apptEvt) return;
+    var date = pdtDate(apptEvt.dtstart);
     if (!byDate[date]) byDate[date] = [];
-    const s = new Date(evt.dtstart), e = new Date(evt.dtend);
-    byDate[date].push({start: s.getUTCHours()-7 + s.getUTCMinutes()/60, end: e.getUTCHours()-7 + e.getUTCMinutes()/60});
+    byDate[date].push({start: pdtHr(apptEvt.dtstart), end: pdtHr(apptEvt.dtend), ref: m.reference_id});
   });
   return byDate;
 }
 
-function findSlot(busy, durHrs, fromDate) {
+// allowToday: pass true for past-due reschedules so today is a valid slot.
+// allowSaturday: pass true only when meld chat explicitly requests Saturday.
+function findSlot(busy, durHrs, fromDate, allowToday, allowSaturday) {
   const today = localDate();
   let d = new Date(fromDate+'T12:00:00-07:00');
   for (let i=0; i<28; i++) {
     d.setDate(d.getDate()+1);
     const ds = d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
-    if (d.getDay()===0 || d.getDay()===1 || d.getDay()===6 || ds<=today) continue;
+    const skipToday = allowToday ? ds < today : ds <= today;
+    if (d.getDay()===0 || d.getDay()===1 || (!allowSaturday && d.getDay()===6) || skipToday) continue;
     const b = (busy[ds]||[]).sort(function(a,b){return a.start-b.start;});
-    const candidates = [8,9,10,11,13,14,15,16];
-    for (let ci=0; ci<candidates.length; ci++) {
-      const start = candidates[ci];
-      const end = start+durHrs;
-      if (end>17.5) continue;
-      if (!b.some(function(x){ return start < x.end+0.5 && end+0.5 > x.start; })) {
-        const hr=Math.floor(start), min=Math.round((start-hr)*60);
+    let earliest = 8;
+    if (ds === today) {
+      const nowLocal = new Date(new Date().toLocaleString('en-US',{timeZone:'America/Los_Angeles'}));
+      earliest = Math.max(8, nowLocal.getHours() + nowLocal.getMinutes()/60 + 0.5);
+    }
+    for (let s=earliest; s<=17-durHrs; s+=0.25) {
+      const end = s+durHrs;
+      if (!b.some(function(x){ return s < x.end+0.5 && end+0.5 > x.start; })) {
+        const hr=Math.floor(s), min=Math.round((s-hr)*60);
         return {date:ds, startHr:hr, startMin:min, durationHrs:durHrs};
       }
     }
@@ -129,8 +155,9 @@ async function cancelStale(meldId, keepDate, sc, csrf) {
   if (r.status!==200) return;
   const m = JSON.parse(r.body);
   for (const a of (m.managementappointment||[])) {
-    const d = a.availability_segment && a.availability_segment.event && a.availability_segment.event.dtstart.slice(0,10);
-    if (d !== keepDate) await api('PATCH', '/api/management-appointments/'+a.id+'/cancel/', sc, csrf, {});
+    const dtstart = a.dtstart || (a.availability_segment && a.availability_segment.event && a.availability_segment.event.dtstart);
+    const d = dtstart ? pdtDate(dtstart) : null;
+    if (d && d !== keepDate) await api('PATCH', '/api/management-appointments/'+a.id+'/cancel/', sc, csrf, {});
   }
 }
 
@@ -206,11 +233,25 @@ async function main() {
     }
   }
 
-  // Build busy calendars per tech
-  const wadeMelds   = melds.filter(function(m){return m.in_house_servicers&&m.in_house_servicers.some(function(s){return s.agent&&s.agent.id===WADE_ID;});});
-  const justinMelds = melds.filter(function(m){return m.in_house_servicers&&m.in_house_servicers.some(function(s){return s.agent&&s.agent.id===JUSTIN_ID;});});
-  const wadeBusy   = buildBusy(wadeMelds);
-  const justinBusy = buildBusy(justinMelds);
+  // Build busy calendars from ALL assigned melds per tech (not just Spokane repairs)
+  // so the scheduler sees their full calendar when finding open slots.
+  const allWadeMelds = [], allJustinMelds = [];
+  {
+    let offset = 0;
+    while (true) {
+      const r = await api('GET', '/api/melds/?limit=200&offset='+offset+'&status=PENDING_COMPLETION', sc, csrf);
+      const d = JSON.parse(r.body);
+      (d.results||[]).forEach(function(m) {
+        if (m.in_house_servicers && m.in_house_servicers.some(function(s){return s.agent&&s.agent.id===WADE_ID;})) allWadeMelds.push(m);
+        if (m.in_house_servicers && m.in_house_servicers.some(function(s){return s.agent&&s.agent.id===JUSTIN_ID;})) allJustinMelds.push(m);
+      });
+      if (!d.next || !(d.results||[]).length) break;
+      offset += 200;
+    }
+    console.log('Full calendar: Wade='+allWadeMelds.length+' Justin='+allJustinMelds.length+' scheduled melds');
+  }
+  const wadeBusy   = buildBusy(allWadeMelds);
+  const justinBusy = buildBusy(allJustinMelds);
 
   const RESCHEDULE_KW = /reschedule|different (time|day|date)|can'?t make|not available|won'?t be home|conflict|push|postpone/i;
   const ACCOMMODATE_KW = /available (at|after|before|on)|prefer|better (time|day)|can (you|we) (come|do it)|i'?ll be home|good time|works for me|please come/i;
@@ -276,10 +317,9 @@ async function main() {
 
   for (let mi=0; mi<melds.length; mi++) {
     const m = melds[mi];
-    const appt = m.managementappointment && m.managementappointment.find(function(a){return a.availability_segment&&a.availability_segment.event;});
-    const apptEvt = appt && appt.availability_segment.event;
-    const isPastDue = apptEvt && apptEvt.dtstart.slice(0,10) < today;
-    const isUnscheduled = !apptEvt;
+    var apptEvt = getMeldAppt(m);
+    var isPastDue = apptEvt && pdtDate(apptEvt.dtstart) < today;
+    var isUnscheduled = !apptEvt;
     const isWade = m.in_house_servicers && m.in_house_servicers.some(function(s){return s.agent&&s.agent.id===WADE_ID;});
 
     // Read chat for ALL melds — check for requests even on already-scheduled ones
@@ -289,7 +329,8 @@ async function main() {
       if (rc.status===200) {
         var msgs = JSON.parse(rc.body);
         if (!Array.isArray(msgs)) msgs = msgs.results||[];
-        chatAction = parseChatAction(msgs, appt&&appt.created);
+        var apptCreated = (m.managementappointment||[]).map(function(a){return a.created;}).filter(Boolean)[0]||null;
+        chatAction = parseChatAction(msgs, apptCreated);
         if (chatAction) console.log(m.reference_id+' chat action detected: '+chatAction.action+' from '+chatAction.sender+': '+chatAction.note);
       }
     } catch(e) { /* no chat */ }
@@ -322,12 +363,12 @@ async function main() {
 
     // For shorten: keep same date, just trim end time
     if (item.shorten && ca) {
-      const appt = m.managementappointment.find(function(a){return a.availability_segment&&a.availability_segment.event;});
-      const evt = appt && appt.availability_segment.event;
+      var evt = getMeldAppt(m);
       if (evt) {
-        const sameDay = evt.dtstart.slice(0,10);
-        const startHr = new Date(evt.dtstart).getUTCHours()-7;
-        const startMin = new Date(evt.dtstart).getUTCMinutes();
+        var sameDay = pdtDate(evt.dtstart);
+        var lStart = new Date(new Date(evt.dtstart).toLocaleString('en-US',{timeZone:'America/Los_Angeles'}));
+        var startHr = lStart.getHours();
+        var startMin = lStart.getMinutes();
         const times = slotStr(sameDay, startHr, startMin, ca.durationHrs);
         process.stdout.write(m.reference_id+' ['+m.priority+'] '+techName+' shorten to '+ca.durationHrs+'h same day... ');
         const r = await schedMeld(m.id, times.dtstart, times.dtend, m.started, sc, csrf);
@@ -344,11 +385,14 @@ async function main() {
     if (ca && ca.requestedDay) {
       const prefDay = nextDayOccurrence(ca.requestedDay, today);
       if (prefDay) {
-        const candidate = findSlot(Object.assign({},busy), dur, new Date(prefDay+'T12:00:00-07:00').toISOString().slice(0,10));
+          var chatWantsSat = /saturday|sat\b/i.test(ca.requestedDay||'') || /saturday|sat\b/i.test(ca.note||'');
+        const candidate = findSlot(Object.assign({},busy), dur, new Date(prefDay+'T12:00:00-07:00').toISOString().slice(0,10), false, chatWantsSat);
         if (candidate && candidate.date===prefDay) { slot=candidate; console.log('  Honoring chat day request: '+prefDay); }
       }
     }
-    if (!slot) slot = findSlot(busy, dur, today);
+    var isPastDueAction = (item.reason||'').indexOf('past-due') >= 0;
+    var chatWantsSatMain = ca && (/saturday|sat\b/i.test(ca.requestedDay||'') || /saturday|sat\b/i.test(ca.note||''));
+    if (!slot) slot = findSlot(busy, dur, today, isPastDueAction, chatWantsSatMain);
     if (!slot) { console.log('No slot for '+m.reference_id); continue; }
     const times = slotStr(slot.date, slot.startHr, slot.startMin, dur);
     // Cancel phantom appointments before scheduling
@@ -374,17 +418,15 @@ async function main() {
   // Print final summary
   console.log('\n=== Spokane Schedule — Wade & Justin ===');
   melds.sort(function(a,b){
-    const da=(a.managementappointment&&a.managementappointment.find(function(x){return x.availability_segment&&x.availability_segment.event;})||{availability_segment:{event:{dtstart:'zzz'}}}).availability_segment&&(a.managementappointment.find(function(x){return x.availability_segment&&x.availability_segment.event;})||{}).availability_segment.event.dtstart||'zzz';
-    const db=(b.managementappointment&&b.managementappointment.find(function(x){return x.availability_segment&&x.availability_segment.event;})||{}).availability_segment&&(b.managementappointment.find(function(x){return x.availability_segment&&x.availability_segment.event;})||{}).availability_segment.event.dtstart||'zzz';
-    return da.localeCompare(db);
+    var ea = getMeldAppt(a), eb = getMeldAppt(b);
+    return (ea?ea.dtstart:'zzz').localeCompare(eb?eb.dtstart:'zzz');
   });
   melds.forEach(function(m) {
-    const appt = m.managementappointment && m.managementappointment.find(function(a){return a.availability_segment&&a.availability_segment.event;});
-    const apptEvt = appt && appt.availability_segment.event;
-    const tech = m.in_house_servicers && m.in_house_servicers.map(function(s){return s.agent&&s.agent.first_name;}).filter(Boolean).join('+');
-    const apptStr = apptEvt ? fmt(apptEvt.dtstart) : 'NO APPT';
-    const isPastDue = apptEvt && apptEvt.dtstart.slice(0,10) < today;
-    const flag = isPastDue?' PAST-DUE':(!apptEvt?' UNSCHEDULED':'');
+    var apptEvt = getMeldAppt(m);
+    var tech = m.in_house_servicers && m.in_house_servicers.map(function(s){return s.agent&&s.agent.first_name;}).filter(Boolean).join('+');
+    var apptStr = apptEvt ? fmt(apptEvt.dtstart) : 'NO APPT';
+    var pd = apptEvt && pdtDate(apptEvt.dtstart) < today;
+    var flag = pd?' PAST-DUE':(!apptEvt?' UNSCHEDULED':'');
     console.log((m.reference_id||'').padEnd(11)+'|'+(m.priority||'?').padEnd(9)+'|'+(tech||'?').padEnd(8)+'|'+(m.brief_description||'').slice(0,30).padEnd(31)+'| '+apptStr+flag);
   });
 }
