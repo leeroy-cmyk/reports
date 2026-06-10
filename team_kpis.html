@@ -239,7 +239,8 @@ function getRampSpend(key) {
 
 // ── Per-tech metric computation ───────────────────────────────────────────────
 function computeMetrics(melds) {
-  const completed = melds.filter(m => m.status === 'COMPLETED' && inPeriod(m.completed || m.created));
+  // Filter by completion_date (saved as 'completed'); fall back to first_appt, then created
+  const completed = melds.filter(m => m.status === 'COMPLETED' && inPeriod(m.completed || m.first_appt || m.created));
   const active    = melds.filter(m => m.status !== 'COMPLETED');
 
   // Days to schedule: created → first_appt

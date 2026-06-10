@@ -892,8 +892,8 @@ async function fetchPMTechMetrics() {
     return null;
   }
   function tmPriority(m) {
-    if (m.management_is_emergency) return 'Emergency';
-    const p = (m.management_priority || '').toLowerCase();
+    const p = (m.priority || '').toLowerCase();
+    if (p === 'emergency' || p === 'urgent') return 'Emergency';
     if (p === 'high') return 'High';
     if (p === 'low')  return 'Low';
     return 'Normal';
@@ -905,8 +905,8 @@ async function fetchPMTechMetrics() {
       brief:     (m.brief_description || '').slice(0, 80),
       status,
       priority:  tmPriority(m),
-      created:   (m.created_date_time || '').slice(0, 10),
-      completed: (m.completed || '').slice(0, 10) || null,
+      created:   (m.created || '').slice(0, 10),
+      completed: (m.completion_date || '').slice(0, 10) || null,
       first_appt: tmGetAppt(m),
       property:  m.unit?.prop?.property_name || m.prop?.property_name || '',
       work_type: m.work_type || '',
@@ -921,7 +921,7 @@ async function fetchPMTechMetrics() {
     const rows = res.results || [];
     if (rows.length === 0) break;
     for (const m of rows) {
-      const created = (m.created_date_time || '').slice(0, 10);
+      const created = (m.created || '').slice(0, 10);
       if (created && created < SIX_MONTHS_AGO) { hitOld = true; break; }
       const ids = (m.in_house_servicers || []).filter(s => s.agent).map(s => s.agent.id);
       for (const t of TECHS) {
