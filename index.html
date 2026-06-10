@@ -85,6 +85,13 @@
         <span class="badge badge-maintenance">Maintenance</span>
       </a>
 
+      <a class="card" href="team_kpis.html">
+        <div class="card-title">Team KPIs</div>
+        <div class="card-date" id="team-kpis-date">—</div>
+        <div class="card-desc">Wade, Justin &amp; Jonas — WOs completed, days to schedule, backlog, throughput, materials cost, priority mix.</div>
+        <span class="badge badge-maintenance">Maintenance</span>
+      </a>
+
     </div>
 
     <div class="section-title" style="margin-top:40px">Projects</div>
@@ -110,6 +117,13 @@ fetch('./data/ramp_processed.json').then(r=>r.json()).then(d=>{
   }).catch(()=>{});
   fetch('./data/tools_supplies.json').then(r=>r.json()).then(d=>{
     const el = document.getElementById('tools-date');
+    if (el && d.fetched_at) {
+      const ts = new Date(d.fetched_at);
+      el.textContent = ts.toLocaleDateString('en-US', { month:'long', day:'numeric', year:'numeric' });
+    }
+  }).catch(()=>{});
+  fetch('./data/pm_tech_metrics.json').then(r=>r.json()).then(d=>{
+    const el = document.getElementById('team-kpis-date');
     if (el && d.fetched_at) {
       const ts = new Date(d.fetched_at);
       el.textContent = ts.toLocaleDateString('en-US', { month:'long', day:'numeric', year:'numeric' });
