@@ -284,6 +284,16 @@ function computeMetrics(melds) {
   const priCount = { Emergency: 0, High: 0, Normal: 0, Low: 0 };
   completed.forEach(m => { priCount[m.priority] = (priCount[m.priority] || 0) + 1; });
 
+  // Ratings
+  const rated = completed.filter(m => m.rating != null);
+  const avgRating = rated.length ? rated.reduce((s, m) => s + m.rating, 0) / rated.length : null;
+  const ratingDist = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+  rated.forEach(m => { const r = Math.round(m.rating); if (r >= 1 && r <= 5) ratingDist[r]++; });
+  const topReviews = completed
+    .filter(m => m.rating === 5 && m.review)
+    .sort((a, b) => (b.completed || '').localeCompare(a.completed || ''))
+    .slice(0, 3);
+
   // Property breakdown
   const byProp = {};
   completed.forEach(m => {
@@ -311,6 +321,10 @@ function computeMetrics(melds) {
     avgActiveAge: avg(activeDays),
     priCount,
     topProps,
+    avgRating,
+    ratingDist,
+    ratedCount:   rated.length,
+    topReviews,
   };
 }
 
@@ -395,6 +409,8 @@ function render() {
     { label: 'Avg Total Cost/WO', desc: 'Labor + materials', fn: (m, key, ctx) => ctx.avgTotal, fmt: fmtDollar, higherBetter: false, needsCtx: true, nullLabel: '—' },
     { label: 'Avg Labor/WO',  desc: 'QBTime hrs × wage', fn: (m, key, ctx) => ctx.avgLab, fmt: fmtDollar, higherBetter: null, needsCtx: true, nullLabel: '—' },
     { label: 'Avg Materials/WO', desc: 'Ramp R&M cards', fn: (m, key, ctx) => ctx.avgMat, fmt: fmtDollar, higherBetter: false, needsCtx: true, nullLabel: '—' },
+    { label: 'Avg Resident Rating', desc: '1–5 star scale', fn: m => m.avgRating, fmt: v => v.toFixed(2) + ' ★', higherBetter: true, nullLabel: '—' },
+    { label: 'Rating Response Rate', desc: '% WOs with a review', fn: m => m.completed > 0 ? m.ratedCount / m.completed * 100 : null, fmt: v => v.toFixed(0) + '%', higherBetter: null, nullLabel: '—' },
     { label: 'High/Emergency %', desc: 'Priority mix', fn: m => m.completed > 0 ? (m.priCount.Emergency + m.priCount.High) / m.completed * 100 : null, fmt: v => v.toFixed(0) + '%', higherBetter: null, nullLabel: '—' },
   ];
 
@@ -502,6 +518,27 @@ function techCard(t, m, cost) {
         <div class="kpi-lbl">Total Cost / WO</div>
         <div class="kpi-note">labor ${laborPct}% · mat ${matPct}%</div>
       </div>
+      <div class="kpi-cell" style="grid-column:1/-1;display:flex;align-items:center;gap:16px;padding:10px 14px">
+        <div>
+          <div class="kpi-val" style="font-size:26px">${m.avgRating !== null ? m.avgRating.toFixed(2) + ' ★' : '—'}</div>
+          <div class="kpi-lbl">Resident Rating</div>
+          <div class="kpi-note">${m.ratedCount} reviews · ${m.completed > 0 ? (m.ratedCount/m.completed*100).toFixed(0) : 0}% response rate</div>
+        </div>
+        ${m.avgRating !== null ? `<div style="flex:1">
+          ${[5,4,3,2,1].map(s => {
+            const cnt = m.ratingDist[s] || 0;
+            const pct = m.ratedCount > 0 ? cnt / m.ratedCount * 100 : 0;
+            const col = s >= 4 ? '#27ae60' : s === 3 ? '#f39c12' : '#e74c3c';
+            return `<div style="display:flex;align-items:center;gap:6px;margin-bottom:2px">
+              <span style="font-size:10px;color:var(--muted);width:16px;text-align:right">${s}★</span>
+              <div style="flex:1;height:6px;background:#eee;border-radius:3px;overflow:hidden">
+                <div style="width:${pct.toFixed(0)}%;height:100%;background:${col}"></div>
+              </div>
+              <span style="font-size:10px;color:var(--muted);width:20px">${cnt}</span>
+            </div>`;
+          }).join('')}
+        </div>` : ''}
+      </div>
     </div>
 
     <div class="priority-bar-wrap" style="padding:10px 14px 6px">
@@ -519,6 +556,12 @@ function techCard(t, m, cost) {
         <span class="pleg"><span class="pleg-dot" style="background:#bdc3c7"></span> Low ${m.priCount.Low}</span>
       </div>
     </div>
+
+    ${m.topReviews.length > 0 ? `
+    <div style="border-top:1px solid var(--border);padding:8px 14px">
+      <div style="font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px">Recent 5★ Reviews</div>
+      ${m.topReviews.map(r => `<div style="font-size:11px;color:#444;margin-bottom:4px;padding:5px 8px;background:#f9fcff;border-left:3px solid #27ae60;border-radius:0 4px 4px 0">"${r.review}"</div>`).join('')}
+    </div>` : ''}
 
     ${m.topProps.length > 0 ? `
     <div class="tech-table-wrap">

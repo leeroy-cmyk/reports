@@ -915,6 +915,8 @@ async function fetchPMTechMetrics() {
       first_appt: tmGetAppt(m),
       property:  m.unit?.prop?.property_name || m.prop?.property_name || '',
       work_type: m.work_type || '',
+      rating:    m.tenant_rating != null ? +m.tenant_rating : null,
+      review:    (m.tenant_review || '').trim().slice(0, 200) || null,
     };
   }
 
@@ -1045,6 +1047,19 @@ const FETCH_ONLY = process.env.FETCH_ONLY || 'all';
 
   if (FETCH_ONLY === 'pm-tech-only') {
     await fetchPMTechMetrics();
+    console.log('Done.');
+    return;
+  }
+
+  if (FETCH_ONLY === 'pm-check-ratings') {
+    const session = await pmLogin();
+    const res = await pmGet('/api/melds/?status=COMPLETED&limit=100', session);
+    const rated = (res.results || []).filter(m => m.tenant_rating != null);
+    console.log('Total in page:', (res.results||[]).length, '| With rating:', rated.length);
+    rated.slice(0, 8).forEach(m => console.log('rating:', JSON.stringify(m.tenant_rating), '| review:', JSON.stringify((m.tenant_review||'').slice(0,80))));
+    const allRatings = (res.results||[]).map(m => m.tenant_rating).filter(v => v != null);
+    const unique = [...new Set(allRatings.map(v => JSON.stringify(v)))];
+    console.log('Unique rating values:', unique.join(', '));
     console.log('Done.');
     return;
   }
