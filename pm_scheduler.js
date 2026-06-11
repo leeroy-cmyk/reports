@@ -291,8 +291,9 @@ async function main() {
       const tc = (d.results||[]).filter(m => {
         const propObj = (m.unit && m.unit.prop) ? m.unit.prop : m.prop;
         const prop = (propObj?.property_name || '').toLowerCase();
-        return (prop.startsWith('tc68') || prop.startsWith('tc34')) &&
-               m.work_type !== 'ENVIRONMENTAL' && !m.project;
+        // Jonas handles ALL work types at tc68/tc34 (incl. ENVIRONMENTAL grounds melds).
+        // Only turns (project melds) are excluded — those go to Armani.
+        return (prop.startsWith('tc68') || prop.startsWith('tc34')) && !m.project;
       });
       melds.push(...tc);
       if (!d.next || !d.results?.length) break;
