@@ -106,7 +106,7 @@
 <div class="header">
   <div>
     <h1>Team Performance KPIs</h1>
-    <div class="sub">Wade Hippen &nbsp;·&nbsp; Justin Gutierrez &nbsp;·&nbsp; Jonas Hoard</div>
+    <div class="sub">Jonas Hoard &nbsp;·&nbsp; Wade Hippen &nbsp;·&nbsp; Justin Gutierrez &nbsp;·&nbsp; Jared Miller &nbsp;·&nbsp; Jaxson Lakins &nbsp;·&nbsp; Isaac Chavez</div>
   </div>
   <div class="updated" id="hdr-updated">Loading...</div>
 </div>
@@ -132,6 +132,7 @@
 const DATA_BASE = 'data/';
 let RAW_TECH = null;
 let RAW_RAMP = null;
+let LABOR_BY_REF = null;
 
 async function loadData() {
   const [techRes, rampRes] = await Promise.allSettled([
@@ -140,6 +141,7 @@ async function loadData() {
   ]);
   RAW_TECH = techRes.status === 'fulfilled' ? techRes.value : null;
   RAW_RAMP = rampRes.status === 'fulfilled' ? rampRes.value : null;
+  LABOR_BY_REF = RAW_TECH ? (RAW_TECH.labor_by_ref || {}) : {};
   if (!RAW_TECH) {
     document.getElementById('main').innerHTML = '<div class="error">pm_tech_metrics.json not found — data fetch may still be running. Refresh in a minute.</div>';
     return;
@@ -226,7 +228,11 @@ function fmtDollar(n) {
 }
 
 // ── Ramp materials cost per tech ──────────────────────────────────────────────
-const RAMP_LN_MAP = { jonas: 'hoard', wade: 'hippen', justin: 'gutierrez' };
+const RAMP_LN_MAP = {
+  jonas: 'hoard', wade: 'hippen', justin: 'gutierrez',
+  jared: 'miller', jaxson: 'lakins', isaac: 'chavez',
+};
+const WAGES = { jonas: 27.00, wade: 28.44, justin: 25.00, jared: 28.09, jaxson: 24.00, isaac: 27.00 };
 const RM_GL = new Set(['52000','52001','52002','52003','67800','52100','52200','52300']);
 
 function getRampSpend(key) {
@@ -235,6 +241,12 @@ function getRampSpend(key) {
   return (RAW_RAMP.transactions || [])
     .filter(t => t.ln === ln && RM_GL.has(String(t.gl)) && inPeriod(t.d))
     .reduce((s, t) => s + (t.amt || 0), 0);
+}
+
+function getLaborCost(key, completedMelds) {
+  const byRef = LABOR_BY_REF[key] || {};
+  const wage  = WAGES[key] || 0;
+  return completedMelds.reduce((sum, m) => sum + ((byRef[m.ref] || 0) * wage), 0);
 }
 
 // ── Per-tech metric computation ───────────────────────────────────────────────
@@ -304,9 +316,12 @@ function computeMetrics(melds) {
 
 // ── Render ────────────────────────────────────────────────────────────────────
 const TECH_DEFS = [
-  { key: 'jonas',  name: 'Jonas Hoard',      region: 'Tacoma (tc68/tc34)', color: '#1a5276' },
-  { key: 'wade',   name: 'Wade Hippen',       region: 'Spokane Repairs',    color: '#1e8449' },
-  { key: 'justin', name: 'Justin Gutierrez',  region: 'Spokane Repairs',    color: '#7d3c98' },
+  { key: 'jonas',  name: 'Jonas Hoard',       region: 'Tacoma',      color: '#1a5276' },
+  { key: 'wade',   name: 'Wade Hippen',        region: 'Spokane',     color: '#1e8449' },
+  { key: 'justin', name: 'Justin Gutierrez',   region: 'Spokane',     color: '#7d3c98' },
+  { key: 'jared',  name: 'Jared Miller',       region: 'Tri-Cities',  color: '#17526b' },
+  { key: 'jaxson', name: 'Jaxson Lakins',      region: 'Tri-Cities',  color: '#7e5109' },
+  { key: 'isaac',  name: 'Isaac Chavez',       region: 'Tri-Cities',  color: '#0e6655' },
 ];
 
 function render() {
@@ -330,7 +345,7 @@ function render() {
   const totalActive    = TECH_DEFS.reduce((s, t) => s + metrics[t.key].active, 0);
   const allSched  = TECH_DEFS.flatMap(t => {
     const ms = meldsByKey[t.key] || [];
-    return ms.filter(m => m.status === 'COMPLETE' && inPeriod(m.completed || m.created) && m.created && m.first_appt)
+    return ms.filter(m => m.status === 'COMPLETED' && inPeriod(m.completed || m.first_appt || m.created) && m.created && m.first_appt)
       .map(m => { const d = daysBetween(m.created, m.first_appt); return (d >= 0 && d <= 60) ? d : null; })
       .filter(d => d !== null);
   });
@@ -351,9 +366,14 @@ function render() {
   html.push(`<div class="tech-grid">`);
   TECH_DEFS.forEach(t => {
     const m = metrics[t.key];
-    const rampSpend = getRampSpend(t.key);
-    const avgCostPerWO = m.completed > 0 ? rampSpend / m.completed : null;
-    html.push(techCard(t, m, rampSpend, avgCostPerWO));
+    const completedMelds = (meldsByKey[t.key] || []).filter(ml => ml.status === 'COMPLETED' && inPeriod(ml.completed || ml.first_appt || ml.created));
+    const materials  = getRampSpend(t.key);
+    const labor      = getLaborCost(t.key, completedMelds);
+    const totalCost  = labor + materials;
+    const avgTotal   = m.completed > 0 ? totalCost  / m.completed : null;
+    const avgMat     = m.completed > 0 ? materials  / m.completed : null;
+    const avgLab     = m.completed > 0 ? labor      / m.completed : null;
+    html.push(techCard(t, m, { materials, labor, totalCost, avgTotal, avgMat, avgLab }));
   });
   html.push(`</div>`);
 
@@ -362,9 +382,7 @@ function render() {
   html.push(`<div class="comparison-wrap"><table class="comp-table">`);
   html.push(`<thead><tr>
     <th>Metric</th>
-    <th>Jonas Hoard<br><span style="font-weight:400;font-size:10px;opacity:.8">Tacoma</span></th>
-    <th>Wade Hippen<br><span style="font-weight:400;font-size:10px;opacity:.8">Spokane</span></th>
-    <th>Justin Gutierrez<br><span style="font-weight:400;font-size:10px;opacity:.8">Spokane</span></th>
+    ${TECH_DEFS.map(t => `<th>${t.name.split(' ')[0]}<br><span style="font-weight:400;font-size:10px;opacity:.8">${t.region}</span></th>`).join('')}
   </tr></thead><tbody>`);
 
   const rows = [
@@ -374,13 +392,25 @@ function render() {
     { label: 'Avg Days to Schedule', desc: 'Created → appt', fn: m => m.avgSched, fmt: fmtDays, higherBetter: false, nullLabel: '—' },
     { label: 'Avg Time to Complete', desc: 'Appt → done', fn: m => m.avgComplete, fmt: fmtDays, higherBetter: false, nullLabel: '—' },
     { label: 'Avg Backlog Age', desc: 'Open WO age', fn: m => m.avgActiveAge, fmt: fmtDays, higherBetter: false, nullLabel: '—' },
-    { label: 'Materials Spend', desc: 'Ramp R&M cards', fn: (m, key) => getRampSpend(key), fmt: fmtDollar, higherBetter: null },
-    { label: 'Avg Cost/WO',   desc: 'Materials only', fn: (m, key) => { const s = getRampSpend(key); return m.completed > 0 ? s / m.completed : null; }, fmt: fmtDollar, higherBetter: false, nullLabel: '—' },
+    { label: 'Avg Total Cost/WO', desc: 'Labor + materials', fn: (m, key, ctx) => ctx.avgTotal, fmt: fmtDollar, higherBetter: false, needsCtx: true, nullLabel: '—' },
+    { label: 'Avg Labor/WO',  desc: 'QBTime hrs × wage', fn: (m, key, ctx) => ctx.avgLab, fmt: fmtDollar, higherBetter: null, needsCtx: true, nullLabel: '—' },
+    { label: 'Avg Materials/WO', desc: 'Ramp R&M cards', fn: (m, key, ctx) => ctx.avgMat, fmt: fmtDollar, higherBetter: false, needsCtx: true, nullLabel: '—' },
     { label: 'High/Emergency %', desc: 'Priority mix', fn: m => m.completed > 0 ? (m.priCount.Emergency + m.priCount.High) / m.completed * 100 : null, fmt: v => v.toFixed(0) + '%', higherBetter: null, nullLabel: '—' },
   ];
 
+  // Build per-tech cost context for comparison table
+  const costCtx = {};
+  TECH_DEFS.forEach(t => {
+    const completedMelds = (meldsByKey[t.key] || []).filter(ml => ml.status === 'COMPLETED' && inPeriod(ml.completed || ml.first_appt || ml.created));
+    const materials = getRampSpend(t.key);
+    const labor     = getLaborCost(t.key, completedMelds);
+    const total     = labor + materials;
+    const n         = metrics[t.key].completed;
+    costCtx[t.key]  = { avgTotal: n > 0 ? total/n : null, avgLab: n > 0 ? labor/n : null, avgMat: n > 0 ? materials/n : null };
+  });
+
   rows.forEach(row => {
-    const vals = TECH_DEFS.map(t => row.fn(metrics[t.key], t.key));
+    const vals = TECH_DEFS.map(t => row.fn(metrics[t.key], t.key, row.needsCtx ? costCtx[t.key] : {}));
     const numeric = vals.filter(v => v !== null && !isNaN(v));
     const best  = row.higherBetter === true  ? Math.max(...numeric) : row.higherBetter === false ? Math.min(...numeric) : null;
     const worst = row.higherBetter === true  ? Math.min(...numeric) : row.higherBetter === false ? Math.max(...numeric) : null;
@@ -388,7 +418,7 @@ function render() {
     html.push(`<tr><td><span class="metric-name">${row.label}</span><br><span class="metric-desc">${row.desc}</span></td>`);
     TECH_DEFS.forEach((t, i) => {
       const v = vals[i];
-      const display = v === null || isNaN(v) ? (row.nullLabel || '—') : row.fmt(v, t.key);
+      const display = v === null || isNaN(v) ? (row.nullLabel || '—') : row.fmt(v);
       const cls = v !== null && !isNaN(v) && v === best ? 'best' : v !== null && !isNaN(v) && v === worst && best !== worst ? 'worst' : '';
       html.push(`<td class="${cls}">${display}</td>`);
     });
@@ -411,7 +441,7 @@ function sumCard(icon, val, label, sub) {
   </div>`;
 }
 
-function techCard(t, m, rampSpend, avgCostPerWO) {
+function techCard(t, m, cost) {
   // Backlog badge
   let badgeCls = 'badge-green', badgeTxt = 'On Track';
   if (m.active > 10) { badgeCls = 'badge-red'; badgeTxt = m.active + ' backlog'; }
@@ -431,6 +461,9 @@ function techCard(t, m, rampSpend, avgCostPerWO) {
     const pct = (cnt / m.completed * 100).toFixed(0);
     propRows += `<tr><td>${prop}</td><td style="text-align:right">${cnt}</td><td style="text-align:right;color:var(--muted)">${pct}%</td></tr>`;
   });
+
+  const laborPct = cost.totalCost > 0 ? (cost.labor / cost.totalCost * 100).toFixed(0) : 0;
+  const matPct   = cost.totalCost > 0 ? (cost.materials / cost.totalCost * 100).toFixed(0) : 0;
 
   return `<div class="tech-card">
     <div class="tech-header" style="border-bottom:3px solid ${t.color}">
@@ -465,9 +498,9 @@ function techCard(t, m, rampSpend, avgCostPerWO) {
         <div class="kpi-note">med ${fmtDays(m.medComplete)}</div>
       </div>
       <div class="kpi-cell">
-        <div class="kpi-val">${fmtDollar(avgCostPerWO)}</div>
-        <div class="kpi-lbl">Materials / WO</div>
-        <div class="kpi-note">${fmtDollar(rampSpend)} total</div>
+        <div class="kpi-val">${fmtDollar(cost.avgTotal)}</div>
+        <div class="kpi-lbl">Total Cost / WO</div>
+        <div class="kpi-note">labor ${laborPct}% · mat ${matPct}%</div>
       </div>
     </div>
 

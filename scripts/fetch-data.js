@@ -867,14 +867,18 @@ async function fetchPropertyMeldTurns() {
 }
 
 // ── PropertyMeld Tech Metrics ────────────────────────────────────────────────
-// Fetches repair melds for Wade, Justin, Jonas — saves slim records for KPI HTML.
+// Fetches repair melds for all repair techs — saves slim records + QBT labor for KPI HTML.
 async function fetchPMTechMetrics() {
   if (!PM_EMAIL || !PM_PASSWORD) { console.log('PM credentials not set, skipping tech metrics.'); return; }
 
+  // PM agent ID, QBTime user ID, wage rate, display label
   const TECHS = [
-    { name: 'Jonas Hoard',      id: 59983, key: 'jonas'  },
-    { name: 'Wade Hippen',      id: 48355, key: 'wade'   },
-    { name: 'Justin Gutierrez', id: 59624, key: 'justin' },
+    { name: 'Jonas Hoard',      id: 59983, key: 'jonas',   qbtId: 7623296, wage: 27.00, region: 'Tacoma'    },
+    { name: 'Wade Hippen',      id: 48355, key: 'wade',    qbtId: 36898,   wage: 28.44, region: 'Spokane'   },
+    { name: 'Justin Gutierrez', id: 59624, key: 'justin',  qbtId: 7564674, wage: 25.00, region: 'Spokane'   },
+    { name: 'Jared Miller',     id: 48347, key: 'jared',   qbtId: 36902,   wage: 28.09, region: 'Tri-Cities'},
+    { name: 'Jaxson Lakins',    id: 51579, key: 'jaxson',  qbtId: 6010510, wage: 24.00, region: 'Tri-Cities'},
+    { name: 'Isaac Chavez',     id: 51605, key: 'isaac',   qbtId: 6010506, wage: 27.00, region: 'Tri-Cities'},
   ];
   const SIX_MONTHS_AGO = new Date(Date.now() - 190 * 86400000).toISOString().slice(0, 10);
 
@@ -882,7 +886,8 @@ async function fetchPMTechMetrics() {
   const session = await pmLogin();
   console.log('PM tech metrics: logged in');
 
-  const techMelds = { jonas: [], wade: [], justin: [] };
+  const techMelds = {};
+  TECHS.forEach(t => { techMelds[t.key] = []; });
 
   function tmGetAppt(m) {
     for (const a of (m.managementappointment || [])) {
@@ -954,11 +959,51 @@ async function fetchPMTechMetrics() {
     }
   }
 
+  // ── QBTime labor hours per tech per WO reference ─────────────────────────
+  // Builds {techKey: {woRef: totalHours}} from R&M timesheets in qbtime.json
+  const laborByRef = {};
+  TECHS.forEach(t => { laborByRef[t.key] = {}; });
+
+  const qbtPath = path.join(DATA_DIR, 'qbtime.json');
+  if (fs.existsSync(qbtPath)) {
+    const qbt = JSON.parse(fs.readFileSync(qbtPath, 'utf8'));
+    const qbtIdToKey = {};
+    TECHS.forEach(t => { qbtIdToKey[t.qbtId] = t.key; });
+
+    function getJcPath(id, cache, jcs) {
+      if (cache[id] !== undefined) return cache[id];
+      const j = jcs[id];
+      if (!j) return (cache[id] = []);
+      if (j.parent_id === 0) return (cache[id] = [j.name]);
+      return (cache[id] = [...getJcPath(j.parent_id, cache, jcs), j.name]);
+    }
+    const jcCache = {}, jcs = qbt.jobcodes || {};
+
+    Object.values(qbt.timesheets || {}).forEach(ts => {
+      const key = qbtIdToKey[ts.user_id];
+      if (!key) return;
+      if (ts.type !== 'regular') return;
+      const cls = ts.customfields?.['25056'] || '';
+      if (!/r&m|repair|maintenance/i.test(cls)) return;
+      const p = getJcPath(ts.jobcode_id, jcCache, jcs);
+      const woRef = p.length >= 3 ? p[p.length - 1] : null;
+      if (!woRef || !/^T[A-Z0-9]{6,}/i.test(woRef)) return; // must look like a PM ref
+      const hrs = ts.duration / 3600;
+      laborByRef[key][woRef] = (laborByRef[key][woRef] || 0) + hrs;
+    });
+
+    const totalEntries = Object.values(laborByRef).reduce((s, m) => s + Object.keys(m).length, 0);
+    console.log(`QBT labor: ${totalEntries} WO-level entries across ${TECHS.length} techs`);
+  } else {
+    console.log('qbtime.json not found, labor costs will be omitted');
+  }
+
+  const summary = TECHS.map(t => `${t.key}=${techMelds[t.key].length}`).join(' ');
   save('pm_tech_metrics.json', {
     ok: true, fetched_at: new Date().toISOString(), since: SIX_MONTHS_AGO,
-    techs: TECHS, melds: techMelds,
+    techs: TECHS, melds: techMelds, labor_by_ref: laborByRef,
   });
-  console.log(`PM tech metrics: jonas=${techMelds.jonas.length} wade=${techMelds.wade.length} justin=${techMelds.justin.length}`);
+  console.log(`PM tech metrics: ${summary}`);
 }
 
 // FETCH_ONLY env var controls what runs:
@@ -1000,6 +1045,48 @@ const FETCH_ONLY = process.env.FETCH_ONLY || 'all';
 
   if (FETCH_ONLY === 'pm-tech-only') {
     await fetchPMTechMetrics();
+    console.log('Done.');
+    return;
+  }
+
+  if (FETCH_ONLY === 'pm-find-agents') {
+    const session = await pmLogin();
+    const targets = ['jaxson','jared','isaac','lakin','miller','chavez'];
+    let offset = 0;
+    while (true) {
+      const res = await pmGet(`/api/melds/?status=PENDING_COMPLETION&limit=200&offset=${offset}`, session);
+      const rows = res.results || [];
+      rows.forEach(m => {
+        (m.in_house_servicers||[]).forEach(s => {
+          if (!s.agent) return;
+          const fn = (s.agent.first_name||'').toLowerCase();
+          const ln = (s.agent.last_name ||'').toLowerCase();
+          if (targets.some(t => fn.includes(t) || ln.includes(t)))
+            console.log('PM agent:', s.agent.id, s.agent.first_name, s.agent.last_name);
+        });
+      });
+      if (!res.next || rows.length === 0) break;
+      offset += 200;
+      await sleep(150);
+    }
+    // Also check COMPLETED melds
+    offset = 0;
+    for (let i = 0; i < 5; i++) {
+      const res = await pmGet(`/api/melds/?status=COMPLETED&limit=200&offset=${offset}`, session);
+      const rows = res.results || [];
+      rows.forEach(m => {
+        (m.in_house_servicers||[]).forEach(s => {
+          if (!s.agent) return;
+          const fn = (s.agent.first_name||'').toLowerCase();
+          const ln = (s.agent.last_name ||'').toLowerCase();
+          if (targets.some(t => fn.includes(t) || ln.includes(t)))
+            console.log('PM agent:', s.agent.id, s.agent.first_name, s.agent.last_name);
+        });
+      });
+      if (!res.next || rows.length === 0) break;
+      offset += 200;
+      await sleep(150);
+    }
     console.log('Done.');
     return;
   }
