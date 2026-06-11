@@ -283,6 +283,7 @@ async function main() {
   // 1. Get all open tc68/tc34 melds — both Jonas-assigned AND unassigned non-project repair melds
   const statuses = ['PENDING_ASSIGNMENT','PENDING_MORE_MANAGEMENT_AVAILABILITY','PENDING_COMPLETION'];
   let melds = [];
+  let jonasAll = []; // ALL melds assigned to Jonas (incl. turns) — for busy-block awareness
   for (const s of statuses) {
     let offset = 0;
     while(true) {
@@ -296,11 +297,16 @@ async function main() {
         return (prop.startsWith('tc68') || prop.startsWith('tc34')) && !m.project;
       });
       melds.push(...tc);
+      // Capture every Jonas-assigned meld (any property, any type incl. turns) so busy
+      // blocks reflect his FULL calendar — otherwise turn melds (e.g. Trash Out spanning
+      // a full workday) are invisible and the scheduler double-books on top of them.
+      jonasAll.push(...(d.results||[]).filter(m => m.in_house_servicers?.some(srv => srv.agent?.id === JONAS_ID)));
       if (!d.next || !d.results?.length) break;
       offset += 200;
     }
   }
   const seen = new Set(); melds = melds.filter(m=>{if(seen.has(m.id))return false;seen.add(m.id);return true;});
+  const seenAll = new Set(); jonasAll = jonasAll.filter(m=>{if(seenAll.has(m.id))return false;seenAll.add(m.id);return true;});
 
   // Auto-assign unassigned melds to Jonas (skip pest control and turn-only work)
   const PEST_RE = /pest|bed.?bug|termite|rodent|mice|mouse|trap|exterminate|infest/i;
@@ -324,7 +330,8 @@ async function main() {
   log('Jonas tc68/tc34 melds: '+melds.length);
 
   const today = localDate();
-  const busyBlocks = buildBusyBlocks(melds);
+  // Busy blocks from Jonas's ENTIRE calendar (turns included), not just the schedulable subset.
+  const busyBlocks = buildBusyBlocks(jonasAll);
 
   // 2. Process each meld
   for (const m of melds) {
