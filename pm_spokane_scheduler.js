@@ -13,6 +13,7 @@
  * Turns (project melds) → Scott/Ron/Magoon, never touched here.
  */
 const https = require('https');
+const { analyzeChat } = require('./pm_chat_llm'); // LLM chat reader; no-ops to null without ANTHROPIC_API_KEY
 const BASE = 'https://app.propertymeld.com', MGMT = '2975';
 const WADE_ID = 48355, JUSTIN_ID = 59624;
 const TECHS = [{ id: WADE_ID, name: 'Wade' }, { id: JUSTIN_ID, name: 'Justin' }];
@@ -262,10 +263,22 @@ async function main(){
     let newMsgs;
     if(apptEvt){ const cut=apptCreated?new Date(apptCreated).getTime():(Date.now()-RECENCY); newMsgs=messages.filter(x=>x.created&&new Date(x.created).getTime()>cut&&(Date.now()-new Date(x.created).getTime())<RECENCY); }
     else { const cut=Date.now()-30*86400000; newMsgs=messages.filter(x=>x.created&&new Date(x.created).getTime()>cut); }
-    const chatAction=newMsgs.length?parseChatAction(newMsgs):null;
+    // LLM reads the full recent chat like a coordinator; keyword parser is the fallback.
+    let chatAction=null, llm=null;
+    const apptStrPDT=apptEvt?fmt(apptEvt.dtstart):null;
+    const recentChat=messages.some(x=>x.created&&(Date.now()-new Date(x.created).getTime())<21*86400000);
+    if(recentChat) llm=await analyzeChat(brief,messages,apptStrPDT,today);
+    if(llm){
+      if(llm.intent!=='none') chatAction = llm.earlier
+        ? {action:'reschedule',requestedDay:null,requestedTime:null,isTenant:true,note:llm.reasoning,sender:'chat(LLM)',msgDate:today}
+        : {action:'accommodate_resident',requestedDay:(llm.pref&&llm.pref.dayName)||null,requestedTime:(llm.pref&&llm.pref.time)||null,note:llm.reasoning,sender:'chat(LLM)',msgDate:today};
+    } else {
+      chatAction=newMsgs.length?parseChatAction(newMsgs):null;
+    }
 
-    // preference lock from TITLE or intent-gated chat (never raw chat text)
+    // preference lock: TITLE, then LLM structured pref, then keyword-extracted day/time
     let pref=usablePreference(extractPreference(brief),today);
+    if(!pref&&llm&&llm.pref) pref=usablePreference(llm.pref,today);
     if(!pref&&chatAction&&(chatAction.requestedDay||chatAction.requestedTime)) pref=usablePreference({dayName:chatAction.requestedDay||null,time:chatAction.requestedTime||null,dateStr:null},today);
     if(pref)lockedPrefs.set(m.id,pref);
 

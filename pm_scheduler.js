@@ -10,6 +10,7 @@
 
 const https = require('https');
 const fs = require('fs');
+const { analyzeChat } = require('./pm_chat_llm'); // LLM chat reader; no-ops to null without ANTHROPIC_API_KEY
 const BASE = 'https://app.propertymeld.com', MGMT = '2975';
 const JONAS_ID = 59983;
 const ARMANI_ID = 59985; // Armani Mitchell — handles Tacoma TURNS. Jonas + Armani are the only Tacoma techs.
@@ -495,13 +496,27 @@ async function main() {
       newMessages = messages.filter(msg => msg.created && new Date(msg.created).getTime() > cutoff);
     }
 
-    // Parse chat for scheduling actions (only from new messages)
-    const chatAction = newMessages.length > 0 ? parseSchedulingRequest(newMessages, brief) : null;
+    // Read the chat like a coordinator via the LLM (full recent thread); fall back to the
+    // keyword parser when the LLM is unavailable. The LLM sees the CURRENT appointment and
+    // flags already-satisfied requests itself — that's what prevents re-acting every run.
+    let chatAction = null, llm = null;
+    const apptStrPDT = apptEvt ? new Date(apptEvt.dtstart).toLocaleString('en-US',{timeZone:'America/Los_Angeles',weekday:'short',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'}) : null;
+    const recentChat = messages.some(x => x.created && (Date.now() - new Date(x.created).getTime()) < 21*86400000);
+    if (recentChat) llm = await analyzeChat(brief, messages, apptStrPDT, today);
+    if (llm) {
+      if (llm.intent !== 'none') {
+        chatAction = llm.earlier
+          ? { action:'reschedule', requestedDay:null, requestedTime:null, note: llm.reasoning, sender:'chat(LLM)', msgDate: today }
+          : { action:'accommodate_resident', requestedDay: (llm.pref&&llm.pref.dayName)||null, requestedTime: (llm.pref&&llm.pref.time)||null, note: llm.reasoning, sender:'chat(LLM)', msgDate: today };
+      }
+    } else {
+      chatAction = newMessages.length > 0 ? parseSchedulingRequest(newMessages, brief) : null;
+    }
 
-    // Preference lock: a specific day/time/date stated in the TITLE, or a day/time the
-    // intent-gated chat parser extracted from a real reschedule/accommodate request.
-    // (Do NOT regex raw chat text — it grabs boilerplate like "Mon–Fri 9 AM–5 PM".)
+    // Preference lock: a specific day/time/date in the TITLE, the LLM's structured pref, or
+    // (fallback) a day/time the keyword parser extracted from a real request.
     let pref = usablePreference(extractPreference(brief), today);
+    if (!pref && llm && llm.pref) pref = usablePreference(llm.pref, today);
     if (!pref && chatAction && (chatAction.requestedDay || chatAction.requestedTime)) {
       pref = usablePreference({ dayName: chatAction.requestedDay || null, time: chatAction.requestedTime || null, dateStr: null }, today);
     }
