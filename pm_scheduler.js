@@ -196,6 +196,66 @@ function nextOccurrenceOfDay(dayName, afterDate) {
   return null;
 }
 
+// ── PREFERENCE LOCK ──────────────────────────────────────────────────────────
+// A specific day/time/date stated in the work-order TITLE or CHAT is a hard preference:
+// schedule to it and never let compaction move it.
+const MONTHS = {jan:1,feb:2,mar:3,apr:4,may:5,jun:6,jul:7,aug:8,sep:9,oct:10,nov:11,dec:12};
+function extractPreference(text) {
+  if (!text) return null;
+  const t = String(text);
+  const dayName = (t.match(/\b(monday|tuesday|wednesday|thursday|friday|saturday|sunday)\b/i)||[])[1] || null;
+  const time = (t.match(/\b\d{1,2}(?::\d{2})?\s*(?:am|pm)\b/i)||[])[0] || null;
+  let dateStr = null;
+  const mon = t.match(/\b(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\.?\s+(\d{1,2})\b/i);
+  const mdy = t.match(/\b(\d{1,2})\/(\d{1,2})(?:\/(\d{2,4}))?\b/);
+  if (mon) { const mm=MONTHS[mon[1].toLowerCase()]; const dd=parseInt(mon[2]); if(mm&&dd>=1&&dd<=31) dateStr='2026-'+String(mm).padStart(2,'0')+'-'+String(dd).padStart(2,'0'); }
+  else if (mdy) { const mm=parseInt(mdy[1]), dd=parseInt(mdy[2]); if(mm>=1&&mm<=12&&dd>=1&&dd<=31) dateStr='2026-'+String(mm).padStart(2,'0')+'-'+String(dd).padStart(2,'0'); }
+  if (!dayName && !time && !dateStr) return null;
+  return { dayName, time, dateStr };
+}
+// Keep only honorable parts: drop a date that's already in the past.
+function usablePreference(pref, today) {
+  if (!pref) return null;
+  const out = { dayName: pref.dayName || null, time: pref.time || null, dateStr: (pref.dateStr && pref.dateStr > today) ? pref.dateStr : null };
+  return (out.dayName || out.time || out.dateStr) ? out : null;
+}
+// Does an existing appointment already satisfy the preference?
+function apptMatchesPref(apptEvt, pref) {
+  if (!apptEvt || !pref) return false;
+  const d = apptEvt.dtstart.slice(0,10);
+  if (pref.dateStr && d !== pref.dateStr) return false;
+  if (pref.dayName) {
+    const DAYS = {sunday:0,monday:1,tuesday:2,wednesday:3,thursday:4,friday:5,saturday:6};
+    if (new Date(d+'T12:00:00-07:00').getDay() !== DAYS[pref.dayName.toLowerCase()]) return false;
+  }
+  if (pref.time) { const pt = parseTime(pref.time); if (pt && Math.abs(pdtHr(apptEvt.dtstart) - (pt.hr+pt.min/60)) > 0.01) return false; }
+  return true;
+}
+// First free slot ON a specific date (8am–5pm), or null if that day is full.
+function findSlotOnDate(busyBlocks, durationHrs, dateStr, bufferHrs = 0.5) {
+  const busy = (busyBlocks[dateStr]||[]).sort((a,b)=>a.start-b.start);
+  for (let s=8; s<=17-durationHrs; s+=0.25) {
+    const e=s+durationHrs;
+    if (!busy.some(b => s < b.end+bufferHrs && e+bufferHrs > b.start)) return {date:dateStr, startHr:Math.floor(s), startMin:Math.round((s-Math.floor(s))*60), durationHrs};
+  }
+  return null;
+}
+// Build the slot a preference points to.
+function preferredSlot(pref, durationHrs, busyBlocks, today, bufferHrs = 0.5) {
+  let date = pref.dateStr || (pref.dayName ? nextOccurrenceOfDay(pref.dayName, today) : null);
+  if (!date || date <= today) date = pref.dayName ? nextOccurrenceOfDay(pref.dayName, today) : nextAvailableDate(today);
+  if (!date) return null;
+  const pt = pref.time ? parseTime(pref.time) : null;
+  if (pt) {
+    const start = pt.hr + pt.min/60, end = start + durationHrs;
+    const busy = busyBlocks[date] || [];
+    const conflict = busy.some(b => start < b.end + bufferHrs && end + bufferHrs > b.start);
+    if (start >= 8 && end <= 17 && !conflict) return {date, startHr:pt.hr, startMin:pt.min, durationHrs}; // honor exact requested time
+  }
+  // Requested time taken/invalid → first free slot that day, else next available day
+  return findSlotOnDate(busyBlocks, durationHrs, date) || findNextSlot(busyBlocks, durationHrs, today);
+}
+
 // ── SCHEDULING LOGIC ─────────────────────────────────────────────────────────
 
 const PRIORITY_ORDER = {Emergency:0, Urgent:0, High:1, Normal:2, Medium:2, Low:3};
@@ -376,6 +436,9 @@ async function main() {
   // remain reserved and the relocated one finds a genuinely free slot.
   const overlapIds = findOverlaps(jonasAll);
   if (overlapIds.size) log('Overlapping appointments to relocate: '+overlapIds.size);
+  // Preference locks: meld id → {dayName,time,dateStr} parsed from title/chat. Populated in
+  // the loop below (chat is fetched there) and honored by both the loop and the compaction pass.
+  const lockedPrefs = new Map();
 
   // 2. Process each meld
   for (const m of melds) {
@@ -427,6 +490,15 @@ async function main() {
     // Parse chat for scheduling actions (only from new messages)
     const chatAction = newMessages.length > 0 ? parseSchedulingRequest(newMessages, brief) : null;
 
+    // Preference lock: a specific day/time/date stated in the TITLE, or a day/time the
+    // intent-gated chat parser extracted from a real reschedule/accommodate request.
+    // (Do NOT regex raw chat text — it grabs boilerplate like "Mon–Fri 9 AM–5 PM".)
+    let pref = usablePreference(extractPreference(brief), today);
+    if (!pref && chatAction && (chatAction.requestedDay || chatAction.requestedTime)) {
+      pref = usablePreference({ dayName: chatAction.requestedDay || null, time: chatAction.requestedTime || null, dateStr: null }, today);
+    }
+    if (pref) lockedPrefs.set(m.id, pref);
+
     // Decide what to do
     let action = null;
     let reason = '';
@@ -444,6 +516,10 @@ async function main() {
         action = 'schedule_new';
         reason = 'Unscheduled + duration hint from '+chatAction.sender+': '+chatAction.durationHrs+'h';
       }
+    } else if (pref && (isUnscheduled || isPastDue || !apptMatchesPref(apptEvt, pref))) {
+      // Locked preference (title/chat states a specific day/time/date) and we're not already on it
+      action = 'honor_pref';
+      reason = 'Honoring stated preference '+JSON.stringify(pref);
     } else if (chatAction?.action === 'reschedule' || chatAction?.action === 'accommodate_resident') {
       // Act on chat request whether meld is scheduled or not
       action = chatAction.action;
@@ -452,10 +528,10 @@ async function main() {
     } else if (isPastDue) {
       action = 'reschedule_pastdue';
       reason = 'Past due: was '+apptEvt.dtend.slice(0,10);
-    } else if (apptEvt && isBlockedDay(apptDate)) {
+    } else if (apptEvt && isBlockedDay(apptDate) && !pref) {
       action = 'reschedule_blockedday';
       reason = 'On reserved day (Mon/weekend), relocating off '+apptDate;
-    } else if (apptEvt && overlapIds.has(m.id)) {
+    } else if (apptEvt && overlapIds.has(m.id) && !pref) {
       action = 'reschedule_overlap';
       reason = 'Double-booked on '+apptDate+', relocating to a free slot';
     } else if (isUnscheduled) {
@@ -475,7 +551,13 @@ async function main() {
     const shortenOk = chatAction?.action === 'shorten' && chatAction.durationHrs >= 0.25 && chatAction.durationHrs <= 4;
     const durHrs = Math.min(8, shortenOk ? chatAction.durationHrs : estimateDuration(brief));
 
-    if (chatAction?.action === 'accommodate_resident' && (chatAction.requestedDay || chatAction.requestedTime)) {
+    // Locked preference takes priority over everything: place at the stated day/time.
+    if (action === 'honor_pref' && pref) {
+      newSlot = preferredSlot(pref, durHrs, busyBlocks, today);
+      if (newSlot) log('  → preferred slot '+newSlot.date+' '+String(newSlot.startHr).padStart(2,'0')+':'+String(newSlot.startMin).padStart(2,'0'));
+    }
+
+    if (!newSlot && chatAction?.action === 'accommodate_resident' && (chatAction.requestedDay || chatAction.requestedTime)) {
       // Try to honor resident preference
       const prefDay = chatAction.requestedDay ? nextOccurrenceOfDay(chatAction.requestedDay, today) : null;
       const prefTime = parseTime(chatAction.requestedTime);
@@ -624,6 +706,12 @@ async function main() {
     const curDate = cur.dtstart.slice(0,10);
     const curStart = pdtHr(cur.dtstart);
     const dur = Math.max(0.5, (new Date(cur.dtend) - new Date(cur.dtstart)) / 3600000);
+    // Preference-locked melds (specific day/time from title or chat) are never pulled —
+    // keep them exactly where Phase 1 honored the preference.
+    if (lockedPrefs.has(m.id)) {
+      (fixedBusy[curDate] = fixedBusy[curDate] || []).push({ start: curStart, end: pdtHr(cur.dtend) });
+      continue;
+    }
     const ns = findNextSlot(fixedBusy, dur, today);
     const earlier = ns && (ns.date < curDate || (ns.date === curDate && (ns.startHr + ns.startMin/60) < curStart - 0.01));
     if (earlier) {
