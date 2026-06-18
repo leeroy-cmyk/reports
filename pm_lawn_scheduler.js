@@ -41,10 +41,13 @@ const TEMPLATE = {
   161284: { prop:'w226', day:3, hr:10, min:15, dur:2 },
   161286: { prop:'e328', day:3, hr:12, min:15, dur:2 },
   161289: { prop:'c302', day:3, hr:14, min:15, dur:2 },
+  // h731 — Wednesday 12:00pm (Lee Roy 2026-06-18). Two PM recurrences exist for h731
+  // (163904 old bi-weekly, 179920 current); both point here so it always lands Wed 12pm.
+  163904: { prop:'h731', day:3, hr:12, min:0, dur:2 },
+  179920: { prop:'h731', day:3, hr:12, min:0, dur:2 },
   // Thursday
   161291: { prop:'c313',     day:4, hr:8,  min:15, dur:2 },
   162927: { prop:'o155-Oak', day:4, hr:10, min:15, dur:2 },
-  163904: { prop:'h731',     day:4, hr:12, min:15, dur:2 },  // added 2026-06-11 (NB: PM recurrence is bi-weekly — set to weekly in PM for true weekly)
   // Friday
   167333: { prop:'k104',     day:5, hr:8,  min:15, dur:2 },
   164381: { prop:'k308',     day:5, hr:10, min:15, dur:2 },
