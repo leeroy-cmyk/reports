@@ -36,15 +36,15 @@ const TEMPLATE = {
   161279: { prop:'m608', day:2, hr:13, min:15, dur:1 },
   161280: { prop:'m405', day:2, hr:14, min:15, dur:1 },
   161281: { prop:'l912', day:2, hr:15, min:15, dur:1 },
-  // Wednesday
-  161282: { prop:'w117', day:3, hr:8,  min:15, dur:2 },
-  161284: { prop:'w226', day:3, hr:10, min:15, dur:2 },
-  161286: { prop:'e328', day:3, hr:12, min:15, dur:2 },
-  161289: { prop:'c302', day:3, hr:14, min:15, dur:2 },
-  // h731 — Wednesday 12:00pm (Lee Roy 2026-06-18). Two PM recurrences exist for h731
-  // (163904 old bi-weekly, 179920 current); both point here so it always lands Wed 12pm.
-  163904: { prop:'h731', day:3, hr:12, min:0, dur:2 },
+  // Wednesday — re-sequenced 2026-06-18 to fit h731 at noon (Lee Roy: "move the schedule
+  // out to make room"). Day now runs 8:00–18:00, no overlaps.
+  161282: { prop:'w117', day:3, hr:8,  min:0, dur:2 },   // 8:00–10:00
+  161284: { prop:'w226', day:3, hr:10, min:0, dur:2 },   // 10:00–12:00
+  // h731 at noon — two PM recurrences (163904 old bi-weekly, 179920 current) both point here.
+  163904: { prop:'h731', day:3, hr:12, min:0, dur:2 },   // 12:00–14:00
   179920: { prop:'h731', day:3, hr:12, min:0, dur:2 },
+  161286: { prop:'e328', day:3, hr:14, min:0, dur:2 },   // 14:00–16:00 (moved out)
+  161289: { prop:'c302', day:3, hr:16, min:0, dur:2 },   // 16:00–18:00 (moved out)
   // Thursday
   161291: { prop:'c313',     day:4, hr:8,  min:15, dur:2 },
   162927: { prop:'o155-Oak', day:4, hr:10, min:15, dur:2 },
