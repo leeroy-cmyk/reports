@@ -102,7 +102,7 @@ function parseSchedulingRequest(messages, meldBrief) {
   // Returns { action, requestedDate, requestedTime, durationHint, note } or null
   // action: 'reschedule' | 'accommodate_resident' | 'shorten' | null
 
-  const RESCHEDULE_KEYWORDS = /reschedule|different (time|day|date)|can'?t make|not available|won'?t be home|conflict|push|move it|push (it|this)|postpone/i;
+  const RESCHEDULE_KEYWORDS = /reschedule|different (time|day|date)|can'?t make|not available|won'?t be home|conflict|postpone|push (it|this) back|move (it|this|that) (up|back)|(schedule|come|get|fix)\s+\w*\s*(earlier|sooner)|earlier than|something earlier|any earlier|come (in )?sooner|before (mon|tue|wed|thu|fri|sat|sun|noon)/i;
   const ACCOMMODATE_KEYWORDS = /available (at|after|before|on)|prefer|better (time|day)|can (you|we) (come|do it)|i'?ll be home|good time|works for me|please come|sometime (on|around)/i;
   const SHORTEN_KEYWORDS = /(\d+)\s*(min|minute|minutes|hr|hour)/i;
   const TIME_PATTERN = /\b(\d{1,2})(?::(\d{2}))?\s*(am|pm)\b/i;
@@ -136,11 +136,14 @@ function parseSchedulingRequest(messages, meldBrief) {
       const dayMatch = DAY_PATTERN.exec(text);
       const timeMatch = TIME_PATTERN.exec(text);
       const nextMatch = NEXT_PATTERN.exec(text);
+      // "earlier/sooner/before X / not X" = move to the EARLIEST slot — the day mentioned is
+      // the one to AVOID, not a target. Don't capture it as a requested day/time.
+      const earlier = /earlier|sooner|before (mon|tue|wed|thu|fri|sat|sun|noon)|no later than|not (on )?(mon|tue|wed|thu|fri|sat|sun)/i.test(text);
       return {
         action: 'reschedule',
-        requestedDay: dayMatch ? dayMatch[1] : null,
-        requestedTime: timeMatch ? timeMatch[0] : null,
-        nextWeek: !!nextMatch,
+        requestedDay: earlier ? null : (dayMatch ? dayMatch[1] : null),
+        requestedTime: earlier ? null : (timeMatch ? timeMatch[0] : null),
+        nextWeek: !earlier && !!nextMatch,
         isFromTenant,
         note: text,
         sender: senderName,
@@ -556,9 +559,17 @@ async function main() {
     const shortenOk = chatAction?.action === 'shorten' && chatAction.durationHrs >= 0.25 && chatAction.durationHrs <= 4;
     const durHrs = Math.min(8, shortenOk ? chatAction.durationHrs : estimateDuration(brief));
 
+    // Exclude this meld's OWN current appointment from the slot search, so it isn't blocked
+    // by itself — otherwise a "move earlier" reschedule pushes it to the next free slot (LATER).
+    let searchBusy = busyBlocks;
+    if (apptEvt) {
+      const os = pdtHr(apptEvt.dtstart), oe = pdtHr(apptEvt.dtend);
+      searchBusy = {...busyBlocks, [apptDate]: (busyBlocks[apptDate]||[]).filter(b => Math.abs(b.start-os) > 0.01 || Math.abs(b.end-oe) > 0.01)};
+    }
+
     // Locked preference takes priority over everything: place at the stated day/time.
     if (action === 'honor_pref' && pref) {
-      newSlot = preferredSlot(pref, durHrs, busyBlocks, today);
+      newSlot = preferredSlot(pref, durHrs, searchBusy, today);
       if (newSlot) log('  → preferred slot '+newSlot.date+' '+String(newSlot.startHr).padStart(2,'0')+':'+String(newSlot.startMin).padStart(2,'0'));
     }
 
@@ -569,7 +580,7 @@ async function main() {
       if (prefDay && prefTime) {
         const slotStart = prefTime.hr + prefTime.min/60;
         const slotEnd = slotStart + durHrs;
-        const busy = busyBlocks[prefDay] || [];
+        const busy = searchBusy[prefDay] || [];
         const conflicts = busy.some(b => slotStart < b.end + 0.5 && slotEnd + 0.5 > b.start);
         if (!conflicts && slotEnd <= 17 && prefDay > today) {
           newSlot = {date: prefDay, startHr: prefTime.hr, startMin: prefTime.min, durationHrs: durHrs};
@@ -581,7 +592,7 @@ async function main() {
     if (!newSlot && chatAction?.action === 'reschedule' && chatAction.requestedDay) {
       const prefDay = nextOccurrenceOfDay(chatAction.requestedDay, today);
       if (prefDay) {
-        const openSlot = findNextSlot({...busyBlocks, [prefDay]: busyBlocks[prefDay]||[]}, durHrs, prefDay);
+        const openSlot = findNextSlot(searchBusy, durHrs, prefDay);
         if (openSlot?.date === prefDay) newSlot = openSlot;
       }
     }
@@ -597,7 +608,7 @@ async function main() {
           d.setDate(d.getDate()+1);
           const ds = d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
           if (d.getDay() === 0 || d.getDay() === 1 || d.getDay() === 6 || ds <= today) continue; // skip Mon + weekends
-          const busy = (busyBlocks[ds] || []);
+          const busy = (searchBusy[ds] || []);
           const slotEnd = 8 + durHrs;
           if (!busy.some(b => 8 < b.end + 0.25 && slotEnd + 0.25 > b.start)) {
             newSlot = {date: ds, startHr: 8, startMin: 0, durationHrs: durHrs};
@@ -605,12 +616,19 @@ async function main() {
           }
         }
       } else {
-        newSlot = findNextSlot(busyBlocks, durHrs, startSearch);
+        newSlot = findNextSlot(searchBusy, durHrs, startSearch);
       }
     }
 
     if (!newSlot) {
       log('  Could not find slot for '+ref);
+      continue;
+    }
+
+    // Idempotency: if the best achievable slot is exactly where it already sits, do nothing
+    // (prevents churn when a chat request can't improve on the current placement).
+    if (apptEvt && action !== 'shorten' && apptDate === newSlot.date && Math.abs(pdtHr(apptEvt.dtstart) - (newSlot.startHr + newSlot.startMin/60)) < 0.01) {
+      log('  (already optimally placed — no change)');
       continue;
     }
 

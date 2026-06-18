@@ -162,7 +162,7 @@ function preferredSlot(pref, durHrs, busy, today, bufferHrs=0.5){
 }
 
 // ── CHAT PARSING (recency-bounded) ──────────────────────────────────────────────
-const RESCHEDULE_KW=/reschedule|different (time|day|date)|can'?t make|not available|won'?t be home|conflict|push|postpone/i;
+const RESCHEDULE_KW=/reschedule|different (time|day|date)|can'?t make|not available|won'?t be home|conflict|postpone|push (it|this) back|move (it|this|that) (up|back)|(schedule|come|get|fix)\s+\w*\s*(earlier|sooner)|earlier than|something earlier|any earlier|come (in )?sooner|before (mon|tue|wed|thu|fri|sat|sun|noon)/i;
 const ACCOMMODATE_KW=/available (at|after|before|on)|prefer|better (time|day)|can (you|we) (come|do it)|i'?ll be home|good time|works for me|please come/i;
 const DURATION_KW=/(\d+)\s*(min|minute|minutes|hr|hour)/i;
 const TIME_KW=/\b(\d{1,2})(?::(\d{2}))?\s*(am|pm)\b/i;
@@ -175,7 +175,10 @@ function parseChatAction(messages){
     const msgDate=(msg.created||'').slice(0,10);
     const dm=DURATION_KW.exec(text);
     if(dm&&isAgent){ const num=parseFloat(dm[1]); const hrs=dm[2].toLowerCase().startsWith('h')?num:num/60; return {action:'shorten',durationHrs:hrs,note:text.slice(0,80),sender,msgDate}; }
-    if(RESCHEDULE_KW.test(text)){ const d=DAY_KW.exec(text),t=TIME_KW.exec(text); return {action:'reschedule',requestedDay:d?d[1]:null,requestedTime:t?t[0]:null,isTenant,note:text.slice(0,80),sender,msgDate}; }
+    if(RESCHEDULE_KW.test(text)){ const d=DAY_KW.exec(text),t=TIME_KW.exec(text);
+      // "earlier/sooner/before X / not X" → move to EARLIEST; the mentioned day is to AVOID, not target.
+      const earlier=/earlier|sooner|before (mon|tue|wed|thu|fri|sat|sun|noon)|no later than|not (on )?(mon|tue|wed|thu|fri|sat|sun)/i.test(text);
+      return {action:'reschedule',requestedDay:earlier?null:(d?d[1]:null),requestedTime:earlier?null:(t?t[0]:null),isTenant,note:text.slice(0,80),sender,msgDate}; }
     if(isTenant&&ACCOMMODATE_KW.test(text)){ const d=DAY_KW.exec(text),t=TIME_KW.exec(text); return {action:'accommodate_resident',requestedDay:d?d[1]:null,requestedTime:t?t[0]:null,note:text.slice(0,80),sender,msgDate}; }
   }
   return null;
@@ -277,7 +280,11 @@ async function main(){
     else if(isUnscheduled){ action='schedule_new'; reason='unscheduled'; }
     if(!action)continue;
 
-    const tb=busy[tid];
+    const tbFull=busy[tid];
+    // Exclude this meld's OWN appt from the search so it isn't blocked by itself (else a
+    // "move earlier" reschedule pushes it to the next free slot = LATER).
+    let tb=tbFull;
+    if(apptEvt){ const os=pdtHr(apptEvt.dtstart),oe=pdtHr(apptEvt.dtend); tb={...tbFull,[apptDate]:(tbFull[apptDate]||[]).filter(b=>Math.abs(b.start-os)>0.01||Math.abs(b.end-oe)>0.01)}; }
     const shortenOk=chatAction&&chatAction.action==='shorten'&&chatAction.durationHrs>=0.25&&chatAction.durationHrs<=4;
     const durHrs=Math.min(8, shortenOk?chatAction.durationHrs:estimateDuration(brief));
     console.log(ref+' ['+priority+'] '+tName+' '+brief.slice(0,32)+' → '+action+': '+reason);
@@ -312,9 +319,9 @@ async function main(){
     if(result.status>=200&&result.status<300){
       console.log('  ✓ '+ns.date+' '+String(ns.startHr).padStart(2,'0')+':'+String(ns.startMin).padStart(2,'0')+' ('+ns.durationHrs+'h)');
       await cancelStale(m.id, ns.date, sc, csrf);
-      // free vacated slot, reserve new
-      if(apptEvt){ const od=pdtDate(apptEvt.dtstart); if(tb[od]){ const os=pdtHr(apptEvt.dtstart),oe=pdtHr(apptEvt.dtend); tb[od]=tb[od].filter(b=>Math.abs(b.start-os)>0.01||Math.abs(b.end-oe)>0.01); } }
-      (tb[ns.date]=tb[ns.date]||[]).push({start:ns.startHr+ns.startMin/60,end:ns.startHr+ns.startMin/60+ns.durationHrs});
+      // free vacated slot, reserve new — on the REAL per-tech calendar (tbFull), not the search clone
+      if(apptEvt){ const od=pdtDate(apptEvt.dtstart); if(tbFull[od]){ const os=pdtHr(apptEvt.dtstart),oe=pdtHr(apptEvt.dtend); tbFull[od]=tbFull[od].filter(b=>Math.abs(b.start-os)>0.01||Math.abs(b.end-oe)>0.01); } }
+      (tbFull[ns.date]=tbFull[ns.date]||[]).push({start:ns.startHr+ns.startMin/60,end:ns.startHr+ns.startMin/60+ns.durationHrs});
     } else console.log('  ✗ FAIL '+result.status+' '+result.body.slice(0,80));
   }
 
