@@ -12,6 +12,7 @@ const https = require('https');
 const fs = require('fs');
 const BASE = 'https://app.propertymeld.com', MGMT = '2975';
 const JONAS_ID = 59983;
+const ARMANI_ID = 59985; // Armani Mitchell — handles Tacoma TURNS. Jonas + Armani are the only Tacoma techs.
 const LOG_FILE = process.env.PM_LOG_FILE || null; // set to a path to persist logs; omit in CI
 const DRY = !!process.env.DRY_RUN; // preview mode: log intended writes without PATCHing
 
@@ -339,13 +340,20 @@ async function main() {
   const seen = new Set(); melds = melds.filter(m=>{if(seen.has(m.id))return false;seen.add(m.id);return true;});
   const seenAll = new Set(); jonasAll = jonasAll.filter(m=>{if(seenAll.has(m.id))return false;seenAll.add(m.id);return true;});
 
-  // Auto-assign unassigned melds to Jonas (skip pest control and turn-only work)
+  // Assign tc68/tc34 non-turn melds to Jonas when they're either unassigned OR assigned to
+  // a tech who doesn't work Tacoma. Only Jonas + Armani work Tacoma; anyone else (e.g.
+  // Margarito Saldana = Tri-Cities) on a non-turn meld here is a mis-assignment → give to Jonas.
+  // Leave Armani-assigned melds alone (he owns turn-prep). Skip pest control.
   const PEST_RE = /pest|bed.?bug|termite|rodent|mice|mouse|trap|exterminate|infest/i;
   for (const m of melds) {
-    const hasJonas = m.in_house_servicers?.some(s => s.agent?.id === JONAS_ID);
+    const hasJonas  = m.in_house_servicers?.some(s => s.agent?.id === JONAS_ID);
+    const hasArmani = m.in_house_servicers?.some(s => s.agent?.id === ARMANI_ID);
     const hasAnyTech = m.in_house_servicers?.length > 0;
-    if (!hasJonas && !hasAnyTech && !PEST_RE.test(m.brief_description||'')) {
-      log('Auto-assigning '+m.reference_id+' to Jonas (was unassigned)');
+    if (hasJonas || hasArmani || PEST_RE.test(m.brief_description||'')) continue;
+    if (!hasAnyTech || !(hasJonas || hasArmani)) {
+      const others = (m.in_house_servicers||[]).map(s => ((s.agent?.first_name||'')+' '+(s.agent?.last_name||'')).trim()).filter(Boolean);
+      log((hasAnyTech ? 'Reassigning '+m.reference_id+' to Jonas (was on non-Tacoma tech: '+others.join(', ')+')'
+                      : 'Auto-assigning '+m.reference_id+' to Jonas (was unassigned)'));
       const ra = await apiPatch('/api/melds/'+m.id+'/assign-maintenance/', sc, csrf,
         {maintenance:[{id:JONAS_ID,type:'ManagementAgent'}],user_groups:[]});
       if (ra.status < 300) {
@@ -397,20 +405,24 @@ async function main() {
       if (!Array.isArray(messages)) messages = messages.results || [];
     } catch(e) { /* no chat */ }
 
-    // Only act on chat messages that are NEW — newer than the current appointment creation,
-    // or within the last 48 hours if no appointment exists. This prevents re-triggering on old messages.
+    // Which chat messages are actionable depends on whether the meld is already scheduled:
     const apptCreated = appt?.created || null;
-    const lookbackCutoff = apptCreated
-      ? new Date(apptCreated)
-      : new Date(Date.now() - 48 * 3600000);
-    // Hard recency bound: only act on chat from the last ~26h. Rescheduling keeps the
-    // same appointment record (apptCreated doesn't advance), so without this an old
-    // "please reschedule" message would re-trigger a move on every daily run (thrash).
-    // 26h > the 24h run cadence, so each genuinely-new message still gets one chance.
-    const RECENCY_MS = 26 * 3600000;
-    const newMessages = messages.filter(msg =>
-      msg.created && new Date(msg.created) > lookbackCutoff
-      && (Date.now() - new Date(msg.created).getTime()) < RECENCY_MS);
+    const RECENCY_MS = 26 * 3600000; // > 24h run cadence
+    let newMessages;
+    if (apptEvt) {
+      // ALREADY SCHEDULED: only act on messages newer than the appointment AND within ~26h.
+      // Rescheduling keeps the same appointment record (apptCreated doesn't advance), so
+      // without the recency cap an old "please reschedule" note would re-fire every run (thrash).
+      const cutoff = apptCreated ? new Date(apptCreated).getTime() : (Date.now() - RECENCY_MS);
+      newMessages = messages.filter(msg => msg.created
+        && new Date(msg.created).getTime() > cutoff
+        && (Date.now() - new Date(msg.created).getTime()) < RECENCY_MS);
+    } else {
+      // NOT YET SCHEDULED: honor any resident preferred-date / scheduling note from the last
+      // 30 days. No thrash risk — once placed the meld has an appointment and won't reset.
+      const cutoff = Date.now() - 30 * 86400000;
+      newMessages = messages.filter(msg => msg.created && new Date(msg.created).getTime() > cutoff);
+    }
 
     // Parse chat for scheduling actions (only from new messages)
     const chatAction = newMessages.length > 0 ? parseSchedulingRequest(newMessages, brief) : null;
