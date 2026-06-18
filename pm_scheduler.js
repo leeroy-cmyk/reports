@@ -255,12 +255,9 @@ function buildBusyBlocks(melds) {
     const evt = appt.availability_segment.event;
     const date = evt.dtstart.slice(0,10);
     if (!byDate[date]) byDate[date] = [];
-    // Convert to PDT hours
-    const startPDT = new Date(evt.dtstart);
-    const endPDT = new Date(evt.dtend);
-    const startHr = startPDT.getUTCHours() - 7; // PDT offset
-    const endHr = endPDT.getUTCHours() - 7;
-    byDate[date].push({start: startHr + (startPDT.getUTCMinutes()/60), end: endHr + (endPDT.getUTCMinutes()/60)});
+    // Use pdtHr (wraps mod 24) so appts ending at/after midnight UTC (5pm+ PDT) don't
+    // produce a negative end-hour that hides the block and causes double-booking.
+    byDate[date].push({start: pdtHr(evt.dtstart), end: pdtHr(evt.dtend)});
   });
   return byDate;
 }
@@ -410,7 +407,14 @@ async function main() {
     const lookbackCutoff = apptCreated
       ? new Date(apptCreated)
       : new Date(Date.now() - 48 * 3600000);
-    const newMessages = messages.filter(msg => msg.created && new Date(msg.created) > lookbackCutoff);
+    // Hard recency bound: only act on chat from the last ~26h. Rescheduling keeps the
+    // same appointment record (apptCreated doesn't advance), so without this an old
+    // "please reschedule" message would re-trigger a move on every daily run (thrash).
+    // 26h > the 24h run cadence, so each genuinely-new message still gets one chance.
+    const RECENCY_MS = 26 * 3600000;
+    const newMessages = messages.filter(msg =>
+      msg.created && new Date(msg.created) > lookbackCutoff
+      && (Date.now() - new Date(msg.created).getTime()) < RECENCY_MS);
 
     // Parse chat for scheduling actions (only from new messages)
     const chatAction = newMessages.length > 0 ? parseSchedulingRequest(newMessages, brief) : null;
