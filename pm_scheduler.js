@@ -10,6 +10,7 @@ const fs = require('fs');
 const BASE = 'https://app.propertymeld.com', MGMT = '2975';
 const JONAS_ID = 59983;
 const LOG_FILE = process.env.PM_LOG_FILE || null; // set to a path to persist logs; omit in CI
+const DRY = !!process.env.DRY_RUN; // preview mode: log intended writes without PATCHing
 
 // ── HELPERS ──────────────────────────────────────────────────────────────────
 
@@ -45,6 +46,7 @@ async function apiGet(path, sc, csrf) {
 }
 
 async function apiPatch(path, sc, csrf, body) {
+  if (DRY) { console.log('   [DRY] would PATCH '+path); return {status:200, body:'{}'}; }
   const bodyStr = JSON.stringify(body);
   const h = {'User-Agent':'Mozilla/5.0','Cookie':sc(),'X-CSRFToken':csrf,'Accept':'application/json','Content-Type':'application/json','Content-Length':Buffer.byteLength(bodyStr),'Referer':BASE+'/'+MGMT+'/m/'+MGMT+'/'};
   return httpreq('PATCH', BASE+'/'+MGMT+'/m/'+MGMT+path, h, bodyStr);
@@ -70,6 +72,12 @@ function localDate(daysFromNow = 0) {
 
 function isMon(dateStr) {
   return new Date(dateStr+'T12:00:00-07:00').getDay() === 1;
+}
+
+// Sunday(0), Monday(1), Saturday(6) are reserved — nothing should be scheduled on them
+function isBlockedDay(dateStr) {
+  const d = new Date(dateStr+'T12:00:00-07:00').getDay();
+  return d === 0 || d === 1 || d === 6;
 }
 
 // Find next available date (skip Mondays, start from tomorrow)
@@ -208,6 +216,36 @@ function estimateDuration(brief) {
 
 // ── CALENDAR BUILDER ─────────────────────────────────────────────────────────
 
+// Convert an ISO datetime to PDT decimal hours (e.g. 9.5 = 9:30am)
+function pdtHr(iso) {
+  const d = new Date(iso);
+  return ((d.getUTCHours() - 7 + 24) % 24) + d.getUTCMinutes() / 60;
+}
+
+// Find meld ids whose appointment overlaps a higher/equal-priority appointment on the
+// same day → the lower-priority/later one should be relocated. Considers the tech's
+// ENTIRE calendar (turns included) so repairs don't sit on top of a full-day turn.
+function findOverlaps(allMelds) {
+  const overlapIds = new Set();
+  const byDate = {};
+  allMelds.forEach(m => {
+    const e = m.managementappointment?.find(a => a.availability_segment?.event)?.availability_segment?.event;
+    if (!e) return;
+    const d = e.dtstart.slice(0, 10);
+    (byDate[d] = byDate[d] || []).push({ m, start: pdtHr(e.dtstart), end: pdtHr(e.dtend) });
+  });
+  for (const d in byDate) {
+    const list = byDate[d].sort((a, b) =>
+      (PRIORITY_ORDER[a.m.priority] ?? 2) - (PRIORITY_ORDER[b.m.priority] ?? 2) || a.start - b.start);
+    const kept = [];
+    for (const it of list) {
+      if (kept.some(k => it.start < k.end && it.end > k.start)) overlapIds.add(it.m.id);
+      else kept.push(it);
+    }
+  }
+  return overlapIds;
+}
+
 // Build busy time blocks from existing scheduled melds
 function buildBusyBlocks(melds) {
   const byDate = {};
@@ -332,6 +370,11 @@ async function main() {
   const today = localDate();
   // Busy blocks from Jonas's ENTIRE calendar (turns included), not just the schedulable subset.
   const busyBlocks = buildBusyBlocks(jonasAll);
+  // Detect double-booked appointments across his whole calendar; the loser of each
+  // overlap gets relocated below. Build busy blocks BEFORE this so the kept appts
+  // remain reserved and the relocated one finds a genuinely free slot.
+  const overlapIds = findOverlaps(jonasAll);
+  if (overlapIds.size) log('Overlapping appointments to relocate: '+overlapIds.size);
 
   // 2. Process each meld
   for (const m of melds) {
@@ -397,6 +440,12 @@ async function main() {
     } else if (isPastDue) {
       action = 'reschedule_pastdue';
       reason = 'Past due: was '+apptEvt.dtend.slice(0,10);
+    } else if (apptEvt && isBlockedDay(apptDate)) {
+      action = 'reschedule_blockedday';
+      reason = 'On reserved day (Mon/weekend), relocating off '+apptDate;
+    } else if (apptEvt && overlapIds.has(m.id)) {
+      action = 'reschedule_overlap';
+      reason = 'Double-booked on '+apptDate+', relocating to a free slot';
     } else if (isUnscheduled) {
       action = 'schedule_new';
       reason = 'Unscheduled';
@@ -408,7 +457,11 @@ async function main() {
 
     // Determine new slot
     let newSlot = null;
-    const durHrs = chatAction?.action === 'shorten' ? chatAction.durationHrs : estimateDuration(brief);
+    // Use chat "shorten" hint only if it's a sane single-visit duration (0.25–4h);
+    // otherwise fall back to the description estimate. Guards against parsing e.g.
+    // "within 48 hours" as a 48-hour job. Hard cap at 8h (one workday) regardless.
+    const shortenOk = chatAction?.action === 'shorten' && chatAction.durationHrs >= 0.25 && chatAction.durationHrs <= 4;
+    const durHrs = Math.min(8, shortenOk ? chatAction.durationHrs : estimateDuration(brief));
 
     if (chatAction?.action === 'accommodate_resident' && (chatAction.requestedDay || chatAction.requestedTime)) {
       // Try to honor resident preference
@@ -476,7 +529,9 @@ async function main() {
         mark_scheduled: true, segments_to_keep: [],
         new_segments: [{ event: { dtstart: shortSlot.dtstart, dtend: shortSlot.dtend } }]
       });
-    } else if (m.started) {
+    } else if (m.started || apptEvt) {
+      // Already started OR already has a real appointment → reschedule the existing one
+      // (PENDING_COMPLETION melds require segments/reschedule/, not accept/)
       result = await apiPatch('/api/melds/'+m.id+'/segments/reschedule/', sc, csrf, {
         mark_scheduled: true, segments_to_keep: [],
         new_segments: [{ event: { dtstart, dtend } }]

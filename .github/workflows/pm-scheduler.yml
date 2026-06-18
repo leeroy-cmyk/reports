@@ -1,0 +1,28 @@
+name: PropertyMeld Scheduler (Jonas tc68/tc34)
+
+on:
+  schedule:
+    - cron: '0 13 * * *'   # 13:00 UTC = 6:00 AM PDT, once per day
+  workflow_dispatch:
+
+# Prevent overlapping runs if a previous one is still going
+concurrency:
+  group: pm-scheduler
+  cancel-in-progress: false
+
+jobs:
+  schedule:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run tc68/tc34 scheduler
+        env:
+          PROPERTYMELD_EMAIL:    ${{ secrets.PROPERTYMELD_EMAIL }}
+          PROPERTYMELD_PASSWORD: ${{ secrets.PROPERTYMELD_PASSWORD }}
+        run: node pm_scheduler.js
