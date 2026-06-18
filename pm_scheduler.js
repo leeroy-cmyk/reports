@@ -277,22 +277,15 @@ function findNextSlot(busyBlocks, durationHrs, startingFrom, bufferHrs = 0.5) {
     if (d.getDay() === 0 || d.getDay() === 1 || d.getDay() === 6 || dateStr <= today) { d.setDate(d.getDate()+1); continue; }
 
     const busy = (busyBlocks[dateStr] || []).sort((a,b)=>a.start-b.start);
-    // Try slots from 8am to 5pm
-    let candidate = 8;
-    let placed = false;
+    // Pack the nearest day densely from 8am: take the first non-conflicting slot.
+    // (No morning-reserve gap — fill closer days fully before scheduling further out.)
     for (let slot = 8; slot <= 17 - durationHrs; slot += 0.25) {
       const slotEnd = slot + durationHrs;
       const conflicts = busy.some(b => slot < b.end + bufferHrs && slotEnd + bufferHrs > b.start);
-      // Also leave Tue/Thu morning first slot open for emergency buffer after 3pm
       if (!conflicts && slotEnd <= 17) {
-        // Prefer not to put things right at start of day on days already with 2+ jobs
-        const jobsOnDay = busy.length;
-        const preferAfternoon = jobsOnDay >= 2 && slot < 13;
-        if (!preferAfternoon) {
-          const startHr = Math.floor(slot);
-          const startMin = Math.round((slot - startHr) * 60);
-          return {date: dateStr, startHr, startMin, durationHrs};
-        }
+        const startHr = Math.floor(slot);
+        const startMin = Math.round((slot - startHr) * 60);
+        return {date: dateStr, startHr, startMin, durationHrs};
       }
     }
     d.setDate(d.getDate()+1);
@@ -566,13 +559,80 @@ async function main() {
 
     if (result.status >= 200 && result.status < 300) {
       log('  ✓ Scheduled '+ref+' for '+date+' '+String(startHr).padStart(2,'0')+':'+String(startMin).padStart(2,'0')+' ('+dh+'h)');
-      // Update busy blocks
+      // Free the slot this meld vacated (if any) so nearer days can still be packed
+      // by melds processed later in this run.
+      if (apptEvt) {
+        const od = apptEvt.dtstart.slice(0,10);
+        if (busyBlocks[od]) {
+          const os = pdtHr(apptEvt.dtstart), oe = pdtHr(apptEvt.dtend);
+          busyBlocks[od] = busyBlocks[od].filter(b => Math.abs(b.start-os) > 0.01 || Math.abs(b.end-oe) > 0.01);
+        }
+      }
+      // Reserve the new slot
       if (!busyBlocks[date]) busyBlocks[date] = [];
       busyBlocks[date].push({start: startHr+startMin/60, end: startHr+startMin/60+dh});
     } else {
       log('  ✗ Failed to schedule '+ref+': '+result.status+' '+result.body.slice(0,80));
     }
   }
+
+  // ── PHASE 2: COMPACTION ──────────────────────────────────────────────────
+  // Pull already-scheduled repairs into the nearest open slots so closer days are
+  // always filled before later ones. Idempotent: once compacted, nothing moves.
+  log('Compaction pass...');
+  let fresh = [];
+  for (const s of statuses) {
+    let offset = 0;
+    while (true) {
+      const r = await apiGet('/api/melds/?limit=200&offset='+offset+'&status='+s, sc, csrf);
+      const d = JSON.parse(r.body);
+      fresh.push(...(d.results||[]).filter(m => m.in_house_servicers?.some(srv => srv.agent?.id === JONAS_ID)));
+      if (!d.next || !d.results?.length) break;
+      offset += 200;
+    }
+  }
+  const fseen = new Set(); fresh = fresh.filter(m => { if (fseen.has(m.id)) return false; fseen.add(m.id); return true; });
+  const apptOf = m => m.managementappointment?.find(a => a.availability_segment?.event)?.availability_segment?.event;
+  // Movable = Jonas's tc68/tc34 non-turn repairs with a future appt on a non-reserved day
+  const movable = fresh.filter(m => {
+    const po = (m.unit && m.unit.prop) ? m.unit.prop : m.prop;
+    const prop = (po?.property_name || '').toLowerCase();
+    if (!(prop.startsWith('tc68') || prop.startsWith('tc34')) || m.project) return false;
+    const e = apptOf(m);
+    return e && e.dtstart.slice(0,10) > today && !isBlockedDay(e.dtstart.slice(0,10));
+  });
+  const movableIds = new Set(movable.map(m => m.id));
+  // Fixed calendar = everything else Jonas has (turns, etc.) — never moved
+  const fixedBusy = buildBusyBlocks(fresh.filter(m => !movableIds.has(m.id)));
+  // Process earliest-scheduled first so we never leapfrog an earlier meld
+  movable.sort((a,b) => apptOf(a).dtstart.localeCompare(apptOf(b).dtstart));
+  let pulled = 0;
+  for (const m of movable) {
+    const cur = apptOf(m);
+    const curDate = cur.dtstart.slice(0,10);
+    const curStart = pdtHr(cur.dtstart);
+    const dur = Math.max(0.5, (new Date(cur.dtend) - new Date(cur.dtstart)) / 3600000);
+    const ns = findNextSlot(fixedBusy, dur, today);
+    const earlier = ns && (ns.date < curDate || (ns.date === curDate && (ns.startHr + ns.startMin/60) < curStart - 0.01));
+    if (earlier) {
+      const { dtstart, dtend } = slot(ns.date, ns.startHr, ns.startMin, dur);
+      const r = await apiPatch('/api/melds/'+m.id+'/segments/reschedule/', sc, csrf, {
+        mark_scheduled: true, segments_to_keep: [], new_segments: [{ event: { dtstart, dtend } }]
+      });
+      if (r.status >= 200 && r.status < 300) {
+        log('  ⇐ Pulled '+m.reference_id+' '+curDate+' → '+ns.date+' '+String(ns.startHr).padStart(2,'0')+':'+String(ns.startMin).padStart(2,'0'));
+        (fixedBusy[ns.date] = fixedBusy[ns.date] || []).push({ start: ns.startHr + ns.startMin/60, end: ns.startHr + ns.startMin/60 + dur });
+        pulled++;
+      } else {
+        log('  ✗ Compact failed '+m.reference_id+': '+r.status);
+        (fixedBusy[curDate] = fixedBusy[curDate] || []).push({ start: curStart, end: pdtHr(cur.dtend) });
+      }
+    } else {
+      // Keep where it is; reserve its slot
+      (fixedBusy[curDate] = fixedBusy[curDate] || []).push({ start: curStart, end: pdtHr(cur.dtend) });
+    }
+  }
+  log('Compaction: '+pulled+' meld(s) pulled earlier');
 
   // 3. Save log (only if LOG_FILE is set)
   if (LOG_FILE) {
