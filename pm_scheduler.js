@@ -206,7 +206,7 @@ function extractPreference(text) {
   const dayName = (t.match(/\b(monday|tuesday|wednesday|thursday|friday|saturday|sunday)\b/i)||[])[1] || null;
   const time = (t.match(/\b\d{1,2}(?::\d{2})?\s*(?:am|pm)\b/i)||[])[0] || null;
   let dateStr = null;
-  const mon = t.match(/\b(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\.?\s+(\d{1,2})\b/i);
+  const mon = t.match(/\b(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\.?\s+(\d{1,2})(?:st|nd|rd|th)?\b/i);
   const mdy = t.match(/\b(\d{1,2})\/(\d{1,2})(?:\/(\d{2,4}))?\b/);
   if (mon) { const mm=MONTHS[mon[1].toLowerCase()]; const dd=parseInt(mon[2]); if(mm&&dd>=1&&dd<=31) dateStr='2026-'+String(mm).padStart(2,'0')+'-'+String(dd).padStart(2,'0'); }
   else if (mdy) { const mm=parseInt(mdy[1]), dd=parseInt(mdy[2]); if(mm>=1&&mm<=12&&dd>=1&&dd<=31) dateStr='2026-'+String(mm).padStart(2,'0')+'-'+String(dd).padStart(2,'0'); }
@@ -216,7 +216,9 @@ function extractPreference(text) {
 // Keep only honorable parts: drop a date that's already in the past.
 function usablePreference(pref, today) {
   if (!pref) return null;
-  const out = { dayName: pref.dayName || null, time: pref.time || null, dateStr: (pref.dateStr && pref.dateStr > today) ? pref.dateStr : null };
+  // Keep a stated date if it's today or future (a "June 18th" task should be done ON the 18th,
+  // even though the scheduler normally skips today). Past dates can't be honored → dropped.
+  const out = { dayName: pref.dayName || null, time: pref.time || null, dateStr: (pref.dateStr && pref.dateStr >= today) ? pref.dateStr : null };
   return (out.dayName || out.time || out.dateStr) ? out : null;
 }
 // Does an existing appointment already satisfy the preference?
@@ -232,28 +234,31 @@ function apptMatchesPref(apptEvt, pref) {
   return true;
 }
 // First free slot ON a specific date (8am–5pm), or null if that day is full.
-function findSlotOnDate(busyBlocks, durationHrs, dateStr, bufferHrs = 0.5) {
+function findSlotOnDate(busyBlocks, durationHrs, dateStr, bufferHrs = 0.5, minStart = 8) {
   const busy = (busyBlocks[dateStr]||[]).sort((a,b)=>a.start-b.start);
-  for (let s=8; s<=17-durationHrs; s+=0.25) {
+  for (let s=Math.max(8,minStart); s<=17-durationHrs; s+=0.25) {
     const e=s+durationHrs;
     if (!busy.some(b => s < b.end+bufferHrs && e+bufferHrs > b.start)) return {date:dateStr, startHr:Math.floor(s), startMin:Math.round((s-Math.floor(s))*60), durationHrs};
   }
   return null;
 }
-// Build the slot a preference points to.
+// Build the slot a preference points to. A stated date that is TODAY is honored same-day
+// (from the next quarter-hour after now) — the only case where today is schedulable.
 function preferredSlot(pref, durationHrs, busyBlocks, today, bufferHrs = 0.5) {
   let date = pref.dateStr || (pref.dayName ? nextOccurrenceOfDay(pref.dayName, today) : null);
-  if (!date || date <= today) date = pref.dayName ? nextOccurrenceOfDay(pref.dayName, today) : nextAvailableDate(today);
+  if (!date || date < today) date = nextAvailableDate(today); // past/none → next open day
   if (!date) return null;
+  const isToday = date === today;
+  const minStart = isToday ? Math.min(16, Math.ceil((pdtHr(new Date().toISOString()) + 0.5) * 4) / 4) : 8;
   const pt = pref.time ? parseTime(pref.time) : null;
   if (pt) {
     const start = pt.hr + pt.min/60, end = start + durationHrs;
     const busy = busyBlocks[date] || [];
     const conflict = busy.some(b => start < b.end + bufferHrs && end + bufferHrs > b.start);
-    if (start >= 8 && end <= 17 && !conflict) return {date, startHr:pt.hr, startMin:pt.min, durationHrs}; // honor exact requested time
+    if (start >= minStart && end <= 17 && !conflict) return {date, startHr:pt.hr, startMin:pt.min, durationHrs}; // honor exact requested time
   }
   // Requested time taken/invalid → first free slot that day, else next available day
-  return findSlotOnDate(busyBlocks, durationHrs, date) || findNextSlot(busyBlocks, durationHrs, today);
+  return findSlotOnDate(busyBlocks, durationHrs, date, bufferHrs, minStart) || findNextSlot(busyBlocks, durationHrs, today);
 }
 
 // ── SCHEDULING LOGIC ─────────────────────────────────────────────────────────
@@ -503,7 +508,11 @@ async function main() {
     let action = null;
     let reason = '';
 
-    if (chatAction?.action === 'shorten') {
+    if (pref && (isUnscheduled || isPastDue || !apptMatchesPref(apptEvt, pref))) {
+      // Locked preference (title/chat states a specific day/time/date) — TOP priority.
+      action = 'honor_pref';
+      reason = 'Honoring stated preference '+JSON.stringify(pref);
+    } else if (chatAction?.action === 'shorten') {
       // Agent left duration note — update if current duration is longer
       if (apptEvt) {
         const currentDur = (new Date(apptEvt.dtend) - new Date(apptEvt.dtstart)) / 3600000;
@@ -516,10 +525,6 @@ async function main() {
         action = 'schedule_new';
         reason = 'Unscheduled + duration hint from '+chatAction.sender+': '+chatAction.durationHrs+'h';
       }
-    } else if (pref && (isUnscheduled || isPastDue || !apptMatchesPref(apptEvt, pref))) {
-      // Locked preference (title/chat states a specific day/time/date) and we're not already on it
-      action = 'honor_pref';
-      reason = 'Honoring stated preference '+JSON.stringify(pref);
     } else if (chatAction?.action === 'reschedule' || chatAction?.action === 'accommodate_resident') {
       // Act on chat request whether meld is scheduled or not
       action = chatAction.action;
