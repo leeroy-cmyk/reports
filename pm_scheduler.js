@@ -1,8 +1,11 @@
 #!/usr/bin/env node
 /**
  * PropertyMeld tc68/tc34 Scheduler
- * Runs automatically 5x/day via Claude scheduled agent.
+ * Runs automatically once daily via GitHub Actions (.github/workflows/pm-scheduler.yml, 6am PDT).
  * Checks Jonas Hoard's work orders, reads chats, reschedules as needed.
+ * Self-heals: schedules unscheduled melds, moves past-due forward, relocates anything
+ * landing on a reserved day (Mon/weekend), and spreads out double-booked appointments.
+ * Set DRY_RUN=1 to preview without writing.
  */
 
 const https = require('https');
