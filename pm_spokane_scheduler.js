@@ -96,6 +96,28 @@ async function cancelStale(meldId, keepDate, sc, csrf){
     if(d) await apiPatch('/api/management-appointments/'+a.id+'/cancel/',sc,csrf,{}); // cancel other dates AND same-date duplicates
   }
 }
+// Proactive dedup: a meld left UNTOUCHED by the scheduler keeps any pre-existing duplicate
+// appointments forever (cancelStale only runs on melds we actively move). A ghost duplicate is
+// also invisible to buildBusyBlocks (it reads only getMeldAppt's first appt) → silent double-book.
+// So before building the busy calendars, collapse every meld to exactly ONE real appt
+// (keep the most recently created = highest id; "last write wins"). Mutates the meld objects.
+async function dedupeAppts(melds, sc, csrf){
+  let removed=0;
+  for(const m of melds){
+    const isReal=a=>(a.dtstart&&a.dtend)||(a.availability_segment&&a.availability_segment.event&&a.availability_segment.event.dtstart);
+    const real=(m.managementappointment||[]).filter(isReal);
+    if(real.length<=1)continue;
+    real.sort((a,b)=>(b.id||0)-(a.id||0)); const keep=real[0];
+    for(const a of real.slice(1)){
+      const ds=a.dtstart||(a.availability_segment&&a.availability_segment.event&&a.availability_segment.event.dtstart);
+      console.log('  dedupe '+(m.reference_id||m.id)+': cancel duplicate appt '+a.id+' ('+(ds?pdtDate(ds):'?')+')');
+      if(!DRY) await apiPatch('/api/management-appointments/'+a.id+'/cancel/',sc,csrf,{});
+      removed++;
+    }
+    m.managementappointment=(m.managementappointment||[]).filter(a=>a===keep||!real.includes(a));
+  }
+  if(removed)console.log('Deduped '+removed+' duplicate appointment(s)');
+}
 
 // ── PREFERENCE LOCK (same rules as Tacoma) ──────────────────────────────────────
 function extractPreference(text){
@@ -152,6 +174,17 @@ function findSlotOnDate(busy, durHrs, dateStr, bufferHrs=0.5, minStart=8){
   for(let s=Math.max(8,minStart);s<=17-durHrs;s+=0.25){ const e=s+durHrs; if(!b.some(x=>s<x.end+bufferHrs&&e+bufferHrs>x.start)) return {date:dateStr,startHr:Math.floor(s),startMin:Math.round((s-Math.floor(s))*60),durationHrs:durHrs}; }
   return null;
 }
+// Hard-pinned date (e.g. a date written into the meld TITLE): MUST land on this exact date.
+// Use a clean gap if one exists; otherwise stack right after the last job (the date is non-negotiable).
+function forceSlotOnDate(busy, durHrs, dateStr, bufferHrs=0.5){
+  const clean=findSlotOnDate(busy,durHrs,dateStr,bufferHrs,8);
+  if(clean)return clean;
+  const b=(busy[dateStr]||[]).slice().sort((a,b)=>a.start-b.start);
+  let start=b.length?b[b.length-1].end+bufferHrs:8;
+  if(start+durHrs>18)start=Math.max(8,18-durHrs);   // keep within ~6pm; may abut, but the date is fixed
+  const hr=Math.floor(start),min=Math.round((start-hr)*60);
+  return {date:dateStr,startHr:hr,startMin:min,durationHrs:durHrs};
+}
 function preferredSlot(pref, durHrs, busy, today, bufferHrs=0.5){
   let date=pref.dateStr||(pref.dayName?nextOccurrenceOfDay(pref.dayName,today):null);
   if(!date||date<today)date=nextAvailableDate(today);
@@ -163,11 +196,14 @@ function preferredSlot(pref, durHrs, busy, today, bufferHrs=0.5){
 }
 
 // ── CHAT PARSING (recency-bounded) ──────────────────────────────────────────────
-const RESCHEDULE_KW=/reschedule|different (time|day|date)|can'?t make|not available|won'?t be home|conflict|postpone|push (it|this) back|move (it|this|that) (up|back)|(schedule|come|get|fix)\s+\w*\s*(earlier|sooner)|earlier than|something earlier|any earlier|come (in )?sooner|before (mon|tue|wed|thu|fri|sat|sun|noon)/i;
-const ACCOMMODATE_KW=/available (at|after|before|on)|prefer|better (time|day)|can (you|we) (come|do it)|i'?ll be home|good time|works for me|please come/i;
-const DURATION_KW=/(\d+)\s*(min|minute|minutes|hr|hour)/i;
+const RESCHEDULE_KW=/reschedul|re-?schedul|different (time|day|date)|change (the |my |it |to )?(time|day|date|appointment|appt)|can'?t (make|do|be (home|there|here))|cannot (make|do|be)|won'?t be (home|here|there|available|around|in)|not (available|free|home|gonna be home|going to be home)|unavailable|out of town|out of the office|on (vacation|holiday|leave)|need to (move|change|reschedul|switch|push|delay)|have to (move|change|reschedul|switch|push)|switch (the |to )?(time|day|date|it)|conflict|postpone|delay|push (it|this|back|out|to)|move (it|this|that|my appt|the appt|appointment|the appointment)?\s*(back|up|to|out|earlier|later)?|another (day|time)|some other (day|time)|other (day|time)|reschedul\w* for|come back (a|another|on|later)/i;
+const ACCOMMODATE_KW=/available|i'?m free|i am free|i'?ll be (home|here|available|around|in)|works (for me|better|best)|that works|good time|(would )?prefer|better (time|day|to|if)|can (you|we|someone) (come|do it|make it|stop by|swing by|schedule)|please come|any ?time|only (free|available)|best time|suits me|convenient|whenever (works|you|is)|let'?s do|how about|mornings?|afternoons?|evenings?|before noon|after \d|between \d/i;
+const DURATION_KW=/(\d+)\s*(min|mins|minute|minutes|hr|hrs|hour|hours)\b/i;
+const EARLIER_KW=/\b(earlier|sooner|asap)\b|as soon as possible|any ?sooner|(any|some)thing earlier|move (it|this|that)?\s*up|bump (it|this|that)?\s*up|squeeze (me|us|it|him|her|them)?\s*in|fit (me|us|it|him|her|them)?\s*in|expedite|right away|today if|tomorrow if|this week instead|before (mon|tue|wed|thu|fri|sat|sun|noon|\d|the )|no later than|not (on )?(mon|tue|wed|thu|fri|sat|sun)/i;
 const TIME_KW=/\b(\d{1,2})(?::(\d{2}))?\s*(am|pm)\b/i;
-const DAY_KW=/\b(monday|tuesday|wednesday|thursday|friday|mon|tue|wed|thu|fri)\b/i;
+const DAY_KW=/\b(monday|tuesday|wednesday|thursday|friday|saturday|sunday|mon|tue|wed|thu|fri|sat|sun)\b/i;
+const TOD_KW=[[/\bmornings\b|in the morning|this morning|before noon|forenoon/i,'9:00 am'],[/\bafternoons\b|in the afternoon|this afternoon|after lunch/i,'1:00 pm'],[/\bevenings\b|in the evening|this evening|after work|end of day|\beod\b/i,'4:00 pm']];
+const resolveTimeKW=t=>{const m=TIME_KW.exec(t);if(m)return m[0];for(const [re,v] of TOD_KW)if(re.test(t))return v;return null;};
 function parseChatAction(messages){
   const sorted=messages.slice().sort((a,b)=>(b.created||'').localeCompare(a.created||''));
   for(const msg of sorted.slice(0,10)){
@@ -176,11 +212,10 @@ function parseChatAction(messages){
     const msgDate=(msg.created||'').slice(0,10);
     const dm=DURATION_KW.exec(text);
     if(dm&&isAgent){ const num=parseFloat(dm[1]); const hrs=dm[2].toLowerCase().startsWith('h')?num:num/60; return {action:'shorten',durationHrs:hrs,note:text.slice(0,80),sender,msgDate}; }
-    if(RESCHEDULE_KW.test(text)){ const d=DAY_KW.exec(text),t=TIME_KW.exec(text);
+    if(RESCHEDULE_KW.test(text)||EARLIER_KW.test(text)){ const d=DAY_KW.exec(text); const earlier=EARLIER_KW.test(text);
       // "earlier/sooner/before X / not X" → move to EARLIEST; the mentioned day is to AVOID, not target.
-      const earlier=/earlier|sooner|before (mon|tue|wed|thu|fri|sat|sun|noon)|no later than|not (on )?(mon|tue|wed|thu|fri|sat|sun)/i.test(text);
-      return {action:'reschedule',requestedDay:earlier?null:(d?d[1]:null),requestedTime:earlier?null:(t?t[0]:null),isTenant,note:text.slice(0,80),sender,msgDate}; }
-    if(isTenant&&ACCOMMODATE_KW.test(text)){ const d=DAY_KW.exec(text),t=TIME_KW.exec(text); return {action:'accommodate_resident',requestedDay:d?d[1]:null,requestedTime:t?t[0]:null,note:text.slice(0,80),sender,msgDate}; }
+      return {action:'reschedule',requestedDay:earlier?null:(d?d[1]:null),requestedTime:earlier?null:resolveTimeKW(text),isTenant,note:text.slice(0,80),sender,msgDate}; }
+    if(isTenant&&ACCOMMODATE_KW.test(text)){ const d=DAY_KW.exec(text); const rt=resolveTimeKW(text); if(d||rt) return {action:'accommodate_resident',requestedDay:d?d[1]:null,requestedTime:rt,note:text.slice(0,80),sender,msgDate}; }
   }
   return null;
 }
@@ -224,6 +259,10 @@ async function main(){
     if(!d.next||!d.results||!d.results.length)break; off+=200; } }
   const seen=new Set(); repairs=repairs.filter(m=>{if(seen.has(m.id))return false;seen.add(m.id);return true;});
   for(const t of TECHS){ const s2=new Set(); techAll[t.id]=techAll[t.id].filter(m=>{if(s2.has(m.id))return false;s2.add(m.id);return true;}); }
+
+  // 1b. Collapse duplicate appointments to one per meld (keep newest) BEFORE building busy
+  // calendars, so ghost duplicates can't cause silent double-booking. Mutates the meld objects.
+  for(const t of TECHS) await dedupeAppts(techAll[t.id], sc, csrf);
 
   // 2. Assign/reassign: balance unassigned + non-Spokane-tech melds onto Wade/Justin
   let load={[WADE_ID]:techAll[WADE_ID].length,[JUSTIN_ID]:techAll[JUSTIN_ID].length};
@@ -305,14 +344,21 @@ async function main(){
     // find slot
     let ns=null;
     if(action==='honor_pref'&&pref){
-      ns=preferredSlot(pref,durHrs,tb,today);
-      // If we can't actually land on the stated day/time/date (e.g. that day is full),
-      // the preference is unsatisfiable: drop the lock so it isn't re-tried forever, and
-      // leave an already-scheduled meld where it is (compaction handles it normally).
-      const t=ns?slot(ns.date,ns.startHr,ns.startMin,ns.durationHrs):null;
-      if(!t||!apptMatchesPref({dtstart:t.dtstart},pref)){
-        lockedPrefs.delete(m.id);
-        if(apptEvt){ console.log('  (preference '+JSON.stringify(pref)+' not achievable — leaving as-is)'); continue; }
+      if(pref.dateStr&&pref.dateStr>=today){
+        // HARD DATE from the meld title (e.g. "June 23rd - POST NTE NOTICE") — must land on this
+        // exact date even if it means stacking at end of day. A title date is non-negotiable;
+        // never bounce it to a different day (the old behavior dumped it weeks out + gave up).
+        ns=pref.time?preferredSlot(pref,durHrs,tb,today):null;
+        if(!ns||ns.date!==pref.dateStr) ns=forceSlotOnDate(tb,durHrs,pref.dateStr);
+      } else {
+        // Soft pref (day-name/time only): honor if possible; if the stated slot is unreachable,
+        // drop the lock so it isn't re-tried forever, and leave an already-scheduled meld put.
+        ns=preferredSlot(pref,durHrs,tb,today);
+        const t=ns?slot(ns.date,ns.startHr,ns.startMin,ns.durationHrs):null;
+        if(!t||!apptMatchesPref({dtstart:t.dtstart},pref)){
+          lockedPrefs.delete(m.id);
+          if(apptEvt){ console.log('  (preference '+JSON.stringify(pref)+' not achievable — leaving as-is)'); continue; }
+        }
       }
     }
     if(!ns&&chatAction&&chatAction.action==='accommodate_resident'&&chatAction.requestedDay){ const pd=nextOccurrenceOfDay(chatAction.requestedDay,today); if(pd){ const c=findSlotOnDate(tb,durHrs,pd); if(c)ns=c; } }

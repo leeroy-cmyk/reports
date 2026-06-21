@@ -103,12 +103,17 @@ function parseSchedulingRequest(messages, meldBrief) {
   // Returns { action, requestedDate, requestedTime, durationHint, note } or null
   // action: 'reschedule' | 'accommodate_resident' | 'shorten' | null
 
-  const RESCHEDULE_KEYWORDS = /reschedule|different (time|day|date)|can'?t make|not available|won'?t be home|conflict|postpone|push (it|this) back|move (it|this|that) (up|back)|(schedule|come|get|fix)\s+\w*\s*(earlier|sooner)|earlier than|something earlier|any earlier|come (in )?sooner|before (mon|tue|wed|thu|fri|sat|sun|noon)/i;
-  const ACCOMMODATE_KEYWORDS = /available (at|after|before|on)|prefer|better (time|day)|can (you|we) (come|do it)|i'?ll be home|good time|works for me|please come|sometime (on|around)/i;
-  const SHORTEN_KEYWORDS = /(\d+)\s*(min|minute|minutes|hr|hour)/i;
+  const RESCHEDULE_KEYWORDS = /reschedul|re-?schedul|different (time|day|date)|change (the |my |it |to )?(time|day|date|appointment|appt)|can'?t (make|do|be (home|there|here))|cannot (make|do|be)|won'?t be (home|here|there|available|around|in)|not (available|free|home|gonna be home|going to be home)|unavailable|out of town|out of the office|on (vacation|holiday|leave)|need to (move|change|reschedul|switch|push|delay)|have to (move|change|reschedul|switch|push)|switch (the |to )?(time|day|date|it)|conflict|postpone|delay|push (it|this|back|out|to)|move (it|this|that|my appt|the appt|appointment|the appointment)?\s*(back|up|to|out|earlier|later)?|another (day|time)|some other (day|time)|other (day|time)|reschedul\w* for|come back (a|another|on|later)/i;
+  // Tenant availability/preference — tenant-gated, and only acted on if a day or time is also present.
+  const ACCOMMODATE_KEYWORDS = /available|i'?m free|i am free|i'?ll be (home|here|available|around|in)|works (for me|better|best)|that works|good time|(would )?prefer|better (time|day|to|if)|can (you|we|someone) (come|do it|make it|stop by|swing by|schedule)|please come|any ?time|only (free|available)|best time|suits me|convenient|whenever (works|you|is)|let'?s do|how about|mornings?|afternoons?|evenings?|before noon|after \d|between \d/i;
+  const SHORTEN_KEYWORDS = /(\d+)\s*(min|mins|minute|minutes|hr|hrs|hour|hours)\b/i;
   const TIME_PATTERN = /\b(\d{1,2})(?::(\d{2}))?\s*(am|pm)\b/i;
-  const DAY_PATTERN = /\b(monday|tuesday|wednesday|thursday|friday|saturday|sunday|mon|tue|wed|thu|fri|sat|sun|weekday|weekend)\b/i;
+  const DAY_PATTERN = /\b(monday|tuesday|wednesday|thursday|friday|saturday|sunday|mon|tue|wed|thu|fri|sat|sun)\b/i;
   const NEXT_PATTERN = /\bnext\s+(week|monday|tuesday|wednesday|thursday|friday)\b/i;
+  const EARLIER_KEYWORDS = /\b(earlier|sooner|asap)\b|as soon as possible|any ?sooner|(any|some)thing earlier|move (it|this|that)?\s*up|bump (it|this|that)?\s*up|squeeze (me|us|it|him|her|them)?\s*in|fit (me|us|it|him|her|them)?\s*in|expedite|right away|today if|tomorrow if|this week instead|before (mon|tue|wed|thu|fri|sat|sun|noon|\d|the )|no later than|not (on )?(mon|tue|wed|thu|fri|sat|sun)/i;
+  // time-of-day → concrete start time. Require plural or "the/this" so greetings ("good morning") don't match.
+  const TOD = [[/\bmornings\b|in the morning|this morning|before noon|forenoon/i,'9:00 am'],[/\bafternoons\b|in the afternoon|this afternoon|after lunch/i,'1:00 pm'],[/\bevenings\b|in the evening|this evening|after work|end of day|\beod\b/i,'4:00 pm']];
+  const resolveTime = t => { const m = TIME_PATTERN.exec(t); if (m) return m[0]; for (const [re,v] of TOD) if (re.test(t)) return v; return null; };
 
   // Sort messages by created desc — look at most recent ones first
   const sorted = [...messages].sort((a,b) => b.created.localeCompare(a.created));
@@ -132,19 +137,21 @@ function parseSchedulingRequest(messages, meldBrief) {
       return { action: 'shorten', durationHrs: hrs, note: text, sender: senderName, msgDate: when };
     }
 
-    // Check for reschedule request
-    if (RESCHEDULE_KEYWORDS.test(text)) {
+    // Reschedule request — any reschedule phrasing OR a bare "earlier/sooner/ASAP" ask
+    if (RESCHEDULE_KEYWORDS.test(text) || EARLIER_KEYWORDS.test(text)) {
       const dayMatch = DAY_PATTERN.exec(text);
-      const timeMatch = TIME_PATTERN.exec(text);
       const nextMatch = NEXT_PATTERN.exec(text);
       // "earlier/sooner/before X / not X" = move to the EARLIEST slot — the day mentioned is
       // the one to AVOID, not a target. Don't capture it as a requested day/time.
-      const earlier = /earlier|sooner|before (mon|tue|wed|thu|fri|sat|sun|noon)|no later than|not (on )?(mon|tue|wed|thu|fri|sat|sun)/i.test(text);
+      const earlier = EARLIER_KEYWORDS.test(text);
+      // "can't make / won't be home / not available <day>" — that day is to AVOID, not target.
+      const unavail = /can'?t make|cannot make|won'?t be (home|here|there|available|around|in)|not (available|free|home|here)|unavailable|out of town|out of the office|on (vacation|holiday|leave)|\bbusy\b|conflict/i.test(text);
+      const noTarget = earlier || unavail;
       return {
         action: 'reschedule',
-        requestedDay: earlier ? null : (dayMatch ? dayMatch[1] : null),
-        requestedTime: earlier ? null : (timeMatch ? timeMatch[0] : null),
-        nextWeek: !earlier && !!nextMatch,
+        requestedDay: noTarget ? null : (dayMatch ? dayMatch[1] : null),
+        requestedTime: noTarget ? null : resolveTime(text),
+        nextWeek: !noTarget && !!nextMatch,
         isFromTenant,
         note: text,
         sender: senderName,
@@ -152,18 +159,21 @@ function parseSchedulingRequest(messages, meldBrief) {
       };
     }
 
-    // Check for resident time preference
+    // Check for resident time preference — only actionable if a day or time is present
+    // (prevents "good morning!" / "thanks" from triggering a needless move).
     if (isFromTenant && ACCOMMODATE_KEYWORDS.test(text)) {
-      const timeMatch = TIME_PATTERN.exec(text);
+      const requestedTime = resolveTime(text);
       const dayMatch = DAY_PATTERN.exec(text);
-      return {
-        action: 'accommodate_resident',
-        requestedDay: dayMatch ? dayMatch[1] : null,
-        requestedTime: timeMatch ? timeMatch[0] : null,
-        note: text,
-        sender: senderName,
-        msgDate: when
-      };
+      if (dayMatch || requestedTime) {
+        return {
+          action: 'accommodate_resident',
+          requestedDay: dayMatch ? dayMatch[1] : null,
+          requestedTime,
+          note: text,
+          sender: senderName,
+          msgDate: when
+        };
+      }
     }
   }
   return null;
