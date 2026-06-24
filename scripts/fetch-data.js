@@ -426,12 +426,18 @@ function buildTurnCosts() {
     }
   }
 
-  // Add estimates from AppFolio work orders
+  // Add estimates from AppFolio work orders.
+  // A turn estimate lives on the 'Unit Turn' WO, but it is frequently ALSO
+  // present on an 'Internal' "Turn Estimate - For Approval/Approved" WO for
+  // the same unit. Summing both work-order types double-counts the estimate.
+  // So: use the Unit Turn estimate(s) when present, and only fall back to
+  // Internal turn-estimate WOs for units that have no Unit Turn WO yet.
+  // Non-turn Internal WOs are ignored (must mention "turn" in the description).
   const woPath = path.join(DATA_DIR, 'workorders.json');
   if (fs.existsSync(woPath)) {
     const wo = JSON.parse(fs.readFileSync(woPath, 'utf8'));
+    const turnEst = {}, internalEst = {};
     for (const r of (wo.rows || [])) {
-      if (!['Unit Turn', 'Internal'].includes(r.work_order_type)) continue;
       const est = parseFloat(r.estimate_amount) || 0;
       if (est <= 0) continue;
       const unitName = (r.unit_name || '').trim();
@@ -439,7 +445,15 @@ function buildTurnCosts() {
       const propMatch = (r.property_name || '').match(/([a-z]{1,3}\d{2,3})/i);
       if (!propMatch) continue;
       const code = propMatch[1].toLowerCase() + '-' + unitName;
-      ensureUnit(code).estimate = Math.round(((units[code].estimate || 0) + est) * 100) / 100;
+      if (r.work_order_type === 'Unit Turn') {
+        turnEst[code] = (turnEst[code] || 0) + est;
+      } else if (r.work_order_type === 'Internal' && /turn/i.test(r.job_description || '')) {
+        internalEst[code] = (internalEst[code] || 0) + est;
+      }
+    }
+    for (const code of new Set([...Object.keys(turnEst), ...Object.keys(internalEst)])) {
+      const est = turnEst[code] != null ? turnEst[code] : internalEst[code];
+      ensureUnit(code).estimate = Math.round(est * 100) / 100;
     }
   }
 
