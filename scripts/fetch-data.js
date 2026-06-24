@@ -488,11 +488,14 @@ function buildToolsSupplies() {
 }
 
 // ── APPLIANCES ────────────────────────────────────────────────────────────────
-// Two strictly separate buckets — never combined:
-//   capex = CapEx appliance PURCHASES (Ramp GL 59000 "CapEX - Appliance" OR
-//           class "r203:CapEx Appliances") + QBT labor classed "CapEx Appliances"
-//   rm    = R&M appliance REPAIRS (class "r203:R&M-Appliance", NOT capex) +
-//           QBT labor classed "R&M-Appliance"
+// Two strictly separate buckets — never combined. CLASS is authoritative:
+//   capex = only items whose class is "CapEx Appliances" (Ramp QuickbooksClass
+//           "r203:CapEx Appliances" or QBT class "r203:CapEx Appliances").
+//   rm    = appliance-related items NOT classed CapEx Appliances — i.e. class
+//           "r203:R&M-Appliance", plus GL-59000 appliance-account purchases left
+//           at the bare "r203" class (those are repairs, not capital).
+// The GL 59000 ("CapEX - Appliance") account alone does NOT make something CapEx;
+// without the explicit "CapEx Appliances" class it is treated as R&M.
 // Each line item carries a description of the appliance (Ramp memo/merchant or QBT note).
 const APPL_WAGE_MAP = {
   'leeroy':50.00,'hippen':28.44,'hoard':27.00,'lakins':24.00,'leonides':25.00,
@@ -531,9 +534,14 @@ function buildAppliances() {
       const cls   = cats.find(c => c.tracking_category_remote_id === 'QuickbooksClass')?.category_name || '';
       const dept  = cats.find(c => c.tracking_category_remote_id === 'QuickbooksDepartment')?.category_name || '';
 
-      const isCapex = gl === '59000' || cls === 'r203:CapEx Appliances';
-      const isRM    = !isCapex && cls === 'r203:R&M-Appliance';
-      if (!isCapex && !isRM) continue;
+      // CLASS is authoritative for CapEx — the GL account alone is NOT enough.
+      // GL 59000 ("CapEX - Appliance") includes many tx left at the bare "r203"
+      // class; those are NOT capital appliances, so they fall to R&M.
+      // Appliance universe = the appliance GL account OR an appliance class.
+      const inAppliance = gl === '59000' || cls === 'r203:CapEx Appliances' || cls === 'r203:R&M-Appliance';
+      if (!inAppliance) continue;
+      const isCapex = cls === 'r203:CapEx Appliances';
+      const isRM    = !isCapex; // appliance-related but not classed CapEx Appliances → R&M
 
       const prop = applPropCode(dept);
       if (!prop) continue;
