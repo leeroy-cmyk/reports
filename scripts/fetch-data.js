@@ -404,8 +404,13 @@ function buildTurnCosts() {
       if (wage === undefined) continue;
       empName = raw;
     }
-    const cat = qbtToCat(t.customfields?.['25056'] || '');
-    if (cat !== 'Turn' && cat !== 'CapEx') continue; // Turn + CapEx Turn labor
+    const cls = t.customfields?.['25056'] || '';
+    const sub = cls.includes(':') ? cls.split(':').slice(1).join(':') : '';
+    // Turn + CapEx Turns ONLY. Do NOT use qbtToCat here — it collapses every
+    // CapEx class (Appliances, Discretionary, Non-Discretionary) to 'CapEx',
+    // which would wrongly count non-turn capital labor as turn cost.
+    if (sub !== 'Turn' && sub !== 'CapEx Turns') continue;
+    const cat = sub === 'Turn' ? 'Turn' : 'CapEx';
     const hrs = Math.round(t.duration / 3600 * 100) / 100;
     ensureUnit(unitCode).labor.push({ d: t.date, emp: empName, hrs, cost: Math.round(hrs * wage * 100) / 100, cat });
   }
