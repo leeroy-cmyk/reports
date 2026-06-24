@@ -1238,32 +1238,32 @@ function buildCostDetailHtml(r) {
 let filteredCostsRows = [];
 
 function buildPropSummaryTable() {
+  // Completed turns ONLY — a turn that finished (Complete or Occupied) and
+  // actually incurred cost in the period. This keeps estimate vs. spent
+  // apples-to-apples: we only credit the estimate for turns that happened,
+  // not for units still occupied / on notice / mid-turn.
   const props = {};
   costsRows.forEach(r => {
-    if (!props[r.prop]) props[r.prop] = { active:0, complete:0, completeCosts:[], totalLabor:0, totalMats:0, total:0, totalEst:0 };
+    const isCompleted = (r.status === 'Complete' || r.status === 'Occupied') && r.total > 0;
+    if (!isCompleted) return;
+    if (!props[r.prop]) props[r.prop] = { complete:0, totalEst:0, totalSpent:0 };
     const p = props[r.prop];
-    if (r.status === 'Active') p.active++;
-    if ((r.status === 'Complete' || r.status === 'Occupied') && r.total > 0) { p.complete++; p.completeCosts.push(r.total); }
-    p.totalLabor += r.totalLabor;
-    p.totalMats  += r.totalMats;
-    p.total      += r.total;
+    p.complete++;
     p.totalEst   += r.estimate || 0;
+    p.totalSpent += r.total;
   });
 
-  const rows = Object.entries(props).sort((a,b) => b[1].total - a[1].total).map(([prop, p]) => {
-    const avg   = p.completeCosts.length ? p.completeCosts.reduce((s,c)=>s+c,0)/p.completeCosts.length : 0;
-    const delta = p.totalEst > 0 ? p.totalEst - p.total : null;
-    const deltaHtml = delta === null ? '—'
+  const rows = Object.entries(props).sort((a,b) => b[1].totalSpent - a[1].totalSpent).map(([prop, p]) => {
+    const avg   = p.complete ? p.totalSpent / p.complete : 0;
+    const delta = p.totalEst > 0 ? p.totalEst - p.totalSpent : null;
+    const deltaHtml = delta === null ? '<span style="color:#bdc3c7">—</span>'
       : `<span style="color:${delta >= 0 ? '#1e8449' : '#c0392b'};font-weight:600">${delta >= 0 ? '+' : ''}${fmtC(delta)}</span>`;
     return `<tr>
       <td><strong>${prop}</strong></td>
-      <td>${p.active > 0 ? `<span class="badge cost-active">${p.active}</span>` : '—'}</td>
-      <td>${p.complete > 0 ? `<span class="badge cost-complete">${p.complete}</span>` : '—'}</td>
-      <td>${avg > 0 ? fmtC(avg) : '—'}</td>
-      <td>${p.totalLabor > 0 ? fmtC(p.totalLabor) : '—'}</td>
-      <td>${p.totalMats > 0 ? fmtC(p.totalMats) : '—'}</td>
-      <td><strong>${p.total > 0 ? fmtC(p.total) : '—'}</strong></td>
-      <td>${p.totalEst > 0 ? fmtC(p.totalEst) : '—'}</td>
+      <td><span class="badge cost-complete">${p.complete}</span></td>
+      <td>${p.totalEst > 0 ? fmtC(p.totalEst) : '<span style="color:#bdc3c7">—</span>'}</td>
+      <td><strong>${fmtC(p.totalSpent)}</strong></td>
+      <td>${fmtC(avg)}</td>
       <td>${deltaHtml}</td>
     </tr>`;
   }).join('');
@@ -1271,11 +1271,10 @@ function buildPropSummaryTable() {
   return `<div style="overflow-x:auto;border:1px solid #d0dce8;border-radius:8px;margin-bottom:24px;">
     <table class="prop-table">
       <thead><tr>
-        <th>Property</th><th>Active Turns</th><th>Completed w/ Costs</th>
-        <th>Avg Cost / Turn</th><th>Labor</th><th>Materials</th><th>Actual</th>
-        <th>Estimate</th><th>Δ Est − Actual</th>
+        <th>Property</th><th>Turns Complete</th><th>Estimate</th>
+        <th>Spent</th><th>Avg / Completed</th><th>Δ Est − Spent</th>
       </tr></thead>
-      <tbody>${rows || '<tr><td colspan="9" style="text-align:center;padding:16px;color:#7f8fa4;">No data</td></tr>'}</tbody>
+      <tbody>${rows || '<tr><td colspan="6" style="text-align:center;padding:16px;color:#7f8fa4;">No turns completed in this period</td></tr>'}</tbody>
     </table>
   </div>`;
 }
@@ -1399,7 +1398,8 @@ function buildCostsTab() {
 
   el.innerHTML = `
     <div class="kpi-grid">${kpiHtml}</div>
-    <div class="section-title">Cost by Property</div>
+    <div class="section-title">Completed Turns by Property</div>
+    <div style="font-size:0.78rem;color:#7f8fa4;margin:-6px 0 10px;">Only turns completed in this period — estimate vs. spent is apples-to-apples (active/notice/occupied units excluded).</div>
     ${buildPropSummaryTable()}
     <div class="section-title" style="margin-top:24px;">Unit Detail</div>
     <div class="controls" style="margin-bottom:12px;">
