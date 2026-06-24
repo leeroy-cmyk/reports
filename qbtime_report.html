@@ -130,7 +130,7 @@
 <div class="header">
   <div>
     <h1>Budget vs Actuals — McKay Property Management</h1>
-    <div class="sub">Labor (QBT timecards) + Ramp card purchases vs AppFolio Budget · Vendor invoices not included</div>
+    <div class="sub">Labor (QBT timecards) + Ramp card purchases + Ramp vendor bills vs AppFolio Budget</div>
   </div>
   <div class="header-right">
     <span class="as-of" id="asOf"></span>
@@ -155,6 +155,8 @@
 
   <div class="cards" id="cards"></div>
 
+  <div id="billsBanner" style="display:none"></div>
+
   <div class="tabs">
     <div class="tab active" onclick="showTab('bva')">Budget vs Actuals</div>
     <div class="tab" onclick="showTab('charts')">Property Charts</div>
@@ -174,8 +176,10 @@
 <script>
 let RAW_QBT      = null;
 let RAW_RAMP     = null;
+let RAW_BILLS    = null;
 let RAW_BUDGET   = null;
 let BUDGET_CODES = new Set();
+let BILLS_SUMMARY = { total: 0, unassigned: 0 };  // bills folded into actuals this period
 let BUDGET_MODE  = 'mtd';   // 'mtd' | 'monthly' | 'ytd' | 'custom'
 let PERIOD_FROM  = '';
 let PERIOD_TO    = '';
@@ -205,6 +209,10 @@ function propCode(str) {
   if (!str) return null;
   const m = str.match(/([a-z]{1,3}\d{2,3})/i);
   return m ? m[1].toLowerCase() : null;
+}
+
+function propLabel(p) {
+  return p === 'UNASSIGNED' ? 'Unassigned (vendor bills)' : p;
 }
 
 function getRampPropCode(tx) {
@@ -336,6 +344,7 @@ function varHtml(budget, actual) {
 function buildActuals() {
   const actuals = {};
   const init = () => ({ 'R&M': 0, 'Turn': 0, 'Grounds': 0, 'Unclassified': 0 });
+  BILLS_SUMMARY = { total: 0, unassigned: 0 };
 
   // QBT labor — include ALL valid employees with a recognized property
   if (RAW_QBT) {
@@ -366,6 +375,22 @@ function buildActuals() {
       if (!cls) return; // non-maintenance account — exclude
       if (!actuals[pCode]) actuals[pCode] = init();
       actuals[pCode][cls] += tx.amt;
+    });
+  }
+
+  // Ramp vendor bills (Bill Pay) — GL-account category, property from QuickbooksDepartment.
+  // Bills without a property code are bucketed under 'UNASSIGNED' (surfaced via banner).
+  if (RAW_BILLS) {
+    RAW_BILLS.bills.forEach(b => {
+      if (!b.d || b.d < PERIOD_FROM || b.d > PERIOD_TO) return;
+      const cls = RAMP_ACCT_CAT[b.gl];
+      if (!cls) return; // non-maintenance / CapEx / untagged GL — exclude
+      let pCode = propCode(b.dept && b.dept.includes(':') ? b.dept.split(':')[0].trim() : b.dept);
+      if (!pCode || !BUDGET_CODES.has(pCode)) pCode = 'UNASSIGNED';
+      if (!actuals[pCode]) actuals[pCode] = init();
+      actuals[pCode][cls] += b.amt;
+      BILLS_SUMMARY.total += b.amt;
+      if (pCode === 'UNASSIGNED') BILLS_SUMMARY.unassigned += b.amt;
     });
   }
 
@@ -410,7 +435,7 @@ function render() {
   document.getElementById('asOf').textContent = _d ? ('Updated ' + _d.toLocaleDateString('en-US', {month:'short',day:'numeric',year:'numeric'}) + ' · ' + _d.toLocaleTimeString('en-US', {hour:'numeric',minute:'2-digit'})) : '—';
   document.getElementById('cards').innerHTML = [
     { c: 'c-blue',   label: 'Total Budget',   val: fmt(grandTotalBgt),  sub: budgetPeriodLabel() + ' · R&M + Turn + Grounds' },
-    { c: 'c-orange', label: 'Total Actual',   val: fmt(grandTotalAct),  sub: 'R&M + Turn + Grounds (labor + materials)' },
+    { c: 'c-orange', label: 'Total Actual',   val: fmt(grandTotalAct),  sub: 'R&M + Turn + Grounds (labor + materials + vendor bills)' },
     { c: totVar >= 0 ? 'c-green' : 'c-red',  label: 'Variance',
       val: (totVar >= 0 ? '▼ ' : '▲ ') + fmt(Math.abs(totVar)),
       sub: totPct !== null ? totPct + '% of budget used' : '—' },
@@ -418,6 +443,18 @@ function render() {
   ].map(({ c, label, val, sub }) =>
     `<div class="card ${c}"><div class="card-label">${label}</div><div class="card-value">${val}</div><div class="card-sub">${sub}</div></div>`
   ).join('');
+
+  // VENDOR BILLS BANNER
+  const billsBanner = document.getElementById('billsBanner');
+  if (BILLS_SUMMARY.total > 0) {
+    const unTxt = BILLS_SUMMARY.unassigned > 0
+      ? ` Of that, <strong>${fmt(BILLS_SUMMARY.unassigned)}</strong> isn't property-coded in Ramp yet — it appears in the <em>Unassigned (vendor bills)</em> row below and is excluded from the property charts.`
+      : '';
+    billsBanner.style.cssText = 'display:block;margin:0 0 16px;padding:11px 16px;border-radius:8px;background:#eaf3fb;border:1px solid #b9d6ef;border-left:4px solid #2e86c1;color:#1a5276;font-size:13px;line-height:1.45';
+    billsBanner.innerHTML = `🧾 Actuals include <strong>${fmt(BILLS_SUMMARY.total)}</strong> in Ramp vendor bills for this period (drafts + submitted).${unTxt}`;
+  } else {
+    billsBanner.style.display = 'none';
+  }
 
   // BVA TABLE
   const bgtPeriod = budgetPeriodLabel();
@@ -451,8 +488,8 @@ function render() {
      <td class="act-val tot-act">${act > 0 ? fmt(act) : '—'}</td>
      <td class="tot-var">${varHtml(bgt, act)}</td>`;
 
-  const tbody = '<tbody>' + rows.map(r => `<tr>
-    <td class="prop-name">${r.p}</td>
+  const tbody = '<tbody>' + rows.map(r => `<tr${r.p === 'UNASSIGNED' ? ' class="unassigned-row"' : ''}>
+    <td class="prop-name">${propLabel(r.p)}</td>
     ${catCell(r.bgt['R&M'],    r.act['R&M'],    true)}
     ${catCell(r.bgt['Turn'],   r.act['Turn'],   hasTurnBgt)}
     ${catCell(r.bgt['Grounds'],r.act['Grounds'],hasGroundsBgt)}
@@ -471,7 +508,7 @@ function render() {
 
   // PROPERTY CHARTS
   const CHART_MAIN = ['R&M', 'Turn', 'Grounds'];
-  const propHtml = rows.map(r => {
+  const propHtml = rows.filter(r => r.p !== 'UNASSIGNED').map(r => {
     const catRows = [...CHART_MAIN, ...(r.act['Unclassified'] > 0 ? ['Unclassified'] : [])].map(cat => {
       const act = r.act[cat];
       const bgt = r.bgt[cat];
@@ -520,15 +557,17 @@ async function loadData() {
   const err  = document.getElementById('errorBar');
   over.classList.remove('hidden'); err.classList.remove('show');
   try {
-    const [qbtRes, rampRes, budgetRes] = await Promise.all([
+    const [qbtRes, rampRes, billsRes, budgetRes] = await Promise.all([
       fetch('./data/qbtime.json'),
       fetch('./data/ramp_processed.json'),
+      fetch('./data/ramp_bills.json').catch(() => null),
       fetch('./data/budget.json'),
     ]);
     if (!qbtRes.ok) throw new Error('qbtime.json ' + qbtRes.status);
     RAW_QBT = await qbtRes.json();
     if (!RAW_QBT.ok) throw new Error(RAW_QBT.error || 'Bad QBT data');
     if (rampRes.ok)   RAW_RAMP   = await rampRes.json();
+    if (billsRes && billsRes.ok) RAW_BILLS = await billsRes.json();
     if (budgetRes.ok) {
       RAW_BUDGET   = await budgetRes.json();
       BUDGET_CODES = new Set(RAW_BUDGET.properties.map(p => propCode(p.property_name)).filter(Boolean));
