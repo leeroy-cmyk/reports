@@ -363,6 +363,15 @@ function extractUnitCode(propField) {
   return unit.includes('-') ? unit : null; // must be "propcode-unitnum" format
 }
 
+// Property code from a property/dept field, whether or not it carries a unit.
+// Handles "Region:propcode-unit", "propcode (123)", "propcode-unit", etc.
+function extractPropCode(propField) {
+  if (!propField) return null;
+  const seg = propField.includes(':') ? propField.slice(propField.lastIndexOf(':') + 1) : propField;
+  const m = seg.match(/([a-z]{1,3}\d{2,3})/i);
+  return m ? m[1].toLowerCase() : null;
+}
+
 function qbtToCat(cls) {
   if (!cls || !cls.includes(':')) return null;
   const sub = cls.split(':').slice(1).join(':');
@@ -380,6 +389,15 @@ function buildTurnCosts() {
   console.log('Building turn_costs.json...');
   const qbt = JSON.parse(fs.readFileSync(qbtPath, 'utf8'));
   const units = {};
+  // Property-level rollup of ALL turn spend (unit-tagged AND property-only),
+  // daily-bucketed so the dashboard can filter by any period. Captures turn
+  // spend coded to a property without a unit, which the per-unit map drops.
+  const propSpend = {};
+  function addPropSpend(pc, kind, date, amt) {
+    if (!pc || !date) return;
+    const p = propSpend[pc] || (propSpend[pc] = { labor: {}, materials: {} });
+    p[kind][date] = Math.round(((p[kind][date] || 0) + amt) * 100) / 100;
+  }
 
   function ensureUnit(code) {
     if (!units[code]) {
@@ -391,8 +409,6 @@ function buildTurnCosts() {
 
   for (const t of Object.values(qbt.timesheets || {})) {
     if (t.type !== 'regular') continue;
-    const unitCode = extractUnitCode(t.customfields?.['25068']);
-    if (!unitCode) continue;
     const u = qbt.users?.[t.user_id];
     if (!u) continue;
     const raw = (u.display_name || '').trim();
@@ -412,17 +428,21 @@ function buildTurnCosts() {
     if (sub !== 'Turn' && sub !== 'CapEx Turns') continue;
     const cat = sub === 'Turn' ? 'Turn' : 'CapEx';
     const hrs = Math.round(t.duration / 3600 * 100) / 100;
-    ensureUnit(unitCode).labor.push({ d: t.date, emp: empName, hrs, cost: Math.round(hrs * wage * 100) / 100, cat });
+    const cost = Math.round(hrs * wage * 100) / 100;
+    const propField = t.customfields?.['25068'];
+    addPropSpend(extractPropCode(propField), 'labor', t.date, cost); // all turn labor, unit or not
+    const unitCode = extractUnitCode(propField);
+    if (unitCode) ensureUnit(unitCode).labor.push({ d: t.date, emp: empName, hrs, cost, cat });
   }
 
   if (fs.existsSync(rampPath)) {
     const ramp = JSON.parse(fs.readFileSync(rampPath, 'utf8'));
     for (const tx of (ramp.transactions || [])) {
-      const unitCode = extractUnitCode(tx.dept);
-      if (!unitCode) continue;
       const cat = TC_RAMP_CATS[tx.gl];
       if (cat !== 'Turn' && cat !== 'CapEx') continue; // Turn + CapEx Turn materials
-      ensureUnit(unitCode).materials.push({ d: tx.d, amt: tx.amt, cat, ln: tx.ln });
+      addPropSpend(extractPropCode(tx.dept), 'materials', tx.d, tx.amt); // all turn materials, unit or not
+      const unitCode = extractUnitCode(tx.dept);
+      if (unitCode) ensureUnit(unitCode).materials.push({ d: tx.d, amt: tx.amt, cat, ln: tx.ln });
     }
   }
 
@@ -462,8 +482,8 @@ function buildTurnCosts() {
     u.materials.sort((a, b) => b.d.localeCompare(a.d));
   }
 
-  save('turn_costs.json', { ok: true, fetched_at: qbt.fetched_at, units });
-  console.log('turn_costs.json: ' + Object.keys(units).length + ' units');
+  save('turn_costs.json', { ok: true, fetched_at: qbt.fetched_at, units, propSpend });
+  console.log('turn_costs.json: ' + Object.keys(units).length + ' units, ' + Object.keys(propSpend).length + ' properties');
 }
 
 // ── TOOLS & SUPPLIES ─────────────────────────────────────────────────────────
