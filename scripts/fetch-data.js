@@ -489,13 +489,11 @@ function buildToolsSupplies() {
 
 // ── APPLIANCES ────────────────────────────────────────────────────────────────
 // Two strictly separate buckets — never combined. CLASS is authoritative:
-//   capex = only items whose class is "CapEx Appliances" (Ramp QuickbooksClass
-//           "r203:CapEx Appliances" or QBT class "r203:CapEx Appliances").
-//   rm    = appliance-related items NOT classed CapEx Appliances — i.e. class
-//           "r203:R&M-Appliance", plus GL-59000 appliance-account purchases left
-//           at the bare "r203" class (those are repairs, not capital).
-// The GL 59000 ("CapEX - Appliance") account alone does NOT make something CapEx;
-// without the explicit "CapEx Appliances" class it is treated as R&M.
+//   capex = only items whose class is exactly "CapEx Appliances".
+//   rm    = items whose class is exactly "R&M-Appliance", OR items that are
+//           UNCLASSIFIED ("r203" only / blank class) AND whose note/memo names an
+//           actual appliance. Unclassified items with no appliance mention are
+//           dropped — the GL account alone never qualifies anything.
 // Each line item carries a description of the appliance (Ramp memo/merchant or QBT note).
 const APPL_WAGE_MAP = {
   'leeroy':50.00,'hippen':28.44,'hoard':27.00,'lakins':24.00,'leonides':25.00,
@@ -503,6 +501,19 @@ const APPL_WAGE_MAP = {
   'saldana':28.40,'sanchez':25.50,'uttke':34.00,'chavez':27.00,'cramer':25.75,
   'deckard':22.00,'dunlap':23.00,'gutierrez':25.00,'higley':31.99,
 };
+// Note/memo mentions an actual appliance — used to rescue UNCLASSIFIED ("r203"
+// only) items into R&M. Explicitly-classed items don't need this.
+const APPLIANCE_RE = /\b(appliances?|refrigerator|fridge|freezer|stove|oven|range|dishwasher|washer|dryer|microwave|disposal|air ?condition\w*|conditioner|ptac|a\/c)\b/i;
+
+// Classify by class + note → 'capex', 'rm', or null (exclude).
+function applianceBucket(cls, note) {
+  cls = cls || '';
+  if (cls === 'r203:CapEx Appliances') return 'capex';
+  if (cls === 'r203:R&M-Appliance')    return 'rm';
+  const sub = cls.includes(':') ? cls.split(':').slice(1).join(':').trim() : '';
+  if (sub === '' && APPLIANCE_RE.test(note || '')) return 'rm'; // unclassified but note names an appliance
+  return null;
+}
 
 function applPropCode(str) {
   if (!str) return null;
@@ -530,18 +541,12 @@ function buildAppliances() {
     if (ra) fetched_at = ra;
     for (const t of transactions) {
       const cats  = t.accounting_categories || [];
-      const gl    = cats.find(c => c.tracking_category_remote_id === 'QuickbooksCategory')?.category_id || null;
       const cls   = cats.find(c => c.tracking_category_remote_id === 'QuickbooksClass')?.category_name || '';
       const dept  = cats.find(c => c.tracking_category_remote_id === 'QuickbooksDepartment')?.category_name || '';
 
-      // CLASS is authoritative for CapEx — the GL account alone is NOT enough.
-      // GL 59000 ("CapEX - Appliance") includes many tx left at the bare "r203"
-      // class; those are NOT capital appliances, so they fall to R&M.
-      // Appliance universe = the appliance GL account OR an appliance class.
-      const inAppliance = gl === '59000' || cls === 'r203:CapEx Appliances' || cls === 'r203:R&M-Appliance';
-      if (!inAppliance) continue;
-      const isCapex = cls === 'r203:CapEx Appliances';
-      const isRM    = !isCapex; // appliance-related but not classed CapEx Appliances → R&M
+      const bucket = applianceBucket(cls, t.memo);
+      if (!bucket) continue;
+      const isCapex = bucket === 'capex';
 
       const prop = applPropCode(dept);
       if (!prop) continue;
@@ -567,9 +572,9 @@ function buildAppliances() {
     for (const t of Object.values(qbt.timesheets || {})) {
       if (t.type !== 'regular') continue;
       const cls = t.customfields?.['25056'] || '';
-      const isCapex = cls === 'r203:CapEx Appliances';
-      const isRM    = cls === 'r203:R&M-Appliance';
-      if (!isCapex && !isRM) continue;
+      const bucket = applianceBucket(cls, t.notes);
+      if (!bucket) continue;
+      const isCapex = bucket === 'capex';
 
       const prop = applPropCode(t.customfields?.['25068']);
       if (!prop) continue;
