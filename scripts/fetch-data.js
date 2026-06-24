@@ -195,9 +195,9 @@ async function fetchQBTime() {
 const RAMP_CLIENT_ID     = process.env.RAMP_CLIENT_ID;
 const RAMP_CLIENT_SECRET = process.env.RAMP_CLIENT_SECRET;
 
-function fetchRampToken() {
+function fetchRampToken(scope = 'transactions:read') {
   return new Promise((resolve, reject) => {
-    const body = 'grant_type=client_credentials&scope=transactions:read';
+    const body = 'grant_type=client_credentials&scope=' + encodeURIComponent(scope);
     const auth = Buffer.from(RAMP_CLIENT_ID + ':' + RAMP_CLIENT_SECRET).toString('base64');
     const req = https.request({
       hostname: 'api.ramp.com', path: '/developer/v1/token', method: 'POST',
@@ -339,6 +339,75 @@ function buildRampProcessed() {
 
   save('ramp_processed.json', { fetched_at, transactions: slim });
   console.log('ramp_processed.json: ' + slim.length + ' transactions (' + (JSON.stringify(slim).length / 1024).toFixed(0) + ' KB)');
+}
+
+// ── RAMP VENDOR BILLS (Bill Pay) ──────────────────────────────────────────────
+// Fetches draft + submitted/paid vendor bills and explodes them to per-line-item
+// records (a bill can split across GL accounts / properties). Property comes from
+// the QuickbooksDepartment field (line-level, else bill-level); GL account number
+// drives the report category. Property is often missing on drafts (it's in the memo)
+// — the report buckets those as "Unassigned".
+async function fetchRampBills() {
+  if (!RAMP_CLIENT_ID || !RAMP_CLIENT_SECRET) { console.log('Ramp credentials not set, skipping bills.'); return; }
+  console.log('Fetching Ramp bills...');
+  const token = await fetchRampToken('bills:read accounting:read');
+
+  const fieldOf = (sels, extId) => {
+    const s = (sels || []).find(x => x.category_info && x.category_info.external_id === extId);
+    return s ? (s.external_code || s.name || null) : null;
+  };
+
+  async function pageAll(base) {
+    let out = [], start = null;
+    while (true) {
+      const qs = new URLSearchParams({ page_size: '100' });
+      if (start) qs.set('start', start);
+      const res = await fetchRamp(token, base + (base.includes('?') ? '&' : '?') + qs.toString());
+      (res.data || []).forEach(b => out.push(b));
+      if (!res.page || !res.page.next) break;
+      start = new URL(res.page.next).searchParams.get('start');
+      await sleep(120);
+    }
+    return out;
+  }
+
+  const drafts    = await pageAll('/developer/v1/bills/drafts');
+  const submitted = await pageAll('/developer/v1/bills');
+
+  // Merge by id (drafts and submitted are distinct objects, but guard anyway)
+  const seen = new Set();
+  const merged = [];
+  [...drafts.map(b => ({ b, draft: true })), ...submitted.map(b => ({ b, draft: false }))].forEach(({ b, draft }) => {
+    if (b.id && seen.has(b.id)) return;
+    if (b.id) seen.add(b.id);
+    merged.push({ b, draft });
+  });
+
+  // Explode to per-line-item records
+  const lines = [];
+  merged.forEach(({ b, draft }) => {
+    if (b.archived_at) return; // skip archived/canceled
+    const topDept = fieldOf(b.accounting_field_selections, 'QuickbooksDepartment');
+    const vendor  = b.vendor_name || b.remote_name || null;
+    const d       = (b.posting_date || b.due_at || b.created_at || '').slice(0, 10) || null;
+    (b.line_items || []).forEach(li => {
+      const conv = li.amount?.minor_unit_conversion_rate || 100;
+      lines.push({
+        d,
+        amt:    (li.amount?.amount || 0) / conv,
+        gl:     fieldOf(li.accounting_field_selections, 'QuickbooksCategory'),
+        dept:   fieldOf(li.accounting_field_selections, 'QuickbooksDepartment') || topDept || null,
+        status: b.status_summary || (draft ? 'DRAFT' : null),
+        draft,
+        vendor,
+        memo:   (li.memo || '').slice(0, 120) || null,
+      });
+    });
+  });
+
+  save('ramp_bills.json', { ok: true, fetched_at: new Date().toISOString(), bills: lines });
+  console.log('ramp_bills.json: ' + lines.length + ' line items from ' + merged.length + ' bills (' +
+    drafts.length + ' draft, ' + submitted.length + ' submitted)');
 }
 
 // ── TURN COSTS ──────────────────────────────────────────────────────────────
@@ -1178,7 +1247,8 @@ async function fetchPMTechMetrics() {
 // FETCH_ONLY env var controls what runs:
 //   'appfolio'       → turnvac + workorders + budget (every 5 min)
 //   'qbt-only'       → QBTime + audit.json only
-//   'ramp-only'      → Ramp only (incremental 60-day window)
+//   'ramp-only'      → Ramp only (incremental 60-day window) + vendor bills
+//   'bills-only'     → Ramp vendor bills only (ramp_bills.json)
 //   'ramp-full'      → Ramp full re-fetch (150 days, ignores existing cache) + processed rebuild
 //   'pm-only'        → PropertyMeld WOs + turns + tech metrics
 //   'pm-tech-only'   → PropertyMeld tech metrics only (pm_tech_metrics.json)
@@ -1191,6 +1261,12 @@ const FETCH_ONLY = process.env.FETCH_ONLY || 'all';
 (async () => {
   if (FETCH_ONLY === 'costs-only') {
     buildTurnCosts();
+    console.log('Done.');
+    return;
+  }
+
+  if (FETCH_ONLY === 'bills-only') {
+    await fetchRampBills();
     console.log('Done.');
     return;
   }
@@ -1287,6 +1363,7 @@ const FETCH_ONLY = process.env.FETCH_ONLY || 'all';
     buildTurnCosts();
     buildToolsSupplies();
     buildAppliances();
+    try { await fetchRampBills(); } catch(e) { console.error('Ramp bills fetch failed (non-fatal):', e.message); }
     console.log('Done.');
     return;
   }
@@ -1317,6 +1394,8 @@ const FETCH_ONLY = process.env.FETCH_ONLY || 'all';
   if (runRamp) {
     try { await fetchRampTransactions(); buildRampProcessed(); buildTurnCosts(); buildToolsSupplies(); buildAppliances(); }
     catch(e) { console.error('Ramp fetch failed:', e.message); if (FETCH_ONLY === 'ramp-only') process.exit(1); }
+    try { await fetchRampBills(); }
+    catch(e) { console.error('Ramp bills fetch failed (non-fatal):', e.message); }
   }
 
   if (runPM) {
