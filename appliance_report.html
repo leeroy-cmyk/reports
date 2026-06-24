@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Appliance Report — McKay</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f4f6f9; color: #2c3e50; min-height: 100vh; }
+
+    header { background: #1a5276; color: white; padding: 20px 32px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px; }
+    .header-left h1 { font-size: 1.5rem; font-weight: 700; }
+    .header-left p  { font-size: 0.8rem; opacity: 0.7; margin-top: 4px; }
+    .updated-chip { font-size: 0.78rem; background: rgba(255,255,255,0.15); padding: 4px 12px; border-radius: 20px; white-space: nowrap; align-self: center; }
+
+    main { max-width: 1120px; margin: 0 auto; padding: 24px; }
+
+    /* Separation banner */
+    .sep-banner { background: #eaf4fb; border: 1px solid #d6eaf8; border-left: 4px solid #2e86c1; border-radius: 8px; padding: 10px 16px; font-size: 0.82rem; color: #1a5276; margin-bottom: 20px; }
+    .sep-banner b { font-weight: 700; }
+
+    /* Period selector */
+    .section-title { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #7f8c8d; margin: 4px 0 10px; }
+    .period-row { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; align-items: center; }
+    .period-chip { background: white; border-radius: 20px; padding: 7px 16px; border: 2px solid #e8ecf0; box-shadow: 0 1px 3px rgba(0,0,0,0.06); cursor: pointer; transition: all 0.14s; user-select: none; font-size: 0.85rem; font-weight: 600; color: #5d6d7e; }
+    .period-chip:hover { border-color: #2e86c1; }
+    .period-chip.active { border-color: #1a5276; background: #1a5276; color: white; }
+    .custom-range { display: flex; gap: 6px; align-items: center; margin-bottom: 22px; font-size: 0.82rem; color: #7f8c8d; flex-wrap: wrap; }
+    .custom-range input[type=date] { font: inherit; font-size: 0.82rem; padding: 5px 8px; border: 1px solid #cdd6df; border-radius: 6px; color: #2c3e50; }
+    .custom-range button { font: inherit; font-size: 0.8rem; font-weight: 600; padding: 6px 14px; border: none; border-radius: 6px; background: #2e86c1; color: white; cursor: pointer; }
+    .custom-range button:hover { background: #1a5276; }
+    .range-note { color: #95a5a6; font-size: 0.78rem; }
+
+    /* Tabs */
+    .tab-bar { display: flex; gap: 6px; margin-bottom: 18px; border-bottom: 2px solid #e3e9ef; }
+    .tab { padding: 11px 22px; cursor: pointer; font-size: 0.92rem; font-weight: 700; color: #95a5a6; border-bottom: 3px solid transparent; margin-bottom: -2px; transition: all 0.14s; user-select: none; }
+    .tab:hover { color: #2e86c1; }
+    .tab.active { color: #1a5276; border-bottom-color: #1a5276; }
+    .tab .tab-amt { font-size: 0.78rem; font-weight: 600; opacity: 0.75; margin-left: 6px; }
+
+    /* Stats */
+    .stats-row { display: flex; gap: 14px; margin-bottom: 24px; flex-wrap: wrap; }
+    .stat-card { background: white; border-radius: 10px; padding: 16px 22px; flex: 1; min-width: 120px; box-shadow: 0 1px 4px rgba(0,0,0,0.07); border: 1px solid #e8ecf0; }
+    .stat-value { font-size: 1.5rem; font-weight: 700; color: #1a5276; line-height: 1; }
+    .stat-value.material { color: #1a5276; }
+    .stat-value.labor    { color: #b9770e; }
+    .stat-label { font-size: 0.72rem; color: #7f8c8d; margin-top: 5px; text-transform: uppercase; letter-spacing: 0.05em; }
+
+    /* Property table */
+    .table-section-title { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #7f8c8d; margin: 20px 0 8px; }
+    .table-wrap { background: white; border-radius: 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.07); overflow: hidden; border: 1px solid #e8ecf0; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.86rem; }
+    th { background: #f8fafc; padding: 10px 14px; text-align: left; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #7f8c8d; border-bottom: 1px solid #e8ecf0; white-space: nowrap; cursor: pointer; user-select: none; }
+    th.num { text-align: right; }
+    th:hover { background: #eef2f7; color: #2e86c1; }
+    th.sort-asc::after  { content: ' ▲'; font-size: 0.65rem; }
+    th.sort-desc::after { content: ' ▼'; font-size: 0.65rem; }
+    th.sort-asc, th.sort-desc { color: #1a5276; background: #eaf4fb; }
+    td { padding: 10px 14px; border-bottom: 1px solid #f0f3f6; vertical-align: middle; }
+    .prop-row { cursor: pointer; }
+    .prop-row:hover td { background: #fafcfe; }
+    .prop-row.open td { background: #eaf4fb; }
+    .prop-code { font-weight: 700; color: #1a5276; text-transform: uppercase; }
+    .caret { display: inline-block; width: 14px; color: #95a5a6; transition: transform 0.12s; }
+    .prop-row.open .caret { transform: rotate(90deg); }
+    .num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .amt-total { font-weight: 700; color: #2c3e50; }
+    .amt-material { color: #1a5276; }
+    .amt-labor    { color: #b9770e; }
+    .muted { color: #bdc3c7; }
+
+    /* Detail rows */
+    .detail-cell { padding: 0 !important; background: #f8fafc; }
+    .detail-inner { padding: 4px 14px 12px 34px; }
+    .detail-table { width: 100%; border-collapse: collapse; font-size: 0.81rem; background: white; border-radius: 8px; overflow: hidden; border: 1px solid #e8ecf0; margin-top: 6px; }
+    .detail-table th { background: #fbfdff; font-size: 0.64rem; padding: 7px 12px; cursor: default; }
+    .detail-table th:hover { background: #fbfdff; color: #7f8c8d; }
+    .detail-table td { padding: 7px 12px; border-bottom: 1px solid #f3f6f9; }
+    .detail-table tr:last-child td { border-bottom: none; }
+    .date-cell { white-space: nowrap; color: #7f8c8d; font-size: 0.78rem; }
+    .type-badge { display: inline-block; border-radius: 20px; padding: 2px 9px; font-size: 0.66rem; font-weight: 700; white-space: nowrap; }
+    .type-badge.material { background: #d6eaf8; color: #1a5276; }
+    .type-badge.labor    { background: #fdebd0; color: #a04000; }
+    .desc-cell { color: #5d6d7e; }
+    .unit-cell { font-weight: 600; color: #34495e; white-space: nowrap; }
+    .who-cell  { color: #7f8c8d; white-space: nowrap; }
+    .empty-msg { padding: 40px; text-align: center; color: #aab; font-size: 0.9rem; }
+
+    .grand-row td { background: #f8fafc; font-weight: 700; border-top: 2px solid #e3e9ef; }
+
+    footer { text-align: center; padding: 28px; font-size: 0.74rem; color: #bdc3c7; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-left">
+    <h1>🔌 Appliance Report</h1>
+    <p>CapEx appliances & R&amp;M appliance repairs — tracked separately · Ramp purchases + QBT labor</p>
+  </div>
+  <div class="updated-chip" id="updated-ts">Loading…</div>
+</header>
+
+<main>
+
+  <div class="sep-banner">
+    <b>CapEx appliances</b> (capital replacements, GL&nbsp;59000 / class&nbsp;“CapEx Appliances”) and
+    <b>R&amp;M appliance repairs</b> (class&nbsp;“R&amp;M-Appliance”) are kept in <b>separate tabs and never combined</b>.
+    Each line shows materials (Ramp, with description) and labor (QBT).
+  </div>
+
+  <div class="section-title">Period</div>
+  <div class="period-row" id="period-row"></div>
+  <div class="custom-range">
+    <span>Custom:</span>
+    <input type="date" id="cr-start"/>
+    <span>to</span>
+    <input type="date" id="cr-end"/>
+    <button onclick="applyCustom()">Apply</button>
+    <span class="range-note" id="range-note"></span>
+  </div>
+
+  <div class="tab-bar">
+    <div class="tab active" id="tab-capex" onclick="setTab('capex')">CapEx Appliances<span class="tab-amt" id="tab-capex-amt"></span></div>
+    <div class="tab" id="tab-rm" onclick="setTab('rm')">R&amp;M Appliance Repairs<span class="tab-amt" id="tab-rm-amt"></span></div>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-card"><div class="stat-value" id="s-total">—</div><div class="stat-label">Total</div></div>
+    <div class="stat-card"><div class="stat-value material" id="s-material">—</div><div class="stat-label">Materials (Ramp)</div></div>
+    <div class="stat-card"><div class="stat-value labor" id="s-labor">—</div><div class="stat-label">Labor (QBT)</div></div>
+    <div class="stat-card"><div class="stat-value" id="s-items">—</div><div class="stat-label">Line Items</div></div>
+    <div class="stat-card"><div class="stat-value" id="s-props">—</div><div class="stat-label">Properties</div></div>
+  </div>
+
+  <div class="table-section-title" id="table-title">By Property</div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th data-col="prop" onclick="sortBy('prop')">Property</th>
+          <th class="num" data-col="material" onclick="sortBy('material')">Materials</th>
+          <th class="num" data-col="labor" onclick="sortBy('labor')">Labor</th>
+          <th class="num" data-col="total" onclick="sortBy('total')">Total</th>
+          <th class="num" data-col="count" onclick="sortBy('count')">Items</th>
+        </tr>
+      </thead>
+      <tbody id="prop-body">
+        <tr><td colspan="5" class="empty-msg">Loading…</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</main>
+<footer>McKay Maintenance &amp; Construction · leeroy-cmyk.github.io/reports</footer>
+
+<script>
+  const FMT = new Intl.NumberFormat('en-US', { style:'currency', currency:'USD', maximumFractionDigits:0 });
+  const FMT2 = new Intl.NumberFormat('en-US', { style:'currency', currency:'USD' });
+  const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const fmt$  = n => FMT.format(n||0);
+  const fmt$2 = n => FMT2.format(n||0);
+  const fmtDate = d => { const [y,m,day]=d.split('-'); return MONTHS[+m-1]+' '+(+day); };
+  const esc = s => (s||'').replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+
+  let DATA = { capex: [], rm: [] };
+  let curTab    = 'capex';
+  let curPeriod = 'ytd';
+  let crStart = null, crEnd = null;       // custom range strings YYYY-MM-DD
+  let sortCol = 'total', sortDir = 'desc';
+  let openProps = new Set();
+
+  // ── Period boundaries ────────────────────────────────────────────────────────
+  function pad(n){ return String(n).padStart(2,'0'); }
+  function iso(d){ return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate()); }
+  function periodRange() {
+    const now = new Date();
+    const y = now.getFullYear(), m = now.getMonth();
+    switch (curPeriod) {
+      case 'month': return [y+'-'+pad(m+1)+'-01', iso(now)];
+      case 'lastmonth': {
+        const s = new Date(y, m-1, 1), e = new Date(y, m, 0);
+        return [iso(s), iso(e)];
+      }
+      case 'ytd':   return [y+'-01-01', iso(now)];
+      case '12mo':  { const s = new Date(now); s.setDate(s.getDate()-365); return [iso(s), iso(now)]; }
+      case 'all':   return [null, null];
+      case 'custom': return [crStart, crEnd];
+      default:      return [null, null];
+    }
+  }
+  const PERIODS = [
+    { key:'month',     label:'This Month' },
+    { key:'lastmonth', label:'Last Month' },
+    { key:'ytd',       label:'YTD' },
+    { key:'12mo',      label:'Last 12 Mo' },
+    { key:'all',       label:'All' },
+  ];
+
+  function inRange(dateStr) {
+    const [s,e] = periodRange();
+    if (s && dateStr < s) return false;
+    if (e && dateStr > e) return false;
+    return true;
+  }
+
+  function rows() { return (DATA[curTab] || []).filter(r => inRange(r.date)); }
+
+  // ── Aggregate by property ────────────────────────────────────────────────────
+  function byProperty(items) {
+    const map = {};
+    items.forEach(r => {
+      const p = r.prop;
+      if (!map[p]) map[p] = { prop:p, material:0, labor:0, total:0, count:0, items:[] };
+      const g = map[p];
+      if (r.type === 'Labor') g.labor += r.amount; else g.material += r.amount;
+      g.total += r.amount;
+      g.count++;
+      g.items.push(r);
+    });
+    return Object.values(map);
+  }
+
+  function sortProps(arr) {
+    const dir = sortDir === 'asc' ? 1 : -1;
+    return [...arr].sort((a,b) => {
+      if (sortCol === 'prop') return a.prop.localeCompare(b.prop) * dir;
+      return (a[sortCol] - b[sortCol]) * dir;
+    });
+  }
+
+  function updateSortHeaders() {
+    document.querySelectorAll('th[data-col]').forEach(th => {
+      const col = th.dataset.col;
+      th.classList.toggle('sort-asc',  col === sortCol && sortDir === 'asc');
+      th.classList.toggle('sort-desc', col === sortCol && sortDir === 'desc');
+    });
+  }
+  function sortBy(col) {
+    if (sortCol === col) sortDir = sortDir === 'asc' ? 'desc' : 'asc';
+    else { sortCol = col; sortDir = col === 'prop' ? 'asc' : 'desc'; }
+    updateSortHeaders();
+    render();
+  }
+
+  // ── Render ───────────────────────────────────────────────────────────────────
+  function render() {
+    const items = rows();
+    const total    = items.reduce((s,r) => s+r.amount, 0);
+    const material = items.filter(r => r.type !== 'Labor').reduce((s,r) => s+r.amount, 0);
+    const labor    = items.filter(r => r.type === 'Labor').reduce((s,r) => s+r.amount, 0);
+    const props    = byProperty(items);
+
+    document.getElementById('s-total').textContent    = fmt$(total);
+    document.getElementById('s-material').textContent = fmt$(material);
+    document.getElementById('s-labor').textContent    = fmt$(labor);
+    document.getElementById('s-items').textContent    = items.length;
+    document.getElementById('s-props').textContent    = props.length;
+
+    // tab totals for current period
+    const capexTot = (DATA.capex||[]).filter(r=>inRange(r.date)).reduce((s,r)=>s+r.amount,0);
+    const rmTot    = (DATA.rm||[]).filter(r=>inRange(r.date)).reduce((s,r)=>s+r.amount,0);
+    document.getElementById('tab-capex-amt').textContent = capexTot ? fmt$(capexTot) : '';
+    document.getElementById('tab-rm-amt').textContent    = rmTot ? fmt$(rmTot) : '';
+
+    document.getElementById('table-title').textContent =
+      (curTab === 'capex' ? 'CapEx Appliances' : 'R&M Appliance Repairs') + ' by Property — ' + props.length + ' propert' + (props.length===1?'y':'ies');
+
+    const body = document.getElementById('prop-body');
+    if (!props.length) {
+      body.innerHTML = '<tr><td colspan="5" class="empty-msg">No appliance ' + (curTab==='capex'?'purchases':'repairs') + ' in this period.</td></tr>';
+      return;
+    }
+    const sorted = sortProps(props);
+    let html = '';
+    sorted.forEach(p => {
+      const open = openProps.has(p.prop);
+      html += `<tr class="prop-row ${open?'open':''}" onclick="toggleProp('${p.prop}')">
+        <td><span class="caret">▶</span><span class="prop-code">${esc(p.prop)}</span></td>
+        <td class="num amt-material">${p.material ? fmt$(p.material) : '<span class="muted">—</span>'}</td>
+        <td class="num amt-labor">${p.labor ? fmt$(p.labor) : '<span class="muted">—</span>'}</td>
+        <td class="num amt-total">${fmt$(p.total)}</td>
+        <td class="num">${p.count}</td>
+      </tr>`;
+      if (open) html += detailRow(p);
+    });
+    // grand total
+    const gMat = props.reduce((s,p)=>s+p.material,0), gLab = props.reduce((s,p)=>s+p.labor,0), gCnt = props.reduce((s,p)=>s+p.count,0);
+    html += `<tr class="grand-row"><td>TOTAL</td>
+      <td class="num">${fmt$(gMat)}</td><td class="num">${fmt$(gLab)}</td>
+      <td class="num">${fmt$(gMat+gLab)}</td><td class="num">${gCnt}</td></tr>`;
+    body.innerHTML = html;
+  }
+
+  function detailRow(p) {
+    const items = [...p.items].sort((a,b) => b.date.localeCompare(a.date));
+    const rowsHtml = items.map(r => {
+      const isLabor = r.type === 'Labor';
+      const desc = r.desc || (isLabor ? '' : '');
+      const merchant = r.merchant ? `<b>${esc(r.merchant)}</b>` : '';
+      const descFull = [merchant, esc(desc)].filter(Boolean).join(' — ') || '<span class="muted">no description</span>';
+      const laborTag = isLabor && r.hrs ? ` <span class="muted">(${r.hrs}h)</span>` : '';
+      return `<tr>
+        <td class="date-cell">${fmtDate(r.date)}</td>
+        <td><span class="type-badge ${isLabor?'labor':'material'}">${isLabor?'Labor':'Material'}</span></td>
+        <td class="unit-cell">${r.unit ? esc(r.unit) : '<span class="muted">—</span>'}</td>
+        <td class="who-cell">${esc(r.who)||'<span class="muted">—</span>'}</td>
+        <td class="desc-cell">${descFull}${laborTag}</td>
+        <td class="num amt-total">${fmt$2(r.amount)}</td>
+      </tr>`;
+    }).join('');
+    return `<tr class="detail-row"><td class="detail-cell" colspan="5"><div class="detail-inner">
+      <table class="detail-table">
+        <thead><tr><th>Date</th><th>Type</th><th>Unit</th><th>Who</th><th>Description</th><th class="num">Amount</th></tr></thead>
+        <tbody>${rowsHtml}</tbody>
+      </table>
+    </div></td></tr>`;
+  }
+
+  function toggleProp(p) {
+    if (openProps.has(p)) openProps.delete(p); else openProps.add(p);
+    render();
+  }
+
+  function setTab(tab) {
+    curTab = tab;
+    openProps.clear();
+    document.getElementById('tab-capex').classList.toggle('active', tab==='capex');
+    document.getElementById('tab-rm').classList.toggle('active', tab==='rm');
+    render();
+  }
+
+  function setPeriod(key) {
+    curPeriod = key;
+    document.querySelectorAll('.period-chip').forEach(c => c.classList.toggle('active', c.dataset.key === key));
+    updateRangeNote();
+    render();
+  }
+  function applyCustom() {
+    const s = document.getElementById('cr-start').value;
+    const e = document.getElementById('cr-end').value;
+    if (!s || !e) { alert('Pick both start and end dates'); return; }
+    crStart = s; crEnd = e; curPeriod = 'custom';
+    document.querySelectorAll('.period-chip').forEach(c => c.classList.remove('active'));
+    updateRangeNote();
+    render();
+  }
+  function updateRangeNote() {
+    const [s,e] = periodRange();
+    const note = document.getElementById('range-note');
+    if (!s && !e) note.textContent = 'Showing all available data';
+    else note.textContent = 'Showing ' + (s?fmtDateFull(s):'start') + ' → ' + (e?fmtDateFull(e):'today');
+  }
+  function fmtDateFull(d){ const [y,m,day]=d.split('-'); return MONTHS[+m-1]+' '+(+day)+', '+y; }
+
+  // ── Init ──────────────────────────────────────────────────────────────────────
+  document.getElementById('period-row').innerHTML = PERIODS.map(p =>
+    `<div class="period-chip ${p.key==='ytd'?'active':''}" data-key="${p.key}" onclick="setPeriod('${p.key}')">${p.label}</div>`
+  ).join('');
+
+  fetch('./data/appliances.json?_=' + Date.now())
+    .then(r => { if (!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
+    .then(data => {
+      DATA.capex = data.capex || [];
+      DATA.rm    = data.rm || [];
+      if (data.fetched_at) {
+        const ts = new Date(data.fetched_at);
+        document.getElementById('updated-ts').textContent =
+          'Updated ' + ts.toLocaleDateString('en-US',{month:'short',day:'numeric'}) +
+          ' · ' + ts.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
+      } else document.getElementById('updated-ts').textContent = '';
+      updateSortHeaders();
+      updateRangeNote();
+      render();
+    })
+    .catch(err => {
+      document.getElementById('updated-ts').textContent = 'Error loading data';
+      document.getElementById('prop-body').innerHTML =
+        `<tr><td colspan="5" class="empty-msg">⚠ Failed to load data: ${err.message}</td></tr>`;
+    });
+</script>
+</body>
+</html>

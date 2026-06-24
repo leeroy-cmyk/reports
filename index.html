@@ -85,6 +85,13 @@
         <span class="badge badge-maintenance">Maintenance</span>
       </a>
 
+      <a class="card" href="appliance_report.html">
+        <div class="card-title">Appliance Report</div>
+        <div class="card-date" id="appliance-date">—</div>
+        <div class="card-desc">CapEx appliances vs R&amp;M appliance repairs per property — kept separate. Ramp purchases (with descriptions) + QBT labor.</div>
+        <span class="badge badge-maintenance">Maintenance</span>
+      </a>
+
       <a class="card" href="team_kpis.html">
         <div class="card-title">Team KPIs</div>
         <div class="card-date" id="team-kpis-date">—</div>
@@ -117,6 +124,13 @@ fetch('./data/ramp_processed.json').then(r=>r.json()).then(d=>{
   }).catch(()=>{});
   fetch('./data/tools_supplies.json').then(r=>r.json()).then(d=>{
     const el = document.getElementById('tools-date');
+    if (el && d.fetched_at) {
+      const ts = new Date(d.fetched_at);
+      el.textContent = ts.toLocaleDateString('en-US', { month:'long', day:'numeric', year:'numeric' });
+    }
+  }).catch(()=>{});
+  fetch('./data/appliances.json').then(r=>r.json()).then(d=>{
+    const el = document.getElementById('appliance-date');
     if (el && d.fetched_at) {
       const ts = new Date(d.fetched_at);
       el.textContent = ts.toLocaleDateString('en-US', { month:'long', day:'numeric', year:'numeric' });

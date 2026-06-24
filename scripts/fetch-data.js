@@ -487,6 +487,121 @@ function buildToolsSupplies() {
   console.log('tools_supplies.json: ' + result.length + ' transactions');
 }
 
+// ── APPLIANCES ────────────────────────────────────────────────────────────────
+// Two strictly separate buckets — never combined:
+//   capex = CapEx appliance PURCHASES (Ramp GL 59000 "CapEX - Appliance" OR
+//           class "r203:CapEx Appliances") + QBT labor classed "CapEx Appliances"
+//   rm    = R&M appliance REPAIRS (class "r203:R&M-Appliance", NOT capex) +
+//           QBT labor classed "R&M-Appliance"
+// Each line item carries a description of the appliance (Ramp memo/merchant or QBT note).
+const APPL_WAGE_MAP = {
+  'leeroy':50.00,'hippen':28.44,'hoard':27.00,'lakins':24.00,'leonides':25.00,
+  'magoon':25.00,'mcquaid':25.00,'miller':28.09,'mitchell':27.00,'robson':23.00,
+  'saldana':28.40,'sanchez':25.50,'uttke':34.00,'chavez':27.00,'cramer':25.75,
+  'deckard':22.00,'dunlap':23.00,'gutierrez':25.00,'higley':31.99,
+};
+
+function applPropCode(str) {
+  if (!str) return null;
+  const m = str.match(/([a-z]{1,3}\d{2,3})/i);
+  return m ? m[1].toLowerCase() : null;
+}
+function applUnit(deptStr) {
+  if (!deptStr) return '';
+  const colon = deptStr.indexOf(':');
+  return colon === -1 ? '' : deptStr.slice(colon + 1).trim();
+}
+
+function buildAppliances() {
+  const rampPath = path.join(DATA_DIR, 'ramp.json');
+  const qbtPath  = path.join(DATA_DIR, 'qbtime.json');
+  console.log('Building appliances.json...');
+
+  const capex = [];   // CapEx - Appliances line items
+  const rm    = [];   // R&M - Appliance line items
+  let fetched_at = new Date().toISOString();
+
+  // ── Ramp materials ──────────────────────────────────────────────────────────
+  if (fs.existsSync(rampPath)) {
+    const { transactions, fetched_at: ra } = JSON.parse(fs.readFileSync(rampPath, 'utf8'));
+    if (ra) fetched_at = ra;
+    for (const t of transactions) {
+      const cats  = t.accounting_categories || [];
+      const gl    = cats.find(c => c.tracking_category_remote_id === 'QuickbooksCategory')?.category_id || null;
+      const cls   = cats.find(c => c.tracking_category_remote_id === 'QuickbooksClass')?.category_name || '';
+      const dept  = cats.find(c => c.tracking_category_remote_id === 'QuickbooksDepartment')?.category_name || '';
+
+      const isCapex = gl === '59000' || cls === 'r203:CapEx Appliances';
+      const isRM    = !isCapex && cls === 'r203:R&M-Appliance';
+      if (!isCapex && !isRM) continue;
+
+      const prop = applPropCode(dept);
+      if (!prop) continue;
+      const item = {
+        date:     t.user_transaction_time.slice(0, 10),
+        prop, unit: applUnit(dept),
+        amount:   t.amount,
+        type:     'Material',
+        source:   'Ramp',
+        merchant: t.merchant_name || '',
+        desc:     (t.memo || '').trim(),
+        who:      ((t.card_holder?.first_name || '') + ' ' + (t.card_holder?.last_name || '')).trim(),
+      };
+      (isCapex ? capex : rm).push(item);
+    }
+  } else {
+    console.log('buildAppliances: ramp.json not found, materials omitted');
+  }
+
+  // ── QBT labor ─────────────────────────────────────────────────────────────
+  if (fs.existsSync(qbtPath)) {
+    const qbt = JSON.parse(fs.readFileSync(qbtPath, 'utf8'));
+    for (const t of Object.values(qbt.timesheets || {})) {
+      if (t.type !== 'regular') continue;
+      const cls = t.customfields?.['25056'] || '';
+      const isCapex = cls === 'r203:CapEx Appliances';
+      const isRM    = cls === 'r203:R&M-Appliance';
+      if (!isCapex && !isRM) continue;
+
+      const prop = applPropCode(t.customfields?.['25068']);
+      if (!prop) continue;
+
+      const u = qbt.users?.[t.user_id];
+      const raw = (u?.display_name || '').trim();
+      let who, wage;
+      if (raw.toLowerCase().includes('outright')) { who = 'LeeRoy'; wage = 50.00; }
+      else {
+        const ln = raw.split(/\s+/).pop().toLowerCase().replace(/[^a-z]/g, '');
+        wage = APPL_WAGE_MAP[ln];
+        if (wage === undefined) continue; // not a field tech with a known rate
+        who = (u.first_name || '') + ' ' + (u.last_name || '');
+      }
+      const hrs = Math.round(t.duration / 3600 * 100) / 100;
+      if (hrs <= 0) continue;
+      const item = {
+        date:     t.date,
+        prop, unit: applUnit(t.customfields?.['25068']),
+        amount:   Math.round(hrs * wage * 100) / 100,
+        hrs,
+        type:     'Labor',
+        source:   'QBT',
+        merchant: '',
+        desc:     (t.notes || '').trim(),
+        who:      who.trim(),
+      };
+      (isCapex ? capex : rm).push(item);
+    }
+  } else {
+    console.log('buildAppliances: qbtime.json not found, labor omitted');
+  }
+
+  capex.sort((a, b) => b.date.localeCompare(a.date));
+  rm.sort((a, b) => b.date.localeCompare(a.date));
+
+  save('appliances.json', { ok: true, fetched_at, capex, rm });
+  console.log('appliances.json: ' + capex.length + ' CapEx appliance + ' + rm.length + ' R&M appliance line items');
+}
+
 const FIREBASE_API_KEY = 'AIzaSyAMAicBq6GIvo7p6s67n0wGoi1zuX21ybw';
 const FIREBASE_PROJECT = 'ridgeview-estimates';
 const FIRESTORE_BASE   = `https://firestore.googleapis.com/v1/projects/${FIREBASE_PROJECT}/databases/(default)/documents`;
@@ -1038,6 +1153,7 @@ const FETCH_ONLY = process.env.FETCH_ONLY || 'all';
     buildAuditData();
     buildTurnCosts();
     buildToolsSupplies();
+    buildAppliances();
     console.log('Done.');
     return;
   }
@@ -1123,6 +1239,7 @@ const FETCH_ONLY = process.env.FETCH_ONLY || 'all';
     buildAuditData();
     buildTurnCosts();
     buildToolsSupplies();
+    buildAppliances();
     console.log('Done.');
     return;
   }
@@ -1151,7 +1268,7 @@ const FETCH_ONLY = process.env.FETCH_ONLY || 'all';
   }
 
   if (runRamp) {
-    try { await fetchRampTransactions(); buildRampProcessed(); buildTurnCosts(); buildToolsSupplies(); }
+    try { await fetchRampTransactions(); buildRampProcessed(); buildTurnCosts(); buildToolsSupplies(); buildAppliances(); }
     catch(e) { console.error('Ramp fetch failed:', e.message); if (FETCH_ONLY === 'ramp-only') process.exit(1); }
   }
 
