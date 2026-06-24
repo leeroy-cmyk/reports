@@ -1237,11 +1237,22 @@ function buildCostDetailHtml(r) {
 
 let filteredCostsRows = [];
 
+// Lifetime spend on a turn = all labor + materials across every period,
+// not just the selected window. Used so estimate vs. spent compares the
+// turn's FULL cost (a turn paid for over May+June isn't shorted in June).
+function lifetimeSpend(code) {
+  const u = RAW_COSTS && RAW_COSTS.units && RAW_COSTS.units[code];
+  if (!u) return 0;
+  const lab = u.labor.reduce((s, e) => s + e.cost, 0);
+  const mat = u.materials.reduce((s, e) => s + e.amt, 0);
+  return lab + mat;
+}
+
 function buildPropSummaryTable() {
   // Completed turns ONLY — a turn that finished (Complete or Occupied) and
-  // actually incurred cost in the period. This keeps estimate vs. spent
-  // apples-to-apples: we only credit the estimate for turns that happened,
-  // not for units still occupied / on notice / mid-turn.
+  // had cost activity in the selected period. The period still scopes WHICH
+  // turns appear, but Spent shows each turn's full LIFETIME cost so estimate
+  // vs. spent is a true comparison (not just the in-window slice).
   const props = {};
   costsRows.forEach(r => {
     const isCompleted = (r.status === 'Complete' || r.status === 'Occupied') && r.total > 0;
@@ -1250,7 +1261,7 @@ function buildPropSummaryTable() {
     const p = props[r.prop];
     p.complete++;
     p.totalEst   += r.estimate || 0;
-    p.totalSpent += r.total;
+    p.totalSpent += lifetimeSpend(r.code);
   });
 
   const rows = Object.entries(props).sort((a,b) => b[1].totalSpent - a[1].totalSpent).map(([prop, p]) => {
@@ -1399,7 +1410,7 @@ function buildCostsTab() {
   el.innerHTML = `
     <div class="kpi-grid">${kpiHtml}</div>
     <div class="section-title">Completed Turns by Property</div>
-    <div style="font-size:0.78rem;color:#7f8fa4;margin:-6px 0 10px;">Only turns completed in this period — estimate vs. spent is apples-to-apples (active/notice/occupied units excluded).</div>
+    <div style="font-size:0.78rem;color:#7f8fa4;margin:-6px 0 10px;">Turns completed with cost activity in this period. <strong>Spent = each turn's full lifetime cost</strong> (all periods), so estimate vs. spent compares the turn's total — active/notice units excluded.</div>
     ${buildPropSummaryTable()}
     <div class="section-title" style="margin-top:24px;">Unit Detail</div>
     <div class="controls" style="margin-bottom:12px;">
