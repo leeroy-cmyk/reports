@@ -157,6 +157,12 @@
 
   <div id="billsBanner" style="display:none"></div>
 
+  <div id="billsDropdown" style="display:none;margin:0 0 16px">
+    <button id="billsToggle" onclick="toggleBills()"
+      style="width:100%;text-align:left;cursor:pointer;background:#fff;border:1px solid #d0dce8;border-radius:8px;padding:11px 16px;font-size:13px;font-weight:700;color:#1a5276;display:flex;align-items:center;justify-content:space-between;gap:10px"></button>
+    <div id="billsList" style="display:none;margin-top:8px;border:1px solid #d0dce8;border-radius:8px;overflow:hidden"></div>
+  </div>
+
   <div class="tabs">
     <div class="tab active" onclick="showTab('bva')">Budget vs Actuals</div>
     <div class="tab" onclick="showTab('charts')">Property Charts</div>
@@ -180,6 +186,7 @@ let RAW_BILLS    = null;
 let RAW_BUDGET   = null;
 let BUDGET_CODES = new Set();
 let BILLS_SUMMARY = { total: 0, unassigned: 0 };  // bills folded into actuals this period
+let BILLS_OPEN = false;  // remembers dropdown expanded state across re-renders
 let BUDGET_MODE  = 'mtd';   // 'mtd' | 'monthly' | 'ytd' | 'custom'
 let PERIOD_FROM  = '';
 let PERIOD_TO    = '';
@@ -232,6 +239,68 @@ const RAMP_ACCT_CAT = {
 function getRampCategory(tx) {
   if (!tx.gl) return null;
   return RAMP_ACCT_CAT[tx.gl] || null;
+}
+
+function esc(s) {
+  return String(s).replace(/[&<>"]/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;' }[c]));
+}
+
+// Bills counted in actuals for the current period (in-range + maintenance GL), richest first.
+function buildBillsRows() {
+  if (!RAW_BILLS) return [];
+  return RAW_BILLS.bills
+    .filter(b => b.d && b.d >= PERIOD_FROM && b.d <= PERIOD_TO && RAMP_ACCT_CAT[b.gl])
+    .map(b => {
+      let pCode = propCode(b.dept && b.dept.includes(':') ? b.dept.split(':')[0].trim() : b.dept);
+      if (!pCode || !BUDGET_CODES.has(pCode)) pCode = 'UNASSIGNED';
+      return {
+        d: b.d, amt: b.amt, cat: RAMP_ACCT_CAT[b.gl], gl: b.gl,
+        prop: pCode, unassigned: pCode === 'UNASSIGNED',
+        desc: b.vendor || b.memo || '—',
+        status: b.draft ? 'Draft' : 'Submitted',
+      };
+    })
+    .sort((a, b) => b.amt - a.amt);
+}
+
+function toggleBills() {
+  BILLS_OPEN = !BILLS_OPEN;
+  document.getElementById('billsList').style.display = BILLS_OPEN ? 'block' : 'none';
+  const car = document.getElementById('billsCaret');
+  if (car) car.textContent = BILLS_OPEN ? '⌃' : '⌄';
+}
+
+function renderBillsDropdown() {
+  const wrap = document.getElementById('billsDropdown');
+  const rows = buildBillsRows();
+  if (!rows.length) { wrap.style.display = 'none'; return; }
+  wrap.style.display = 'block';
+  const total   = rows.reduce((s, r) => s + r.amt, 0);
+  const unCount = rows.filter(r => r.unassigned).length;
+  document.getElementById('billsToggle').innerHTML =
+    `<span>🧾 Vendor Bills — ${rows.length} item${rows.length === 1 ? '' : 's'} · ${fmt(total)}` +
+    (unCount ? ` · <span style="color:#b9770e">${unCount} need property coding</span>` : '') + `</span>` +
+    `<span id="billsCaret" style="font-size:15px;color:#7f8fa4">${BILLS_OPEN ? '⌃' : '⌄'}</span>`;
+  const td = 'padding:7px 12px;border-bottom:1px solid #eef2f6;white-space:nowrap';
+  const th = 'padding:8px 12px;text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:.4px;color:#7f8fa4;background:#f4f6f9;position:sticky;top:0';
+  const body = rows.map(r => `<tr style="${r.unassigned ? 'background:#fffaf0' : ''}">
+    <td style="${td}">${fmtDate(r.d)}</td>
+    <td style="${td};white-space:normal;max-width:340px">${esc(r.desc)}</td>
+    <td style="${td}">${r.unassigned ? '<span style="color:#b9770e">⚠ Unassigned</span>' : r.prop}</td>
+    <td style="${td}">${r.cat}</td>
+    <td style="${td};color:#95a5a6">${r.gl || '—'}</td>
+    <td style="${td}">${r.status}</td>
+    <td style="${td};text-align:right;font-weight:700">${fmt(r.amt)}</td>
+  </tr>`).join('');
+  const list = document.getElementById('billsList');
+  list.innerHTML =
+    `<div style="max-height:340px;overflow:auto"><table style="width:100%;border-collapse:collapse;font-size:12px">
+      <thead><tr>
+        <th style="${th}">Date</th><th style="${th}">Vendor / Memo</th><th style="${th}">Property</th>
+        <th style="${th}">Category</th><th style="${th}">GL</th><th style="${th}">Status</th>
+        <th style="${th};text-align:right">Amount</th>
+      </tr></thead><tbody>${body}</tbody></table></div>`;
+  list.style.display = BILLS_OPEN ? 'block' : 'none';
 }
 
 function isTeamRampTx(tx) {
@@ -455,6 +524,9 @@ function render() {
   } else {
     billsBanner.style.display = 'none';
   }
+
+  // VENDOR BILLS DROPDOWN
+  renderBillsDropdown();
 
   // BVA TABLE
   const bgtPeriod = budgetPeriodLabel();
