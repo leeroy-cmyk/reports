@@ -551,8 +551,26 @@ function buildTurnCosts() {
     u.materials.sort((a, b) => b.d.localeCompare(a.d));
   }
 
-  save('turn_costs.json', { ok: true, fetched_at: qbt.fetched_at, units, propSpend });
-  console.log('turn_costs.json: ' + Object.keys(units).length + ' units, ' + Object.keys(propSpend).length + ' properties');
+  // Completed-turn COUNT per property from PropertyMeld (the authoritative
+  // turn-completion source). The vacancy snapshot can't date completions for
+  // occupied units, so it can't count real turns — PropertyMeld can. Used for
+  // "avg cost per turn" = property turn spend / completed turns. Only real
+  // turn projects (name ~ "turn"), status COMPLETE; excludes Pest Control/Other.
+  const pmPath = path.join(DATA_DIR, 'pm_turns.json');
+  const propTurns = {};
+  if (fs.existsSync(pmPath)) {
+    const pmTurns = (JSON.parse(fs.readFileSync(pmPath, 'utf8')).turns) || [];
+    for (const t of pmTurns) {
+      if (!/turn/i.test(t.name || '') || t.status !== 'COMPLETE') continue;
+      const m = (t.property || '').toLowerCase().replace(/\s+/g, '-').match(/([a-z]{1,3}\d{2,3})/);
+      if (!m) continue;
+      propTurns[m[1]] = (propTurns[m[1]] || 0) + 1;
+    }
+  }
+
+  save('turn_costs.json', { ok: true, fetched_at: qbt.fetched_at, units, propSpend, propTurns });
+  console.log('turn_costs.json: ' + Object.keys(units).length + ' units, ' + Object.keys(propSpend).length + ' properties, ' +
+    Object.keys(propTurns).length + ' props w/ completed PM turns');
 }
 
 // ── TOOLS & SUPPLIES ─────────────────────────────────────────────────────────
