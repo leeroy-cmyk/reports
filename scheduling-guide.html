@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PropertyMeld Scheduling — Rules &amp; Workflow Guide</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+         background: #f4f6f9; color: #2c3e50; line-height: 1.6; padding: 0 0 60px; }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 0 20px; }
+  header { background: linear-gradient(135deg, #1a5276, #2e86c1); color: #fff; padding: 40px 0 34px; margin-bottom: 28px; }
+  header .wrap { }
+  header h1 { font-size: 1.9rem; font-weight: 700; letter-spacing: -0.3px; }
+  header p { opacity: .92; margin-top: 8px; font-size: 1.02rem; max-width: 720px; }
+  header .meta { margin-top: 14px; font-size: .82rem; opacity: .8; }
+  h2 { color: #1a5276; font-size: 1.32rem; margin: 6px 0 16px; display: flex; align-items: center; gap: 10px; }
+  h2 .n { background: #2e86c1; color: #fff; width: 30px; height: 30px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: .95rem; flex: none; }
+  h3 { color: #1a5276; font-size: 1.05rem; margin: 18px 0 8px; }
+  .card { background: #fff; border: 1px solid #e1e8ef; border-radius: 12px; padding: 24px 26px; margin-bottom: 22px; box-shadow: 0 1px 3px rgba(26,82,118,.05); }
+  p { margin-bottom: 12px; }
+  ul, ol { margin: 0 0 12px 22px; }
+  li { margin-bottom: 7px; }
+  code { background: #eef3f8; color: #1a5276; padding: 2px 7px; border-radius: 5px; font-family: "SF Mono", Consolas, monospace; font-size: .86em; }
+  .badge { display: inline-block; padding: 2px 10px; border-radius: 20px; font-size: .76rem; font-weight: 600; vertical-align: middle; }
+  .b-green { background: #e3f6ec; color: #1e7e4f; }
+  .b-red   { background: #fde9e9; color: #c0392b; }
+  .b-blue  { background: #e6f0fa; color: #2470b3; }
+  .b-amber { background: #fcf3e0; color: #b9770e; }
+  .b-gray  { background: #eceef1; color: #5b6b7b; }
+  table { width: 100%; border-collapse: collapse; margin: 8px 0 6px; font-size: .92rem; }
+  th { text-align: left; background: #f4f6f9; color: #5b6b7b; font-size: .74rem; text-transform: uppercase; letter-spacing: .6px; padding: 9px 12px; border-bottom: 2px solid #dde5ee; }
+  td { padding: 9px 12px; border-bottom: 1px solid #eef2f6; vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  .callout { border-left: 4px solid #2e86c1; background: #eef5fb; padding: 14px 18px; border-radius: 0 8px 8px 0; margin: 14px 0; }
+  .callout.warn { border-left-color: #e67e22; background: #fdf4e8; }
+  .callout.stop { border-left-color: #c0392b; background: #fdeceb; }
+  .callout strong { color: #1a5276; }
+  .callout.warn strong { color: #b9770e; }
+  .callout.stop strong { color: #c0392b; }
+  .ask { background: #f7fafd; border: 1px dashed #aac6e0; border-radius: 8px; padding: 10px 14px; margin: 8px 0; font-style: italic; color: #2470b3; }
+  .toc { columns: 2; font-size: .94rem; }
+  .toc a { color: #2470b3; text-decoration: none; display: block; margin-bottom: 6px; }
+  .toc a:hover { text-decoration: underline; }
+  .lead { font-size: 1.05rem; }
+  .pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
+  footer { text-align: center; color: #9aa7b4; font-size: .82rem; margin-top: 30px; }
+  @media (max-width: 640px){ .toc{columns:1;} header h1{font-size:1.5rem;} }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <h1>🛠️ PropertyMeld Scheduling — Rules &amp; Workflow</h1>
+    <p>How McKay Property Management auto-schedules maintenance work, and how you help improve it. This is the shared playbook for everyone who schedules — Lee Roy, Florencia, and the team.</p>
+    <div class="meta">Repo: <code>leeroy-cmyk/pm-scheduling</code> &nbsp;·&nbsp; the live rulebook is <code>CLAUDE.md</code> &nbsp;·&nbsp; this guide mirrors it in plain English.</div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="card">
+    <div class="toc">
+      <a href="#big">1 · The big picture</a>
+      <a href="#workflow">2 · Your daily workflow</a>
+      <a href="#golden">3 · Golden rules (do / don't)</a>
+      <a href="#rulebook">4 · The scheduling rulebook</a>
+      <a href="#regions">5 · Regions &amp; who does what</a>
+      <a href="#change">6 · Changing a rule</a>
+      <a href="#cloud">7 · When the cloud runs</a>
+      <a href="#trouble">8 · Troubleshooting</a>
+    </div>
+  </div>
+
+  <!-- 1 -->
+  <div class="card" id="big">
+    <h2><span class="n">1</span> The big picture</h2>
+    <p class="lead">The scheduler is a program that reads PropertyMeld work orders ("melds") and books them onto the right tech's calendar automatically.</p>
+    <ul>
+      <li><span class="badge b-blue">Runs in the cloud</span> It runs <strong>by itself every morning</strong> — nobody has to push a button. It logs into PropertyMeld as a dedicated scheduler account and schedules the day's work.</li>
+      <li><span class="badge b-green">You improve the rules</span> Your job isn't to run it — it's to make it <em>smarter</em>. When you notice it should do something differently, you tell your Claude, it updates the rule, and the change goes live for everyone.</li>
+      <li><span class="badge b-amber">Shared through git</span> All the rules live in one shared place (the <code>pm-scheduling</code> repo). A change you push is automatically used by the cloud and seen by Lee Roy and every other scheduler.</li>
+    </ul>
+    <div class="callout"><strong>One scheduler, one source of truth.</strong> There used to be copies floating around on different computers. Now there's exactly one — the cloud — and one shared rulebook. That's why we never run it "for real" on a personal machine (more on that below).</div>
+  </div>
+
+  <!-- 2 -->
+  <div class="card" id="workflow">
+    <h2><span class="n">2</span> Your daily workflow</h2>
+    <p>Open <strong>Claude Code inside the <code>pm-scheduling</code> folder</strong> and just talk to it in plain English. A normal session looks like:</p>
+    <ol>
+      <li><strong>Start fresh.</strong> Ask Claude to <em>pull the latest</em> so you have everyone's newest rules.
+        <div class="ask">"Pull the latest, then show me a dry-run preview of the Spokane scheduler."</div></li>
+      <li><strong>Preview.</strong> Claude runs the scheduler in <span class="badge b-blue">DRY RUN</span> mode — it shows what it <em>would</em> schedule without changing anything in PropertyMeld.</li>
+      <li><strong>Spot something to fix?</strong> Tell Claude in plain words.
+        <div class="ask">"Justin shouldn't get jobs on Fridays — make that a rule."</div>
+        <div class="ask">"Schedule pest treatments before regular repairs."</div></li>
+      <li><strong>Re-preview</strong> to confirm the change does what you wanted.</li>
+      <li><strong>Save it for everyone.</strong> When you're happy, tell Claude to commit and push. The cloud uses it on the next run, and the team gets it automatically.
+        <div class="ask">"Looks good — commit and push that change."</div></li>
+    </ol>
+    <div class="callout"><strong>You never have to remember commands.</strong> Claude does the git pulls, previews, commits and pushes for you. You describe what you want in normal language.</div>
+  </div>
+
+  <!-- 3 -->
+  <div class="card" id="golden">
+    <h2><span class="n">3</span> Golden rules</h2>
+    <div class="pill-row">
+      <span class="badge b-green">✓ Pull first</span>
+      <span class="badge b-green">✓ Preview before trusting</span>
+      <span class="badge b-green">✓ Commit &amp; push to share</span>
+      <span class="badge b-red">✗ Never run LIVE on your PC</span>
+    </div>
+    <table>
+      <tr><th>Do</th><th>Why</th></tr>
+      <tr><td><strong>Pull the latest at the start of every session</strong></td><td>So you build on everyone's newest rules, not an old copy.</td></tr>
+      <tr><td><strong>Always preview (DRY RUN) before committing a rule change</strong></td><td>You see exactly what it will do before it's real.</td></tr>
+      <tr><td><strong>Commit &amp; push every improvement</strong></td><td>A change that isn't pushed only helps you — pushing shares it with the whole team + the cloud.</td></tr>
+    </table>
+    <div class="callout stop"><strong>⛔ Never run a scheduler "live / for real" on your own computer.</strong> The cloud is the <em>one and only</em> live runner. If you run it live too, the same jobs get scheduled twice and techs get double-booked. On your machine: <strong>previews only</strong>. Need a real run off-schedule? Ask Claude to trigger it <em>in the cloud</em> instead.</div>
+  </div>
+
+  <!-- 4 -->
+  <div class="card" id="rulebook">
+    <h2><span class="n">4</span> The scheduling rulebook</h2>
+    <p>These rules apply to <strong>every</strong> region. (This is the plain-English version of what's in <code>CLAUDE.md</code>.)</p>
+
+    <h3>📅 Reserved days — never schedule</h3>
+    <p><span class="badge b-red">Sunday</span> <span class="badge b-red">Monday</span> <span class="badge b-red">Saturday</span> are off-limits. Work is only booked Tuesday&nbsp;–&nbsp;Friday.</p>
+
+    <h3>⏰ Business hours</h3>
+    <p>Roughly <strong>8:00 AM – 5:30 PM Pacific</strong>. Times are stored with the Pacific time zone so they show correctly for everyone.</p>
+
+    <h3>🧲 Fill nearest days first, then tidy up</h3>
+    <p>The scheduler books the soonest open day first, then <strong>compacts</strong> the calendar — pulling later jobs earlier into gaps — so techs aren't sitting idle waiting on scattered appointments. It always leaves about a <strong>30-minute buffer</strong> between jobs and never double-books a tech.</p>
+
+    <h3>🔒 Preference lock</h3>
+    <p>If a work order's <strong>title or chat asks for a specific day, time, or date</strong> (e.g. "tenant only available Thursday afternoon"), the scheduler honors that and won't move it around.</p>
+
+    <h3>💬 It reads the chat</h3>
+    <p>The scheduler reads the meld's messages to catch scheduling requests. To avoid thrashing, already-scheduled jobs only react to <em>fresh</em> messages (last ~26 hours); not-yet-scheduled jobs honor requests from the last 30 days.</p>
+  </div>
+
+  <!-- 5 -->
+  <div class="card" id="regions">
+    <h2><span class="n">5</span> Regions &amp; who does what</h2>
+
+    <h3>The techs the scheduler manages</h3>
+    <table>
+      <tr><th>Region</th><th>Tech(s)</th><th>Handles</th></tr>
+      <tr><td><strong>Tacoma</strong> (tc68 / tc34)</td><td>Jonas Hoard, Armani Mitchell</td><td>Jonas = non-turn repairs · Armani = turns</td></tr>
+      <tr><td><strong>Spokane</strong></td><td>Justin Gutierrez</td><td>All Spokane repairs <span class="badge b-gray">Wade no longer here</span></td></tr>
+      <tr><td><strong>Grounds</strong></td><td>David Sanchez, Alexander Overall</td><td>Lawn / grounds service</td></tr>
+    </table>
+
+    <h3>🌲 Tacoma</h3>
+    <ul>
+      <li>Jonas and Armani are the <strong>only</strong> Tacoma techs. If a Tacoma meld lands on anyone else, it's reassigned to <strong>Jonas</strong>.</li>
+      <li>Jonas takes non-turn repairs; Armani takes turns.</li>
+    </ul>
+
+    <h3>🏙️ Spokane</h3>
+    <ul>
+      <li><strong>All repairs go to Justin.</strong> Wade Hippen no longer works here — anything still sitting on Wade is pulled back and reassigned to Justin.</li>
+      <li><strong>Excluded:</strong> turns, environmental, and pest melds are <em>not</em> auto-assigned here.</li>
+      <li><strong>Only reclaim from:</strong> the turn techs (Scott Higley, Ron Cramer, Micheal Magoon) when they wrongly hold a plain repair, or unassigned non-pest melds.</li>
+      <li><strong>Leave alone:</strong> David &amp; Alexander (grounds), <strong>Florencia</strong> (pest), and Dulce (estimates) — those assignments are intentional.</li>
+      <li><strong>Resident time windows:</strong> when a job needs the tenant present, the scheduler reads the tenant's chosen availability windows and books inside one. If days are full, it can "bump" lower-priority, movable, unlocked jobs to later slots to free room for an emergency or a resident window.</li>
+    </ul>
+
+    <h3>🌱 Grounds / Lawn</h3>
+    <ul>
+      <li>Recurring lawn-service melds are mirrored to the <strong>same slots one week later</strong> (this week's pattern → next week, +7 days), for David and Alexander.</li>
+    </ul>
+
+    <div class="callout warn"><strong>Pest is yours, Florencia.</strong> The repair scheduler deliberately never touches pest melds or melds assigned to you — so it won't step on your work. If you want it to help with pest scheduling too, that's a rule we can add together.</div>
+  </div>
+
+  <!-- 6 -->
+  <div class="card" id="change">
+    <h2><span class="n">6</span> Changing a rule</h2>
+    <p>This is the heart of the collaboration. When something should work differently:</p>
+    <ol>
+      <li>Tell your Claude what you want, in plain English.</li>
+      <li>Claude updates <strong>both</strong> the plain-English rule in <code>CLAUDE.md</code> <strong>and</strong> the actual scheduler so they stay in sync.</li>
+      <li>You preview to confirm.</li>
+      <li>Claude commits &amp; pushes — now it's the rule for <strong>everyone</strong> and the cloud starts using it.</li>
+    </ol>
+    <p>Examples of real rule changes:</p>
+    <div class="ask">"Stop scheduling anything on the 4th of July this year."</div>
+    <div class="ask">"In Spokane, do emergencies the same day even if it means bumping a low-priority job."</div>
+    <div class="ask">"Don't auto-assign anything described as a 'quote' or 'estimate'."</div>
+  </div>
+
+  <!-- 7 -->
+  <div class="card" id="cloud">
+    <h2><span class="n">7</span> When the cloud runs</h2>
+    <table>
+      <tr><th>Scheduler</th><th>Runs (Pacific)</th></tr>
+      <tr><td>Tacoma (tc68 / tc34)</td><td>6:00 AM daily</td></tr>
+      <tr><td>Spokane</td><td>6:00 AM daily</td></tr>
+      <tr><td>Grounds / Lawn</td><td>6:00 AM &amp; 2:00 PM daily</td></tr>
+    </table>
+    <p>It always runs whatever rules are currently saved (pushed) to the shared repo. You can also trigger an extra run anytime from the GitHub <strong>Actions</strong> tab → pick a scheduler → <strong>Run workflow</strong> (leave the <em>dry_run</em> box checked to preview, uncheck it for a real run).</p>
+    <div class="callout"><strong>Logged as the scheduler account.</strong> Live runs sign in as a dedicated PropertyMeld scheduler login, so scheduled actions show up as "the scheduler," not as a person.</div>
+  </div>
+
+  <!-- 8 -->
+  <div class="card" id="trouble">
+    <h2><span class="n">8</span> Troubleshooting</h2>
+    <table>
+      <tr><th>Problem</th><th>Fix</th></tr>
+      <tr><td><code>Repository not found</code> when cloning</td><td>You haven't accepted the repo invite yet (or you're signed into a different GitHub account). Accept the invite at <strong>github.com/notifications</strong>, then clone again.</td></tr>
+      <tr><td>Push is rejected</td><td>Ask Claude to <em>pull with rebase, then push again</em> — someone else pushed first. Claude handles this automatically.</td></tr>
+      <tr><td>Preview won't run / login error</td><td>Make sure your <code>pm.env</code> has your own PropertyMeld email &amp; password. (It's only for previews; it's never uploaded.)</td></tr>
+      <tr><td>Not sure if a change is safe</td><td>Preview it (DRY RUN) and/or ask Lee Roy before pushing.</td></tr>
+    </table>
+    <div class="callout"><strong>Questions → Lee Roy.</strong> When in doubt, preview first and ask. Nothing you do in a preview can change PropertyMeld.</div>
+  </div>
+
+  <footer>
+    McKay Property Management · PropertyMeld Scheduling · this guide lives in the <code>pm-scheduling</code> repo and is kept in step with <code>CLAUDE.md</code>.
+  </footer>
+
+</div>
+</body>
+</html>
