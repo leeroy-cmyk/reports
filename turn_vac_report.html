@@ -1244,46 +1244,52 @@ function sumInPeriod(bucket) {
   return s;
 }
 
-function buildPropSummaryTable() {
-  // COMPLETE turn spend per property for the selected period: every dollar of
-  // turn labor + materials coded to the property (unit-tagged AND property-only),
-  // from RAW_COSTS.propSpend. The per-unit rollup alone drops ~$247k of turn
-  // spend that's coded to a property without a unit — this captures all of it.
-  const ps = (RAW_COSTS && RAW_COSTS.propSpend) || {};
+function sumAll(bucket) {
+  let s = 0;
+  if (bucket) for (const d in bucket) s += bucket[d];
+  return s;
+}
 
-  // # of turns that completed (Complete/Occupied) with cost activity this period.
-  const completeCount = {};
-  costsRows.forEach(r => {
-    if ((r.status === 'Complete' || r.status === 'Occupied') && r.total > 0)
-      completeCount[r.prop] = (completeCount[r.prop] || 0) + 1;
-  });
+function buildPropSummaryTable() {
+  // Per property:
+  //  - Labor/Materials/Spent = turn spend in the SELECTED PERIOD (propSpend,
+  //    incl. spend coded to the property but not a unit — ~$247k the per-unit
+  //    rollup drops).
+  //  - Turns to Date + Avg $/Turn = ALL-TIME: PropertyMeld completed-turn count
+  //    (propTurns) and (all-time property turn spend ÷ that count). These are
+  //    all-time on purpose — a turn's cost spans months, and the vacancy
+  //    snapshot can't date completions, so a per-period "avg per turn" is not
+  //    computable. PropertyMeld is the authoritative completion source.
+  const ps = (RAW_COSTS && RAW_COSTS.propSpend) || {};
+  const pt = (RAW_COSTS && RAW_COSTS.propTurns) || {};
 
   const props = {};
-  Object.keys(ps).forEach(prop => {
+  new Set([...Object.keys(ps), ...Object.keys(pt)]).forEach(prop => {
     const labor = sumInPeriod(ps[prop] && ps[prop].labor);
     const mats  = sumInPeriod(ps[prop] && ps[prop].materials);
-    const total = labor + mats;
-    if (total === 0) return;
-    props[prop] = { labor, mats, total, complete: completeCount[prop] || 0 };
+    const allTime = sumAll(ps[prop] && ps[prop].labor) + sumAll(ps[prop] && ps[prop].materials);
+    const turns = pt[prop] || 0;
+    if (labor + mats === 0 && allTime === 0) return;
+    props[prop] = { labor, mats, total: labor + mats, turns, avg: turns ? allTime / turns : 0 };
   });
 
   const rows = Object.entries(props).sort((a,b) => b[1].total - a[1].total).map(([prop, p]) => {
-    const avg = p.complete ? p.total / p.complete : 0;
     return `<tr>
       <td><strong>${prop}</strong></td>
-      <td>${p.complete > 0 ? `<span class="badge cost-complete">${p.complete}</span>` : '<span style="color:#bdc3c7">—</span>'}</td>
       <td>${p.labor > 0 ? fmtC(p.labor) : '<span style="color:#d0dce8">—</span>'}</td>
       <td>${p.mats > 0 ? fmtC(p.mats) : '<span style="color:#d0dce8">—</span>'}</td>
       <td><strong>${fmtC(p.total)}</strong></td>
-      <td>${p.complete > 0 ? fmtC(avg) : '<span style="color:#bdc3c7">—</span>'}</td>
+      <td>${p.turns > 0 ? `<span class="badge cost-complete">${p.turns}</span>` : '<span style="color:#bdc3c7">—</span>'}</td>
+      <td>${p.turns > 0 ? fmtC(p.avg) : '<span style="color:#bdc3c7">—</span>'}</td>
     </tr>`;
   }).join('');
 
   return `<div style="overflow-x:auto;border:1px solid #d0dce8;border-radius:8px;margin-bottom:24px;">
     <table class="prop-table">
       <thead><tr>
-        <th>Property</th><th>Turns Complete</th>
-        <th>Labor</th><th>Materials</th><th>Spent</th><th>Avg / Completed</th>
+        <th>Property</th>
+        <th>Labor (period)</th><th>Materials (period)</th><th>Spent (period)</th>
+        <th>Turns to Date</th><th>Avg $/Turn (all-time)</th>
       </tr></thead>
       <tbody>${rows || '<tr><td colspan="6" style="text-align:center;padding:16px;color:#7f8fa4;">No turn spend in this period</td></tr>'}</tbody>
     </table>
@@ -1410,7 +1416,7 @@ function buildCostsTab() {
   el.innerHTML = `
     <div class="kpi-grid">${kpiHtml}</div>
     <div class="section-title">Turn Spend by Property</div>
-    <div style="font-size:0.78rem;color:#7f8fa4;margin:-6px 0 10px;"><strong>Spent = all turn labor + materials coded to the property in this period</strong> (QBT timecards + Ramp), including spend not tagged to a specific unit. Turns Complete counts turns finished with cost activity this period. For estimate vs. actual on individual turns, see Unit Detail below.</div>
+    <div style="font-size:0.78rem;color:#7f8fa4;margin:-6px 0 10px;"><strong>Labor / Materials / Spent</strong> = turn spend in the selected period (QBT timecards + Ramp), including spend coded to the property but not a specific unit. <strong>Turns to Date + Avg $/Turn</strong> are all-time: completed-turn count from PropertyMeld ÷ all-time turn spend — a turn's cost spans months, so a per-period average isn't meaningful. For estimate vs. actual on individual turns, see Unit Detail below.</div>
     ${buildPropSummaryTable()}
     <div class="section-title" style="margin-top:24px;">Unit Detail — Estimate vs. Actual per Turn</div>
     <div style="font-size:0.78rem;color:#7f8fa4;margin:-6px 0 10px;">Per-turn comparison for spend that <em>is</em> tagged to a unit. Turn spend coded to the property without a unit isn't shown here — see property totals above for the complete figure.</div>
