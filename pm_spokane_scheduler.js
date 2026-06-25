@@ -5,7 +5,9 @@
  *  on Wade is reclaimed and reassigned to Justin.)
  * Runs daily via GitHub Actions (.github/workflows/pm-spokane-scheduler.yml).
  * Full parity with the Tacoma (Jonas) scheduler: assigns/reassigns Spokane non-turn
- * repairs to Justin, honors stated day/time/date preferences, reads
+ * repairs to Justin, honors stated day/time/date preferences, honors resident-set
+ * availability windows from the tenant portal (appointment-request) for presence-required
+ * melds, reads
  * chats, reschedules past-due, relocates anything on a reserved day (Mon/weekend) or
  * double-booked, then compacts each tech's calendar to fill the nearest days first.
  * Set DRY_RUN=1 to preview without writing.
@@ -25,7 +27,9 @@ const FORMER_TECHS = new Set([WADE_ID]); // anything still on Wade gets reclaime
 const SPOKANE_GROUPS = [25113, 25115];
 const DRY = !!process.env.DRY_RUN;
 const PEST_RE = /pest|bed.?bug|termite|rodent|mice|mouse|trap|exterminate|infest/i;
-const PRIORITY_ORDER = { Emergency:0, Urgent:0, High:1, Normal:2, Medium:2, Low:3 };
+// PropertyMeld returns priorities UPPERCASE (EMERGENCY/HIGH/MEDIUM/LOW); look up case-insensitively.
+const PRIORITY_ORDER = { EMERGENCY:0, URGENT:0, HIGH:1, NORMAL:2, MEDIUM:2, LOW:3 };
+const PRI = p => PRIORITY_ORDER[String(p||'Normal').toUpperCase()] ?? 2;
 const MONTHS = {jan:1,feb:2,mar:3,apr:4,may:5,jun:6,jul:7,aug:8,sep:9,oct:10,nov:11,dec:12};
 
 // ── HTTP / AUTH ───────────────────────────────────────────────────────────────
@@ -159,7 +163,7 @@ function estimateDuration(brief){
 }
 function buildBusyBlocks(melds){ const byDate={}; melds.forEach(m=>{ const e=getMeldAppt(m); if(!e)return; const d=pdtDate(e.dtstart); (byDate[d]=byDate[d]||[]).push({start:pdtHr(e.dtstart),end:pdtHr(e.dtend)}); }); return byDate; }
 function findOverlaps(melds){ const ov=new Set(),byDate={}; melds.forEach(m=>{const e=getMeldAppt(m);if(!e)return;const d=pdtDate(e.dtstart);(byDate[d]=byDate[d]||[]).push({m,start:pdtHr(e.dtstart),end:pdtHr(e.dtend)});});
-  for(const d in byDate){ const list=byDate[d].sort((a,b)=>(PRIORITY_ORDER[a.m.priority]??2)-(PRIORITY_ORDER[b.m.priority]??2)||a.start-b.start); const kept=[]; for(const it of list){ if(kept.some(k=>it.start<k.end&&it.end>k.start))ov.add(it.m.id); else kept.push(it); } }
+  for(const d in byDate){ const list=byDate[d].sort((a,b)=>PRI(a.m.priority)-PRI(b.m.priority)||a.start-b.start); const kept=[]; for(const it of list){ if(kept.some(k=>it.start<k.end&&it.end>k.start))ov.add(it.m.id); else kept.push(it); } }
   return ov;
 }
 // Earliest free slot from `startingFrom`, packed from 8am, skipping today/Mon/weekend. Fill nearest first.
@@ -197,6 +201,49 @@ function preferredSlot(pref, durHrs, busy, today, bufferHrs=0.5){
   const pt=pref.time?parseTime(pref.time):null;
   if(pt){ const start=pt.hr+pt.min/60,end=start+durHrs; const conflict=(busy[date]||[]).some(b=>start<b.end+bufferHrs&&end+bufferHrs>b.start); if(start>=minStart&&end<=17&&!conflict)return {date,startHr:pt.hr,startMin:pt.min,durationHrs:durHrs}; }
   return findSlotOnDate(busy,durHrs,date,bufferHrs,minStart)||findNextSlot(busy,durHrs,today);
+}
+
+// ── RESIDENT PREFERRED AVAILABILITY ──────────────────────────────────────────────
+// When a meld needs the resident present, the tenant portal lets them pick time windows
+// ("appointment-request"). Honor those: schedule the visit INSIDE a window the resident gave us.
+// Fetch the resident's FUTURE availability windows, clipped to working days/hours and merged.
+// Returns [{date,startHr,endHr}] sorted earliest-first; [] if none usable.
+async function getResidentWindows(meldId, today, sc, csrf){
+  let avails=[];
+  try{ const r=await apiGet('/api/melds/'+meldId+'/appointment-request/',sc,csrf);
+    if(r.status===200){ const ar=JSON.parse(r.body); avails=(ar.availabilities||[]).map(a=>a.event).filter(e=>e&&e.dtstart&&e.dtend); } }catch(e){}
+  const now=Date.now(), byDate={};
+  for(const e of avails){
+    if(new Date(e.dtend).getTime()<=now)continue;          // window already passed
+    const d=pdtDate(e.dtstart);
+    if(d<today||isBlockedDay(d))continue;                  // tech doesn't work Mon/weekend
+    let s=Math.max(8,pdtHr(e.dtstart)), en=Math.min(18,pdtHr(e.dtend));
+    if(en-s<0.5)continue;
+    (byDate[d]=byDate[d]||[]).push([s,en]);
+  }
+  const out=[];
+  for(const d of Object.keys(byDate).sort()){
+    const iv=byDate[d].sort((a,b)=>a[0]-b[0]); const merged=[iv[0].slice()];
+    for(let i=1;i<iv.length;i++){ const last=merged[merged.length-1]; if(iv[i][0]<=last[1]+0.001)last[1]=Math.max(last[1],iv[i][1]); else merged.push(iv[i].slice()); }
+    for(const [a,b] of merged)out.push({date:d,startHr:a,endHr:b});
+  }
+  return out;
+}
+// Earliest free slot that fits ENTIRELY within one of the resident's windows, on the tech calendar.
+function slotInWindows(windows, durHrs, busy, today, bufferHrs=0.5){
+  for(const w of windows){                                 // earliest window first
+    const isToday=w.date===today;
+    const minStart=isToday?Math.max(w.startHr,Math.ceil((nowPdtHr()+0.5)*4)/4):w.startHr;
+    const b=(busy[w.date]||[]).sort((a,b)=>a.start-b.start);
+    for(let s=minStart;s+durHrs<=w.endHr+1e-9;s+=0.25){ const e=s+durHrs;
+      if(!b.some(x=>s<x.end+bufferHrs&&e+bufferHrs>x.start)) return {date:w.date,startHr:Math.floor(s),startMin:Math.round((s-Math.floor(s))*60),durationHrs:durHrs}; }
+  }
+  return null;
+}
+function apptInWindows(apptEvt, windows){
+  if(!apptEvt)return false;
+  const d=pdtDate(apptEvt.dtstart), s=pdtHr(apptEvt.dtstart), e=pdtHr(apptEvt.dtend);
+  return windows.some(w=>w.date===d && s>=w.startHr-1e-9 && e<=w.endHr+1e-9);
 }
 
 // ── CHAT PARSING (recency-bounded) ──────────────────────────────────────────────
@@ -287,6 +334,7 @@ async function main(){
   const overlapIds=new Set(); for(const t of TECHS) for(const id of findOverlaps(techAll[t.id])) overlapIds.add(id);
   if(overlapIds.size)console.log('Overlapping appointments to relocate: '+overlapIds.size);
   const lockedPrefs=new Map();
+  const residentWinCache=new Map();   // meld id → resident availability windows (reused by the bump phase)
 
   // 4. Decide + apply per meld
   const techIdOf=m=>{for(const t of TECHS)if(hasTech(m,t.id))return t.id;return null;};
@@ -324,9 +372,18 @@ async function main(){
     if(!pref&&chatAction&&(chatAction.requestedDay||chatAction.requestedTime)) pref=usablePreference({dayName:chatAction.requestedDay||null,time:chatAction.requestedTime||null,dateStr:null},today);
     if(pref)lockedPrefs.set(m.id,pref);
 
+    // resident portal availability (presence-required melds). Used only when there's no stronger
+    // explicit signal: a `pref` here means either a manager title date (wins) or a fresh chat
+    // day/time (newer than the portal, wins). With no pref, the resident's windows drive scheduling.
+    const residentWindows = await getResidentWindows(m.id, today, sc, csrf);
+    residentWinCache.set(m.id, residentWindows);
+    const useResident = residentWindows.length>0 && !pref;
+    if(useResident) lockedPrefs.set(m.id, {resident:true});   // lock so compaction won't pull it out of the window
+
     // decide action
     let action=null, reason='';
     if(pref&&(isUnscheduled||isPastDue||!apptMatchesPref(apptEvt,pref))){ action='honor_pref'; reason='preference '+JSON.stringify(pref); }
+    else if(useResident&&(isUnscheduled||isPastDue||(apptEvt&&isBlockedDay(apptDate))||(apptEvt&&overlapIds.has(m.id))||!apptInWindows(apptEvt,residentWindows))){ action='honor_resident'; reason='resident avail '+residentWindows.map(w=>w.date).join(',').slice(0,24); }
     else if(chatAction&&chatAction.action==='shorten'){ if(apptEvt){ const cur=(new Date(apptEvt.dtend)-new Date(apptEvt.dtstart))/3600000; if(cur>chatAction.durationHrs+0.1){action='shorten';reason='shorten per '+chatAction.sender;} } else action='schedule_new'; }
     else if(chatAction&&(chatAction.action==='reschedule'||chatAction.action==='accommodate_resident')){ action=chatAction.action; reason='chat '+chatAction.sender+': '+chatAction.note.slice(0,40); }
     else if(isPastDue){ action='reschedule_pastdue'; reason='past due '+apptDate; }
@@ -337,15 +394,25 @@ async function main(){
 
     const tbFull=busy[tid];
     // Exclude this meld's OWN appt from the search so it isn't blocked by itself (else a
-    // "move earlier" reschedule pushes it to the next free slot = LATER).
+    // "move earlier" reschedule pushes it to the next free slot = LATER). Remove exactly ONE
+    // matching block — if another meld is double-booked at the identical time, its twin must stay
+    // visible, otherwise the conflict is hidden and the overlap never resolves.
     let tb=tbFull;
-    if(apptEvt){ const os=pdtHr(apptEvt.dtstart),oe=pdtHr(apptEvt.dtend); tb={...tbFull,[apptDate]:(tbFull[apptDate]||[]).filter(b=>Math.abs(b.start-os)>0.01||Math.abs(b.end-oe)>0.01)}; }
+    if(apptEvt){ const os=pdtHr(apptEvt.dtstart),oe=pdtHr(apptEvt.dtend); let dropped=false;
+      tb={...tbFull,[apptDate]:(tbFull[apptDate]||[]).filter(b=>{ if(!dropped&&Math.abs(b.start-os)<0.01&&Math.abs(b.end-oe)<0.01){dropped=true;return false;} return true; })}; }
     const shortenOk=chatAction&&chatAction.action==='shorten'&&chatAction.durationHrs>=0.25&&chatAction.durationHrs<=4;
     const durHrs=Math.min(8, shortenOk?chatAction.durationHrs:estimateDuration(brief));
     console.log(ref+' ['+priority+'] '+tName+' '+brief.slice(0,32)+' → '+action+': '+reason);
 
     // find slot
     let ns=null;
+    if(action==='honor_resident'){
+      ns=slotInWindows(residentWindows,durHrs,tb,today);
+      // No window fits — resident's free time is fully booked (or shorter than the job). With a
+      // single tech and a deep backlog this is a real capacity conflict, not a bug: honoring it
+      // would mean bumping other work. Surface it loudly; leave an already-scheduled meld put.
+      if(!ns){ console.log('  ⚠ RESIDENT WINDOW UNAVAILABLE ('+residentWindows.map(w=>w.date).join(', ')+') — Justin fully booked those day(s); needs a bump or more capacity'); if(apptEvt) continue; }
+    }
     if(action==='honor_pref'&&pref){
       if(pref.dateStr&&pref.dateStr>=today){
         // HARD DATE from the meld title (e.g. "June 23rd - POST NTE NOTICE") — must land on this
@@ -411,6 +478,74 @@ async function main(){
     }
   }
   console.log('Compaction: '+pulled+' pulled earlier');
+
+  // 6. PRIORITY ACCOMMODATION (bumping). One tech + deep backlog means resident-preferred days and
+  // even emergencies can be fully booked. Policy: bump lower-priority, movable, unlocked work off the
+  // needed day(s) to later openings so we can (a) pull EMERGENCIES in ASAP and (b) honor resident
+  // windows. Works off FRESH state (no stale appts), protects locked/windowed work, bounded per claimant.
+  {
+    const fresh=[]; const fseen=new Set();
+    for(const s of statuses){ let off=0; while(true){ const r=await apiGet('/api/melds/?limit=200&offset='+off+'&status='+s,sc,csrf); if(r.status!==200)break; const d=JSON.parse(r.body); (d.results||[]).forEach(m=>{ if(hasTech(m,JUSTIN_ID)&&inScope(m)&&!fseen.has(m.id)){fseen.add(m.id);fresh.push(m);} }); if(!d.next||!d.results||!d.results.length)break; off+=200; } }
+    const META=new Map();
+    for(const m of fresh){ const e=getMeldAppt(m); META.set(m.id,{ id:m.id, m, e, ref:m.reference_id, prio:PRI(m.priority),
+      date:e?pdtDate(e.dtstart):null, start:e?pdtHr(e.dtstart):null, end:e?pdtHr(e.dtend):null,
+      windows:residentWinCache.get(m.id)||[], locked:lockedPrefs.has(m.id),
+      dur:Math.max(0.5, e?(new Date(e.dtend)-new Date(e.dtstart))/3600000:estimateDuration(m.brief_description)) }); }
+    const priName=p=>['Emergency','High','Normal','Low'][p]||'Normal';
+    const hhmm=ns=>String(ns.startHr).padStart(2,'0')+':'+String(ns.startMin).padStart(2,'0');
+    const busyExcept=exceptId=>{ const bd={}; for(const x of META.values()){ if(x.id===exceptId||!x.date)continue; (bd[x.date]=bd[x.date]||[]).push({start:x.start,end:x.end}); } return bd; };
+    const nextWorkingDays=n=>{ const out=[]; let d=new Date(today+'T12:00:00-07:00'); for(let i=0;i<25&&out.length<n;i++){ d.setDate(d.getDate()+1); const ds=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); if(!isBlockedDay(ds))out.push(ds); } return out; };
+    async function doMove(x, ns){ const {dtstart,dtend}=slot(ns.date,ns.startHr,ns.startMin,x.dur); const r=await applyMove(x.m,dtstart,dtend,sc,csrf); if(r.status>=200&&r.status<300){ await cancelStale(x.id, ns.date, sc, csrf); x.date=ns.date; x.start=ns.startHr+ns.startMin/60; x.end=x.start+x.dur; return true; } console.log('    ✗ move failed '+x.ref+' '+r.status); return false; }
+    // lowest-priority, latest victim that actually OVERLAPS a window's time (bumping a job outside
+    // the needed time range wouldn't free the slot), and that we're allowed to bump for `claimant`.
+    function pickVictim(windows, claimant, allowEqual){
+      const wByDate={}; for(const w of windows){ (wByDate[w.date]=wByDate[w.date]||[]).push(w); }
+      const c=[...META.values()].filter(x=>{
+        if(x.id===claimant.id||!x.date)return false;
+        const ws=wByDate[x.date]; if(!ws)return false;
+        if(!ws.some(w=>x.start<w.endHr&&x.end>w.startHr))return false; // must overlap the needed window time
+        if(x.locked||x.windows.length)return false;            // never bump locked or resident-windowed work
+        if(isBlockedDay(x.date)||x.date<=today)return false;   // not movable (today/blocked)
+        return allowEqual? x.prio>=claimant.prio : x.prio>claimant.prio;
+      });
+      c.sort((a,b)=> b.prio-a.prio || b.start-a.start);
+      return c[0]||null;
+    }
+    async function relocate(victim, avoidDays){
+      const bv=busyExcept(victim.id); for(const d of avoidDays) bv[d]=[{start:8,end:18}];
+      const vns=findNextSlot(bv,victim.dur,today); if(!vns)return false;
+      const ok=await doMove(victim,vns);
+      if(ok) console.log('    ↳ bumped '+victim.ref+' ('+priName(victim.prio)+') → '+vns.date+' '+hhmm(vns));
+      return ok;
+    }
+
+    let accommodated=0;
+    // (a) Emergencies → earliest working day, bumping lower-priority work there if needed.
+    const emergencies=[...META.values()].filter(x=>x.prio===0 && x.date);
+    for(const c of emergencies){
+      let placed=false;
+      for(const D of nextWorkingDays(8)){
+        if(c.date===D){ placed=true; break; }              // already on this earliest-feasible day or earlier
+        if(c.date<D) break;                                 // current appt is already earlier than remaining candidates
+        const win=[{date:D,startHr:8,endHr:18}];
+        let ns=slotInWindows(win,c.dur,busyExcept(c.id),today,0.5); let bumps=0;
+        while(!ns && bumps<2){ const v=pickVictim(win,c,false); if(!v)break; if(!await relocate(v,[D]))break; bumps++; ns=slotInWindows(win,c.dur,busyExcept(c.id),today,0.5); }
+        if(ns){ if(await doMove(c,ns)){ console.log('  ★ EMERGENCY '+c.ref+' pulled in → '+ns.date+' '+hhmm(ns)+(bumps?(' (after '+bumps+' bump'+(bumps>1?'s':'')+')'):'')); accommodated++; } placed=true; break; }
+      }
+      if(!placed) console.log('  ⚠ emergency '+c.ref+' — no earlier slot even with bumping');
+    }
+    // (b) Resident-window melds not currently inside a window → bump same/lower work on window days.
+    const residents=[...META.values()].filter(x=>x.windows.length>0 && !(x.e&&apptInWindows(x.e,x.windows)));
+    for(const c of residents){
+      const winDays=c.windows.map(w=>w.date);
+      let ns=slotInWindows(c.windows,c.dur,busyExcept(c.id),today,0.5); let bumps=0;
+      while(!ns && bumps<3){ const v=pickVictim(c.windows,c,true); if(!v)break; if(!await relocate(v,winDays))break; bumps++; ns=slotInWindows(c.windows,c.dur,busyExcept(c.id),today,0.5); }
+      if(ns){ if(await doMove(c,ns)){ console.log('  ◆ RESIDENT '+c.ref+' → '+ns.date+' '+hhmm(ns)+(bumps?(' (after '+bumps+' bump'+(bumps>1?'s':'')+')'):'')+' [resident-preferred]'); accommodated++; } }
+      else console.log('  ⚠ resident '+c.ref+' — could not free a window slot ('+winDays.join(', ')+') even with bumping');
+    }
+    console.log('Accommodation: '+accommodated+' meld(s) placed via bumping');
+  }
+
   console.log('=== Done ===');
 }
 main().catch(e=>{ console.error('FATAL:',e.message); process.exit(1); });
