@@ -1,0 +1,41 @@
+name: Refresh Scheduling Rules
+
+on:
+  schedule:
+    - cron: '0 14 * * *'   # 14:00 UTC = 7:00 AM PDT, once per day
+  workflow_dispatch:
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Configure git
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Extract rules from the shared rulebook
+        env:
+          PM_SCHEDULING_TOKEN: ${{ secrets.PM_SCHEDULING_TOKEN }}
+        run: node scripts/extract-rules.js
+
+      - name: Commit updated rules (if changed)
+        run: |
+          git add data/scheduling_rules.json
+          git diff --cached --quiet && { echo "No rule changes"; exit 0; }
+          git commit -m "chore: refresh scheduling rules $(date -u '+%Y-%m-%d %H:%M UTC')"
+          for i in 1 2 3 4 5; do
+            git pull --rebase origin main && git push && exit 0
+            echo "Push attempt $i failed, retrying in $((i * 5))s..."
+            sleep $((i * 5))
+          done
+          exit 1

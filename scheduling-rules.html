@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scheduling Rules — McKay PropertyMeld</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body { font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+         background: #f4f6f9; color: #2c3e50; line-height: 1.6; margin: 0; padding: 0 0 60px; }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 0 20px; }
+  header.pg { background: linear-gradient(135deg, #1a5276, #2e86c1); color: #fff; padding: 36px 0 30px; margin-bottom: 26px; }
+  header.pg h1 { font-size: 1.8rem; font-weight: 700; letter-spacing: -0.3px; }
+  header.pg p { opacity: .92; margin-top: 7px; font-size: 1rem; max-width: 660px; }
+  .updated { margin-top: 14px; font-size: .82rem; opacity: .9; display: inline-flex; align-items: center; gap: 8px; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: #7ee2a8; box-shadow: 0 0 0 3px rgba(126,226,168,.3); }
+  h2.scope { color: #1a5276; font-size: 1.15rem; margin: 26px 0 12px; display: flex; align-items: center; gap: 10px; }
+  h2.scope .count { font-size: .76rem; font-weight: 600; color: #5b6b7b; background: #e9eef4; border-radius: 12px; padding: 1px 9px; }
+  .rule { background: #fff; border: 1px solid #e1e8ef; border-radius: 10px; padding: 16px 18px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(26,82,118,.05); }
+  .rule .cat { display: inline-block; font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: #2470b3; background: #e6f0fa; border-radius: 6px; padding: 2px 9px; margin-bottom: 8px; }
+  .rule .body { font-size: .98rem; }
+  .rule ul { margin: 8px 0 2px 20px; }
+  .rule li { margin-bottom: 4px; font-size: .92rem; color: #44515f; }
+  code { background: #eef3f8; color: #1a5276; padding: 1px 6px; border-radius: 5px; font-family: "SF Mono", Consolas, monospace; font-size: .85em; }
+  .note { background: #eef5fb; border-left: 4px solid #2e86c1; border-radius: 0 8px 8px 0; padding: 13px 16px; font-size: .9rem; margin: 6px 0 22px; }
+  .note strong { color: #1a5276; }
+  footer.pg { text-align: center; color: #9aa7b4; font-size: .8rem; margin-top: 30px; }
+  footer.pg a { color: #2470b3; }
+  .loading, .err { text-align: center; color: #7f8fa4; padding: 40px 0; }
+  .err { color: #c0392b; }
+  a.focusable:focus-visible { outline: 2px solid #2e86c1; outline-offset: 2px; }
+</style>
+</head>
+<body>
+
+<header class="pg">
+  <div class="wrap">
+    <h1>📋 Scheduling Rules</h1>
+    <p>The scheduling rules currently in effect for McKay PropertyMeld auto-scheduling. This page reads the team's shared rulebook and refreshes daily, so new or changed rules show up here on their own.</p>
+    <div class="updated"><span class="dot"></span><span id="updated">Loading…</span></div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="note">
+    <strong>How rules get here:</strong> schedulers change a rule by editing the shared rulebook
+    (<code>pm-scheduling / CLAUDE.md</code>) through Claude. This report pulls from that rulebook
+    once a day — so whatever's listed below is what the automatic scheduler is actually following.
+  </div>
+  <div id="content"><div class="loading">Loading rules…</div></div>
+  <footer class="pg">
+    McKay Property Management · PropertyMeld auto-scheduling · source: <code>pm-scheduling/CLAUDE.md</code>
+  </footer>
+</div>
+
+<script>
+const SCOPE_ORDER = ['All regions', 'Tacoma', 'Spokane', 'Grounds'];
+const SCOPE_ICON  = { 'All regions': '🌐', 'Tacoma': '🌲', 'Spokane': '🏙️', 'Grounds': '🌱' };
+
+function esc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+// minimal, safe markdown: escape first, then **bold**, `code`, *italic*
+function md(s){
+  return esc(s)
+    .replace(/`([^`]+)`/g, '<code>$1</code>')
+    .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+    .replace(/(^|[^*])\*([^*]+)\*(?!\*)/g, '$1<em>$2</em>');
+}
+function ago(iso){
+  const then = new Date(iso), now = new Date(), mins = Math.round((now - then)/60000);
+  if (isNaN(then)) return iso;
+  const d = then.toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'});
+  const t = then.toLocaleTimeString(undefined,{hour:'numeric',minute:'2-digit'});
+  let rel;
+  if (mins < 60) rel = mins + ' min ago';
+  else if (mins < 1440) rel = Math.round(mins/60) + ' hr ago';
+  else rel = Math.round(mins/1440) + ' day(s) ago';
+  return 'Updated ' + d + ' at ' + t + ' (' + rel + ')';
+}
+
+fetch('data/scheduling_rules.json?t=' + Date.now())
+  .then(r => { if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
+  .then(data => {
+    document.getElementById('updated').textContent = ago(data.generated_at || data.last_checked);
+    const rules = data.rules || [];
+    const byScope = {};
+    rules.forEach(r => { (byScope[r.scope] = byScope[r.scope] || []).push(r); });
+    const scopes = [...new Set([...SCOPE_ORDER, ...Object.keys(byScope)])].filter(s => byScope[s]);
+    let html = '';
+    scopes.forEach(scope => {
+      const list = byScope[scope];
+      html += '<h2 class="scope">' + (SCOPE_ICON[scope]||'•') + ' ' + esc(scope) +
+              ' <span class="count">' + list.length + '</span></h2>';
+      list.forEach(rule => {
+        const showCat = rule.category && rule.category.toLowerCase() !== 'general' &&
+                        rule.category.toLowerCase() !== scope.toLowerCase();
+        html += '<div class="rule">';
+        if (showCat) html += '<span class="cat">' + esc(rule.category) + '</span>';
+        html += '<div class="body">' + md(rule.text || rule.category) + '</div>';
+        if (rule.details && rule.details.length) {
+          html += '<ul>' + rule.details.map(d => '<li>' + md(d) + '</li>').join('') + '</ul>';
+        }
+        html += '</div>';
+      });
+    });
+    if (data.note) html += '<div class="note">' + esc(data.note) + '</div>';
+    document.getElementById('content').innerHTML = html || '<div class="loading">No rules found.</div>';
+  })
+  .catch(e => {
+    document.getElementById('updated').textContent = 'Could not load';
+    document.getElementById('content').innerHTML =
+      '<div class="err">Couldn\'t load the rules right now (' + esc(e.message) + '). Try refreshing.</div>';
+  });
+</script>
+</body>
+</html>

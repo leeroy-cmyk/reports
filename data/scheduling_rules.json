@@ -1,0 +1,50 @@
+{
+  "generated_at": "2026-06-25T21:26:55.222Z",
+  "last_checked": "2026-06-25T21:26:55.222Z",
+  "source": "leeroy-cmyk/pm-scheduling/CLAUDE.md",
+  "count": 7,
+  "rules": [
+    {
+      "category": "Reserved days",
+      "text": "never schedule Sunday, Monday, or Saturday.",
+      "details": [],
+      "scope": "All regions"
+    },
+    {
+      "category": "General",
+      "text": "Fill the **nearest open days first**, then compact gaps; never double-book a tech (leave ~30 min buffer between jobs).",
+      "details": [],
+      "scope": "All regions"
+    },
+    {
+      "category": "Preference lock",
+      "text": "if a meld's title or chat asks for a specific day/time/date, honor it and don't move it.",
+      "details": [],
+      "scope": "All regions"
+    },
+    {
+      "category": "General",
+      "text": "Business hours ~8:00–17:30 Pacific. Times are ISO with Pacific offset, e.g. `2026-06-25T09:00:00-07:00`.",
+      "details": [],
+      "scope": "All regions"
+    },
+    {
+      "category": "Tacoma",
+      "text": "Jonas + Armani are the only Tacoma techs; reassign anyone else's Tacoma meld to Jonas.",
+      "details": [],
+      "scope": "Tacoma"
+    },
+    {
+      "category": "Spokane",
+      "text": "all repairs go to **Justin** (Wade Hippen no longer works here); exclude turns/environmental/pest; only reclaim melds from turn techs (Scott/Ron/Magoon) or unassigned — leave David/Alex/Florencia/Dulce alone.",
+      "details": [],
+      "scope": "Spokane"
+    },
+    {
+      "category": "Grounds",
+      "text": "mirror the current week's recurring lawn-service melds to the same slots +7 days.",
+      "details": [],
+      "scope": "Grounds"
+    }
+  ]
+}
