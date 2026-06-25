@@ -113,6 +113,15 @@ function parseRules(md) {
 
   const rules = parseRules(md);
   const now = new Date().toISOString();
+
+  // Only rewrite when the rules actually changed — keeps generated_at meaningful
+  // (= last real change) and avoids a no-op commit on every daily run.
+  let prev = null;
+  if (fs.existsSync(OUT)) { try { prev = JSON.parse(fs.readFileSync(OUT, 'utf8')); } catch (e) {} }
+  if (prev && JSON.stringify(prev.rules) === JSON.stringify(rules)) {
+    console.log('scheduling_rules.json: ' + rules.length + ' rules, unchanged (no write)');
+    return;
+  }
   fs.writeFileSync(OUT, JSON.stringify({
     generated_at: now,
     last_checked: now,
@@ -120,5 +129,5 @@ function parseRules(md) {
     count: rules.length,
     rules,
   }, null, 2));
-  console.log('scheduling_rules.json: ' + rules.length + ' rules');
+  console.log('scheduling_rules.json: ' + rules.length + ' rules (updated)');
 })();
