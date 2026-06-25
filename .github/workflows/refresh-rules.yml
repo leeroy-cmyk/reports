@@ -12,7 +12,18 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout reports (this repo)
+        uses: actions/checkout@v4
+
+      # Pull the shared rulebook (private repo) with a read-only deploy key
+      - name: Checkout pm-scheduling rulebook
+        uses: actions/checkout@v4
+        with:
+          repository: leeroy-cmyk/pm-scheduling
+          ssh-key: ${{ secrets.PM_SCHEDULING_DEPLOY_KEY }}
+          path: _rulebook
+          sparse-checkout: CLAUDE.md
+          sparse-checkout-cone-mode: false
 
       - uses: actions/setup-node@v4
         with:
@@ -25,7 +36,7 @@ jobs:
 
       - name: Extract rules from the shared rulebook
         env:
-          PM_SCHEDULING_TOKEN: ${{ secrets.PM_SCHEDULING_TOKEN }}
+          RULES_LOCAL_FILE: _rulebook/CLAUDE.md
         run: node scripts/extract-rules.js
 
       - name: Commit updated rules (if changed)

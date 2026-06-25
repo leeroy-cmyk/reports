@@ -48,8 +48,6 @@ function getMarkdown() {
   return fetchRemote();
 }
 
-const REGIONS = ['Tacoma', 'Spokane', 'Grounds'];
-
 function parseRules(md) {
   const lines = md.split(/\r?\n/);
   let start = -1;
@@ -58,38 +56,42 @@ function parseRules(md) {
   }
   if (start < 0) return [];
   const rules = [];
+  let group = 'General';                 // current ### subsection
   let cur = null;
   const push = () => { if (cur) { rules.push(cur); cur = null; } };
   for (let i = start; i < lines.length; i++) {
     const line = lines[i];
-    if (/^##\s/.test(line)) break;                 // next section ends the rulebook
+    if (/^##\s/.test(line)) break;                          // next ## section ends the rulebook
+    const h3 = line.match(/^###\s+(.*)$/);
+    if (h3) { push(); group = h3[1].replace(/\s*[—-].*$/, '').trim() || h3[1].trim(); continue; }  // "Tacoma — tc68" -> "Tacoma"
     const top = line.match(/^-\s+(.*)$/);
     const sub = line.match(/^\s+-\s+(.*)$/);
     if (top) {
       push();
-      let txt = top[1].trim();
-      let category = 'General';
-      const b = txt.match(/^\*\*(.+?)\*\*\s*[:：]?\s*[-—]?\s*/);   // leading **Label** (— / : optional)
+      const full = top[1].trim();
+      let txt = full;
+      let category = '';
+      const b = full.match(/^\*\*(.+?)\*\*(.*)$/);          // leading **bold** + remainder
       if (b) {
-        const label = b[1].replace(/[:：]\s*$/, '').trim();
-        txt = txt.slice(b[0].length).trim();
-        if (!txt) {
-          // whole bullet was bold — split "Label — rule text" if there's a separator
-          const m = label.match(/^(.+?)\s+[—-]\s+(.+)$/);
-          if (m) { category = m[1].trim(); txt = m[2].trim(); } else { category = label; }
-        } else {
-          category = label;
+        const inner = b[1].trim();
+        const after = b[2];
+        if (/[:：]\s*$/.test(inner)) {                      // "**Label:** rest" — clear label
+          category = inner.replace(/[:：]\s*$/, '').trim();
+          txt = after.trim();
+        } else if (after.trim() === '') {                  // whole bullet is bold
+          const m = inner.match(/^(.+?)\s+—\s+(.+)$/);      // "**Label — rule.**"
+          if (m) { category = m[1].trim(); txt = m[2].trim(); } else { txt = inner; }
         }
+        // else: mid-sentence emphasis → keep full bullet, render bold inline (category stays '')
       }
-      cur = { category, text: txt, details: [] };
+      cur = { group, category, text: txt, details: [] };
     } else if (sub && cur) {
       cur.details.push(sub[1].trim());
     } else if (cur && line.trim()) {
-      cur.text += (cur.text ? ' ' : '') + line.trim();   // wrapped continuation line
+      cur.text += (cur.text ? ' ' : '') + line.trim();             // wrapped continuation line
     }
   }
   push();
-  rules.forEach(r => { r.scope = REGIONS.find(rg => new RegExp('^' + rg, 'i').test(r.category)) || 'All regions'; });
   return rules;
 }
 

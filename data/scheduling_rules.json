@@ -1,50 +1,163 @@
 {
-  "generated_at": "2026-06-25T21:26:55.222Z",
-  "last_checked": "2026-06-25T21:26:55.222Z",
+  "generated_at": "2026-06-25T21:36:53.818Z",
+  "last_checked": "2026-06-25T21:36:53.818Z",
   "source": "leeroy-cmyk/pm-scheduling/CLAUDE.md",
-  "count": 7,
+  "count": 22,
   "rules": [
     {
+      "group": "General",
       "category": "Reserved days",
-      "text": "never schedule Sunday, Monday, or Saturday.",
-      "details": [],
-      "scope": "All regions"
+      "text": "never schedule **Sunday, Monday, or Saturday**. Monday is held open as an emergency reserve. Work is booked **Tuesday–Friday** only.",
+      "details": [
+        "\"Today\" is never used either — except a job whose stated preferred date is today, or a past-due job that needs the soonest slot."
+      ]
     },
     {
-      "category": "General",
-      "text": "Fill the **nearest open days first**, then compact gaps; never double-book a tech (leave ~30 min buffer between jobs).",
-      "details": [],
-      "scope": "All regions"
+      "group": "General",
+      "category": "Business hours",
+      "text": "roughly **8:00 AM – 5:30 PM Pacific**. Times are stored with the Pacific time-zone offset (e.g. `2026-06-25T09:00:00-07:00`).",
+      "details": []
     },
     {
-      "category": "Preference lock",
-      "text": "if a meld's title or chat asks for a specific day/time/date, honor it and don't move it.",
-      "details": [],
-      "scope": "All regions"
+      "group": "General",
+      "category": "",
+      "text": "**Fill the nearest open days first**, packing densely from 8 AM, then a daily **compaction pass** pulls later jobs into the earliest open slots. Keep about a **30-minute buffer** between jobs and never double-book a tech.",
+      "details": [
+        "Busy time is read from the tech's **entire** calendar (including turns), so it never books on top of an all-day turn.",
+        "Compaction is idempotent — once everything is packed, a re-run changes nothing."
+      ]
     },
     {
-      "category": "General",
-      "text": "Business hours ~8:00–17:30 Pacific. Times are ISO with Pacific offset, e.g. `2026-06-25T09:00:00-07:00`.",
-      "details": [],
-      "scope": "All regions"
+      "group": "General",
+      "category": "Priority order",
+      "text": "Emergency / Urgent → High → Normal / Medium → Low.",
+      "details": []
     },
     {
-      "category": "Tacoma",
-      "text": "Jonas + Armani are the only Tacoma techs; reassign anyone else's Tacoma meld to Jonas.",
-      "details": [],
-      "scope": "Tacoma"
+      "group": "General",
+      "category": "Past due",
+      "text": "if a job's scheduled time passes without completion, reschedule it to the next available slot (keeping priority order). Never leave a past-due job unscheduled.",
+      "details": []
     },
     {
-      "category": "Spokane",
-      "text": "all repairs go to **Justin** (Wade Hippen no longer works here); exclude turns/environmental/pest; only reclaim melds from turn techs (Scott/Ron/Magoon) or unassigned — leave David/Alex/Florencia/Dulce alone.",
-      "details": [],
-      "scope": "Spokane"
+      "group": "General",
+      "category": "",
+      "text": "**Preference lock — honor a stated day/time/date.** If a work order's **title or chat** asks for a specific day, time, or date, the scheduler books it there and won't move it.",
+      "details": [
+        "Locked jobs are exempt from compaction, blocked-day moves, and overlap moves — a stated preference is never overridden by packing.",
+        "Ordinal dates are understood (\"June 18th\"). A stated date of **today** books same-day; a date in the **past** is dropped (job scheduled ASAP).",
+        "Only the **title** and a genuine **chat request** count — office-hours boilerplate (\"Mon–Fri 9–5\") is never treated as a preference."
+      ]
     },
     {
-      "category": "Grounds",
-      "text": "mirror the current week's recurring lawn-service melds to the same slots +7 days.",
-      "details": [],
-      "scope": "Grounds"
+      "group": "General",
+      "category": "",
+      "text": "**Reads the chat.** It reads each job's recent messages for reschedule requests, resident preferred times, and duration hints, and accommodates residents when possible (without overriding Emergency/Urgent).",
+      "details": [
+        "A Claude \"chat reader\" interprets the intent; the code still applies every rule above. If it's unavailable, a keyword reader is the fallback.",
+        "**Not-yet-scheduled** jobs honor requests from the last **30 days**; **already-scheduled** jobs only act on messages from the last **~26 hours** (so an old message doesn't re-shuffle the calendar every day).",
+        "\"Earlier / sooner / before Monday\" means **avoid** that day and find an earlier slot — not book on it.",
+        "Duration hints are only trusted between **15 minutes and 4 hours** (avoids reading \"within 48 hours\" as a 48-hour job)."
+      ]
+    },
+    {
+      "group": "General",
+      "category": "Schedule stability",
+      "text": "don't reshuffle without a reason — only move work for a higher priority, a past-due job, or a valid resident conflict.",
+      "details": []
+    },
+    {
+      "group": "General",
+      "category": "Self-heal",
+      "text": "any appointment that lands on a reserved day (Mon/Sat/Sun) or that double-books a tech is automatically relocated.",
+      "details": []
+    },
+    {
+      "group": "General",
+      "category": "Preview before live",
+      "text": "always dry-run a change first. Live runs happen only in the cloud (see \"How it runs\").",
+      "details": []
+    },
+    {
+      "group": "Tacoma",
+      "category": "",
+      "text": "**Only Jonas Hoard and Armani Mitchell work Tacoma.** Jonas takes all non-turn repairs; Armani takes turns.",
+      "details": [
+        "Any non-turn tc68/tc34 job found on a different tech is **reassigned to Jonas** (e.g. Margarito is Tri-Cities, not Tacoma)."
+      ]
+    },
+    {
+      "group": "Tacoma",
+      "category": "",
+      "text": "**Jonas does every work type here, including lawn / Environmental** — unlike Spokane, grounds work at tc68/tc34 is not split off to anyone else.",
+      "details": []
+    },
+    {
+      "group": "Tacoma",
+      "category": "",
+      "text": "**Turns** (project melds) go to Armani; the repair scheduler leaves them alone. (Dulce Salinas legitimately appears on \"AppFolio Estimate\" turn melds.)",
+      "details": []
+    },
+    {
+      "group": "Spokane",
+      "category": "",
+      "text": "**All repairs go to Justin Gutierrez.** Wade Hippen no longer works here — any job still sitting on Wade is reclaimed and reassigned to Justin.",
+      "details": []
+    },
+    {
+      "group": "Spokane",
+      "category": "",
+      "text": "**Covers** the Spokane property group plus Our Natural Homes.",
+      "details": []
+    },
+    {
+      "group": "Spokane",
+      "category": "Excluded",
+      "text": "turns, Environmental (those go to the grounds team), and pest. Unassigned pest is never auto-assigned.",
+      "details": []
+    },
+    {
+      "group": "Spokane",
+      "category": "",
+      "text": "**Only reclaim** a repair from the turn techs (Scott Higley, Ron Cramer, Micheal Magoon) when they're wrongly holding a plain repair, or from unassigned non-pest jobs.",
+      "details": [
+        "**Leave alone:** David & Alexander (grounds), **Florencia** (pest), and Dulce (estimates) — those assignments are intentional."
+      ]
+    },
+    {
+      "group": "Spokane",
+      "category": "Resident time windows",
+      "text": "when a job needs the tenant present, the scheduler reads the tenant's chosen availability windows and books inside one.",
+      "details": [
+        "If the needed days are full, it can **bump** a lower-priority, movable, unlocked job to a later slot to free room for an emergency or a resident window (bounded to a couple of bumps)."
+      ]
+    },
+    {
+      "group": "Spokane",
+      "category": "",
+      "text": "**Pest \"attend treatment\" jobs** are date-pinned: the date is fixed and the exact time is vendor-driven (left to a person).",
+      "details": []
+    },
+    {
+      "group": "Spokane",
+      "category": "",
+      "text": "Only **one appointment per job** is kept — duplicate appointments are cleaned up so they can't cause double-booking.",
+      "details": []
+    },
+    {
+      "group": "Grounds / Lawn",
+      "category": "",
+      "text": "**David Sanchez and Alexander Overall** handle recurring \"Lawn service\" melds in Spokane (plus Our Natural Homes). Repairs and other techs' work are not touched.",
+      "details": []
+    },
+    {
+      "group": "Grounds / Lawn",
+      "category": "",
+      "text": "Each week's recurring lawn melds are snapped to a **canonical template week** (a fixed day, time, and duration per property) and mirrored forward **+7 days**, so the times never drift week to week.",
+      "details": [
+        "A property lands on the calendar as often as PropertyMeld generates its instance — most are weekly; a few (e.g. h731) are intentionally bi-weekly.",
+        "A new recurrence not yet in the template is flagged as UNKNOWN so it can be added to the template."
+      ]
     }
   ]
 }
