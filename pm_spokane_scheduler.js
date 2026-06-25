@@ -1,9 +1,11 @@
 #!/usr/bin/env node
 /**
- * PropertyMeld Spokane Scheduler — Wade Hippen + Justin Gutierrez (repairs).
+ * PropertyMeld Spokane Scheduler — Justin Gutierrez (repairs).
+ * (Wade Hippen quit 2026-06-25; Justin is now the sole repairs tech — any meld still
+ *  on Wade is reclaimed and reassigned to Justin.)
  * Runs daily via GitHub Actions (.github/workflows/pm-spokane-scheduler.yml).
  * Full parity with the Tacoma (Jonas) scheduler: assigns/reassigns Spokane non-turn
- * repairs to Wade/Justin (balanced), honors stated day/time/date preferences, reads
+ * repairs to Justin, honors stated day/time/date preferences, reads
  * chats, reschedules past-due, relocates anything on a reserved day (Mon/weekend) or
  * double-booked, then compacts each tech's calendar to fill the nearest days first.
  * Set DRY_RUN=1 to preview without writing.
@@ -16,8 +18,10 @@ const https = require('https');
 const { analyzeChat } = require('./pm_chat_llm'); // LLM chat reader; no-ops to null without ANTHROPIC_API_KEY
 const BASE = 'https://app.propertymeld.com', MGMT = '2975';
 const WADE_ID = 48355, JUSTIN_ID = 59624;
-const TECHS = [{ id: WADE_ID, name: 'Wade' }, { id: JUSTIN_ID, name: 'Justin' }];
-const TECH_IDS = new Set([WADE_ID, JUSTIN_ID]);
+// Wade Hippen quit (last day 2026-06-25). Justin Gutierrez is now the sole Spokane repairs tech.
+const TECHS = [{ id: JUSTIN_ID, name: 'Justin' }];
+const TECH_IDS = new Set([JUSTIN_ID]);
+const FORMER_TECHS = new Set([WADE_ID]); // anything still on Wade gets reclaimed → reassigned to Justin
 const SPOKANE_GROUPS = [25113, 25115];
 const DRY = !!process.env.DRY_RUN;
 const PEST_RE = /pest|bed.?bug|termite|rodent|mice|mouse|trap|exterminate|infest/i;
@@ -239,7 +243,8 @@ const TURN_TECHS=new Set([48356,48379,50779]); // Scott Higley, Ron Cramer, Mich
 function inScope(m){
   if(!isSpokaneRepair(m))return false;
   const ids=(m.in_house_servicers||[]).map(s=>s.agent&&s.agent.id).filter(Boolean);
-  if(ids.some(id=>TECH_IDS.has(id)))return true;                       // already Wade/Justin
+  if(ids.some(id=>TECH_IDS.has(id)))return true;                       // already on a current tech (Justin)
+  if(ids.some(id=>FORMER_TECHS.has(id)))return true;                   // still on Wade (quit) → reclaim to Justin
   if(ids.length===0)return !PEST_RE.test(m.brief_description||'');     // unassigned non-pest → claim
   if(ids.every(id=>TURN_TECHS.has(id)))return true;                    // turn tech wrongly holds a repair → reclaim
   return false;                                                        // anyone else → leave alone
@@ -249,11 +254,11 @@ function inScope(m){
 async function main(){
   const {sc,csrf}=await login();
   const today=localDate();
-  console.log('=== Spokane Scheduler (Wade+Justin) '+new Date().toISOString()+(DRY?' [DRY_RUN]':'')+' ===');
+  console.log('=== Spokane Scheduler (Justin) '+new Date().toISOString()+(DRY?' [DRY_RUN]':'')+' ===');
 
   // 1. Fetch all melds across statuses; collect Spokane repairs + each tech's full calendar
   const statuses=['PENDING_ASSIGNMENT','PENDING_MORE_MANAGEMENT_AVAILABILITY','PENDING_COMPLETION'];
-  let repairs=[]; const techAll={[WADE_ID]:[],[JUSTIN_ID]:[]};
+  let repairs=[]; const techAll={}; for(const t of TECHS) techAll[t.id]=[];
   for(const s of statuses){ let off=0; while(true){ const r=await apiGet('/api/melds/?limit=200&offset='+off+'&status='+s,sc,csrf); if(r.status!==200)break; const d=JSON.parse(r.body);
     (d.results||[]).forEach(m=>{ if(inScope(m))repairs.push(m); for(const t of TECHS) if(hasTech(m,t.id))techAll[t.id].push(m); });
     if(!d.next||!d.results||!d.results.length)break; off+=200; } }
@@ -264,32 +269,30 @@ async function main(){
   // calendars, so ghost duplicates can't cause silent double-booking. Mutates the meld objects.
   for(const t of TECHS) await dedupeAppts(techAll[t.id], sc, csrf);
 
-  // 2. Assign/reassign: balance unassigned + non-Spokane-tech melds onto Wade/Justin
-  let load={[WADE_ID]:techAll[WADE_ID].length,[JUSTIN_ID]:techAll[JUSTIN_ID].length};
+  // 2. Assign/reassign: route unassigned, non-Spokane-tech, and former-tech (Wade) melds → Justin.
+  let load={[JUSTIN_ID]:techAll[JUSTIN_ID].length};
   for(const m of repairs){
-    if(hasTech(m,WADE_ID)||hasTech(m,JUSTIN_ID))continue;        // already on a Spokane tech
+    if(hasTech(m,JUSTIN_ID))continue;                            // already on Justin
     if(PEST_RE.test(m.brief_description||''))continue;            // never auto-assign pest
     const others=(m.in_house_servicers||[]).map(s=>((s.agent?.first_name||'')+' '+(s.agent?.last_name||'')).trim()).filter(Boolean);
-    const to= load[JUSTIN_ID]<load[WADE_ID] ? JUSTIN_ID : WADE_ID;  // lighter tech (Wade on tie)
-    const name= to===WADE_ID?'Wade':'Justin';
-    console.log((others.length?'Reassigning '+m.reference_id+' to '+name+' (was on non-Spokane tech: '+others.join(', ')+')':'Auto-assigning '+m.reference_id+' to '+name+' (unassigned)'));
-    const r=await apiPatch('/api/melds/'+m.id+'/assign-maintenance/',sc,csrf,{maintenance:[{id:to,type:'ManagementAgent'}],user_groups:[]});
-    if(r.status<300){ m.in_house_servicers=[{agent:{id:to,first_name:name}}]; load[to]++; techAll[to].push(m); }
+    console.log((others.length?'Reassigning '+m.reference_id+' to Justin (was on: '+others.join(', ')+')':'Auto-assigning '+m.reference_id+' to Justin (unassigned)'));
+    const r=await apiPatch('/api/melds/'+m.id+'/assign-maintenance/',sc,csrf,{maintenance:[{id:JUSTIN_ID,type:'ManagementAgent'}],user_groups:[]});
+    if(r.status<300){ m.in_house_servicers=[{agent:{id:JUSTIN_ID,first_name:'Justin'}}]; load[JUSTIN_ID]++; techAll[JUSTIN_ID].push(m); }
     else console.log('  Failed to assign: '+r.status);
   }
-  console.log('Spokane repair melds: '+repairs.length+' | Wade load '+load[WADE_ID]+' / Justin load '+load[JUSTIN_ID]);
+  console.log('Spokane repair melds: '+repairs.length+' | Justin load '+load[JUSTIN_ID]);
 
   // 3. Per-tech busy calendars + overlap detection (whole calendar, so we never double-book)
-  const busy={[WADE_ID]:buildBusyBlocks(techAll[WADE_ID]),[JUSTIN_ID]:buildBusyBlocks(techAll[JUSTIN_ID])};
-  const overlapIds=new Set([...findOverlaps(techAll[WADE_ID]),...findOverlaps(techAll[JUSTIN_ID])]);
+  const busy={}; for(const t of TECHS) busy[t.id]=buildBusyBlocks(techAll[t.id]);
+  const overlapIds=new Set(); for(const t of TECHS) for(const id of findOverlaps(techAll[t.id])) overlapIds.add(id);
   if(overlapIds.size)console.log('Overlapping appointments to relocate: '+overlapIds.size);
   const lockedPrefs=new Map();
 
   // 4. Decide + apply per meld
-  const techIdOf=m=>hasTech(m,WADE_ID)?WADE_ID:(hasTech(m,JUSTIN_ID)?JUSTIN_ID:null);
+  const techIdOf=m=>{for(const t of TECHS)if(hasTech(m,t.id))return t.id;return null;};
   for(const m of repairs){
     const tid=techIdOf(m); if(!tid)continue;                     // pest left unassigned, etc.
-    const tName=tid===WADE_ID?'Wade':'Justin';
+    const tName=(TECHS.find(t=>t.id===tid)||{}).name||'tech';
     const ref=m.reference_id, brief=m.brief_description||'', priority=m.priority||'Normal';
     const apptEvt=getMeldAppt(m); const apptDate=apptEvt?pdtDate(apptEvt.dtstart):null;
     const isPastDue=apptEvt&&apptDate<today; const isUnscheduled=!apptEvt;
@@ -387,7 +390,7 @@ async function main(){
   // 5. Compaction — per tech, pull scheduled repairs into nearest open slots. Locked melds exempt.
   // REFETCH fresh state first: the main loop mutated PM appointments but not the in-memory
   // objects, so compacting off stale appts would re-create overlaps.
-  const freshByTech={[WADE_ID]:[],[JUSTIN_ID]:[]};
+  const freshByTech={}; for(const t of TECHS) freshByTech[t.id]=[];
   for(const s of statuses){ let off=0; while(true){ const r=await apiGet('/api/melds/?limit=200&offset='+off+'&status='+s,sc,csrf); if(r.status!==200)break; const d=JSON.parse(r.body); (d.results||[]).forEach(m=>{ for(const t of TECHS) if(hasTech(m,t.id))freshByTech[t.id].push(m); }); if(!d.next||!d.results||!d.results.length)break; off+=200; } }
   for(const t of TECHS){ const sd=new Set(); freshByTech[t.id]=freshByTech[t.id].filter(m=>{if(sd.has(m.id))return false;sd.add(m.id);return true;}); }
   let pulled=0;
