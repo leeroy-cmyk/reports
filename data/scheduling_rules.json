@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-06-25T21:38:40.853Z",
-  "last_checked": "2026-06-25T21:38:40.853Z",
+  "generated_at": "2026-06-29T16:50:59.560Z",
+  "last_checked": "2026-06-29T16:50:59.560Z",
   "source": "leeroy-cmyk/pm-scheduling/CLAUDE.md",
-  "count": 22,
+  "count": 23,
   "rules": [
     {
       "group": "General",
@@ -37,6 +37,12 @@
       "group": "General",
       "category": "Past due",
       "text": "if a job's scheduled time passes without completion, reschedule it to the next available slot (keeping priority order). Never leave a past-due job unscheduled.",
+      "details": []
+    },
+    {
+      "group": "General",
+      "category": "Emergency / Urgent — schedule today, first",
+      "text": "Emergency and Urgent melds are sorted to the front of the queue and scheduled on today's date (the current day), overriding the Monday and \"no today\" restrictions. They land at the first available slot of the day (8am or first open slot). All other melds continue to respect the Tue–Fri rule and never land on today. Sat/Sun remain blocked even for emergencies.",
       "details": []
     },
     {
