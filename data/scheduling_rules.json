@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-07-01T16:22:51.800Z",
-  "last_checked": "2026-07-01T16:22:51.800Z",
+  "generated_at": "2026-07-02T16:02:36.865Z",
+  "last_checked": "2026-07-02T16:02:36.865Z",
   "source": "leeroy-cmyk/pm-scheduling/CLAUDE.md",
-  "count": 24,
+  "count": 27,
   "rules": [
     {
       "group": "General",
@@ -140,9 +140,7 @@
       "group": "Spokane",
       "category": "Resident time windows",
       "text": "when a job needs the tenant present, the scheduler reads the tenant's chosen availability windows and books inside one.",
-      "details": [
-        "If the needed days are full, it can **bump** a lower-priority, movable, unlocked job to a later slot to free room for an emergency or a resident window (bounded to a couple of bumps)."
-      ]
+      "details": []
     },
     {
       "group": "Spokane",
@@ -155,6 +153,29 @@
       "category": "",
       "text": "Only **one appointment per job** is kept — duplicate appointments are cleaned up so they can't cause double-booking.",
       "details": []
+    },
+    {
+      "group": "Spokane",
+      "category": "Emergency/Urgent always goes FIRST on today's calendar (rewritten 2026-07-02)",
+      "text": "an emergency is never wedged into whatever gap happens to be free — it takes the earliest available time today, and whatever else is already on today's calendar shifts LATER that same day to make room (`insertEmergencyToday`). An already-committed today appointment is **never** moved to a different date for this — the resident is expecting Justin today regardless, so the day's close time can stretch past the normal 4pm, up to **6pm** (`EMERGENCY_EXTENDED_CLOSE`), instead. A today job with a stated resident preference/lock is left in place, never shifted.",
+      "details": []
+    },
+    {
+      "group": "Spokane",
+      "category": "Property-aware buffer (added 2026-07-02)",
+      "text": "the 30-minute buffer between jobs exists for drive time between properties — back-to-back jobs at the SAME property (e.g. two units in the same building) need no buffer, since Justin is already on site. The buffer only applies between jobs at different properties. This applies everywhere a slot is searched, including the emergency shift above and the same-day gap-closing pass below.",
+      "details": []
+    },
+    {
+      "group": "Spokane",
+      "category": "Property clustering (permanent, added 2026-07-01)",
+      "text": "plain new/past-due repairs (no chat/pref/emergency trigger) are placed by building CODE PREFIX (e.g. \"k104\"), not pure priority+earliest-slot — the goal is Justin spending a whole day at one property instead of bouncing around. A new job first looks for an existing future day already dedicated to its property with room; if none, it starts a fresh day on the nearest completely open work day; if neither is possible within 90 days, it falls back to the plain earliest-slot search so nothing goes unscheduled.",
+      "details": [
+        "**Never moves the DATE of an already-scheduled job.** The only exception is same-day gap-closing (`sameDayCompaction`): every day is swept for gaps that no longer need to exist — a cancellation leaving a hole mid-day, or (since 2026-07-02) a same-property pair still carrying a buffer from before the property-aware rule existed — and the jobs after the gap (same day only, not preference-locked) shift earlier to close it. This is what replaced the old cross-day compaction, which used to undo clustering by pulling melds to the nearest open slot regardless of property.",
+        "Chat-driven reschedules and preference locks are unaffected by clustering — they keep their existing (higher-priority) behavior and can break a day's property theme for that one visit.",
+        "One-time backlog rebuild done 2026-07-01 via `pm_spokane_property_test.js` (kept in the repo as the reference implementation / for any future one-time re-clustering; not run automatically).",
+        "**Cross-day gap-filling (`pm_spokane_fill_gaps.js`, added 2026-07-02) — MANUAL only, not in any workflow.** A day that isn't fully booked 8am-4pm delays the backlog and eats an extra calendar day for no reason. Run this by hand (`DRY_RUN=1 node pm_spokane_fill_gaps.js` to preview, `node pm_spokane_fill_gaps.js` live) to pull melds forward from later days into a day's open tail time, in this order: (a) more of that day's own property from the nearest later day, (b) a complete different-property day/group that fits the gap entirely, (c) loose singles (priority, then oldest-created first) — capped to one per source day (its current last job) so a pull never leaves a fresh gap behind. Skips today, locked/preference melds, and Emergency/Urgent. Kept manual deliberately (per Florencia, 2026-07-02) until it's been watched working correctly for a while — it moves already-scheduled jobs across dates, which is exactly what the \"never move an already-scheduled date\" rule above normally forbids."
+      ]
     },
     {
       "group": "Grounds / Lawn",
