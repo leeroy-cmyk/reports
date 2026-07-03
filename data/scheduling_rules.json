@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-07-02T16:02:36.865Z",
-  "last_checked": "2026-07-02T16:02:36.865Z",
+  "generated_at": "2026-07-03T15:50:34.800Z",
+  "last_checked": "2026-07-03T15:50:34.800Z",
   "source": "leeroy-cmyk/pm-scheduling/CLAUDE.md",
-  "count": 27,
+  "count": 28,
   "rules": [
     {
       "group": "General",
@@ -42,8 +42,10 @@
     {
       "group": "General",
       "category": "Emergency / Urgent — schedule today, first",
-      "text": "Emergency and Urgent melds are sorted to the front of the queue and scheduled on today's date (the current day), overriding the Monday and \"no today\" restrictions. They land at the first available slot of the day (8am or first open slot). All other melds continue to respect the Tue–Fri rule and never land on today. Sat/Sun remain blocked even for emergencies.",
-      "details": []
+      "text": "Emergency and Urgent melds are sorted to the front of the queue and scheduled on today's date (the current day), overriding the Monday and \"no today\" restrictions. All other melds continue to respect the Tue–Fri rule and never land on today. Sat/Sun remain blocked even for emergencies.",
+      "details": [
+        "**Always goes first, never bumped to another date (rewritten 2026-07-02, both Tacoma and Spokane):** the emergency takes the earliest available slot on today's calendar — never just wedged into whatever gap happens to be free. Whatever else is already on today's calendar shifts LATER that same day to make room; an already-committed today appointment is never moved to a different date (the resident is expecting the tech today regardless). Today's close can stretch past the normal close time to fit everyone in — see each region's section below for its specific allowance. A today job with a stated resident preference/lock is never shifted."
+      ]
     },
     {
       "group": "General",
@@ -102,6 +104,12 @@
       "group": "Tacoma",
       "category": "",
       "text": "**Turns** (project melds) go to Armani; the repair scheduler leaves them alone. (Dulce Salinas legitimately appears on \"AppFolio Estimate\" turn melds.)",
+      "details": []
+    },
+    {
+      "group": "Tacoma",
+      "category": "",
+      "text": "**Emergency/Urgent extended close: 7pm** (`EMERGENCY_EXTENDED_CLOSE` in `pm_scheduler.js`) — same +2h allowance over Tacoma's normal 5pm close that Spokane uses over its own. No property clustering here, so every shift (emergency vs. whatever it displaces) uses the flat 0.5h buffer — there's no same-property exception like Spokane's.",
       "details": []
     },
     {
@@ -169,12 +177,12 @@
     {
       "group": "Spokane",
       "category": "Property clustering (permanent, added 2026-07-01)",
-      "text": "plain new/past-due repairs (no chat/pref/emergency trigger) are placed by building CODE PREFIX (e.g. \"k104\"), not pure priority+earliest-slot — the goal is Justin spending a whole day at one property instead of bouncing around. A new job first looks for an existing future day already dedicated to its property with room; if none, it starts a fresh day on the nearest completely open work day; if neither is possible within 90 days, it falls back to the plain earliest-slot search so nothing goes unscheduled.",
+      "text": "plain new/past-due repairs (no chat/pref/emergency trigger) are placed by building CODE PREFIX (e.g. \"k104\"), not pure priority+earliest-slot — the goal is Justin spending a whole day at one property instead of bouncing around. A new job first looks for an existing future day already dedicated to its property with room; if none, it starts a fresh day on the nearest completely open work day; if neither is possible within 90 days, it falls back to the plain earliest-slot search so nothing goes unscheduled. 1. **Declutter:** a day where no property has 2+ melds (every job is a lone stop) has zero clustering value — relocate its singles, one at a time, to any OTHER day that already has a real cluster of its own, regardless of destination property (a lone stop's drive time doesn't depend on which day it lands on). Never dumps into another weak/lone day or a completely empty one — that would just relocate the clutter instead of solving it. Frees the day entirely for a future same-property block to move into. 2. **Gap-fill:** pulls melds forward into a day's open tail time — (a) more of that day's own property from the nearest later day, (b) a complete different-property day/group that fits the gap entirely, (c) loose singles (priority, then oldest-created first), capped to one per source day (its current last job) so a pull never leaves a fresh gap behind. 3. **Same-property consolidation:** a property scattered across multiple days is merged onto whichever of those days already has the most of it, REBUILT from 8am — that property's block first (existing + pulled-in candidates), then any other-property filler that was already on that day. May run past the normal 4pm close, up to **6pm** (`CONSOLIDATION_EXTENDED_CLOSE`) — keeping a property together outweighs the exact close time (Florencia, 2026-07-02). All three passes skip today, locked/preference melds, Emergency/Urgent, and — per Florencia, 2026-07-02 — **anything on or before `FREEZE_THROUGH` (2026-07-13)**; the schedule-change window only covers dates after that. Kept manual deliberately until it's been watched working correctly for a while — it moves already-scheduled jobs across dates, which is exactly what the \"never move an already-scheduled date\" rule above normally forbids.",
       "details": [
         "**Never moves the DATE of an already-scheduled job.** The only exception is same-day gap-closing (`sameDayCompaction`): every day is swept for gaps that no longer need to exist — a cancellation leaving a hole mid-day, or (since 2026-07-02) a same-property pair still carrying a buffer from before the property-aware rule existed — and the jobs after the gap (same day only, not preference-locked) shift earlier to close it. This is what replaced the old cross-day compaction, which used to undo clustering by pulling melds to the nearest open slot regardless of property.",
         "Chat-driven reschedules and preference locks are unaffected by clustering — they keep their existing (higher-priority) behavior and can break a day's property theme for that one visit.",
         "One-time backlog rebuild done 2026-07-01 via `pm_spokane_property_test.js` (kept in the repo as the reference implementation / for any future one-time re-clustering; not run automatically).",
-        "**Cross-day gap-filling (`pm_spokane_fill_gaps.js`, added 2026-07-02) — MANUAL only, not in any workflow.** A day that isn't fully booked 8am-4pm delays the backlog and eats an extra calendar day for no reason. Run this by hand (`DRY_RUN=1 node pm_spokane_fill_gaps.js` to preview, `node pm_spokane_fill_gaps.js` live) to pull melds forward from later days into a day's open tail time, in this order: (a) more of that day's own property from the nearest later day, (b) a complete different-property day/group that fits the gap entirely, (c) loose singles (priority, then oldest-created first) — capped to one per source day (its current last job) so a pull never leaves a fresh gap behind. Skips today, locked/preference melds, and Emergency/Urgent. Kept manual deliberately (per Florencia, 2026-07-02) until it's been watched working correctly for a while — it moves already-scheduled jobs across dates, which is exactly what the \"never move an already-scheduled date\" rule above normally forbids."
+        "**Cross-day gap-filling (`pm_spokane_fill_gaps.js`, added 2026-07-02) — MANUAL only, not in any workflow.** A day that isn't fully booked 8am-4pm — including a completely empty workday sitting before later work — delays the backlog and eats an extra calendar day for no reason. Run this by hand (`DRY_RUN=1 node pm_spokane_fill_gaps.js` to preview, `node pm_spokane_fill_gaps.js` live). Three passes, in order:"
       ]
     },
     {
