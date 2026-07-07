@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-07-03T15:50:34.800Z",
-  "last_checked": "2026-07-03T15:50:34.800Z",
+  "generated_at": "2026-07-07T16:25:31.681Z",
+  "last_checked": "2026-07-07T16:25:31.681Z",
   "source": "leeroy-cmyk/pm-scheduling/CLAUDE.md",
-  "count": 28,
+  "count": 34,
   "rules": [
     {
       "group": "General",
@@ -199,6 +199,42 @@
         "A property lands on the calendar as often as PropertyMeld generates its instance — most are weekly; a few (e.g. h731) are intentionally bi-weekly.",
         "A new recurrence not yet in the template is flagged as UNKNOWN so it can be added to the template."
       ]
+    },
+    {
+      "group": "Tri",
+      "category": "",
+      "text": "**Reynaldo Leonides (\"Rey\")** handles lawn, city-clustered: Mon+Tue kn47-K1 (two weekly blocks), Wed kn47-K1 \"extras\" (periodic items — bed weeding, irrigation checks, tree limb clearance, flower bed refresh, weed spraying — each has its own fixed Wednesday slot so simultaneous due-dates never overlap), Thu Richland (rl16 + rl21), Fri Pasco (ps17 + ps25 + ps91).",
+      "details": []
+    },
+    {
+      "group": "Tri",
+      "category": "",
+      "text": "**Hannah Deckard** handles grounds/porter work: Tue Pasco, Wed Richland, Mon/Thu/Fri Kennewick (kn47 K1).",
+      "details": []
+    },
+    {
+      "group": "Tri",
+      "category": "",
+      "text": "**Scope is deliberately narrow — recurring melds ONLY.** One-off melds for Rey/Hannah (sprinkler repairs, pest issues, bulk furniture, etc.) are always placed manually by Florencia or the tech — this scheduler never touches them, and has no Emergency/Urgent override logic (not needed since one-offs, where an emergency would live, are out of scope entirely).",
+      "details": []
+    },
+    {
+      "group": "Tri",
+      "category": "",
+      "text": "**No Monday reserve** — unlike Tacoma/Spokane, Rey and Hannah work a normal Mon–Fri week (no emergency-driven Monday hold), same as Spokane's David/Alexander.",
+      "details": []
+    },
+    {
+      "group": "Tri",
+      "category": "",
+      "text": "**Never touches the current week** — only schedules starting the Monday after the current week, same convention as the Spokane lawn template.",
+      "details": []
+    },
+    {
+      "group": "Tri",
+      "category": "\"Litter Pickup\" special case (Hannah, recurring id 153870)",
+      "text": "runs every 3 days, so it doesn't map to one fixed weekday like the rest of the template. It rotates through a fixed 3-slot cycle each time a new instance needs placing — Mon 06:00 → Wed 06:00 → Fri 10:15 → back to Mon — rather than a single fixed day. Hannah moves it by hand if the auto-picked day doesn't match actual need.",
+      "details": []
     }
   ]
 }
