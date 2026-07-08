@@ -1041,6 +1041,26 @@ async function fetchPropertyMeldTurns() {
   console.log(`\nPropertyMeld turns: ${projects.length} TURN projects fetched`);
 
   const turns = [];
+  const scheduleEvents = [];   // per-appointment feed for the Spokane turn calendar
+  const SPOK_CITIES = new Set(['Spokane', 'Spokane Valley', 'Medical Lake']);
+  const catOf = (b) => {
+    b = b || '';
+    if (/final\s*walk/i.test(b))                         return 'final-walk';
+    if (/initial walkthrough|walk-?through|^a\s*[-–]/i.test(b)) return 'walkthrough';
+    if (/carpet/i.test(b))                               return 'carpet';       // carpet clean OR replace
+    if (/\bpaint\b|^c\s*[-–]/i.test(b))                  return 'paint';
+    if (/floor/i.test(b))                                return 'flooring';
+    if (/\bcleaning\b|^f\s*[-–]/i.test(b))               return 'cleaning';
+    if (/maintenance|repair|^[bd]\s*[-–]/i.test(b))      return 'maintenance';
+    if (/estimate/i.test(b))                             return 'estimate';
+    return 'other';
+  };
+  const pac = (iso) => {
+    const d = new Date(iso);
+    return { date: d.toLocaleDateString('en-CA', { timeZone: 'America/Los_Angeles' }),
+             time: d.toLocaleTimeString('en-US', { timeZone: 'America/Los_Angeles', hour: 'numeric', minute: '2-digit' }) };
+  };
+  const SCHED_CUTOFF = new Date(Date.now() - 7 * 86400000).toLocaleDateString('en-CA', { timeZone: 'America/Los_Angeles' }); // last 7 days + future
   let done = 0;
   const BATCH = 5;
   for (let i = 0; i < projects.length; i += BATCH) {
@@ -1092,6 +1112,38 @@ async function fetchPropertyMeldTurns() {
         const unit = proj.unit;
         const propObj = unit?.prop || {};
 
+        // ---- Spokane per-appointment schedule feed (in-house + vendor) ----
+        if (SPOK_CITIES.has((propObj.city || '').trim())) {
+          const unitLabel = unit?.unit || unit?.display_address?.line_2 || '';
+          for (const m of melds) {
+            if (m.status === 'COMPLETED') continue;
+            const cat = catOf(m.brief_description || '');
+            if (cat === 'final-walk' || cat === 'estimate') continue;   // not shown on the crew calendar
+            // management (in-house) appointments
+            (m.managementappointment || []).forEach(a => {
+              const e = a.availability_segment?.event; if (!e?.dtstart) return;
+              const s = (a.management_assignment?.in_house_servicers || [])[0]
+                     || (m.in_house_servicers || [])[0]?.agent;
+              const who = s ? `${s.first_name || ''} ${s.last_name || ''}`.trim() : 'Unassigned';
+              const p = pac(e.dtstart); if (p.date < SCHED_CUTOFF) return;
+              scheduleEvents.push({ date: p.date, start: p.time, end: pac(e.dtend).time,
+                prop: propObj.property_name || '', unit: unitLabel, category: cat,
+                brief: m.brief_description || '', who, whoType: 'tech', ref: m.reference_id });
+            });
+            // vendor appointments
+            (m.vendorappointment || []).forEach(a => {
+              const e = a.availability_segment?.event; if (!e?.dtstart) return;
+              const vr = (m.vendor_assignment_requests || []).find(r => r.id === a.assignment_request)
+                      || (m.vendor_assignment_requests || [])[0];
+              const who = vr?.vendor?.name || 'Vendor';
+              const p = pac(e.dtstart); if (p.date < SCHED_CUTOFF) return;
+              scheduleEvents.push({ date: p.date, start: p.time, end: pac(e.dtend).time,
+                prop: propObj.property_name || '', unit: unitLabel, category: cat,
+                brief: m.brief_description || '', who, whoType: 'vendor', ref: m.reference_id });
+            });
+          }
+        }
+
         turns.push({
           id:           proj.id,
           name:         proj.name,
@@ -1118,6 +1170,9 @@ async function fetchPropertyMeldTurns() {
   }
   console.log(`\nPropertyMeld turns: saved ${turns.length} turn records`);
   save('pm_turns.json', { ok: true, fetched_at: new Date().toISOString(), turns });
+  scheduleEvents.sort((a, b) => a.date.localeCompare(b.date) || String(a.who).localeCompare(String(b.who)));
+  save('turn_schedule.json', { ok: true, region: 'Spokane', fetched_at: new Date().toISOString(), events: scheduleEvents });
+  console.log(`PropertyMeld turns: saved ${scheduleEvents.length} Spokane schedule events`);
 }
 
 // ── PropertyMeld Tech Metrics ────────────────────────────────────────────────
@@ -1303,6 +1358,12 @@ const FETCH_ONLY = process.env.FETCH_ONLY || 'all';
     await fetchPropertyMeldWOs();
     await fetchPropertyMeldTurns();
     await fetchPMTechMetrics();
+    console.log('Done.');
+    return;
+  }
+
+  if (FETCH_ONLY === 'turns-only') {
+    await fetchPropertyMeldTurns();
     console.log('Done.');
     return;
   }

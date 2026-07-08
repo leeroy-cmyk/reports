@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spokane Turn Schedule</title>
+<style>
+  :root{--bg:#f4f6f9;--card:#fff;--navy:#1a5276;--blue:#2e86c1;--ink:#243746;--mut:#7b8a99;--line:#e6ebf0}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:13px/1.5 -apple-system,Segoe UI,Roboto,Arial,sans-serif}
+  .wrap{max-width:1280px;margin:0 auto;padding:24px 16px 60px}
+  .top{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px}
+  h1{color:var(--navy);margin:0;font-size:23px}
+  .upd{color:var(--mut);font-size:12px}
+  .sub{color:var(--mut);margin:2px 0 16px}
+  .legend{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 16px}
+  .chip{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:14px;font-size:12px;font-weight:600;cursor:pointer;user-select:none;border:1px solid transparent}
+  .chip .dot{width:9px;height:9px;border-radius:50%}
+  .chip.off{opacity:.35}
+  table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:8px;overflow:hidden;table-layout:fixed}
+  th,td{border:1px solid var(--line);vertical-align:top;padding:5px 6px;width:14.28%}
+  th{background:#fcfdfe;color:var(--mut);font-size:11px;text-transform:uppercase;letter-spacing:.3px}
+  td{height:96px}
+  td.wknd{background:#fbfbfd}.td-fri{background:#faf7f0}
+  .dn{font-weight:700;color:var(--navy);font-size:11px;margin-bottom:3px}
+  .dn.today{color:#c0392b}
+  .ev{display:block;border-left:3px solid #ccc;padding:1px 4px;margin-bottom:2px;font-size:11px;border-radius:2px;background:#fbfcfd}
+  .ev .t{color:var(--mut)}
+  .ev .u{font-weight:600}
+  .ev .who{color:var(--mut)}
+  .ev.vendor .who{font-style:italic}
+  .wkhdr{margin:18px 0 4px;color:var(--navy);font-weight:600;font-size:12px}
+  .empty{color:var(--mut);padding:30px;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><h1>Spokane Turn Schedule</h1><span class="upd" id="upd"></span></div>
+  <p class="sub">Live from PropertyMeld — in-house paint / maintenance / walkthroughs plus vendor cleaning, carpet &amp; flooring. Mon–Thu work, Friday buffer.</p>
+  <div class="legend" id="legend"></div>
+  <div id="cal"></div>
+</div>
+<script>
+const CATS={
+  paint:{label:'Paint',color:'#8e44ad'},
+  maintenance:{label:'Maintenance',color:'#c0392b'},
+  walkthrough:{label:'Walkthrough',color:'#1f6bb0'},
+  cleaning:{label:'Cleaning',color:'#16a085'},
+  carpet:{label:'Carpet',color:'#d68910'},
+  flooring:{label:'Flooring',color:'#7f8c8d'},
+  other:{label:'Other',color:'#566573'}
+};
+const active={};Object.keys(CATS).forEach(k=>active[k]=true);
+const DOW=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+const pad=n=>String(n).padStart(2,'0');
+function iso(d){return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());}
+function mondayOf(d){const x=new Date(d);const g=(x.getDay()+6)%7;x.setDate(x.getDate()-g);x.setHours(0,0,0,0);return x;}
+function fmtD(d){return (d.getMonth()+1)+'/'+d.getDate();}
+let EVENTS=[];
+const todayISO=new Date().toLocaleDateString('en-CA');
+
+function renderLegend(){
+  const el=document.getElementById('legend');
+  el.innerHTML=Object.entries(CATS).map(([k,c])=>
+    `<span class="chip" data-k="${k}" style="background:${c.color}18;color:${c.color}"><span class="dot" style="background:${c.color}"></span>${c.label}</span>`).join('');
+  el.querySelectorAll('.chip').forEach(ch=>ch.onclick=()=>{const k=ch.dataset.k;active[k]=!active[k];ch.classList.toggle('off',!active[k]);render();});
+}
+function render(){
+  const evs=EVENTS.filter(e=>active[e.category]!==false);
+  const cal=document.getElementById('cal');
+  if(!evs.length){cal.innerHTML='<div class="empty">No scheduled turn work in range.</div>';return;}
+  const byDate={};evs.forEach(e=>{(byDate[e.date]=byDate[e.date]||[]).push(e);});
+  const dates=EVENTS.map(e=>e.date).sort();
+  let start=mondayOf(new Date(Math.min(new Date(dates[0]),new Date(todayISO))+'T00:00:00'));
+  const end=new Date(dates[dates.length-1]+'T00:00:00');
+  let html='';
+  for(let wk=new Date(start); wk<=end; wk.setDate(wk.getDate()+7)){
+    const wkStart=new Date(wk);
+    html+=`<div class="wkhdr">Week of ${fmtD(wkStart)}</div><table><tr>${DOW.slice(1).concat('Sun').map(d=>'<th>'+d+'</th>').join('')}</tr><tr>`;
+    for(let i=0;i<7;i++){
+      const d=new Date(wkStart);d.setDate(d.getDate()+i);const ds=iso(d);
+      const dowIdx=d.getDay();const cls=(dowIdx===0||dowIdx===6)?'wknd':(dowIdx===5?'td-fri':'');
+      const list=(byDate[ds]||[]).sort((a,b)=>(a.who||'').localeCompare(b.who||''));
+      const cells=list.map(e=>{const c=CATS[e.category]||CATS.other;
+        return `<span class="ev ${e.whoType}" style="border-left-color:${c.color}" title="${e.brief.replace(/"/g,'')}">`+
+          `<span class="t">${e.start}</span> <span class="u">${e.prop} #${e.unit}</span> `+
+          `<span style="color:${c.color}">${c.label}</span> · <span class="who">${e.who}</span></span>`;}).join('');
+      html+=`<td class="${cls}"><div class="dn ${ds===todayISO?'today':''}">${DOW[dowIdx]} ${fmtD(d)}${dowIdx===5?' · buffer':''}</div>${cells}</td>`;
+    }
+    html+='</tr></table>';
+  }
+  cal.innerHTML=html;
+}
+fetch('./data/turn_schedule.json?cb='+Date.now()).then(r=>r.json()).then(j=>{
+  EVENTS=j.events||[];
+  const u=j.fetched_at?new Date(j.fetched_at):null;
+  document.getElementById('upd').textContent='Updated '+(u?u.toLocaleDateString('en-US',{month:'short',day:'numeric'})+' · '+u.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}):'—')+' · '+EVENTS.length+' events';
+  renderLegend();render();
+}).catch(e=>{document.getElementById('cal').innerHTML='<div class="empty">Could not load turn_schedule.json</div>';});
+</script>
+</body>
+</html>
