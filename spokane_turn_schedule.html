@@ -70,7 +70,8 @@ function render(){
   if(!evs.length){cal.innerHTML='<div class="empty">No scheduled turn work in range.</div>';return;}
   const byDate={};evs.forEach(e=>{(byDate[e.date]=byDate[e.date]||[]).push(e);});
   const dates=EVENTS.map(e=>e.date).sort();
-  let start=mondayOf(new Date(Math.min(new Date(dates[0]),new Date(todayISO))+'T00:00:00'));
+  const firstDate=dates[0]<todayISO?dates[0]:todayISO;
+  let start=mondayOf(new Date(firstDate+'T00:00:00'));
   const end=new Date(dates[dates.length-1]+'T00:00:00');
   let html='';
   for(let wk=new Date(start); wk<=end; wk.setDate(wk.getDate()+7)){
