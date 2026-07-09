@@ -49,6 +49,38 @@ async function fetchTurnVac() {
   save('turnvac.json', { ok: true, count: rows.length, fetched_at: new Date().toISOString(), rows });
 }
 
+// Rule A: detect move-out date changes / cancellations day-over-day (from turnvac).
+function buildMoveoutChanges() {
+  const tvPath = path.join(DATA_DIR, 'turnvac.json');
+  if (!fs.existsSync(tvPath)) { console.log('buildMoveoutChanges: turnvac.json missing, skip.'); return; }
+  const rows = JSON.parse(fs.readFileSync(tvPath, 'utf8')).rows || [];
+  const today = new Date().toLocaleDateString('en-CA', { timeZone: 'America/Los_Angeles' });
+  const cur = {};
+  rows.forEach(r => { if (r.unit_id != null) cur[r.unit_id] = { moveOut: r.last_move_out || null, status: r.unit_status || '', prop: r.property_name, unit: r.unit, city: r.city }; });
+  const statePath = path.join(DATA_DIR, 'moveout_state.json');
+  let state = { units: {}, changes: [] };
+  if (fs.existsSync(statePath)) { try { state = JSON.parse(fs.readFileSync(statePath, 'utf8')); } catch(e) {} }
+  const prev = state.units || {};
+  const firstRun = Object.keys(prev).length === 0;
+  const nc = [];
+  if (!firstRun) {
+    for (const id in cur) {
+      if (prev[id] && prev[id].moveOut !== cur[id].moveOut)
+        nc.push({ date: today, type: 'moveout_changed', unit_id: id, prop: cur[id].prop, unit: cur[id].unit, city: cur[id].city, from: prev[id].moveOut, to: cur[id].moveOut });
+      if (!prev[id])
+        nc.push({ date: today, type: 'moveout_new', unit_id: id, prop: cur[id].prop, unit: cur[id].unit, city: cur[id].city, to: cur[id].moveOut });
+    }
+    for (const id in prev) {
+      if (!cur[id]) nc.push({ date: today, type: 'moveout_removed', unit_id: id, prop: prev[id].prop, unit: prev[id].unit, city: prev[id].city, from: prev[id].moveOut, was_status: prev[id].status });
+    }
+  }
+  const cutoff = new Date(Date.now() - 60 * 86400000).toLocaleDateString('en-CA', { timeZone: 'America/Los_Angeles' });
+  const changes = (state.changes || []).concat(nc).filter(c => c.date >= cutoff);
+  save('moveout_state.json', { fetched_at: new Date().toISOString(), units: cur, changes });
+  save('moveout_changes.json', { fetched_at: new Date().toISOString(), changes: changes.slice(-300) });
+  console.log(`buildMoveoutChanges: ${firstRun ? 'seeded state (first run)' : nc.length + ' new change(s)'}`);
+}
+
 async function fetchWorkOrders() {
   console.log('Fetching work_order...');
   const raw = await fetchAF('/api/v2/reports/work_order.json', { property_visibility: 'active' });
@@ -1362,6 +1394,12 @@ const FETCH_ONLY = process.env.FETCH_ONLY || 'all';
     return;
   }
 
+  if (FETCH_ONLY === 'moveout-only') {
+    buildMoveoutChanges();
+    console.log('Done.');
+    return;
+  }
+
   if (FETCH_ONLY === 'turns-only') {
     await fetchPropertyMeldTurns();
     console.log('Done.');
@@ -1455,6 +1493,7 @@ const FETCH_ONLY = process.env.FETCH_ONLY || 'all';
   if (runAppFolio) {
     try {
       await fetchTurnVac();
+      buildMoveoutChanges(); // Rule A: flag move-out date changes / cancellations
       await fetchWorkOrders();
       await fetchBudget();
       await syncVacanciesToFirebase();
