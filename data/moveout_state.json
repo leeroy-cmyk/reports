@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-07-09T18:24:49.165Z",
+  "fetched_at": "2026-07-09T20:20:17.477Z",
   "units": {
     "2": {
       "moveOut": "2026-07-31",
@@ -59,14 +59,14 @@
     },
     "179": {
       "moveOut": "2026-07-08",
-      "status": "Notice-Unrented",
+      "status": "Vacant-Unrented",
       "prop": "b101",
       "unit": "16",
       "city": "Spokane"
     },
     "203": {
       "moveOut": "2026-07-31",
-      "status": "Notice-Rented",
+      "status": "Notice-Unrented",
       "prop": "hl65",
       "unit": "9",
       "city": "Helena"
@@ -736,6 +736,13 @@
       "unit": "H202",
       "city": "Kennewick"
     },
+    "935": {
+      "moveOut": "2026-08-02",
+      "status": "Notice-Unrented",
+      "prop": "kn47 K1",
+      "unit": "J101",
+      "city": "Kennewick"
+    },
     "947": {
       "moveOut": "2025-11-30",
       "status": "Vacant-Unrented",
@@ -806,9 +813,16 @@
       "unit": "D108",
       "city": "Kennewick"
     },
+    "1048": {
+      "moveOut": "2026-08-02",
+      "status": "Notice-Unrented",
+      "prop": "kn47 K2",
+      "unit": "D201",
+      "city": "Kennewick"
+    },
     "1052": {
       "moveOut": "2026-07-08",
-      "status": "Notice-Unrented",
+      "status": "Vacant-Unrented",
       "prop": "kn47 K2",
       "unit": "D205",
       "city": "Kennewick"
@@ -881,6 +895,13 @@
       "status": "Notice-Unrented",
       "prop": "o155-Elm",
       "unit": "I",
+      "city": "Spokane"
+    },
+    "1137": {
+      "moveOut": "2026-04-30",
+      "status": "Vacant-Rented",
+      "prop": "o155-Elm",
+      "unit": "J",
       "city": "Spokane"
     },
     "1143": {
@@ -1066,5 +1087,33 @@
       "city": "Tacoma"
     }
   },
-  "changes": []
+  "changes": [
+    {
+      "date": "2026-07-09",
+      "type": "moveout_new",
+      "unit_id": "935",
+      "prop": "kn47 K1",
+      "unit": "J101",
+      "city": "Kennewick",
+      "to": "2026-08-02"
+    },
+    {
+      "date": "2026-07-09",
+      "type": "moveout_new",
+      "unit_id": "1048",
+      "prop": "kn47 K2",
+      "unit": "D201",
+      "city": "Kennewick",
+      "to": "2026-08-02"
+    },
+    {
+      "date": "2026-07-09",
+      "type": "moveout_new",
+      "unit_id": "1137",
+      "prop": "o155-Elm",
+      "unit": "J",
+      "city": "Spokane",
+      "to": "2026-04-30"
+    }
+  ]
 }
