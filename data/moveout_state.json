@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-07-13T17:41:51.812Z",
+  "fetched_at": "2026-07-13T19:04:44.547Z",
   "units": {
     "2": {
       "moveOut": "2026-07-31",
@@ -241,7 +241,7 @@
     },
     "407": {
       "moveOut": "2026-03-31",
-      "status": "Vacant-Unrented",
+      "status": "Vacant-Rented",
       "prop": "ps17",
       "unit": "A5",
       "city": "Pasco"
@@ -430,7 +430,7 @@
     },
     "563": {
       "moveOut": "2026-03-31",
-      "status": "Vacant-Unrented",
+      "status": "Vacant-Rented",
       "prop": "rl16",
       "unit": "C02",
       "city": "Richland"
@@ -783,13 +783,6 @@
       "status": "Vacant-Unrented",
       "prop": "kn47 K2",
       "unit": "B105",
-      "city": "Kennewick"
-    },
-    "1016": {
-      "moveOut": "2026-06-30",
-      "status": "Vacant-Unrented",
-      "prop": "kn47 K2",
-      "unit": "B201",
       "city": "Kennewick"
     },
     "1047": {
@@ -1171,6 +1164,16 @@
       "city": "Kennewick",
       "from": "2026-04-24",
       "was_status": "Vacant-Rented"
+    },
+    {
+      "date": "2026-07-13",
+      "type": "moveout_removed",
+      "unit_id": "1016",
+      "prop": "kn47 K2",
+      "unit": "B201",
+      "city": "Kennewick",
+      "from": "2026-06-30",
+      "was_status": "Vacant-Unrented"
     }
   ]
 }
