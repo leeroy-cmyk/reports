@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-07-13T03:35:57.517Z",
+  "fetched_at": "2026-07-13T09:59:17.739Z",
   "units": {
     "2": {
       "moveOut": "2026-07-31",
@@ -479,7 +479,7 @@
     },
     "660": {
       "moveOut": "2026-07-12",
-      "status": "Notice-Unrented",
+      "status": "Vacant-Unrented",
       "prop": "s129",
       "unit": "9",
       "city": "Spokane Valley"
@@ -692,13 +692,6 @@
       "status": "Vacant-Rented",
       "prop": "kn47 K1",
       "unit": "D102",
-      "city": "Kennewick"
-    },
-    "890": {
-      "moveOut": "2026-04-24",
-      "status": "Vacant-Rented",
-      "prop": "kn47 K1",
-      "unit": "E204",
       "city": "Kennewick"
     },
     "913": {
@@ -1168,6 +1161,16 @@
       "unit": "D14",
       "city": "Richland",
       "to": "2026-07-31"
+    },
+    {
+      "date": "2026-07-13",
+      "type": "moveout_removed",
+      "unit_id": "890",
+      "prop": "kn47 K1",
+      "unit": "E204",
+      "city": "Kennewick",
+      "from": "2026-04-24",
+      "was_status": "Vacant-Rented"
     }
   ]
 }
