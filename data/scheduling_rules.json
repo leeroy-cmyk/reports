@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-09T16:24:15.149Z",
-  "last_checked": "2026-07-09T16:24:15.149Z",
+  "generated_at": "2026-07-13T16:26:42.355Z",
+  "last_checked": "2026-07-13T16:26:42.355Z",
   "source": "leeroy-cmyk/pm-scheduling/CLAUDE.md",
   "count": 34,
   "rules": [
@@ -42,9 +42,10 @@
     {
       "group": "General",
       "category": "Emergency / Urgent — schedule today, first",
-      "text": "Emergency and Urgent melds are sorted to the front of the queue and scheduled on today's date (the current day), overriding the Monday and \"no today\" restrictions. All other melds continue to respect the Tue–Fri rule and never land on today. Sat/Sun remain blocked even for emergencies.",
+      "text": "Emergency and Urgent melds are sorted to the front of the queue and scheduled on today's date (the current day), overriding the Monday and \"no today\" restrictions. All other melds continue to respect the Tue–Fri rule and never land on today.",
       "details": [
-        "**Always goes first, never bumped to another date (rewritten 2026-07-02, both Tacoma and Spokane):** the emergency takes the earliest available slot on today's calendar — never just wedged into whatever gap happens to be free. Whatever else is already on today's calendar shifts LATER that same day to make room; an already-committed today appointment is never moved to a different date (the resident is expecting the tech today regardless). Today's close can stretch past the normal close time to fit everyone in — see each region's section below for its specific allowance. A today job with a stated resident preference/lock is never shifted."
+        "**Always goes first, never bumped to another date (rewritten 2026-07-02, both Tacoma and Spokane):** the emergency takes the earliest available slot on today's calendar — never just wedged into whatever gap happens to be free. Whatever else is already on today's calendar shifts LATER that same day to make room; an already-committed today appointment is never moved to a different date (the resident is expecting the tech today regardless). Today's close can stretch past the normal close time to fit everyone in — see each region's section below for its specific allowance. A today job with a stated resident preference/lock is never shifted.",
+        "**Weekend exception (fixed 2026-07-12):** if \"today\" is Saturday or Sunday, the emergency is NOT booked on the weekend — nobody works it. Instead it's redirected to **Monday, first thing**, with the exact same \"goes first, pushes everything else later that same day\" behavior, just landing on Monday instead of today. (Previously the code had a bug where `insertEmergencyToday` booked straight onto the weekend date whenever a run happened to fall on Sat/Sun — found 2026-07-12 when 7 emergency melds landed on a Sunday. Fixed in both `pm_scheduler.js` and `pm_spokane_scheduler.js` via a `nextMonday()` redirect.)"
       ]
     },
     {
