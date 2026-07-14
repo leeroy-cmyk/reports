@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-07-13T16:26:42.355Z",
-  "last_checked": "2026-07-13T16:26:42.355Z",
+  "generated_at": "2026-07-14T19:28:45.284Z",
+  "last_checked": "2026-07-14T19:28:45.284Z",
   "source": "leeroy-cmyk/pm-scheduling/CLAUDE.md",
-  "count": 34,
+  "count": 42,
   "rules": [
     {
       "group": "General",
@@ -237,6 +237,54 @@
       "group": "Tri",
       "category": "\"Litter Pickup\" special case (Hannah, recurring id 153870)",
       "text": "runs every 3 days, so it doesn't map to one fixed weekday like the rest of the template. It rotates through a fixed 3-slot cycle each time a new instance needs placing — Mon 06:00 → Wed 06:00 → Fri 10:15 → back to Mon — rather than a single fixed day. Hannah moves it by hand if the auto-picked day doesn't match actual need.",
+      "details": []
+    },
+    {
+      "group": "Turns",
+      "category": "What a turn is",
+      "text": "when a resident gives notice or moves out, AppFolio sets a move-out date and a **Standard Unit Turn** project is created in PropertyMeld for that unit. The turn's start date is the **day after the move-out date**. One turn per unit — duplicates are skipped.",
+      "details": []
+    },
+    {
+      "group": "Turns",
+      "category": "Techs",
+      "text": "Ron Cramer and Micheal Magoon do the in-house work (Scott Higley no longer works here). Two more turn techs start **Monday, July 20, 2026**. Ron and Michael only do **maintenance and paint** — cleaning and flooring are vendors.",
+      "details": []
+    },
+    {
+      "group": "Turns",
+      "category": "In-house work per turn",
+      "text": "**2 back-to-back days of paint, then 1 day of maintenance**, all done by the **same tech** (one tech per unit). Plus a **1-hour initial walkthrough** the day after the unit vacates, split between both techs.",
+      "details": []
+    },
+    {
+      "group": "Turns",
+      "category": "Work days",
+      "text": "**Monday–Thursday, 8 AM–4 PM. Friday is left open** as a buffer for delays; no weekend work. A turn's paint→maintenance may bridge the Friday/weekend (e.g. paint Thursday + Monday). Both techs are kept fully booked Mon–Thu to finish turns as fast as possible.",
+      "details": []
+    },
+    {
+      "group": "Turns",
+      "category": "Order of scheduling",
+      "text": "**leased units first** (a new tenant is already lined up, so the move-in deadline is firm), by soonest move-in; then everyone else by **highest property vacancy %** first, to clear the most-affected properties fastest.",
+      "details": []
+    },
+    {
+      "group": "Turns",
+      "category": "Vendors (coming once the new techs start)",
+      "text": "cleaning (Spo Cleaning) is scheduled after paint and maintenance finish, with a **2-business-day buffer** (maintenance Monday → cleaning Thursday); carpet cleaning (Allklean) the day after cleaning; flooring/carpet replacement by Inland Pacific Flooring; the final walkthrough the day after carpet cleaning.",
+      "details": []
+    },
+    {
+      "group": "Turns",
+      "category": "AppFolio available date — required step",
+      "text": "once the work is scheduled, the unit's **Available date and Ready-to-Show date are set to the same day**, and **Rent Ready is set to \"No.\"** Only the turn manager sets Rent Ready to \"Yes,\" as a verification step — the automation never does. The available date is **3 days after the final walkthrough** (a buffer for punch-list items found at the walkthrough or vendor delays); until the vendor steps are automated, it's an interim **7 days after maintenance is completed**.",
+      "details": []
+    },
+    {
+      "group": "Turns",
+      "category": "Move-out changes",
+      "text": "AppFolio is checked **daily** for move-out dates that change or move-outs that get cancelled, and the turn schedule (and the available date) is updated to match.",
       "details": []
     }
   ]
