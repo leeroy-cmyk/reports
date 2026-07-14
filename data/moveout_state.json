@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-07-14T15:57:28.761Z",
+  "fetched_at": "2026-07-14T17:22:27.381Z",
   "units": {
     "2": {
       "moveOut": "2026-07-31",
@@ -31,7 +31,7 @@
     },
     "123": {
       "moveOut": "2026-06-14",
-      "status": "Vacant-Unrented",
+      "status": "Vacant-Rented",
       "prop": "a210",
       "unit": "4",
       "city": "Spokane Valley"
@@ -136,7 +136,7 @@
     },
     "339": {
       "moveOut": "2026-05-31",
-      "status": "Vacant-Rented",
+      "status": "Vacant-Unrented",
       "prop": "k104- LeFevre",
       "unit": "505-3",
       "city": "Medical Lake"
@@ -524,13 +524,6 @@
       "status": "Vacant-Unrented",
       "prop": "l912 (Multi-Family)",
       "unit": "202",
-      "city": "Spokane"
-    },
-    "711": {
-      "moveOut": "2026-07-31",
-      "status": "Notice-Unrented",
-      "prop": "c313",
-      "unit": "3",
       "city": "Spokane"
     },
     "714": {
@@ -1190,6 +1183,16 @@
       "unit": "22",
       "city": "Spokane",
       "to": "2026-07-31"
+    },
+    {
+      "date": "2026-07-14",
+      "type": "moveout_removed",
+      "unit_id": "711",
+      "prop": "c313",
+      "unit": "3",
+      "city": "Spokane",
+      "from": "2026-07-31",
+      "was_status": "Notice-Unrented"
     }
   ]
 }
