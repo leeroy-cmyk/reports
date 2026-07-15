@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-07-15T17:19:13.482Z",
+  "fetched_at": "2026-07-15T18:38:12.541Z",
   "units": {
     "2": {
       "moveOut": "2026-07-31",
@@ -673,20 +673,6 @@
       "unit": "C208",
       "city": "Kennewick"
     },
-    "864": {
-      "moveOut": "2026-05-31",
-      "status": "Vacant-Rented",
-      "prop": "kn47 K1",
-      "unit": "D102",
-      "city": "Kennewick"
-    },
-    "913": {
-      "moveOut": "2026-06-14",
-      "status": "Vacant-Unrented",
-      "prop": "kn47 K1",
-      "unit": "G103",
-      "city": "Kennewick"
-    },
     "919": {
       "moveOut": "2026-06-30",
       "status": "Vacant-Unrented",
@@ -755,13 +741,6 @@
       "status": "Notice-Unrented",
       "prop": "kn47 K2",
       "unit": "A104",
-      "city": "Kennewick"
-    },
-    "1004": {
-      "moveOut": "2026-06-15",
-      "status": "Vacant-Unrented",
-      "prop": "kn47 K2",
-      "unit": "A205",
       "city": "Kennewick"
     },
     "1012": {
@@ -995,6 +974,13 @@
       "unit": "C76",
       "city": "Tacoma"
     },
+    "1227": {
+      "moveOut": "2026-08-05",
+      "status": "Notice-Unrented",
+      "prop": "tc68",
+      "unit": "C78",
+      "city": "Tacoma"
+    },
     "1228": {
       "moveOut": "2026-07-11",
       "status": "Vacant-Unrented",
@@ -1218,6 +1204,45 @@
       "unit": "D29",
       "city": "Pasco",
       "to": "2026-07-24"
+    },
+    {
+      "date": "2026-07-15",
+      "type": "moveout_new",
+      "unit_id": "1227",
+      "prop": "tc68",
+      "unit": "C78",
+      "city": "Tacoma",
+      "to": "2026-08-05"
+    },
+    {
+      "date": "2026-07-15",
+      "type": "moveout_removed",
+      "unit_id": "864",
+      "prop": "kn47 K1",
+      "unit": "D102",
+      "city": "Kennewick",
+      "from": "2026-05-31",
+      "was_status": "Vacant-Rented"
+    },
+    {
+      "date": "2026-07-15",
+      "type": "moveout_removed",
+      "unit_id": "913",
+      "prop": "kn47 K1",
+      "unit": "G103",
+      "city": "Kennewick",
+      "from": "2026-06-14",
+      "was_status": "Vacant-Unrented"
+    },
+    {
+      "date": "2026-07-15",
+      "type": "moveout_removed",
+      "unit_id": "1004",
+      "prop": "kn47 K2",
+      "unit": "A205",
+      "city": "Kennewick",
+      "from": "2026-06-15",
+      "was_status": "Vacant-Unrented"
     }
   ]
 }
