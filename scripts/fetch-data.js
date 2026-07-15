@@ -1196,7 +1196,7 @@ async function fetchPropertyMeldTurns() {
               scheduleEvents.push({ date: cleanBase, start: '', end: '',
                 prop: propObj.property_name || '', unit: unitLabel, category: 'suggested-cleaning',
                 brief: `Suggested cleaning — 3 business days after in-house done (${lastMaintPaint})`,
-                who: 'U&K Properties', whoType: 'suggested', ref: proj.id });
+                who: 'SPO Cleaning', whoType: 'suggested', ref: proj.id });
             }
             if (!carpetApptDate) {
               const carpetDate = addBizDays(cleanBase, 1);
