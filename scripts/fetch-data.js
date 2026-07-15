@@ -1092,6 +1092,13 @@ async function fetchPropertyMeldTurns() {
     return { date: d.toLocaleDateString('en-CA', { timeZone: 'America/Los_Angeles' }),
              time: d.toLocaleTimeString('en-US', { timeZone: 'America/Los_Angeles', hour: 'numeric', minute: '2-digit' }) };
   };
+  // Add N business days (Mon–Fri; vendors work Fridays, not weekends) to a YYYY-MM-DD date.
+  const addBizDays = (isoDate, n) => {
+    const d = new Date(isoDate + 'T12:00:00');
+    let added = 0;
+    while (added < n) { d.setDate(d.getDate() + 1); const wd = d.getDay(); if (wd !== 0 && wd !== 6) added++; }
+    return d.toLocaleDateString('en-CA');
+  };
   const SCHED_CUTOFF = new Date(Date.now() - 7 * 86400000).toLocaleDateString('en-CA', { timeZone: 'America/Los_Angeles' }); // last 7 days + future
   let done = 0;
   const BATCH = 5;
@@ -1113,6 +1120,8 @@ async function fetchPropertyMeldTurns() {
         let finalWalkDate    = null;  // final walkthrough appt   → turn work END
         let lastMaintPaint   = null;  // last maint OR paint appt → handoff to cleaners
         let lastClean        = null;  // last cleaning OR carpet  → cleaning done
+        let cleanApptDate    = null;  // scheduled F-Cleaning appt (if any)
+        let carpetApptDate   = null;  // scheduled E-Carpet appt   (if any)
 
         // Helper: get the scheduled date from either management or vendor appointment
         function getApptDate(m) {
@@ -1136,6 +1145,8 @@ async function fetchPropertyMeldTurns() {
           if (isFinalWalk(brief)) {
             if (!finalWalkDate || apptDate > finalWalkDate) finalWalkDate = apptDate;
           }
+          if (isCleaning(brief)) { if (!cleanApptDate  || apptDate < cleanApptDate)  cleanApptDate  = apptDate; }
+          if (isCarpet(brief))   { if (!carpetApptDate || apptDate < carpetApptDate) carpetApptDate = apptDate; }
           if (isCleaning(brief) || isCarpet(brief)) {
             if (!lastClean || apptDate > lastClean) lastClean = apptDate;
           }
@@ -1173,6 +1184,27 @@ async function fetchPropertyMeldTurns() {
                 prop: propObj.property_name || '', unit: unitLabel, category: cat,
                 brief: m.brief_description || '', who, whoType: 'vendor', ref: m.reference_id });
             });
+          }
+
+          // ---- Suggested vendor dates (REQUIRED for every active turn) ----
+          // Cleaning = 3rd business day after the last in-house day; carpet cleaning =
+          // the next business day. Shown so the turn manager has target dates when
+          // contacting vendors — only until a real vendor appt exists for that meld.
+          if (proj.total_completed_melds !== proj.total_melds && lastMaintPaint) {
+            const cleanBase = cleanApptDate || addBizDays(lastMaintPaint, 3);
+            if (!cleanApptDate && cleanBase >= SCHED_CUTOFF) {
+              scheduleEvents.push({ date: cleanBase, start: '', end: '',
+                prop: propObj.property_name || '', unit: unitLabel, category: 'suggested-cleaning',
+                brief: `Suggested cleaning — 3 business days after in-house done (${lastMaintPaint})`,
+                who: 'U&K Properties', whoType: 'suggested', ref: proj.id });
+            }
+            if (!carpetApptDate) {
+              const carpetDate = addBizDays(cleanBase, 1);
+              if (carpetDate >= SCHED_CUTOFF) scheduleEvents.push({ date: carpetDate, start: '', end: '',
+                prop: propObj.property_name || '', unit: unitLabel, category: 'suggested-carpet',
+                brief: 'Suggested carpet cleaning — business day after cleaning',
+                who: 'Allklean', whoType: 'suggested', ref: proj.id });
+            }
           }
         }
 

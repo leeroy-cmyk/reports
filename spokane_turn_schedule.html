@@ -28,6 +28,9 @@
   .ev .u{font-weight:600}
   .ev .who{color:var(--mut)}
   .ev.vendor .who{font-style:italic}
+  .ev.suggested{border-left-style:dashed;background:#fffdf6}
+  .ev.suggested .who{font-style:italic}
+  .ev.suggested .t{font-weight:700}
   .wkhdr{margin:18px 0 4px;color:var(--navy);font-weight:600;font-size:12px}
   .empty{color:var(--mut);padding:30px;text-align:center}
 </style>
@@ -35,7 +38,7 @@
 <body>
 <div class="wrap">
   <div class="top"><h1>Spokane Turn Schedule</h1><span class="upd" id="upd"></span></div>
-  <p class="sub">Live from PropertyMeld — in-house paint / maintenance / walkthroughs plus vendor cleaning, carpet &amp; flooring. Mon–Thu work, Friday buffer.</p>
+  <p class="sub">Live from PropertyMeld — in-house paint / maintenance / walkthroughs plus vendor cleaning, carpet &amp; flooring. Mon–Thu work, Friday buffer. <b>Dashed “≈” entries are suggested vendor dates</b> (cleaning = 3 business days after in-house done, carpet the next business day) — target dates for the turn manager when booking vendors, until a real appointment is set.</p>
   <div class="legend" id="legend"></div>
   <div id="cal"></div>
 </div>
@@ -45,7 +48,9 @@ const CATS={
   maintenance:{label:'Maintenance',color:'#c0392b'},
   walkthrough:{label:'Walkthrough',color:'#1f6bb0'},
   cleaning:{label:'Cleaning',color:'#16a085'},
+  'suggested-cleaning':{label:'Suggested Cleaning',color:'#16a085'},
   carpet:{label:'Carpet',color:'#d68910'},
+  'suggested-carpet':{label:'Suggested Carpet',color:'#d68910'},
   flooring:{label:'Flooring',color:'#7f8c8d'},
   other:{label:'Other',color:'#566573'}
 };
@@ -83,7 +88,7 @@ function render(){
       const list=(byDate[ds]||[]).sort((a,b)=>(a.who||'').localeCompare(b.who||''));
       const cells=list.map(e=>{const c=CATS[e.category]||CATS.other;
         return `<span class="ev ${e.whoType}" style="border-left-color:${c.color}" title="${e.brief.replace(/"/g,'')}">`+
-          `<span class="t">${e.start}</span> <span class="u">${e.prop} #${e.unit}</span> `+
+          `<span class="t">${e.start||'≈'}</span> <span class="u">${e.prop} #${e.unit}</span> `+
           `<span style="color:${c.color}">${c.label}</span> · <span class="who">${e.who}</span></span>`;}).join('');
       html+=`<td class="${cls}"><div class="dn ${ds===todayISO?'today':''}">${DOW[dowIdx]} ${fmtD(d)}${dowIdx===5?' · buffer':''}</div>${cells}</td>`;
     }
