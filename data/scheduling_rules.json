@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-07-14T19:28:45.284Z",
-  "last_checked": "2026-07-14T19:28:45.284Z",
+  "generated_at": "2026-07-16T15:29:22.241Z",
+  "last_checked": "2026-07-16T15:29:22.241Z",
   "source": "leeroy-cmyk/pm-scheduling/CLAUDE.md",
-  "count": 42,
+  "count": 43,
   "rules": [
     {
       "group": "General",
@@ -105,6 +105,12 @@
     {
       "group": "Tacoma",
       "category": "",
+      "text": "**Grounds recurring melds default to Friday (added 2026-07-16, Jonas's request).** All of Tacoma's recurring melds (`recurring_meld` set on the meld) are grounds work, so every recurring instance defaults to a Friday preference lock, business hours, if it doesn't already have a more specific stated preference from the title/chat. A stated preference still wins — the Friday default only fills in when none is found.",
+      "details": []
+    },
+    {
+      "group": "Tacoma",
+      "category": "",
       "text": "**Turns** (project melds) go to Armani; the repair scheduler leaves them alone. (Dulce Salinas legitimately appears on \"AppFolio Estimate\" turn melds.)",
       "details": []
     },
@@ -200,6 +206,8 @@
       "text": "Each week's recurring lawn melds are snapped to a **canonical template week** (a fixed day, time, and duration per property) and mirrored forward **+7 days**, so the times never drift week to week.",
       "details": [
         "A property lands on the calendar as often as PropertyMeld generates its instance — most are weekly; a few (e.g. h731) are intentionally bi-weekly.",
+        "**h731 duplicate recurrence removed (2026-07-16):** h731 briefly had two PropertyMeld recurrences pointing at the same slot — one correct (every 15 days, id 163904) and one duplicate firing every 7 days (id 179920). Florencia deleted the 7-day one in PropertyMeld; the TEMPLATE in `pm_lawn_scheduler.js` now only maps the bi-weekly id.",
+        "**o155-Elm added to the template (2026-07-16, id 162926):** a separate recurrence from o155-Oak (162927) that had been running unscheduled/manual. Now fixed to Thursday 12:30 PM (1.25h), right after o155-Oak's slot ends.",
         "A new recurrence not yet in the template is flagged as UNKNOWN so it can be added to the template."
       ]
     },
