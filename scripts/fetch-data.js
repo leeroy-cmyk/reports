@@ -1100,6 +1100,15 @@ async function fetchPropertyMeldTurns() {
     return d.toLocaleDateString('en-CA');
   };
   const SCHED_CUTOFF = new Date(Date.now() - 7 * 86400000).toLocaleDateString('en-CA', { timeZone: 'America/Los_Angeles' }); // last 7 days + future
+  // ---- turn dashboard extras: AppFolio move-in join + alerts engine ----
+  const nrm = s => String(s || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+  const moveInMap = {};
+  try { (JSON.parse(fs.readFileSync(path.join(DATA_DIR, 'turnvac.json'), 'utf8')).rows || []).forEach(r => { moveInMap[nrm(r.property_name) + '|' + nrm(r.unit)] = r.next_move_in || null; }); } catch (e) { console.log('turn dashboard: no turnvac.json for move-in join'); }
+  const TODAY_ISO = new Date().toLocaleDateString('en-CA', { timeZone: 'America/Los_Angeles' });
+  const dowN = iso => ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][new Date(iso + 'T12:00:00Z').getUTCDay()];
+  const STD_TASKS = new Set(['A - Initial walkthrough', 'C - Paint Prep / Paint', 'D - Maintenance']);
+  const alerts = { unscheduled: [], moveInConflict: [], friday: [], weekend: [], pastDue: [], stalled: [], nearDone: [] };
+  const spokTurns = [];
   let done = 0;
   const BATCH = 5;
   for (let i = 0; i < projects.length; i += BATCH) {
@@ -1155,57 +1164,46 @@ async function fetchPropertyMeldTurns() {
         const unit = proj.unit;
         const propObj = unit?.prop || {};
 
-        // ---- Spokane per-appointment schedule feed (in-house + vendor) ----
+        // ---- Spokane turn dashboard: enriched events + alerts + per-turn rollup ----
         if (SPOK_CITIES.has((propObj.city || '').trim())) {
           const unitLabel = unit?.unit || unit?.display_address?.line_2 || '';
+          const propName = propObj.property_name || '';
+          const lbl = `${propName} ${unitLabel}`.trim();
+          const open = proj.total_melds > proj.total_completed_melds;
+          const mi = moveInMap[nrm(propName) + '|' + nrm(unitLabel)] || null;
+          const inh = c => c === 'walkthrough' || c === 'paint' || c === 'maintenance';
+          let lastInhouse = null, nextTask = null;
           for (const m of melds) {
-            if (m.status === 'COMPLETED') continue;
-            const cat = catOf(m.brief_description || '');
-            if (cat === 'final-walk' || cat === 'estimate') continue;   // not shown on the crew calendar
-            // management (in-house) appointments
-            (m.managementappointment || []).forEach(a => {
-              const e = a.availability_segment?.event; if (!e?.dtstart) return;
-              const s = (a.management_assignment?.in_house_servicers || [])[0]
-                     || (m.in_house_servicers || [])[0]?.agent;
-              const who = s ? `${s.first_name || ''} ${s.last_name || ''}`.trim() : 'Unassigned';
-              const p = pac(e.dtstart); if (p.date < SCHED_CUTOFF) return;
-              scheduleEvents.push({ date: p.date, start: p.time, end: pac(e.dtend).time,
-                prop: propObj.property_name || '', unit: unitLabel, category: cat,
-                brief: m.brief_description || '', who, whoType: 'tech', ref: m.reference_id });
-            });
-            // vendor appointments
-            (m.vendorappointment || []).forEach(a => {
-              const e = a.availability_segment?.event; if (!e?.dtstart) return;
-              const vr = (m.vendor_assignment_requests || []).find(r => r.id === a.assignment_request)
-                      || (m.vendor_assignment_requests || [])[0];
-              const who = vr?.vendor?.name || 'Vendor';
-              const p = pac(e.dtstart); if (p.date < SCHED_CUTOFF) return;
-              scheduleEvents.push({ date: p.date, start: p.time, end: pac(e.dtend).time,
-                prop: propObj.property_name || '', unit: unitLabel, category: cat,
-                brief: m.brief_description || '', who, whoType: 'vendor', ref: m.reference_id });
-            });
+            const brief = m.brief_description || '', cat = catOf(brief), isDone = m.status === 'COMPLETED' || !!m.completion_date;
+            const mgmt = (m.managementappointment || []).filter(a => a.availability_segment?.event?.dtstart);
+            const vend = (m.vendorappointment || []).filter(a => a.availability_segment?.event?.dtstart);
+            const techName = (m.in_house_servicers || [])[0]?.agent ? `${(m.in_house_servicers)[0].agent.first_name} ${(m.in_house_servicers)[0].agent.last_name}` : 'Unassigned';
+            if (!isDone && cat !== 'estimate') {
+              mgmt.forEach(a => { const e = a.availability_segment.event; const s = (a.management_assignment?.in_house_servicers || [])[0] || (m.in_house_servicers || [])[0]?.agent; const who = s ? `${s.first_name || ''} ${s.last_name || ''}`.trim() : 'Unassigned'; const p = pac(e.dtstart); if (cat !== 'final-walk') scheduleEvents.push({ date: p.date, start: p.time, end: pac(e.dtend).time, prop: propName, unit: unitLabel, category: cat, brief, who, whoType: 'tech', ref: m.reference_id, meld_id: m.id, projId: proj.id, status: m.status }); });
+              vend.forEach(a => { const e = a.availability_segment.event; const vr = (m.vendor_assignment_requests || []).find(r => r.id === a.assignment_request) || (m.vendor_assignment_requests || [])[0]; const who = vr?.vendor?.name || 'Vendor'; const p = pac(e.dtstart); scheduleEvents.push({ date: p.date, start: p.time, end: pac(e.dtend).time, prop: propName, unit: unitLabel, category: cat, brief, who, whoType: 'vendor', ref: m.reference_id, meld_id: m.id, projId: proj.id, status: m.status }); });
+            }
+            const apptDates = [...mgmt, ...vend].map(a => pac(a.availability_segment.event.dtstart).date);
+            if (inh(cat)) apptDates.forEach(d => { if (d > (lastInhouse || '')) lastInhouse = d; });
+            if (open) {
+              if (STD_TASKS.has(brief.trim()) && apptDates.length === 0 && !isDone) alerts.unscheduled.push({ lbl, prop: propName, unit: unitLabel, task: brief.replace(' Prep / Paint', ''), status: m.status, projId: proj.id });
+              for (const a of mgmt) { const d = pac(a.availability_segment.event.dtstart).date; const wd = dowN(d);
+                if (inh(cat)) { if (wd === 'Sat' || wd === 'Sun') alerts.weekend.push({ lbl, task: brief, date: d, dow: wd, projId: proj.id }); else if (wd === 'Fri') alerts.friday.push({ lbl, task: brief.replace(' Prep / Paint', ''), date: d, projId: proj.id }); }
+                if (!isDone && d < TODAY_ISO) alerts.pastDue.push({ lbl, prop: propName, unit: unitLabel, task: brief.replace(' Prep / Paint', ''), date: d, dow: wd, status: m.status, category: cat, who: techName, projId: proj.id });
+              }
+              apptDates.filter(d => d >= TODAY_ISO).forEach(d => { if (!nextTask || d < nextTask.date) nextTask = { date: d, task: cat }; });
+            }
           }
-
-          // ---- Suggested vendor dates (REQUIRED for every active turn) ----
-          // Cleaning = 3rd business day after the last in-house day; carpet cleaning =
-          // the next business day. Shown so the turn manager has target dates when
-          // contacting vendors — only until a real vendor appt exists for that meld.
-          if (proj.total_completed_melds !== proj.total_melds && lastMaintPaint) {
+          // ---- Suggested vendor dates (cleaning = 3 biz days after in-house; carpet next biz day) ----
+          if (open && lastMaintPaint) {
             const cleanBase = cleanApptDate || addBizDays(lastMaintPaint, 3);
-            if (!cleanApptDate && cleanBase >= SCHED_CUTOFF) {
-              scheduleEvents.push({ date: cleanBase, start: '', end: '',
-                prop: propObj.property_name || '', unit: unitLabel, category: 'suggested-cleaning',
-                brief: `Suggested cleaning — 3 business days after in-house done (${lastMaintPaint})`,
-                who: 'SPO Cleaning', whoType: 'suggested', ref: proj.id });
-            }
-            if (!carpetApptDate) {
-              const carpetDate = addBizDays(cleanBase, 1);
-              if (carpetDate >= SCHED_CUTOFF) scheduleEvents.push({ date: carpetDate, start: '', end: '',
-                prop: propObj.property_name || '', unit: unitLabel, category: 'suggested-carpet',
-                brief: 'Suggested carpet cleaning — business day after cleaning',
-                who: 'Allklean', whoType: 'suggested', ref: proj.id });
-            }
+            if (!cleanApptDate) scheduleEvents.push({ date: cleanBase, start: '', end: '', prop: propName, unit: unitLabel, category: 'suggested-cleaning', brief: `Suggested cleaning — 3 business days after in-house done (${lastMaintPaint})`, who: 'SPO Cleaning', whoType: 'suggested', ref: proj.id, projId: proj.id, status: 'SUGGESTED' });
+            if (!carpetApptDate) { const carpetDate = addBizDays(cleanBase, 1); scheduleEvents.push({ date: carpetDate, start: '', end: '', prop: propName, unit: unitLabel, category: 'suggested-carpet', brief: 'Suggested carpet cleaning — business day after cleaning', who: 'Allklean', whoType: 'suggested', ref: proj.id, projId: proj.id, status: 'SUGGESTED' }); }
           }
+          if (open) {
+            if (mi && lastInhouse && lastInhouse > mi.slice(0, 10)) alerts.moveInConflict.push({ lbl, prop: propName, unit: unitLabel, lastInhouse, mi: mi.slice(0, 10), projId: proj.id });
+            if (proj.due_date && proj.due_date.slice(0, 10) < TODAY_ISO) { const rec = { lbl, prop: propName, unit: unitLabel, due: proj.due_date.slice(0, 10), done: proj.total_completed_melds, total: proj.total_melds, projId: proj.id }; if (proj.total_completed_melds <= 2) alerts.stalled.push(rec); else alerts.nearDone.push(rec); }
+          }
+          spokTurns.push({ projId: proj.id, name: proj.name, prop: propName, unit: unitLabel, status: open ? 'ACTIVE' : 'COMPLETE', start: proj.start_date ? proj.start_date.slice(0,10) : null, due: proj.due_date ? proj.due_date.slice(0,10) : null, move_in: mi ? mi.slice(0,10) : null, done: proj.total_completed_melds, total: proj.total_melds, last_inhouse: lastInhouse, next_task: nextTask });
         }
 
         turns.push({
@@ -1235,8 +1233,10 @@ async function fetchPropertyMeldTurns() {
   console.log(`\nPropertyMeld turns: saved ${turns.length} turn records`);
   save('pm_turns.json', { ok: true, fetched_at: new Date().toISOString(), turns });
   scheduleEvents.sort((a, b) => a.date.localeCompare(b.date) || String(a.who).localeCompare(String(b.who)));
-  save('turn_schedule.json', { ok: true, region: 'Spokane', fetched_at: new Date().toISOString(), events: scheduleEvents });
-  console.log(`PropertyMeld turns: saved ${scheduleEvents.length} Spokane schedule events`);
+  const openCount = spokTurns.filter(t => t.status === 'ACTIVE').length;
+  const kpis = { openTurns: openCount, totalTurnsShown: spokTurns.length, pastDue: alerts.pastDue.length, unscheduled: alerts.unscheduled.length, fridayViol: alerts.friday.length, moveInConflict: alerts.moveInConflict.length, stalled: alerts.stalled.length, atRisk: alerts.unscheduled.length + alerts.moveInConflict.length + alerts.friday.length + alerts.weekend.length + alerts.stalled.length };
+  save('turn_schedule.json', { ok: true, region: 'Spokane', fetched_at: new Date().toISOString(), today: TODAY_ISO, events: scheduleEvents, turns: spokTurns, alerts, kpis });
+  console.log(`PropertyMeld turns: saved ${scheduleEvents.length} events, ${spokTurns.length} Spokane turns, ${kpis.atRisk} at-risk`);
 }
 
 // ── PropertyMeld Tech Metrics ────────────────────────────────────────────────
