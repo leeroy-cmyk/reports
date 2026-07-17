@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-07-17T15:09:54.446Z",
-  "last_checked": "2026-07-17T15:09:54.446Z",
+  "generated_at": "2026-07-17T22:21:33.794Z",
+  "last_checked": "2026-07-17T22:21:33.794Z",
   "source": "leeroy-cmyk/pm-scheduling/CLAUDE.md",
-  "count": 43,
+  "count": 44,
   "rules": [
     {
       "group": "General",
@@ -72,6 +72,12 @@
         "\"Earlier / sooner / before Monday\" means **avoid** that day and find an earlier slot — not book on it.",
         "Duration hints are only trusted between **15 minutes and 4 hours** (avoids reading \"within 48 hours\" as a 48-hour job)."
       ]
+    },
+    {
+      "group": "General",
+      "category": "",
+      "text": "**Append-only — the set schedule NEVER moves (firm rule, Lee Roy 2026-07-17).** Once anything is placed it stays put: **in-house work does not move, vendor work does not move, and available dates do not move.** The scheduler only **adds** newly-created work into the **next available open slots** — it never reschedules, repacks, or pulls existing work earlier, not even for a high-priority or high-demand unit. If a unit is already scheduled late, it stays late; the way to make future units land sooner is to create/schedule the turn earlier, not to re-shuffle what's already set. Priority order (below) only sequences **new, unscheduled** work among itself — it never displaces work that's already on the calendar. (This overrides any earlier \"REPACK\"/priority-pull idea for pulling a late turn forward.)",
+      "details": []
     },
     {
       "group": "General",
@@ -259,7 +265,7 @@
     {
       "group": "Turns",
       "category": "Techs",
-      "text": "Ron Cramer and Micheal Magoon do the in-house work (Scott Higley no longer works here). Two more turn techs start **Monday, July 20, 2026**. Ron and Michael only do **maintenance and paint** — cleaning and flooring are vendors.",
+      "text": "Ron Cramer and Micheal Magoon do the in-house work (Scott Higley no longer works here). These are the **only two turn techs** — no additional hires (an earlier note claimed two more start July 20, 2026; that hire never happened — corrected 2026-07-17). Ron and Michael only do **maintenance and paint** — cleaning and flooring are vendors.",
       "details": []
     },
     {
@@ -277,7 +283,7 @@
     {
       "group": "Turns",
       "category": "Order of scheduling",
-      "text": "**leased units first** (a new tenant is already lined up, so the move-in deadline is firm), by soonest move-in; then everyone else by **highest property vacancy %** first, to clear the most-affected properties fastest.",
+      "text": "applies **only to new, unscheduled turns** as they're added — it never re-orders or pulls forward turns already on the calendar (see the append-only rule in \"General\"). New turns are sequenced by a strict priority ladder: **(1) leased units first** (a new tenant is already lined up, so the move-in deadline is firm), by soonest move-in date; then **(2) units with a Converted application**, by earliest desired move-in date; then **(3) units with a Converting application**, by earliest desired move-in date; then **(4) highest property vacancy %**, to clear the most-affected properties fastest; then **(5) highest scheduled rent**. Only **Converted** and **Converting** applications count toward the desired-move-in tiers — **Converted always outranks Converting** — because those are the prospects actually likely to sign; every other application status is ignored for scheduling priority.",
       "details": []
     },
     {
