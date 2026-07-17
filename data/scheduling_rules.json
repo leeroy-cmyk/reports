@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-07-17T22:21:33.794Z",
-  "last_checked": "2026-07-17T22:21:33.794Z",
+  "generated_at": "2026-07-17T22:29:55.950Z",
+  "last_checked": "2026-07-17T22:29:55.950Z",
   "source": "leeroy-cmyk/pm-scheduling/CLAUDE.md",
-  "count": 44,
+  "count": 45,
   "rules": [
     {
       "group": "General",
@@ -76,7 +76,7 @@
     {
       "group": "General",
       "category": "",
-      "text": "**Append-only — the set schedule NEVER moves (firm rule, Lee Roy 2026-07-17).** Once anything is placed it stays put: **in-house work does not move, vendor work does not move, and available dates do not move.** The scheduler only **adds** newly-created work into the **next available open slots** — it never reschedules, repacks, or pulls existing work earlier, not even for a high-priority or high-demand unit. If a unit is already scheduled late, it stays late; the way to make future units land sooner is to create/schedule the turn earlier, not to re-shuffle what's already set. Priority order (below) only sequences **new, unscheduled** work among itself — it never displaces work that's already on the calendar. (This overrides any earlier \"REPACK\"/priority-pull idea for pulling a late turn forward.)",
+      "text": "**Append-only — the set schedule NEVER moves (firm rule, Lee Roy 2026-07-17).** Once anything is placed it stays put: **in-house work does not move, vendor work does not move, and available dates do not move.** The scheduler only **adds** newly-created work into the **next available open slots** — it never reschedules, repacks, or pulls existing work earlier, not even for a high-priority or high-demand unit. If a unit is already scheduled late, it stays late; the way to make future units land sooner is to create/schedule the turn earlier, not to re-shuffle what's already set. Priority order (below) only sequences **new, unscheduled** work among itself — it never displaces work that's already on the calendar. (This overrides any earlier \"REPACK\"/priority-pull idea for pulling a late turn forward.) The **one exception** is a **cancelled move-out** (see Turns): a turn whose move-out/notice was cancelled is a *void* turn, so it's deleted outright and the slot it frees is backfilled by the next-priority unscheduled turn — that's reclaiming an invalid slot, not rescheduling valid work.",
       "details": []
     },
     {
@@ -300,8 +300,14 @@
     },
     {
       "group": "Turns",
+      "category": "",
+      "text": "**Cancelled move-out / notice-to-vacate → delete the turn (firm rule, Lee Roy 2026-07-17).** If a unit's move-out or notice-to-vacate is cancelled (the resident is staying), that unit is no longer turning: the turn is **unscheduled** (all its PropertyMeld appointments cancelled) and the **turn project is removed completely** (its open melds and the project deleted). This frees the days it was holding on Ron/Magoon's calendars, and the next daily gap-fill run **fills that opening with the next-highest-priority unscheduled turn** (per the priority ladder above). This is the only case where already-scheduled in-house work is removed — it isn't a reschedule of valid work, it's reclaiming a slot for a turn that shouldn't exist anymore (so it stays consistent with the append-only rule).",
+      "details": []
+    },
+    {
+      "group": "Turns",
       "category": "Move-out changes",
-      "text": "AppFolio is checked **daily** for move-out dates that change or move-outs that get cancelled, and the turn schedule (and the available date) is updated to match.",
+      "text": "AppFolio is checked **daily** for move-out dates that change or move-outs that get cancelled, and the turn schedule (and the available date) is updated to match. A cancelled move-out triggers the delete-the-turn rule above; a changed move-out date shifts the turn's start (new work is added per the append-only rule — existing placed work is not moved).",
       "details": []
     }
   ]
