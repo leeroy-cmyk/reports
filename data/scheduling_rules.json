@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-16T15:29:22.241Z",
-  "last_checked": "2026-07-16T15:29:22.241Z",
+  "generated_at": "2026-07-17T15:09:54.446Z",
+  "last_checked": "2026-07-17T15:09:54.446Z",
   "source": "leeroy-cmyk/pm-scheduling/CLAUDE.md",
   "count": 43,
   "rules": [
@@ -56,7 +56,10 @@
         "Locked jobs are exempt from compaction, blocked-day moves, and overlap moves — a stated preference is never overridden by packing.",
         "Ordinal dates are understood (\"June 18th\"). A stated date of **today** books same-day; a date in the **past** is dropped (job scheduled ASAP).",
         "Only the **title** and a genuine **chat request** count — office-hours boilerplate (\"Mon–Fri 9–5\") is never treated as a preference.",
-        "**Weekend exception (added 2026-07-09):** a stated Saturday/Sunday date from the **resident OR the tech** (e.g. a tech rescheduling around an emergency and offering to come Saturday) is honored as a preference — this is the only way work lands on a reserved day. It no longer requires the resident specifically; the tech's own stated day counts too, since the resident typically just confirms it afterward."
+        "**Weekend/Monday exception (added 2026-07-09, extended to managers 2026-07-16):** a stated Saturday/Sunday/Monday date from the **resident, the tech, OR a manager** (e.g. a tech rescheduling around an emergency and offering to come Saturday, or a manager writing \"please schedule Monday July 20th\") is honored as a preference — this is the only way work lands on a reserved day. Originally resident-only, then opened to the tech's own stated day, now a manager's direct instruction counts too.",
+        "`nextOccurrenceOfDay` (both `pm_scheduler.js` and `pm_spokane_scheduler.js`) used to have a hardcoded block making \"Monday\" impossible to resolve as a target day even when explicitly requested — fixed 2026-07-16 so a stated Monday preference can actually be honored, not just silently dropped.",
+        "A chat-based preference normally only lives ~26h (anti-thrash — see below), which isn't enough to *permanently* protect a meld sitting on a reserved day. `hasReservedDayOverride()` in both scripts scans the **full** comment history (ignoring recency) for a resident/tech/manager message naming that specific day/date, and — without ever triggering a reschedule itself — permanently suppresses the reserved-day relocation once found. This is what makes a manager's one-time chat note as durable as a title-embedded date.",
+        "The standard \"outside business hours\" auto-reply text (which itself says \"Monday–Friday\") is explicitly excluded from all of this matching — otherwise the auto-reply's own mention of \"Monday\" reads as a manager stating a preference on every after-hours meld."
       ]
     },
     {
@@ -65,7 +68,7 @@
       "text": "**Reads the chat.** It reads each job's recent messages for reschedule requests, resident preferred times, and duration hints, and accommodates residents when possible (without overriding Emergency/Urgent).",
       "details": [
         "A Claude \"chat reader\" interprets the intent; the code still applies every rule above. If it's unavailable, a keyword reader is the fallback.",
-        "**Not-yet-scheduled** jobs honor requests from the last **30 days**; **already-scheduled** jobs only act on messages from the last **~26 hours** (so an old message doesn't re-shuffle the calendar every day).",
+        "**Not-yet-scheduled** jobs honor requests from the last **30 days**; **already-scheduled** jobs only act on messages from the last **~26 hours** (so an old message doesn't re-shuffle the calendar every day) — except the reserved-day override above, which is recency-exempt by design.",
         "\"Earlier / sooner / before Monday\" means **avoid** that day and find an earlier slot — not book on it.",
         "Duration hints are only trusted between **15 minutes and 4 hours** (avoids reading \"within 48 hours\" as a 48-hour job)."
       ]
