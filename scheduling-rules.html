@@ -8,27 +8,43 @@
   *, *::before, *::after { box-sizing: border-box; }
   body { font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
          background: #f4f6f9; color: #2c3e50; line-height: 1.6; margin: 0; padding: 0 0 60px; }
-  .wrap { max-width: 860px; margin: 0 auto; padding: 0 20px; }
-  header.pg { background: linear-gradient(135deg, #1a5276, #2e86c1); color: #fff; padding: 36px 0 30px; margin-bottom: 26px; }
-  header.pg h1 { font-size: 1.8rem; font-weight: 700; letter-spacing: -0.3px; }
-  header.pg p { opacity: .92; margin-top: 7px; font-size: 1rem; max-width: 660px; }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 20px; }
+  header.pg { background: linear-gradient(135deg, #1a5276, #2e86c1); color: #fff; padding: 34px 0 28px; }
+  header.pg h1 { font-size: 1.8rem; font-weight: 700; letter-spacing: -0.3px; margin: 0; }
+  header.pg p { opacity: .92; margin-top: 7px; font-size: 1rem; max-width: 680px; }
   .updated { margin-top: 14px; font-size: .82rem; opacity: .9; display: inline-flex; align-items: center; gap: 8px; }
   .dot { width: 8px; height: 8px; border-radius: 50%; background: #7ee2a8; box-shadow: 0 0 0 3px rgba(126,226,168,.3); }
-  h2.scope { color: #1a5276; font-size: 1.15rem; margin: 26px 0 12px; display: flex; align-items: center; gap: 10px; }
-  h2.scope .count { font-size: .76rem; font-weight: 600; color: #5b6b7b; background: #e9eef4; border-radius: 12px; padding: 1px 9px; }
-  .rule { background: #fff; border: 1px solid #e1e8ef; border-radius: 10px; padding: 16px 18px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(26,82,118,.05); }
+
+  /* Tab bar */
+  .tabbar { position: sticky; top: 0; z-index: 20; background: #f4f6f9; border-bottom: 1px solid #e1e8ef; padding-top: 14px; }
+  .tabs { display: flex; flex-wrap: wrap; gap: 8px; padding-bottom: 12px; }
+  .tab { display: inline-flex; align-items: center; gap: 7px; cursor: pointer; border: 1px solid #d7e0ea; background: #fff;
+         color: #44515f; border-radius: 999px; padding: 8px 15px; font-size: .9rem; font-weight: 600; transition: all .15s; user-select: none; }
+  .tab:hover { border-color: #2e86c1; color: #1a5276; }
+  .tab .tcount { font-size: .72rem; font-weight: 700; background: #eef3f8; color: #5b6b7b; border-radius: 10px; padding: 0 7px; }
+  .tab.active { background: linear-gradient(135deg, #1a5276, #2e86c1); color: #fff; border-color: transparent; box-shadow: 0 2px 8px rgba(26,82,118,.25); }
+  .tab.active .tcount { background: rgba(255,255,255,.25); color: #fff; }
+
+  .blurb { background: #eef5fb; border-left: 4px solid #2e86c1; border-radius: 0 8px 8px 0; padding: 12px 16px; font-size: .92rem; margin: 22px 0 18px; color: #3a4b5a; }
+  .panel { display: none; }
+  .panel.active { display: block; animation: fade .2s ease; }
+  @keyframes fade { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+
+  h2.scope { color: #1a5276; font-size: 1.08rem; margin: 22px 0 12px; padding-bottom: 6px; border-bottom: 2px solid #e9eef4; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  h2.scope .sub { font-weight: 400; color: #7f8fa4; font-size: .82rem; }
+  h2.scope .count { font-size: .74rem; font-weight: 600; color: #5b6b7b; background: #e9eef4; border-radius: 12px; padding: 1px 9px; margin-left: auto; }
+  .rule { background: #fff; border: 1px solid #e1e8ef; border-radius: 10px; padding: 15px 18px; margin-bottom: 11px; box-shadow: 0 1px 3px rgba(26,82,118,.05); }
   .rule .cat { display: inline-block; font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: #2470b3; background: #e6f0fa; border-radius: 6px; padding: 2px 9px; margin-bottom: 8px; }
-  .rule .body { font-size: .98rem; }
-  .rule ul { margin: 8px 0 2px 20px; }
-  .rule li { margin-bottom: 4px; font-size: .92rem; color: #44515f; }
+  .rule .body { font-size: .97rem; }
+  .rule ul { margin: 9px 0 2px 18px; }
+  .rule li { margin-bottom: 5px; font-size: .9rem; color: #44515f; }
   code { background: #eef3f8; color: #1a5276; padding: 1px 6px; border-radius: 5px; font-family: "SF Mono", Consolas, monospace; font-size: .85em; }
-  .note { background: #eef5fb; border-left: 4px solid #2e86c1; border-radius: 0 8px 8px 0; padding: 13px 16px; font-size: .9rem; margin: 6px 0 22px; }
+  .note { background: #fff; border: 1px solid #e1e8ef; border-left: 4px solid #8aa4bd; border-radius: 0 8px 8px 0; padding: 13px 16px; font-size: .88rem; margin: 6px 0 20px; color: #44515f; }
   .note strong { color: #1a5276; }
   footer.pg { text-align: center; color: #9aa7b4; font-size: .8rem; margin-top: 30px; }
-  footer.pg a { color: #2470b3; }
+  footer.pg a, footer.pg code { color: #2470b3; }
   .loading, .err { text-align: center; color: #7f8fa4; padding: 40px 0; }
   .err { color: #c0392b; }
-  a.focusable:focus-visible { outline: 2px solid #2e86c1; outline-offset: 2px; }
 </style>
 </head>
 <body>
@@ -36,27 +52,47 @@
 <header class="pg">
   <div class="wrap">
     <h1>📋 Scheduling Rules</h1>
-    <p>The scheduling rules currently in effect for McKay PropertyMeld auto-scheduling. This page reads the team's shared rulebook and refreshes daily, so new or changed rules show up here on their own.</p>
+    <p>The complete rules currently in effect for McKay PropertyMeld auto-scheduling, organized by category. This page reads the team's shared rulebook and refreshes daily, so new or changed rules show up here on their own.</p>
     <div class="updated"><span class="dot"></span><span id="updated">Loading…</span></div>
   </div>
 </header>
 
+<div class="tabbar"><div class="wrap"><div class="tabs" id="tabs"></div></div></div>
+
 <div class="wrap">
-  <div class="note">
+  <div id="content"><div class="loading">Loading rules…</div></div>
+  <div class="note" style="margin-top:26px;">
     <strong>How rules get here:</strong> schedulers change a rule by editing the shared rulebook
     (<code>pm-scheduling / CLAUDE.md</code>) through Claude. This report pulls from that rulebook
-    once a day — so whatever's listed below is what the automatic scheduler is actually following.
+    once a day — so whatever's listed here is exactly what the automatic scheduler is following. Nothing is summarized or left out.
   </div>
-  <div id="content"><div class="loading">Loading rules…</div></div>
   <footer class="pg">
     McKay Property Management · PropertyMeld auto-scheduling · source: <code>pm-scheduling/CLAUDE.md</code>
   </footer>
 </div>
 
 <script>
-const GROUP_ORDER = ['General', 'Tacoma', 'Spokane', 'Turns', 'Grounds / Lawn'];
-const GROUP_ICON  = { 'General': '🌐', 'Tacoma': '🌲', 'Spokane': '🏙️', 'Turns': '🔑', 'Grounds / Lawn': '🌱' };
-const GROUP_SUB   = { 'General': 'All regions', 'Tacoma': 'tc68 / tc34', 'Spokane': 'Justin', 'Turns': 'Ron & Michael · unit make-ready', 'Grounds / Lawn': 'David & Alexander' };
+// ── Category tabs: each maps one or more rulebook groups into a single tab ──────────────
+const TABS = [
+  { id:'general',    name:'General',        icon:'🌐', groups:['General'],
+    blurb:'The baseline rules that apply to <strong>every region and every kind of work</strong> — reserved days, business hours, priority order, emergencies, preference locks, chat-reading, and schedule stability.' },
+  { id:'workorders', name:'Work Orders',    icon:'🔧', groups:['Tacoma','Spokane'],
+    blurb:'Repair &amp; maintenance <strong>work-order scheduling, by region</strong> — who works where, day cutoffs, property clustering, drive-time buffers, and emergency handling.' },
+  { id:'turns',      name:'Turns',          icon:'🔑', groups:['Turns'],
+    blurb:'<strong>Unit make-ready (turns)</strong> — Ron &amp; Michael\'s in-house paint/maintenance, the priority order for new turns, append-only scheduling, available-date rules, and vendors.' },
+  { id:'grounds',    name:'Grounds & Lawn', icon:'🌱', groups:['Grounds / Lawn','Tri-Cities Grounds/Lawn'],
+    blurb:'<strong>Recurring grounds &amp; lawn service, by region</strong> — the fixed weekly templates for David &amp; Alexander (Spokane) and Rey &amp; Hannah (Tri-Cities).' },
+];
+// Per-group subheader label (region / scope) shown inside a tab
+const GROUP_SUB = {
+  'General': 'Applies to every region &amp; every work type',
+  'Tacoma': 'tc68 / tc34 — Jonas (repairs) &amp; Armani (turns)',
+  'Spokane': 'Repairs — Justin Gutierrez',
+  'Turns': 'Ron Cramer &amp; Micheal Magoon · unit make-ready',
+  'Grounds / Lawn': 'Spokane — David Sanchez &amp; Alexander Overall',
+  'Tri-Cities Grounds/Lawn': 'Tri-Cities — Reynaldo (lawn) &amp; Hannah (grounds)',
+};
+const GROUP_ICON = { 'Tacoma':'🌲', 'Spokane':'🏙️', 'Grounds / Lawn':'🌱', 'Tri-Cities Grounds/Lawn':'🌾' };
 
 function esc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 // minimal, safe markdown: escape first, then **bold**, `code`, *italic*
@@ -77,6 +113,20 @@ function ago(iso){
   else rel = Math.round(mins/1440) + ' day(s) ago';
   return 'Updated ' + d + ' at ' + t + ' (' + rel + ')';
 }
+function ruleHTML(rule){
+  let h = '<div class="rule">';
+  if (rule.category) h += '<span class="cat">' + esc(rule.category) + '</span>';
+  h += '<div class="body">' + md(rule.text || rule.category || '') + '</div>';
+  if (rule.details && rule.details.length)
+    h += '<ul>' + rule.details.map(d => '<li>' + md(d) + '</li>').join('') + '</ul>';
+  return h + '</div>';
+}
+
+function showTab(id){
+  document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.id === id));
+  document.querySelectorAll('.panel').forEach(p => p.classList.toggle('active', p.id === 'panel-' + id));
+  if (history.replaceState) history.replaceState(null, '', '#' + id);
+}
 
 fetch('data/scheduling_rules.json?t=' + Date.now())
   .then(r => { if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
@@ -85,25 +135,41 @@ fetch('data/scheduling_rules.json?t=' + Date.now())
     const rules = data.rules || [];
     const byGroup = {};
     rules.forEach(r => { const g = r.group || 'General'; (byGroup[g] = byGroup[g] || []).push(r); });
-    const groups = [...new Set([...GROUP_ORDER, ...Object.keys(byGroup)])].filter(g => byGroup[g]);
-    let html = '';
-    groups.forEach(group => {
-      const list = byGroup[group];
-      const sub = GROUP_SUB[group] ? ' <span style="font-weight:400;color:#7f8fa4;font-size:.8rem">· ' + esc(GROUP_SUB[group]) + '</span>' : '';
-      html += '<h2 class="scope">' + (GROUP_ICON[group]||'•') + ' ' + esc(group) + sub +
-              ' <span class="count">' + list.length + '</span></h2>';
-      list.forEach(rule => {
-        html += '<div class="rule">';
-        if (rule.category) html += '<span class="cat">' + esc(rule.category) + '</span>';
-        html += '<div class="body">' + md(rule.text || rule.category) + '</div>';
-        if (rule.details && rule.details.length) {
-          html += '<ul>' + rule.details.map(d => '<li>' + md(d) + '</li>').join('') + '</ul>';
+
+    // Any group not claimed by a tab lands in an auto "Other" tab so nothing is ever dropped.
+    const claimed = new Set(TABS.flatMap(t => t.groups));
+    const leftover = Object.keys(byGroup).filter(g => !claimed.has(g));
+    const tabs = leftover.length
+      ? [...TABS, { id:'other', name:'Other', icon:'•', groups:leftover, blurb:'Additional rules from the rulebook.' }]
+      : TABS.slice();
+
+    const tabsWithRules = tabs.filter(t => t.groups.some(g => byGroup[g] && byGroup[g].length));
+    let tabBar = '', panels = '';
+    tabsWithRules.forEach((t, i) => {
+      const count = t.groups.reduce((n, g) => n + (byGroup[g] ? byGroup[g].length : 0), 0);
+      tabBar += '<div class="tab' + (i===0?' active':'') + '" data-id="' + t.id + '" onclick="showTab(\'' + t.id + '\')">' +
+                t.icon + ' ' + esc(t.name) + ' <span class="tcount">' + count + '</span></div>';
+      let body = '<div class="blurb">' + t.blurb + '</div>';
+      const multi = t.groups.filter(g => byGroup[g] && byGroup[g].length).length > 1;
+      t.groups.forEach(g => {
+        const list = byGroup[g]; if (!list || !list.length) return;
+        // Show a scope subheader when a tab spans more than one rulebook group (region split)
+        if (multi) {
+          body += '<h2 class="scope">' + (GROUP_ICON[g] || t.icon) + ' ' + esc(g) +
+                  (GROUP_SUB[g] ? ' <span class="sub">· ' + GROUP_SUB[g] + '</span>' : '') +
+                  ' <span class="count">' + list.length + '</span></h2>';
         }
-        html += '</div>';
+        body += list.map(ruleHTML).join('');
       });
+      panels += '<div class="panel' + (i===0?' active':'') + '" id="panel-' + t.id + '">' + body + '</div>';
     });
-    if (data.note) html += '<div class="note">' + esc(data.note) + '</div>';
-    document.getElementById('content').innerHTML = html || '<div class="loading">No rules found.</div>';
+
+    document.getElementById('tabs').innerHTML = tabBar;
+    document.getElementById('content').innerHTML = panels || '<div class="loading">No rules found.</div>';
+
+    // Honor a #hash deep-link to a specific tab
+    const want = (location.hash || '').replace('#','');
+    if (want && tabsWithRules.some(t => t.id === want)) showTab(want);
   })
   .catch(e => {
     document.getElementById('updated').textContent = 'Could not load';

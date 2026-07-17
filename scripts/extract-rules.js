@@ -63,7 +63,7 @@ function parseRules(md) {
     const line = lines[i];
     if (/^##\s/.test(line)) break;                          // next ## section ends the rulebook
     const h3 = line.match(/^###\s+(.*)$/);
-    if (h3) { push(); group = h3[1].replace(/\s*[—-].*$/, '').trim() || h3[1].trim(); continue; }  // "Tacoma — tc68" -> "Tacoma"
+    if (h3) { push(); group = h3[1].replace(/\s+[—–-]\s.*$/, '').replace(/\s*\(.*$/, '').trim() || h3[1].trim(); continue; }  // "Tacoma — tc68" -> "Tacoma"; keeps internal hyphens ("Tri-Cities Grounds/Lawn"); strips "(Rey + Hannah)"
     const top = line.match(/^-\s+(.*)$/);
     const sub = line.match(/^\s+-\s+(.*)$/);
     if (top) {
