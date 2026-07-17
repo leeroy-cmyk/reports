@@ -349,11 +349,13 @@ function buildRecentlyAdded() {
     .sort((a, b) => b.moveOutD - a.moveOutD);
 
   const badge = document.getElementById('recentBadge');
-  if (recent.length > 0) {
-    badge.textContent = recent.length;
-    badge.style.display = 'inline-block';
-  } else {
-    badge.style.display = 'none';
+  if (badge) {
+    if (recent.length > 0) {
+      badge.textContent = recent.length;
+      badge.style.display = 'inline-block';
+    } else {
+      badge.style.display = 'none';
+    }
   }
 
   if (recent.length === 0) {
