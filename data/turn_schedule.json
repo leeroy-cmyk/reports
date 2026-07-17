@@ -1,7 +1,7 @@
 {
   "ok": true,
   "region": "Spokane",
-  "fetched_at": "2026-07-17T15:27:18.004Z",
+  "fetched_at": "2026-07-17T16:57:12.981Z",
   "today": "2026-07-17",
   "events": [
     {
@@ -2064,22 +2064,6 @@
     },
     {
       "date": "2026-08-19",
-      "start": "3:00 PM",
-      "end": "4:00 PM",
-      "prop": "k104- LeFevre",
-      "unit": "509-1",
-      "addr": "509 N. Brower, 1, Medical Lake",
-      "category": "walkthrough",
-      "brief": "A - Initial walkthrough",
-      "who": "Ron Cramer",
-      "whoType": "tech",
-      "ref": "T50PH10",
-      "meld_id": 13061276,
-      "projId": 228491,
-      "status": "PENDING_COMPLETION"
-    },
-    {
-      "date": "2026-08-19",
       "start": "10:00 AM",
       "end": "11:00 AM",
       "prop": "b101",
@@ -2092,6 +2076,22 @@
       "ref": "TRF4W19",
       "meld_id": 13082190,
       "projId": 228918,
+      "status": "PENDING_COMPLETION"
+    },
+    {
+      "date": "2026-08-19",
+      "start": "3:00 PM",
+      "end": "4:00 PM",
+      "prop": "k104- LeFevre",
+      "unit": "509-1",
+      "addr": "509 N. Brower, 1, Medical Lake",
+      "category": "walkthrough",
+      "brief": "A - Initial walkthrough",
+      "who": "Ron Cramer",
+      "whoType": "tech",
+      "ref": "T50PH10",
+      "meld_id": 13061276,
+      "projId": 228491,
       "status": "PENDING_COMPLETION"
     },
     {
@@ -5173,57 +5173,6 @@
   ],
   "turns": [
     {
-      "projId": 232506,
-      "name": "Standard Unit Turn",
-      "prop": "o155-Elm",
-      "unit": "P",
-      "status": "ACTIVE",
-      "start": "2026-07-10",
-      "due": "2026-07-21",
-      "move_in": "2026-07-27",
-      "done": 5,
-      "total": 7,
-      "last_inhouse": "2026-07-22",
-      "next_task": {
-        "date": "2026-07-20",
-        "task": "paint"
-      }
-    },
-    {
-      "projId": 232611,
-      "name": "Standard Unit Turn",
-      "prop": "p705",
-      "unit": "19",
-      "status": "ACTIVE",
-      "start": "2026-08-01",
-      "due": "2026-08-15",
-      "move_in": null,
-      "done": 0,
-      "total": 7,
-      "last_inhouse": "2026-10-14",
-      "next_task": {
-        "date": "2026-09-01",
-        "task": "walkthrough"
-      }
-    },
-    {
-      "projId": 232610,
-      "name": "Standard Unit Turn",
-      "prop": "k104- LeFevre",
-      "unit": "506-3",
-      "status": "ACTIVE",
-      "start": "2026-07-06",
-      "due": "2026-07-20",
-      "move_in": "2026-08-26",
-      "done": 1,
-      "total": 7,
-      "last_inhouse": "2026-07-30",
-      "next_task": {
-        "date": "2026-07-28",
-        "task": "paint"
-      }
-    },
-    {
       "projId": 232609,
       "name": "Standard Unit Turn",
       "prop": "c302",
@@ -5255,6 +5204,57 @@
       "next_task": {
         "date": "2026-09-02",
         "task": "walkthrough"
+      }
+    },
+    {
+      "projId": 232610,
+      "name": "Standard Unit Turn",
+      "prop": "k104- LeFevre",
+      "unit": "506-3",
+      "status": "ACTIVE",
+      "start": "2026-07-06",
+      "due": "2026-07-20",
+      "move_in": "2026-08-26",
+      "done": 1,
+      "total": 7,
+      "last_inhouse": "2026-07-30",
+      "next_task": {
+        "date": "2026-07-28",
+        "task": "paint"
+      }
+    },
+    {
+      "projId": 232611,
+      "name": "Standard Unit Turn",
+      "prop": "p705",
+      "unit": "19",
+      "status": "ACTIVE",
+      "start": "2026-08-01",
+      "due": "2026-08-15",
+      "move_in": null,
+      "done": 0,
+      "total": 7,
+      "last_inhouse": "2026-10-14",
+      "next_task": {
+        "date": "2026-09-01",
+        "task": "walkthrough"
+      }
+    },
+    {
+      "projId": 232506,
+      "name": "Standard Unit Turn",
+      "prop": "o155-Elm",
+      "unit": "P",
+      "status": "ACTIVE",
+      "start": "2026-07-10",
+      "due": "2026-07-21",
+      "move_in": "2026-07-27",
+      "done": 5,
+      "total": 7,
+      "last_inhouse": "2026-07-22",
+      "next_task": {
+        "date": "2026-07-20",
+        "task": "paint"
       }
     },
     {
@@ -5340,6 +5340,23 @@
       }
     },
     {
+      "projId": 229353,
+      "name": "Standard Unit Turn",
+      "prop": "c313",
+      "unit": "22",
+      "status": "ACTIVE",
+      "start": "2026-08-04",
+      "due": "2026-09-11",
+      "move_in": null,
+      "done": 0,
+      "total": 7,
+      "last_inhouse": "2026-09-16",
+      "next_task": {
+        "date": "2026-08-19",
+        "task": "walkthrough"
+      }
+    },
+    {
       "projId": 229358,
       "name": "Standard Unit Turn",
       "prop": "a210",
@@ -5374,19 +5391,19 @@
       }
     },
     {
-      "projId": 229353,
+      "projId": 229349,
       "name": "Standard Unit Turn",
-      "prop": "c313",
-      "unit": "22",
+      "prop": "m405",
+      "unit": "11",
       "status": "ACTIVE",
       "start": "2026-08-04",
       "due": "2026-09-11",
       "move_in": null,
       "done": 0,
       "total": 7,
-      "last_inhouse": "2026-09-16",
+      "last_inhouse": "2026-11-10",
       "next_task": {
-        "date": "2026-08-19",
+        "date": "2026-09-02",
         "task": "walkthrough"
       }
     },
@@ -5404,23 +5421,6 @@
       "last_inhouse": "2026-10-26",
       "next_task": {
         "date": "2026-09-01",
-        "task": "walkthrough"
-      }
-    },
-    {
-      "projId": 229349,
-      "name": "Standard Unit Turn",
-      "prop": "m405",
-      "unit": "11",
-      "status": "ACTIVE",
-      "start": "2026-08-04",
-      "due": "2026-09-11",
-      "move_in": null,
-      "done": 0,
-      "total": 7,
-      "last_inhouse": "2026-11-10",
-      "next_task": {
-        "date": "2026-09-02",
         "task": "walkthrough"
       }
     },
@@ -5473,23 +5473,6 @@
       }
     },
     {
-      "projId": 228919,
-      "name": "Standard Unit Turn",
-      "prop": "m405",
-      "unit": "20",
-      "status": "ACTIVE",
-      "start": "2026-08-04",
-      "due": "2026-09-10",
-      "move_in": null,
-      "done": 0,
-      "total": 7,
-      "last_inhouse": "2026-11-10",
-      "next_task": {
-        "date": "2026-09-02",
-        "task": "walkthrough"
-      }
-    },
-    {
       "projId": 228920,
       "name": "Standard Unit Turn",
       "prop": "m221",
@@ -5507,19 +5490,19 @@
       }
     },
     {
-      "projId": 228491,
+      "projId": 228919,
       "name": "Standard Unit Turn",
-      "prop": "k104- LeFevre",
-      "unit": "509-1",
+      "prop": "m405",
+      "unit": "20",
       "status": "ACTIVE",
       "start": "2026-08-04",
-      "due": "2026-09-09",
+      "due": "2026-09-10",
       "move_in": null,
       "done": 0,
       "total": 7,
-      "last_inhouse": "2026-09-29",
+      "last_inhouse": "2026-11-10",
       "next_task": {
-        "date": "2026-08-19",
+        "date": "2026-09-02",
         "task": "walkthrough"
       }
     },
@@ -5535,6 +5518,23 @@
       "done": 0,
       "total": 7,
       "last_inhouse": "2026-09-01",
+      "next_task": {
+        "date": "2026-08-19",
+        "task": "walkthrough"
+      }
+    },
+    {
+      "projId": 228491,
+      "name": "Standard Unit Turn",
+      "prop": "k104- LeFevre",
+      "unit": "509-1",
+      "status": "ACTIVE",
+      "start": "2026-08-04",
+      "due": "2026-09-09",
+      "move_in": null,
+      "done": 0,
+      "total": 7,
+      "last_inhouse": "2026-09-29",
       "next_task": {
         "date": "2026-08-19",
         "task": "walkthrough"
@@ -5575,20 +5575,6 @@
       }
     },
     {
-      "projId": 228059,
-      "name": "Pest Control",
-      "prop": "e328",
-      "unit": "1",
-      "status": "COMPLETE",
-      "start": "2026-06-16",
-      "due": "2026-07-15",
-      "move_in": null,
-      "done": 11,
-      "total": 11,
-      "last_inhouse": "2026-06-19",
-      "next_task": null
-    },
-    {
       "projId": 228487,
       "name": "Standard Unit Turn",
       "prop": "a210",
@@ -5600,6 +5586,20 @@
       "done": 7,
       "total": 7,
       "last_inhouse": "2026-06-24",
+      "next_task": null
+    },
+    {
+      "projId": 228059,
+      "name": "Pest Control",
+      "prop": "e328",
+      "unit": "1",
+      "status": "COMPLETE",
+      "start": "2026-06-16",
+      "due": "2026-07-15",
+      "move_in": null,
+      "done": 11,
+      "total": 11,
+      "last_inhouse": "2026-06-19",
       "next_task": null
     },
     {
@@ -5696,20 +5696,6 @@
       "next_task": null
     },
     {
-      "projId": 226096,
-      "name": "Pest Control",
-      "prop": "c313",
-      "unit": "31",
-      "status": "COMPLETE",
-      "start": "2026-06-04",
-      "due": "2026-07-03",
-      "move_in": null,
-      "done": 11,
-      "total": 11,
-      "last_inhouse": "2026-06-08",
-      "next_task": null
-    },
-    {
       "projId": 226190,
       "name": "Pest Control",
       "prop": "w226",
@@ -5724,24 +5710,24 @@
       "next_task": null
     },
     {
+      "projId": 226096,
+      "name": "Pest Control",
+      "prop": "c313",
+      "unit": "31",
+      "status": "COMPLETE",
+      "start": "2026-06-04",
+      "due": "2026-07-03",
+      "move_in": null,
+      "done": 11,
+      "total": 11,
+      "last_inhouse": "2026-06-08",
+      "next_task": null
+    },
+    {
       "projId": 226004,
       "name": "Pest Control",
       "prop": "w117",
       "unit": "8",
-      "status": "ACTIVE",
-      "start": "2026-06-03",
-      "due": "2026-07-02",
-      "move_in": null,
-      "done": 7,
-      "total": 10,
-      "last_inhouse": "2026-06-15",
-      "next_task": null
-    },
-    {
-      "projId": 226005,
-      "name": "Pest Control",
-      "prop": "w117",
-      "unit": "9",
       "status": "ACTIVE",
       "start": "2026-06-03",
       "due": "2026-07-02",
@@ -5763,6 +5749,20 @@
       "done": 7,
       "total": 7,
       "last_inhouse": "2026-06-11",
+      "next_task": null
+    },
+    {
+      "projId": 226005,
+      "name": "Pest Control",
+      "prop": "w117",
+      "unit": "9",
+      "status": "ACTIVE",
+      "start": "2026-06-03",
+      "due": "2026-07-02",
+      "move_in": null,
+      "done": 7,
+      "total": 10,
+      "last_inhouse": "2026-06-15",
       "next_task": null
     },
     {
@@ -5794,20 +5794,6 @@
       "next_task": null
     },
     {
-      "projId": 224580,
-      "name": "Standard Unit Turn",
-      "prop": "a916",
-      "unit": "3",
-      "status": "COMPLETE",
-      "start": "2026-05-28",
-      "due": "2026-07-07",
-      "move_in": null,
-      "done": 7,
-      "total": 7,
-      "last_inhouse": "2026-05-28",
-      "next_task": null
-    },
-    {
       "projId": 224585,
       "name": "Standard Unit Turn",
       "prop": "c313",
@@ -5823,6 +5809,20 @@
         "date": "2026-09-01",
         "task": "walkthrough"
       }
+    },
+    {
+      "projId": 224580,
+      "name": "Standard Unit Turn",
+      "prop": "a916",
+      "unit": "3",
+      "status": "COMPLETE",
+      "start": "2026-05-28",
+      "due": "2026-07-07",
+      "move_in": null,
+      "done": 7,
+      "total": 7,
+      "last_inhouse": "2026-05-28",
+      "next_task": null
     },
     {
       "projId": 224013,
@@ -5859,20 +5859,6 @@
       }
     },
     {
-      "projId": 223923,
-      "name": "Standard Unit Turn",
-      "prop": "o155-Elm",
-      "unit": "J",
-      "status": "COMPLETE",
-      "start": "2026-05-21",
-      "due": "2026-06-03",
-      "move_in": null,
-      "done": 7,
-      "total": 7,
-      "last_inhouse": "2026-06-29",
-      "next_task": null
-    },
-    {
       "projId": 224004,
       "name": "Standard Unit Turn",
       "prop": "m405",
@@ -5887,17 +5873,17 @@
       "next_task": null
     },
     {
-      "projId": 223811,
-      "name": "Pest Control",
-      "prop": "w117",
-      "unit": "7",
-      "status": "ACTIVE",
-      "start": "2026-05-20",
-      "due": "2026-06-18",
+      "projId": 223923,
+      "name": "Standard Unit Turn",
+      "prop": "o155-Elm",
+      "unit": "J",
+      "status": "COMPLETE",
+      "start": "2026-05-21",
+      "due": "2026-06-03",
       "move_in": null,
-      "done": 8,
-      "total": 11,
-      "last_inhouse": "2026-06-15",
+      "done": 7,
+      "total": 7,
+      "last_inhouse": "2026-06-29",
       "next_task": null
     },
     {
@@ -5918,6 +5904,20 @@
       }
     },
     {
+      "projId": 223811,
+      "name": "Pest Control",
+      "prop": "w117",
+      "unit": "7",
+      "status": "ACTIVE",
+      "start": "2026-05-20",
+      "due": "2026-06-18",
+      "move_in": null,
+      "done": 8,
+      "total": 11,
+      "last_inhouse": "2026-06-15",
+      "next_task": null
+    },
+    {
       "projId": 223783,
       "name": "Standard Unit Turn",
       "prop": "c313",
@@ -5935,20 +5935,6 @@
       }
     },
     {
-      "projId": 223656,
-      "name": "Pest Control",
-      "prop": "c313",
-      "unit": "7",
-      "status": "COMPLETE",
-      "start": "2026-05-20",
-      "due": "2026-06-18",
-      "move_in": null,
-      "done": 11,
-      "total": 11,
-      "last_inhouse": "2026-05-22",
-      "next_task": null
-    },
-    {
       "projId": 223542,
       "name": "Standard Unit Turn",
       "prop": "p705",
@@ -5964,6 +5950,20 @@
         "date": "2026-10-14",
         "task": "paint"
       }
+    },
+    {
+      "projId": 223656,
+      "name": "Pest Control",
+      "prop": "c313",
+      "unit": "7",
+      "status": "COMPLETE",
+      "start": "2026-05-20",
+      "due": "2026-06-18",
+      "move_in": null,
+      "done": 11,
+      "total": 11,
+      "last_inhouse": "2026-05-22",
+      "next_task": null
     },
     {
       "projId": 223766,
@@ -6028,6 +6028,20 @@
       "next_task": null
     },
     {
+      "projId": 222935,
+      "name": "Standard Unit Turn",
+      "prop": "v202",
+      "unit": "1",
+      "status": "COMPLETE",
+      "start": "2026-05-28",
+      "due": "2026-07-09",
+      "move_in": null,
+      "done": 8,
+      "total": 8,
+      "last_inhouse": "2026-07-02",
+      "next_task": null
+    },
+    {
       "projId": 222932,
       "name": "Standard Unit Turn",
       "prop": "b101",
@@ -6045,34 +6059,20 @@
       }
     },
     {
-      "projId": 222935,
+      "projId": 222929,
       "name": "Standard Unit Turn",
-      "prop": "v202",
-      "unit": "1",
-      "status": "COMPLETE",
-      "start": "2026-05-28",
-      "due": "2026-07-09",
-      "move_in": null,
-      "done": 8,
-      "total": 8,
-      "last_inhouse": "2026-07-02",
-      "next_task": null
-    },
-    {
-      "projId": 222931,
-      "name": "Standard Unit Turn",
-      "prop": "c313",
-      "unit": "12",
+      "prop": "e328",
+      "unit": "4",
       "status": "ACTIVE",
       "start": "2026-07-02",
       "due": "2026-08-15",
       "move_in": null,
-      "done": 3,
+      "done": 0,
       "total": 7,
-      "last_inhouse": "2026-09-14",
+      "last_inhouse": "2026-08-12",
       "next_task": {
-        "date": "2026-07-31",
-        "task": "cleaning"
+        "date": "2026-08-10",
+        "task": "paint"
       }
     },
     {
@@ -6093,19 +6093,36 @@
       }
     },
     {
-      "projId": 222929,
+      "projId": 222931,
       "name": "Standard Unit Turn",
-      "prop": "e328",
-      "unit": "4",
+      "prop": "c313",
+      "unit": "12",
       "status": "ACTIVE",
       "start": "2026-07-02",
       "due": "2026-08-15",
       "move_in": null,
-      "done": 0,
+      "done": 3,
       "total": 7,
-      "last_inhouse": "2026-08-12",
+      "last_inhouse": "2026-09-14",
       "next_task": {
-        "date": "2026-08-10",
+        "date": "2026-07-31",
+        "task": "cleaning"
+      }
+    },
+    {
+      "projId": 222918,
+      "name": "Standard Unit Turn",
+      "prop": "w117",
+      "unit": "3",
+      "status": "ACTIVE",
+      "start": "2026-07-01",
+      "due": "2026-08-14",
+      "move_in": "2026-08-14",
+      "done": 2,
+      "total": 7,
+      "last_inhouse": "2026-07-28",
+      "next_task": {
+        "date": "2026-07-23",
         "task": "paint"
       }
     },
@@ -6127,21 +6144,18 @@
       }
     },
     {
-      "projId": 222918,
+      "projId": 222906,
       "name": "Standard Unit Turn",
-      "prop": "w117",
-      "unit": "3",
-      "status": "ACTIVE",
-      "start": "2026-07-01",
-      "due": "2026-08-14",
-      "move_in": "2026-08-14",
-      "done": 2,
+      "prop": "c313",
+      "unit": "6",
+      "status": "COMPLETE",
+      "start": "2026-06-01",
+      "due": "2026-07-15",
+      "move_in": null,
+      "done": 7,
       "total": 7,
-      "last_inhouse": "2026-07-28",
-      "next_task": {
-        "date": "2026-07-23",
-        "task": "paint"
-      }
+      "last_inhouse": "2026-06-05",
+      "next_task": null
     },
     {
       "projId": 222912,
@@ -6176,20 +6190,6 @@
         "date": "2026-08-13",
         "task": "paint"
       }
-    },
-    {
-      "projId": 222906,
-      "name": "Standard Unit Turn",
-      "prop": "c313",
-      "unit": "6",
-      "status": "COMPLETE",
-      "start": "2026-06-01",
-      "due": "2026-07-15",
-      "move_in": null,
-      "done": 7,
-      "total": 7,
-      "last_inhouse": "2026-06-05",
-      "next_task": null
     },
     {
       "projId": 222904,
@@ -6265,20 +6265,6 @@
       "next_task": null
     },
     {
-      "projId": 222446,
-      "name": "Standard Unit Turn",
-      "prop": "v202",
-      "unit": "2",
-      "status": "COMPLETE",
-      "start": "2026-06-01",
-      "due": "2026-06-25",
-      "move_in": null,
-      "done": 7,
-      "total": 7,
-      "last_inhouse": "2026-06-15",
-      "next_task": null
-    },
-    {
       "projId": 222441,
       "name": "Standard Unit Turn",
       "prop": "w226",
@@ -6304,6 +6290,20 @@
       "done": 8,
       "total": 8,
       "last_inhouse": "2026-06-25",
+      "next_task": null
+    },
+    {
+      "projId": 222446,
+      "name": "Standard Unit Turn",
+      "prop": "v202",
+      "unit": "2",
+      "status": "COMPLETE",
+      "start": "2026-06-01",
+      "due": "2026-06-25",
+      "move_in": null,
+      "done": 7,
+      "total": 7,
+      "last_inhouse": "2026-06-15",
       "next_task": null
     },
     {
@@ -6422,20 +6422,6 @@
       "next_task": null
     },
     {
-      "projId": 220145,
-      "name": "Pest Control",
-      "prop": "c313",
-      "unit": "25",
-      "status": "COMPLETE",
-      "start": "2026-05-01",
-      "due": "2026-05-30",
-      "move_in": null,
-      "done": 14,
-      "total": 14,
-      "last_inhouse": "2026-06-08",
-      "next_task": null
-    },
-    {
       "projId": 220148,
       "name": "Pest Control",
       "prop": "c313",
@@ -6450,17 +6436,31 @@
       "next_task": null
     },
     {
-      "projId": 219414,
-      "name": "Standard Unit Turn",
+      "projId": 220145,
+      "name": "Pest Control",
       "prop": "c313",
-      "unit": "30",
+      "unit": "25",
       "status": "COMPLETE",
-      "start": "2026-04-28",
+      "start": "2026-05-01",
+      "due": "2026-05-30",
+      "move_in": null,
+      "done": 14,
+      "total": 14,
+      "last_inhouse": "2026-06-08",
+      "next_task": null
+    },
+    {
+      "projId": 219566,
+      "name": "Standard Unit Turn",
+      "prop": "e328",
+      "unit": "1",
+      "status": "COMPLETE",
+      "start": "2026-04-29",
       "due": "2026-05-30",
       "move_in": null,
       "done": 7,
       "total": 7,
-      "last_inhouse": "2026-05-12",
+      "last_inhouse": "2026-05-05",
       "next_task": null
     },
     {
@@ -6492,35 +6492,18 @@
       "next_task": null
     },
     {
-      "projId": 219566,
+      "projId": 219414,
       "name": "Standard Unit Turn",
-      "prop": "e328",
-      "unit": "1",
+      "prop": "c313",
+      "unit": "30",
       "status": "COMPLETE",
-      "start": "2026-04-29",
+      "start": "2026-04-28",
       "due": "2026-05-30",
       "move_in": null,
       "done": 7,
       "total": 7,
-      "last_inhouse": "2026-05-05",
+      "last_inhouse": "2026-05-12",
       "next_task": null
-    },
-    {
-      "projId": 219403,
-      "name": "Standard Unit Turn",
-      "prop": "k104- LeFevre",
-      "unit": "524-7",
-      "status": "ACTIVE",
-      "start": "2026-04-28",
-      "due": "2026-05-30",
-      "move_in": null,
-      "done": 1,
-      "total": 7,
-      "last_inhouse": "2026-10-08",
-      "next_task": {
-        "date": "2026-10-06",
-        "task": "paint"
-      }
     },
     {
       "projId": 219384,
@@ -6551,6 +6534,23 @@
       "next_task": null
     },
     {
+      "projId": 219403,
+      "name": "Standard Unit Turn",
+      "prop": "k104- LeFevre",
+      "unit": "524-7",
+      "status": "ACTIVE",
+      "start": "2026-04-28",
+      "due": "2026-05-30",
+      "move_in": null,
+      "done": 1,
+      "total": 7,
+      "last_inhouse": "2026-10-08",
+      "next_task": {
+        "date": "2026-10-06",
+        "task": "paint"
+      }
+    },
+    {
       "projId": 219408,
       "name": "Standard Unit Turn",
       "prop": "m608",
@@ -6562,6 +6562,20 @@
       "done": 7,
       "total": 7,
       "last_inhouse": "2026-05-11",
+      "next_task": null
+    },
+    {
+      "projId": 219351,
+      "name": "Standard Unit Turn",
+      "prop": "c313",
+      "unit": "27",
+      "status": "COMPLETE",
+      "start": "2026-04-28",
+      "due": "2026-05-06",
+      "move_in": null,
+      "done": 9,
+      "total": 9,
+      "last_inhouse": "2026-05-12",
       "next_task": null
     },
     {
@@ -6593,20 +6607,6 @@
       "next_task": null
     },
     {
-      "projId": 219351,
-      "name": "Standard Unit Turn",
-      "prop": "c313",
-      "unit": "27",
-      "status": "COMPLETE",
-      "start": "2026-04-28",
-      "due": "2026-05-06",
-      "move_in": null,
-      "done": 9,
-      "total": 9,
-      "last_inhouse": "2026-05-12",
-      "next_task": null
-    },
-    {
       "projId": 218840,
       "name": "Other - 916 W Augusta Avenue - 9, Unit 9",
       "prop": "a916",
@@ -6618,48 +6618,6 @@
       "done": 3,
       "total": 10,
       "last_inhouse": null,
-      "next_task": null
-    },
-    {
-      "projId": 217685,
-      "name": "Other - 907 E 8th Ave UNIT Haystack  Hotel",
-      "prop": "Haystack  Hotel",
-      "unit": "Haystack  Hotel",
-      "status": "COMPLETE",
-      "start": "2026-04-16",
-      "due": "2026-05-16",
-      "move_in": null,
-      "done": 11,
-      "total": 11,
-      "last_inhouse": "2026-04-22",
-      "next_task": null
-    },
-    {
-      "projId": 217686,
-      "name": "Other - 511 E Augusta Ave #103 UNIT 103",
-      "prop": "a511",
-      "unit": "103",
-      "status": "COMPLETE",
-      "start": "2026-04-16",
-      "due": "2026-05-16",
-      "move_in": null,
-      "done": 11,
-      "total": 11,
-      "last_inhouse": "2026-04-27",
-      "next_task": null
-    },
-    {
-      "projId": 217695,
-      "name": "Other - 3131 So Cook St UNIT 21",
-      "prop": "c313",
-      "unit": "21",
-      "status": "COMPLETE",
-      "start": "2026-04-16",
-      "due": "2026-05-16",
-      "move_in": null,
-      "done": 11,
-      "total": 11,
-      "last_inhouse": "2026-04-27",
       "next_task": null
     },
     {
@@ -6688,6 +6646,48 @@
       "done": 13,
       "total": 14,
       "last_inhouse": "2026-06-08",
+      "next_task": null
+    },
+    {
+      "projId": 217686,
+      "name": "Other - 511 E Augusta Ave #103 UNIT 103",
+      "prop": "a511",
+      "unit": "103",
+      "status": "COMPLETE",
+      "start": "2026-04-16",
+      "due": "2026-05-16",
+      "move_in": null,
+      "done": 11,
+      "total": 11,
+      "last_inhouse": "2026-04-27",
+      "next_task": null
+    },
+    {
+      "projId": 217685,
+      "name": "Other - 907 E 8th Ave UNIT Haystack  Hotel",
+      "prop": "Haystack  Hotel",
+      "unit": "Haystack  Hotel",
+      "status": "COMPLETE",
+      "start": "2026-04-16",
+      "due": "2026-05-16",
+      "move_in": null,
+      "done": 11,
+      "total": 11,
+      "last_inhouse": "2026-04-22",
+      "next_task": null
+    },
+    {
+      "projId": 217695,
+      "name": "Other - 3131 So Cook St UNIT 21",
+      "prop": "c313",
+      "unit": "21",
+      "status": "COMPLETE",
+      "start": "2026-04-16",
+      "due": "2026-05-16",
+      "move_in": null,
+      "done": 11,
+      "total": 11,
+      "last_inhouse": "2026-04-27",
       "next_task": null
     },
     {
@@ -6761,27 +6761,13 @@
       "next_task": null
     },
     {
-      "projId": 215087,
-      "name": "Turn - 12002 E Valleyway Avenue #11 UNIT 11",
-      "prop": "v202",
-      "unit": "11",
+      "projId": 215094,
+      "name": "Turn - 519 N. Walker UNIT 519-2",
+      "prop": "k104- LeFevre",
+      "unit": "519-2",
       "status": "COMPLETE",
       "start": "2026-04-01",
-      "due": "2026-04-15",
-      "move_in": null,
-      "done": 7,
-      "total": 7,
-      "last_inhouse": null,
-      "next_task": null
-    },
-    {
-      "projId": 215092,
-      "name": "Turn - 3131 So Cook St UNIT 34",
-      "prop": "c313",
-      "unit": "34",
-      "status": "COMPLETE",
-      "start": "2026-04-01",
-      "due": "2026-04-29",
+      "due": "2026-04-30",
       "move_in": null,
       "done": 7,
       "total": 7,
@@ -6806,13 +6792,27 @@
       }
     },
     {
-      "projId": 215094,
-      "name": "Turn - 519 N. Walker UNIT 519-2",
-      "prop": "k104- LeFevre",
-      "unit": "519-2",
+      "projId": 215092,
+      "name": "Turn - 3131 So Cook St UNIT 34",
+      "prop": "c313",
+      "unit": "34",
       "status": "COMPLETE",
       "start": "2026-04-01",
-      "due": "2026-04-30",
+      "due": "2026-04-29",
+      "move_in": null,
+      "done": 7,
+      "total": 7,
+      "last_inhouse": null,
+      "next_task": null
+    },
+    {
+      "projId": 215087,
+      "name": "Turn - 12002 E Valleyway Avenue #11 UNIT 11",
+      "prop": "v202",
+      "unit": "11",
+      "status": "COMPLETE",
+      "start": "2026-04-01",
+      "due": "2026-04-15",
       "move_in": null,
       "done": 7,
       "total": 7,
@@ -6862,6 +6862,34 @@
       "next_task": null
     },
     {
+      "projId": 211558,
+      "name": "Turn - 503 N. Brower UNIT 503-4",
+      "prop": "k104- LeFevre",
+      "unit": "503-4",
+      "status": "COMPLETE",
+      "start": "2026-03-09",
+      "due": "2026-03-18",
+      "move_in": null,
+      "done": 6,
+      "total": 6,
+      "last_inhouse": null,
+      "next_task": null
+    },
+    {
+      "projId": 211601,
+      "name": "Turn - 155 S Oak St UNIT A7",
+      "prop": "o155-Oak",
+      "unit": "A7",
+      "status": "COMPLETE",
+      "start": "2026-03-09",
+      "due": "2026-04-08",
+      "move_in": null,
+      "done": 8,
+      "total": 8,
+      "last_inhouse": "2026-03-24",
+      "next_task": null
+    },
+    {
       "projId": 211554,
       "name": "CapEx Turn- 316 N. Washington Street B UNIT 316-B",
       "prop": "k308",
@@ -6890,34 +6918,6 @@
       "next_task": null
     },
     {
-      "projId": 211601,
-      "name": "Turn - 155 S Oak St UNIT A7",
-      "prop": "o155-Oak",
-      "unit": "A7",
-      "status": "COMPLETE",
-      "start": "2026-03-09",
-      "due": "2026-04-08",
-      "move_in": null,
-      "done": 8,
-      "total": 8,
-      "last_inhouse": "2026-03-24",
-      "next_task": null
-    },
-    {
-      "projId": 211558,
-      "name": "Turn - 503 N. Brower UNIT 503-4",
-      "prop": "k104- LeFevre",
-      "unit": "503-4",
-      "status": "COMPLETE",
-      "start": "2026-03-09",
-      "due": "2026-03-18",
-      "move_in": null,
-      "done": 6,
-      "total": 6,
-      "last_inhouse": null,
-      "next_task": null
-    },
-    {
       "projId": 210766,
       "name": "Turn- 3132 E Jackson Ave UNIT 3132",
       "prop": "j312",
@@ -6932,20 +6932,6 @@
       "next_task": null
     },
     {
-      "projId": 208577,
-      "name": "Turn - 405 S Maple St #12 UNIT 12",
-      "prop": "m405",
-      "unit": "12",
-      "status": "COMPLETE",
-      "start": "2026-03-02",
-      "due": "2026-03-21",
-      "move_in": null,
-      "done": 7,
-      "total": 7,
-      "last_inhouse": "2026-03-04",
-      "next_task": null
-    },
-    {
       "projId": 209013,
       "name": "Turn - 3110 E Jackson Ave UNIT 3110",
       "prop": "j312",
@@ -6957,6 +6943,20 @@
       "done": 7,
       "total": 7,
       "last_inhouse": "2026-02-23",
+      "next_task": null
+    },
+    {
+      "projId": 208577,
+      "name": "Turn - 405 S Maple St #12 UNIT 12",
+      "prop": "m405",
+      "unit": "12",
+      "status": "COMPLETE",
+      "start": "2026-03-02",
+      "due": "2026-03-21",
+      "move_in": null,
+      "done": 7,
+      "total": 7,
+      "last_inhouse": "2026-03-04",
       "next_task": null
     },
     {
@@ -6988,20 +6988,6 @@
       "next_task": null
     },
     {
-      "projId": 208573,
-      "name": "Turn - 1010 W Boone Ave. - 18 UNIT 18",
-      "prop": "b101",
-      "unit": "18",
-      "status": "COMPLETE",
-      "start": "2026-03-02",
-      "due": "2026-03-21",
-      "move_in": null,
-      "done": 6,
-      "total": 6,
-      "last_inhouse": "2026-03-03",
-      "next_task": null
-    },
-    {
       "projId": 208203,
       "name": "Other - 1117 W 5th Ave - 6 UNIT 6",
       "prop": "w117",
@@ -7013,6 +6999,20 @@
       "done": 1,
       "total": 1,
       "last_inhouse": "2026-02-17",
+      "next_task": null
+    },
+    {
+      "projId": 208573,
+      "name": "Turn - 1010 W Boone Ave. - 18 UNIT 18",
+      "prop": "b101",
+      "unit": "18",
+      "status": "COMPLETE",
+      "start": "2026-03-02",
+      "due": "2026-03-21",
+      "move_in": null,
+      "done": 6,
+      "total": 6,
+      "last_inhouse": "2026-03-03",
       "next_task": null
     },
     {
@@ -7086,6 +7086,20 @@
       "next_task": null
     },
     {
+      "projId": 205411,
+      "name": "CapEx Turn - 155 S Oak St UNIT C8",
+      "prop": "o155-Oak",
+      "unit": "C8",
+      "status": "COMPLETE",
+      "start": "2026-01-26",
+      "due": "2026-02-25",
+      "move_in": null,
+      "done": 7,
+      "total": 7,
+      "last_inhouse": "2026-02-02",
+      "next_task": null
+    },
+    {
       "projId": 205419,
       "name": "Turn - 3116 E Jackson Ave UNIT 3116",
       "prop": "j312",
@@ -7111,34 +7125,6 @@
       "done": 9,
       "total": 9,
       "last_inhouse": "2026-02-05",
-      "next_task": null
-    },
-    {
-      "projId": 205411,
-      "name": "CapEx Turn - 155 S Oak St UNIT C8",
-      "prop": "o155-Oak",
-      "unit": "C8",
-      "status": "COMPLETE",
-      "start": "2026-01-26",
-      "due": "2026-02-25",
-      "move_in": null,
-      "done": 7,
-      "total": 7,
-      "last_inhouse": "2026-02-02",
-      "next_task": null
-    },
-    {
-      "projId": 205390,
-      "name": "CapEx Turn - 1905 W 2nd Ave UNIT C",
-      "prop": "o155-Elm",
-      "unit": "C",
-      "status": "COMPLETE",
-      "start": "2026-01-26",
-      "due": "2026-02-10",
-      "move_in": null,
-      "done": 7,
-      "total": 7,
-      "last_inhouse": "2026-02-02",
       "next_task": null
     },
     {
@@ -7184,6 +7170,20 @@
       "next_task": null
     },
     {
+      "projId": 205390,
+      "name": "CapEx Turn - 1905 W 2nd Ave UNIT C",
+      "prop": "o155-Elm",
+      "unit": "C",
+      "status": "COMPLETE",
+      "start": "2026-01-26",
+      "due": "2026-02-10",
+      "move_in": null,
+      "done": 7,
+      "total": 7,
+      "last_inhouse": "2026-02-02",
+      "next_task": null
+    },
+    {
       "projId": 205383,
       "name": "CapEx Turn- 1905 W 2nd Ave UNIT H",
       "prop": "o155-Elm",
@@ -7195,20 +7195,6 @@
       "done": 7,
       "total": 7,
       "last_inhouse": "2026-01-29",
-      "next_task": null
-    },
-    {
-      "projId": 202834,
-      "name": "Turn - 155 S Oak St UNIT A8",
-      "prop": "o155-Oak",
-      "unit": "A8",
-      "status": "COMPLETE",
-      "start": "2026-01-05",
-      "due": "2026-02-06",
-      "move_in": null,
-      "done": 7,
-      "total": 7,
-      "last_inhouse": "2026-01-14",
       "next_task": null
     },
     {
@@ -7226,6 +7212,20 @@
       "next_task": null
     },
     {
+      "projId": 202834,
+      "name": "Turn - 155 S Oak St UNIT A8",
+      "prop": "o155-Oak",
+      "unit": "A8",
+      "status": "COMPLETE",
+      "start": "2026-01-05",
+      "due": "2026-02-06",
+      "move_in": null,
+      "done": 7,
+      "total": 7,
+      "last_inhouse": "2026-01-14",
+      "next_task": null
+    },
+    {
       "projId": 200328,
       "name": "Turn - 155 S Oak St UNIT C9",
       "prop": "o155-Oak",
@@ -7240,17 +7240,17 @@
       "next_task": null
     },
     {
-      "projId": 200325,
-      "name": "Turn - 508 N. Brower UNIT 508-3",
-      "prop": "k104- LeFevre",
-      "unit": "508-3",
+      "projId": 200326,
+      "name": "Turn - 405 S Maple St 18 UNIT 18",
+      "prop": "m405",
+      "unit": "18",
       "status": "COMPLETE",
-      "start": "2025-12-10",
-      "due": "2025-12-19",
+      "start": "2025-12-11",
+      "due": "2026-01-05",
       "move_in": null,
-      "done": 9,
-      "total": 9,
-      "last_inhouse": "2026-03-11",
+      "done": 8,
+      "total": 8,
+      "last_inhouse": "2025-12-12",
       "next_task": null
     },
     {
@@ -7268,13 +7268,27 @@
       "next_task": null
     },
     {
-      "projId": 200326,
-      "name": "Turn - 405 S Maple St 18 UNIT 18",
-      "prop": "m405",
-      "unit": "18",
+      "projId": 200325,
+      "name": "Turn - 508 N. Brower UNIT 508-3",
+      "prop": "k104- LeFevre",
+      "unit": "508-3",
       "status": "COMPLETE",
-      "start": "2025-12-11",
-      "due": "2026-01-05",
+      "start": "2025-12-10",
+      "due": "2025-12-19",
+      "move_in": null,
+      "done": 9,
+      "total": 9,
+      "last_inhouse": "2026-03-11",
+      "next_task": null
+    },
+    {
+      "projId": 197867,
+      "name": "Turn - 3131 So Cook St UNIT 28",
+      "prop": "c313",
+      "unit": "28",
+      "status": "COMPLETE",
+      "start": "2025-11-30",
+      "due": "2025-12-19",
       "move_in": null,
       "done": 8,
       "total": 8,
@@ -7310,17 +7324,17 @@
       "next_task": null
     },
     {
-      "projId": 197867,
-      "name": "Turn - 3131 So Cook St UNIT 28",
-      "prop": "c313",
-      "unit": "28",
+      "projId": 197864,
+      "name": "Turn - 916 W Augusta Avenue - 12 (cottage) UNIT 12 (cottage)",
+      "prop": "a916",
+      "unit": "12 (cottage)",
       "status": "COMPLETE",
       "start": "2025-11-30",
-      "due": "2025-12-19",
+      "due": "2025-12-22",
       "move_in": null,
       "done": 8,
       "total": 8,
-      "last_inhouse": "2025-12-12",
+      "last_inhouse": "2025-12-19",
       "next_task": null
     },
     {
@@ -7335,20 +7349,6 @@
       "done": 7,
       "total": 7,
       "last_inhouse": "2025-12-01",
-      "next_task": null
-    },
-    {
-      "projId": 197864,
-      "name": "Turn - 916 W Augusta Avenue - 12 (cottage) UNIT 12 (cottage)",
-      "prop": "a916",
-      "unit": "12 (cottage)",
-      "status": "COMPLETE",
-      "start": "2025-11-30",
-      "due": "2025-12-22",
-      "move_in": null,
-      "done": 8,
-      "total": 8,
-      "last_inhouse": "2025-12-19",
       "next_task": null
     },
     {
@@ -7380,20 +7380,6 @@
       "next_task": null
     },
     {
-      "projId": 194799,
-      "name": "Turn - 12903 E Sprague Ave UNIT 12",
-      "prop": "s129",
-      "unit": "12",
-      "status": "COMPLETE",
-      "start": "2025-11-12",
-      "due": "2025-11-30",
-      "move_in": null,
-      "done": 10,
-      "total": 10,
-      "last_inhouse": "2025-11-13",
-      "next_task": null
-    },
-    {
       "projId": 194798,
       "name": "Turn - 4210 N Avalon Rd #9 UNIT 9",
       "prop": "a210",
@@ -7422,17 +7408,17 @@
       "next_task": null
     },
     {
-      "projId": 194715,
-      "name": "Turn - 2715 N Pines Rd - 08 UNIT 08",
-      "prop": "p705",
-      "unit": "08",
+      "projId": 194799,
+      "name": "Turn - 12903 E Sprague Ave UNIT 12",
+      "prop": "s129",
+      "unit": "12",
       "status": "COMPLETE",
-      "start": "2025-10-28",
-      "due": "2025-11-17",
+      "start": "2025-11-12",
+      "due": "2025-11-30",
       "move_in": null,
-      "done": 7,
-      "total": 7,
-      "last_inhouse": "2025-10-30",
+      "done": 10,
+      "total": 10,
+      "last_inhouse": "2025-11-13",
       "next_task": null
     },
     {
@@ -7447,6 +7433,20 @@
       "done": 8,
       "total": 8,
       "last_inhouse": "2025-11-06",
+      "next_task": null
+    },
+    {
+      "projId": 194715,
+      "name": "Turn - 2715 N Pines Rd - 08 UNIT 08",
+      "prop": "p705",
+      "unit": "08",
+      "status": "COMPLETE",
+      "start": "2025-10-28",
+      "due": "2025-11-17",
+      "move_in": null,
+      "done": 7,
+      "total": 7,
+      "last_inhouse": "2025-10-30",
       "next_task": null
     },
     {
@@ -7506,6 +7506,20 @@
       "next_task": null
     },
     {
+      "projId": 192647,
+      "name": "Turn - 155 S Oak St UNIT A6",
+      "prop": "o155-Oak",
+      "unit": "A6",
+      "status": "COMPLETE",
+      "start": "2025-10-10",
+      "due": "2025-10-31",
+      "move_in": null,
+      "done": 7,
+      "total": 7,
+      "last_inhouse": "2025-10-16",
+      "next_task": null
+    },
+    {
       "projId": 192650,
       "name": "Turn - 155 S Oak St UNIT B3",
       "prop": "o155-Oak",
@@ -7534,20 +7548,6 @@
       "next_task": null
     },
     {
-      "projId": 192647,
-      "name": "Turn - 155 S Oak St UNIT A6",
-      "prop": "o155-Oak",
-      "unit": "A6",
-      "status": "COMPLETE",
-      "start": "2025-10-10",
-      "due": "2025-10-31",
-      "move_in": null,
-      "done": 7,
-      "total": 7,
-      "last_inhouse": "2025-10-16",
-      "next_task": null
-    },
-    {
       "projId": 192643,
       "name": "Turn - 155 S Oak St UNIT A3",
       "prop": "o155-Oak",
@@ -7562,10 +7562,10 @@
       "next_task": null
     },
     {
-      "projId": 189749,
-      "name": "Touch Up - 519 N. Walker UNIT 519-3",
+      "projId": 189751,
+      "name": "Touch Up - 505 N. Brower UNIT 505-1",
       "prop": "k104- LeFevre",
-      "unit": "519-3",
+      "unit": "505-1",
       "status": "COMPLETE",
       "start": "2025-09-24",
       "due": "2025-09-26",
@@ -7604,10 +7604,10 @@
       "next_task": null
     },
     {
-      "projId": 189751,
-      "name": "Touch Up - 505 N. Brower UNIT 505-1",
+      "projId": 189749,
+      "name": "Touch Up - 519 N. Walker UNIT 519-3",
       "prop": "k104- LeFevre",
-      "unit": "505-1",
+      "unit": "519-3",
       "status": "COMPLETE",
       "start": "2025-09-24",
       "due": "2025-09-26",
@@ -7615,6 +7615,20 @@
       "done": 3,
       "total": 3,
       "last_inhouse": "2025-09-25",
+      "next_task": null
+    },
+    {
+      "projId": 189669,
+      "name": "Turn - 1226 W. 5th Ave. - 8 UNIT 8",
+      "prop": "w226",
+      "unit": "8",
+      "status": "COMPLETE",
+      "start": "2025-09-24",
+      "due": "2025-10-03",
+      "move_in": null,
+      "done": 7,
+      "total": 7,
+      "last_inhouse": "2025-10-06",
       "next_task": null
     },
     {
@@ -7660,20 +7674,6 @@
       "next_task": null
     },
     {
-      "projId": 189669,
-      "name": "Turn - 1226 W. 5th Ave. - 8 UNIT 8",
-      "prop": "w226",
-      "unit": "8",
-      "status": "COMPLETE",
-      "start": "2025-09-24",
-      "due": "2025-10-03",
-      "move_in": null,
-      "done": 7,
-      "total": 7,
-      "last_inhouse": "2025-10-06",
-      "next_task": null
-    },
-    {
       "projId": 189674,
       "name": "Turn - 314 N. LeFerve UNIT 314-11",
       "prop": "k104- LeFevre",
@@ -7699,6 +7699,20 @@
       "done": 7,
       "total": 7,
       "last_inhouse": null,
+      "next_task": null
+    },
+    {
+      "projId": 189663,
+      "name": "Turn - 405 S Maple St 15 UNIT 15",
+      "prop": "m405",
+      "unit": "15",
+      "status": "COMPLETE",
+      "start": "2025-10-01",
+      "due": "2025-10-10",
+      "move_in": null,
+      "done": 9,
+      "total": 9,
+      "last_inhouse": "2025-10-03",
       "next_task": null
     },
     {
@@ -7730,20 +7744,6 @@
       "next_task": null
     },
     {
-      "projId": 189663,
-      "name": "Turn - 405 S Maple St 15 UNIT 15",
-      "prop": "m405",
-      "unit": "15",
-      "status": "COMPLETE",
-      "start": "2025-10-01",
-      "due": "2025-10-10",
-      "move_in": null,
-      "done": 9,
-      "total": 9,
-      "last_inhouse": "2025-10-03",
-      "next_task": null
-    },
-    {
       "projId": 189664,
       "name": "Turn - 2705 N Pines Rd - 13 UNIT 13",
       "prop": "p705",
@@ -7755,20 +7755,6 @@
       "done": 10,
       "total": 10,
       "last_inhouse": "2025-10-17",
-      "next_task": null
-    },
-    {
-      "projId": 189655,
-      "name": "Turn - 9300 E Sprague Avenue - 3 UNIT 3",
-      "prop": "s300",
-      "unit": "3",
-      "status": "COMPLETE",
-      "start": "2025-09-29",
-      "due": "2025-10-08",
-      "move_in": null,
-      "done": 7,
-      "total": 7,
-      "last_inhouse": "2025-09-30",
       "next_task": null
     },
     {
@@ -7786,20 +7772,6 @@
       "next_task": null
     },
     {
-      "projId": 189660,
-      "name": "Turn - 511 E Augusta Ave #102 UNIT 102",
-      "prop": "a511",
-      "unit": "102",
-      "status": "COMPLETE",
-      "start": "2025-10-01",
-      "due": "2025-10-14",
-      "move_in": null,
-      "done": 7,
-      "total": 7,
-      "last_inhouse": "2025-10-06",
-      "next_task": null
-    },
-    {
       "projId": 189654,
       "name": "Turn - 1117 W 5th Ave - 7 UNIT 7",
       "prop": "w117",
@@ -7811,6 +7783,20 @@
       "done": 8,
       "total": 8,
       "last_inhouse": "2026-01-15",
+      "next_task": null
+    },
+    {
+      "projId": 189660,
+      "name": "Turn - 511 E Augusta Ave #102 UNIT 102",
+      "prop": "a511",
+      "unit": "102",
+      "status": "COMPLETE",
+      "start": "2025-10-01",
+      "due": "2025-10-14",
+      "move_in": null,
+      "done": 7,
+      "total": 7,
+      "last_inhouse": "2025-10-06",
       "next_task": null
     },
     {
@@ -7828,17 +7814,17 @@
       "next_task": null
     },
     {
-      "projId": 189652,
-      "name": "Turn - 511 E Augusta Ave #303 UNIT 303",
-      "prop": "a511",
-      "unit": "303",
+      "projId": 189655,
+      "name": "Turn - 9300 E Sprague Avenue - 3 UNIT 3",
+      "prop": "s300",
+      "unit": "3",
       "status": "COMPLETE",
-      "start": "2025-09-24",
-      "due": "2025-10-07",
+      "start": "2025-09-29",
+      "due": "2025-10-08",
       "move_in": null,
       "done": 7,
       "total": 7,
-      "last_inhouse": "2025-09-25",
+      "last_inhouse": "2025-09-30",
       "next_task": null
     },
     {
@@ -7884,6 +7870,20 @@
       "next_task": null
     },
     {
+      "projId": 189652,
+      "name": "Turn - 511 E Augusta Ave #303 UNIT 303",
+      "prop": "a511",
+      "unit": "303",
+      "status": "COMPLETE",
+      "start": "2025-09-24",
+      "due": "2025-10-07",
+      "move_in": null,
+      "done": 7,
+      "total": 7,
+      "last_inhouse": "2025-09-25",
+      "next_task": null
+    },
+    {
       "projId": 189546,
       "name": "Turn - 12903 E Sprague Ave UNIT 11",
       "prop": "s129",
@@ -7898,20 +7898,6 @@
       "next_task": null
     },
     {
-      "projId": 187737,
-      "name": "Turn - 9300 E Sprague Avenue - 2 UNIT 2",
-      "prop": "s300",
-      "unit": "2",
-      "status": "COMPLETE",
-      "start": "2025-09-10",
-      "due": "2025-09-23",
-      "move_in": null,
-      "done": 6,
-      "total": 6,
-      "last_inhouse": "2025-09-12",
-      "next_task": null
-    },
-    {
       "projId": 186120,
       "name": "Turn - 12903 E Sprague Ave UNIT 6",
       "prop": "s129",
@@ -7923,6 +7909,20 @@
       "done": 6,
       "total": 6,
       "last_inhouse": null,
+      "next_task": null
+    },
+    {
+      "projId": 187737,
+      "name": "Turn - 9300 E Sprague Avenue - 2 UNIT 2",
+      "prop": "s300",
+      "unit": "2",
+      "status": "COMPLETE",
+      "start": "2025-09-10",
+      "due": "2025-09-23",
+      "move_in": null,
+      "done": 6,
+      "total": 6,
+      "last_inhouse": "2025-09-12",
       "next_task": null
     },
     {
@@ -7982,34 +7982,6 @@
       "next_task": null
     },
     {
-      "projId": 185242,
-      "name": "Turn - 405 S Maple St UNIT 25",
-      "prop": "m405",
-      "unit": "25",
-      "status": "COMPLETE",
-      "start": "2025-09-01",
-      "due": "2025-09-19",
-      "move_in": null,
-      "done": 8,
-      "total": 8,
-      "last_inhouse": "2025-09-03",
-      "next_task": null
-    },
-    {
-      "projId": 185241,
-      "name": "Turn - 505 N. Brower UNIT 505-1",
-      "prop": "k104- LeFevre",
-      "unit": "505-1",
-      "status": "COMPLETE",
-      "start": "2025-09-01",
-      "due": "2025-09-17",
-      "move_in": null,
-      "done": 7,
-      "total": 7,
-      "last_inhouse": "2025-09-01",
-      "next_task": null
-    },
-    {
       "projId": 185239,
       "name": "Turn - 3112 E Jackson Ave UNIT 3112",
       "prop": "j312",
@@ -8049,6 +8021,34 @@
       "done": 7,
       "total": 7,
       "last_inhouse": "2025-09-08",
+      "next_task": null
+    },
+    {
+      "projId": 185241,
+      "name": "Turn - 505 N. Brower UNIT 505-1",
+      "prop": "k104- LeFevre",
+      "unit": "505-1",
+      "status": "COMPLETE",
+      "start": "2025-09-01",
+      "due": "2025-09-17",
+      "move_in": null,
+      "done": 7,
+      "total": 7,
+      "last_inhouse": "2025-09-01",
+      "next_task": null
+    },
+    {
+      "projId": 185242,
+      "name": "Turn - 405 S Maple St UNIT 25",
+      "prop": "m405",
+      "unit": "25",
+      "status": "COMPLETE",
+      "start": "2025-09-01",
+      "due": "2025-09-19",
+      "move_in": null,
+      "done": 8,
+      "total": 8,
+      "last_inhouse": "2025-09-03",
       "next_task": null
     },
     {
@@ -8206,6 +8206,20 @@
       "next_task": null
     },
     {
+      "projId": 181749,
+      "name": "Turn - 1117 W 5th Ave - 4 UNIT 4",
+      "prop": "w117",
+      "unit": "4",
+      "status": "COMPLETE",
+      "start": "2025-08-04",
+      "due": "2025-09-04",
+      "move_in": null,
+      "done": 8,
+      "total": 8,
+      "last_inhouse": "2025-08-28",
+      "next_task": null
+    },
+    {
       "projId": 181750,
       "name": "Turn - 405 S Maple St UNIT 16",
       "prop": "m405",
@@ -8248,17 +8262,17 @@
       "next_task": null
     },
     {
-      "projId": 181749,
-      "name": "Turn - 1117 W 5th Ave - 4 UNIT 4",
-      "prop": "w117",
-      "unit": "4",
+      "projId": 181221,
+      "name": "Turn - 916 W Augusta Avenue - 7 UNIT 7",
+      "prop": "a916",
+      "unit": "7",
       "status": "COMPLETE",
-      "start": "2025-08-04",
-      "due": "2025-09-04",
+      "start": "2025-07-31",
+      "due": "2025-08-15",
       "move_in": null,
-      "done": 8,
-      "total": 8,
-      "last_inhouse": "2025-08-28",
+      "done": 7,
+      "total": 7,
+      "last_inhouse": null,
       "next_task": null
     },
     {
@@ -8266,6 +8280,20 @@
       "name": "Turn - 2705 N Pines Rd - 11 UNIT 11",
       "prop": "p705",
       "unit": "11",
+      "status": "COMPLETE",
+      "start": "2025-07-31",
+      "due": "2025-08-15",
+      "move_in": null,
+      "done": 7,
+      "total": 7,
+      "last_inhouse": null,
+      "next_task": null
+    },
+    {
+      "projId": 181218,
+      "name": "Turn - 507 N. Brower UNIT 507-4",
+      "prop": "k104- LeFevre",
+      "unit": "507-4",
       "status": "COMPLETE",
       "start": "2025-07-31",
       "due": "2025-08-15",
@@ -8290,20 +8318,6 @@
       "next_task": null
     },
     {
-      "projId": 181218,
-      "name": "Turn - 507 N. Brower UNIT 507-4",
-      "prop": "k104- LeFevre",
-      "unit": "507-4",
-      "status": "COMPLETE",
-      "start": "2025-07-31",
-      "due": "2025-08-15",
-      "move_in": null,
-      "done": 7,
-      "total": 7,
-      "last_inhouse": null,
-      "next_task": null
-    },
-    {
       "projId": 181219,
       "name": "Turn - 405 S Maple St UNIT 9",
       "prop": "m405",
@@ -8314,34 +8328,6 @@
       "move_in": null,
       "done": 7,
       "total": 7,
-      "last_inhouse": null,
-      "next_task": null
-    },
-    {
-      "projId": 181221,
-      "name": "Turn - 916 W Augusta Avenue - 7 UNIT 7",
-      "prop": "a916",
-      "unit": "7",
-      "status": "COMPLETE",
-      "start": "2025-07-31",
-      "due": "2025-08-15",
-      "move_in": null,
-      "done": 7,
-      "total": 7,
-      "last_inhouse": null,
-      "next_task": null
-    },
-    {
-      "projId": 181211,
-      "name": "Turn - 1117 W 5th Ave - 11 UNIT 11",
-      "prop": "w117",
-      "unit": "11",
-      "status": "COMPLETE",
-      "start": "2025-07-31",
-      "due": "2025-08-15",
-      "move_in": null,
-      "done": 8,
-      "total": 8,
       "last_inhouse": null,
       "next_task": null
     },
@@ -8360,6 +8346,20 @@
       "next_task": null
     },
     {
+      "projId": 181211,
+      "name": "Turn - 1117 W 5th Ave - 11 UNIT 11",
+      "prop": "w117",
+      "unit": "11",
+      "status": "COMPLETE",
+      "start": "2025-07-31",
+      "due": "2025-08-15",
+      "move_in": null,
+      "done": 8,
+      "total": 8,
+      "last_inhouse": null,
+      "next_task": null
+    },
+    {
       "projId": 180410,
       "name": "Turn - 9300 E Sprague Avenue - 2 UNIT 2",
       "prop": "s300",
@@ -8367,20 +8367,6 @@
       "status": "COMPLETE",
       "start": "2025-07-28",
       "due": "2025-08-06",
-      "move_in": null,
-      "done": 7,
-      "total": 7,
-      "last_inhouse": null,
-      "next_task": null
-    },
-    {
-      "projId": 180862,
-      "name": "Turn - 512 E. Percival UNIT 512-4",
-      "prop": "k104- LeFevre",
-      "unit": "512-4",
-      "status": "COMPLETE",
-      "start": "2025-07-30",
-      "due": "2025-08-08",
       "move_in": null,
       "done": 7,
       "total": 7,
@@ -8399,6 +8385,20 @@
       "done": 7,
       "total": 7,
       "last_inhouse": "2025-08-04",
+      "next_task": null
+    },
+    {
+      "projId": 180862,
+      "name": "Turn - 512 E. Percival UNIT 512-4",
+      "prop": "k104- LeFevre",
+      "unit": "512-4",
+      "status": "COMPLETE",
+      "start": "2025-07-30",
+      "due": "2025-08-08",
+      "move_in": null,
+      "done": 7,
+      "total": 7,
+      "last_inhouse": null,
       "next_task": null
     },
     {
@@ -8528,20 +8528,6 @@
       "next_task": null
     },
     {
-      "projId": 176390,
-      "name": "Turn - 1010 W Boone Ave. - 11 UNIT 11",
-      "prop": "b101",
-      "unit": "11",
-      "status": "COMPLETE",
-      "start": "2025-07-01",
-      "due": "2025-07-10",
-      "move_in": null,
-      "done": 7,
-      "total": 7,
-      "last_inhouse": null,
-      "next_task": null
-    },
-    {
       "projId": 176387,
       "name": "Turn - 3131 So Cook St UNIT 26",
       "prop": "c313",
@@ -8570,6 +8556,20 @@
       "next_task": null
     },
     {
+      "projId": 176390,
+      "name": "Turn - 1010 W Boone Ave. - 11 UNIT 11",
+      "prop": "b101",
+      "unit": "11",
+      "status": "COMPLETE",
+      "start": "2025-07-01",
+      "due": "2025-07-10",
+      "move_in": null,
+      "done": 7,
+      "total": 7,
+      "last_inhouse": null,
+      "next_task": null
+    },
+    {
       "projId": 176388,
       "name": "Turn - 3131 So Cook St UNIT 7",
       "prop": "c313",
@@ -8584,20 +8584,6 @@
       "next_task": null
     },
     {
-      "projId": 176385,
-      "name": "Turn - 3025 S Cook St - 5 UNIT 5",
-      "prop": "c302",
-      "unit": "5",
-      "status": "COMPLETE",
-      "start": "2025-07-01",
-      "due": "2025-07-11",
-      "move_in": null,
-      "done": 7,
-      "total": 7,
-      "last_inhouse": null,
-      "next_task": null
-    },
-    {
       "projId": 174919,
       "name": "Turn - 405 S Maple St UNIT 6",
       "prop": "m405",
@@ -8605,6 +8591,20 @@
       "status": "COMPLETE",
       "start": "2025-06-26",
       "due": "2025-07-08",
+      "move_in": null,
+      "done": 7,
+      "total": 7,
+      "last_inhouse": null,
+      "next_task": null
+    },
+    {
+      "projId": 176385,
+      "name": "Turn - 3025 S Cook St - 5 UNIT 5",
+      "prop": "c302",
+      "unit": "5",
+      "status": "COMPLETE",
+      "start": "2025-07-01",
+      "due": "2025-07-11",
       "move_in": null,
       "done": 7,
       "total": 7,
@@ -8654,20 +8654,6 @@
       "next_task": null
     },
     {
-      "projId": 173801,
-      "name": "Turn - 524 E. Percival UNIT 524-8",
-      "prop": "k104- LeFevre",
-      "unit": "524-8",
-      "status": "COMPLETE",
-      "start": "2025-06-16",
-      "due": "2025-06-25",
-      "move_in": null,
-      "done": 7,
-      "total": 7,
-      "last_inhouse": null,
-      "next_task": null
-    },
-    {
       "projId": 174718,
       "name": "Turn - 2705 N Pines Rd - 03 UNIT 03",
       "prop": "p705",
@@ -8696,13 +8682,13 @@
       "next_task": null
     },
     {
-      "projId": 173124,
-      "name": "Turn - 506 N. Brower UNIT 506-4",
+      "projId": 173801,
+      "name": "Turn - 524 E. Percival UNIT 524-8",
       "prop": "k104- LeFevre",
-      "unit": "506-4",
+      "unit": "524-8",
       "status": "COMPLETE",
-      "start": "2025-06-11",
-      "due": "2025-06-20",
+      "start": "2025-06-16",
+      "due": "2025-06-25",
       "move_in": null,
       "done": 7,
       "total": 7,
@@ -8724,20 +8710,6 @@
       "next_task": null
     },
     {
-      "projId": 172735,
-      "name": "Turn - 3131 So Cook St UNIT 32",
-      "prop": "c313",
-      "unit": "32",
-      "status": "COMPLETE",
-      "start": "2025-06-09",
-      "due": "2025-06-20",
-      "move_in": null,
-      "done": 8,
-      "total": 8,
-      "last_inhouse": null,
-      "next_task": null
-    },
-    {
       "projId": 172468,
       "name": "Turn - 3134 E Jackson Ave UNIT 3134",
       "prop": "j312",
@@ -8752,12 +8724,40 @@
       "next_task": null
     },
     {
+      "projId": 173124,
+      "name": "Turn - 506 N. Brower UNIT 506-4",
+      "prop": "k104- LeFevre",
+      "unit": "506-4",
+      "status": "COMPLETE",
+      "start": "2025-06-11",
+      "due": "2025-06-20",
+      "move_in": null,
+      "done": 7,
+      "total": 7,
+      "last_inhouse": null,
+      "next_task": null
+    },
+    {
       "projId": 172466,
       "name": "Turn - 1117 W 5th Ave - 10 UNIT 10",
       "prop": "w117",
       "unit": "10",
       "status": "COMPLETE",
       "start": "2025-06-06",
+      "due": "2025-06-20",
+      "move_in": null,
+      "done": 8,
+      "total": 8,
+      "last_inhouse": null,
+      "next_task": null
+    },
+    {
+      "projId": 172735,
+      "name": "Turn - 3131 So Cook St UNIT 32",
+      "prop": "c313",
+      "unit": "32",
+      "status": "COMPLETE",
+      "start": "2025-06-09",
       "due": "2025-06-20",
       "move_in": null,
       "done": 8,
@@ -8794,20 +8794,6 @@
       "next_task": null
     },
     {
-      "projId": 171286,
-      "name": "Turn - 2715 N Pines Rd - 04 UNIT 04",
-      "prop": "p705",
-      "unit": "04",
-      "status": "COMPLETE",
-      "start": "2025-06-02",
-      "due": "2025-06-12",
-      "move_in": null,
-      "done": 7,
-      "total": 7,
-      "last_inhouse": null,
-      "next_task": null
-    },
-    {
       "projId": 171285,
       "name": "Turn - 1608 W. Main Avenue - 7 UNIT 7",
       "prop": "m608",
@@ -8822,6 +8808,20 @@
       "next_task": null
     },
     {
+      "projId": 171286,
+      "name": "Turn - 2715 N Pines Rd - 04 UNIT 04",
+      "prop": "p705",
+      "unit": "04",
+      "status": "COMPLETE",
+      "start": "2025-06-02",
+      "due": "2025-06-12",
+      "move_in": null,
+      "done": 7,
+      "total": 7,
+      "last_inhouse": null,
+      "next_task": null
+    },
+    {
       "projId": 171287,
       "name": "Turn - 506 N. Brower UNIT 506-1",
       "prop": "k104- LeFevre",
@@ -8832,6 +8832,20 @@
       "move_in": null,
       "done": 7,
       "total": 7,
+      "last_inhouse": null,
+      "next_task": null
+    },
+    {
+      "projId": 171277,
+      "name": "Turn - 503 N. Brower UNIT 503-3",
+      "prop": "k104- LeFevre",
+      "unit": "503-3",
+      "status": "COMPLETE",
+      "start": "2025-06-02",
+      "due": "2025-06-12",
+      "move_in": null,
+      "done": 8,
+      "total": 8,
       "last_inhouse": null,
       "next_task": null
     },
@@ -8874,20 +8888,6 @@
       "move_in": null,
       "done": 7,
       "total": 7,
-      "last_inhouse": null,
-      "next_task": null
-    },
-    {
-      "projId": 171277,
-      "name": "Turn - 503 N. Brower UNIT 503-3",
-      "prop": "k104- LeFevre",
-      "unit": "503-3",
-      "status": "COMPLETE",
-      "start": "2025-06-02",
-      "due": "2025-06-12",
-      "move_in": null,
-      "done": 8,
-      "total": 8,
       "last_inhouse": null,
       "next_task": null
     },
@@ -8948,6 +8948,20 @@
       "next_task": null
     },
     {
+      "projId": 166529,
+      "name": "Turn - 519 N. Walker UNIT 519-5",
+      "prop": "k104- LeFevre",
+      "unit": "519-5",
+      "status": "COMPLETE",
+      "start": "2025-05-01",
+      "due": "2025-05-15",
+      "move_in": null,
+      "done": 7,
+      "total": 7,
+      "last_inhouse": null,
+      "next_task": null
+    },
+    {
       "projId": 166676,
       "name": "Turn - 405 S Maple St UNIT 20",
       "prop": "m405",
@@ -8976,10 +8990,10 @@
       "next_task": null
     },
     {
-      "projId": 166529,
-      "name": "Turn - 519 N. Walker UNIT 519-5",
-      "prop": "k104- LeFevre",
-      "unit": "519-5",
+      "projId": 166345,
+      "name": "Turn - 511 E Augusta Ave #103 UNIT 103",
+      "prop": "a511",
+      "unit": "103",
       "status": "COMPLETE",
       "start": "2025-05-01",
       "due": "2025-05-15",
@@ -8990,13 +9004,27 @@
       "next_task": null
     },
     {
-      "projId": 166345,
-      "name": "Turn - 511 E Augusta Ave #103 UNIT 103",
-      "prop": "a511",
-      "unit": "103",
+      "projId": 166347,
+      "name": "Turn - 3106 E Jackson Ave UNIT 3106",
+      "prop": "j312",
+      "unit": "3106",
       "status": "COMPLETE",
       "start": "2025-05-01",
-      "due": "2025-05-15",
+      "due": "2025-05-10",
+      "move_in": null,
+      "done": 8,
+      "total": 8,
+      "last_inhouse": null,
+      "next_task": null
+    },
+    {
+      "projId": 166343,
+      "name": "Turn - 3131 So Cook St UNIT 6",
+      "prop": "c313",
+      "unit": "6",
+      "status": "COMPLETE",
+      "start": "2025-05-01",
+      "due": "2025-05-20",
       "move_in": null,
       "done": 7,
       "total": 7,
@@ -9032,34 +9060,6 @@
       "next_task": null
     },
     {
-      "projId": 166343,
-      "name": "Turn - 3131 So Cook St UNIT 6",
-      "prop": "c313",
-      "unit": "6",
-      "status": "COMPLETE",
-      "start": "2025-05-01",
-      "due": "2025-05-20",
-      "move_in": null,
-      "done": 7,
-      "total": 7,
-      "last_inhouse": null,
-      "next_task": null
-    },
-    {
-      "projId": 166347,
-      "name": "Turn - 3106 E Jackson Ave UNIT 3106",
-      "prop": "j312",
-      "unit": "3106",
-      "status": "COMPLETE",
-      "start": "2025-05-01",
-      "due": "2025-05-10",
-      "move_in": null,
-      "done": 8,
-      "total": 8,
-      "last_inhouse": null,
-      "next_task": null
-    },
-    {
       "projId": 165508,
       "name": "Turn - 2715 N Pines Rd - 02 UNIT 02",
       "prop": "p705",
@@ -9071,20 +9071,6 @@
       "done": 7,
       "total": 7,
       "last_inhouse": "2025-04-29",
-      "next_task": null
-    },
-    {
-      "projId": 164042,
-      "name": "Turn - 1010 W Boone Ave. - 1 UNIT 1",
-      "prop": "b101",
-      "unit": "1",
-      "status": "COMPLETE",
-      "start": "2025-04-17",
-      "due": "2025-04-24",
-      "move_in": null,
-      "done": 8,
-      "total": 8,
-      "last_inhouse": null,
       "next_task": null
     },
     {
@@ -9102,6 +9088,20 @@
       "next_task": null
     },
     {
+      "projId": 164042,
+      "name": "Turn - 1010 W Boone Ave. - 1 UNIT 1",
+      "prop": "b101",
+      "unit": "1",
+      "status": "COMPLETE",
+      "start": "2025-04-17",
+      "due": "2025-04-24",
+      "move_in": null,
+      "done": 8,
+      "total": 8,
+      "last_inhouse": null,
+      "next_task": null
+    },
+    {
       "projId": 162666,
       "name": "Other - 3025 S Cook St - 12 UNIT 12",
       "prop": "c302",
@@ -9113,20 +9113,6 @@
       "done": 1,
       "total": 1,
       "last_inhouse": null,
-      "next_task": null
-    },
-    {
-      "projId": 162484,
-      "name": "Turn - 737 S Hatch St - C UNIT 737 C",
-      "prop": "h731",
-      "unit": "737 C",
-      "status": "COMPLETE",
-      "start": "2025-04-07",
-      "due": "2025-04-11",
-      "move_in": null,
-      "done": 7,
-      "total": 7,
-      "last_inhouse": "2025-04-07",
       "next_task": null
     },
     {
@@ -9144,6 +9130,20 @@
       "next_task": null
     },
     {
+      "projId": 162484,
+      "name": "Turn - 737 S Hatch St - C UNIT 737 C",
+      "prop": "h731",
+      "unit": "737 C",
+      "status": "COMPLETE",
+      "start": "2025-04-07",
+      "due": "2025-04-11",
+      "move_in": null,
+      "done": 7,
+      "total": 7,
+      "last_inhouse": "2025-04-07",
+      "next_task": null
+    },
+    {
       "projId": 162665,
       "name": "Turn - 4210 N Avalon Rd #1 UNIT a210 1",
       "prop": "a210",
@@ -9154,6 +9154,20 @@
       "move_in": null,
       "done": 9,
       "total": 9,
+      "last_inhouse": null,
+      "next_task": null
+    },
+    {
+      "projId": 160696,
+      "name": "Turn - 737 S Hatch St - B UNIT 737 B",
+      "prop": "h731",
+      "unit": "737 B",
+      "status": "COMPLETE",
+      "start": "2025-04-06",
+      "due": "2025-05-01",
+      "move_in": null,
+      "done": 7,
+      "total": 7,
       "last_inhouse": null,
       "next_task": null
     },
@@ -9172,13 +9186,13 @@
       "next_task": null
     },
     {
-      "projId": 160696,
-      "name": "Turn - 737 S Hatch St - B UNIT 737 B",
-      "prop": "h731",
-      "unit": "737 B",
+      "projId": 160697,
+      "name": "Turn - 1221 N Monroe St - 34 UNIT 34",
+      "prop": "m221",
+      "unit": "34",
       "status": "COMPLETE",
-      "start": "2025-04-06",
-      "due": "2025-05-01",
+      "start": "2025-04-11",
+      "due": "2025-04-20",
       "move_in": null,
       "done": 7,
       "total": 7,
@@ -9200,59 +9214,17 @@
       "next_task": null
     },
     {
-      "projId": 160697,
-      "name": "Turn - 1221 N Monroe St - 34 UNIT 34",
+      "projId": 160693,
+      "name": "Turn - 1221 N Monroe St - 5 UNIT 5",
       "prop": "m221",
-      "unit": "34",
-      "status": "COMPLETE",
-      "start": "2025-04-11",
-      "due": "2025-04-20",
-      "move_in": null,
-      "done": 7,
-      "total": 7,
-      "last_inhouse": null,
-      "next_task": null
-    },
-    {
-      "projId": 160691,
-      "name": "Turn - 1010 W Boone Ave. - 5 UNIT 5",
-      "prop": "b101",
       "unit": "5",
       "status": "COMPLETE",
       "start": "2025-04-01",
       "due": "2025-04-11",
       "move_in": null,
-      "done": 6,
-      "total": 6,
-      "last_inhouse": "2025-04-03",
-      "next_task": null
-    },
-    {
-      "projId": 160689,
-      "name": "Turn - 519 N. Walker UNIT 519-5",
-      "prop": "k104- LeFevre",
-      "unit": "519-5",
-      "status": "COMPLETE",
-      "start": "2025-04-01",
-      "due": "2025-05-08",
-      "move_in": null,
-      "done": 6,
-      "total": 6,
+      "done": 5,
+      "total": 5,
       "last_inhouse": "2025-04-02",
-      "next_task": null
-    },
-    {
-      "projId": 160692,
-      "name": "Turn - 1608 W. Main Avenue - 1 UNIT 1",
-      "prop": "m608",
-      "unit": "1",
-      "status": "COMPLETE",
-      "start": "2025-04-01",
-      "due": "2025-04-11",
-      "move_in": null,
-      "done": 7,
-      "total": 7,
-      "last_inhouse": "2025-04-03",
       "next_task": null
     },
     {
@@ -9270,17 +9242,45 @@
       "next_task": null
     },
     {
-      "projId": 160693,
-      "name": "Turn - 1221 N Monroe St - 5 UNIT 5",
-      "prop": "m221",
+      "projId": 160689,
+      "name": "Turn - 519 N. Walker UNIT 519-5",
+      "prop": "k104- LeFevre",
+      "unit": "519-5",
+      "status": "COMPLETE",
+      "start": "2025-04-01",
+      "due": "2025-05-08",
+      "move_in": null,
+      "done": 6,
+      "total": 6,
+      "last_inhouse": "2025-04-02",
+      "next_task": null
+    },
+    {
+      "projId": 160691,
+      "name": "Turn - 1010 W Boone Ave. - 5 UNIT 5",
+      "prop": "b101",
       "unit": "5",
       "status": "COMPLETE",
       "start": "2025-04-01",
       "due": "2025-04-11",
       "move_in": null,
-      "done": 5,
-      "total": 5,
-      "last_inhouse": "2025-04-02",
+      "done": 6,
+      "total": 6,
+      "last_inhouse": "2025-04-03",
+      "next_task": null
+    },
+    {
+      "projId": 160692,
+      "name": "Turn - 1608 W. Main Avenue - 1 UNIT 1",
+      "prop": "m608",
+      "unit": "1",
+      "status": "COMPLETE",
+      "start": "2025-04-01",
+      "due": "2025-04-11",
+      "move_in": null,
+      "done": 7,
+      "total": 7,
+      "last_inhouse": "2025-04-03",
       "next_task": null
     },
     {
@@ -9298,17 +9298,17 @@
       "next_task": null
     },
     {
-      "projId": 160684,
-      "name": "Turn - 1608 W. Main Avenue - 2 UNIT 2",
-      "prop": "m608",
-      "unit": "2",
+      "projId": 160685,
+      "name": "Turn - 3131 So Cook St UNIT 27",
+      "prop": "c313",
+      "unit": "27",
       "status": "COMPLETE",
-      "start": "2025-03-30",
-      "due": "2025-05-01",
+      "start": "2025-04-01",
+      "due": "2025-04-11",
       "move_in": null,
-      "done": 5,
-      "total": 5,
-      "last_inhouse": "2025-03-31",
+      "done": 7,
+      "total": 7,
+      "last_inhouse": null,
       "next_task": null
     },
     {
@@ -9340,17 +9340,17 @@
       "next_task": null
     },
     {
-      "projId": 160685,
-      "name": "Turn - 3131 So Cook St UNIT 27",
-      "prop": "c313",
-      "unit": "27",
+      "projId": 160684,
+      "name": "Turn - 1608 W. Main Avenue - 2 UNIT 2",
+      "prop": "m608",
+      "unit": "2",
       "status": "COMPLETE",
-      "start": "2025-04-01",
-      "due": "2025-04-11",
+      "start": "2025-03-30",
+      "due": "2025-05-01",
       "move_in": null,
-      "done": 7,
-      "total": 7,
-      "last_inhouse": null,
+      "done": 5,
+      "total": 5,
+      "last_inhouse": "2025-03-31",
       "next_task": null
     },
     {
@@ -9438,20 +9438,6 @@
       "next_task": null
     },
     {
-      "projId": 158491,
-      "name": "Turn - 509 N. Brower UNIT 509-3",
-      "prop": "k104- LeFevre",
-      "unit": "509-3",
-      "status": "COMPLETE",
-      "start": "2025-03-12",
-      "due": "2025-03-20",
-      "move_in": null,
-      "done": 6,
-      "total": 6,
-      "last_inhouse": null,
-      "next_task": null
-    },
-    {
       "projId": 158643,
       "name": "Turn - 12002 E Valleyway Avenue #9 UNIT 9",
       "prop": "v202",
@@ -9463,6 +9449,20 @@
       "done": 7,
       "total": 7,
       "last_inhouse": "2025-03-13",
+      "next_task": null
+    },
+    {
+      "projId": 158491,
+      "name": "Turn - 509 N. Brower UNIT 509-3",
+      "prop": "k104- LeFevre",
+      "unit": "509-3",
+      "status": "COMPLETE",
+      "start": "2025-03-12",
+      "due": "2025-03-20",
+      "move_in": null,
+      "done": 6,
+      "total": 6,
+      "last_inhouse": null,
       "next_task": null
     },
     {
@@ -9564,6 +9564,20 @@
       "next_task": null
     },
     {
+      "projId": 156047,
+      "name": "Renovation - 912 W Lincoln Pl UNIT 101",
+      "prop": "l912 (Multi-Family)",
+      "unit": "101",
+      "status": "COMPLETE",
+      "start": "2025-02-25",
+      "due": "2025-04-22",
+      "move_in": null,
+      "done": 13,
+      "total": 13,
+      "last_inhouse": null,
+      "next_task": null
+    },
+    {
       "projId": 154651,
       "name": "Turn - 314 N. LeFerve UNIT 314-9",
       "prop": "k104- LeFevre",
@@ -9592,17 +9606,17 @@
       "next_task": null
     },
     {
-      "projId": 156047,
-      "name": "Renovation - 912 W Lincoln Pl UNIT 101",
-      "prop": "l912 (Multi-Family)",
-      "unit": "101",
+      "projId": 154636,
+      "name": "Turn - 1010 W Boone Ave. - 4 UNIT 4",
+      "prop": "b101",
+      "unit": "4",
       "status": "COMPLETE",
-      "start": "2025-02-25",
-      "due": "2025-04-22",
+      "start": "2025-02-15",
+      "due": "2025-02-25",
       "move_in": null,
-      "done": 13,
-      "total": 13,
-      "last_inhouse": null,
+      "done": 6,
+      "total": 6,
+      "last_inhouse": "2025-02-19",
       "next_task": null
     },
     {
@@ -9617,20 +9631,6 @@
       "done": 7,
       "total": 7,
       "last_inhouse": "2025-02-18",
-      "next_task": null
-    },
-    {
-      "projId": 154636,
-      "name": "Turn - 1010 W Boone Ave. - 4 UNIT 4",
-      "prop": "b101",
-      "unit": "4",
-      "status": "COMPLETE",
-      "start": "2025-02-15",
-      "due": "2025-02-25",
-      "move_in": null,
-      "done": 6,
-      "total": 6,
-      "last_inhouse": "2025-02-19",
       "next_task": null
     },
     {
@@ -9746,6 +9746,20 @@
       "next_task": null
     },
     {
+      "projId": 151217,
+      "name": "Turn - 3131 So Cook St UNIT 30",
+      "prop": "c313",
+      "unit": "30",
+      "status": "COMPLETE",
+      "start": "2025-01-14",
+      "due": "2025-02-01",
+      "move_in": null,
+      "done": 9,
+      "total": 9,
+      "last_inhouse": "2025-01-27",
+      "next_task": null
+    },
+    {
       "projId": 152113,
       "name": "Turn - 3128 E 28th Ave UNIT 2",
       "prop": "e328",
@@ -9771,20 +9785,6 @@
       "done": 19,
       "total": 19,
       "last_inhouse": "2025-02-12",
-      "next_task": null
-    },
-    {
-      "projId": 151217,
-      "name": "Turn - 3131 So Cook St UNIT 30",
-      "prop": "c313",
-      "unit": "30",
-      "status": "COMPLETE",
-      "start": "2025-01-14",
-      "due": "2025-02-01",
-      "move_in": null,
-      "done": 9,
-      "total": 9,
-      "last_inhouse": "2025-01-27",
       "next_task": null
     },
     {
@@ -9844,6 +9844,20 @@
       "next_task": null
     },
     {
+      "projId": 148930,
+      "name": "Turn - 1427 W 7th Ave - 4 UNIT 4",
+      "prop": "w427",
+      "unit": "4",
+      "status": "COMPLETE",
+      "start": "2025-01-02",
+      "due": "2025-01-10",
+      "move_in": null,
+      "done": 6,
+      "total": 6,
+      "last_inhouse": "2025-01-07",
+      "next_task": null
+    },
+    {
       "projId": 148927,
       "name": "Turn - 1117 W 5th Ave - 11 UNIT 11",
       "prop": "w117",
@@ -9886,17 +9900,17 @@
       "next_task": null
     },
     {
-      "projId": 148930,
-      "name": "Turn - 1427 W 7th Ave - 4 UNIT 4",
-      "prop": "w427",
-      "unit": "4",
+      "projId": 148925,
+      "name": "Turn - 101 E. Spence UNIT 101-2",
+      "prop": "k104- LeFevre",
+      "unit": "101-2",
       "status": "COMPLETE",
-      "start": "2025-01-02",
+      "start": "2024-12-31",
       "due": "2025-01-10",
       "move_in": null,
       "done": 6,
       "total": 6,
-      "last_inhouse": "2025-01-07",
+      "last_inhouse": "2025-01-03",
       "next_task": null
     },
     {
@@ -9914,17 +9928,17 @@
       "next_task": null
     },
     {
-      "projId": 148925,
-      "name": "Turn - 101 E. Spence UNIT 101-2",
+      "projId": 147988,
+      "name": "Renovation - 314 N. LeFerve UNIT 314-10",
       "prop": "k104- LeFevre",
-      "unit": "101-2",
+      "unit": "314-10",
       "status": "COMPLETE",
-      "start": "2024-12-31",
-      "due": "2025-01-10",
+      "start": "2024-12-11",
+      "due": "2025-01-01",
       "move_in": null,
-      "done": 6,
-      "total": 6,
-      "last_inhouse": "2025-01-03",
+      "done": 12,
+      "total": 12,
+      "last_inhouse": null,
       "next_task": null
     },
     {
@@ -9938,20 +9952,6 @@
       "move_in": null,
       "done": 6,
       "total": 6,
-      "last_inhouse": null,
-      "next_task": null
-    },
-    {
-      "projId": 147988,
-      "name": "Renovation - 314 N. LeFerve UNIT 314-10",
-      "prop": "k104- LeFevre",
-      "unit": "314-10",
-      "status": "COMPLETE",
-      "start": "2024-12-11",
-      "due": "2025-01-01",
-      "move_in": null,
-      "done": 12,
-      "total": 12,
       "last_inhouse": null,
       "next_task": null
     },
@@ -10026,6 +10026,20 @@
       "next_task": null
     },
     {
+      "projId": 146347,
+      "name": "Turn - 2705 N Pines Rd - 17 UNIT 17",
+      "prop": "p705",
+      "unit": "17",
+      "status": "COMPLETE",
+      "start": "2024-11-27",
+      "due": "2024-12-06",
+      "move_in": null,
+      "done": 6,
+      "total": 6,
+      "last_inhouse": "2024-11-27",
+      "next_task": null
+    },
+    {
       "projId": 146298,
       "name": "Turn - 1010 W Boone Ave. - 18 UNIT 18",
       "prop": "b101",
@@ -10037,20 +10051,6 @@
       "done": 4,
       "total": 4,
       "last_inhouse": "2024-11-27",
-      "next_task": null
-    },
-    {
-      "projId": 146394,
-      "name": "Renovation - 912 W Lincoln Pl UNIT 301",
-      "prop": "l912 (Multi-Family)",
-      "unit": "301",
-      "status": "COMPLETE",
-      "start": "2024-12-02",
-      "due": "2025-01-24",
-      "move_in": null,
-      "done": 15,
-      "total": 15,
-      "last_inhouse": "2025-01-05",
       "next_task": null
     },
     {
@@ -10068,17 +10068,17 @@
       "next_task": null
     },
     {
-      "projId": 146347,
-      "name": "Turn - 2705 N Pines Rd - 17 UNIT 17",
-      "prop": "p705",
-      "unit": "17",
+      "projId": 146394,
+      "name": "Renovation - 912 W Lincoln Pl UNIT 301",
+      "prop": "l912 (Multi-Family)",
+      "unit": "301",
       "status": "COMPLETE",
-      "start": "2024-11-27",
-      "due": "2024-12-06",
+      "start": "2024-12-02",
+      "due": "2025-01-24",
       "move_in": null,
-      "done": 6,
-      "total": 6,
-      "last_inhouse": "2024-11-27",
+      "done": 15,
+      "total": 15,
+      "last_inhouse": "2025-01-05",
       "next_task": null
     },
     {
