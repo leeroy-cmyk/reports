@@ -23,6 +23,8 @@
   .tab { padding: 12px 24px; cursor: pointer; font-size: 0.9rem; color: #7f8fa4; border-bottom: 3px solid transparent; transition: all .2s; }
   .tab:hover { color: #1a5276; }
   .tab.active { color: #1a5276; border-bottom-color: #2e86c1; font-weight: 600; }
+  .tabgroup { align-self:center; font-size:0.62rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:#9aa7b4; padding:0 4px 0 12px; }
+  .tabgroup:first-child { padding-left:0; }
 
   .panel { display: none; padding: 28px 32px; }
   .panel.active { display: block; }
@@ -197,20 +199,16 @@
 <div class="error-bar" id="errorBar"></div>
 
 <div class="tabs">
+  <span class="tabgroup">Vacancy · all regions</span>
   <div class="tab active" onclick="showTab('overview',this)">Overview</div>
   <div class="tab" onclick="showTab('kpis',this)">KPIs</div>
-  <div class="tab" onclick="showTab('turnsDue',this)">Turns Due</div>
-  <div class="tab" onclick="showTab('recentlyAdded',this)">Recently Added <span id="recentBadge" style="display:none;background:#e74c3c;color:#fff;border-radius:10px;font-size:0.7rem;font-weight:700;padding:1px 7px;margin-left:4px;vertical-align:middle;"></span></div>
+  <div class="tab" onclick="showTab('detail',this)">Turns</div>
   <div class="tab" onclick="showTab('byProperty',this)">By Property</div>
-  <div class="tab" onclick="showTab('detail',this)">Full Detail</div>
   <div class="tab" onclick="showTab('turnCosts',this)">Turn Costs</div>
+  <span class="tabgroup">Dispatch · Spokane</span>
   <div class="tab" onclick="showTab('dispatch',this)">📋 Dispatch</div>
-  <div class="tab" onclick="showTab('scal',this)">Calendar</div>
-  <div class="tab" onclick="showTab('stasks',this)">Tasks</div>
-  <div class="tab" onclick="showTab('spast',this)">Past Due</div>
   <div class="tab" onclick="showTab('srisk',this)">⚠ At-Risk</div>
-  <div class="tab" onclick="showTab('sturns',this)">Turns Overview</div>
-  <div class="tab" onclick="showTab('stech',this)">Tech Workload</div>
+  <div class="tab" onclick="showTab('stasks',this)">Tasks</div>
 </div>
 
 <div id="overview" class="panel active"><div id="overviewContent"><p style="color:#7f8fa4;padding:20px;">Loading…</p></div></div>
@@ -1559,6 +1557,7 @@ function renderPast(){
 function renderRisk(){
   const a=DATA.alerts;const sections=[];
   const sec=(title,cls,items,fmt)=>{if(!items||!items.length)return '';return `<div class="sec"><h3>${title} <span class="cnt">· ${items.length}</span></h3><div class="card">${items.map(x=>`<div class="row ${cls}">${fmt(x)}</div>`).join('')}</div></div>`;};
+  sections.push(sec('⏰ Past due — scheduled date passed, not marked done','arw',(a.pastDue||[]).map(x=>({...x,over:daysBetween(x.date,TODAY)})).sort((p,q)=>q.over-p.over),x=>`<b>${esc(x.lbl)}</b> — ${esc(x.task)} was <b>${x.date}</b> (${x.dow}) · <b style="color:var(--red)">${x.over}d</b> ago &nbsp;${pmLink(x.projId,'open ↗')}`));
   sections.push(sec('🚫 Move-in conflicts — work scheduled after move-in','arw',a.moveInConflict,x=>`<b>${esc(x.lbl)}</b> — last in-house <b>${x.lastInhouse}</b> is AFTER move-in <b>${x.mi}</b> &nbsp;${pmLink(x.projId,'open ↗')}`));
   sections.push(sec('📅 Unscheduled in-house work','arw',a.unscheduled,x=>`<b>${esc(x.lbl)}</b> — ${esc(x.task)} has no appointment <span class="muted">[${esc(x.status)}]</span> &nbsp;${pmLink(x.projId,'open ↗')}`));
   sections.push(sec('🐌 Stalled turns (overdue, ≤2 melds done)','arw',a.stalled,x=>`<b>${esc(x.lbl)}</b> — due ${x.due}, ${x.done}/${x.total} done &nbsp;${pmLink(x.projId,'open ↗')}`));
