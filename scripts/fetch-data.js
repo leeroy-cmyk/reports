@@ -1073,6 +1073,8 @@ async function fetchPropertyMeldTurns() {
   console.log(`\nPropertyMeld turns: ${projects.length} TURN projects fetched`);
 
   const turns = [];
+  const completedTurns = [];   // portfolio completed unit turns (fully complete), for by-month rollup
+  const regionOf = c => { c = (c || '').trim(); if (['Spokane','Spokane Valley','Medical Lake'].includes(c)) return 'Spokane'; if (['Kennewick','Pasco','Richland','West Richland'].includes(c)) return 'Tri-Cities'; if (c === 'Tacoma') return 'Tacoma'; return c || 'Other'; };
   const scheduleEvents = [];   // per-appointment feed for the Spokane turn calendar
   const SPOK_CITIES = new Set(['Spokane', 'Spokane Valley', 'Medical Lake']);
   const catOf = (b) => {
@@ -1164,6 +1166,19 @@ async function fetchPropertyMeldTurns() {
         const unit = proj.unit;
         const propObj = unit?.prop || {};
 
+        // portfolio completed-turns rollup: fully-complete unit turns (exclude pest + non-unit projects),
+        // bucketed by the month of the LAST meld completion.
+        {
+          const fully = proj.total_melds > 0 && proj.total_completed_melds >= proj.total_melds;
+          const hasUnit = unit && (unit.unit || unit.display_address?.line_2);
+          if (fully && hasUnit && !/pest/i.test(proj.name || '')) {
+            let mx = null;
+            for (const m of melds) { if (m.completion_date) { const d = pac(m.completion_date).date; if (!mx || d > mx) mx = d; } }
+            const uk = nrm(propObj.property_name) + '|' + nrm(unit.unit || unit.display_address?.line_2 || '');
+            if (mx) completedTurns.push({ date: mx, region: regionOf(propObj.city), key: uk });
+          }
+        }
+
         // ---- Spokane turn dashboard: enriched events + alerts + per-turn rollup ----
         if (SPOK_CITIES.has((propObj.city || '').trim())) {
           const unitLabel = unit?.unit || unit?.display_address?.line_2 || '';
@@ -1232,7 +1247,13 @@ async function fetchPropertyMeldTurns() {
     await sleep(150);
   }
   console.log(`\nPropertyMeld turns: saved ${turns.length} turn records`);
-  save('pm_turns.json', { ok: true, fetched_at: new Date().toISOString(), turns });
+  // last 6 months of completed turns (portfolio + by region)
+  const completedByMonth = [];
+  { const now = new Date();
+    for (let i = 5; i >= 0; i--) { const d = new Date(now.getFullYear(), now.getMonth() - i, 1); const key = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0');
+      const mr = completedTurns.filter(x => x.date.slice(0, 7) === key); const seen = {}; mr.forEach(x => { if (!seen[x.key]) seen[x.key] = x.region; }); const byRegion = {}; Object.values(seen).forEach(r => byRegion[r] = (byRegion[r] || 0) + 1);
+      completedByMonth.push({ month: key, label: d.toLocaleString('en-US', { month: 'short' }), total: Object.keys(seen).length, byRegion }); } }
+  save('pm_turns.json', { ok: true, fetched_at: new Date().toISOString(), turns, completedByMonth });
   scheduleEvents.sort((a, b) => a.date.localeCompare(b.date) || String(a.who).localeCompare(String(b.who)));
   const openCount = spokTurns.filter(t => t.status === 'ACTIVE').length;
   const kpis = { openTurns: openCount, totalTurnsShown: spokTurns.length, pastDue: alerts.pastDue.length, unscheduled: alerts.unscheduled.length, fridayViol: alerts.friday.length, moveInConflict: alerts.moveInConflict.length, stalled: alerts.stalled.length, atRisk: alerts.unscheduled.length + alerts.moveInConflict.length + alerts.friday.length + alerts.weekend.length + alerts.stalled.length };

@@ -460,6 +460,7 @@ async function loadData() {
     setTimeout(() => { bar.style.width = '0'; bar.style.transition = 'none'; setTimeout(() => bar.style.transition = 'width 0.4s ease', 50); }, 600);
 
     buildOverview();
+    renderCompletedTrend();
     buildTurnsDue();
     buildRecentlyAdded();
     buildByProperty();
@@ -582,6 +583,20 @@ function buildOverview() {
 // ── TURNS DUE ─────────────────────────────────────────────────────────────────
 let dueFilter = null;
 
+function renderCompletedTrend() {
+  const cbm = (RAW_TURNS && RAW_TURNS.completedByMonth) || [];
+  const ov = document.getElementById('overviewContent');
+  if (!cbm.length || !ov) return;
+  const max = Math.max(1, ...cbm.map(m => m.total));
+  const bars = cbm.map(m => `<div style="flex:1;text-align:center;min-width:44px">
+      <div style="font-size:1.5rem;font-weight:700;color:#1a5276;line-height:1">${m.total}</div>
+      <div style="margin:5px auto 0;width:56%;height:${Math.round(m.total / max * 56) + 3}px;background:linear-gradient(#2e86c1,#1a5276);border-radius:3px 3px 0 0"></div>
+      <div style="font-size:0.72rem;color:#7f8fa4;margin-top:5px">${m.label}</div></div>`).join('');
+  const html = `<div style="background:#fff;border:1px solid #e6ebf0;border-radius:10px;padding:16px 20px;margin-bottom:18px">
+      <div style="font-size:0.78rem;font-weight:700;color:#1a5276;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:10px">Turns completed / month — portfolio (last 6 mo)</div>
+      <div style="display:flex;align-items:flex-end;gap:10px;max-width:520px">${bars}</div></div>`;
+  ov.insertAdjacentHTML('afterbegin', html);
+}
 function buildTurnsDue() {
   // All units with an available_on date, sorted by urgency
   const units = allData
