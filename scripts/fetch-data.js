@@ -1169,6 +1169,7 @@ async function fetchPropertyMeldTurns() {
           const unitLabel = unit?.unit || unit?.display_address?.line_2 || '';
           const propName = propObj.property_name || '';
           const lbl = `${propName} ${unitLabel}`.trim();
+          const addr = unit?.display_address ? [unit.display_address.line_1, unit.display_address.line_2, unit.display_address.city].filter(Boolean).join(', ') : (propObj.line_1 ? [propObj.line_1, propObj.city].filter(Boolean).join(', ') : '');
           const open = proj.total_melds > proj.total_completed_melds;
           const mi = moveInMap[nrm(propName) + '|' + nrm(unitLabel)] || null;
           const inh = c => c === 'walkthrough' || c === 'paint' || c === 'maintenance';
@@ -1179,8 +1180,8 @@ async function fetchPropertyMeldTurns() {
             const vend = (m.vendorappointment || []).filter(a => a.availability_segment?.event?.dtstart);
             const techName = (m.in_house_servicers || [])[0]?.agent ? `${(m.in_house_servicers)[0].agent.first_name} ${(m.in_house_servicers)[0].agent.last_name}` : 'Unassigned';
             if (!isDone && cat !== 'estimate') {
-              mgmt.forEach(a => { const e = a.availability_segment.event; const s = (a.management_assignment?.in_house_servicers || [])[0] || (m.in_house_servicers || [])[0]?.agent; const who = s ? `${s.first_name || ''} ${s.last_name || ''}`.trim() : 'Unassigned'; const p = pac(e.dtstart); scheduleEvents.push({ date: p.date, start: p.time, end: pac(e.dtend).time, prop: propName, unit: unitLabel, category: cat, brief, who, whoType: 'tech', ref: m.reference_id, meld_id: m.id, projId: proj.id, status: m.status }); });
-              vend.forEach(a => { const e = a.availability_segment.event; const vr = (m.vendor_assignment_requests || []).find(r => r.id === a.assignment_request) || (m.vendor_assignment_requests || [])[0]; const who = vr?.vendor?.name || 'Vendor'; const p = pac(e.dtstart); scheduleEvents.push({ date: p.date, start: p.time, end: pac(e.dtend).time, prop: propName, unit: unitLabel, category: cat, brief, who, whoType: 'vendor', ref: m.reference_id, meld_id: m.id, projId: proj.id, status: m.status }); });
+              mgmt.forEach(a => { const e = a.availability_segment.event; const s = (a.management_assignment?.in_house_servicers || [])[0] || (m.in_house_servicers || [])[0]?.agent; const who = s ? `${s.first_name || ''} ${s.last_name || ''}`.trim() : 'Unassigned'; const p = pac(e.dtstart); scheduleEvents.push({ date: p.date, start: p.time, end: pac(e.dtend).time, prop: propName, unit: unitLabel, addr, category: cat, brief, who, whoType: 'tech', ref: m.reference_id, meld_id: m.id, projId: proj.id, status: m.status }); });
+              vend.forEach(a => { const e = a.availability_segment.event; const vr = (m.vendor_assignment_requests || []).find(r => r.id === a.assignment_request) || (m.vendor_assignment_requests || [])[0]; const who = vr?.vendor?.name || 'Vendor'; const p = pac(e.dtstart); scheduleEvents.push({ date: p.date, start: p.time, end: pac(e.dtend).time, prop: propName, unit: unitLabel, addr, category: cat, brief, who, whoType: 'vendor', ref: m.reference_id, meld_id: m.id, projId: proj.id, status: m.status }); });
             }
             const apptDates = [...mgmt, ...vend].map(a => pac(a.availability_segment.event.dtstart).date);
             if (inh(cat)) apptDates.forEach(d => { if (d > (lastInhouse || '')) lastInhouse = d; });
@@ -1196,8 +1197,8 @@ async function fetchPropertyMeldTurns() {
           // ---- Suggested vendor dates (cleaning = 3 biz days after in-house; carpet next biz day) ----
           if (open && lastMaintPaint) {
             const cleanBase = cleanApptDate || addBizDays(lastMaintPaint, 3);
-            if (!cleanApptDate) scheduleEvents.push({ date: cleanBase, start: '', end: '', prop: propName, unit: unitLabel, category: 'suggested-cleaning', brief: `Suggested cleaning — 3 business days after in-house done (${lastMaintPaint})`, who: 'SPO Cleaning', whoType: 'suggested', ref: proj.id, projId: proj.id, status: 'SUGGESTED' });
-            if (!carpetApptDate) { const carpetDate = addBizDays(cleanBase, 1); scheduleEvents.push({ date: carpetDate, start: '', end: '', prop: propName, unit: unitLabel, category: 'suggested-carpet', brief: 'Suggested carpet cleaning — business day after cleaning', who: 'Allklean', whoType: 'suggested', ref: proj.id, projId: proj.id, status: 'SUGGESTED' }); }
+            if (!cleanApptDate) scheduleEvents.push({ date: cleanBase, start: '', end: '', prop: propName, unit: unitLabel, addr, category: 'suggested-cleaning', brief: `Suggested cleaning — 3 business days after in-house done (${lastMaintPaint})`, who: 'SPO Cleaning', whoType: 'suggested', ref: proj.id, projId: proj.id, status: 'SUGGESTED' });
+            if (!carpetApptDate) { const carpetDate = addBizDays(cleanBase, 1); scheduleEvents.push({ date: carpetDate, start: '', end: '', prop: propName, unit: unitLabel, addr, category: 'suggested-carpet', brief: 'Suggested carpet cleaning — business day after cleaning', who: 'Allklean', whoType: 'suggested', ref: proj.id, projId: proj.id, status: 'SUGGESTED' }); }
           }
           if (open) {
             if (mi && lastInhouse && lastInhouse > mi.slice(0, 10)) alerts.moveInConflict.push({ lbl, prop: propName, unit: unitLabel, lastInhouse, mi: mi.slice(0, 10), projId: proj.id });

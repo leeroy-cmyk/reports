@@ -46,6 +46,23 @@
   .ev.vendor .who{font-style:italic} .ev.suggested{border-left-style:dashed;background:#fffdf6} .ev.suggested .t{font-weight:700}
   .wkhdr{margin:16px 0 4px;color:var(--navy);font-weight:600;font-size:12px}
   .empty{color:var(--mut);padding:26px;text-align:center}
+  /* dispatch */
+  .printbtn{padding:5px 12px;border:1px solid var(--navy);background:var(--navy);color:#fff;border-radius:7px;font-weight:600;cursor:pointer;margin-right:10px}
+  .dsptbl{table-layout:fixed;margin-bottom:20px}
+  .dsptbl th{border:1px solid var(--line)} .dsptbl td{border:1px solid var(--line);vertical-align:top;height:70px;padding:3px}
+  .dsptbl th.crew,.dsptbl td.crew{width:104px}
+  td.crew{font-weight:700;color:var(--navy);font-size:12px;background:#fcfdfe}
+  td.crew.t-vendor{color:#16a085} td.crew.t-sug{color:#b9770a;font-style:italic;font-weight:600}
+  .dsptbl td.today{background:#fef9ee}
+  .job{border-left:3px solid #ccc;padding:2px 5px;margin-bottom:3px;background:#fbfcfd;border-radius:3px;font-size:11px;line-height:1.25}
+  .job.suggested{border-left-style:dashed;background:#fffdf6}
+  .job .jh{white-space:nowrap} .job .tm{font-weight:700} .job .jc{font-weight:600}
+  .job .un{font-weight:600;color:var(--ink)} .job .ad{color:var(--mut);font-size:10px}
+  @media print{
+    .tabs,.kpis,.upd,.printbtn,.bar .muted{display:none!important}
+    .pane:not(.on){display:none} .wrap{max-width:none;padding:0}
+    h1{font-size:16px} .dsptbl td{height:auto} .job{break-inside:avoid}
+  }
   .sec{margin:0 0 18px} .sec h3{margin:0 0 6px;font-size:14px} .sec .cnt{color:var(--mut);font-weight:400}
   .card{background:#fff;border:1px solid var(--line);border-radius:8px;padding:2px 0}
   .row{padding:6px 12px;border-bottom:1px solid var(--line);font-size:12.5px} .row:last-child{border:none}
@@ -58,6 +75,7 @@
   <div class="top"><h1>Spokane Turn Schedule</h1><span class="upd" id="upd"></span></div>
   <div class="kpis" id="kpis"></div>
   <div class="tabs" id="tabs"></div>
+  <div id="p-dispatch" class="pane"></div>
   <div id="p-cal" class="pane"><div class="legend" id="legend" style="margin-bottom:12px"></div><div id="cal"></div></div>
   <div id="p-tasks" class="pane">
     <div class="bar">
@@ -91,6 +109,7 @@ let DATA={events:[],turns:[],alerts:{},kpis:{}}, TODAY;
 const active={};Object.keys(CATS).forEach(k=>active[k]=true);
 
 const TABS=[
+  {id:'dispatch',label:'📋 Dispatch'},
   {id:'cal',label:'Calendar'},{id:'tasks',label:'Tasks'},
   {id:'past',label:'Past Due',badge:()=>DATA.alerts.pastDue?.length||0},
   {id:'risk',label:'⚠ At-Risk',badge:()=>DATA.kpis.atRisk||0},
@@ -98,7 +117,7 @@ const TABS=[
 function buildTabs(){
   document.getElementById('tabs').innerHTML=TABS.map((t,i)=>{const b=t.badge?t.badge():0;return `<div class="tab${i===0?' on':''}" data-id="${t.id}">${t.label}${b?`<span class="badge">${b}</span>`:''}</div>`;}).join('');
   document.querySelectorAll('.tab').forEach(el=>el.onclick=()=>{document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));el.classList.add('on');document.querySelectorAll('.pane').forEach(p=>p.classList.remove('on'));document.getElementById('p-'+el.dataset.id).classList.add('on');});
-  document.getElementById('p-cal').classList.add('on');
+  document.getElementById('p-dispatch').classList.add('on');
 }
 function kpiRow(){
   const k=DATA.kpis;const cells=[['n','Open turns',k.openTurns,''],['n','Past due',k.pastDue,k.pastDue?'bad':'good'],['n','Unscheduled',k.unscheduled,k.unscheduled?'warn':'good'],['n','Fri viol.',k.fridayViol,k.fridayViol?'warn':'good'],['n','Move-in risk',k.moveInConflict,k.moveInConflict?'bad':'good'],['n','Stalled',k.stalled,k.stalled?'warn':'good']];
@@ -191,6 +210,33 @@ function renderTurns(){
   sortableTable(document.getElementById('turnsTbl'),cols,rows,oState);
 }
 /* ---------- Tech Workload ---------- */
+/* ---------- Dispatch (field crew calendar) ---------- */
+function renderDispatch(){
+  const mon=mondayOf(new Date(TODAY+'T00:00:00'));const floor=isoOf(mon);
+  const evs=DATA.events.filter(e=>e.date>=floor);
+  const el=document.getElementById('p-dispatch');
+  if(!evs.length){el.innerHTML='<div class="empty">No dispatched turn work scheduled.</div>';return;}
+  const col=c=>(CATS[c]||CATS.other).color, lab=c=>(CATS[c]||CATS.other).label;
+  const rank=e=>e.whoType==='tech'?0:e.whoType==='vendor'?1:2;
+  const weeks={};evs.forEach(e=>{const w=isoOf(mondayOf(new Date(e.date+'T00:00:00')));(weeks[w]=weeks[w]||[]).push(e);});
+  let html='<div class="bar"><button class="printbtn" onclick="window.print()">🖨 Print</button><span class="muted">Spokane turn crew field dispatch — Mon–Thu in-house, Fri buffer/vendors. <b>≈</b> = suggested vendor date (not yet booked).</span></div><div class="dsp">';
+  Object.keys(weeks).sort().forEach(w=>{
+    const we=weeks[w];
+    const whos=[...new Set(we.map(e=>e.who))].sort((a,b)=>{const ea=we.find(x=>x.who===a),eb=we.find(x=>x.who===b);return rank(ea)-rank(eb)||a.localeCompare(b);});
+    const days=[0,1,2,3,4].map(i=>{const d=new Date(w+'T00:00:00');d.setDate(d.getDate()+i);return isoOf(d);});
+    [5,6].forEach(i=>{const d=new Date(w+'T00:00:00');d.setDate(d.getDate()+i);const ds=isoOf(d);if(we.some(e=>e.date===ds))days.push(ds);});
+    html+=`<div class="wkhdr">Week of ${fmtD(new Date(w+'T00:00:00'))}</div><table class="dsptbl"><tr><th class="crew">Crew</th>${days.map(d=>{const dd=new Date(d+'T00:00:00');const wd=dd.getDay();return `<th class="${(wd===0||wd===6)?'wknd':(wd===5?'td-fri':'')}">${DOW[wd]} ${fmtD(dd)}${wd===5?' · buffer':''}${d===TODAY?' •':''}</th>`;}).join('')}</tr>`;
+    whos.forEach(who=>{
+      const wr=rank(we.find(e=>e.who===who));
+      html+=`<tr><td class="crew ${wr===0?'t-tech':wr===1?'t-vendor':'t-sug'}">${esc(who)}</td>`;
+      days.forEach(d=>{const jobs=we.filter(e=>e.who===who&&e.date===d).sort((a,b)=>(a.start||'~').localeCompare(b.start||'~'));
+        html+='<td class="'+(d===TODAY?'today':'')+'">'+jobs.map(e=>{const c=col(e.category);return `<div class="job ${e.whoType}" style="border-left-color:${c}" title="${esc(e.brief)}"><div class="jh"><span class="tm">${e.start||'≈'}</span> <span class="jc" style="color:${c}">${lab(e.category)}</span></div><div class="un">${esc(e.prop)} #${esc(e.unit)}</div><div class="ad">${esc(e.addr||'')}</div></div>`;}).join('')+'</td>';});
+      html+='</tr>';
+    });
+    html+='</table>';
+  });
+  el.innerHTML=html+'</div>';
+}
 function renderTech(){
   const floor=isoOf(new Date(new Date(TODAY+'T12:00:00').getTime()-7*864e5));
   const techEvents=DATA.events.filter(e=>e.whoType==='tech'&&e.date>=floor);
@@ -221,7 +267,7 @@ fetch('./data/turn_schedule.json?cb='+Date.now()).then(r=>r.json()).then(j=>{
   const u=j.fetched_at?new Date(j.fetched_at):null;
   document.getElementById('upd').textContent='Updated '+(u?u.toLocaleDateString('en-US',{month:'short',day:'numeric'})+' · '+u.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}):'—')+' · '+(DATA.events||[]).length+' events · '+(DATA.kpis.openTurns||0)+' open turns';
   buildTabs();kpiRow();renderLegend();fillFilters();
-  renderCal();renderTasks();renderPast();renderRisk();renderTurns();renderTech();
+  renderDispatch();renderCal();renderTasks();renderPast();renderRisk();renderTurns();renderTech();
 }).catch(e=>{document.getElementById('cal').innerHTML='<div class="empty">Could not load turn_schedule.json</div>';});
 </script>
 </body>
