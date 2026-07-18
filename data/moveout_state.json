@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-07-18T05:52:07.803Z",
+  "fetched_at": "2026-07-18T09:27:34.695Z",
   "units": {
     "2": {
       "moveOut": "2026-07-31",
@@ -223,13 +223,6 @@
       "status": "Notice-Unrented",
       "prop": "ps25",
       "unit": "D29",
-      "city": "Pasco"
-    },
-    "390": {
-      "moveOut": "2026-04-30",
-      "status": "Vacant-Rented",
-      "prop": "ps25",
-      "unit": "E32",
       "city": "Pasco"
     },
     "395": {
@@ -505,13 +498,6 @@
       "unit": "D14",
       "city": "Richland"
     },
-    "654": {
-      "moveOut": "2026-06-09",
-      "status": "Vacant-Rented",
-      "prop": "s129",
-      "unit": "3",
-      "city": "Spokane Valley"
-    },
     "660": {
       "moveOut": "2026-07-12",
       "status": "Vacant-Unrented",
@@ -692,13 +678,6 @@
       "status": "Vacant-Unrented",
       "prop": "kn47 K1",
       "unit": "A104",
-      "city": "Kennewick"
-    },
-    "831": {
-      "moveOut": "2026-04-10",
-      "status": "Vacant-Rented",
-      "prop": "kn47 K1",
-      "unit": "A201",
       "city": "Kennewick"
     },
     "851": {
@@ -899,7 +878,7 @@
     },
     "1121": {
       "moveOut": "2026-07-17",
-      "status": "Notice-Unrented",
+      "status": "Vacant-Unrented",
       "prop": "o155-Oak",
       "unit": "C9",
       "city": "Spokane"
@@ -1489,6 +1468,36 @@
       "unit": "D11",
       "city": "Richland",
       "to": "2026-08-31"
+    },
+    {
+      "date": "2026-07-18",
+      "type": "moveout_removed",
+      "unit_id": "390",
+      "prop": "ps25",
+      "unit": "E32",
+      "city": "Pasco",
+      "from": "2026-04-30",
+      "was_status": "Vacant-Rented"
+    },
+    {
+      "date": "2026-07-18",
+      "type": "moveout_removed",
+      "unit_id": "654",
+      "prop": "s129",
+      "unit": "3",
+      "city": "Spokane Valley",
+      "from": "2026-06-09",
+      "was_status": "Vacant-Rented"
+    },
+    {
+      "date": "2026-07-18",
+      "type": "moveout_removed",
+      "unit_id": "831",
+      "prop": "kn47 K1",
+      "unit": "A201",
+      "city": "Kennewick",
+      "from": "2026-04-10",
+      "was_status": "Vacant-Rented"
     }
   ]
 }
