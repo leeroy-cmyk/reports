@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Turn Automation — Progress</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body { font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+         background: #f4f6f9; color: #2c3e50; line-height: 1.55; margin: 0; padding: 0 0 60px; }
+  .wrap { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+  header.pg { background: linear-gradient(135deg, #1a5276, #2e86c1); color: #fff; padding: 34px 0 28px; }
+  header.pg h1 { font-size: 1.85rem; font-weight: 700; letter-spacing: -0.3px; margin: 0; }
+  header.pg p { opacity: .93; margin-top: 7px; font-size: 1rem; max-width: 700px; }
+  .updated { margin-top: 14px; font-size: .82rem; opacity: .9; display: inline-flex; align-items: center; gap: 8px; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: #7ee2a8; box-shadow: 0 0 0 3px rgba(126,226,168,.3); }
+
+  /* Overview */
+  .overview { background: #fff; border: 1px solid #e1e8ef; border-radius: 12px; padding: 20px 22px; margin: 24px 0 30px; box-shadow: 0 1px 3px rgba(26,82,118,.05); }
+  .bar { display: flex; height: 22px; border-radius: 7px; overflow: hidden; margin: 4px 0 16px; }
+  .bar span { display: block; }
+  .seg-cloud { background: #27ae60; }
+  .seg-local { background: #2e86c1; }
+  .seg-pending { background: #e0e5ea; }
+  .chips { display: flex; flex-wrap: wrap; gap: 10px; }
+  .chip { display: inline-flex; align-items: center; gap: 8px; font-size: .86rem; font-weight: 600; color: #44515f; }
+  .sw { width: 13px; height: 13px; border-radius: 4px; }
+  .ov-title { font-size: .78rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: #1a5276; margin-bottom: 10px; }
+
+  h2.sec { color: #1a5276; font-size: 1.25rem; margin: 34px 0 6px; }
+  .sec-sub { color: #7f8fa4; font-size: .9rem; margin: 0 0 16px; }
+
+  /* Stage cards */
+  .stage { position: relative; background: #fff; border: 1px solid #e1e8ef; border-radius: 12px; padding: 16px 18px 16px 20px; margin-bottom: 13px; box-shadow: 0 1px 3px rgba(26,82,118,.05); border-left: 5px solid #d7e0ea; }
+  .stage.st-cloud { border-left-color: #27ae60; }
+  .stage.st-local { border-left-color: #2e86c1; }
+  .stage.st-pending { border-left-color: #e67e22; }
+  .stage.st-blocked { border-left-color: #c0392b; }
+  .stage-head { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .stage-num { flex: none; width: 30px; height: 30px; border-radius: 50%; background: #eef3f8; color: #1a5276; font-weight: 700; font-size: .95rem; display: flex; align-items: center; justify-content: center; }
+  .stage-title { font-size: 1.06rem; font-weight: 700; color: #223; }
+  .badge { margin-left: auto; font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .4px; border-radius: 20px; padding: 3px 11px; white-space: nowrap; }
+  .b-cloud { background: #e5f6ec; color: #1e8449; }
+  .b-local { background: #e6f0fa; color: #2470b3; }
+  .b-pending { background: #fdf0e3; color: #b9631a; }
+  .b-blocked { background: #fbe6e4; color: #b03328; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 26px; margin-top: 12px; }
+  @media (max-width: 620px){ .cols { grid-template-columns: 1fr; } }
+  .col h4 { font-size: .72rem; text-transform: uppercase; letter-spacing: .05em; margin: 4px 0 6px; }
+  .col.done h4 { color: #1e8449; }
+  .col.todo h4 { color: #b9631a; }
+  ul.pts { list-style: none; margin: 0; padding: 0; }
+  ul.pts li { font-size: .9rem; color: #44515f; padding-left: 20px; position: relative; margin-bottom: 5px; }
+  .col.done li::before { content: "✓"; position: absolute; left: 0; color: #27ae60; font-weight: 700; }
+  .col.todo li::before { content: "○"; position: absolute; left: 2px; color: #e67e22; font-weight: 700; font-size: .8rem; top: 1px; }
+  .stage code, .next code { background: #eef3f8; color: #1a5276; padding: 1px 6px; border-radius: 5px; font-family: "SF Mono", Consolas, monospace; font-size: .84em; }
+
+  /* Next steps */
+  .next { background: #fff; border: 1px solid #e1e8ef; border-radius: 12px; padding: 8px 6px; box-shadow: 0 1px 3px rgba(26,82,118,.05); }
+  .step { display: flex; gap: 14px; padding: 14px 16px; border-bottom: 1px solid #eef2f6; }
+  .step:last-child { border-bottom: none; }
+  .step-n { flex: none; width: 28px; height: 28px; border-radius: 8px; background: linear-gradient(135deg,#1a5276,#2e86c1); color: #fff; font-weight: 700; display: flex; align-items: center; justify-content: center; font-size: .9rem; }
+  .step-b { flex: 1; }
+  .step-b .t { font-weight: 700; color: #223; font-size: .98rem; }
+  .step-b .d { font-size: .88rem; color: #55636f; margin-top: 2px; }
+  .pri { font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .4px; border-radius: 5px; padding: 1px 7px; margin-left: 8px; vertical-align: middle; }
+  .pri-hi { background: #fdeceb; color: #c0392b; }
+  .pri-md { background: #fdf6e3; color: #b9821a; }
+  .pri-lo { background: #eef3f8; color: #5b6b7b; }
+
+  .legend { display: flex; flex-wrap: wrap; gap: 16px; margin: 18px 0 0; font-size: .82rem; color: #55636f; }
+  .legend span b { color: #223; }
+  footer.pg { text-align: center; color: #9aa7b4; font-size: .8rem; margin-top: 34px; }
+  footer.pg code { color: #2470b3; }
+</style>
+</head>
+<body>
+
+<header class="pg">
+  <div class="wrap">
+    <h1>🔄 Turn Automation — Progress</h1>
+    <p>Where the automated unit-turn pipeline stands today: what's fully automated, what still runs by hand, and what's next. Covers the Spokane turn program (move-out → make-ready → available to rent).</p>
+    <div class="updated"><span class="dot"></span><span>Updated July 19, 2026</span></div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="overview">
+    <div class="ov-title">Pipeline status — 8 stages</div>
+    <div class="bar">
+      <span class="seg-cloud"   style="width:37.5%"></span>
+      <span class="seg-local"   style="width:37.5%"></span>
+      <span class="seg-pending" style="width:25%"></span>
+    </div>
+    <div class="chips">
+      <span class="chip"><span class="sw" style="background:#27ae60"></span>3 fully automated (cloud, hands-off)</span>
+      <span class="chip"><span class="sw" style="background:#2e86c1"></span>3 automated in your daily local run</span>
+      <span class="chip"><span class="sw" style="background:#e0e5ea"></span>2 pending</span>
+    </div>
+  </div>
+
+  <h2 class="sec">The turn pipeline</h2>
+  <p class="sec-sub">Each stage a turn goes through, from a resident giving notice to the unit being ready to rent.</p>
+
+  <!-- 1 -->
+  <div class="stage st-local">
+    <div class="stage-head"><div class="stage-num">1</div><div class="stage-title">Detect move-outs &amp; notices</div><span class="badge b-local">Local daily run</span></div>
+    <div class="cols">
+      <div class="col done"><h4>Done</h4><ul class="pts">
+        <li>Reads AppFolio vacancy daily; finds Spokane units that moved out or gave notice</li>
+        <li>Turn start date = move-out + 1 day</li>
+        <li>100% AppFolio ↔ PropertyMeld unit matching</li>
+      </ul></div>
+      <div class="col todo"><h4>To finish</h4><ul class="pts">
+        <li>Runs as part of your <code>schedule spokane turns</code> command — not yet a cloud cron (see Next Steps #1)</li>
+      </ul></div>
+    </div>
+  </div>
+
+  <!-- 2 -->
+  <div class="stage st-local">
+    <div class="stage-head"><div class="stage-num">2</div><div class="stage-title">Create the turn project</div><span class="badge b-local">Local daily run</span></div>
+    <div class="cols">
+      <div class="col done"><h4>Done</h4><ul class="pts">
+        <li>Creates the "Standard Unit Turn" (7-meld template) in PropertyMeld for any unit missing one</li>
+        <li>Skips units that already have an open turn</li>
+      </ul></div>
+      <div class="col todo"><h4>To finish</h4><ul class="pts">
+        <li>Uses only PropertyMeld + AppFolio APIs (no 2FA) — ready to move to the cloud so it runs hands-off (Next Steps #1)</li>
+      </ul></div>
+    </div>
+  </div>
+
+  <!-- 3 -->
+  <div class="stage st-cloud">
+    <div class="stage-head"><div class="stage-num">3</div><div class="stage-title">Dedupe duplicate turns</div><span class="badge b-cloud">Automated · cloud</span></div>
+    <div class="cols">
+      <div class="col done"><h4>Done</h4><ul class="pts">
+        <li>If a unit has more than one open turn, keeps the canonical one and neutralizes the duplicate</li>
+        <li>Runs first in the daily cloud job — stops double-booking at the source</li>
+      </ul></div>
+      <div class="col todo"><h4>To finish</h4><ul class="pts"><li>Nothing — complete</li></ul></div>
+    </div>
+  </div>
+
+  <!-- 4 -->
+  <div class="stage st-cloud">
+    <div class="stage-head"><div class="stage-num">4</div><div class="stage-title">Schedule in-house work (Ron &amp; Michael)</div><span class="badge b-cloud">Automated · cloud</span></div>
+    <div class="cols">
+      <div class="col done"><h4>Done</h4><ul class="pts">
+        <li>2 paint days + 1 maintenance day per turn (one tech per unit) + 1-hr initial walkthrough</li>
+        <li>Mon–Thu 8a–4p, densely packed, never double-books</li>
+        <li>Append-only — never moves work already on the calendar</li>
+        <li>Priority: leased → Converted → Converting → vacancy % → rent</li>
+      </ul></div>
+      <div class="col todo"><h4>To finish</h4><ul class="pts">
+        <li>Only 2 turn techs — near-term calendars fill fast, so new turns can land weeks out</li>
+        <li>Spokane only (Tri-Cities not yet automated — Next Steps #5)</li>
+      </ul></div>
+    </div>
+  </div>
+
+  <!-- 5 -->
+  <div class="stage st-cloud">
+    <div class="stage-head"><div class="stage-num">5</div><div class="stage-title">Final walkthrough (quality check)</div><span class="badge b-cloud">Automated · cloud</span></div>
+    <div class="cols">
+      <div class="col done"><h4>Done</h4><ul class="pts">
+        <li>Scheduled to David Sanchez, the day after the last vendor task (carpet, else cleaning)</li>
+        <li>Runs daily in the cloud job</li>
+      </ul></div>
+      <div class="col todo"><h4>To finish</h4><ul class="pts">
+        <li>Lands most precisely once vendor dates are set automatically (depends on Stage 6)</li>
+      </ul></div>
+    </div>
+  </div>
+
+  <!-- 6 -->
+  <div class="stage st-pending">
+    <div class="stage-head"><div class="stage-num">6</div><div class="stage-title">Schedule vendors (cleaning, carpet, flooring)</div><span class="badge b-pending">Pending</span></div>
+    <div class="cols">
+      <div class="col done"><h4>Done</h4><ul class="pts">
+        <li>The Turns report shows <em>suggested</em> cleaning &amp; carpet dates (clean = last in-house + 3 business days; carpet = next day) so the manager can book vendors</li>
+      </ul></div>
+      <div class="col todo"><h4>To finish</h4><ul class="pts">
+        <li>Auto-booking not built — the vendor "assign + set date" API hasn't been captured yet</li>
+        <li>Vendors: SPO Cleaning · Allklean (carpet) · Inland Pacific (flooring)</li>
+      </ul></div>
+    </div>
+  </div>
+
+  <!-- 7 -->
+  <div class="stage st-local">
+    <div class="stage-head"><div class="stage-num">7</div><div class="stage-title">Set AppFolio available date</div><span class="badge b-blocked">Local · cloud blocked</span></div>
+    <div class="cols">
+      <div class="col done"><h4>Done</h4><ul class="pts">
+        <li>Sets Available = Ready-to-Show, Rent Ready = No; date = final walk + 3 days (interim: maintenance + 7)</li>
+        <li>Ratchet — dates only move earlier, never later</li>
+        <li>Runs in your daily <code>af_daily</code> local command</li>
+      </ul></div>
+      <div class="col todo"><h4>To finish</h4><ul class="pts">
+        <li>Can't run in the cloud — AppFolio login needs SMS 2FA, which blocks a headless cron (Next Steps #4)</li>
+      </ul></div>
+    </div>
+  </div>
+
+  <!-- 8 -->
+  <div class="stage st-pending">
+    <div class="stage-head"><div class="stage-num">8</div><div class="stage-title">Handle cancelled / changed move-outs</div><span class="badge b-pending">Pending</span></div>
+    <div class="cols">
+      <div class="col done"><h4>Done</h4><ul class="pts">
+        <li>Changed move-out date → turn start shifts, new work added (append-only)</li>
+        <li>Rule set: a cancelled move-out deletes the turn completely and frees its slot</li>
+        <li>Cleanup script built &amp; dry-run ready (<code>pm_cancelled_turn_cleanup.js</code>)</li>
+      </ul></div>
+      <div class="col todo"><h4>To finish</h4><ul class="pts">
+        <li>Not yet wired into the daily job — needs one dry-run review, then activation (Next Steps #2)</li>
+      </ul></div>
+    </div>
+  </div>
+
+  <h2 class="sec">Next steps</h2>
+  <p class="sec-sub">In priority order.</p>
+  <div class="next">
+    <div class="step"><div class="step-n">1</div><div class="step-b">
+      <div class="t">Move turn detection &amp; creation to the cloud <span class="pri pri-hi">High</span></div>
+      <div class="d">Stages 1–2 use only PropertyMeld/AppFolio APIs (no 2FA), so they can run hands-off in the daily cloud job. Then the only thing needing your local run is the AppFolio date write.</div>
+    </div></div>
+    <div class="step"><div class="step-n">2</div><div class="step-b">
+      <div class="t">Activate cancelled-move-out cleanup <span class="pri pri-hi">High</span></div>
+      <div class="d">Run the built script as a cloud dry-run, review the flagged turns, then add it as the first step of the daily workflow so cancelled turns are removed and their slots backfilled automatically.</div>
+    </div></div>
+    <div class="step"><div class="step-n">3</div><div class="step-b">
+      <div class="t">Automate vendor scheduling <span class="pri pri-md">Medium</span></div>
+      <div class="d">Capture the PropertyMeld vendor assign/schedule API, then auto-book cleaning → carpet → flooring. This also lets the final walkthrough land on an exact date instead of a suggestion.</div>
+    </div></div>
+    <div class="step"><div class="step-n">4</div><div class="step-b">
+      <div class="t">Get the AppFolio date write into the cloud <span class="pri pri-md">Medium</span></div>
+      <div class="d">Resolve the SMS-2FA blocker (trusted device / app token), or formalize it as the one daily local click. Until then Stage 7 stays local.</div>
+    </div></div>
+    <div class="step"><div class="step-n">5</div><div class="step-b">
+      <div class="t">Expand beyond Spokane <span class="pri pri-lo">Later</span></div>
+      <div class="d">Bring Tri-Cities (and Tacoma) turns into the same create → schedule → publish pipeline.</div>
+    </div></div>
+    <div class="step"><div class="step-n">6</div><div class="step-b">
+      <div class="t">Backlog cleanup <span class="pri pri-lo">Later</span></div>
+      <div class="d">Cancel stale / duplicate open turns and mark finished-but-still-open turns complete so counts and the calendar stay clean.</div>
+    </div></div>
+  </div>
+
+  <div class="legend">
+    <span><span class="sw" style="display:inline-block;background:#27ae60;vertical-align:middle;margin-right:5px"></span><b>Automated · cloud</b> — runs itself daily, hands-off</span>
+    <span><span class="sw" style="display:inline-block;background:#2e86c1;vertical-align:middle;margin-right:5px"></span><b>Local daily run</b> — scripted, runs on your PC via your daily command</span>
+    <span><span class="sw" style="display:inline-block;background:#e67e22;vertical-align:middle;margin-right:5px"></span><b>Pending</b> — not active yet</span>
+  </div>
+
+  <footer class="pg">
+    McKay Property Management · Turn automation · cloud job <code>pm-spokane-turn-scheduler.yml</code> · local pipeline <code>schedule_spokane_turns.cmd</code>
+  </footer>
+</div>
+</body>
+</html>
