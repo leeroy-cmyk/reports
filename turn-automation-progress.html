@@ -80,7 +80,7 @@
   <div class="wrap">
     <h1>🔄 Turn Automation — Progress</h1>
     <p>Where the automated unit-turn pipeline stands today: what's fully automated, what still runs by hand, and what's next. Covers the Spokane turn program (move-out → make-ready → available to rent).</p>
-    <div class="updated"><span class="dot"></span><span>Updated July 19, 2026</span></div>
+    <div class="updated"><span class="dot"></span><span>Updated July 20, 2026</span></div>
   </div>
 </header>
 
@@ -108,7 +108,7 @@
     <div class="stage-head"><div class="stage-num">1</div><div class="stage-title">Detect move-outs &amp; notices</div><span class="badge b-local">Local daily run</span></div>
     <div class="cols">
       <div class="col done"><h4>Done</h4><ul class="pts">
-        <li>Reads AppFolio vacancy daily; finds Spokane units that moved out or gave notice</li>
+        <li>Reads AppFolio vacancy daily; finds units that moved out or gave notice — <strong>all three regions: Spokane, Tacoma, Tri-Cities</strong></li>
         <li>Turn start date = move-out + 1 day</li>
         <li>100% AppFolio ↔ PropertyMeld unit matching</li>
       </ul></div>
@@ -124,7 +124,8 @@
     <div class="cols">
       <div class="col done"><h4>Done</h4><ul class="pts">
         <li>Creates the "Standard Unit Turn" (7-meld template) in PropertyMeld for any unit missing one</li>
-        <li>Skips units that already have an open turn</li>
+        <li>Skips units that already have an open turn; skips rent-ready units</li>
+        <li><strong>Runs for all three regions</strong> (Spokane, Tacoma, Tri-Cities) — onboarded July 20</li>
       </ul></div>
       <div class="col todo"><h4>To finish</h4><ul class="pts">
         <li>Uses only PropertyMeld + AppFolio APIs (no 2FA) — ready to move to the cloud so it runs hands-off (Next Steps #1)</li>
@@ -156,7 +157,7 @@
       </ul></div>
       <div class="col todo"><h4>To finish</h4><ul class="pts">
         <li>Only 2 turn techs — near-term calendars fill fast, so new turns can land weeks out</li>
-        <li>Spokane only (Tri-Cities not yet automated — Next Steps #5)</li>
+        <li><strong>Spokane only</strong> — Tacoma &amp; Tri-Cities turns are now created &amp; detected, but not yet auto-scheduled to techs (Next Steps #5–6)</li>
       </ul></div>
     </div>
   </div>
@@ -239,12 +240,12 @@
       <div class="d">Resolve the SMS-2FA blocker (trusted device / app token), or formalize it as the one daily local click. Until then Stage 7 stays local.</div>
     </div></div>
     <div class="step"><div class="step-n">5</div><div class="step-b">
-      <div class="t">Onboard the Tri-Cities region <span class="pri pri-md">Next region</span></div>
-      <div class="d">Bring Tri-Cities turns into the same create → schedule → publish pipeline — its own techs, vendors, and priority. This is the first region added after Spokane.</div>
+      <div class="t">Schedule Tri-Cities turns <span class="pri pri-md">Next region</span></div>
+      <div class="d">Creation &amp; detection are now live for Tri-Cities (turns are being created automatically). Next: auto-schedule the in-house work to Tri-Cities techs, add its vendors, and write AppFolio dates — completing the pipeline for the region.</div>
     </div></div>
     <div class="step"><div class="step-n">6</div><div class="step-b">
-      <div class="t">Onboard the Tacoma region <span class="pri pri-lo">After Tri-Cities</span></div>
-      <div class="d">Once Tri-Cities is running smoothly, extend the same pipeline to Tacoma turns (Armani) — the region added after Tri-Cities.</div>
+      <div class="t">Schedule Tacoma turns <span class="pri pri-lo">After Tri-Cities</span></div>
+      <div class="d">Creation &amp; detection are now live for Tacoma too. Once Tri-Cities scheduling is running smoothly, auto-schedule Tacoma turns (Armani) and publish their dates.</div>
     </div></div>
     <div class="step"><div class="step-n">7</div><div class="step-b">
       <div class="t">Backlog cleanup <span class="pri pri-lo">Later</span></div>
