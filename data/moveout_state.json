@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-07-20T22:39:58.250Z",
+  "fetched_at": "2026-07-20T23:40:59.543Z",
   "units": {
     "2": {
       "moveOut": "2026-07-31",
@@ -77,13 +77,6 @@
       "prop": "b101",
       "unit": "16",
       "city": "Spokane"
-    },
-    "201": {
-      "moveOut": "2026-08-31",
-      "status": "Notice-Unrented",
-      "prop": "hl65",
-      "unit": "7",
-      "city": "Helena"
     },
     "203": {
       "moveOut": "2026-07-31",
@@ -322,13 +315,6 @@
       "prop": "ps17",
       "unit": "B5",
       "city": "Pasco"
-    },
-    "424": {
-      "moveOut": "2026-08-31",
-      "status": "Notice-Unrented",
-      "prop": "m221",
-      "unit": "4",
-      "city": "Spokane"
     },
     "430": {
       "moveOut": "2026-05-31",
@@ -1612,6 +1598,26 @@
       "unit": "U",
       "city": "Spokane",
       "to": "2026-08-31"
+    },
+    {
+      "date": "2026-07-20",
+      "type": "moveout_removed",
+      "unit_id": "201",
+      "prop": "hl65",
+      "unit": "7",
+      "city": "Helena",
+      "from": "2026-08-31",
+      "was_status": "Notice-Unrented"
+    },
+    {
+      "date": "2026-07-20",
+      "type": "moveout_removed",
+      "unit_id": "424",
+      "prop": "m221",
+      "unit": "4",
+      "city": "Spokane",
+      "from": "2026-08-31",
+      "was_status": "Notice-Unrented"
     }
   ]
 }
