@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-17T22:35:05.094Z",
-  "last_checked": "2026-07-17T22:35:05.094Z",
+  "generated_at": "2026-07-21T15:39:31.369Z",
+  "last_checked": "2026-07-21T15:39:31.369Z",
   "source": "leeroy-cmyk/pm-scheduling/CLAUDE.md",
   "count": 45,
   "rules": [
@@ -132,13 +132,13 @@
     {
       "group": "Spokane",
       "category": "",
-      "text": "**All repairs go to Justin Gutierrez.** Wade Hippen no longer works here — any job still sitting on Wade is reclaimed and reassigned to Justin.",
+      "text": "**Justin Gutierrez + Jacob Jett split repairs by PROPERTY (Jacob hired 2026-07-20, replacing Wade Hippen).** A property is decided fresh each run: any property with an Emergency/Urgent/High in-scope meld belongs to Justin; a property where every in-scope meld is Medium/Normal/Low belongs to Jacob. This only decides a NEW/unassigned/reclaimed meld — one that already has a tech is never reassigned. A reclaimed-from-Wade meld routes through this same rule (no longer blanket-to-Justin).",
       "details": []
     },
     {
       "group": "Spokane",
       "category": "",
-      "text": "**Justin's day ends at 4:00 PM**, not the general 5:00 PM cutoff — no job is scheduled to end after 16:00 (requested by Justin, 2026-07-01). A hard-pinned title/chat date that doesn't fit with the normal buffer gets squeezed in with a tighter (or zero) buffer that day instead of running the day later — the close time never moves, even for a non-negotiable date.",
+      "text": "**Justin's day ends at 4:00 PM**, not the general 5:00 PM cutoff — no job is scheduled to end after 16:00 (requested by Justin, 2026-07-01). A hard-pinned title/chat date that doesn't fit with the normal buffer gets squeezed in with a tighter (or zero) buffer that day instead of running the day later — the close time never moves, even for a non-negotiable date. (Jacob has no stated close-time exception yet — uses the general 5pm baseline until he asks for one.)",
       "details": []
     },
     {
@@ -183,7 +183,9 @@
       "group": "Spokane",
       "category": "Emergency/Urgent always goes FIRST on today's calendar (rewritten 2026-07-02)",
       "text": "an emergency is never wedged into whatever gap happens to be free — it takes the earliest available time today, and whatever else is already on today's calendar shifts LATER that same day to make room (`insertEmergencyToday`). An already-committed today appointment is **never** moved to a different date for this — the resident is expecting Justin today regardless, so the day's close time can stretch past the normal 4pm, up to **6pm** (`EMERGENCY_EXTENDED_CLOSE`), instead. A today job with a stated resident preference/lock is left in place, never shifted.",
-      "details": []
+      "details": [
+        "**An Emergency/Urgent meld already sitting on today is left alone (fixed 2026-07-20).** It used to get needlessly re-run through `insertEmergencyToday` whenever today is a reserved day (e.g. Monday) or it overlapped another same-day meld — neither check knew about the emergency-today exception. With several real same-day emergencies each re-triggering this against the others, times cascaded unbounded (a real incident produced invalid post-midnight hours like \"37:00\" from 9 simultaneous same-day Emergency melds). Both the reserved-day and overlap checks now skip an Emergency/Urgent meld whose appointment is already today — a genuine today-vs-today double-booking between two real emergencies is left as a dispatch call for a person, not auto-shifted to an invalid hour."
+      ]
     },
     {
       "group": "Spokane",
