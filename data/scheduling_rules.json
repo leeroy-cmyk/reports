@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-07-21T15:39:31.369Z",
-  "last_checked": "2026-07-21T15:39:31.369Z",
+  "generated_at": "2026-07-22T15:28:36.068Z",
+  "last_checked": "2026-07-22T15:28:36.068Z",
   "source": "leeroy-cmyk/pm-scheduling/CLAUDE.md",
-  "count": 45,
+  "count": 47,
   "rules": [
     {
       "group": "General",
@@ -89,6 +89,21 @@
       "group": "General",
       "category": "Self-heal",
       "text": "any appointment that lands on a reserved day (Mon/Sat/Sun) or that double-books a tech is automatically relocated — unless it's backed by a stated preference lock (see the weekend exception above), which is left alone.",
+      "details": []
+    },
+    {
+      "group": "General",
+      "category": "",
+      "text": "**Manual assignment is sacred (firm rule, Florencia 2026-07-22, the MOST important rule alongside the one below) — applies in every region, no exceptions.** Once a meld has ANY assignee — a technician (even one outside that region's normal pool) OR a vendor — no scheduler ever takes it away or hands it to someone else. Only a genuinely unassigned meld (no in-house servicer, no active vendor request) is ever auto-claimed.",
+      "details": [
+        "**Vendor assignments are easy to miss:** they live in the `vendor_assignment_requests` field, a SEPARATE field from `in_house_servicers`. A meld handed to a vendor still shows an *empty* `in_house_servicers` list, so any check that only looks at `in_house_servicers` sees it as \"unassigned\" and will silently steal it back for a technician. **Real incident (2026-07-22):** this happened in Tri-Cities — assigning a meld to a vendor got it silently un-assigned and handed back to Jared/Jaxson. Fixed the same day in all three repair schedulers (`pm_scheduler.js`, `pm_spokane_scheduler.js`, `pm_tricities_scheduler.js`) via a shared `hasActiveVendorAssignment()` check (a vendor request counts as active unless it's `rejected` or `canceled`).",
+        "Tacoma used to have a \"steal it back for Jonas\" branch for a meld sitting on a tech who doesn't work Tacoma (e.g. Margarito). **Removed 2026-07-22** as part of this same rule — Tacoma now only ever claims a truly unassigned meld, matching Spokane's convention (a8e392f, 2026-07-20) and Tri-Cities."
+      ]
+    },
+    {
+      "group": "General",
+      "category": "",
+      "text": "**Manual appointment moves are sacred (firm rule, Florencia 2026-07-20, made universal 2026-07-22) — applies in every region, no exceptions.** If a person moves a meld's appointment by hand in the PropertyMeld UI, no scheduler ever touches that appointment again — not via compaction, emergency-insertion displacement, or the reserved-day/overlap self-heal. Every scheduler always logs in as the same \"Ridgeview Scheduler\" service account (persona id **62267**); every appointment carries an `update_by`/`create_by` persona id, so if the last touch came from a *different* persona, a human did it by hand. Implemented as `wasManuallyMoved()` in all three repair schedulers (`pm_scheduler.js`, `pm_spokane_scheduler.js`, `pm_tricities_scheduler.js`) as of 2026-07-22 — previously Spokane-only.",
       "details": []
     },
     {
