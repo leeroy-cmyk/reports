@@ -1395,18 +1395,26 @@ function buildCostsTab() {
   costsRows = [];
 
   for (const [code, u] of Object.entries(RAW_COSTS.units)) {
-    const labor     = u.labor.filter(e => e.d >= COST_FROM && e.d <= COST_TO);
-    const materials = u.materials.filter(e => e.d >= COST_FROM && e.d <= COST_TO);
-    const totalLabor = labor.reduce((s,e) => s + e.cost, 0);
-    const totalMats  = materials.reduce((s,e) => s + e.amt, 0);
-    const total = totalLabor + totalMats;
-
     const vac = vacMap[code];
     let status, turnStart = null;
     if (!vac) { status = 'Occupied'; }
     else if (!vac.isVacant) { status = 'Notice'; turnStart = vac.last_move_out; }
     else if (vac.effectiveRentReady === 'Yes') { status = 'Complete'; turnStart = vac.last_move_out; }
     else { status = 'Active'; turnStart = vac.last_move_out; }
+
+    // Per-turn actual spans the WHOLE turn (from ~move-out onward), NOT the month
+    // selector. A turn's cost accrues over months, so slicing one turn to a single
+    // month drops most completed turns to $0 (the "completed turns with no cost" bug).
+    // The month selector governs the property rollup above; individual turns are
+    // scoped to their own turn window (7-day grace before move-out for prep charges).
+    const winFrom = turnStart
+      ? new Date(new Date(turnStart + 'T00:00:00Z').getTime() - 7 * 864e5).toISOString().slice(0, 10)
+      : '2000-01-01';
+    const labor     = u.labor.filter(e => e.d >= winFrom);
+    const materials = u.materials.filter(e => e.d >= winFrom);
+    const totalLabor = labor.reduce((s,e) => s + e.cost, 0);
+    const totalMats  = materials.reduce((s,e) => s + e.amt, 0);
+    const total = totalLabor + totalMats;
 
     if (total === 0 && !u.estimate && status !== 'Active') continue;
     costsRows.push({ code, prop: u.prop, unitNum: u.unitNum, status, turnStart, totalLabor, totalMats, total, estimate: u.estimate || 0, labor, materials });
@@ -1435,14 +1443,18 @@ function buildCostsTab() {
   const completeRows = costsRows.filter(r => (r.status === 'Complete' || r.status === 'Occupied') && r.total > 0);
   const accruing     = activeRows.reduce((s,r) => s + r.total, 0);
   const avgCompleted = completeRows.length ? completeRows.reduce((s,r)=>s+r.total,0)/completeRows.length : 0;
-  const totalLabor   = costsRows.reduce((s,r)=>s+r.totalLabor,0);
-  const totalMats    = costsRows.reduce((s,r)=>s+r.totalMats,0);
+  // Turn Labor/Materials KPIs = portfolio turn spend in the SELECTED PERIOD
+  // (propSpend, incl. spend coded to a property without a unit) — this is what the
+  // month selector drives. The per-turn table below is turn-scoped, not period-scoped.
+  const psK = (RAW_COSTS && RAW_COSTS.propSpend) || {};
+  const periodLabor = Object.values(psK).reduce((s,p)=>s+sumInPeriod(p.labor),0);
+  const periodMats  = Object.values(psK).reduce((s,p)=>s+sumInPeriod(p.materials),0);
 
   const kpis = [
     { cls: activeRows.length>0?'warn':'', lbl: 'Active Turns', val: activeRows.length, sub: fmtC(accruing) + ' accruing' },
     { cls: 'good', lbl: 'Completed Turns', val: completeRows.length, sub: avgCompleted>0 ? 'avg '+fmtC(avgCompleted)+'/turn' : 'no completed turns yet' },
-    { cls: '', lbl: 'Turn Labor', val: fmtC(totalLabor), sub: 'QBT — Turn class only' },
-    { cls: '', lbl: 'Turn Materials', val: fmtC(totalMats), sub: 'Ramp — Turn GL only' },
+    { cls: '', lbl: 'Turn Labor (period)', val: fmtC(periodLabor), sub: 'QBT — Turn class, selected period' },
+    { cls: '', lbl: 'Turn Materials (period)', val: fmtC(periodMats), sub: 'Ramp — Turn GL, selected period' },
   ];
   const kpiHtml = kpis.map(k => `<div class="kpi-card ${k.cls}"><div class="kpi-label">${k.lbl}</div><div class="kpi-value">${k.val}</div><div class="kpi-sub">${k.sub}</div></div>`).join('');
 
@@ -1454,7 +1466,7 @@ function buildCostsTab() {
     <div style="font-size:0.78rem;color:#7f8fa4;margin:-6px 0 10px;"><strong>Labor / Materials / Spent</strong> = turn spend in the selected period (QBT timecards + Ramp), including spend coded to the property but not a specific unit. <strong>Turns to Date + Avg $/Turn</strong> are all-time: completed-turn count from PropertyMeld ÷ all-time turn spend — a turn's cost spans months, so a per-period average isn't meaningful. For estimate vs. actual on individual turns, see Unit Detail below.</div>
     ${buildPropSummaryTable()}
     <div class="section-title" style="margin-top:24px;">Unit Detail — Estimate vs. Actual per Turn</div>
-    <div style="font-size:0.78rem;color:#7f8fa4;margin:-6px 0 10px;">Per-turn comparison for spend that <em>is</em> tagged to a unit. Turn spend coded to the property without a unit isn't shown here — see property totals above for the complete figure.</div>
+    <div style="font-size:0.78rem;color:#7f8fa4;margin:-6px 0 10px;">Per-turn comparison for spend that <em>is</em> tagged to a unit. <strong>Actuals span the full turn</strong> (from move-out onward), not the month selector above — a turn's cost accrues over months. Turn spend coded to the property without a unit isn't shown here — see property totals above for the complete figure.</div>
     <div class="controls" style="margin-bottom:12px;">
       <input type="text" id="costSearch" placeholder="Search property or unit…" oninput="filterCostsTable()" style="width:200px;">
       <select id="costPropFilter" onchange="filterCostsTable()">
