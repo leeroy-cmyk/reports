@@ -1366,6 +1366,9 @@ function renderCostsTable() {
       <td>${r.unitNum}</td>
       <td>${COST_SBADGE[r.status]||r.status}</td>
       <td>${r.turnStart ? fmtDate(r.turnStart) : '<span style="color:#bdc3c7">—</span>'}</td>
+      <td>${r.daysToTurn != null
+        ? `<strong>${r.daysToTurn}</strong>d${r.turnOngoing ? ' <span style="color:#b9770e;font-size:0.72rem">· ongoing</span>' : ''}`
+        : '<span style="color:#bdc3c7">—</span>'}</td>
       <td>${r.totalLabor>0 ? fmtC(r.totalLabor) : '<span style="color:#d0dce8">—</span>'}</td>
       <td>${r.totalMats>0  ? fmtC(r.totalMats)  : '<span style="color:#d0dce8">—</span>'}</td>
       <td><strong style="color:${r.total>0?'#1a2535':'#bdc3c7'}">${r.total>0?fmtC(r.total):'—'}</strong></td>
@@ -1374,10 +1377,10 @@ function renderCostsTable() {
       <td><span id="cexp-${i}" style="color:#2e86c1;font-size:0.78rem">▼</span></td>
     </tr>
     <tr class="cost-detail-row" id="cdet-${i}">
-      <td colspan="10">${buildCostDetailHtml(r)}</td>
+      <td colspan="11">${buildCostDetailHtml(r)}</td>
     </tr>`;
   }).join('');
-  tbody.innerHTML = rows || '<tr><td colspan="8" style="text-align:center;padding:28px;color:#7f8fa4;">No units match filters</td></tr>';
+  tbody.innerHTML = rows || '<tr><td colspan="11" style="text-align:center;padding:28px;color:#7f8fa4;">No units match filters</td></tr>';
   if (countEl) countEl.textContent = filteredCostsRows.length + ' of ' + costsRows.length + ' units';
 }
 
@@ -1416,8 +1419,17 @@ function buildCostsTab() {
     const totalMats  = materials.reduce((s,e) => s + e.amt, 0);
     const total = totalLabor + totalMats;
 
+    // Days to turn: move-out → rent-ready for completed turns (same basis as the
+    // Avg Turn Time KPI); move-out → today (elapsed, ongoing) for active turns.
+    // Notice/Occupied turns haven't run, so N/A.
+    let daysToTurn = null, turnOngoing = false;
+    if (vac && vac.moveOutD) {
+      if (status === 'Complete' && vac.availOnD) daysToTurn = daysBetween(vac.moveOutD, vac.availOnD);
+      else if (status === 'Active') { daysToTurn = Math.max(0, daysBetween(vac.moveOutD, TODAY)); turnOngoing = true; }
+    }
+
     if (total === 0 && !u.estimate && status !== 'Active') continue;
-    costsRows.push({ code, prop: u.prop, unitNum: u.unitNum, status, turnStart, totalLabor, totalMats, total, estimate: u.estimate || 0, labor, materials });
+    costsRows.push({ code, prop: u.prop, unitNum: u.unitNum, status, turnStart, daysToTurn, turnOngoing, totalLabor, totalMats, total, estimate: u.estimate || 0, labor, materials });
   }
 
   // Include active-turn units with no cost entries yet
@@ -1427,7 +1439,8 @@ function buildCostsTab() {
     const code = pc + '-' + r.unit.trim();
     if (RAW_COSTS.units[code]) return;
     const woEst = RAW_COSTS.units[code]?.estimate || 0;
-    costsRows.push({ code, prop: pc, unitNum: r.unit.trim(), status: 'Active', turnStart: r.last_move_out, totalLabor: 0, totalMats: 0, total: 0, estimate: woEst, labor: [], materials: [] });
+    const daysToTurn = r.moveOutD ? Math.max(0, daysBetween(r.moveOutD, TODAY)) : null;
+    costsRows.push({ code, prop: pc, unitNum: r.unit.trim(), status: 'Active', turnStart: r.last_move_out, daysToTurn, turnOngoing: true, totalLabor: 0, totalMats: 0, total: 0, estimate: woEst, labor: [], materials: [] });
   });
 
   const statusOrd = { 'Active':0, 'Complete':1, 'Notice':2, 'Occupied':3 };
@@ -1484,7 +1497,7 @@ function buildCostsTab() {
     <div style="overflow-x:auto;border:1px solid #d0dce8;border-radius:8px;">
       <table class="cost-table">
         <thead><tr>
-          <th>Property</th><th>Unit</th><th>Status</th><th>Move-Out</th>
+          <th>Property</th><th>Unit</th><th>Status</th><th>Move-Out</th><th>Days to Turn</th>
           <th>Labor</th><th>Materials</th><th>Actual</th><th>Estimate</th><th>Δ Est − Actual</th><th></th>
         </tr></thead>
         <tbody id="costTbody"></tbody>
