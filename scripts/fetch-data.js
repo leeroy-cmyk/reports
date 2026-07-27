@@ -1074,9 +1074,11 @@ async function fetchPropertyMeldTurns() {
 
   const turns = [];
   const completedTurns = [];   // portfolio completed unit turns (fully complete), for by-month rollup
-  const regionOf = c => { c = (c || '').trim(); if (['Spokane','Spokane Valley','Medical Lake'].includes(c)) return 'Spokane'; if (['Kennewick','Pasco','Richland','West Richland'].includes(c)) return 'Tri-Cities'; if (c === 'Tacoma') return 'Tacoma'; return c || 'Other'; };
-  const scheduleEvents = [];   // per-appointment feed for the Spokane turn calendar
+  const regionOf = c => { c = (c || '').trim(); if (['Spokane','Spokane Valley','Medical Lake'].includes(c)) return 'Spokane'; if (['Kennewick','Pasco','Richland','West Richland','Burbank'].includes(c)) return 'Tri-Cities'; if (c === 'Tacoma') return 'Tacoma'; return c || 'Other'; };
+  const scheduleEvents = [];   // per-appointment feed for the turn dispatch calendar (Spokane + Tri-Cities)
   const SPOK_CITIES = new Set(['Spokane', 'Spokane Valley', 'Medical Lake']);
+  const TC_CITIES = new Set(['Kennewick', 'Pasco', 'Richland', 'West Richland', 'Burbank']);
+  const DISPATCH_CITIES = new Set([...SPOK_CITIES, ...TC_CITIES]);
   const catOf = (b) => {
     b = b || '';
     if (/final\s*walk/i.test(b))                         return 'final-walk';
@@ -1179,8 +1181,11 @@ async function fetchPropertyMeldTurns() {
           }
         }
 
-        // ---- Spokane turn dashboard: enriched events + alerts + per-turn rollup ----
-        if (SPOK_CITIES.has((propObj.city || '').trim())) {
+        // ---- Turn dispatch dashboard (Spokane + Tri-Cities): enriched events + alerts + per-turn rollup ----
+        if (DISPATCH_CITIES.has((propObj.city || '').trim())) {
+          const dregion = regionOf(propObj.city);
+          const cleanVendor = dregion === 'Tri-Cities' ? 'Duo Cleaning' : 'SPO Cleaning';
+          const carpetVendor = dregion === 'Tri-Cities' ? 'SOS Carpet' : 'Allklean';
           const unitLabel = unit?.unit || unit?.display_address?.line_2 || '';
           const propName = propObj.property_name || '';
           const lbl = `${propName} ${unitLabel}`.trim();
@@ -1195,16 +1200,16 @@ async function fetchPropertyMeldTurns() {
             const vend = (m.vendorappointment || []).filter(a => a.availability_segment?.event?.dtstart);
             const techName = (m.in_house_servicers || [])[0]?.agent ? `${(m.in_house_servicers)[0].agent.first_name} ${(m.in_house_servicers)[0].agent.last_name}` : 'Unassigned';
             if (!isDone && cat !== 'estimate') {
-              mgmt.forEach(a => { const e = a.availability_segment.event; const s = (a.management_assignment?.in_house_servicers || [])[0] || (m.in_house_servicers || [])[0]?.agent; const who = s ? `${s.first_name || ''} ${s.last_name || ''}`.trim() : 'Unassigned'; const p = pac(e.dtstart); scheduleEvents.push({ date: p.date, start: p.time, end: pac(e.dtend).time, prop: propName, unit: unitLabel, addr, category: cat, brief, who, whoType: 'tech', ref: m.reference_id, meld_id: m.id, projId: proj.id, status: m.status }); });
-              vend.forEach(a => { const e = a.availability_segment.event; const vr = (m.vendor_assignment_requests || []).find(r => r.id === a.assignment_request) || (m.vendor_assignment_requests || [])[0]; const who = vr?.vendor?.name || 'Vendor'; const p = pac(e.dtstart); scheduleEvents.push({ date: p.date, start: p.time, end: pac(e.dtend).time, prop: propName, unit: unitLabel, addr, category: cat, brief, who, whoType: 'vendor', ref: m.reference_id, meld_id: m.id, projId: proj.id, status: m.status }); });
+              mgmt.forEach(a => { const e = a.availability_segment.event; const s = (a.management_assignment?.in_house_servicers || [])[0] || (m.in_house_servicers || [])[0]?.agent; const who = s ? `${s.first_name || ''} ${s.last_name || ''}`.trim() : 'Unassigned'; const p = pac(e.dtstart); scheduleEvents.push({ date: p.date, start: p.time, end: pac(e.dtend).time, prop: propName, unit: unitLabel, addr, category: cat, brief, who, whoType: 'tech', ref: m.reference_id, meld_id: m.id, projId: proj.id, status: m.status, region: dregion }); });
+              vend.forEach(a => { const e = a.availability_segment.event; const vr = (m.vendor_assignment_requests || []).find(r => r.id === a.assignment_request) || (m.vendor_assignment_requests || [])[0]; const who = vr?.vendor?.name || 'Vendor'; const p = pac(e.dtstart); scheduleEvents.push({ date: p.date, start: p.time, end: pac(e.dtend).time, prop: propName, unit: unitLabel, addr, category: cat, brief, who, whoType: 'vendor', ref: m.reference_id, meld_id: m.id, projId: proj.id, status: m.status, region: dregion }); });
             }
             const apptDates = [...mgmt, ...vend].map(a => pac(a.availability_segment.event.dtstart).date);
             if (inh(cat)) apptDates.forEach(d => { if (d > (lastInhouse || '')) lastInhouse = d; });
             if (open) {
-              if (STD_TASKS.has(brief.trim()) && apptDates.length === 0 && !isDone) alerts.unscheduled.push({ lbl, prop: propName, unit: unitLabel, task: brief.replace(' Prep / Paint', ''), status: m.status, projId: proj.id });
+              if (STD_TASKS.has(brief.trim()) && apptDates.length === 0 && !isDone) alerts.unscheduled.push({ lbl, prop: propName, unit: unitLabel, task: brief.replace(' Prep / Paint', ''), status: m.status, projId: proj.id, region: dregion });
               for (const a of mgmt) { const d = pac(a.availability_segment.event.dtstart).date; const wd = dowN(d);
-                if (inh(cat)) { if (wd === 'Sat' || wd === 'Sun') alerts.weekend.push({ lbl, task: brief, date: d, dow: wd, projId: proj.id }); else if (wd === 'Fri') alerts.friday.push({ lbl, task: brief.replace(' Prep / Paint', ''), date: d, projId: proj.id }); }
-                if (!isDone && d < TODAY_ISO) alerts.pastDue.push({ lbl, prop: propName, unit: unitLabel, task: brief.replace(' Prep / Paint', ''), date: d, dow: wd, status: m.status, category: cat, who: techName, projId: proj.id });
+                if (inh(cat)) { if (wd === 'Sat' || wd === 'Sun') alerts.weekend.push({ lbl, task: brief, date: d, dow: wd, projId: proj.id, region: dregion }); else if (wd === 'Fri') alerts.friday.push({ lbl, task: brief.replace(' Prep / Paint', ''), date: d, projId: proj.id, region: dregion }); }
+                if (!isDone && d < TODAY_ISO) alerts.pastDue.push({ lbl, prop: propName, unit: unitLabel, task: brief.replace(' Prep / Paint', ''), date: d, dow: wd, status: m.status, category: cat, who: techName, projId: proj.id, region: dregion });
               }
               apptDates.filter(d => d >= TODAY_ISO).forEach(d => { if (!nextTask || d < nextTask.date) nextTask = { date: d, task: cat }; });
             }
@@ -1212,14 +1217,14 @@ async function fetchPropertyMeldTurns() {
           // ---- Suggested vendor dates (cleaning = 3 biz days after in-house; carpet next biz day) ----
           if (open && lastMaintPaint) {
             const cleanBase = cleanApptDate || addBizDays(lastMaintPaint, 3);
-            if (!cleanApptDate) scheduleEvents.push({ date: cleanBase, start: '', end: '', prop: propName, unit: unitLabel, addr, category: 'suggested-cleaning', brief: `Suggested cleaning — 3 business days after in-house done (${lastMaintPaint})`, who: 'SPO Cleaning', whoType: 'suggested', ref: proj.id, projId: proj.id, status: 'SUGGESTED' });
-            if (!carpetApptDate) { const carpetDate = addBizDays(cleanBase, 1); scheduleEvents.push({ date: carpetDate, start: '', end: '', prop: propName, unit: unitLabel, addr, category: 'suggested-carpet', brief: 'Suggested carpet cleaning — business day after cleaning', who: 'Allklean', whoType: 'suggested', ref: proj.id, projId: proj.id, status: 'SUGGESTED' }); }
+            if (!cleanApptDate) scheduleEvents.push({ date: cleanBase, start: '', end: '', prop: propName, unit: unitLabel, addr, category: 'suggested-cleaning', brief: `Suggested cleaning — 3 business days after in-house done (${lastMaintPaint})`, who: cleanVendor, whoType: 'suggested', ref: proj.id, projId: proj.id, status: 'SUGGESTED', region: dregion });
+            if (!carpetApptDate) { const carpetDate = addBizDays(cleanBase, 1); scheduleEvents.push({ date: carpetDate, start: '', end: '', prop: propName, unit: unitLabel, addr, category: 'suggested-carpet', brief: 'Suggested carpet cleaning — business day after cleaning', who: carpetVendor, whoType: 'suggested', ref: proj.id, projId: proj.id, status: 'SUGGESTED', region: dregion }); }
           }
           if (open) {
-            if (mi && lastInhouse && lastInhouse > mi.slice(0, 10)) alerts.moveInConflict.push({ lbl, prop: propName, unit: unitLabel, lastInhouse, mi: mi.slice(0, 10), projId: proj.id });
-            if (proj.due_date && proj.due_date.slice(0, 10) < TODAY_ISO) { const rec = { lbl, prop: propName, unit: unitLabel, due: proj.due_date.slice(0, 10), done: proj.total_completed_melds, total: proj.total_melds, projId: proj.id }; if (proj.total_completed_melds <= 2) alerts.stalled.push(rec); else alerts.nearDone.push(rec); }
+            if (mi && lastInhouse && lastInhouse > mi.slice(0, 10)) alerts.moveInConflict.push({ lbl, prop: propName, unit: unitLabel, lastInhouse, mi: mi.slice(0, 10), projId: proj.id, region: dregion });
+            if (proj.due_date && proj.due_date.slice(0, 10) < TODAY_ISO) { const rec = { lbl, prop: propName, unit: unitLabel, due: proj.due_date.slice(0, 10), done: proj.total_completed_melds, total: proj.total_melds, projId: proj.id, region: dregion }; if (proj.total_completed_melds <= 2) alerts.stalled.push(rec); else alerts.nearDone.push(rec); }
           }
-          spokTurns.push({ projId: proj.id, name: proj.name, prop: propName, unit: unitLabel, status: open ? 'ACTIVE' : 'COMPLETE', start: proj.start_date ? proj.start_date.slice(0,10) : null, due: proj.due_date ? proj.due_date.slice(0,10) : null, move_in: mi ? mi.slice(0,10) : null, done: proj.total_completed_melds, total: proj.total_melds, last_inhouse: lastInhouse, next_task: nextTask });
+          spokTurns.push({ projId: proj.id, name: proj.name, region: dregion, prop: propName, unit: unitLabel, status: open ? 'ACTIVE' : 'COMPLETE', start: proj.start_date ? proj.start_date.slice(0,10) : null, due: proj.due_date ? proj.due_date.slice(0,10) : null, move_in: mi ? mi.slice(0,10) : null, done: proj.total_completed_melds, total: proj.total_melds, last_inhouse: lastInhouse, next_task: nextTask });
         }
 
         turns.push({
@@ -1257,8 +1262,8 @@ async function fetchPropertyMeldTurns() {
   scheduleEvents.sort((a, b) => a.date.localeCompare(b.date) || String(a.who).localeCompare(String(b.who)));
   const openCount = spokTurns.filter(t => t.status === 'ACTIVE').length;
   const kpis = { openTurns: openCount, totalTurnsShown: spokTurns.length, pastDue: alerts.pastDue.length, unscheduled: alerts.unscheduled.length, fridayViol: alerts.friday.length, moveInConflict: alerts.moveInConflict.length, stalled: alerts.stalled.length, atRisk: alerts.unscheduled.length + alerts.moveInConflict.length + alerts.friday.length + alerts.weekend.length + alerts.stalled.length };
-  save('turn_schedule.json', { ok: true, region: 'Spokane', fetched_at: new Date().toISOString(), today: TODAY_ISO, events: scheduleEvents, turns: spokTurns, alerts, kpis });
-  console.log(`PropertyMeld turns: saved ${scheduleEvents.length} events, ${spokTurns.length} Spokane turns, ${kpis.atRisk} at-risk`);
+  save('turn_schedule.json', { ok: true, regions: ['Spokane', 'Tri-Cities'], fetched_at: new Date().toISOString(), today: TODAY_ISO, events: scheduleEvents, turns: spokTurns, alerts, kpis });
+  console.log(`PropertyMeld turns: saved ${scheduleEvents.length} events, ${spokTurns.length} turns (Spokane + Tri-Cities), ${kpis.atRisk} at-risk`);
 }
 
 // ── PropertyMeld Tech Metrics ────────────────────────────────────────────────

@@ -205,7 +205,12 @@
   <div class="tab" onclick="showTab('detail',this)">Turns</div>
   <div class="tab" onclick="showTab('byProperty',this)">By Property</div>
   <div class="tab" onclick="showTab('turnCosts',this)">Turn Costs</div>
-  <span class="tabgroup">Dispatch · Spokane</span>
+  <span class="tabgroup">Dispatch</span>
+  <select onchange="sxSetRegion(this.value)" title="Dispatch region" style="align-self:center;margin:0 8px 0 2px;padding:3px 8px;border:1px solid #d0dce8;border-radius:6px;font-size:0.8rem;font-weight:700;color:#1a5276;background:#fff;cursor:pointer">
+    <option value="Spokane">Spokane</option>
+    <option value="Tri-Cities">Tri-Cities</option>
+    <option value="All">All regions</option>
+  </select>
   <div class="tab" onclick="showTab('dispatch',this)">📋 Dispatch</div>
   <div class="tab" onclick="showTab('srisk',this)">⚠ At-Risk</div>
   <div class="tab" onclick="showTab('stasks',this)">Tasks</div>
@@ -1638,7 +1643,7 @@ function renderDispatch(){
   const col=c=>(CATS[c]||CATS.other).color, lab=c=>(CATS[c]||CATS.other).label;
   const rank=e=>e.whoType==='tech'?0:e.whoType==='vendor'?1:2;
   const weeks={};evs.forEach(e=>{const w=isoOf(mondayOf(new Date(e.date+'T00:00:00')));(weeks[w]=weeks[w]||[]).push(e);});
-  let html='<div class="bar"><button class="printbtn" onclick="window.print()">🖨 Print</button><span class="muted">Spokane turn crew field dispatch — Mon–Thu in-house, Fri buffer/vendors. <b>≈</b> = suggested vendor date (not yet booked).</span></div><div class="dsp">';
+  let html='<div class="bar"><button class="printbtn" onclick="window.print()">🖨 Print</button><span class="muted">'+(SX_REGION==='All'?'All-region':esc(SX_REGION))+' turn crew field dispatch — Mon–Thu in-house, Fri buffer/vendors. <b>≈</b> = suggested vendor date (not yet booked).</span></div><div class="dsp">';
   Object.keys(weeks).sort().forEach(w=>{
     const we=weeks[w];
     const whos=[...new Set(we.map(e=>e.who))].sort((a,b)=>{const ea=we.find(x=>x.who===a),eb=we.find(x=>x.who===b);return rank(ea)-rank(eb)||a.localeCompare(b);});
@@ -1681,12 +1686,22 @@ function fillFilters(){
   ['sx_tSearch','sx_tCat','sx_tWho','sx_tHidePast'].forEach(id=>document.getElementById(id).addEventListener('input',renderTasks));
   ['sx_oSearch','sx_oStatus'].forEach(id=>document.getElementById(id).addEventListener('input',renderTurns));
 }
+let DATA_ALL={events:[],turns:[],alerts:{},kpis:{}};
+let SX_REGION='Spokane';
+const SX_ALERT_KEYS=['unscheduled','moveInConflict','friday','weekend','pastDue','stalled','nearDone'];
+function sxApplyRegion(){
+  const inR=x=>SX_REGION==='All'||(x.region||'Spokane')===SX_REGION;
+  const events=(DATA_ALL.events||[]).filter(inR);
+  const turns=(DATA_ALL.turns||[]).filter(inR);
+  const alerts={};SX_ALERT_KEYS.forEach(k=>alerts[k]=(((DATA_ALL.alerts||{})[k])||[]).filter(inR));
+  const kpis={openTurns:turns.filter(t=>t.status==='ACTIVE').length,totalTurnsShown:turns.length,pastDue:alerts.pastDue.length,unscheduled:alerts.unscheduled.length,fridayViol:alerts.friday.length,moveInConflict:alerts.moveInConflict.length,stalled:alerts.stalled.length,atRisk:alerts.unscheduled.length+alerts.moveInConflict.length+alerts.friday.length+alerts.weekend.length+alerts.stalled.length};
+  DATA={...DATA_ALL,events,turns,alerts,kpis};
+  renderLegend();fillFilters();renderDispatch();renderCal();renderTasks();renderPast();renderRisk();renderTurns();renderTech();
+}
+window.sxSetRegion=function(r){SX_REGION=r;sxApplyRegion();};
 fetch('./data/turn_schedule.json?cb='+Date.now()).then(r=>r.json()).then(j=>{
-  DATA=j;TODAY=j.today||new Date().toLocaleDateString('en-CA');
-  const u=j.fetched_at?new Date(j.fetched_at):null;
-  
-  renderLegend();fillFilters();
-  renderDispatch();renderCal();renderTasks();renderPast();renderRisk();renderTurns();renderTech();
+  DATA_ALL=j;TODAY=j.today||new Date().toLocaleDateString('en-CA');
+  sxApplyRegion();
 }).catch(e=>{document.getElementById('sx_cal').innerHTML='<div class="empty">Could not load turn_schedule.json</div>';});
 
 })();
