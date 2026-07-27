@@ -1560,7 +1560,7 @@ function renderCal(){
     html+=`<div class="wkhdr">Week of ${fmtD(wkStart)}</div><table class="caltable"><tr>${DOW.slice(1).concat('Sun').map(d=>'<th>'+d+'</th>').join('')}</tr><tr>`;
     for(let i=0;i<7;i++){const d=new Date(wkStart);d.setDate(d.getDate()+i);const ds=isoOf(d);const wd=d.getDay();const cls=(wd===0||wd===6)?'wknd':(wd===5?'td-fri':'');
       const list=(byDate[ds]||[]).sort((a,b)=>(a.who||'').localeCompare(b.who||''));
-      const cells=list.map(e=>{const c=CATS[e.category]||CATS.other;return `<span class="ev ${e.whoType}" style="border-left-color:${c.color}" title="${esc(e.brief)}"><span class="t">${e.start||'≈'}</span> <span class="u">${esc(e.prop)} #${esc(e.unit)}</span> <span style="color:${c.color}">${c.label}</span> · <span class="who">${esc(e.who)}</span></span>`;}).join('');
+      const cells=list.map(e=>{const c=CATS[e.category]||CATS.other;return `<span class="ev ${e.whoType}" style="border-left-color:${c.color}" title="${esc(e.brief)}"><span class="t">${e.start||'≈'}</span> <span class="u">${esc(e.prop)} #${esc(e.unit)}</span> <span style="color:${c.color}">${c.label}</span> · <span class="who">${esc(e.who)}</span>${e.origDate?` <span style="color:var(--amber)">↩was ${esc(e.origDate.slice(5))}</span>`:''}</span>`;}).join('');
       html+=`<td class="${cls}"><div class="dn ${ds===TODAY?'today':''}">${DOW[wd]} ${fmtD(d)}${wd===5?' · buffer':''}</div>${cells}</td>`;}
     html+='</tr></table>';}
   cal.innerHTML=html;
@@ -1654,7 +1654,7 @@ function renderDispatch(){
       const wr=rank(we.find(e=>e.who===who));
       html+=`<tr><td class="crew ${wr===0?'t-tech':wr===1?'t-vendor':'t-sug'}">${esc(who)}</td>`;
       days.forEach(d=>{const jobs=we.filter(e=>e.who===who&&e.date===d).sort((a,b)=>(a.start||'~').localeCompare(b.start||'~'));
-        html+='<td class="'+(d===TODAY?'today':'')+'">'+jobs.map(e=>{const c=col(e.category);return `<div class="job ${e.whoType}" style="border-left-color:${c}" title="${esc(e.brief)}"><div class="jh"><span class="tm">${e.start||'≈'}</span> <span class="jc" style="color:${c}">${lab(e.category)}</span></div><div class="un">${esc(e.prop)} #${esc(e.unit)}</div><div class="ad">${esc(e.addr||'')}</div></div>`;}).join('')+'</td>';});
+        html+='<td class="'+(d===TODAY?'today':'')+'">'+jobs.map(e=>{const c=col(e.category);return `<div class="job ${e.whoType}" style="border-left-color:${c}" title="${esc(e.brief)}"><div class="jh"><span class="tm">${e.start||'≈'}</span> <span class="jc" style="color:${c}">${lab(e.category)}</span></div><div class="un">${esc(e.prop)} #${esc(e.unit)}</div><div class="ad">${esc(e.addr||'')}</div>${e.origDate?`<div class="ad" style="color:var(--amber);font-weight:600">↩ was ${esc(e.origDate.slice(5))}</div>`:''}</div>`;}).join('')+'</td>';});
       html+='</tr>';
     });
     html+='</table>';

@@ -1076,6 +1076,12 @@ async function fetchPropertyMeldTurns() {
   const completedTurns = [];   // portfolio completed unit turns (fully complete), for by-month rollup
   const regionOf = c => { c = (c || '').trim(); if (['Spokane','Spokane Valley','Medical Lake'].includes(c)) return 'Spokane'; if (['Kennewick','Pasco','Richland','West Richland','Burbank'].includes(c)) return 'Tri-Cities'; if (c === 'Tacoma') return 'Tacoma'; return c || 'Other'; };
   const scheduleEvents = [];   // per-appointment feed for the turn dispatch calendar (Spokane + Tri-Cities)
+  // Suggested-vendor-date baseline: remember the FIRST suggested cleaning/carpet date per turn so the
+  // report can show "original -> new" when the in-house schedule shifts (e.g. early completion). Pruned to open turns.
+  const SUGG_BASE_FILE = path.join(DATA_DIR, 'turn_suggested_baseline.json');
+  let suggBase = {}; try { suggBase = JSON.parse(fs.readFileSync(SUGG_BASE_FILE, 'utf8')); } catch (e) { suggBase = {}; }
+  const suggSeen = {};
+  const suggEvent = (ev, kind, propName, unitLabel) => { const sk = nrm(propName) + '|' + nrm(unitLabel) + '|' + kind; suggSeen[sk] = 1; const orig = suggBase[sk]; if (orig === undefined) suggBase[sk] = ev.date; else if (orig !== ev.date) ev.origDate = orig; return ev; };
   const SPOK_CITIES = new Set(['Spokane', 'Spokane Valley', 'Medical Lake']);
   const TC_CITIES = new Set(['Kennewick', 'Pasco', 'Richland', 'West Richland', 'Burbank']);
   const DISPATCH_CITIES = new Set([...SPOK_CITIES, ...TC_CITIES]);
@@ -1217,8 +1223,8 @@ async function fetchPropertyMeldTurns() {
           // ---- Suggested vendor dates (cleaning = 3 biz days after in-house; carpet next biz day) ----
           if (open && lastMaintPaint) {
             const cleanBase = cleanApptDate || addBizDays(lastMaintPaint, 3);
-            if (!cleanApptDate) scheduleEvents.push({ date: cleanBase, start: '', end: '', prop: propName, unit: unitLabel, addr, category: 'suggested-cleaning', brief: `Suggested cleaning — 3 business days after in-house done (${lastMaintPaint})`, who: cleanVendor, whoType: 'suggested', ref: proj.id, projId: proj.id, status: 'SUGGESTED', region: dregion });
-            if (!carpetApptDate) { const carpetDate = addBizDays(cleanBase, 1); scheduleEvents.push({ date: carpetDate, start: '', end: '', prop: propName, unit: unitLabel, addr, category: 'suggested-carpet', brief: 'Suggested carpet cleaning — business day after cleaning', who: carpetVendor, whoType: 'suggested', ref: proj.id, projId: proj.id, status: 'SUGGESTED', region: dregion }); }
+            if (!cleanApptDate) scheduleEvents.push(suggEvent({ date: cleanBase, start: '', end: '', prop: propName, unit: unitLabel, addr, category: 'suggested-cleaning', brief: `Suggested cleaning — 3 business days after in-house done (${lastMaintPaint})`, who: cleanVendor, whoType: 'suggested', ref: proj.id, projId: proj.id, status: 'SUGGESTED', region: dregion }, 'clean', propName, unitLabel));
+            if (!carpetApptDate) { const carpetDate = addBizDays(cleanBase, 1); scheduleEvents.push(suggEvent({ date: carpetDate, start: '', end: '', prop: propName, unit: unitLabel, addr, category: 'suggested-carpet', brief: 'Suggested carpet cleaning — business day after cleaning', who: carpetVendor, whoType: 'suggested', ref: proj.id, projId: proj.id, status: 'SUGGESTED', region: dregion }, 'carpet', propName, unitLabel)); }
           }
           if (open) {
             if (mi && lastInhouse && lastInhouse > mi.slice(0, 10)) alerts.moveInConflict.push({ lbl, prop: propName, unit: unitLabel, lastInhouse, mi: mi.slice(0, 10), projId: proj.id, region: dregion });
@@ -1262,6 +1268,8 @@ async function fetchPropertyMeldTurns() {
   scheduleEvents.sort((a, b) => a.date.localeCompare(b.date) || String(a.who).localeCompare(String(b.who)));
   const openCount = spokTurns.filter(t => t.status === 'ACTIVE').length;
   const kpis = { openTurns: openCount, totalTurnsShown: spokTurns.length, pastDue: alerts.pastDue.length, unscheduled: alerts.unscheduled.length, fridayViol: alerts.friday.length, moveInConflict: alerts.moveInConflict.length, stalled: alerts.stalled.length, atRisk: alerts.unscheduled.length + alerts.moveInConflict.length + alerts.friday.length + alerts.weekend.length + alerts.stalled.length };
+  Object.keys(suggBase).forEach(k => { if (!suggSeen[k]) delete suggBase[k]; });   // prune closed turns so a future turn re-baselines
+  try { fs.writeFileSync(SUGG_BASE_FILE, JSON.stringify(suggBase, null, 2)); } catch (e) {}
   save('turn_schedule.json', { ok: true, regions: ['Spokane', 'Tri-Cities'], fetched_at: new Date().toISOString(), today: TODAY_ISO, events: scheduleEvents, turns: spokTurns, alerts, kpis });
   console.log(`PropertyMeld turns: saved ${scheduleEvents.length} events, ${spokTurns.length} turns (Spokane + Tri-Cities), ${kpis.atRisk} at-risk`);
 }
