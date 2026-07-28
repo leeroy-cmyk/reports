@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-07-28T16:02:22.639Z",
-  "last_checked": "2026-07-28T16:02:22.639Z",
+  "generated_at": "2026-07-28T21:24:35.119Z",
+  "last_checked": "2026-07-28T21:24:35.119Z",
   "source": "leeroy-cmyk/pm-scheduling/CLAUDE.md",
-  "count": 50,
+  "count": 51,
   "rules": [
     {
       "group": "General",
@@ -356,6 +356,16 @@
       "category": "Move-out changes",
       "text": "AppFolio is checked **daily** for move-out dates that change or move-outs that get cancelled, and the turn schedule (and the available date) is updated to match. A cancelled move-out triggers the delete-the-turn rule above; a changed move-out date shifts the turn's start (new work is added per the append-only rule — existing placed work is not moved).",
       "details": []
+    },
+    {
+      "group": "Turns",
+      "category": "",
+      "text": "**Duplicate turns — prevented at the source, and a narrow daily mop-up (Lee Roy 2026-07-28).** The real fix for \"a turn was created on a unit that was already turned\" is the **creation guard**: the daily move-out scan (`pm_turn_dryrun.js`) treats a unit as already-serviced when it finds **ANY completed turn** (Standard / `Turn -` / `CapEx Turn`, pest excluded) created within ~75 days of the move-out — so it sets Rent Ready instead of creating a second turn. This is what stops new duplicates.",
+      "details": [
+        "`pm_dedupe_turns.js` (runs first in each turn workflow, before scheduling) is a deliberately **narrow** mop-up: it only neutralizes a **genuine current duplicate** — two turns for one unit that are **both still OPEN and created within 14 days** of each other (e.g. kn47 L205, created 3 days apart). It keeps the canonical one (most-complete → most-melds → earliest) and deletes the other's open melds + project.",
+        "It **never auto-deletes a COMPLETED turn.** A completed \"duplicate\" is ambiguous (could be a legitimate re-turn months later) and deleting its project would destroy completed-meld history. Two open turns created far apart (a stale abandoned turn + a fresh one) are also left alone — that's not a duplicate. Any historical completed-duplicate cleanup is a deliberate one-time human review, never the daily automation.",
+        "**The daily scan DOES catch a unit that didn't vacate / re-rented:** `pm_cancelled_turn_cleanup.js` (also first in each workflow) removes an OPEN turn whose unit is no longer vacant / on-notice in AppFolio. It intentionally skips turns with completed in-house work (never deletes finished work)."
+      ]
     }
   ]
 }
