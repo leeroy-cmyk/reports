@@ -1578,12 +1578,12 @@ function taskRows(){
   const q=(document.getElementById('sx_tSearch').value||'').toLowerCase();
   const cat=document.getElementById('sx_tCat').value, who=document.getElementById('sx_tWho').value, hidePast=document.getElementById('sx_tHidePast').checked;
   let rows=DATA.events.filter(e=>(!cat||e.category===cat)&&(!who||e.who===who)&&(!hidePast||e.date>=TODAY));
-  if(q)rows=rows.filter(e=>(e.prop+' '+e.unit+' '+e.brief+' '+e.who+' '+e.category).toLowerCase().includes(q));
+  if(q)rows=rows.filter(e=>(e.prop+' '+(e.addr||'')+' '+e.unit+' '+e.brief+' '+e.who+' '+e.category).toLowerCase().includes(q));
   return rows;
 }
 function renderTasks(){
   const cols=[{label:'Date',val:r=>r.date,html:r=>`${r.date} <span class="muted">${DOW[new Date(r.date+'T12:00:00').getDay()]}</span>`},
-    {label:'Time',val:r=>r.start||'≈'},{label:'Property',val:r=>r.prop},{label:'Unit',val:r=>r.unit},
+    {label:'Time',val:r=>r.start||'≈'},{label:'Property',val:r=>r.addr||r.prop,html:r=>r.addr?`${esc(r.addr)} <span class="muted">(${esc(r.prop)})</span>`:esc(r.prop)},{label:'Unit',val:r=>r.unit},
     {label:'Category',val:r=>r.category,html:r=>{const c=CATS[r.category]||CATS.other;return `<span class="tag" style="background:${c.color}18;color:${c.color}">${c.label}</span>`;}},
     {label:'Task',val:r=>r.brief},{label:'Assigned',val:r=>r.who,html:r=>`${esc(r.who)} <span class="muted">${r.whoType}</span>`}];
   let rows=taskRows();const c=cols[tState.sort];rows.sort((a,b)=>{const x=c.val(a),y=c.val(b);return (x>y?1:x<y?-1:0)*tState.dir;});
