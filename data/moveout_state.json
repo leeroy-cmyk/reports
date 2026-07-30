@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-07-30T18:46:23.346Z",
+  "fetched_at": "2026-07-30T20:15:18.686Z",
   "units": {
     "2": {
       "moveOut": "2026-07-31",
@@ -764,6 +764,13 @@
       "unit": "D205",
       "city": "Kennewick"
     },
+    "1061": {
+      "moveOut": "2026-08-30",
+      "status": "Notice-Unrented",
+      "prop": "kn47 K2",
+      "unit": "E106",
+      "city": "Kennewick"
+    },
     "1068": {
       "moveOut": "2026-06-30",
       "status": "Vacant-Rented",
@@ -1008,6 +1015,20 @@
       "prop": "tc68",
       "unit": "D106",
       "city": "Tacoma"
+    },
+    "1266": {
+      "moveOut": "2026-07-30",
+      "status": "Notice-Unrented",
+      "prop": "kn47 K2",
+      "unit": "Maintenance Garages (2)",
+      "city": "Kennewick"
+    },
+    "1268": {
+      "moveOut": null,
+      "status": "Vacant-Unrented",
+      "prop": "kn47-k3",
+      "unit": "Maintenance Garages (2)",
+      "city": "Kennewick"
     }
   },
   "changes": [
@@ -1870,6 +1891,33 @@
       "unit": "D04",
       "city": "Richland",
       "to": "2026-08-31"
+    },
+    {
+      "date": "2026-07-30",
+      "type": "moveout_new",
+      "unit_id": "1061",
+      "prop": "kn47 K2",
+      "unit": "E106",
+      "city": "Kennewick",
+      "to": "2026-08-30"
+    },
+    {
+      "date": "2026-07-30",
+      "type": "moveout_new",
+      "unit_id": "1266",
+      "prop": "kn47 K2",
+      "unit": "Maintenance Garages (2)",
+      "city": "Kennewick",
+      "to": "2026-07-30"
+    },
+    {
+      "date": "2026-07-30",
+      "type": "moveout_new",
+      "unit_id": "1268",
+      "prop": "kn47-k3",
+      "unit": "Maintenance Garages (2)",
+      "city": "Kennewick",
+      "to": null
     }
   ]
 }
