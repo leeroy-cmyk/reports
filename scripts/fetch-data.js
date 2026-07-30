@@ -1084,7 +1084,7 @@ async function fetchPropertyMeldTurns() {
   const suggEvent = (ev, kind, propName, unitLabel) => { const sk = nrm(propName) + '|' + nrm(unitLabel) + '|' + kind; suggSeen[sk] = 1; const orig = suggBase[sk]; if (orig === undefined) suggBase[sk] = ev.date; else if (orig !== ev.date) ev.origDate = orig; return ev; };
   const SPOK_CITIES = new Set(['Spokane', 'Spokane Valley', 'Medical Lake']);
   const TC_CITIES = new Set(['Kennewick', 'Pasco', 'Richland', 'West Richland', 'Burbank']);
-  const DISPATCH_CITIES = new Set([...SPOK_CITIES, ...TC_CITIES]);
+  const DISPATCH_CITIES = new Set([...SPOK_CITIES, ...TC_CITIES, 'Tacoma']);   // Tacoma onboarded 2026-07-30
   const catOf = (b) => {
     b = b || '';
     if (/final\s*walk/i.test(b))                         return 'final-walk';
@@ -1203,8 +1203,8 @@ async function fetchPropertyMeldTurns() {
         // ---- Turn dispatch dashboard (Spokane + Tri-Cities): enriched events + alerts + per-turn rollup ----
         if (DISPATCH_CITIES.has((propObj.city || '').trim())) {
           const dregion = regionOf(propObj.city);
-          const cleanVendor = dregion === 'Tri-Cities' ? 'Duo Cleaning' : 'SPO Cleaning';
-          const carpetVendor = dregion === 'Tri-Cities' ? 'SOS Carpet' : 'Allklean';
+          const cleanVendor = dregion === 'Tri-Cities' ? 'Duo Cleaning' : dregion === 'Tacoma' ? "Dana's Quality Cleaning" : 'SPO Cleaning';
+          const carpetVendor = dregion === 'Tri-Cities' ? 'SOS Carpet' : dregion === 'Tacoma' ? null : 'Allklean';   // Tacoma carpet vendor TBD — Lee Roy handling later
           const unitLabel = unit?.unit || unit?.display_address?.line_2 || '';
           const propName = propObj.property_name || '';
           const lbl = `${propName} ${unitLabel}`.trim();
@@ -1239,7 +1239,7 @@ async function fetchPropertyMeldTurns() {
             // stays the timing anchor for carpet even when cleaning itself isn't suggested.
             const cleanBase = cleanApptDate || addBizDays(lastMaintPaint, 3);
             if (!cleanApptDate && hasLiveCleaningMeld) scheduleEvents.push(suggEvent({ date: cleanBase, start: '', end: '', prop: propName, unit: unitLabel, addr, category: 'suggested-cleaning', brief: `Suggested cleaning — 3 business days after in-house done (${lastMaintPaint})`, who: cleanVendor, whoType: 'suggested', ref: proj.id, projId: proj.id, status: 'SUGGESTED', region: dregion }, 'clean', propName, unitLabel));
-            if (!carpetApptDate && hasLiveCarpetMeld) { const carpetDate = addBizDays(cleanBase, 1); scheduleEvents.push(suggEvent({ date: carpetDate, start: '', end: '', prop: propName, unit: unitLabel, addr, category: 'suggested-carpet', brief: 'Suggested carpet cleaning — business day after cleaning', who: carpetVendor, whoType: 'suggested', ref: proj.id, projId: proj.id, status: 'SUGGESTED', region: dregion }, 'carpet', propName, unitLabel)); }
+            if (!carpetApptDate && hasLiveCarpetMeld && carpetVendor) { const carpetDate = addBizDays(cleanBase, 1); scheduleEvents.push(suggEvent({ date: carpetDate, start: '', end: '', prop: propName, unit: unitLabel, addr, category: 'suggested-carpet', brief: 'Suggested carpet cleaning — business day after cleaning', who: carpetVendor, whoType: 'suggested', ref: proj.id, projId: proj.id, status: 'SUGGESTED', region: dregion }, 'carpet', propName, unitLabel)); }
           }
           if (open) {
             if (mi && lastInhouse && lastInhouse > mi.slice(0, 10)) alerts.moveInConflict.push({ lbl, prop: propName, unit: unitLabel, lastInhouse, mi: mi.slice(0, 10), projId: proj.id, region: dregion });
