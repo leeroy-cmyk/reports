@@ -1152,6 +1152,19 @@ async function fetchPropertyMeldTurns() {
           return null;
         }
 
+        // Does a LIVE cleaning / carpet meld actually exist on this turn?
+        // A cancelled or removed E-Carpet meld is MEANINGFUL, not missing data: per Lee Roy
+        // (2026-07-30) it means either the unit has no carpet, or the carpet is being
+        // REPLACED (which gets its own meld). Either way there is nothing to carpet-clean,
+        // so no suggested-carpet date should be produced. Same reasoning for cleaning.
+        // (`alive` mirrors pm_final_walkthrough.js, which already got this right; note that
+        // a cancelled meld usually vanishes from /api/melds/?project= entirely, so absence
+        // is the common case and the status check is belt-and-braces.)
+        const aliveMeld = m => m.status !== 'MANAGER_CANCELED' && m.status !== 'TENANT_CANCELED';
+        const notDone = m => m.status !== 'COMPLETED' && !m.completion_date;
+        const hasLiveCleaningMeld = melds.some(m => isCleaning(m.brief_description || '') && aliveMeld(m) && notDone(m));
+        const hasLiveCarpetMeld   = melds.some(m => isCarpet(m.brief_description || '')   && aliveMeld(m) && notDone(m));
+
         for (const m of melds) {
           const brief    = m.brief_description || '';
           const apptDate = getApptDate(m);
@@ -1222,9 +1235,11 @@ async function fetchPropertyMeldTurns() {
           }
           // ---- Suggested vendor dates (cleaning = 3 biz days after in-house; carpet next biz day) ----
           if (open && lastMaintPaint) {
+            // Only suggest a vendor visit the turn is actually still waiting on. `cleanBase`
+            // stays the timing anchor for carpet even when cleaning itself isn't suggested.
             const cleanBase = cleanApptDate || addBizDays(lastMaintPaint, 3);
-            if (!cleanApptDate) scheduleEvents.push(suggEvent({ date: cleanBase, start: '', end: '', prop: propName, unit: unitLabel, addr, category: 'suggested-cleaning', brief: `Suggested cleaning — 3 business days after in-house done (${lastMaintPaint})`, who: cleanVendor, whoType: 'suggested', ref: proj.id, projId: proj.id, status: 'SUGGESTED', region: dregion }, 'clean', propName, unitLabel));
-            if (!carpetApptDate) { const carpetDate = addBizDays(cleanBase, 1); scheduleEvents.push(suggEvent({ date: carpetDate, start: '', end: '', prop: propName, unit: unitLabel, addr, category: 'suggested-carpet', brief: 'Suggested carpet cleaning — business day after cleaning', who: carpetVendor, whoType: 'suggested', ref: proj.id, projId: proj.id, status: 'SUGGESTED', region: dregion }, 'carpet', propName, unitLabel)); }
+            if (!cleanApptDate && hasLiveCleaningMeld) scheduleEvents.push(suggEvent({ date: cleanBase, start: '', end: '', prop: propName, unit: unitLabel, addr, category: 'suggested-cleaning', brief: `Suggested cleaning — 3 business days after in-house done (${lastMaintPaint})`, who: cleanVendor, whoType: 'suggested', ref: proj.id, projId: proj.id, status: 'SUGGESTED', region: dregion }, 'clean', propName, unitLabel));
+            if (!carpetApptDate && hasLiveCarpetMeld) { const carpetDate = addBizDays(cleanBase, 1); scheduleEvents.push(suggEvent({ date: carpetDate, start: '', end: '', prop: propName, unit: unitLabel, addr, category: 'suggested-carpet', brief: 'Suggested carpet cleaning — business day after cleaning', who: carpetVendor, whoType: 'suggested', ref: proj.id, projId: proj.id, status: 'SUGGESTED', region: dregion }, 'carpet', propName, unitLabel)); }
           }
           if (open) {
             if (mi && lastInhouse && lastInhouse > mi.slice(0, 10)) alerts.moveInConflict.push({ lbl, prop: propName, unit: unitLabel, lastInhouse, mi: mi.slice(0, 10), projId: proj.id, region: dregion });
