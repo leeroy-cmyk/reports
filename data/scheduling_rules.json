@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-07-28T21:24:35.119Z",
-  "last_checked": "2026-07-28T21:24:35.119Z",
+  "generated_at": "2026-07-31T15:58:52.291Z",
+  "last_checked": "2026-07-31T15:58:52.291Z",
   "source": "leeroy-cmyk/pm-scheduling/CLAUDE.md",
-  "count": 51,
+  "count": 52,
   "rules": [
     {
       "group": "General",
@@ -348,6 +348,14 @@
     {
       "group": "Turns",
       "category": "",
+      "text": "**Carpet: cleaning is automated, REPLACEMENT is not — a person handles it (firm rule, Lee Roy 2026-07-30).** The standard turn template creates an **E - Carpet Cleaning** meld and nothing else carpet-related; carpet **replacement** is never auto-created, auto-scheduled, or auto-suggested. Do not build automation for it. (Confirmed 2026-07-30: the turn template creates 8 melds — walkthrough, paint, maintenance, cleaning, carpet cleaning, lockbox check, estimate, final walkthrough — and the turn schedulers only place in-house paint/maintenance/walkthrough, so replacement is untouched today. Keep it that way.)",
+      "details": [
+        "**A cancelled or removed E-Carpet meld is a SIGNAL, not missing data (Lee Roy 2026-07-30):** it means either the unit has no carpet, or **the carpet is being replaced and a person will create that meld**. Either way there is nothing to carpet-clean — so the report must **not** emit a suggested carpet-cleaning date, and the final walkthrough is timed off **cleaning** instead. A vendor suggestion is only ever emitted when a meld actually exists, is not cancelled, and is not completed — never merely because no appointment is booked. (Fixed 2026-07-30 in `reports/scripts/fetch-data.js` — the copy the cloud runs every 15 min — and its local twin `pm-turn-dashboard-gen.js`. It had been emitting 32 phantom carpet visits out of 89, 22 of them at rl21.)"
+      ]
+    },
+    {
+      "group": "Turns",
+      "category": "",
       "text": "**Cancelled move-out / notice-to-vacate → delete the turn (firm rule, Lee Roy 2026-07-17).** If a unit's move-out or notice-to-vacate is cancelled (the resident is staying), that unit is no longer turning: the turn is **unscheduled** (all its PropertyMeld appointments cancelled) and the **turn project is removed completely** (its open melds and the project deleted). This frees the days it was holding on Ron/Magoon's calendars, and the next daily gap-fill run **fills that opening with the next-highest-priority unscheduled turn** (per the priority ladder above). This is the only case where already-scheduled in-house work is removed — it isn't a reschedule of valid work, it's reclaiming a slot for a turn that shouldn't exist anymore (so it stays consistent with the append-only rule).",
       "details": []
     },
@@ -360,8 +368,11 @@
     {
       "group": "Turns",
       "category": "",
-      "text": "**Duplicate turns — prevented at the source, and a narrow daily mop-up (Lee Roy 2026-07-28).** The real fix for \"a turn was created on a unit that was already turned\" is the **creation guard**: the daily move-out scan (`pm_turn_dryrun.js`) treats a unit as already-serviced when it finds **ANY completed turn** (Standard / `Turn -` / `CapEx Turn`, pest excluded) created within ~75 days of the move-out — so it sets Rent Ready instead of creating a second turn. This is what stops new duplicates.",
+      "text": "**Duplicate turns — prevented at the source, and a narrow daily mop-up (Lee Roy 2026-07-28).** The real fix for \"a turn was created on a unit that was already turned\" is the **creation guard**: the daily move-out scan (`pm_turn_dryrun.js`) treats a unit as already-serviced when a prior turn has **work that COMPLETED after the move-out date** — so it sets Rent Ready instead of creating a second turn. This is what stops new duplicates.",
       "details": [
+        "**Test COMPLETION, never the creation date (firm rule, Lee Roy 2026-07-30).** A turn is normally **created when notice is given — before the resident leaves — and executed after**, so a turn's creation date says nothing about which vacancy it belongs to. The only reliable signal is a meld's `completion_date` / `marked_complete` falling **after** the move-out. This is the same bright line the Rent Ready check uses (\"was the unit actually turned since the move-out?\").",
+        "**Two earlier versions of this rule were wrong — do not re-introduce either.** (1) \"any completed turn created within ~75 days *before* the move-out\" was too loose. (2) \"a turn created *after* the move-out\" is backwards and **created 3 duplicate turns in a single run on 2026-07-30** (kn47 K1 #M103, ps17 #A3, s129 #19 — each already serviced by a prior turn whose final walkthrough completed after the move-out); those were deleted the same day.",
+        "Note the mop-up below cannot cover this case: a brand-new OPEN turn duplicating a **CLOSED** one fails the \"both still open\" test, so duplicate prevention has to live in the creation guard.",
         "`pm_dedupe_turns.js` (runs first in each turn workflow, before scheduling) is a deliberately **narrow** mop-up: it only neutralizes a **genuine current duplicate** — two turns for one unit that are **both still OPEN and created within 14 days** of each other (e.g. kn47 L205, created 3 days apart). It keeps the canonical one (most-complete → most-melds → earliest) and deletes the other's open melds + project.",
         "It **never auto-deletes a COMPLETED turn.** A completed \"duplicate\" is ambiguous (could be a legitimate re-turn months later) and deleting its project would destroy completed-meld history. Two open turns created far apart (a stale abandoned turn + a fresh one) are also left alone — that's not a duplicate. Any historical completed-duplicate cleanup is a deliberate one-time human review, never the daily automation.",
         "**The daily scan DOES catch a unit that didn't vacate / re-rented:** `pm_cancelled_turn_cleanup.js` (also first in each workflow) removes an OPEN turn whose unit is no longer vacant / on-notice in AppFolio. It intentionally skips turns with completed in-house work (never deletes finished work)."
