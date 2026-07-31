@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-07-31T06:44:59.226Z",
+  "fetched_at": "2026-07-31T09:34:01.900Z",
   "units": {
     "2": {
       "moveOut": "2026-07-31",
@@ -143,7 +143,7 @@
     },
     "332": {
       "moveOut": "2026-07-30",
-      "status": "Notice-Unrented",
+      "status": "Vacant-Unrented",
       "prop": "k104- LeFevre",
       "unit": "509-4",
       "city": "Medical Lake"
@@ -610,13 +610,6 @@
       "unit": "A206",
       "city": "Tacoma"
     },
-    "823": {
-      "moveOut": "2026-03-18",
-      "status": "Vacant-Rented",
-      "prop": "tc34",
-      "unit": "B112",
-      "city": "Tacoma"
-    },
     "829": {
       "moveOut": "2026-08-31",
       "status": "Notice-Unrented",
@@ -1004,7 +997,7 @@
     },
     "1245": {
       "moveOut": "2026-07-30",
-      "status": "Notice-Unrented",
+      "status": "Vacant-Unrented",
       "prop": "tc68",
       "unit": "D096",
       "city": "Tacoma"
@@ -1018,7 +1011,7 @@
     },
     "1266": {
       "moveOut": "2026-07-30",
-      "status": "Notice-Unrented",
+      "status": "Vacant-Unrented",
       "prop": "kn47 K2",
       "unit": "Maintenance Garages (2)",
       "city": "Kennewick"
@@ -1918,6 +1911,16 @@
       "unit": "Maintenance Garages (2)",
       "city": "Kennewick",
       "to": null
+    },
+    {
+      "date": "2026-07-31",
+      "type": "moveout_removed",
+      "unit_id": "823",
+      "prop": "tc34",
+      "unit": "B112",
+      "city": "Tacoma",
+      "from": "2026-03-18",
+      "was_status": "Vacant-Rented"
     }
   ]
 }
