@@ -301,7 +301,7 @@
 
 <div id="dispatch" class="panel"><div class="sx"><div id="sx_dispatch"></div></div></div>
 <div id="scal" class="panel"><div class="sx"><div class="legend" id="sx_legend" style="margin-bottom:12px"></div><div id="sx_cal"></div></div></div>
-<div id="stasks" class="panel"><div class="sx"><div class="bar"><input class="search" id="sx_tSearch" placeholder="Search property, unit, task, person…" style="min-width:240px"><select id="sx_tCat"></select><select id="sx_tWho"></select><label style="font-size:12px;color:#7b8a99"><input type="checkbox" id="sx_tHidePast"> hide past</label></div><div id="sx_tasksTbl"></div></div></div>
+<div id="stasks" class="panel"><div class="sx"><div class="bar"><input class="search" id="sx_tSearch" placeholder="Search property, unit, task, person…" style="min-width:240px"><select id="sx_tCat"></select><select id="sx_tWho"></select><label style="font-size:12px;color:#7b8a99"><input type="checkbox" id="sx_tHidePast"> hide past</label><label style="font-size:12px;color:#7b8a99" title="Only rows whose suggested vendor date has moved since it was first proposed — the vendor bookings that may need a call"><input type="checkbox" id="sx_tMovedOnly"> needs reschedule only</label></div><div id="sx_tasksTbl"></div></div></div>
 <div id="spast" class="panel"><div class="sx"><p class="muted">Tasks with a scheduled date before today, on melds not yet marked complete.</p><div id="sx_pastTbl"></div></div></div>
 <div id="srisk" class="panel"><div class="sx" id="sx_risk"></div></div>
 <div id="sturns" class="panel"><div class="sx"><div class="bar"><input class="search" id="sx_oSearch" placeholder="Search property / unit…" style="min-width:200px"><select id="sx_oStatus"><option value="ACTIVE">Active turns</option><option value="all">All</option></select><span class="muted" id="sx_oCount"></span></div><div id="sx_turnsTbl"></div></div></div>
@@ -1577,7 +1577,8 @@ const tState={sort:0,dir:1,render:renderTasks};
 function taskRows(){
   const q=(document.getElementById('sx_tSearch').value||'').toLowerCase();
   const cat=document.getElementById('sx_tCat').value, who=document.getElementById('sx_tWho').value, hidePast=document.getElementById('sx_tHidePast').checked;
-  let rows=DATA.events.filter(e=>(!cat||e.category===cat)&&(!who||e.who===who)&&(!hidePast||e.date>=TODAY));
+  const movedEl=document.getElementById('sx_tMovedOnly'), movedOnly=movedEl?movedEl.checked:false;
+  let rows=DATA.events.filter(e=>(!cat||e.category===cat)&&(!who||e.who===who)&&(!hidePast||e.date>=TODAY)&&(!movedOnly||!!e.origDate));
   if(q)rows=rows.filter(e=>(e.prop+' '+(e.addr||'')+' '+e.unit+' '+e.brief+' '+e.who+' '+e.category).toLowerCase().includes(q));
   return rows;
 }
@@ -1585,7 +1586,16 @@ function renderTasks(){
   const cols=[{label:'Date',val:r=>r.date,html:r=>`${r.date} <span class="muted">${DOW[new Date(r.date+'T12:00:00').getDay()]}</span>`},
     {label:'Time',val:r=>r.start||'≈'},{label:'Property',val:r=>r.addr||r.prop,html:r=>r.addr?`${esc(r.addr)} <span class="muted">(${esc(r.prop)})</span>`:esc(r.prop)},{label:'Unit',val:r=>r.unit},
     {label:'Category',val:r=>r.category,html:r=>{const c=CATS[r.category]||CATS.other;return `<span class="tag" style="background:${c.color}18;color:${c.color}">${c.label}</span>`;}},
-    {label:'Task',val:r=>r.brief},{label:'Assigned',val:r=>r.who,html:r=>`${esc(r.who)} <span class="muted">${r.whoType}</span>`}];
+    {label:'Task',val:r=>r.brief},{label:'Assigned',val:r=>r.who,html:r=>`${esc(r.who)} <span class="muted">${r.whoType}</span>`},
+    // Original vs current SUGGESTED vendor date. A suggested date moves whenever the in-house
+    // schedule shifts (early completion, an expedite, a rescheduled paint/maint). If the vendor
+    // was already booked off the old date, this is the list of calls to make.
+    {label:'Orig. suggested',val:r=>r.origDate||'',html:r=>r.origDate?`<span class="muted">${esc(r.origDate)}</span>`:'<span class="muted">—</span>'},
+    {label:'Reschedule?',val:r=>r.origDate?(r.date>r.origDate?2:1):0,html:r=>{
+      if(!r.origDate)return '<span class="muted">—</span>';
+      const later=r.date>r.origDate, d=Math.round((new Date(r.date+'T12:00:00')-new Date(r.origDate+'T12:00:00'))/864e5);
+      return `<span class="tag" style="background:${later?'#c0392b':'#1e7a53'}18;color:${later?'#c0392b':'#1e7a53'}">${later?'later':'earlier'} ${Math.abs(d)}d</span>`;
+    }}];
   let rows=taskRows();const c=cols[tState.sort];rows.sort((a,b)=>{const x=c.val(a),y=c.val(b);return (x>y?1:x<y?-1:0)*tState.dir;});
   sortableTable(document.getElementById('sx_tasksTbl'),cols,rows,tState);
 }
@@ -1683,7 +1693,7 @@ function fillFilters(){
   document.getElementById('sx_tCat').innerHTML='<option value="">All categories</option>'+cats.map(c=>`<option value="${c}">${(CATS[c]||{label:c}).label}</option>`).join('');
   const whos=[...new Set(DATA.events.map(e=>e.who))].sort();
   document.getElementById('sx_tWho').innerHTML='<option value="">All people</option>'+whos.map(w=>`<option>${esc(w)}</option>`).join('');
-  ['sx_tSearch','sx_tCat','sx_tWho','sx_tHidePast'].forEach(id=>document.getElementById(id).addEventListener('input',renderTasks));
+  ['sx_tSearch','sx_tCat','sx_tWho','sx_tHidePast','sx_tMovedOnly'].forEach(id=>{const el=document.getElementById(id);if(el)el.addEventListener('input',renderTasks);});
   ['sx_oSearch','sx_oStatus'].forEach(id=>document.getElementById(id).addEventListener('input',renderTurns));
 }
 let DATA_ALL={events:[],turns:[],alerts:{},kpis:{}};
