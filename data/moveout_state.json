@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-07-31T17:54:26.278Z",
+  "fetched_at": "2026-07-31T19:35:24.206Z",
   "units": {
     "2": {
       "moveOut": "2026-07-31",
@@ -596,6 +596,13 @@
       "unit": "A3",
       "city": "Tacoma"
     },
+    "808": {
+      "moveOut": "2026-07-31",
+      "status": "Notice-Unrented",
+      "prop": "tc34",
+      "unit": "A103",
+      "city": "Tacoma"
+    },
     "811": {
       "moveOut": "2026-05-31",
       "status": "Vacant-Unrented",
@@ -730,7 +737,7 @@
       "city": "Kennewick"
     },
     "1045": {
-      "moveOut": "2026-08-31",
+      "moveOut": "2026-08-06",
       "status": "Notice-Unrented",
       "prop": "kn47 K2",
       "unit": "D106",
@@ -1921,6 +1928,25 @@
       "city": "Tacoma",
       "from": "2026-03-18",
       "was_status": "Vacant-Rented"
+    },
+    {
+      "date": "2026-07-31",
+      "type": "moveout_new",
+      "unit_id": "808",
+      "prop": "tc34",
+      "unit": "A103",
+      "city": "Tacoma",
+      "to": "2026-07-31"
+    },
+    {
+      "date": "2026-07-31",
+      "type": "moveout_changed",
+      "unit_id": "1045",
+      "prop": "kn47 K2",
+      "unit": "D106",
+      "city": "Kennewick",
+      "from": "2026-08-31",
+      "to": "2026-08-06"
     }
   ]
 }
