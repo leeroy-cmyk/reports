@@ -178,6 +178,37 @@
   .cp-rm       { background: #d6eaf8; color: #1a5276; }
   .cp-grounds  { background: #d5f5e3; color: #1e8449; }
   .cp-capex    { background: #fef9e7; color: #b7950b; }
+
+  /* Turn progress column (Turns tab) — segmented checklist bar + expandable task list */
+  .tp-cell { cursor: pointer; min-width: 168px; }
+  .tp-wrap { display: flex; align-items: center; gap: 8px; }
+  .tp-bar  { display: flex; gap: 2px; flex: 1; min-width: 92px; }
+  .tp-seg  { flex: 1; height: 11px; border-radius: 2px; background: #dfe6ec; }
+  .tp-seg.s-done  { background: #27ae60; }
+  .tp-seg.s-late  { background: #e74c3c; }
+  .tp-seg.s-sched { background: #5dade2; }
+  .tp-seg.s-today { background: #f39c12; }
+  .tp-count { font-size: 0.76rem; font-weight: 700; color: #1a5276; white-space: nowrap; }
+  .tp-count.all-done { color: #1e8449; }
+  .tp-none  { color: #b3bfcb; font-size: 0.78rem; }
+  .tp-caret { color: #7f8fa4; font-size: 0.7rem; }
+
+  tr.tp-detail > td { background: #f8fbfd; border-bottom: 2px solid #d0dce8; border-left: 4px solid #2e86c1; padding: 12px 16px 14px 18px; white-space: normal; }
+  .tp-list { display: grid; grid-template-columns: 22px minmax(150px,240px) 100px 130px 120px; gap: 4px 14px; align-items: center; font-size: 0.8rem; width: max-content; }
+  .tp-list .tph { font-size: 0.68rem; color: #7f8fa4; text-transform: uppercase; letter-spacing: 0.6px; padding-bottom: 3px; border-bottom: 1px solid #e0e8ef; }
+  .tp-list .tph:empty { border-bottom: none; }
+  .tp-list .tick { font-size: 0.95rem; line-height: 1; }
+  .tp-list .tick.on  { color: #27ae60; }
+  .tp-list .tick.off { color: #c4cfd9; }
+  .tp-list .tname { font-weight: 600; color: #2c3e50; }
+  .tp-list .tname.done { color: #7f8fa4; text-decoration: line-through; text-decoration-color: #b9c6d1; }
+  .tp-list .tdate.late { color: #c0392b; font-weight: 700; }
+  .tp-list .tdate.none { color: #b3bfcb; font-style: italic; }
+  .tp-list .twho { color: #7f8fa4; }
+  .tp-list .twho.vend { font-style: italic; color: #16a085; }
+  .tp-meta { font-size: 0.74rem; color: #7f8fa4; margin-bottom: 9px; }
+  .tp-legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 0.74rem; color: #7f8fa4; margin: -4px 0 10px; align-items: center; }
+  .tp-legend i { display: inline-block; width: 11px; height: 11px; border-radius: 2px; margin-right: 4px; vertical-align: -1px; }
 .sx{--bg:#f4f6f9;--card:#fff;--navy:#1a5276;--blue:#2e86c1;--ink:#243746;--mut:#7b8a99;--line:#e6ebf0;--red:#c0392b;--amber:#b9770a;--green:#1e8449}.sx{box-sizing:border-box}.sx{margin:0;background:var(--bg);color:var(--ink);font:13px/1.5 -apple-system,Segoe UI,Roboto,Arial,sans-serif}.sx .wrap{max-width:1320px;margin:0 auto;padding:22px 16px 60px}.sx .top{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px}.sx h1{color:var(--navy);margin:0;font-size:22px}.sx .upd{color:var(--mut);font-size:12px}.sx .kpis{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 6px}.sx .kpi{background:#fff;border:1px solid var(--line);border-radius:9px;padding:8px 14px;min-width:92px}.sx .kpi .n{font-size:20px;font-weight:700;color:var(--navy)}.sx .kpi .l{font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:.3px}.sx .kpi.bad .n{color:var(--red)}.sx .kpi.warn .n{color:var(--amber)}.sx .kpi.good .n{color:var(--green)}.sx .tabs{display:flex;flex-wrap:wrap;gap:2px;margin:16px 0 14px;border-bottom:2px solid var(--line)}.sx .tab{padding:8px 15px;cursor:pointer;font-weight:600;color:var(--mut);border:2px solid transparent;border-bottom:none;border-radius:8px 8px 0 0;margin-bottom:-2px}.sx .tab.on{color:var(--navy);background:#fff;border-color:var(--line);border-bottom-color:#fff}.sx .tab .badge{display:inline-block;background:var(--red);color:#fff;border-radius:9px;font-size:10px;padding:0 6px;margin-left:5px;font-weight:700}.sx .pane{display:none}.sx .pane.on{display:block}.sx .bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px}.sx input.search,.sx select{padding:5px 9px;border:1px solid var(--line);border-radius:7px;font-size:13px;background:#fff}.sx .legend{display:flex;flex-wrap:wrap;gap:6px}.sx .chip{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:14px;font-size:12px;font-weight:600;cursor:pointer;user-select:none;border:1px solid transparent}.sx .chip .dot{width:9px;height:9px;border-radius:50%}.sx .chip.off{opacity:.32}.sx table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:8px;overflow:hidden}.sx th,.sx td{border-bottom:1px solid var(--line);padding:6px 9px;text-align:left;vertical-align:top}.sx th{background:#fcfdfe;color:var(--mut);font-size:11px;text-transform:uppercase;letter-spacing:.3px;cursor:pointer;white-space:nowrap;position:sticky;top:0}.sx th.sortable:hover{color:var(--navy)}.sx tbody tr:hover{background:#f7fafd}.sx .tag{display:inline-block;padding:1px 8px;border-radius:11px;font-size:11px;font-weight:600}.sx .prog{height:8px;background:#eef2f6;border-radius:5px;overflow:hidden;width:90px;display:inline-block;vertical-align:middle}.sx .prog>i{display:block;height:100%;background:var(--blue)}.sx .flag{font-size:11px;font-weight:700;padding:1px 7px;border-radius:10px}.sx .f-risk{background:#fdecea;color:var(--red)}.sx .f-ok{background:#eafaf0;color:var(--green)}.sx .f-soon{background:#fff4e0;color:var(--amber)}.sx .caltable{table-layout:fixed}.sx .caltable th,.sx .caltable td{border:1px solid var(--line);width:14.28%}.sx .caltable td{height:92px}.sx td.wknd{background:#fbfbfd}.sx .td-fri{background:#faf7f0}.sx .dn{font-weight:700;color:var(--navy);font-size:11px;margin-bottom:3px}.sx .dn.today{color:var(--red)}.sx .ev{display:block;border-left:3px solid #ccc;padding:1px 4px;margin-bottom:2px;font-size:11px;border-radius:2px;background:#fbfcfd}.sx .ev .t{color:var(--mut)}.sx .ev .u{font-weight:600}.sx .ev.vendor .who{font-style:italic}.sx .ev.suggested{border-left-style:dashed;background:#fffdf6}.sx .ev.suggested .t{font-weight:700}.sx .wkhdr{margin:16px 0 4px;color:var(--navy);font-weight:600;font-size:12px}.sx .empty{color:var(--mut);padding:26px;text-align:center}.sx .printbtn{padding:5px 12px;border:1px solid var(--navy);background:var(--navy);color:#fff;border-radius:7px;font-weight:600;cursor:pointer;margin-right:10px}.sx .dsptbl{table-layout:fixed;margin-bottom:20px}.sx .dsptbl th{border:1px solid var(--line)}.sx .dsptbl td{border:1px solid var(--line);vertical-align:top;height:70px;padding:3px}.sx .dsptbl th.crew,.sx .dsptbl td.crew{width:104px}.sx td.crew{font-weight:700;color:var(--navy);font-size:12px;background:#fcfdfe}.sx td.crew.t-vendor{color:#16a085}.sx td.crew.t-sug{color:#b9770a;font-style:italic;font-weight:600}.sx .dsptbl td.today{background:#fef9ee}.sx .job{border-left:3px solid #ccc;padding:2px 5px;margin-bottom:3px;background:#fbfcfd;border-radius:3px;font-size:11px;line-height:1.25}.sx .job.suggested{border-left-style:dashed;background:#fffdf6}.sx .job .jh{white-space:nowrap}.sx .job .tm{font-weight:700}.sx .job .jc{font-weight:600}.sx .job .un{font-weight:600;color:var(--ink)}.sx .job .ad{color:var(--mut);font-size:10px}.sx .sec{margin:0 0 18px}.sx .sec h3{margin:0 0 6px;font-size:14px}.sx .sec .cnt{color:var(--mut);font-weight:400}.sx .card{background:#fff;border:1px solid var(--line);border-radius:8px;padding:2px 0}.sx .row{padding:6px 12px;border-bottom:1px solid var(--line);font-size:12.5px}.sx .row:last-child{border:none}.sx .muted{color:var(--mut)}.sx .arw{color:var(--red);border-left:3px solid var(--red)}.sx .aok{border-left:3px solid var(--green)}.sx a.pm{color:var(--blue);text-decoration:none}.sx a.pm:hover{text-decoration:underline}
 
 @media print{ .tabs,.controls,.subhead{display:none!important} .panel:not(.active){display:none} .sx .job{break-inside:avoid} }
@@ -261,8 +292,26 @@
       <option value="next_month">Available Next Month</option>
       <option value="movein">Move-In Scheduled</option>
     </select>
+    <select id="filterProgress" onchange="filterTable()">
+      <option value="">All Turn Work</option>
+      <option value="active">Turn in progress</option>
+      <option value="late">Has past-due task</option>
+      <option value="unsched">Has unscheduled task</option>
+      <option value="done">All tasks done</option>
+      <option value="noturn">No turn found</option>
+    </select>
+    <button class="cpb" onclick="toggleAllTasks()" id="tpExpandBtn" style="padding:6px 12px">Expand all</button>
+  </div>
+  <div class="tp-legend">
+    <span><i style="background:#27ae60"></i>done</span>
+    <span><i style="background:#5dade2"></i>scheduled</span>
+    <span><i style="background:#f39c12"></i>today</span>
+    <span><i style="background:#e74c3c"></i>past due</span>
+    <span><i style="background:#dfe6ec"></i>not scheduled</span>
+    <span style="color:#a0aebb">— click any row's progress bar for the full work-order checklist</span>
   </div>
   <div class="row-count" id="rowCount"></div>
+  <div style="overflow-x:auto">
   <table class="data-table" id="detailTable">
     <thead>
       <tr>
@@ -272,17 +321,20 @@
         <th onclick="sortTable(3)">Beds/Ba <span>⇅</span></th>
         <th onclick="sortTable(4)">Status <span>⇅</span></th>
         <th onclick="sortTable(5)">Rent Ready <span>⇅</span></th>
-        <th onclick="sortTable(6)">Days Vacant <span>⇅</span></th>
-        <th onclick="sortTable(7)">Last Move-Out <span>⇅</span></th>
-        <th onclick="sortTable(8)">Turn Target <span>⇅</span></th>
-        <th onclick="sortTable(9)">Available On <span>⇅</span></th>
-        <th onclick="sortTable(10)">Next Move-In <span>⇅</span></th>
-        <th onclick="sortTable(11)">Sched Rent <span>⇅</span></th>
-        <th onclick="sortTable(12)">Avail Status <span>⇅</span></th>
+        <th onclick="sortTable(6)" title="Work orders on the PropertyMeld turn — click a row to see the checklist">Turn Progress <span>⇅</span></th>
+        <th onclick="sortTable(7)">Next Task <span>⇅</span></th>
+        <th onclick="sortTable(8)">Days Vacant <span>⇅</span></th>
+        <th onclick="sortTable(9)">Last Move-Out <span>⇅</span></th>
+        <th onclick="sortTable(10)">Turn Target <span>⇅</span></th>
+        <th onclick="sortTable(11)">Available On <span>⇅</span></th>
+        <th onclick="sortTable(12)">Next Move-In <span>⇅</span></th>
+        <th onclick="sortTable(13)">Sched Rent <span>⇅</span></th>
+        <th onclick="sortTable(14)">Avail Status <span>⇅</span></th>
       </tr>
     </thead>
     <tbody id="detailTbody"></tbody>
   </table>
+  </div>
 </div>
 
 <div id="turnCosts" class="panel">
@@ -325,7 +377,7 @@ function daysBetween(d1, d2) { return Math.round((d2 - d1) / 86400000); }
 
 let allData = [];
 let filteredData = [];
-let sortCol = 9, sortAsc = true;
+let sortCol = 11, sortAsc = true;   // default sort: Available On
 
 // ── RECENTLY ADDED ────────────────────────────────────────────────────────────
 const DISMISSED_KEY = 'turnvac_dismissed_recent';
@@ -472,6 +524,7 @@ async function loadData() {
     buildRecentlyAdded();
     buildByProperty();
     buildDetailFilters();
+    buildTurnIndex();
     filterTable();
 
     // Initialize Costs tab — default to This Month
@@ -755,6 +808,7 @@ function filterTable() {
   const prop    = document.getElementById('filterProp').value;
   const status  = document.getElementById('filterStatus').value;
   const avail   = document.getElementById('filterAvail').value;
+  const prog    = document.getElementById('filterProgress').value;
   const nm = TODAY.getMonth(), ny = TODAY.getFullYear();
 
   filteredData = allData.filter(r => {
@@ -767,6 +821,15 @@ function filterTable() {
     if (avail === 'this_month'  && !(r.availOnD && r.availOnD.getMonth()===nm && r.availOnD.getFullYear()===ny)) return false;
     if (avail === 'next_month'  && !(r.availOnD && r.availOnD.getMonth()===(nm+1)%12)) return false;
     if (avail === 'movein'      && !r.nextMIDate) return false;
+    if (prog) {
+      const s = turnStats(turnFor(r));
+      if (prog === 'noturn'  && s) return false;
+      if (prog !== 'noturn'  && !s) return false;
+      if (prog === 'active'  && s.done >= s.total) return false;
+      if (prog === 'late'    && !s.late) return false;
+      if (prog === 'unsched' && !s.open) return false;
+      if (prog === 'done'    && s.done < s.total) return false;
+    }
     return true;
   });
   applySortAndRender();
@@ -792,19 +855,156 @@ function availBadge(s) {
   return `<span class="badge ${m[s]||'future'}">${s}</span>`;
 }
 
+// ── TURN PROGRESS (work-order checklist per unit) ────────────────────────────
+// Joins each AppFolio unit row to its PropertyMeld turn project (pm_turns.json),
+// which carries a `tasks` array — one entry per live meld with done/date/who.
+const nrmKey = s => String(s||'').toLowerCase().replace(/[^a-z0-9]/g,'');
+const TODAY_ISO = new Date(TODAY.getTime() - TODAY.getTimezoneOffset()*60000).toISOString().slice(0,10);
+let TURN_BY_UNIT = {};
+let expandedTasks = new Set();
+
+function buildTurnIndex() {
+  TURN_BY_UNIT = {};
+  const list = (RAW_TURNS && RAW_TURNS.turns) || [];
+  list.forEach(t => {
+    if (!t.tasks || !t.tasks.length) return;
+    if (/pest/i.test(t.name || '')) return;
+    const k = nrmKey(t.property) + '|' + nrmKey(t.unit);
+    const cur = TURN_BY_UNIT[k];
+    // Prefer the open turn; among same-status turns prefer the newest project.
+    if (!cur || (t.status === 'ACTIVE' && cur.status !== 'ACTIVE') ||
+        (t.status === cur.status && t.id > cur.id)) TURN_BY_UNIT[k] = t;
+  });
+}
+
+function turnFor(r) { return TURN_BY_UNIT[nrmKey(r.property_name) + '|' + nrmKey(r.unit)] || null; }
+
+// State of one task: done | late | today | sched | open (not scheduled)
+function taskState(t) {
+  if (t.done) return 'done';
+  if (!t.date) return 'open';
+  if (t.date < TODAY_ISO) return 'late';
+  if (t.date === TODAY_ISO) return 'today';
+  return 'sched';
+}
+
+function turnStats(t) {
+  if (!t) return null;
+  const st = t.tasks.map(taskState);
+  return {
+    total: t.tasks.length,
+    done:  st.filter(s => s === 'done').length,
+    late:  st.filter(s => s === 'late').length,
+    open:  st.filter(s => s === 'open').length,
+    states: st,
+    pct: t.tasks.length ? st.filter(s => s === 'done').length / t.tasks.length : 0,
+  };
+}
+
+// Next task still to do — earliest scheduled date among incomplete tasks.
+function nextTaskOf(t) {
+  if (!t) return null;
+  const pend = t.tasks.filter(x => !x.done && x.date).sort((a,b) => a.date.localeCompare(b.date));
+  if (pend.length) return pend[0];
+  const un = t.tasks.find(x => !x.done);
+  return un || null;
+}
+
+function progressCell(r) {
+  const t = turnFor(r);
+  if (!t) return `<td class="tp-cell"><span class="tp-none">no turn</span></td>`;
+  const s = turnStats(t);
+  const segs = s.states.map((st, i) => {
+    const cls = st === 'done' ? 's-done' : st === 'late' ? 's-late' : st === 'today' ? 's-today' : st === 'sched' ? 's-sched' : '';
+    const tk = t.tasks[i];
+    const tip = `${tk.task}${tk.date ? ' — ' + fmtDate(tk.date) : ' — not scheduled'}${tk.done ? ' ✓ done' : ''}`;
+    return `<span class="tp-seg ${cls}" title="${esc(tip)}"></span>`;
+  }).join('');
+  const allDone = s.done === s.total;
+  const key = unitKey(r);
+  return `<td class="tp-cell" onclick="toggleTasks(this, '${esc(key).replace(/'/g,"\\'")}')" title="Click for the full checklist">
+    <div class="tp-wrap">
+      <span class="tp-caret">${expandedTasks.has(key) ? '▾' : '▸'}</span>
+      <span class="tp-bar">${segs}</span>
+      <span class="tp-count${allDone ? ' all-done' : ''}">${s.done}/${s.total}${s.late ? ' <span style="color:#c0392b">⚠' + s.late + '</span>' : ''}</span>
+    </div>
+  </td>`;
+}
+
+function nextTaskCell(r) {
+  const t = turnFor(r);
+  if (!t) return `<td><span class="tp-none">—</span></td>`;
+  const nt = nextTaskOf(t);
+  if (!nt) return `<td><span class="badge yes">complete</span></td>`;
+  const st = taskState(nt);
+  const when = !nt.date ? '<span class="tp-none">unscheduled</span>'
+    : `<span style="${st==='late'?'color:#c0392b;font-weight:700':st==='today'?'color:#ca6f1e;font-weight:700':''}">${fmtDate(nt.date)}</span>`;
+  return `<td><span style="font-weight:600">${esc(nt.task)}</span><br><span style="font-size:0.76rem">${when}</span></td>`;
+}
+
+function taskDetailRow(r, colspan) {
+  const t = turnFor(r);
+  if (!t) return '';
+  const rows = t.tasks.map(tk => {
+    const st = taskState(tk);
+    const dateHtml = tk.done
+      ? `<span style="color:#1e8449">${tk.completed ? fmtDate(tk.completed) : 'done'}</span>`
+      : tk.date
+        ? `<span class="tdate ${st==='late'?'late':''}">${fmtDate(tk.date)}${st==='today'?' (today)':''}</span>`
+        : `<span class="tdate none">not scheduled</span>`;
+    const flag = st === 'late' ? '<span class="badge no" style="font-size:0.68rem">past due</span>'
+              : st === 'today' ? '<span class="badge soon" style="font-size:0.68rem">today</span>'
+              : st === 'open' ? '<span class="badge notice" style="font-size:0.68rem">needs scheduling</span>' : '';
+    return `<span class="tick ${tk.done?'on':'off'}">${tk.done?'☑':'☐'}</span>
+      <span class="tname ${tk.done?'done':''}">${esc(tk.task)}</span>
+      <span>${dateHtml}</span>
+      <span class="twho ${tk.vendor?'vend':''}">${esc(tk.who || '—')}</span>
+      <span>${flag}</span>`;
+  }).join('');
+  const s = turnStats(t);
+  const link = `https://app.propertymeld.com/2975/m/2975/project/${t.id}/summary/`;
+  return `<tr class="tp-detail"><td colspan="${colspan}">
+    <div class="tp-meta"><strong>${esc(t.name || 'Turn')}</strong> · ${s.done} of ${s.total} work orders complete${t.due_date ? ' · due ' + fmtDate(t.due_date) : ''} · <a href="${link}" target="_blank" style="color:#2e86c1">open in PropertyMeld ↗</a></div>
+    <div class="tp-list">
+      <span class="tph"></span><span class="tph">Work Order</span><span class="tph">Scheduled</span><span class="tph">Assigned</span><span class="tph"></span>
+      ${rows}
+    </div>
+  </td></tr>`;
+}
+
+function esc(s) { return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+function toggleTasks(td, key) {
+  if (expandedTasks.has(key)) expandedTasks.delete(key); else expandedTasks.add(key);
+  renderDetail();
+}
+
+function toggleAllTasks() {
+  const btn = document.getElementById('tpExpandBtn');
+  const anyOpen = expandedTasks.size > 0;
+  expandedTasks = new Set();
+  if (!anyOpen) filteredData.forEach(r => { if (turnFor(r)) expandedTasks.add(unitKey(r)); });
+  btn.textContent = anyOpen ? 'Expand all' : 'Collapse all';
+  renderDetail();
+}
+
 function renderDetail() {
+  const COLS = 15;
   const rows = filteredData.map(r => {
     const overdue = r.isAvailNow && r.dv > 30;
     const rrBadge = r.isVacant
       ? `<span class="badge ${r.rent_ready==='Yes'?'yes':'no'}">${r.rent_ready||'—'}</span>`
       : `<span class="badge notice">N/A</span>`;
-    return `<tr class="${overdue?'overdue':''}">
+    const key = unitKey(r);
+    const main = `<tr class="${overdue?'overdue':''}">
       <td>${r.property_name||'—'}</td>
       <td><strong>${r.unit||'—'}</strong></td>
       <td>${r.city||'—'}</td>
       <td>${r.bed_and_bath||'—'}</td>
       <td>${statusBadge(r.unit_status)}</td>
       <td>${rrBadge}</td>
+      ${progressCell(r)}
+      ${nextTaskCell(r)}
       <td>${daysBadge(r.dv)}</td>
       <td>${fmtDate(r.last_move_out)}</td>
       <td>${fmtDate(r.unit_turn_target_date)}</td>
@@ -813,7 +1013,8 @@ function renderDetail() {
       <td>${r.schd_rent ? '$' + Number(r.schd_rent).toLocaleString('en-US',{minimumFractionDigits:0}) : '—'}</td>
       <td>${availBadge(r.availStatus)}</td>
     </tr>`;
-  }).join('') || '<tr><td colspan="13" style="text-align:center;color:#4a6a8a;padding:24px;">No matching records</td></tr>';
+    return main + (expandedTasks.has(key) ? taskDetailRow(r, COLS) : '');
+  }).join('') || `<tr><td colspan="${COLS}" style="text-align:center;color:#4a6a8a;padding:24px;">No matching records</td></tr>`;
   document.getElementById('detailTbody').innerHTML = rows;
   document.getElementById('rowCount').textContent = `Showing ${filteredData.length} of ${allData.length} units`;
 }
@@ -829,7 +1030,10 @@ function sortTable(col) {
 }
 
 function getVal(r, col) {
-  const fields = ['property_name','unit','city','bed_and_bath','unit_status','rent_ready','dv','moveOutD','turnTargD','availOnD','nextMIDate','schd_rent','availStatus'];
+  // col 6 = Turn Progress (% of work orders done), col 7 = Next Task (its scheduled date)
+  if (col === 6) { const s = turnStats(turnFor(r)); return s ? s.pct : -Infinity; }
+  if (col === 7) { const nt = nextTaskOf(turnFor(r)); return nt ? (nt.date || '9999-12-30') : '9999-12-31'; }
+  const fields = ['property_name','unit','city','bed_and_bath','unit_status','rent_ready',null,null,'dv','moveOutD','turnTargD','availOnD','nextMIDate','schd_rent','availStatus'];
   const v = r[fields[col]];
   if (v instanceof Date) return v.getTime();
   if (v === null || v === undefined || v === '') return -Infinity;

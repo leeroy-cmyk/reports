@@ -1248,6 +1248,48 @@ async function fetchPropertyMeldTurns() {
           spokTurns.push({ projId: proj.id, name: proj.name, region: dregion, prop: propName, unit: unitLabel, status: open ? 'ACTIVE' : 'COMPLETE', start: proj.start_date ? proj.start_date.slice(0,10) : null, due: proj.due_date ? proj.due_date.slice(0,10) : null, move_in: mi ? mi.slice(0,10) : null, done: proj.total_completed_melds, total: proj.total_melds, last_inhouse: lastInhouse, next_task: nextTask });
         }
 
+        // ---- Per-turn task checklist (drives the Turns tab progress column) ----
+        // One row per live meld: what it is, whether it's done, when it's scheduled, who has it.
+        // Cancelled melds are dropped (a removed E-Carpet means "no carpet", not "missing data").
+        // Only kept for turns that are still open or recently finished — old checklists are dead
+        // weight in a file every report page loads.
+        const taskRank = (b) => {
+          const s = (b || '').trim();
+          if (/final\s*walk/i.test(s)) return 90;
+          const mm = /^([a-h])\s*[-–]/i.exec(s);
+          if (mm) return 10 + (mm[1].toUpperCase().charCodeAt(0) - 65);
+          if (/estimate/i.test(s)) return 10.5;   // right after A - Initial walkthrough
+
+          return 50;
+        };
+        let lastDone = null;
+        for (const m of melds) { if (m.completion_date) { const d = pac(m.completion_date).date; if (!lastDone || d > lastDone) lastDone = d; } }
+        const keepTasks = proj.total_completed_melds < proj.total_melds
+          || (lastDone && lastDone >= new Date(Date.now() - 120 * 86400000).toLocaleDateString('en-CA'));
+        const tasks = !keepTasks ? undefined : melds
+          .filter(m => m.status !== 'MANAGER_CANCELED' && m.status !== 'TENANT_CANCELED')
+          .map(m => {
+            const brief = m.brief_description || '';
+            const isDone = m.status === 'COMPLETED' || !!m.completion_date;
+            const hasVend = (m.vendorappointment || []).some(a => a.availability_segment?.event);
+            const vr = (m.vendor_assignment_requests || [])[0];
+            const svc = (m.in_house_servicers || [])[0]?.agent;
+            const who = svc ? `${svc.first_name || ''} ${svc.last_name || ''}`.trim()
+                      : vr?.vendor?.name || (hasVend ? 'Vendor' : '');
+            return {
+              task:      brief.replace(' Prep / Paint', ''),
+              cat:       catOf(brief),
+              done:      isDone,
+              date:      getApptDate(m),
+              who:       who || null,
+              completed: m.completion_date ? pac(m.completion_date).date : null,
+              vendor:    hasVend || (!svc && !!vr),
+              rank:      taskRank(brief),
+            };
+          })
+          .sort((a, b) => a.rank - b.rank || String(a.date || '9').localeCompare(String(b.date || '9')))
+          .map(({ rank, ...t }) => t);
+
         turns.push({
           id:           proj.id,
           name:         proj.name,
@@ -1263,6 +1305,7 @@ async function fetchPropertyMeldTurns() {
           last_clean:       lastClean,
           total_melds:  proj.total_melds,
           done_melds:   proj.total_completed_melds,
+          tasks,
         });
       } catch(e) {
         console.error(`\n  project ${proj.id} error: ${e.message}`);
