@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-08-04T16:39:02.823Z",
-  "last_checked": "2026-08-04T16:39:02.823Z",
+  "generated_at": "2026-08-04T19:13:04.363Z",
+  "last_checked": "2026-08-04T19:13:04.363Z",
   "source": "leeroy-cmyk/pm-scheduling/CLAUDE.md",
-  "count": 54,
+  "count": 55,
   "rules": [
     {
       "group": "General",
@@ -339,8 +339,9 @@
     {
       "group": "Turns",
       "category": "AppFolio available date — required step",
-      "text": "once the work is scheduled, the unit's **Available date and Ready-to-Show date are set to the same day**, and **Rent Ready is set to \"No.\"** Only the turn manager sets Rent Ready to \"Yes,\" as a verification step — the automation never does. The available date is **3 days after the final walkthrough** (a buffer for punch-list items found at the walkthrough or vendor delays); until the vendor steps are automated, it's an interim **7 days after maintenance is completed**.",
+      "text": "once the work is scheduled, the unit's **Available date and Ready-to-Show date are set to the same day**, and **Rent Ready is set to \"No.\"**",
       "details": [
+        "**Rent Ready is now set in BOTH directions, on verified evidence only (changed 2026-08-04, Lee Roy).** This supersedes the old \"only the turn manager sets Yes — the automation never does\" rule, which left finished turns sitting at No until a person noticed: ps25 #F43, rl16 #A04 and ps17 #A3 were all found that way, up to five weeks after their turns completed. The automation may now set **Yes** when a turn is **verified complete** — a final walkthrough COMPLETED after the move-out — and **No** when it can prove the unit was not turned since the move-out. The evidence bar is identical in both directions, and **no evidence means no change** in either. Manual overrides still win: `pm_avail_plan_manual.json` beats any builder row for the same unit. The available date is **3 days after the final walkthrough** (a buffer for punch-list items found at the walkthrough or vendor delays); until the vendor steps are automated, it's an interim **7 days after maintenance is completed**.",
         "**Available dates only move CLOSER, never OUT (firm rule, Lee Roy 2026-07-27).** An available date may be moved **earlier** (closer) whenever the turn will finish sooner, but is **never** pushed **later** (out) — for ANY unit. This is absolute for a **leased / Converted / Converting** unit, whose date is a commitment to a prospect: never move it out under any circumstance. (This is the standing ratchet, stated as a hard rule — the avail-write step must ratchet each date down-only and skip any write that would move a date later.)",
         "**Don't churn small pull-ins (Lee Roy 2026-07-27):** only bother pulling an available date **closer** when it's more than **~2 weeks (14 days, `AVAIL_PULL_THRESHOLD`)** beyond the new projection; a smaller improvement is left as-is. (Implemented in `pm_avail_plan.js` + `pm_avail_plan_tc.js`.)"
       ]
@@ -353,6 +354,14 @@
         "**Every VACATED unit is checked, not just the ones with turn work already scheduled (firm rule, Lee Roy 2026-08-03).** The riskiest unit is the one that just went vacant with **no turn scheduled at all** — it has no projected available date, and for months that meant it was filtered out before the Rent Ready check ever ran. That is exactly how **tc68 #D096** sat advertised as Rent Ready with a 7/30 move-out and no turn project in PropertyMeld. Only the **date** write depends on having a projection; the Rent Ready check never does.",
         "**Read turn completion from PropertyMeld directly, across OPEN and CLOSED projects.** A fully-turned unit's project is **closed**, so it is absent from the turns report feed — and reading completion from that feed makes a genuinely-turned unit look never-turned. (On 2026-08-03 this would have wrongly flipped 6 Tacoma units: tc34 #A106, tc68 #C64/#C65/#C67/#D080/#D094.) Always go to the source, and include closed projects.",
         "**A Rent-Ready-only correction must not disturb the available date.** When a unit needs Rent Ready = No but has no new projected date, write its **existing** date straight back unchanged so the ratchet is untouched. If it has no date at all, there is **no safe automated write** — surface it for a person instead of writing a blank."
+      ]
+    },
+    {
+      "group": "Turns",
+      "category": "",
+      "text": "**\"Pest Control\" projects are NOT turns — never let them drive turn dates (Lee Roy 2026-08-04).** The PropertyMeld projects endpoint's `project_type=TURN` filter is **not strict**: Pest Control projects (type `OTHER`) come back too, and their melds are lettered exactly like turn melds (\"D - 1st Treatment\", \"F - 2nd Treatment\"), so a category matcher reads them as maintenance and cleaning. That produced real published dates: rl21 #9 and #11 both advertised **2026-07-08** off a pest treatment while their actual turns finish 08-17 and 09-30. Always filter turn projects by **name** — `/turn/i.test(name) && !/pest/i.test(name)` — the same idiom `pm_dedupe_turns.js` and `pm_compact_turns.js` already use. Pest work also runs on **occupied** units, so it must never be treated as a turn anywhere.",
+      "details": [
+        "**A bogus EARLY date is not self-correcting.** The ratchet only moves dates closer, so once a too-early date is written it sticks until a human authorises a push-out. That makes date *sources* worth guarding carefully — a wrong early date is more expensive than a missing one."
       ]
     },
     {
