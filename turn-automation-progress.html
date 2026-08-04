@@ -79,8 +79,8 @@
 <header class="pg">
   <div class="wrap">
     <h1>🔄 Turn Automation — Progress</h1>
-    <p>Where the automated unit-turn pipeline stands today: what's fully automated, what still runs by hand, and what's next. Covers the Spokane turn program (move-out → make-ready → available to rent).</p>
-    <div class="updated"><span class="dot"></span><span>Updated July 20, 2026</span></div>
+    <p>Where the automated unit-turn pipeline stands today: what's fully automated, what still runs by hand, and what's next. Now covers <strong>all three regions — Spokane, Tri-Cities and Tacoma</strong> (move-out → make-ready → available to rent).</p>
+    <div class="updated"><span class="dot"></span><span>Updated August 4, 2026</span></div>
   </div>
 </header>
 
@@ -97,7 +97,33 @@
       <span class="chip"><span class="sw" style="background:#27ae60"></span>3 fully automated (cloud, hands-off)</span>
       <span class="chip"><span class="sw" style="background:#2e86c1"></span>3 automated in your daily local run</span>
       <span class="chip"><span class="sw" style="background:#e0e5ea"></span>2 pending</span>
+      <span class="chip"><span class="sw" style="background:#1a5276"></span>Scheduling live in all 3 regions</span>
     </div>
+  </div>
+
+  <h2 class="sec">Recently shipped</h2>
+  <p class="sec-sub">The last three weeks — the turn program went from one region to three.</p>
+  <div class="next">
+    <div class="step"><div class="step-n">✓</div><div class="step-b">
+      <div class="t">Tacoma turns are now auto-scheduled <span class="pri pri-hi">July 30</span></div>
+      <div class="d"><strong>Armani Mitchell does everything</strong> in Tacoma — initial walkthrough, paint, maintenance and the final QC check. Runs daily in the cloud at 7:00 AM. Tacoma's one rule difference: <strong>4 in-house days = 2 paint + 2 maintenance</strong> (the other regions are 2 + 1). Because Armani is one person, a walkthrough day can't also be a full paint day, so walkthroughs are booked first and paint/maintenance skip those days. Covers tc68 and tc34.</div>
+    </div></div>
+    <div class="step"><div class="step-n">✓</div><div class="step-b">
+      <div class="t">Tri-Cities turns are now auto-scheduled <span class="pri pri-hi">July 27</span></div>
+      <div class="d">Two tech pools: <strong>paint &amp; maintenance go to James Dunlap and Ryan Robson</strong>; <strong>initial and final walkthroughs go to Margarito Saldana</strong> (walkthroughs only). Runs daily in the cloud at 6:40 AM across Kennewick, Pasco, Richland and West Richland. Vendors: Duo Cleaning, SOS Carpet, Vertel Flooring.</div>
+    </div></div>
+    <div class="step"><div class="step-n">✓</div><div class="step-b">
+      <div class="t">Spokane turn scheduling closed a real gap <span class="pri pri-md">July 16</span></div>
+      <div class="d">Spokane turns had <em>no</em> scheduler in the cloud — new turns simply sat unscheduled until someone noticed. Ron Cramer and Micheal Magoon are now gap-filled daily at 6:20 AM.</div>
+    </div></div>
+    <div class="step"><div class="step-n">✓</div><div class="step-b">
+      <div class="t">Scheduling rules tightened across every region <span class="pri pri-md">July 27</span></div>
+      <div class="d"><strong>Never today or tomorrow</strong> — new turn work is placed at least 3 days out so the crew always gets notice. <strong>Available dates only move closer, never out.</strong> Longest-vacant units are prioritised ahead of higher-rent ones. And when a turn finishes early, <strong>forward-compaction</strong> pulls later turns' work into the freed capacity (forward only — nothing is ever pushed later).</div>
+    </div></div>
+    <div class="step"><div class="step-n">✓</div><div class="step-b">
+      <div class="t">Rent Ready is now verified, not assumed <span class="pri pri-hi">Aug 3</span></div>
+      <div class="d">A unit can show "Rent Ready = Yes" either because it was genuinely turned or because the data is stale — so the automation now has to <strong>prove</strong> a unit wasn't turned before changing the flag, using a final walkthrough completed after the move-out. Two blind spots were found and fixed: units with <strong>no turn scheduled yet were skipped entirely</strong> by the check (the riskiest case), and completion was being read from a feed that only contains <em>open</em> turns, which made fully-turned units look untouched. A standing audit now reports both problems across all three regions.</div>
+    </div></div>
   </div>
 
   <h2 class="sec">The turn pipeline</h2>
@@ -147,28 +173,32 @@
 
   <!-- 4 -->
   <div class="stage st-cloud">
-    <div class="stage-head"><div class="stage-num">4</div><div class="stage-title">Schedule in-house work (Ron &amp; Michael)</div><span class="badge b-cloud">Automated · cloud</span></div>
+    <div class="stage-head"><div class="stage-num">4</div><div class="stage-title">Schedule in-house work</div><span class="badge b-cloud">Automated · cloud · all 3 regions</span></div>
     <div class="cols">
       <div class="col done"><h4>Done</h4><ul class="pts">
-        <li>2 paint days + 1 maintenance day per turn (one tech per unit) + 1-hr initial walkthrough</li>
+        <li><strong>All three regions now auto-schedule</strong> — Spokane (Ron &amp; Magoon, 6:20 AM), Tri-Cities (James &amp; Ryan for paint/maint, Margarito for walkthroughs, 6:40 AM), Tacoma (Armani does all of it, 7:00 AM)</li>
+        <li>2 paint days + 1 maintenance day per turn, same tech (Tacoma: 2 paint + <strong>2</strong> maintenance) + 1-hr initial walkthrough</li>
         <li>Mon–Thu 8a–4p, densely packed, never double-books</li>
-        <li>Append-only — never moves work already on the calendar</li>
-        <li>Priority: leased → Converted → Converting → vacancy % → rent</li>
+        <li>Append-only — never moves work already on the calendar; <strong>forward-compaction</strong> pulls later work earlier when a turn finishes early (forward only)</li>
+        <li>Priority: leased → Converted → Converting → <strong>days vacant</strong> → rent</li>
+        <li>Never books today or tomorrow — 3 days' lead time minimum</li>
       </ul></div>
       <div class="col todo"><h4>To finish</h4><ul class="pts">
-        <li>Only 2 turn techs — near-term calendars fill fast, so new turns can land weeks out</li>
-        <li><strong>Spokane only</strong> — Tacoma &amp; Tri-Cities turns are now created &amp; detected, but not yet auto-scheduled to techs (Next Steps #5–6)</li>
+        <li>Thin crews — near-term calendars fill fast, so new turns can still land weeks out (Tacoma is a single tech)</li>
+        <li>Forward-compaction isn't wired for Tacoma yet — it assumes the 2+1 day pattern (Next Steps #5)</li>
       </ul></div>
     </div>
   </div>
 
   <!-- 5 -->
   <div class="stage st-cloud">
-    <div class="stage-head"><div class="stage-num">5</div><div class="stage-title">Final walkthrough (quality check)</div><span class="badge b-cloud">Automated · cloud</span></div>
+    <div class="stage-head"><div class="stage-num">5</div><div class="stage-title">Final walkthrough (quality check)</div><span class="badge b-cloud">Automated · cloud · all 3 regions</span></div>
     <div class="cols">
       <div class="col done"><h4>Done</h4><ul class="pts">
-        <li>Scheduled to David Sanchez, the day after the last vendor task (carpet, else cleaning)</li>
-        <li>Runs daily in the cloud job</li>
+        <li>Scheduled the day after the last vendor task (carpet if there is carpet, else cleaning)</li>
+        <li><strong>Per region:</strong> Spokane → David Sanchez · Tri-Cities → Margarito Saldana · Tacoma → Armani Mitchell</li>
+        <li>Runs daily in each region's cloud job</li>
+        <li>A completed final walkthrough is the system's proof a unit was actually turned — it's what the Rent Ready check tests against</li>
       </ul></div>
       <div class="col todo"><h4>To finish</h4><ul class="pts">
         <li>Lands most precisely once vendor dates are set automatically (depends on Stage 6)</li>
@@ -192,15 +222,19 @@
 
   <!-- 7 -->
   <div class="stage st-local">
-    <div class="stage-head"><div class="stage-num">7</div><div class="stage-title">Set AppFolio available date</div><span class="badge b-blocked">Local · cloud blocked</span></div>
+    <div class="stage-head"><div class="stage-num">7</div><div class="stage-title">Set AppFolio available date &amp; Rent Ready</div><span class="badge b-blocked">Local · cloud blocked · all 3 regions</span></div>
     <div class="cols">
       <div class="col done"><h4>Done</h4><ul class="pts">
         <li>Sets Available = Ready-to-Show, Rent Ready = No; date = final walk + 3 days (interim: maintenance + 7)</li>
-        <li>Ratchet — dates only move earlier, never later</li>
-        <li>Runs in your daily <code>af_daily</code> local command</li>
+        <li>Ratchet — dates only move earlier, never later; small pull-ins under 2 weeks are left alone to avoid churn</li>
+        <li><strong>Covers all three regions</strong> in one daily <code>af_daily</code> run (Spokane + Tri-Cities + Tacoma plans merged)</li>
+        <li><strong>Rent Ready is verified per unit, never blanket-flipped</strong> — a unit genuinely turned since its move-out keeps "Yes"</li>
+        <li>Reaches units that dropped off the turns board (Rent Ready = Yes hides them) via the vacancy report's ids</li>
+        <li>Every write is read back from an independent reporting API and asserted — date, Rent Ready, and unit identity</li>
       </ul></div>
       <div class="col todo"><h4>To finish</h4><ul class="pts">
         <li>Can't run in the cloud — AppFolio login needs SMS 2FA, which blocks a headless cron (Next Steps #4)</li>
+        <li>Device trust isn't holding, so this step currently needs a manual login each run rather than being unattended</li>
       </ul></div>
     </div>
   </div>
@@ -240,14 +274,18 @@
       <div class="d">Resolve the SMS-2FA blocker (trusted device / app token), or formalize it as the one daily local click. Until then Stage 7 stays local.</div>
     </div></div>
     <div class="step"><div class="step-n">5</div><div class="step-b">
-      <div class="t">Schedule Tri-Cities turns <span class="pri pri-md">Next region</span></div>
-      <div class="d">Creation &amp; detection are now live for Tri-Cities (turns are being created automatically). Next: auto-schedule the in-house work to Tri-Cities techs, add its vendors, and write AppFolio dates — completing the pipeline for the region.</div>
+      <div class="t">Extend forward-compaction to Tacoma <span class="pri pri-md">Medium</span></div>
+      <div class="d">Compaction currently assumes the 2-paint + 1-maintenance day pattern, so it isn't wired for Tacoma's 2 + 2. Until it is, an early Tacoma finish doesn't pull later turns forward — capacity is left idle on a single-tech region where it matters most.</div>
     </div></div>
     <div class="step"><div class="step-n">6</div><div class="step-b">
-      <div class="t">Schedule Tacoma turns <span class="pri pri-lo">After Tri-Cities</span></div>
-      <div class="d">Creation &amp; detection are now live for Tacoma too. Once Tri-Cities scheduling is running smoothly, auto-schedule Tacoma turns (Armani) and publish their dates.</div>
+      <div class="t">Catch missed turns automatically <span class="pri pri-hi">High</span></div>
+      <div class="d">Two units sat vacant for days with no turn project at all (tc68 #D096, tc34 #A103) — detection can miss a unit and the failure is silent. The standing audit finds them now, but it's run by hand; it should run daily and alert instead of waiting for someone to spot a wrong Rent Ready flag.</div>
     </div></div>
     <div class="step"><div class="step-n">7</div><div class="step-b">
+      <div class="t">Cover the properties no region owns <span class="pri pri-lo">Later</span></div>
+      <div class="d">A few properties sit outside every region's city list — Helena (hl73) surfaced this way with a stale Rent Ready flag and no automation watching it. Either assign these to a region or give them a catch-all pass.</div>
+    </div></div>
+    <div class="step"><div class="step-n">8</div><div class="step-b">
       <div class="t">Backlog cleanup <span class="pri pri-lo">Later</span></div>
       <div class="d">Cancel stale / duplicate open turns and mark finished-but-still-open turns complete so counts and the calendar stay clean.</div>
     </div></div>
@@ -260,7 +298,7 @@
   </div>
 
   <footer class="pg">
-    McKay Property Management · Turn automation · cloud job <code>pm-spokane-turn-scheduler.yml</code> · local pipeline <code>schedule_spokane_turns.cmd</code>
+    McKay Property Management · Turn automation · cloud jobs <code>pm-spokane-turn-scheduler.yml</code> (6:20a) · <code>pm-tricities-turn-scheduler.yml</code> (6:40a) · <code>pm-tacoma-turn-scheduler.yml</code> (7:00a) · local AppFolio write <code>af_daily.cmd</code>
   </footer>
 </div>
 </body>
