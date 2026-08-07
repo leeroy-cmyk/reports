@@ -456,6 +456,26 @@ const TC_RAMP_CATS = {
   '80121':'CapEx','80122':'CapEx','80130':'CapEx','80140':'CapEx',
 };
 
+// QBO vendor bills (qbo_processed.json) — vendor invoices keyed straight into
+// QuickBooks never touch Ramp, so without these the turn actuals miss flooring,
+// cleaning and subcontractor spend entirely.
+//
+// GL account number is authoritative and runs through TC_RAMP_CATS above. Bills
+// pulled header-level carry no account number, only a category NAME, so these
+// unambiguous names map onto the same buckets.
+//
+// Deliberately NOT mapped — a wrong guess silently misstates turn cost:
+//   'Subcontractors'            generic catch-all; turn, R&M or capital work
+//   'Uncategorized Expense'     uncoded at the source; fix it in QBO, not here
+//   'Discretionary/Nondiscretionary - Contractor'  the CapEx buckets turn costs
+//                               deliberately excludes (only 'CapEx Turns' counts)
+// Whatever falls through is reported in turn_costs.qboGap so the uncoded dollars
+// stay visible instead of just vanishing.
+const TC_QBO_NAME_CATS = {
+  'turn - contractor':'Turn','capex turn - contractor':'CapEx',
+  'r&m - contractor':'R&M','grounds - contractor':'Grounds',
+};
+
 function extractUnitCode(propField) {
   if (!propField) return null;
   const colon = propField.indexOf(':');
@@ -543,8 +563,43 @@ function buildTurnCosts() {
       if (cat !== 'Turn' && cat !== 'CapEx') continue; // Turn + CapEx Turn materials
       addPropSpend(extractPropCode(tx.dept), 'materials', tx.d, tx.amt); // all turn materials, unit or not
       const unitCode = extractUnitCode(tx.dept);
-      if (unitCode) ensureUnit(unitCode).materials.push({ d: tx.d, amt: tx.amt, cat, ln: tx.ln });
+      if (unitCode) ensureUnit(unitCode).materials.push({ d: tx.d, amt: tx.amt, cat, ln: tx.ln, src: 'ramp' });
     }
+  }
+
+  // QBO vendor bills — second materials source alongside Ramp. Same transaction
+  // shape { gl, dept, d, amt, ln }, produced by qbo/to_reports_feed.js.
+  //
+  // No dedup against Ramp is needed. Ramp CARD spend (ramp_processed.json, the only
+  // Ramp source this function reads) syncs to QBO as Purchase/Expense, never as a
+  // Bill, so it cannot collide. Ramp BILL PAY was the one channel that could have —
+  // and it is being retired in favour of keying vendor bills straight into QBO
+  // (LeeRoy, 2026-08-07). ramp_bills.json feeds invoices_report only, not turn costs.
+  const qboPath = path.join(DATA_DIR, 'qbo_processed.json');
+  const qboGap = { total: 0, lines: 0, byCategory: {} };
+  let qboKept = 0;
+  if (fs.existsSync(qboPath)) {
+    const qbo = JSON.parse(fs.readFileSync(qboPath, 'utf8'));
+    for (const tx of (qbo.transactions || [])) {
+      const cat = TC_RAMP_CATS[tx.gl] || TC_QBO_NAME_CATS[String(tx.qbo_category || '').trim().toLowerCase()];
+      if (cat !== 'Turn' && cat !== 'CapEx') {
+        // Not a turn line. Only count it as a GAP if it is plausibly turn work that
+        // was never coded — that is the number worth chasing in QuickBooks.
+        const c = String(tx.qbo_category || '(none)');
+        if (/subcontract|uncategor|split/i.test(c)) {
+          qboGap.total = Math.round((qboGap.total + tx.amt) * 100) / 100;
+          qboGap.lines++;
+          qboGap.byCategory[c] = Math.round(((qboGap.byCategory[c] || 0) + tx.amt) * 100) / 100;
+        }
+        continue;
+      }
+      qboKept++;
+      addPropSpend(extractPropCode(tx.dept), 'materials', tx.d, tx.amt);
+      const unitCode = extractUnitCode(tx.dept);
+      if (unitCode) ensureUnit(unitCode).materials.push({ d: tx.d, amt: tx.amt, cat, ln: tx.vendor || tx.ln, src: 'qbo' });
+    }
+    console.log('  QBO bills: ' + qboKept + ' turn lines added' +
+      (qboGap.lines ? '; ' + qboGap.lines + ' uncoded lines = $' + qboGap.total.toLocaleString() + ' NOT counted' : ''));
   }
 
   // Add estimates from AppFolio work orders.
@@ -600,7 +655,7 @@ function buildTurnCosts() {
     }
   }
 
-  save('turn_costs.json', { ok: true, fetched_at: qbt.fetched_at, units, propSpend, propTurns });
+  save('turn_costs.json', { ok: true, fetched_at: qbt.fetched_at, units, propSpend, propTurns, qboGap });
   console.log('turn_costs.json: ' + Object.keys(units).length + ' units, ' + Object.keys(propSpend).length + ' properties, ' +
     Object.keys(propTurns).length + ' props w/ completed PM turns');
 }

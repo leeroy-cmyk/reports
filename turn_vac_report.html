@@ -170,6 +170,17 @@
   .cost-detail-subtotal { margin-top: 8px; font-size: 0.82rem; font-weight: 700; color: #1a5276; text-align: right; padding-top: 6px; border-top: 1px solid #d0dce8; }
   .no-cost-entries { color: #a0aebb; font-style: italic; font-size: 0.81rem; padding: 6px 0; }
 
+  /* Which system a materials line came from — Ramp card vs QuickBooks vendor bill */
+  .src-tag { font-size: 0.62rem; font-weight: 700; padding: 1px 5px; border-radius: 3px; letter-spacing: 0.4px; vertical-align: middle; }
+  .src-tag.qbo  { background: #d5f0e3; color: #196f4a; }
+  .src-tag.ramp { background: #e2e9f0; color: #5b6d80; }
+
+  /* Uncoded QuickBooks bill spend — dollars turn costs can't see yet */
+  .qbo-gap { display: flex; gap: 18px; align-items: center; flex-wrap: wrap; background: #fdf6e3; border: 1px solid #f0d9a0; border-left: 4px solid #d68910; border-radius: 8px; padding: 12px 16px; margin-bottom: 18px; font-size: 0.82rem; color: #6b5518; }
+  .qbo-gap strong { color: #8a6410; }
+  .qbo-gap .qg-amt { font-size: 1.15rem; font-weight: 700; color: #b9770e; }
+  .qbo-gap .qg-item { white-space: nowrap; }
+
   .badge.cost-active   { background: #fadbd8; color: #c0392b; }
   .badge.cost-complete { background: #d5f5e3; color: #1e8449; }
   .badge.cost-occupied { background: #edf0f3; color: #7f8fa4; }
@@ -1308,7 +1319,7 @@ function buildKPIs() {
             avg ${avgCleanAll !== null ? avgCleanAll+'d' : '—'} ${cleanOutliers.length ? `(${avgCleanStd}d excl. ${cleanOutliers.length} outliers)` : ''}
           </div>
         </div>
-        ${card(avgCostPerTurn!==null?(avgCostPerTurn>2000?'warn':'good'):'', 'Avg Cost / Turn', avgCostPerTurn!==null ? fmtC(avgCostPerTurn) : '—', 'labor + materials (QBT+Ramp, '+costCount+' turns)')}
+        ${card(avgCostPerTurn!==null?(avgCostPerTurn>2000?'warn':'good'):'', 'Avg Cost / Turn', avgCostPerTurn!==null ? fmtC(avgCostPerTurn) : '—', 'labor + materials (QBT + Ramp + QB bills, '+costCount+' turns)')}
       </div>
       ${(durOutliers.length || leadOutliers.length || cleanOutliers.length) ? `
       <div style="background:#fffbf0;border:1px solid #fdebd0;border-radius:6px;padding:12px 16px;margin-bottom:20px;font-size:0.8rem;">
@@ -1344,7 +1355,7 @@ function buildKPIs() {
         </table>
       </div>
       <div style="font-size:0.73rem;color:#a0aebb;margin-top:8px;padding-left:4px">
-        Cost = QBTime turn labor + Ramp turn materials · Start Lead = move-out → first maint appt · Duration = first maint appt → final walkthrough · Time to Clean = last maint/paint → last cleaning/carpet
+        Cost = QBTime turn labor + turn materials (Ramp card + QuickBooks bills) · Start Lead = move-out → first maint appt · Duration = first maint appt → final walkthrough · Time to Clean = last maint/paint → last cleaning/carpet
       </div>
     </div>
   `;
@@ -1444,10 +1455,15 @@ function buildCostDetailHtml(r) {
     ? '<div class="no-cost-entries">No turn materials/contractor in period</div>'
     : r.materials.map(e => {
         const mm = e.d.slice(5,7), dd = e.d.slice(8,10);
-        const name = RAMP_LN_NAMES[e.ln] || (e.ln || '—');
+        // QBO bill lines carry the vendor name directly; Ramp lines carry a
+        // cardholder last name that needs the RAMP_LN_NAMES lookup.
+        const name = e.src === 'qbo' ? (e.ln || '—') : (RAMP_LN_NAMES[e.ln] || (e.ln || '—'));
+        const tag = e.src === 'qbo'
+          ? '<span class="src-tag qbo" title="Vendor bill from QuickBooks">QB</span>'
+          : '<span class="src-tag ramp" title="Ramp card spend">Ramp</span>';
         return `<div class="cost-entry mat">
           <span class="ce-date">${mm}/${dd}</span>
-          <span>${name}</span>
+          <span>${name} ${tag}</span>
           <span class="ce-amt">${fmtC(e.amt)}</span>
         </div>`;
       }).join('') + `<div class="cost-detail-subtotal">Materials/Contractor: ${fmtC(r.totalMats)}</div>`;
@@ -1473,7 +1489,7 @@ function buildCostDetailHtml(r) {
       ${laborHtml}
     </div>
     <div class="cost-detail-col">
-      <div class="cost-detail-heading">Materials/Contractor — Ramp (Turn GL)</div>
+      <div class="cost-detail-heading">Materials/Contractor — Ramp card + QuickBooks bills</div>
       ${matsHtml}
     </div>
   </div>${estBar}`;
@@ -1676,16 +1692,30 @@ function buildCostsTab() {
     { cls: activeRows.length>0?'warn':'', lbl: 'Active Turns', val: activeRows.length, sub: fmtC(accruing) + ' accruing' },
     { cls: 'good', lbl: 'Completed Turns', val: completeRows.length, sub: avgCompleted>0 ? 'avg '+fmtC(avgCompleted)+'/turn' : 'no completed turns yet' },
     { cls: '', lbl: 'Turn Labor (period)', val: fmtC(periodLabor), sub: 'QBT — Turn class, selected period' },
-    { cls: '', lbl: 'Turn Materials (period)', val: fmtC(periodMats), sub: 'Ramp — Turn GL, selected period' },
+    { cls: '', lbl: 'Turn Materials (period)', val: fmtC(periodMats), sub: 'Ramp card + QB bills, selected period' },
   ];
   const kpiHtml = kpis.map(k => `<div class="kpi-card ${k.cls}"><div class="kpi-label">${k.lbl}</div><div class="kpi-value">${k.val}</div><div class="kpi-sub">${k.sub}</div></div>`).join('');
+
+  // Vendor bills that reached QuickBooks but carry no usable category, so turn costs
+  // cannot count them. Shown rather than hidden — the fix is coding in QBO, and the
+  // number is the argument for doing it.
+  const gap = (RAW_COSTS && RAW_COSTS.qboGap) || null;
+  const gapHtml = (gap && gap.total > 0)
+    ? `<div class="qbo-gap">
+         <span class="qg-amt">${fmtC(gap.total)}</span>
+         <span>in QuickBooks vendor bills (${gap.lines} lines) is <strong>not counted</strong> above — it has no category that maps to a turn.</span>
+         ${Object.entries(gap.byCategory).sort((a,b)=>b[1]-a[1])
+             .map(([c,v]) => `<span class="qg-item">• <strong>${c}</strong> ${fmtC(v)}</span>`).join('')}
+       </div>`
+    : '';
 
   const propOptions = [...new Set(costsRows.map(r => r.prop))].sort().map(p => `<option value="${p}">${p}</option>`).join('');
 
   el.innerHTML = `
     <div class="kpi-grid">${kpiHtml}</div>
+    ${gapHtml}
     <div class="section-title">Turn Spend by Property</div>
-    <div style="font-size:0.78rem;color:#7f8fa4;margin:-6px 0 10px;"><strong>Labor / Materials / Spent</strong> = turn spend in the selected period (QBT timecards + Ramp), including spend coded to the property but not a specific unit. <strong>Turns to Date + Avg $/Turn</strong> are all-time: completed-turn count from PropertyMeld ÷ all-time turn spend — a turn's cost spans months, so a per-period average isn't meaningful. For estimate vs. actual on individual turns, see Unit Detail below.</div>
+    <div style="font-size:0.78rem;color:#7f8fa4;margin:-6px 0 10px;"><strong>Labor / Materials / Spent</strong> = turn spend in the selected period (QBT timecards + Ramp card + QuickBooks vendor bills), including spend coded to the property but not a specific unit. <strong>Turns to Date + Avg $/Turn</strong> are all-time: completed-turn count from PropertyMeld ÷ all-time turn spend — a turn's cost spans months, so a per-period average isn't meaningful. For estimate vs. actual on individual turns, see Unit Detail below.</div>
     ${buildPropSummaryTable()}
     <div class="section-title" style="margin-top:24px;">Unit Detail — Estimate vs. Actual per Turn</div>
     <div style="font-size:0.78rem;color:#7f8fa4;margin:-6px 0 10px;">Per-turn comparison for spend that <em>is</em> tagged to a unit. <strong>Actuals span the full turn</strong> (from move-out onward), not the month selector above — a turn's cost accrues over months. Turn spend coded to the property without a unit isn't shown here — see property totals above for the complete figure.</div>
@@ -1713,7 +1743,7 @@ function buildCostsTab() {
       </table>
     </div>
     <div style="margin-top:10px;font-size:0.75rem;color:#a0aebb;">
-      Turn class labor (QBT) + Turn GL materials/contractor (Ramp) only. Data retained after move-in.
+      Turn class labor (QBT) + Turn GL materials/contractor from Ramp card spend and QuickBooks vendor bills. Data retained after move-in.
     </div>`;
 
   filteredCostsRows = costsRows.map((r, i) => ({ r, i }));
