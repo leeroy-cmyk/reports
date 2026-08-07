@@ -1702,10 +1702,14 @@ function buildCostsTab() {
   const gap = (RAW_COSTS && RAW_COSTS.qboGap) || null;
   const gapHtml = (gap && gap.total > 0)
     ? `<div class="qbo-gap">
-         <span class="qg-amt">${fmtC(gap.total)}</span>
-         <span>in QuickBooks vendor bills (${gap.lines} lines) is <strong>not counted</strong> above — it has no category that maps to a turn.</span>
-         ${Object.entries(gap.byCategory).sort((a,b)=>b[1]-a[1])
-             .map(([c,v]) => `<span class="qg-item">• <strong>${c}</strong> ${fmtC(v)}</span>`).join('')}
+         <div style="flex:1 1 100%;">
+           <span class="qg-amt">${fmtC(gap.total)}</span>
+           of QuickBooks vendor bills (${gap.lines} lines) carries a category too vague to classify,
+           so none of it reaches turn costs. <strong>Some is turn work, some is renovation — the category doesn't say.</strong>
+           For comparison, ${fmtC(gap.counted || 0)} of bills <em>was</em> coded clearly enough to count.
+         </div>
+         <span class="qg-item">🔧 <strong>Needs recoding in QuickBooks</strong> ${fmtC(gap.ambiguous || 0)} — generic buckets (Subcontractors, Uncategorized)</span>
+         <span class="qg-item">🔗 <strong>Multi-category splits</strong> ${fmtC(gap.split || 0)} — line detail exists in QBO; the header-level pull can't read it</span>
        </div>`
     : '';
 

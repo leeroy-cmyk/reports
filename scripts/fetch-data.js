@@ -469,11 +469,18 @@ const TC_RAMP_CATS = {
 //   'Uncategorized Expense'     uncoded at the source; fix it in QBO, not here
 //   'Discretionary/Nondiscretionary - Contractor'  the CapEx buckets turn costs
 //                               deliberately excludes (only 'CapEx Turns' counts)
+//   'CapEX - Appliance'         appliance capital — same exclusion; mapping it to
+//                               CapEx here would silently inflate turn spend
 // Whatever falls through is reported in turn_costs.qboGap so the uncoded dollars
 // stay visible instead of just vanishing.
+//
+// Both -Contractor and -Material exist for each bucket and both are real turn cost:
+// omitting the Material half dropped $29,658 of turn spend on the first full pull.
 const TC_QBO_NAME_CATS = {
-  'turn - contractor':'Turn','capex turn - contractor':'CapEx',
-  'r&m - contractor':'R&M','grounds - contractor':'Grounds',
+  'turn - contractor':'Turn',        'turn - material':'Turn',
+  'capex turn - contractor':'CapEx', 'capex turn - material':'CapEx',
+  'r&m - contractor':'R&M',          'r&m - material':'R&M',
+  'grounds - contractor':'Grounds',  'grounds - material':'Grounds',
 };
 
 function extractUnitCode(propField) {
@@ -576,24 +583,36 @@ function buildTurnCosts() {
   // and it is being retired in favour of keying vendor bills straight into QBO
   // (LeeRoy, 2026-08-07). ramp_bills.json feeds invoices_report only, not turn costs.
   const qboPath = path.join(DATA_DIR, 'qbo_processed.json');
-  const qboGap = { total: 0, lines: 0, byCategory: {} };
+  //
+  // qboGap tracks bills whose category cannot be resolved to ANY cost bucket. It is
+  // NOT a claim that this is all hidden turn spend — most of `Subcontractors` is
+  // w225/r202/r203 renovation. It is the amount whose category leaves the question
+  // unanswerable, split into the two problems, which have different fixes:
+  //   ambiguous — a human has to recode it in QuickBooks
+  //   split     — line detail exists in QBO, the header-level pull just can't see it,
+  //               so the v3 OAuth API alone would recover these
+  const qboGap = { total: 0, lines: 0, byCategory: {}, ambiguous: 0, split: 0, counted: 0 };
   let qboKept = 0;
   if (fs.existsSync(qboPath)) {
     const qbo = JSON.parse(fs.readFileSync(qboPath, 'utf8'));
     for (const tx of (qbo.transactions || [])) {
       const cat = TC_RAMP_CATS[tx.gl] || TC_QBO_NAME_CATS[String(tx.qbo_category || '').trim().toLowerCase()];
       if (cat !== 'Turn' && cat !== 'CapEx') {
-        // Not a turn line. Only count it as a GAP if it is plausibly turn work that
-        // was never coded — that is the number worth chasing in QuickBooks.
+        // Not a turn line. Only flag categories that could be CONCEALING turn work.
+        // Explicit non-turn buckets (Discretionary CapEx, Appliances, Auto, Postage…)
+        // are correctly excluded and are not a gap.
         const c = String(tx.qbo_category || '(none)');
-        if (/subcontract|uncategor|split/i.test(c)) {
+        const isSplit = /split/i.test(c);
+        if (isSplit || /subcontract|uncategor/i.test(c)) {
           qboGap.total = Math.round((qboGap.total + tx.amt) * 100) / 100;
           qboGap.lines++;
+          qboGap[isSplit ? 'split' : 'ambiguous'] = Math.round((qboGap[isSplit ? 'split' : 'ambiguous'] + tx.amt) * 100) / 100;
           qboGap.byCategory[c] = Math.round(((qboGap.byCategory[c] || 0) + tx.amt) * 100) / 100;
         }
         continue;
       }
       qboKept++;
+      qboGap.counted = Math.round((qboGap.counted + tx.amt) * 100) / 100;
       addPropSpend(extractPropCode(tx.dept), 'materials', tx.d, tx.amt);
       const unitCode = extractUnitCode(tx.dept);
       if (unitCode) ensureUnit(unitCode).materials.push({ d: tx.d, amt: tx.amt, cat, ln: tx.vendor || tx.ln, src: 'qbo' });
