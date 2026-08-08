@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-08-08T05:27:51.682Z",
+  "fetched_at": "2026-08-08T09:54:27.722Z",
   "units": {
     "2": {
       "moveOut": "2026-07-31",
@@ -589,16 +589,9 @@
       "unit": "102",
       "city": "Spokane"
     },
-    "788": {
-      "moveOut": "2026-05-31",
-      "status": "Vacant-Rented",
-      "prop": "v202",
-      "unit": "2",
-      "city": "Spokane Valley"
-    },
     "805": {
       "moveOut": "2026-08-07",
-      "status": "Notice-Unrented",
+      "status": "Vacant-Unrented",
       "prop": "tc34",
       "unit": "A3",
       "city": "Tacoma"
@@ -701,13 +694,6 @@
       "unit": "L205",
       "city": "Kennewick"
     },
-    "978": {
-      "moveOut": "2026-06-30",
-      "status": "Vacant-Rented",
-      "prop": "kn47 K1",
-      "unit": "M103",
-      "city": "Kennewick"
-    },
     "995": {
       "moveOut": "2026-07-31",
       "status": "Vacant-Unrented",
@@ -762,13 +748,6 @@
       "status": "Notice-Unrented",
       "prop": "kn47 K2",
       "unit": "E106",
-      "city": "Kennewick"
-    },
-    "1072": {
-      "moveOut": "2026-05-31",
-      "status": "Vacant-Rented",
-      "prop": "kn47-k3",
-      "unit": "K101",
       "city": "Kennewick"
     },
     "1077": {
@@ -986,13 +965,6 @@
       "status": "Vacant-Unrented",
       "prop": "tc68",
       "unit": "D091",
-      "city": "Tacoma"
-    },
-    "1243": {
-      "moveOut": "2026-05-08",
-      "status": "Vacant-Rented",
-      "prop": "tc68",
-      "unit": "D094",
       "city": "Tacoma"
     },
     "1245": {
@@ -2566,6 +2538,46 @@
       "unit": "104",
       "city": "Spokane",
       "to": "2026-08-30"
+    },
+    {
+      "date": "2026-08-08",
+      "type": "moveout_removed",
+      "unit_id": "788",
+      "prop": "v202",
+      "unit": "2",
+      "city": "Spokane Valley",
+      "from": "2026-05-31",
+      "was_status": "Vacant-Rented"
+    },
+    {
+      "date": "2026-08-08",
+      "type": "moveout_removed",
+      "unit_id": "978",
+      "prop": "kn47 K1",
+      "unit": "M103",
+      "city": "Kennewick",
+      "from": "2026-06-30",
+      "was_status": "Vacant-Rented"
+    },
+    {
+      "date": "2026-08-08",
+      "type": "moveout_removed",
+      "unit_id": "1072",
+      "prop": "kn47-k3",
+      "unit": "K101",
+      "city": "Kennewick",
+      "from": "2026-05-31",
+      "was_status": "Vacant-Rented"
+    },
+    {
+      "date": "2026-08-08",
+      "type": "moveout_removed",
+      "unit_id": "1243",
+      "prop": "tc68",
+      "unit": "D094",
+      "city": "Tacoma",
+      "from": "2026-05-08",
+      "was_status": "Vacant-Rented"
     }
   ]
 }
