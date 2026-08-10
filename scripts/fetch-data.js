@@ -81,6 +81,51 @@ function buildMoveoutChanges() {
   console.log(`buildMoveoutChanges: ${firstRun ? 'seeded state (first run)' : nc.length + ' new change(s)'}`);
 }
 
+// ── VACANCY LEDGER (turn_ledger.json) ────────────────────────────────────────
+// AppFolio's unit_vacancy report only returns units that are CURRENTLY vacant. The
+// moment a unit re-rents it disappears, taking its move-out and rent-ready dates with
+// it — so a turn completed earlier this month can lose the dates the weekly report
+// needs. Measured 2026-08-10: only 16% of June completions were still in the snapshot,
+// vs 67% of August's.
+//
+// This is an append-only ledger: every run records each vacant unit's move-out and the
+// FIRST date we ever observed it rent-ready, keyed by unit_id, and never deletes. Once
+// captured, a unit keeps its dates permanently. It only accumulates going forward —
+// dates already lost to re-renting cannot be recovered.
+function buildTurnLedger() {
+  const tvPath = path.join(DATA_DIR, 'turnvac.json');
+  if (!fs.existsSync(tvPath)) { console.log('buildTurnLedger: turnvac.json missing, skip.'); return; }
+  const rows = JSON.parse(fs.readFileSync(tvPath, 'utf8')).rows || [];
+  const today = new Date().toLocaleDateString('en-CA', { timeZone: 'America/Los_Angeles' });
+  const p = path.join(DATA_DIR, 'turn_ledger.json');
+  let led = { units: {} };
+  if (fs.existsSync(p)) { try { led = JSON.parse(fs.readFileSync(p, 'utf8')); } catch(e) {} }
+  const U = led.units || (led.units = {});
+  let added = 0, readied = 0;
+
+  for (const r of rows) {
+    if (r.unit_id == null) continue;
+    const k = String(r.unit_id);
+    const e = U[k] || (U[k] = { prop: r.property_name, unit: r.unit, city: r.city, first_seen: today });
+    added += e.first_seen === today ? 1 : 0;
+    e.prop = r.property_name; e.unit = r.unit; e.city = r.city;
+    // Move-out can legitimately be revised (Rule A tracks that); keep the latest value.
+    if (r.last_move_out) e.move_out = r.last_move_out;
+    // Rent-ready: record the first observation only, so a later re-turn of the same unit
+    // cannot overwrite the date that belongs to the turn we are reporting on.
+    const isReady = String(r.rent_ready || '').toLowerCase() === 'yes';
+    if (isReady && !e.ready_date) {
+      // Prefer AppFolio's own date over "the day we noticed", falling back to today.
+      e.ready_date = r.ready_for_showing_on || r.available_on || today;
+      e.ready_source = r.ready_for_showing_on ? 'ready_for_showing_on' : (r.available_on ? 'available_on' : 'observed');
+      readied++;
+    }
+    e.last_seen = today;
+  }
+  save('turn_ledger.json', { fetched_at: new Date().toISOString(), units: U });
+  console.log(`turn_ledger.json: ${Object.keys(U).length} units tracked (${added} new, ${readied} newly rent-ready)`);
+}
+
 async function fetchWorkOrders() {
   console.log('Fetching work_order...');
   const raw = await fetchAF('/api/v2/reports/work_order.json', { property_visibility: 'active' });
@@ -683,6 +728,138 @@ function buildTurnCosts() {
   save('turn_costs.json', { ok: true, fetched_at: qbt.fetched_at, units, propSpend, propTurns, qboGap });
   console.log('turn_costs.json: ' + Object.keys(units).length + ' units, ' + Object.keys(propSpend).length + ' properties, ' +
     Object.keys(propTurns).length + ' props w/ completed PM turns');
+}
+
+// ── WEEKLY REPORT: TURNS COMPLETED MONTH-TO-DATE ─────────────────────────────
+// Format fixed by LeeRoy 2026-08-10. Scope: turns COMPLETED this month to date —
+// work done in earlier months still lands here as long as it completed this month
+// and the cost is captured. Six columns, in this order:
+//   completion date | property | unit | total cost | #days to complete | #days to turn
+//
+// Definitions, all confirmed by LeeRoy:
+//   completion date  = PropertyMeld last-meld completion (`completed_date`). The only
+//                      date that exists for EVERY completed turn, so it is what scopes
+//                      rows into the month.
+//   rent ready       = AppFolio rent-ready date. Both day-counts end here. It is NOT
+//                      the completion date, and it goes blank once a unit re-rents —
+//                      hence turn_ledger.json, which captures it before that happens.
+//   #days to complete = move-out → rent ready
+//   #days to turn     = first in-house appt (paint/maint, `first_appt`) → rent ready
+//   total cost        = QBT labor + Ramp card materials + QuickBooks vendor bills,
+//                       over the WHOLE turn (not a period slice).
+// Rows are never dropped for missing dates — a blank cell says "not captured", which
+// is honest; omitting the row would understate completed-turn count and cost.
+// Resolve a PropertyMeld (property, unit) pair to the unit key used in turn_costs.
+// Tries most-specific first so two units in different buildings can never collide.
+// Matching is case-insensitive because the same building shows up as both `k3` and
+// `K3` in real dept strings.
+function findUnitCode(units, pc, propertyName, unit) {
+  const u = String(unit).trim();
+  const plain = `${pc}-${u}`;
+  // Building qualifier = whatever follows the property code in the property name,
+  // e.g. "kn47 K1" -> k1, "kn47-k3" -> k3. Absent for single-building properties.
+  const tail = String(propertyName || '').slice(String(propertyName || '').toLowerCase().indexOf(pc) + pc.length);
+  const bld = (tail.match(/[a-z]?\d+[a-z]?/i) || [])[0] || null;
+  const cands = bld ? [`${pc}-${bld}-${u}`, plain] : [plain];
+  const lc = {};
+  for (const k of Object.keys(units)) lc[k.toLowerCase()] = k;
+  // Exhaust each candidate (exact THEN case-insensitive) before dropping to a less
+  // specific one — otherwise an exact hit on the plain key wins over the correct
+  // building-qualified key that merely differs in case (`kn47-k3-k202` vs `-K202`).
+  for (const c of cands) {
+    if (units[c]) return c;
+    if (lc[c.toLowerCase()]) return lc[c.toLowerCase()];
+  }
+  return plain;   // nothing matched — return the plain form so the row still renders at $0
+}
+
+function buildTurnsCompleted() {
+  const pmPath = path.join(DATA_DIR, 'pm_turns.json');
+  const tcPath = path.join(DATA_DIR, 'turn_costs.json');
+  if (!fs.existsSync(pmPath)) { console.log('buildTurnsCompleted: pm_turns.json missing, skip.'); return; }
+  const pm = JSON.parse(fs.readFileSync(pmPath, 'utf8'));
+  const costs = fs.existsSync(tcPath) ? JSON.parse(fs.readFileSync(tcPath, 'utf8')) : { units: {} };
+
+  const today = new Date().toLocaleDateString('en-CA', { timeZone: 'America/Los_Angeles' });
+  const month = today.slice(0, 7);
+
+  // Date lookups: live vacancy snapshot first, then the ledger for units that re-rented.
+  const tvPath = path.join(DATA_DIR, 'turnvac.json');
+  const ledPath = path.join(DATA_DIR, 'turn_ledger.json');
+  const nrmU = s => String(s || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+  const byUnit = {};   // "propcode|unit" → { move_out, ready_date, src }
+  const put = (prop, unit, mo, rd, src) => {
+    const pc = extractPropCode(prop);
+    if (!pc || !unit) return;
+    const k = pc + '|' + nrmU(unit);
+    const e = byUnit[k] || (byUnit[k] = {});
+    if (mo && !e.move_out)   { e.move_out = mo;   e.mo_src = src; }
+    if (rd && !e.ready_date) { e.ready_date = rd; e.rd_src = src; }
+  };
+  if (fs.existsSync(tvPath)) {
+    for (const r of (JSON.parse(fs.readFileSync(tvPath, 'utf8')).rows || [])) {
+      const ready = String(r.rent_ready || '').toLowerCase() === 'yes'
+        ? (r.ready_for_showing_on || r.available_on || null) : null;
+      put(r.property_name, r.unit, r.last_move_out || null, ready, 'vacancy');
+    }
+  }
+  if (fs.existsSync(ledPath)) {
+    const U = JSON.parse(fs.readFileSync(ledPath, 'utf8')).units || {};
+    for (const e of Object.values(U)) put(e.prop, e.unit, e.move_out || null, e.ready_date || null, 'ledger');
+  }
+
+  const days = (a, b) => (a && b) ? Math.round((new Date(b + 'T12:00:00Z') - new Date(a + 'T12:00:00Z')) / 864e5) : null;
+
+  const rows = [];
+  for (const t of (pm.turns || [])) {
+    // Same completeness test as the completedByMonth rollup, so the two agree.
+    if (t.status !== 'COMPLETE' || !/turn/i.test(t.name || '') || /pest/i.test(t.name || '')) continue;
+    if (!t.completed_date || t.completed_date.slice(0, 7) !== month) continue;
+    const pc = extractPropCode(t.property);
+    if (!pc || !t.unit) continue;
+    // Cost keys carry the building qualifier for multi-building properties —
+    // `kn47-k1-H101`, not `kn47-H101` (and kn47-k1-E205 / kn47-k2-E205 are different
+    // units, so it cannot be ignored). PropertyMeld puts that qualifier on the
+    // PROPERTY name ("kn47 K1", "kn47-k3") while the cost key puts it on the unit, so
+    // try building-qualified first and fall back to the plain form.
+    const code = findUnitCode(costs.units || {}, pc, t.property, t.unit);
+    const u = costs.units?.[code];
+    const labor = (u?.labor || []).reduce((s, e) => s + e.cost, 0);
+    const mats  = (u?.materials || []).reduce((s, e) => s + e.amt, 0);
+    const d = byUnit[pc + '|' + nrmU(t.unit)] || {};
+    rows.push({
+      completed:  t.completed_date,
+      property:   t.property,
+      prop_code:  pc,
+      unit:       String(t.unit).trim(),
+      labor:      Math.round(labor * 100) / 100,
+      materials:  Math.round(mats * 100) / 100,
+      total_cost: Math.round((labor + mats) * 100) / 100,
+      move_out:   d.move_out || null,
+      ready_date: d.ready_date || null,
+      first_appt: t.first_appt || null,
+      days_to_complete: days(d.move_out, d.ready_date),
+      days_to_turn:     days(t.first_appt, d.ready_date),
+      proj_id:    t.id,
+    });
+  }
+  rows.sort((a, b) => b.completed.localeCompare(a.completed) || a.property.localeCompare(b.property));
+
+  const n = rows.length;
+  const avg = k => { const v = rows.map(r => r[k]).filter(x => x != null); return v.length ? Math.round(v.reduce((s, x) => s + x, 0) / v.length) : null; };
+  const summary = {
+    month, as_of: today, turns: n,
+    total_cost:   Math.round(rows.reduce((s, r) => s + r.total_cost, 0) * 100) / 100,
+    avg_cost:     n ? Math.round(rows.reduce((s, r) => s + r.total_cost, 0) / n * 100) / 100 : 0,
+    avg_days_to_complete: avg('days_to_complete'),
+    avg_days_to_turn:     avg('days_to_turn'),
+    missing_move_out: rows.filter(r => !r.move_out).length,
+    missing_ready:    rows.filter(r => !r.ready_date).length,
+    zero_cost:        rows.filter(r => r.total_cost === 0).length,
+  };
+  save('turns_completed.json', { ok: true, fetched_at: new Date().toISOString(), summary, rows });
+  console.log(`turns_completed.json: ${n} turns completed in ${month} MTD, $${summary.total_cost.toLocaleString()}`
+    + (summary.missing_ready ? ` (${summary.missing_ready} missing rent-ready date)` : ''));
 }
 
 // ── TOOLS & SUPPLIES ─────────────────────────────────────────────────────────
@@ -1383,6 +1560,10 @@ async function fetchPropertyMeldTurns() {
           final_walk:      finalWalkDate,
           last_maint_paint: lastMaintPaint,
           last_clean:       lastClean,
+          // Date the turn finished = LAST meld completion. Same rule the completedTurns
+          // rollup uses, so the weekly report and the by-month KPI can never disagree.
+          // Present on ACTIVE turns too (it just means "latest meld done so far").
+          completed_date: lastDone,
           total_melds:  proj.total_melds,
           done_melds:   proj.total_completed_melds,
           tasks,
@@ -1571,6 +1752,7 @@ const FETCH_ONLY = process.env.FETCH_ONLY || 'all';
 (async () => {
   if (FETCH_ONLY === 'costs-only') {
     buildTurnCosts();
+    buildTurnsCompleted();
     console.log('Done.');
     return;
   }
@@ -1587,6 +1769,7 @@ const FETCH_ONLY = process.env.FETCH_ONLY || 'all';
     buildTurnCosts();
     buildToolsSupplies();
     buildAppliances();
+    buildTurnsCompleted();
     console.log('Done.');
     return;
   }
@@ -1595,18 +1778,21 @@ const FETCH_ONLY = process.env.FETCH_ONLY || 'all';
     await fetchPropertyMeldWOs();
     await fetchPropertyMeldTurns();
     await fetchPMTechMetrics();
+    buildTurnsCompleted();
     console.log('Done.');
     return;
   }
 
   if (FETCH_ONLY === 'moveout-only') {
     buildMoveoutChanges();
+    buildTurnLedger();
     console.log('Done.');
     return;
   }
 
   if (FETCH_ONLY === 'turns-only') {
     await fetchPropertyMeldTurns();
+    buildTurnsCompleted();
     console.log('Done.');
     return;
   }
@@ -1699,10 +1885,12 @@ const FETCH_ONLY = process.env.FETCH_ONLY || 'all';
     try {
       await fetchTurnVac();
       buildMoveoutChanges(); // Rule A: flag move-out date changes / cancellations
+      buildTurnLedger();     // capture move-out/rent-ready before units re-rent out of the snapshot
       await fetchWorkOrders();
       await fetchBudget();
       await syncVacanciesToFirebase();
       buildTurnCosts(); // keep estimates fresh every 5 min
+      buildTurnsCompleted();
     } catch(e) {
       console.error('AppFolio fetch failed:', e.message);
       process.exit(1);
@@ -1710,12 +1898,12 @@ const FETCH_ONLY = process.env.FETCH_ONLY || 'all';
   }
 
   if (runQBT) {
-    try { await fetchQBTime(); buildAuditData(); buildTurnCosts(); }
+    try { await fetchQBTime(); buildAuditData(); buildTurnCosts(); buildTurnsCompleted(); }
     catch(e) { console.error('QBTime fetch failed:', e.message); if (FETCH_ONLY === 'qbt-only') process.exit(1); }
   }
 
   if (runRamp) {
-    try { await fetchRampTransactions(); buildRampProcessed(); buildTurnCosts(); buildToolsSupplies(); buildAppliances(); }
+    try { await fetchRampTransactions(); buildRampProcessed(); buildTurnCosts(); buildToolsSupplies(); buildAppliances(); buildTurnsCompleted(); }
     catch(e) { console.error('Ramp fetch failed:', e.message); if (FETCH_ONLY === 'ramp-only') process.exit(1); }
     try { await fetchRampBills(); }
     catch(e) { console.error('Ramp bills fetch failed (non-fatal):', e.message); }

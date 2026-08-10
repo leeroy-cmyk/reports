@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Turns Completed — Weekly Report</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Segoe UI', sans-serif; background: #f4f6f9; color: #1a2535; min-height: 100vh; }
+header { background: #fff; border-bottom: 2px solid #d0dce8; padding: 16px 32px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 1px 4px rgba(0,0,0,.06); }
+header h1 { font-size: 1.4rem; color: #1a5276; }
+.header-sub { font-size: 0.8rem; color: #7f8fa4; margin-top: 3px; }
+.wrap { padding: 28px 32px; }
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin-bottom: 24px; }
+.kpi-card { background: #fff; border: 1px solid #d0dce8; border-left: 4px solid #2e86c1; border-radius: 8px; padding: 16px 20px; box-shadow: 0 1px 3px rgba(0,0,0,.05); }
+.kpi-label { font-size: 0.72rem; color: #7f8fa4; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 6px; }
+.kpi-value { font-size: 1.65rem; font-weight: 700; color: #1a5276; line-height: 1.1; }
+.kpi-sub { font-size: 0.73rem; color: #a0aebb; margin-top: 5px; }
+.section-title { font-size: 1rem; color: #1a5276; font-weight: 600; margin: 24px 0 6px; padding-bottom: 6px; border-bottom: 2px solid #d0dce8; }
+.note { font-size: 0.78rem; color: #7f8fa4; margin: 0 0 12px; }
+.tbl-wrap { overflow-x: auto; border: 1px solid #d0dce8; border-radius: 8px; }
+table { width: 100%; border-collapse: collapse; }
+th { text-align: left; padding: 10px 12px; font-size: 0.72rem; color: #7f8fa4; text-transform: uppercase; letter-spacing: 0.7px; border-bottom: 2px solid #d0dce8; background: #f4f6f9; white-space: nowrap; cursor: pointer; user-select: none; }
+th:hover { color: #1a5276; }
+th.num, td.num { text-align: right; }
+td { padding: 9px 12px; font-size: 0.85rem; border-bottom: 1px solid #e8edf2; background: #fff; white-space: nowrap; }
+tr:hover td { background: #eaf2f8; }
+tfoot td { background: #f4f6f9; font-weight: 700; color: #1a5276; border-top: 2px solid #d0dce8; border-bottom: none; }
+.blank { color: #c3ccd6; font-style: italic; }
+.zero-cost td { background: #fffdf5; }
+.zero-cost:hover td { background: #fdf6e3; }
+.pill { display: inline-block; padding: 2px 8px; border-radius: 11px; font-size: 0.7rem; font-weight: 600; background: #e2e9f0; color: #5b6d80; }
+.caveat { background: #fdf6e3; border: 1px solid #f0d9a0; border-left: 4px solid #d68910; border-radius: 8px; padding: 12px 16px; margin-bottom: 18px; font-size: 0.82rem; color: #6b5518; }
+.caveat strong { color: #8a6410; }
+.empty { padding: 40px; text-align: center; color: #7f8fa4; }
+.defs { margin-top: 22px; font-size: 0.76rem; color: #8b97a5; line-height: 1.6; background:#fff; border:1px solid #e2e8ee; border-radius:8px; padding:14px 18px; }
+.defs b { color: #5b6d80; }
+@media print {
+  header { box-shadow: none; }
+  .caveat { border-left-width: 3px; }
+  tr:hover td { background: #fff; }
+}
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <h1>Turns Completed — Month to Date</h1>
+    <div class="header-sub" id="sub">Loading…</div>
+  </div>
+  <div class="pill" id="asOf"></div>
+</header>
+
+<div class="wrap">
+  <div id="kpis" class="kpi-grid"></div>
+  <div id="caveat"></div>
+  <div class="section-title">Completed Turns</div>
+  <div class="note">A turn lands here when it <strong>completed this month</strong>, even if the work ran across earlier months. Cost is the full turn, all sources.</div>
+  <div class="tbl-wrap"><table id="tbl">
+    <thead><tr>
+      <th data-k="completed">Completion Date</th>
+      <th data-k="property">Property</th>
+      <th data-k="unit">Unit</th>
+      <th data-k="total_cost" class="num">Total Cost</th>
+      <th data-k="days_to_complete" class="num">Days to Complete</th>
+      <th data-k="days_to_turn" class="num">Days to Turn</th>
+    </tr></thead>
+    <tbody id="tb"></tbody>
+    <tfoot id="tf"></tfoot>
+  </table></div>
+
+  <div class="defs">
+    <div><b>Completion Date</b> — date the last work item on the turn was completed in PropertyMeld.</div>
+    <div><b>Total Cost</b> — QBTime turn labor + Ramp card materials + QuickBooks vendor bills, across the whole turn.</div>
+    <div><b>Days to Complete</b> — move-out → rent ready (AppFolio).</div>
+    <div><b>Days to Turn</b> — first in-house appointment (paint/maintenance) → rent ready (AppFolio).</div>
+  </div>
+</div>
+
+<script>
+const fmtC = n => '$' + Math.round(n).toLocaleString('en-US');
+const fmtD = d => d ? (d.slice(5,7) + '/' + d.slice(8,10)) : null;
+const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+let ROWS = [], SORT = { k: 'completed', dir: -1 };
+
+function cell(v, cls) {
+  return v == null || v === ''
+    ? `<td class="${cls||''}"><span class="blank">—</span></td>`
+    : `<td class="${cls||''}">${v}</td>`;
+}
+
+function render() {
+  const tb = document.getElementById('tb'), tf = document.getElementById('tf');
+  if (!ROWS.length) {
+    tb.innerHTML = '<tr><td colspan="6" class="empty">No turns completed yet this month.</td></tr>';
+    tf.innerHTML = ''; return;
+  }
+  const r = [...ROWS].sort((a, b) => {
+    let x = a[SORT.k], y = b[SORT.k];
+    if (x == null && y == null) return 0;
+    if (x == null) return 1;            // blanks always last, regardless of direction
+    if (y == null) return -1;
+    if (typeof x === 'number') return (x - y) * SORT.dir;
+    return String(x).localeCompare(String(y)) * SORT.dir;
+  });
+  tb.innerHTML = r.map(x => `<tr class="${x.total_cost === 0 ? 'zero-cost' : ''}">
+    ${cell(fmtD(x.completed))}
+    ${cell(x.property)}
+    ${cell(x.unit)}
+    ${cell(fmtC(x.total_cost), 'num')}
+    ${cell(x.days_to_complete, 'num')}
+    ${cell(x.days_to_turn, 'num')}
+  </tr>`).join('');
+
+  const tot = ROWS.reduce((s, x) => s + x.total_cost, 0);
+  const avg = k => { const v = ROWS.map(x => x[k]).filter(n => n != null); return v.length ? Math.round(v.reduce((s,n)=>s+n,0)/v.length) : null; };
+  const dc = avg('days_to_complete'), dt = avg('days_to_turn');
+  tf.innerHTML = `<tr>
+    <td colspan="3">${ROWS.length} turn${ROWS.length===1?'':'s'}</td>
+    <td class="num">${fmtC(tot)}</td>
+    <td class="num">${dc==null?'—':'avg '+dc}</td>
+    <td class="num">${dt==null?'—':'avg '+dt}</td>
+  </tr>`;
+}
+
+document.querySelectorAll('th').forEach(th => th.onclick = () => {
+  const k = th.dataset.k;
+  SORT = { k, dir: SORT.k === k ? -SORT.dir : (k === 'completed' ? -1 : 1) };
+  document.querySelectorAll('th').forEach(t => t.style.color = '');
+  th.style.color = '#2e86c1';
+  render();
+});
+
+fetch('./data/turns_completed.json?t=' + Date.now())
+  .then(r => r.json())
+  .then(j => {
+    ROWS = j.rows || [];
+    const s = j.summary || {};
+    const [y, m] = (s.month || '').split('-');
+    document.getElementById('sub').textContent =
+      `${MONTHS[+m - 1] || ''} ${y || ''} — turns completed this month to date`;
+    document.getElementById('asOf').textContent = 'as of ' + (s.as_of || '');
+
+    document.getElementById('kpis').innerHTML = [
+      { l: 'Turns Completed', v: s.turns ?? 0, sub: 'month to date' },
+      { l: 'Total Cost', v: fmtC(s.total_cost || 0), sub: 'labor + materials + bills' },
+      { l: 'Avg Cost / Turn', v: fmtC(s.avg_cost || 0), sub: (s.turns || 0) + ' turns' },
+      { l: 'Avg Days to Complete', v: s.avg_days_to_complete ?? '—', sub: 'move-out → rent ready' },
+      { l: 'Avg Days to Turn', v: s.avg_days_to_turn ?? '—', sub: 'in-house work → rent ready' },
+    ].map(k => `<div class="kpi-card"><div class="kpi-label">${k.l}</div><div class="kpi-value">${k.v}</div><div class="kpi-sub">${k.sub}</div></div>`).join('');
+
+    // Be explicit about what the blanks mean rather than letting them read as zeros.
+    const bits = [];
+    if (s.missing_ready)    bits.push(`<strong>${s.missing_ready}</strong> missing a rent-ready date`);
+    if (s.missing_move_out) bits.push(`<strong>${s.missing_move_out}</strong> missing a move-out date`);
+    if (s.zero_cost)        bits.push(`<strong>${s.zero_cost}</strong> with no cost captured yet`);
+    document.getElementById('caveat').innerHTML = bits.length
+      ? `<div class="caveat">${bits.join(' · ')}. AppFolio only exposes these dates while a unit is still vacant, so a turn whose unit has already re-rented can lose them — those cells show “—” rather than a wrong number. Dates are being recorded daily from now on, so this shrinks over time.</div>`
+      : '';
+    render();
+  })
+  .catch(e => {
+    document.getElementById('sub').textContent = 'Could not load data';
+    document.getElementById('tb').innerHTML =
+      `<tr><td colspan="6" class="empty">turns_completed.json not available.<br><span style="font-size:.8rem">Run <code>FETCH_ONLY=costs-only node scripts/fetch-data.js</code></span></td></tr>`;
+  });
+</script>
+</body>
+</html>
