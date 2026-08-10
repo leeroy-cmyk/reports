@@ -582,6 +582,11 @@ function buildTurnCosts() {
   // Bill, so it cannot collide. Ramp BILL PAY was the one channel that could have —
   // and it is being retired in favour of keying vendor bills straight into QBO
   // (LeeRoy, 2026-08-07). ramp_bills.json feeds invoices_report only, not turn costs.
+  // Vendor-bill reporting starts June 2026 — LeeRoy, 2026-08-10: "just june 2026 and
+  // move forward." Earlier bills are coded too inconsistently to be worth carrying.
+  // qbo/to_reports_feed.js already applies this floor; repeated here so the report
+  // cannot silently include older bills if a wider feed is ever dropped in.
+  const QBO_SINCE = '2026-06-01';
   const qboPath = path.join(DATA_DIR, 'qbo_processed.json');
   //
   // qboGap tracks bills whose category cannot be resolved to ANY cost bucket. It is
@@ -596,6 +601,7 @@ function buildTurnCosts() {
   if (fs.existsSync(qboPath)) {
     const qbo = JSON.parse(fs.readFileSync(qboPath, 'utf8'));
     for (const tx of (qbo.transactions || [])) {
+      if (!tx.d || tx.d < QBO_SINCE) continue;
       const cat = TC_RAMP_CATS[tx.gl] || TC_QBO_NAME_CATS[String(tx.qbo_category || '').trim().toLowerCase()];
       if (cat !== 'Turn' && cat !== 'CapEx') {
         // Not a turn line. Only flag categories that could be CONCEALING turn work.
