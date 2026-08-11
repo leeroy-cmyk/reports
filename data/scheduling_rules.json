@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-08T14:26:25.655Z",
-  "last_checked": "2026-08-08T14:26:25.655Z",
+  "generated_at": "2026-08-11T14:52:48.560Z",
+  "last_checked": "2026-08-11T14:52:48.560Z",
   "source": "leeroy-cmyk/pm-scheduling/CLAUDE.md",
   "count": 56,
   "rules": [
@@ -263,6 +263,7 @@
         "A property lands on the calendar as often as PropertyMeld generates its instance — most are weekly; a few (e.g. h731) are intentionally bi-weekly.",
         "**h731 duplicate recurrence removed (2026-07-16):** h731 briefly had two PropertyMeld recurrences pointing at the same slot — one correct (every 15 days, id 163904) and one duplicate firing every 7 days (id 179920). Florencia deleted the 7-day one in PropertyMeld; the TEMPLATE in `pm_lawn_scheduler.js` now only maps the bi-weekly id.",
         "**o155-Elm added to the template (2026-07-16, id 162926):** a separate recurrence from o155-Oak (162927) that had been running unscheduled/manual. Now fixed to Thursday 12:30 PM (1.25h), right after o155-Oak's slot ends.",
+        "**c702 \"Dumpster Pick Up\" added to the template (2026-08-11, id 186065):** Friday 12:15 PM (1h), right after k308. First non-\"Lawn service\"-titled recurring meld on this route, so the scope filter (which only matched `brief_description` against \"Lawn service\") had to widen to also admit any `recurring_meld` id already whitelisted in TEMPLATE — otherwise a correctly templated meld with a different title is silently dropped before the TEMPLATE lookup ever runs.",
         "A new recurrence not yet in the template is flagged as UNKNOWN so it can be added to the template."
       ]
     },
