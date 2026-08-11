@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-08-11T14:35:43.929Z",
+  "fetched_at": "2026-08-11T15:39:54.734Z",
   "units": {
     "2": {
       "moveOut": "2026-07-31",
@@ -892,7 +892,7 @@
     },
     "1220": {
       "moveOut": null,
-      "status": "Vacant-Rented",
+      "status": "Vacant-Unrented",
       "prop": "tc68",
       "unit": "C71",
       "city": "Tacoma"
@@ -985,13 +985,6 @@
       "moveOut": "2026-07-30",
       "status": "Vacant-Unrented",
       "prop": "kn47 K2",
-      "unit": "Maintenance Garages (2)",
-      "city": "Kennewick"
-    },
-    "1268": {
-      "moveOut": null,
-      "status": "Vacant-Unrented",
-      "prop": "kn47-k3",
       "unit": "Maintenance Garages (2)",
       "city": "Kennewick"
     },
@@ -2616,6 +2609,16 @@
       "unit": "C18",
       "city": "Pasco",
       "to": "2026-08-31"
+    },
+    {
+      "date": "2026-08-11",
+      "type": "moveout_removed",
+      "unit_id": "1268",
+      "prop": "kn47-k3",
+      "unit": "Maintenance Garages (2)",
+      "city": "Kennewick",
+      "from": null,
+      "was_status": "Vacant-Unrented"
     }
   ]
 }
