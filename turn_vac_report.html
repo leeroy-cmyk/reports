@@ -150,6 +150,10 @@
 
   .cost-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
   .cost-table th { text-align: left; padding: 10px 12px; font-size: 0.73rem; color: #7f8fa4; text-transform: uppercase; letter-spacing: 0.7px; border-bottom: 2px solid #d0dce8; background: #f4f6f9; white-space: nowrap; }
+  .cost-table th.sortable, .prop-table th.sortable { cursor: pointer; user-select: none; }
+  .cost-table th.sortable:hover, .prop-table th.sortable:hover { color: #1a5276; }
+  .cost-table th.sorted, .prop-table th.sorted { color: #1a5276; }
+  .cost-table th .sarrow, .prop-table th .sarrow { color: #2e86c1; font-size: 0.68rem; margin-left: 4px; }
   .cost-table td { padding: 9px 12px; border-bottom: 1px solid #e8edf2; background: #fff; white-space: nowrap; }
   .cost-table tr.cost-data-row { cursor: pointer; }
   .cost-table tr.cost-data-row:hover td { background: #eaf2f8; }
@@ -1566,27 +1570,42 @@ function buildPropSummaryTable() {
     props[prop] = { labor, mats, total: labor + mats, turns, avg: turns ? allTime / turns : 0 };
   });
 
-  const rows = Object.entries(props).sort((a,b) => b[1].total - a[1].total).map(([prop, p]) => {
-    return `<tr>
-      <td><strong>${prop}</strong></td>
+  propSummaryRows = Object.entries(props).map(([prop, p]) => ({ prop, ...p }));
+
+  return `<div style="overflow-x:auto;border:1px solid #d0dce8;border-radius:8px;margin-bottom:24px;">
+    <table class="prop-table">
+      <thead><tr>
+        <th class="sortable" data-sk="prop" onclick="sortProps('prop')">Property</th>
+        <th class="sortable" data-sk="labor" onclick="sortProps('labor')">Labor (period)</th>
+        <th class="sortable" data-sk="mats" onclick="sortProps('mats')">Materials (period)</th>
+        <th class="sortable" data-sk="total" onclick="sortProps('total')">Spent (period)</th>
+        <th class="sortable" data-sk="turns" onclick="sortProps('turns')">Turns to Date</th>
+        <th class="sortable" data-sk="avg" onclick="sortProps('avg')">Avg $/Turn (all-time)</th>
+      </tr></thead>
+      <tbody id="propSummaryTbody"></tbody>
+    </table>
+  </div>`;
+}
+
+function sortProps(k) {
+  PROP_SORT = { k, dir: PROP_SORT.k === k ? -PROP_SORT.dir : (k === 'prop' ? 1 : -1) };
+  renderPropSummary();
+}
+
+function renderPropSummary() {
+  const tb = document.getElementById('propSummaryTbody');
+  if (!tb) return;
+  const sorted = [...propSummaryRows].sort((a, b) => cmpSort(a[PROP_SORT.k], b[PROP_SORT.k], PROP_SORT.dir));
+  tb.innerHTML = sorted.map(p => `<tr>
+      <td><strong>${p.prop}</strong></td>
       <td>${p.labor > 0 ? fmtC(p.labor) : '<span style="color:#d0dce8">—</span>'}</td>
       <td>${p.mats > 0 ? fmtC(p.mats) : '<span style="color:#d0dce8">—</span>'}</td>
       <td><strong>${fmtC(p.total)}</strong></td>
       <td>${p.turns > 0 ? `<span class="badge cost-complete">${p.turns}</span>` : '<span style="color:#bdc3c7">—</span>'}</td>
       <td>${p.turns > 0 ? fmtC(p.avg) : '<span style="color:#bdc3c7">—</span>'}</td>
-    </tr>`;
-  }).join('');
-
-  return `<div style="overflow-x:auto;border:1px solid #d0dce8;border-radius:8px;margin-bottom:24px;">
-    <table class="prop-table">
-      <thead><tr>
-        <th>Property</th>
-        <th>Labor (period)</th><th>Materials (period)</th><th>Spent (period)</th>
-        <th>Turns to Date</th><th>Avg $/Turn (all-time)</th>
-      </tr></thead>
-      <tbody>${rows || '<tr><td colspan="6" style="text-align:center;padding:16px;color:#7f8fa4;">No turn spend in this period</td></tr>'}</tbody>
-    </table>
-  </div>`;
+    </tr>`).join('') ||
+    '<tr><td colspan="6" style="text-align:center;padding:16px;color:#7f8fa4;">No turn spend in this period</td></tr>';
+  paintSortArrows('#turnCosts .prop-table', PROP_SORT.k, PROP_SORT.dir);
 }
 
 const COST_SBADGE = {
@@ -1609,11 +1628,59 @@ function filterCostsTable() {
   renderCostsTable();
 }
 
+// Paint the ▲/▼ marker on whichever header a table is currently sorted by.
+// Headers are written once by the tab's build function; only tbody is re-rendered,
+// so the marker has to be re-applied here rather than baked into the header HTML.
+function paintSortArrows(tableSel, key, dir) {
+  document.querySelectorAll(tableSel + ' th.sortable').forEach(th => {
+    th.classList.toggle('sorted', th.dataset.sk === key);
+    const old = th.querySelector('.sarrow');
+    if (old) old.remove();
+    if (th.dataset.sk === key) {
+      const s = document.createElement('span');
+      s.className = 'sarrow';
+      s.textContent = dir === 1 ? '▲' : '▼';
+      th.appendChild(s);
+    }
+  });
+}
+
+// Shared comparator: blanks always sort last regardless of direction, so a
+// "—" cell never masquerades as the smallest or largest value.
+function cmpSort(x, y, dir) {
+  if (x == null && y == null) return 0;
+  if (x == null) return 1;
+  if (y == null) return -1;
+  if (typeof x === 'number' && typeof y === 'number') return (x - y) * dir;
+  return String(x).localeCompare(String(y)) * dir;
+}
+
+function sortCosts(k) {
+  // Text ascends first, numbers and dates descend first — biggest cost / most
+  // recent turn is what you want on the first click.
+  const textFirst = (k === 'prop' || k === 'unitNum' || k === 'status');
+  COST_SORT = { k, dir: COST_SORT.k === k ? -COST_SORT.dir : (textFirst ? 1 : -1) };
+  renderCostsTable();
+}
+
 function renderCostsTable() {
   const tbody   = document.getElementById('costTbody');
   const countEl = document.getElementById('costRowCount');
   if (!tbody) return;
-  const rows = filteredCostsRows.map(({ r, i }) => {
+
+  // Default (no column picked) keeps the grouped Active → Complete → Notice →
+  // Occupied ordering that buildCostsTab establishes.
+  let view = filteredCostsRows;
+  if (COST_SORT.k) {
+    const statusOrd = { 'Active':0, 'Complete':1, 'Notice':2, 'Occupied':3 };
+    const val = r => COST_SORT.k === 'delta'  ? (r.estimate > 0 ? r.estimate - r.total : null)
+                   : COST_SORT.k === 'status' ? (statusOrd[r.status] ?? 9)
+                   : r[COST_SORT.k];
+    view = [...filteredCostsRows].sort((A, B) => cmpSort(val(A.r), val(B.r), COST_SORT.dir));
+  }
+  paintSortArrows('#turnCosts .cost-table', COST_SORT.k, COST_SORT.dir);
+
+  const rows = view.map(({ r, i }) => {
     const delta = r.estimate > 0 ? r.estimate - r.total : null;
     const deltaHtml = delta === null
       ? '<span style="color:#d0dce8">—</span>'
@@ -1649,6 +1716,8 @@ function renderCostsTable() {
 // date range can be selected. Scoped to a turn's COMPLETION date, not the work
 // dates — a turn belongs to the range its last meld completed in.
 let RAW_DONE = null, DONE_FROM = '', DONE_TO = '', doneRows = [], DONE_SORT = { k: 'completed', dir: -1 };
+let COST_SORT = { k: null, dir: 1 };
+let PROP_SORT = { k: 'total', dir: -1 }, propSummaryRows = [];
 
 function setDonePeriod(mode, btn) {
   // Scope to this panel — setCostPeriod clears .cpb globally, which would strip
@@ -1748,12 +1817,12 @@ function buildDoneTab() {
     <div style="overflow-x:auto;border:1px solid #d0dce8;border-radius:8px;">
       <table class="cost-table">
         <thead><tr>
-          <th onclick="sortDone('completed')">Completion Date</th>
-          <th onclick="sortDone('property')">Property</th>
-          <th onclick="sortDone('unit')">Unit</th>
-          <th onclick="sortDone('total_cost')">Total Cost</th>
-          <th onclick="sortDone('days_to_complete')">Days to Complete</th>
-          <th onclick="sortDone('days_to_turn')">Days to Turn</th>
+          <th class="sortable" data-sk="completed" onclick="sortDone('completed')">Completion Date</th>
+          <th class="sortable" data-sk="property" onclick="sortDone('property')">Property</th>
+          <th class="sortable" data-sk="unit" onclick="sortDone('unit')">Unit</th>
+          <th class="sortable" data-sk="total_cost" onclick="sortDone('total_cost')">Total Cost</th>
+          <th class="sortable" data-sk="days_to_complete" onclick="sortDone('days_to_complete')">Days to Complete</th>
+          <th class="sortable" data-sk="days_to_turn" onclick="sortDone('days_to_turn')">Days to Turn</th>
         </tr></thead>
         <tbody id="doneTbody"></tbody>
         <tfoot id="doneTfoot"></tfoot>
@@ -1785,14 +1854,8 @@ function renderDoneTable() {
     (!pf || r.prop_code === pf) &&
     (!q || (r.property + ' ' + r.unit).toLowerCase().includes(q)));
 
-  const sorted = [...shown].sort((a, b) => {
-    let x = a[DONE_SORT.k], y = b[DONE_SORT.k];
-    if (x == null && y == null) return 0;
-    if (x == null) return 1;              // blanks last regardless of direction
-    if (y == null) return -1;
-    if (typeof x === 'number') return (x - y) * DONE_SORT.dir;
-    return String(x).localeCompare(String(y)) * DONE_SORT.dir;
-  });
+  const sorted = [...shown].sort((a, b) => cmpSort(a[DONE_SORT.k], b[DONE_SORT.k], DONE_SORT.dir));
+  paintSortArrows('#turnsDone .cost-table', DONE_SORT.k, DONE_SORT.dir);
 
   const blank = '<span style="color:#c3ccd6;font-style:italic">—</span>';
   tbody.innerHTML = sorted.map(r => `
@@ -1958,8 +2021,17 @@ function buildCostsTab() {
     <div style="overflow-x:auto;border:1px solid #d0dce8;border-radius:8px;">
       <table class="cost-table">
         <thead><tr>
-          <th>Property</th><th>Unit</th><th>Status</th><th>Move-Out</th><th>Turn End</th><th>Days to Turn</th>
-          <th>Labor</th><th>Materials</th><th>Actual</th><th>Estimate</th><th>Δ Est − Actual</th><th></th>
+          <th class="sortable" data-sk="prop" onclick="sortCosts('prop')">Property</th>
+          <th class="sortable" data-sk="unitNum" onclick="sortCosts('unitNum')">Unit</th>
+          <th class="sortable" data-sk="status" onclick="sortCosts('status')">Status</th>
+          <th class="sortable" data-sk="turnStart" onclick="sortCosts('turnStart')">Move-Out</th>
+          <th class="sortable" data-sk="turnEnd" onclick="sortCosts('turnEnd')">Turn End</th>
+          <th class="sortable" data-sk="daysToTurn" onclick="sortCosts('daysToTurn')">Days to Turn</th>
+          <th class="sortable" data-sk="totalLabor" onclick="sortCosts('totalLabor')">Labor</th>
+          <th class="sortable" data-sk="totalMats" onclick="sortCosts('totalMats')">Materials</th>
+          <th class="sortable" data-sk="total" onclick="sortCosts('total')">Actual</th>
+          <th class="sortable" data-sk="estimate" onclick="sortCosts('estimate')">Estimate</th>
+          <th class="sortable" data-sk="delta" onclick="sortCosts('delta')">Δ Est − Actual</th><th></th>
         </tr></thead>
         <tbody id="costTbody"></tbody>
       </table>
@@ -1969,6 +2041,7 @@ function buildCostsTab() {
       <strong>Turn End</strong> = the date the unit was completed — AppFolio's rent-ready date, the same date the weekly Turns Completed report uses. Blank means AppFolio never recorded one before the unit re-rented and dropped out of the vacancy snapshot; the ledger only captures dates from 2026-08-10 forward.
     </div>`;
 
+  renderPropSummary();
   filteredCostsRows = costsRows.map((r, i) => ({ r, i }));
   renderCostsTable();
 }
