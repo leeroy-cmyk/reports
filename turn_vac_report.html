@@ -1591,6 +1591,7 @@ function renderCostsTable() {
       <td>${r.unitNum}</td>
       <td>${COST_SBADGE[r.status]||r.status}</td>
       <td>${r.turnStart ? fmtDate(r.turnStart) : '<span style="color:#bdc3c7">—</span>'}</td>
+      <td>${r.turnEnd ? fmtDate(r.turnEnd) : '<span style="color:#bdc3c7">—</span>'}</td>
       <td>${r.daysToTurn != null
         ? `<strong>${r.daysToTurn}</strong>d${r.turnOngoing ? ' <span style="color:#b9770e;font-size:0.72rem">· ongoing</span>' : ''}`
         : '<span style="color:#bdc3c7">—</span>'}</td>
@@ -1602,10 +1603,10 @@ function renderCostsTable() {
       <td><span id="cexp-${i}" style="color:#2e86c1;font-size:0.78rem">▼</span></td>
     </tr>
     <tr class="cost-detail-row" id="cdet-${i}">
-      <td colspan="11">${buildCostDetailHtml(r)}</td>
+      <td colspan="12">${buildCostDetailHtml(r)}</td>
     </tr>`;
   }).join('');
-  tbody.innerHTML = rows || '<tr><td colspan="11" style="text-align:center;padding:28px;color:#7f8fa4;">No units match filters</td></tr>';
+  tbody.innerHTML = rows || '<tr><td colspan="12" style="text-align:center;padding:28px;color:#7f8fa4;">No units match filters</td></tr>';
   if (countEl) countEl.textContent = filteredCostsRows.length + ' of ' + costsRows.length + ' units';
 }
 
@@ -1644,17 +1645,26 @@ function buildCostsTab() {
     const totalMats  = materials.reduce((s,e) => s + e.amt, 0);
     const total = totalLabor + totalMats;
 
-    // Days to turn: move-out → rent-ready for completed turns (same basis as the
+    // Turn end = the date the unit was completed, i.e. AppFolio's rent-ready date,
+    // resolved server-side in buildTurnCosts from the vacancy snapshot and the
+    // ledger. Prefer it over vac.availOnD: the snapshot drops a unit once it
+    // re-rents, and the ledger keeps the date after that.
+    const turnEnd = u.turnEnd || null;
+
+    // Days to turn: move-out → turn end for completed turns (same basis as the
     // Avg Turn Time KPI); move-out → today (elapsed, ongoing) for active turns.
     // Notice/Occupied turns haven't run, so N/A.
     let daysToTurn = null, turnOngoing = false;
     if (vac && vac.moveOutD) {
-      if (status === 'Complete' && vac.availOnD) daysToTurn = daysBetween(vac.moveOutD, vac.availOnD);
+      if (status === 'Complete') {
+        const endD = turnEnd ? parseDate(turnEnd) : vac.availOnD;
+        if (endD) daysToTurn = daysBetween(vac.moveOutD, endD);
+      }
       else if (status === 'Active') { daysToTurn = Math.max(0, daysBetween(vac.moveOutD, TODAY)); turnOngoing = true; }
     }
 
     if (total === 0 && !u.estimate && status !== 'Active') continue;
-    costsRows.push({ code, prop: u.prop, unitNum: u.unitNum, status, turnStart, daysToTurn, turnOngoing, totalLabor, totalMats, total, estimate: u.estimate || 0, labor, materials });
+    costsRows.push({ code, prop: u.prop, unitNum: u.unitNum, status, turnStart, turnEnd, daysToTurn, turnOngoing, totalLabor, totalMats, total, estimate: u.estimate || 0, labor, materials });
   }
 
   // Include active-turn units with no cost entries yet
@@ -1665,7 +1675,7 @@ function buildCostsTab() {
     if (RAW_COSTS.units[code]) return;
     const woEst = RAW_COSTS.units[code]?.estimate || 0;
     const daysToTurn = r.moveOutD ? Math.max(0, daysBetween(r.moveOutD, TODAY)) : null;
-    costsRows.push({ code, prop: pc, unitNum: r.unit.trim(), status: 'Active', turnStart: r.last_move_out, daysToTurn, turnOngoing: true, totalLabor: 0, totalMats: 0, total: 0, estimate: woEst, labor: [], materials: [] });
+    costsRows.push({ code, prop: pc, unitNum: r.unit.trim(), status: 'Active', turnStart: r.last_move_out, turnEnd: null, daysToTurn, turnOngoing: true, totalLabor: 0, totalMats: 0, total: 0, estimate: woEst, labor: [], materials: [] });
   });
 
   const statusOrd = { 'Active':0, 'Complete':1, 'Notice':2, 'Occupied':3 };
@@ -1740,7 +1750,7 @@ function buildCostsTab() {
     <div style="overflow-x:auto;border:1px solid #d0dce8;border-radius:8px;">
       <table class="cost-table">
         <thead><tr>
-          <th>Property</th><th>Unit</th><th>Status</th><th>Move-Out</th><th>Days to Turn</th>
+          <th>Property</th><th>Unit</th><th>Status</th><th>Move-Out</th><th>Turn End</th><th>Days to Turn</th>
           <th>Labor</th><th>Materials</th><th>Actual</th><th>Estimate</th><th>Δ Est − Actual</th><th></th>
         </tr></thead>
         <tbody id="costTbody"></tbody>
@@ -1748,6 +1758,7 @@ function buildCostsTab() {
     </div>
     <div style="margin-top:10px;font-size:0.75rem;color:#a0aebb;">
       Turn class labor (QBT) + Turn GL materials/contractor from Ramp card spend and QuickBooks vendor bills. Data retained after move-in.
+      <strong>Turn End</strong> = the date the unit was completed — AppFolio's rent-ready date, the same date the weekly Turns Completed report uses. Blank means AppFolio never recorded one before the unit re-rented and dropped out of the vacancy snapshot; the ledger only captures dates from 2026-08-10 forward.
     </div>`;
 
   filteredCostsRows = costsRows.map((r, i) => ({ r, i }));

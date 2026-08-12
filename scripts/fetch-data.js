@@ -708,6 +708,56 @@ function buildTurnCosts() {
     u.materials.sort((a, b) => b.d.localeCompare(a.d));
   }
 
+  // ── AppFolio turn end date per unit ────────────────────────────────────────
+  // "The date the unit was completed" (LeeRoy, 2026-08-12) = AppFolio's rent-ready
+  // date. Deliberately the same date buildTurnsCompleted calls `ready_date`, so the
+  // Turn Costs tab and the weekly Turns Completed report cannot disagree about when
+  // a turn ended. NOT the PropertyMeld completion date — LeeRoy asked for AppFolio.
+  //
+  // Resolution mirrors buildTurnsCompleted: the live vacancy snapshot first, then
+  // turn_ledger.json for units that have since re-rented. unit_vacancy only returns
+  // CURRENTLY vacant units, so without the ledger every completed turn loses its date
+  // the moment a new tenant moves in.
+  //
+  // Keyed in the SAME `propcode[-building]-unit` shape the cost map uses. AppFolio
+  // hangs the building qualifier off the PROPERTY name ("kn47 K1") while the cost key
+  // hangs it off the unit (`kn47-k1-H101`), so register both the qualified and the
+  // plain key. If two buildings collide on the plain key the later date wins — the
+  // plain key is already ambiguous at that point, and the most recent turn is the
+  // better guess for a cost row that is being read now.
+  const afEnd = {};
+  const addTurnEnd = (propName, unit, date) => {
+    if (!date || !unit) return;
+    const pc = extractPropCode(propName);
+    if (!pc) return;
+    const pn = String(propName || '');
+    const tail = pn.slice(pn.toLowerCase().indexOf(pc) + pc.length);
+    const bld = (tail.match(/[a-z]?\d+[a-z]?/i) || [])[0] || null;
+    const u = String(unit).trim();
+    for (const k of (bld ? [`${pc}-${bld}-${u}`, `${pc}-${u}`] : [`${pc}-${u}`])) {
+      const lk = k.toLowerCase();
+      if (!afEnd[lk] || date > afEnd[lk]) afEnd[lk] = date;
+    }
+  };
+  const tvPathTC = path.join(DATA_DIR, 'turnvac.json');
+  if (fs.existsSync(tvPathTC)) {
+    for (const r of (JSON.parse(fs.readFileSync(tvPathTC, 'utf8')).rows || [])) {
+      if (String(r.rent_ready || '').toLowerCase() !== 'yes') continue;
+      addTurnEnd(r.property_name, r.unit, r.ready_for_showing_on || r.available_on || null);
+    }
+  }
+  const ledPathTC = path.join(DATA_DIR, 'turn_ledger.json');
+  if (fs.existsSync(ledPathTC)) {
+    for (const e of Object.values(JSON.parse(fs.readFileSync(ledPathTC, 'utf8')).units || {})) {
+      addTurnEnd(e.prop, e.unit, e.ready_date || null);
+    }
+  }
+  let turnEndHits = 0;
+  for (const [code, u] of Object.entries(units)) {
+    const d = afEnd[code.toLowerCase()];
+    if (d) { u.turnEnd = d; turnEndHits++; }
+  }
+
   // Completed-turn COUNT per property from PropertyMeld (the authoritative
   // turn-completion source). The vacancy snapshot can't date completions for
   // occupied units, so it can't count real turns — PropertyMeld can. Used for
@@ -727,7 +777,7 @@ function buildTurnCosts() {
 
   save('turn_costs.json', { ok: true, fetched_at: qbt.fetched_at, units, propSpend, propTurns, qboGap });
   console.log('turn_costs.json: ' + Object.keys(units).length + ' units, ' + Object.keys(propSpend).length + ' properties, ' +
-    Object.keys(propTurns).length + ' props w/ completed PM turns');
+    Object.keys(propTurns).length + ' props w/ completed PM turns, ' + turnEndHits + ' units w/ AppFolio turn-end date');
 }
 
 // ── WEEKLY REPORT: TURNS COMPLETED MONTH-TO-DATE ─────────────────────────────
