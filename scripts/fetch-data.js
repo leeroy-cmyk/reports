@@ -126,6 +126,23 @@ function buildTurnLedger() {
   console.log(`turn_ledger.json: ${Object.keys(U).length} units tracked (${added} new, ${readied} newly rent-ready)`);
 }
 
+// AppFolio's own Turn section (Maintenance → Unit Turns), one row per unit turn.
+// `turn_end_date` is the date the unit turn is marked complete there — LeeRoy's
+// definition of when a turn ended (2026-08-12), NOT the rent-ready/available date.
+// The report also carries OPEN turns, with turn_end_date null, which is how a turn
+// still in progress correctly resolves to a blank rather than a stale earlier date.
+//
+// The work_order report cannot substitute for this: it only returns OPEN work
+// orders (verified 2026-08-12 — 0 rows with completed_on across every status
+// filter the API accepts), so completed Unit Turn WOs are invisible to it.
+async function fetchUnitTurnDetail() {
+  console.log('Fetching unit_turn_detail...');
+  const raw = await fetchAF('/api/v2/reports/unit_turn_detail.json', {});
+  const rows = (Array.isArray(raw) ? raw : (raw.results || [])).filter(r => !EXCLUDED_PROPERTIES.includes(r.property));
+  save('unit_turn_detail.json', { ok: true, count: rows.length, fetched_at: new Date().toISOString(), rows });
+  console.log(`unit_turn_detail.json: ${rows.length} turns, ${rows.filter(r => r.turn_end_date).length} with a turn end date`);
+}
+
 async function fetchWorkOrders() {
   console.log('Fetching work_order...');
   const raw = await fetchAF('/api/v2/reports/work_order.json', { property_visibility: 'active' });
@@ -709,53 +726,50 @@ function buildTurnCosts() {
   }
 
   // ── AppFolio turn end date per unit ────────────────────────────────────────
-  // "The date the unit was completed" (LeeRoy, 2026-08-12) = AppFolio's rent-ready
-  // date. Deliberately the same date buildTurnsCompleted calls `ready_date`, so the
-  // Turn Costs tab and the weekly Turns Completed report cannot disagree about when
-  // a turn ended. NOT the PropertyMeld completion date — LeeRoy asked for AppFolio.
+  // LeeRoy, 2026-08-12: "turn end dates should be when the unit turn work order is
+  // marked completed in appfolio turn section, not the available date." So this is
+  // `turn_end_date` from the unit_turn_detail report (AppFolio's Turn section) —
+  // NOT rent-ready/available, and NOT the PropertyMeld completion date.
   //
-  // Resolution mirrors buildTurnsCompleted: the live vacancy snapshot first, then
-  // turn_ledger.json for units that have since re-rented. unit_vacancy only returns
-  // CURRENTLY vacant units, so without the ledger every completed turn loses its date
-  // the moment a new tenant moves in.
+  // ⚠️ Take the unit's LATEST turn, not its latest turn_end_date. A unit with an
+  // open turn also has older completed ones; picking the max end date would stamp a
+  // previous turn's completion onto the current one (kn47-k1-L105 would have read
+  // 2025-10-01 for a turn that started 2025-10-02). Open turns are present in the
+  // report with turn_end_date null, so selecting the latest turn by move_out_date
+  // yields a blank for work still in progress, which is the honest answer.
   //
-  // Keyed in the SAME `propcode[-building]-unit` shape the cost map uses. AppFolio
-  // hangs the building qualifier off the PROPERTY name ("kn47 K1") while the cost key
-  // hangs it off the unit (`kn47-k1-H101`), so register both the qualified and the
-  // plain key. If two buildings collide on the plain key the later date wins — the
-  // plain key is already ambiguous at that point, and the most recent turn is the
-  // better guess for a cost row that is being read now.
-  const afEnd = {};
-  const addTurnEnd = (propName, unit, date) => {
-    if (!date || !unit) return;
-    const pc = extractPropCode(propName);
-    if (!pc) return;
-    const pn = String(propName || '');
-    const tail = pn.slice(pn.toLowerCase().indexOf(pc) + pc.length);
-    const bld = (tail.match(/[a-z]?\d+[a-z]?/i) || [])[0] || null;
-    const u = String(unit).trim();
-    for (const k of (bld ? [`${pc}-${bld}-${u}`, `${pc}-${u}`] : [`${pc}-${u}`])) {
-      const lk = k.toLowerCase();
-      if (!afEnd[lk] || date > afEnd[lk]) afEnd[lk] = date;
-    }
-  };
-  const tvPathTC = path.join(DATA_DIR, 'turnvac.json');
-  if (fs.existsSync(tvPathTC)) {
-    for (const r of (JSON.parse(fs.readFileSync(tvPathTC, 'utf8')).rows || [])) {
-      if (String(r.rent_ready || '').toLowerCase() !== 'yes') continue;
-      addTurnEnd(r.property_name, r.unit, r.ready_for_showing_on || r.available_on || null);
+  // Keyed in the `propcode[-building]-unit` shape the cost map uses. AppFolio hangs
+  // the building qualifier off the PROPERTY name ("kn47 K1") while the cost key hangs
+  // it off the unit (`kn47-k1-H101`), so register both the qualified and plain key.
+  const afTurns = {};
+  const utdPath = path.join(DATA_DIR, 'unit_turn_detail.json');
+  if (fs.existsSync(utdPath)) {
+    for (const r of (JSON.parse(fs.readFileSync(utdPath, 'utf8')).rows || [])) {
+      if (!r.unit) continue;
+      const pc = extractPropCode(r.property);
+      if (!pc) continue;
+      const pn = String(r.property || '');
+      const tail = pn.slice(pn.toLowerCase().indexOf(pc) + pc.length);
+      const bld = (tail.match(/[a-z]?\d+[a-z]?/i) || [])[0] || null;
+      const u = String(r.unit).trim();
+      for (const k of (bld ? [`${pc}-${bld}-${u}`, `${pc}-${u}`] : [`${pc}-${u}`])) {
+        const lk = k.toLowerCase();
+        (afTurns[lk] || (afTurns[lk] = [])).push(r);
+      }
     }
   }
-  const ledPathTC = path.join(DATA_DIR, 'turn_ledger.json');
-  if (fs.existsSync(ledPathTC)) {
-    for (const e of Object.values(JSON.parse(fs.readFileSync(ledPathTC, 'utf8')).units || {})) {
-      addTurnEnd(e.prop, e.unit, e.ready_date || null);
-    }
-  }
-  let turnEndHits = 0;
+  let turnEndHits = 0, turnOpen = 0;
   for (const [code, u] of Object.entries(units)) {
-    const d = afEnd[code.toLowerCase()];
-    if (d) { u.turnEnd = d; turnEndHits++; }
+    const list = afTurns[code.toLowerCase()];
+    if (!list || !list.length) continue;
+    // Latest turn = latest move-out; unit_turn_id breaks ties and orders the rows
+    // that carry no move-out date at all.
+    const latest = list.slice().sort((a, b) =>
+      String(a.move_out_date || '').localeCompare(String(b.move_out_date || '')) ||
+      (Number(a.unit_turn_id) - Number(b.unit_turn_id))).pop();
+    u.turnMoveOut = latest.move_out_date || null;
+    if (latest.turn_end_date) { u.turnEnd = latest.turn_end_date; turnEndHits++; }
+    else turnOpen++;
   }
 
   // Completed-turn COUNT per property from PropertyMeld (the authoritative
@@ -777,7 +791,8 @@ function buildTurnCosts() {
 
   save('turn_costs.json', { ok: true, fetched_at: qbt.fetched_at, units, propSpend, propTurns, qboGap });
   console.log('turn_costs.json: ' + Object.keys(units).length + ' units, ' + Object.keys(propSpend).length + ' properties, ' +
-    Object.keys(propTurns).length + ' props w/ completed PM turns, ' + turnEndHits + ' units w/ AppFolio turn-end date');
+    Object.keys(propTurns).length + ' props w/ completed PM turns, ' + turnEndHits + ' units w/ AppFolio turn-end date'
+    + ' (' + turnOpen + ' with the turn still open)');
 }
 
 // ── WEEKLY REPORT: TURNS COMPLETED MONTH-TO-DATE ─────────────────────────────
@@ -1815,12 +1830,21 @@ async function fetchPMTechMetrics() {
 //   'pm-tech-only'   → PropertyMeld tech metrics only (pm_tech_metrics.json)
 //   'qbt-ramp'       → QBTime + Ramp (legacy, local use)
 //   'costs-only'     → rebuild turn_costs.json from local files only (no network)
+//   'turndetail-only'→ refetch AppFolio unit_turn_detail (turn end dates) + rebuild costs
 //   'processed-only' → rebuild ramp_processed + audit + turn_costs from local files only
 //   unset/'all'      → everything
 const FETCH_ONLY = process.env.FETCH_ONLY || 'all';
 
 (async () => {
   if (FETCH_ONLY === 'costs-only') {
+    buildTurnCosts();
+    buildTurnsCompleted();
+    console.log('Done.');
+    return;
+  }
+
+  if (FETCH_ONLY === 'turndetail-only') {
+    await fetchUnitTurnDetail();
     buildTurnCosts();
     buildTurnsCompleted();
     console.log('Done.');
@@ -1957,6 +1981,7 @@ const FETCH_ONLY = process.env.FETCH_ONLY || 'all';
       buildMoveoutChanges(); // Rule A: flag move-out date changes / cancellations
       buildTurnLedger();     // capture move-out/rent-ready before units re-rent out of the snapshot
       await fetchWorkOrders();
+      await fetchUnitTurnDetail();  // AppFolio turn-end dates for the Turn Costs tab
       await fetchBudget();
       await syncVacanciesToFirebase();
       buildTurnCosts(); // keep estimates fresh every 5 min
