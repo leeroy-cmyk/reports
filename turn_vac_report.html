@@ -1916,9 +1916,9 @@ function buildCostsTab() {
     const totalMats  = materials.reduce((s,e) => s + e.amt, 0);
     const total = totalLabor + totalMats;
 
-    // Turn end = the date the unit turn was marked complete in AppFolio's Turn
-    // section, resolved server-side in buildTurnCosts from unit_turn_detail.
-    // Blank while that turn is still open there.
+    // Turn end = date the Final Walkthrough was COMPLETED in PropertyMeld,
+    // resolved server-side in buildTurnCosts. Not u.afTurnEnd (AppFolio's turn
+    // section date, kept in the data but not shown) and not the scheduled walk.
     const turnEnd = u.turnEnd || null;
 
     // Days to turn: move-out → turn end for completed turns; move-out → today
@@ -2038,7 +2038,7 @@ function buildCostsTab() {
     </div>
     <div style="margin-top:10px;font-size:0.75rem;color:#a0aebb;">
       Turn class labor (QBT) + Turn GL materials/contractor from Ramp card spend and QuickBooks vendor bills. Data retained after move-in.
-      <strong>Turn End</strong> = the date the unit turn was marked complete in <strong>AppFolio's Turn section</strong> (Maintenance → Unit Turns), not the rent-ready or available date. Blank means AppFolio hasn't closed that unit's current turn yet — including turns the crew has finished but nobody has marked complete there.
+      <strong>Turn End</strong> = the date the <strong>Final Walkthrough</strong> was completed in PropertyMeld — not the scheduled walkthrough, and not the AppFolio turn or available date. Blank means no completed final walkthrough is on record for that unit's latest turn.
     </div>`;
 
   renderPropSummary();

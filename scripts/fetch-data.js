@@ -758,7 +758,7 @@ function buildTurnCosts() {
       }
     }
   }
-  let turnEndHits = 0, turnOpen = 0;
+  let afEndHits = 0;
   for (const [code, u] of Object.entries(units)) {
     const list = afTurns[code.toLowerCase()];
     if (!list || !list.length) continue;
@@ -768,8 +768,7 @@ function buildTurnCosts() {
       String(a.move_out_date || '').localeCompare(String(b.move_out_date || '')) ||
       (Number(a.unit_turn_id) - Number(b.unit_turn_id))).pop();
     u.turnMoveOut = latest.move_out_date || null;
-    if (latest.turn_end_date) { u.turnEnd = latest.turn_end_date; turnEndHits++; }
-    else turnOpen++;
+    if (latest.turn_end_date) { u.afTurnEnd = latest.turn_end_date; afEndHits++; }
   }
 
   // Completed-turn COUNT per property from PropertyMeld (the authoritative
@@ -779,6 +778,7 @@ function buildTurnCosts() {
   // turn projects (name ~ "turn"), status COMPLETE; excludes Pest Control/Other.
   const pmPath = path.join(DATA_DIR, 'pm_turns.json');
   const propTurns = {};
+  let turnEndHits = 0, fromTasks = 0;
   if (fs.existsSync(pmPath)) {
     const pmTurns = (JSON.parse(fs.readFileSync(pmPath, 'utf8')).turns) || [];
     for (const t of pmTurns) {
@@ -787,12 +787,57 @@ function buildTurnCosts() {
       if (!m) continue;
       propTurns[m[1]] = (propTurns[m[1]] || 0) + 1;
     }
+
+    // ── TURN END = FINAL WALKTHROUGH ────────────────────────────────────────
+    // LeeRoy, 2026-08-12: "not the turn completion date in appfolio, we will use
+    // the date of the final walkthrough." So Turn End is the date the Final
+    // Walkthrough meld was COMPLETED in PropertyMeld.
+    //
+    // ⚠️ NOT `t.final_walk` — that is the SCHEDULED appointment and is routinely a
+    // future date on an active turn (2027-02-09 on a turn running now). Using it
+    // would put dates in the future in a "when did this finish" column.
+    //
+    // Two sources, in order:
+    //   final_walk_done — completion of the final-walk meld, recorded by
+    //                     fetchPropertyMeldWOs. Full history, but only populated
+    //                     from the first cloud PM run after 2026-08-12.
+    //   tasks[]         — the per-meld checklist, which already carries each
+    //                     meld's `completed` date. Only kept for turns that are
+    //                     open or finished within 120 days, so it covers recent
+    //                     turns until final_walk_done backfills the rest.
+    // Turns are matched to cost keys with findUnitCode, which handles PropertyMeld
+    // putting the building qualifier on the PROPERTY name while the cost key puts
+    // it on the unit.
+    const walkByCode = {};
+    for (const t of pmTurns) {
+      if (!/turn/i.test(t.name || '') || /pest/i.test(t.name || '')) continue;
+      let d = t.final_walk_done || null;
+      if (!d && Array.isArray(t.tasks)) {
+        for (const k of t.tasks) {
+          if (!k.completed) continue;
+          if (k.cat !== 'final-walk' && !/final\s*walk/i.test(k.task || '')) continue;
+          if (!d || k.completed > d) d = k.completed;
+          fromTasks++;
+        }
+      }
+      if (!d) continue;
+      const pc = extractPropCode(t.property);
+      if (!pc || !t.unit) continue;
+      const code = findUnitCode(units, pc, t.property, t.unit);
+      // A unit can turn more than once; the most recent walkthrough is this row's.
+      if (!walkByCode[code] || d > walkByCode[code]) walkByCode[code] = d;
+    }
+    for (const [code, d] of Object.entries(walkByCode)) {
+      if (!units[code]) continue;   // findUnitCode falls back to a plain key that may not exist
+      units[code].turnEnd = d;
+      turnEndHits++;
+    }
   }
 
   save('turn_costs.json', { ok: true, fetched_at: qbt.fetched_at, units, propSpend, propTurns, qboGap });
   console.log('turn_costs.json: ' + Object.keys(units).length + ' units, ' + Object.keys(propSpend).length + ' properties, ' +
-    Object.keys(propTurns).length + ' props w/ completed PM turns, ' + turnEndHits + ' units w/ AppFolio turn-end date'
-    + ' (' + turnOpen + ' with the turn still open)');
+    Object.keys(propTurns).length + ' props w/ completed PM turns, ' + turnEndHits + ' units w/ a completed final walkthrough'
+    + ' (' + afEndHits + ' also have an AppFolio turn-end date, kept as afTurnEnd)');
 }
 
 // ── WEEKLY REPORT: TURNS COMPLETED MONTH-TO-DATE ─────────────────────────────
@@ -1526,6 +1571,19 @@ async function fetchPropertyMeldTurns() {
           }
         }
 
+        // Final walkthrough COMPLETION — the date the turn ended (LeeRoy, 2026-08-12).
+        // Distinct from `final_walk` above, which is the scheduled appointment and is
+        // routinely a future date on an active turn. Separate pass because the loop
+        // above skips melds with no appointment, and a walkthrough can be completed
+        // without one. Cancelled melds don't count as a walkthrough having happened.
+        let finalWalkDone = null;
+        for (const m of melds) {
+          if (!isFinalWalk(m.brief_description || '') || !m.completion_date) continue;
+          if (m.status === 'MANAGER_CANCELED' || m.status === 'TENANT_CANCELED') continue;
+          const d = pac(m.completion_date).date;
+          if (!finalWalkDone || d > finalWalkDone) finalWalkDone = d;
+        }
+
         const unit = proj.unit;
         const propObj = unit?.prop || {};
 
@@ -1642,7 +1700,8 @@ async function fetchPropertyMeldTurns() {
           start_date:   proj.start_date ? proj.start_date.slice(0, 10) : null,
           due_date:     proj.due_date   ? proj.due_date.slice(0, 10)   : null,
           first_appt:      firstApptDate,
-          final_walk:      finalWalkDate,
+          final_walk:      finalWalkDate,   // SCHEDULED appt — may be in the future
+          final_walk_done: finalWalkDone,   // COMPLETED walkthrough = turn end date
           last_maint_paint: lastMaintPaint,
           last_clean:       lastClean,
           // Date the turn finished = LAST meld completion. Same rule the completedTurns
