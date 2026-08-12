@@ -247,6 +247,7 @@
   <div class="tab" onclick="showTab('detail',this)">Turns</div>
   <div class="tab" onclick="showTab('byProperty',this)">By Property</div>
   <div class="tab" onclick="showTab('turnCosts',this)">Turn Costs</div>
+  <div class="tab" onclick="showTab('turnsDone',this)">Completed</div>
   <span class="tabgroup">Dispatch</span>
   <select onchange="sxSetRegion(this.value)" title="Dispatch region" style="align-self:center;margin:0 8px 0 2px;padding:3px 8px;border:1px solid #d0dce8;border-radius:6px;font-size:0.8rem;font-weight:700;color:#1a5276;background:#fff;cursor:pointer">
     <option value="Spokane">Spokane</option>
@@ -359,6 +360,22 @@
     <button class="cpb" onclick="setCostPeriod('custom',null)">Go</button>
   </div>
   <div id="costsContent"><p style="color:#7f8fa4;padding:20px;">Loading…</p></div>
+</div>
+
+<div id="turnsDone" class="panel">
+  <div class="cost-period-row">
+    <button class="cpb active" onclick="setDonePeriod('thisMo',this)">This Month</button>
+    <button class="cpb" onclick="setDonePeriod('lastMo',this)">Last Month</button>
+    <button class="cpb" onclick="setDonePeriod('last3mo',this)">Last 3 Mo</button>
+    <button class="cpb" onclick="setDonePeriod('ytd',this)">YTD</button>
+    <button class="cpb" onclick="setDonePeriod('all',this)">All Time</button>
+    <div class="cost-sep"></div>
+    <input type="date" id="doneDateFrom" class="cost-date-input">
+    <span style="color:#bdc3c7;font-size:0.8rem">–</span>
+    <input type="date" id="doneDateTo" class="cost-date-input">
+    <button class="cpb" onclick="setDonePeriod('custom',null)">Go</button>
+  </div>
+  <div id="doneContent"><p style="color:#7f8fa4;padding:20px;">Loading…</p></div>
 </div>
 
 
@@ -479,10 +496,11 @@ async function loadData() {
   errBar.style.display = 'none';
 
   try {
-    const [resp, costsResp, turnsResp] = await Promise.all([
+    const [resp, costsResp, turnsResp, doneResp] = await Promise.all([
       fetch('./data/turnvac.json'),
       fetch('./data/turn_costs.json').catch(() => null),
       fetch('./data/pm_turns.json').catch(() => null),
+      fetch('./data/turns_completed_all.json').catch(() => null),
     ]);
     bar.style.width = '80%';
     if (!resp.ok) throw new Error('HTTP ' + resp.status);
@@ -494,6 +512,9 @@ async function loadData() {
     }
     if (turnsResp && turnsResp.ok) {
       try { RAW_TURNS = await turnsResp.json(); } catch(e) { /* ignore */ }
+    }
+    if (doneResp && doneResp.ok) {
+      try { RAW_DONE = await doneResp.json(); } catch(e) { /* ignore */ }
     }
 
     allData = json.rows.map(r => {
@@ -545,6 +566,18 @@ async function loadData() {
     document.getElementById('costDateFrom').value = COST_FROM;
     document.getElementById('costDateTo').value   = COST_TO;
     buildCostsTab();
+
+    // Completed tab — default to This Month, matching the weekly report's scope.
+    // Isolated: a failure here must not blank the tabs rendered above it, and this
+    // page's outer catch swallows the stack into a generic banner.
+    try {
+      const dNow = new Date();
+      DONE_FROM = new Date(dNow.getFullYear(), dNow.getMonth(), 1).toISOString().slice(0, 10);
+      DONE_TO   = dNow.toISOString().slice(0, 10);
+      document.getElementById('doneDateFrom').value = DONE_FROM;
+      document.getElementById('doneDateTo').value   = DONE_TO;
+      buildDoneTab();
+    } catch(e) { console.error('Completed tab failed:', e); }
   } catch(e) {
     bar.style.width = '0';
     errBar.style.display = 'block';
@@ -1608,6 +1641,181 @@ function renderCostsTable() {
   }).join('');
   tbody.innerHTML = rows || '<tr><td colspan="12" style="text-align:center;padding:28px;color:#7f8fa4;">No units match filters</td></tr>';
   if (countEl) countEl.textContent = filteredCostsRows.length + ' of ' + costsRows.length + ' units';
+}
+
+// ── COMPLETED TURNS TAB ──────────────────────────────────────────────────────
+// Same six columns and definitions as the standalone weekly turns_completed.html
+// (format fixed by LeeRoy 2026-08-10), but over turns_completed_all.json so any
+// date range can be selected. Scoped to a turn's COMPLETION date, not the work
+// dates — a turn belongs to the range its last meld completed in.
+let RAW_DONE = null, DONE_FROM = '', DONE_TO = '', doneRows = [], DONE_SORT = { k: 'completed', dir: -1 };
+
+function setDonePeriod(mode, btn) {
+  // Scope to this panel — setCostPeriod clears .cpb globally, which would strip
+  // the active state off these buttons.
+  document.querySelectorAll('#turnsDone .cpb').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  const now = new Date();
+  const pad = n => String(n).padStart(2, '0');
+  const ymd = d => d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
+  if (mode === 'all') {
+    DONE_FROM = ''; DONE_TO = '';
+  } else if (mode === 'ytd') {
+    DONE_FROM = now.getFullYear() + '-01-01'; DONE_TO = ymd(now);
+  } else if (mode === 'thisMo') {
+    DONE_FROM = now.getFullYear() + '-' + pad(now.getMonth() + 1) + '-01'; DONE_TO = ymd(now);
+  } else if (mode === 'lastMo') {
+    const last = new Date(now.getFullYear(), now.getMonth(), 0);
+    DONE_FROM = last.getFullYear() + '-' + pad(last.getMonth() + 1) + '-01'; DONE_TO = ymd(last);
+  } else if (mode === 'last3mo') {
+    const from = new Date(now.getFullYear(), now.getMonth() - 2, 1);
+    DONE_FROM = ymd(from); DONE_TO = ymd(now);
+  } else if (mode === 'custom') {
+    const f = document.getElementById('doneDateFrom').value;
+    const t = document.getElementById('doneDateTo').value;
+    if (!f || !t) { alert('Please enter both dates.'); return; }
+    if (f > t)    { alert('Start date must be before end date.'); return; }
+    DONE_FROM = f; DONE_TO = t;
+  }
+  document.getElementById('doneDateFrom').value = DONE_FROM;
+  document.getElementById('doneDateTo').value   = DONE_TO;
+  buildDoneTab();
+}
+
+function buildDoneTab() {
+  const el = document.getElementById('doneContent');
+  if (!el) return;
+  if (!RAW_DONE || !RAW_DONE.rows) {
+    el.innerHTML = `<div style="padding:40px;text-align:center;color:#7f8fa4;">
+      Completed-turn history isn't available yet.<br>
+      <span style="font-size:0.8rem;">Run <code>FETCH_ONLY=costs-only node scripts/fetch-data.js</code> to generate <code>turns_completed_all.json</code>.</span>
+    </div>`;
+    return;
+  }
+
+  doneRows = RAW_DONE.rows.filter(r =>
+    (!DONE_FROM || r.completed >= DONE_FROM) && (!DONE_TO || r.completed <= DONE_TO));
+
+  const n = doneRows.length;
+  const totalCost = doneRows.reduce((s, r) => s + r.total_cost, 0);
+  const avg = k => { const v = doneRows.map(r => r[k]).filter(x => x != null); return v.length ? Math.round(v.reduce((s, x) => s + x, 0) / v.length) : null; };
+  const dc = avg('days_to_complete'), dt = avg('days_to_turn');
+  const withReady = doneRows.filter(r => r.ready_date).length;
+  const zeroCost  = doneRows.filter(r => r.total_cost === 0).length;
+
+  const rangeLbl = !DONE_FROM && !DONE_TO ? 'all time' : `${fmtDate(DONE_FROM)} – ${fmtDate(DONE_TO)}`;
+  const kpis = [
+    { lbl: 'Turns Completed', val: n, sub: rangeLbl },
+    { lbl: 'Total Cost', val: fmtC(totalCost), sub: 'labor + materials + bills' },
+    { lbl: 'Avg Cost / Turn', val: n ? fmtC(totalCost / n) : '—', sub: n + ' turn' + (n === 1 ? '' : 's') },
+    { lbl: 'Avg Days to Complete', val: dc == null ? '—' : dc, sub: 'move-out → rent ready' },
+    { lbl: 'Avg Days to Turn', val: dt == null ? '—' : dt, sub: 'in-house work → rent ready' },
+  ];
+  const kpiHtml = kpis.map(k => `<div class="kpi-card"><div class="kpi-label">${k.lbl}</div><div class="kpi-value">${k.val}</div><div class="kpi-sub">${k.sub}</div></div>`).join('');
+
+  // The day-counts depend on AppFolio dates that vanish when a unit re-rents, and
+  // the ledger that preserves them only starts 2026-08-10. Older ranges therefore
+  // average over a small, self-selected subset. Say so — a thin average silently
+  // presented as the month's number is how this report misleads.
+  const pct = n ? Math.round(withReady / n * 100) : 0;
+  const warnBits = [];
+  if (n && pct < 100) warnBits.push(`<strong>${n - withReady}</strong> of ${n} turns have no AppFolio rent-ready date, so both day-count averages are based on the other <strong>${withReady}</strong> (${pct}%)`);
+  if (zeroCost) warnBits.push(`<strong>${zeroCost}</strong> with no cost captured`);
+  const warnHtml = warnBits.length
+    ? `<div class="qbo-gap" style="background:#fdf6e3;border-color:#f0d9a0;border-left-color:#d68910;color:#6b5518;">
+         <div style="flex:1 1 100%;">${warnBits.join(' · ')}.
+         AppFolio only exposes move-out and rent-ready dates while a unit is still vacant, and the ledger that captures
+         them before a unit re-rents only starts 2026-08-10 — so coverage thins out the further back you look
+         (August 83%, July 41%, earlier under 20%). Blank cells mean “not captured”, never zero.
+         Turn <em>counts</em> and PropertyMeld completion dates are unaffected.</div>
+       </div>`
+    : '';
+
+  const propOptions = [...new Set(RAW_DONE.rows.map(r => r.prop_code))].sort().map(p => `<option value="${p}">${p}</option>`).join('');
+
+  el.innerHTML = `
+    <div class="kpi-grid">${kpiHtml}</div>
+    ${warnHtml}
+    <div class="section-title">Completed Turns</div>
+    <div style="font-size:0.78rem;color:#7f8fa4;margin:-6px 0 10px;">A turn lands in a range when it <strong>completed</strong> in that range, even if the work ran across earlier months. Cost is the full turn, all sources — not a slice of the range.</div>
+    <div class="controls" style="margin-bottom:12px;">
+      <input type="text" id="doneSearch" placeholder="Search property or unit…" oninput="renderDoneTable()" style="width:200px;">
+      <select id="donePropFilter" onchange="renderDoneTable()">
+        <option value="">All Properties</option>${propOptions}
+      </select>
+      <span id="doneRowCount" class="row-count"></span>
+    </div>
+    <div style="overflow-x:auto;border:1px solid #d0dce8;border-radius:8px;">
+      <table class="cost-table">
+        <thead><tr>
+          <th onclick="sortDone('completed')">Completion Date</th>
+          <th onclick="sortDone('property')">Property</th>
+          <th onclick="sortDone('unit')">Unit</th>
+          <th onclick="sortDone('total_cost')">Total Cost</th>
+          <th onclick="sortDone('days_to_complete')">Days to Complete</th>
+          <th onclick="sortDone('days_to_turn')">Days to Turn</th>
+        </tr></thead>
+        <tbody id="doneTbody"></tbody>
+        <tfoot id="doneTfoot"></tfoot>
+      </table>
+    </div>
+    <div style="margin-top:10px;font-size:0.75rem;color:#a0aebb;">
+      <strong>Completion Date</strong> — date the last work item on the turn was completed in PropertyMeld.
+      <strong>Total Cost</strong> — QBTime turn labor + Ramp card materials + QuickBooks vendor bills, across the whole turn.
+      <strong>Days to Complete</strong> — move-out → rent ready (AppFolio).
+      <strong>Days to Turn</strong> — first in-house appointment (paint/maintenance) → rent ready (AppFolio).
+    </div>`;
+
+  renderDoneTable();
+}
+
+function sortDone(k) {
+  DONE_SORT = { k, dir: DONE_SORT.k === k ? -DONE_SORT.dir : (k === 'completed' || k === 'total_cost' ? -1 : 1) };
+  renderDoneTable();
+}
+
+function renderDoneTable() {
+  const tbody = document.getElementById('doneTbody');
+  const tfoot = document.getElementById('doneTfoot');
+  const countEl = document.getElementById('doneRowCount');
+  if (!tbody) return;
+  const q = (document.getElementById('doneSearch')?.value || '').toLowerCase();
+  const pf = document.getElementById('donePropFilter')?.value || '';
+  const shown = doneRows.filter(r =>
+    (!pf || r.prop_code === pf) &&
+    (!q || (r.property + ' ' + r.unit).toLowerCase().includes(q)));
+
+  const sorted = [...shown].sort((a, b) => {
+    let x = a[DONE_SORT.k], y = b[DONE_SORT.k];
+    if (x == null && y == null) return 0;
+    if (x == null) return 1;              // blanks last regardless of direction
+    if (y == null) return -1;
+    if (typeof x === 'number') return (x - y) * DONE_SORT.dir;
+    return String(x).localeCompare(String(y)) * DONE_SORT.dir;
+  });
+
+  const blank = '<span style="color:#c3ccd6;font-style:italic">—</span>';
+  tbody.innerHTML = sorted.map(r => `
+    <tr${r.total_cost === 0 ? ' style="background:#fffdf5"' : ''}>
+      <td>${fmtDate(r.completed)}</td>
+      <td><strong>${r.property}</strong></td>
+      <td>${r.unit}</td>
+      <td><strong>${r.total_cost > 0 ? fmtC(r.total_cost) : blank}</strong></td>
+      <td>${r.days_to_complete != null ? r.days_to_complete + 'd' : blank}</td>
+      <td>${r.days_to_turn != null ? r.days_to_turn + 'd' : blank}</td>
+    </tr>`).join('') ||
+    '<tr><td colspan="6" style="text-align:center;padding:28px;color:#7f8fa4;">No turns completed in this range</td></tr>';
+
+  const tot = shown.reduce((s, r) => s + r.total_cost, 0);
+  const avg = k => { const v = shown.map(r => r[k]).filter(x => x != null); return v.length ? Math.round(v.reduce((s, x) => s + x, 0) / v.length) : null; };
+  const dc = avg('days_to_complete'), dt = avg('days_to_turn');
+  tfoot.innerHTML = shown.length ? `<tr style="background:#f4f6f9;font-weight:700;color:#1a5276;">
+      <td colspan="3">${shown.length} turn${shown.length === 1 ? '' : 's'}</td>
+      <td>${fmtC(tot)}</td>
+      <td>${dc == null ? '—' : 'avg ' + dc + 'd'}</td>
+      <td>${dt == null ? '—' : 'avg ' + dt + 'd'}</td>
+    </tr>` : '';
+  if (countEl) countEl.textContent = shown.length + ' of ' + doneRows.length + ' turns';
 }
 
 function buildCostsTab() {

@@ -864,7 +864,7 @@ function buildTurnsCompleted() {
   for (const t of (pm.turns || [])) {
     // Same completeness test as the completedByMonth rollup, so the two agree.
     if (t.status !== 'COMPLETE' || !/turn/i.test(t.name || '') || /pest/i.test(t.name || '')) continue;
-    if (!t.completed_date || t.completed_date.slice(0, 7) !== month) continue;
+    if (!t.completed_date) continue;
     const pc = extractPropCode(t.property);
     if (!pc || !t.unit) continue;
     // Cost keys carry the building qualifier for multi-building properties —
@@ -895,21 +895,41 @@ function buildTurnsCompleted() {
   }
   rows.sort((a, b) => b.completed.localeCompare(a.completed) || a.property.localeCompare(b.property));
 
-  const n = rows.length;
-  const avg = k => { const v = rows.map(r => r[k]).filter(x => x != null); return v.length ? Math.round(v.reduce((s, x) => s + x, 0) / v.length) : null; };
-  const summary = {
-    month, as_of: today, turns: n,
-    total_cost:   Math.round(rows.reduce((s, r) => s + r.total_cost, 0) * 100) / 100,
-    avg_cost:     n ? Math.round(rows.reduce((s, r) => s + r.total_cost, 0) / n * 100) / 100 : 0,
-    avg_days_to_complete: avg('days_to_complete'),
-    avg_days_to_turn:     avg('days_to_turn'),
-    missing_move_out: rows.filter(r => !r.move_out).length,
-    missing_ready:    rows.filter(r => !r.ready_date).length,
-    zero_cost:        rows.filter(r => r.total_cost === 0).length,
+  const summarize = (rs, forMonth) => {
+    const n = rs.length;
+    const avg = k => { const v = rs.map(r => r[k]).filter(x => x != null); return v.length ? Math.round(v.reduce((s, x) => s + x, 0) / v.length) : null; };
+    return {
+      month: forMonth, as_of: today, turns: n,
+      total_cost:   Math.round(rs.reduce((s, r) => s + r.total_cost, 0) * 100) / 100,
+      avg_cost:     n ? Math.round(rs.reduce((s, r) => s + r.total_cost, 0) / n * 100) / 100 : 0,
+      avg_days_to_complete: avg('days_to_complete'),
+      avg_days_to_turn:     avg('days_to_turn'),
+      missing_move_out: rs.filter(r => !r.move_out).length,
+      missing_ready:    rs.filter(r => !r.ready_date).length,
+      zero_cost:        rs.filter(r => r.total_cost === 0).length,
+    };
   };
-  save('turns_completed.json', { ok: true, fetched_at: new Date().toISOString(), summary, rows });
-  console.log(`turns_completed.json: ${n} turns completed in ${month} MTD, $${summary.total_cost.toLocaleString()}`
-    + (summary.missing_ready ? ` (${summary.missing_ready} missing rent-ready date)` : ''));
+
+  // Two outputs from one pass:
+  //   turns_completed.json     — month-to-date ONLY. Format locked by LeeRoy 2026-08-10
+  //                              and consumed by the standalone turns_completed.html.
+  //                              Do not widen its scope; add to the _all file instead.
+  //   turns_completed_all.json — every completed turn, so the Turns dashboard's
+  //                              Completed tab can filter to any date range client-side.
+  const mtd = rows.filter(r => r.completed.slice(0, 7) === month);
+  save('turns_completed.json', { ok: true, fetched_at: new Date().toISOString(), summary: summarize(mtd, month), rows: mtd });
+  save('turns_completed_all.json', {
+    ok: true, fetched_at: new Date().toISOString(),
+    summary: summarize(rows, null),
+    first_completed: rows.length ? rows[rows.length - 1].completed : null,
+    last_completed:  rows.length ? rows[0].completed : null,
+    rows,
+  });
+  const mtdSummary = summarize(mtd, month);
+  console.log(`turns_completed.json: ${mtd.length} turns completed in ${month} MTD, $${mtdSummary.total_cost.toLocaleString()}`
+    + (mtdSummary.missing_ready ? ` (${mtdSummary.missing_ready} missing rent-ready date)` : ''));
+  console.log(`turns_completed_all.json: ${rows.length} completed turns all-time`
+    + (rows.length ? ` (${rows[rows.length - 1].completed} → ${rows[0].completed})` : ''));
 }
 
 // ── TOOLS & SUPPLIES ─────────────────────────────────────────────────────────
