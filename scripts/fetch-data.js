@@ -992,6 +992,217 @@ function buildTurnsCompleted() {
     + (rows.length ? ` (${rows[rows.length - 1].completed} → ${rows[0].completed})` : ''));
 }
 
+// ── TURNS HUB ────────────────────────────────────────────────────────────────
+// One record per unit currently in the turn pipeline, with EVERY fact about that
+// unit already joined: vacancy dates, PropertyMeld project + task checklist,
+// costs, estimate, schedule and risk flags.
+//
+// Why this exists: LeeRoy, 2026-08-13 — "too much here.. too many tabs.. too much
+// info in different spots." That complaint is really a JOIN problem. The old report
+// made the page re-derive the same unit identity in five places from three key
+// shapes, so each tab could only show its own slice. Doing the join ONCE here means
+// the hub page renders a row and expands a dossier without matching anything.
+//
+// Scope is the LIVE pipeline only (vacant/notice units + open PM turns + turns
+// finished in the last 90 days). History, the property spend rollup and the dispatch
+// grid stay in turns_completed_all.json / turn_costs.json / turn_schedule.json —
+// the hub page loads those directly rather than duplicating them here.
+function buildTurnsHub() {
+  const P = n => path.join(DATA_DIR, n);
+  const rd = n => { try { return JSON.parse(fs.readFileSync(P(n), 'utf8')); } catch (e) { return null; } };
+  const tv    = rd('turnvac.json');
+  if (!tv) { console.log('buildTurnsHub: turnvac.json missing, skip.'); return; }
+  const pm    = rd('pm_turns.json')     || { turns: [] };
+  const costs = rd('turn_costs.json')   || { units: {} };
+  const sched = rd('turn_schedule.json')|| { turns: [], events: [] };
+  const led   = rd('turn_ledger.json')  || { units: {} };
+
+  const today = new Date().toLocaleDateString('en-CA', { timeZone: 'America/Los_Angeles' });
+  const nrmU  = s => String(s || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+  const K     = (prop, unit) => { const pc = extractPropCode(prop); return pc && unit ? pc + '|' + nrmU(unit) : null; };
+  const days  = (a, b) => (a && b) ? Math.round((new Date(b + 'T12:00:00Z') - new Date(a + 'T12:00:00Z')) / 864e5) : null;
+
+  // Region: the scheduler already knows it per property; city is the fallback for
+  // properties no scheduler covers (Tacoma has no turn scheduler of its own).
+  const regionByProp = {};
+  for (const t of (sched.turns || [])) { const pc = extractPropCode(t.prop); if (pc && t.region) regionByProp[pc] = t.region; }
+  for (const e of (sched.events || [])) { const pc = extractPropCode(e.prop); if (pc && e.region && !regionByProp[pc]) regionByProp[pc] = e.region; }
+  const cityRegion = c => /spokane/i.test(c) ? 'Spokane'
+    : /kennewick|pasco|richland|west richland|burbank/i.test(c) ? 'Tri-Cities'
+    : /tacoma|lakewood|puyallup|federal way/i.test(c) ? 'Tacoma' : null;
+
+  // ── index the sources by unit key ──
+  const pmByKey = {};
+  for (const t of (pm.turns || [])) {
+    if (!/turn/i.test(t.name || '') || /pest/i.test(t.name || '')) continue;
+    const k = K(t.property, t.unit);
+    if (!k) continue;
+    // Newest project wins when a unit has turned more than once.
+    const cur = pmByKey[k];
+    if (!cur || String(t.start_date || '') > String(cur.start_date || '')) pmByKey[k] = t;
+  }
+  const schedByKey = {};
+  for (const t of (sched.turns || [])) { const k = K(t.prop, t.unit); if (k && (!schedByKey[k] || t.status === 'ACTIVE')) schedByKey[k] = t; }
+
+  // Next scheduled appointment per unit, from the dispatch feed (today forward).
+  const nextApptByKey = {};
+  for (const e of (sched.events || [])) {
+    if (!e.date || e.date < today) continue;
+    if (/CANCEL/i.test(e.status || '')) continue;
+    const k = K(e.prop, e.unit);
+    if (!k) continue;
+    if (!nextApptByKey[k] || e.date < nextApptByKey[k].date) nextApptByKey[k] = { date: e.date, cat: e.category, who: e.who, brief: e.brief };
+  }
+
+  // ── build one record per live unit ──
+  const recs = {};
+  const ensure = (prop, unit) => {
+    const k = K(prop, unit);
+    if (!k) return null;
+    return recs[k] || (recs[k] = { key: k, prop: extractPropCode(prop), unit: String(unit).trim(), at_risk: [] });
+  };
+
+  for (const r of (tv.rows || [])) {
+    if (EXCLUDED_PROPERTIES.includes(r.property_name)) continue;
+    const rec = ensure(r.property_name, r.unit);
+    if (!rec) continue;
+    const vacant = String(r.unit_status || '').startsWith('Vacant-');
+    Object.assign(rec, {
+      property_name: r.property_name, city: r.city, addr: r.unit_address || r.address || null,
+      unit_id: r.unit_id, unit_status: r.unit_status,
+      // Notice-* = tenant still in place, so rent_ready is not meaningful yet.
+      rent_ready: vacant ? r.rent_ready : null,
+      vacant, days_vacant: vacant ? r.days_vacant : null,
+      move_out: r.last_move_out || null, available_on: r.available_on || null,
+      ready_on: r.ready_for_showing_on || null, target_date: r.unit_turn_target_date || null,
+      next_move_in: r.next_move_in || null, rent: r.schd_rent || null,
+      bed_bath: r.bed_and_bath || null, sqft: r.sqft || null,
+    });
+  }
+  // Ledger fills move-out dates for units that already re-rented out of the snapshot.
+  for (const e of Object.values(led.units || {})) {
+    const k = K(e.prop, e.unit);
+    if (!k || !recs[k]) continue;
+    if (!recs[k].move_out && e.move_out) recs[k].move_out = e.move_out;
+  }
+  // Open PM turns for units the vacancy snapshot doesn't carry (already re-rented,
+  // or a turn running on a unit that never showed vacant).
+  for (const [k, t] of Object.entries(pmByKey)) {
+    if (recs[k]) continue;
+    if (t.status !== 'ACTIVE' && !(t.completed_date && t.completed_date >= new Date(Date.now() - 90 * 864e5).toISOString().slice(0, 10))) continue;
+    recs[k] = { key: k, prop: extractPropCode(t.property), unit: String(t.unit).trim(), property_name: t.property, at_risk: [] };
+  }
+
+  // ── attach PM project, costs, schedule, stage and risk ──
+  const STAGE_ORDER = ['Move-out', 'Walkthrough', 'Paint', 'Maintenance', 'Cleaning', 'Carpet', 'Final Walk', 'Ready'];
+  let n = 0;
+  for (const rec of Object.values(recs)) {
+    const k = rec.key;
+    const t = pmByKey[k];
+    const s = schedByKey[k];
+    rec.region = regionByProp[rec.prop] || cityRegion(rec.city || '') || (s && s.region) || null;
+
+    if (t) {
+      rec.pm = {
+        projId: t.id, name: t.name, status: t.status,
+        done: t.done_melds, total: t.total_melds,
+        first_appt: t.first_appt || null,
+        final_walk: t.final_walk || null,            // SCHEDULED — may be future
+        final_walk_done: t.final_walk_done || null,  // COMPLETED = turn end
+        completed_date: t.completed_date || null,
+        due: (s && s.due) || null,
+        next_task: (s && s.next_task) || null,
+        tasks: Array.isArray(t.tasks) ? t.tasks : null,
+      };
+    }
+    rec.next_appt = nextApptByKey[k] || null;
+
+    // Cost: the cost map is keyed propcode[-building]-unit, so resolve through the
+    // same helper the weekly report uses rather than guessing the key here.
+    const code = findUnitCode(costs.units || {}, rec.prop, rec.property_name || rec.prop, rec.unit);
+    const cu = (costs.units || {})[code];
+    if (cu) {
+      const labor = (cu.labor || []).reduce((a, e) => a + e.cost, 0);
+      const mats  = (cu.materials || []).reduce((a, e) => a + e.amt, 0);
+      rec.cost = {
+        code,
+        labor: Math.round(labor * 100) / 100,
+        materials: Math.round(mats * 100) / 100,
+        total: Math.round((labor + mats) * 100) / 100,
+        estimate: cu.estimate || 0,
+        laborEntries: (cu.labor || []).slice(0, 60),
+        materialEntries: (cu.materials || []).slice(0, 60),
+      };
+      if (cu.turnEnd) rec.turn_end = cu.turnEnd;         // completed final walkthrough
+      if (cu.afTurnEnd) rec.af_turn_end = cu.afTurnEnd;  // AppFolio turn section
+    } else {
+      rec.cost = { code, labor: 0, materials: 0, total: 0, estimate: 0, laborEntries: [], materialEntries: [] };
+    }
+    if (!rec.turn_end && rec.pm && rec.pm.final_walk_done) rec.turn_end = rec.pm.final_walk_done;
+
+    // Stage = the next thing that has to happen. Ready once AppFolio says rent-ready.
+    let stage = null;
+    if (rec.rent_ready === 'Yes') stage = 'Ready';
+    else if (rec.pm && rec.pm.tasks) {
+      const open = rec.pm.tasks.filter(x => !x.done);
+      const catStage = { paint: 'Paint', maintenance: 'Maintenance', cleaning: 'Cleaning', carpet: 'Carpet', 'final-walk': 'Final Walk', walkthrough: 'Walkthrough' };
+      stage = open.length ? (catStage[open[0].cat] || 'Maintenance') : 'Final Walk';
+    } else if (rec.pm && rec.pm.next_task) {
+      stage = ({ paint: 'Paint', maint: 'Maintenance', maintenance: 'Maintenance', clean: 'Cleaning', cleaning: 'Cleaning', carpet: 'Carpet' })[rec.pm.next_task.task] || 'Maintenance';
+    } else if (!rec.vacant && rec.move_out) stage = 'Move-out';
+    rec.stage = stage;
+    rec.stage_ord = Math.max(0, STAGE_ORDER.indexOf(stage || 'Move-out'));
+
+    rec.days_elapsed = rec.move_out ? Math.max(0, days(rec.move_out, rec.turn_end || today)) : null;
+    rec.days_to_turn = (rec.move_out && rec.turn_end) ? days(rec.move_out, rec.turn_end) : null;
+
+    // Status the row is filtered by.
+    rec.status = rec.turn_end ? 'complete'
+      : rec.rent_ready === 'Yes' ? 'ready'
+      : rec.vacant ? 'active'
+      : rec.move_out ? 'notice' : 'other';
+
+    // Risk flags — the exceptions that used to live on their own tab.
+    // Only LIVE turns can be at risk: a finished turn that ran long is history, and
+    // flagging it buries the handful of units that actually need a decision today.
+    //
+    // ⚠️ `unit_turn_target_date` is deliberately NOT a risk trigger. Measured
+    // 2026-08-13: available_on is past target on 130 of 235 units, so it fires on
+    // more than half the portfolio and tells you nothing. It's kept on the record as
+    // `target_date` and shown in the dossier for reference, but it does not raise a
+    // flag. If those targets are ever maintained, revisit this.
+    if (rec.status === 'active' || rec.status === 'ready') {
+      if (rec.available_on && rec.available_on < today && rec.rent_ready !== 'Yes') rec.at_risk.push('Available date passed');
+      if (rec.status === 'active' && !rec.next_appt && !(rec.pm && rec.pm.next_task)) rec.at_risk.push('Nothing scheduled');
+      if (rec.status === 'active' && rec.days_elapsed != null && rec.days_elapsed > 45) rec.at_risk.push('Over 45 days vacant');
+      if (rec.next_move_in && rec.available_on && rec.available_on > rec.next_move_in) rec.at_risk.push('Move-in before ready');
+    }
+    n++;
+  }
+
+  const rows = Object.values(recs).sort((a, b) =>
+    (b.at_risk.length - a.at_risk.length) ||
+    String(a.prop).localeCompare(String(b.prop)) ||
+    String(a.unit).localeCompare(String(b.unit)));
+
+  const active = rows.filter(r => r.status === 'active');
+  const summary = {
+    as_of: today,
+    units: rows.length,
+    active: active.length,
+    ready: rows.filter(r => r.status === 'ready').length,
+    notice: rows.filter(r => r.status === 'notice').length,
+    at_risk: rows.filter(r => r.at_risk.length).length,
+    unscheduled: active.filter(r => !r.next_appt).length,
+    accruing: Math.round(active.reduce((s, r) => s + (r.cost ? r.cost.total : 0), 0) * 100) / 100,
+    avg_days_open: active.length ? Math.round(active.reduce((s, r) => s + (r.days_elapsed || 0), 0) / active.length) : null,
+    revenue_at_risk: Math.round(active.reduce((s, r) => s + (parseFloat(r.rent) || 0) / 30, 0) * 100) / 100,
+  };
+
+  save('turns_hub.json', { ok: true, fetched_at: new Date().toISOString(), summary, rows });
+  console.log(`turns_hub.json: ${rows.length} units (${summary.active} active, ${summary.at_risk} at risk, ${summary.unscheduled} unscheduled)`);
+}
+
 // ── TOOLS & SUPPLIES ─────────────────────────────────────────────────────────
 function buildToolsSupplies() {
   const rampPath = path.join(DATA_DIR, 'ramp.json');
@@ -1897,7 +2108,7 @@ const FETCH_ONLY = process.env.FETCH_ONLY || 'all';
 (async () => {
   if (FETCH_ONLY === 'costs-only') {
     buildTurnCosts();
-    buildTurnsCompleted();
+    buildTurnsCompleted(); buildTurnsHub();
     console.log('Done.');
     return;
   }
@@ -1905,7 +2116,7 @@ const FETCH_ONLY = process.env.FETCH_ONLY || 'all';
   if (FETCH_ONLY === 'turndetail-only') {
     await fetchUnitTurnDetail();
     buildTurnCosts();
-    buildTurnsCompleted();
+    buildTurnsCompleted(); buildTurnsHub();
     console.log('Done.');
     return;
   }
@@ -1922,7 +2133,7 @@ const FETCH_ONLY = process.env.FETCH_ONLY || 'all';
     buildTurnCosts();
     buildToolsSupplies();
     buildAppliances();
-    buildTurnsCompleted();
+    buildTurnsCompleted(); buildTurnsHub();
     console.log('Done.');
     return;
   }
@@ -1931,7 +2142,7 @@ const FETCH_ONLY = process.env.FETCH_ONLY || 'all';
     await fetchPropertyMeldWOs();
     await fetchPropertyMeldTurns();
     await fetchPMTechMetrics();
-    buildTurnsCompleted();
+    buildTurnsCompleted(); buildTurnsHub();
     console.log('Done.');
     return;
   }
@@ -1945,7 +2156,7 @@ const FETCH_ONLY = process.env.FETCH_ONLY || 'all';
 
   if (FETCH_ONLY === 'turns-only') {
     await fetchPropertyMeldTurns();
-    buildTurnsCompleted();
+    buildTurnsCompleted(); buildTurnsHub();
     console.log('Done.');
     return;
   }
@@ -2044,7 +2255,7 @@ const FETCH_ONLY = process.env.FETCH_ONLY || 'all';
       await fetchBudget();
       await syncVacanciesToFirebase();
       buildTurnCosts(); // keep estimates fresh every 5 min
-      buildTurnsCompleted();
+      buildTurnsCompleted(); buildTurnsHub();
     } catch(e) {
       console.error('AppFolio fetch failed:', e.message);
       process.exit(1);
@@ -2052,12 +2263,12 @@ const FETCH_ONLY = process.env.FETCH_ONLY || 'all';
   }
 
   if (runQBT) {
-    try { await fetchQBTime(); buildAuditData(); buildTurnCosts(); buildTurnsCompleted(); }
+    try { await fetchQBTime(); buildAuditData(); buildTurnCosts(); buildTurnsCompleted(); buildTurnsHub(); }
     catch(e) { console.error('QBTime fetch failed:', e.message); if (FETCH_ONLY === 'qbt-only') process.exit(1); }
   }
 
   if (runRamp) {
-    try { await fetchRampTransactions(); buildRampProcessed(); buildTurnCosts(); buildToolsSupplies(); buildAppliances(); buildTurnsCompleted(); }
+    try { await fetchRampTransactions(); buildRampProcessed(); buildTurnCosts(); buildToolsSupplies(); buildAppliances(); buildTurnsCompleted(); buildTurnsHub(); }
     catch(e) { console.error('Ramp fetch failed:', e.message); if (FETCH_ONLY === 'ramp-only') process.exit(1); }
     try { await fetchRampBills(); }
     catch(e) { console.error('Ramp bills fetch failed (non-fatal):', e.message); }

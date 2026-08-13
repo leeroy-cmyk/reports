@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Turns Hub</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Segoe UI', system-ui, sans-serif; background: #f4f6f9; color: #1a2535; }
+
+/* ── chrome ─────────────────────────────────────────────────────────────── */
+header { background: #fff; border-bottom: 2px solid #d0dce8; padding: 14px 28px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+header h1 { font-size: 1.3rem; color: #1a5276; letter-spacing: -0.01em; }
+.sub { font-size: 0.78rem; color: #7f8fa4; margin-top: 2px; }
+.stamp { font-size: 0.75rem; color: #7f8fa4; }
+.stamp span { color: #1a5276; font-weight: 600; }
+
+nav { position: sticky; top: 0; z-index: 20; background: #fff; border-bottom: 1px solid #d0dce8; padding: 0 28px; display: flex; gap: 4px; overflow-x: auto; box-shadow: 0 1px 4px rgba(0,0,0,.05); }
+nav a { padding: 11px 15px; font-size: 0.85rem; font-weight: 600; color: #7f8fa4; text-decoration: none; border-bottom: 3px solid transparent; white-space: nowrap; }
+nav a:hover { color: #1a5276; }
+nav a.on { color: #1a5276; border-bottom-color: #2e86c1; }
+
+.wrap { padding: 20px 28px 60px; max-width: 1680px; }
+section { scroll-margin-top: 52px; margin-bottom: 34px; }
+.shead { display: flex; align-items: baseline; gap: 12px; margin: 0 0 10px; padding-bottom: 7px; border-bottom: 2px solid #d0dce8; }
+.shead h2 { font-size: 1rem; color: #1a5276; font-weight: 700; }
+.shead .note { font-size: 0.76rem; color: #7f8fa4; }
+
+/* ── kpi strip ──────────────────────────────────────────────────────────── */
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(158px, 1fr)); gap: 12px; margin-bottom: 22px; }
+.k { background: #fff; border: 1px solid #d0dce8; border-left: 4px solid #2e86c1; border-radius: 8px; padding: 13px 16px; }
+.k.warn { border-left-color: #d68910; }
+.k.bad  { border-left-color: #c0392b; }
+.k.good { border-left-color: #1e8449; }
+.k .lbl { font-size: 0.68rem; color: #7f8fa4; text-transform: uppercase; letter-spacing: 0.7px; }
+.k .val { font-size: 1.5rem; font-weight: 700; color: #1a5276; line-height: 1.15; margin-top: 4px; }
+.k .sub { font-size: 0.71rem; color: #a0aebb; margin-top: 3px; }
+.k.click { cursor: pointer; }
+.k.click:hover { background: #eaf2f8; }
+
+/* ── controls ───────────────────────────────────────────────────────────── */
+.bar { display: flex; gap: 9px; flex-wrap: wrap; align-items: center; margin-bottom: 12px; }
+.bar input[type=text], .bar select, .bar input[type=date] { padding: 6px 10px; font-size: 0.83rem; border: 1px solid #d0dce8; border-radius: 6px; background: #fff; color: #1a2535; font-family: inherit; }
+.bar input[type=text] { min-width: 210px; }
+.pill { padding: 5px 13px; font-size: 0.8rem; font-weight: 600; border-radius: 20px; border: 1px solid #d0dce8; background: #fff; color: #7f8fa4; cursor: pointer; }
+.pill:hover { border-color: #1a5276; color: #1a5276; }
+.pill.on { background: #1a5276; color: #fff; border-color: #1a5276; }
+.pill.risk.on { background: #c0392b; border-color: #c0392b; }
+.count { font-size: 0.78rem; color: #7f8fa4; margin-left: auto; }
+
+/* ── tables ─────────────────────────────────────────────────────────────── */
+.tw { overflow-x: auto; border: 1px solid #d0dce8; border-radius: 8px; background: #fff; }
+table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+/* NOTE: no `position: sticky` here. `.tw` sets overflow-x, which makes it the
+   sticky containing block, so a `top: 44px` header is pushed 44px DOWN over the
+   first body row instead of pinning to the viewport (measured: header at y=192,
+   first row at y=182 — the row became unclickable). Sticky headers would need the
+   page itself to be the scroll container; not worth losing horizontal scroll. */
+th { text-align: left; padding: 9px 12px; font-size: 0.7rem; color: #7f8fa4; text-transform: uppercase; letter-spacing: 0.6px; background: #f4f6f9; border-bottom: 2px solid #d0dce8; white-space: nowrap; cursor: pointer; user-select: none; }
+th:hover { color: #1a5276; }
+th.sorted { color: #1a5276; }
+th .ar { color: #2e86c1; font-size: 0.66rem; margin-left: 3px; }
+td { padding: 8px 12px; border-bottom: 1px solid #e8edf2; white-space: nowrap; }
+tbody tr.row { cursor: pointer; }
+tbody tr.row:hover td { background: #eaf2f8; }
+tbody tr.det { display: none; }
+tbody tr.det.open { display: table-row; }
+tbody tr.det td { background: #f9fbfc; padding: 0; border-bottom: 2px solid #d0dce8; }
+tfoot td { background: #f4f6f9; font-weight: 700; color: #1a5276; border-top: 2px solid #d0dce8; }
+.blank { color: #c3ccd6; font-style: italic; }
+.num { text-align: right; }
+
+/* ── badges ─────────────────────────────────────────────────────────────── */
+.b { display: inline-block; padding: 2px 9px; border-radius: 11px; font-size: 0.7rem; font-weight: 600; white-space: nowrap; }
+.b.active { background: #fdf0d5; color: #92400e; }
+.b.ready  { background: #d5f0e0; color: #1e6b45; }
+.b.notice { background: #e2e9f0; color: #55657a; }
+.b.complete { background: #dbe9f7; color: #1a5276; }
+.b.other  { background: #eceff2; color: #7f8fa4; }
+.b.stage  { background: #eaf2f8; color: #1a5276; }
+.b.risk   { background: #fbe3e0; color: #a5352a; margin-right: 4px; }
+.b.cat-paint { background:#efe3f7; color:#6b3fa0; }
+.b.cat-maintenance { background:#fbe3e0; color:#a5352a; }
+.b.cat-cleaning { background:#d9f2ee; color:#12705f; }
+.b.cat-carpet { background:#fbeeda; color:#8a5a00; }
+.b.cat-final-walk { background:#dde3ea; color:#2c3e50; }
+.b.cat-walkthrough { background:#dbe9f7; color:#1a5276; }
+
+/* ── dossier ────────────────────────────────────────────────────────────── */
+.dos { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 0; }
+/* min-width:0 — grid items default to min-width:auto, so one long line (a note,
+   or a full street address) stops the column shrinking and spills into the next. */
+.dos .panel { padding: 14px 18px; border-right: 1px solid #e8edf2; min-width: 0; overflow-wrap: anywhere; }
+.dos .panel:last-child { border-right: none; }
+.dos h4 { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.7px; color: #7f8fa4; margin-bottom: 9px; }
+.kv { display: grid; grid-template-columns: auto 1fr; gap: 3px 12px; font-size: 0.81rem; }
+.kv dt { color: #7f8fa4; }
+.kv dd { color: #1a2535; font-weight: 600; text-align: right; }
+.steps { display: flex; flex-direction: column; gap: 6px; }
+.step { display: flex; align-items: center; gap: 8px; font-size: 0.81rem; }
+.dot { width: 9px; height: 9px; border-radius: 50%; background: #d0dce8; flex: none; }
+.dot.done { background: #1e8449; }
+.dot.next { background: #d68910; box-shadow: 0 0 0 3px #fdf0d5; }
+.step .t { flex: 1; }
+.step .d { color: #7f8fa4; font-size: 0.76rem; }
+.step.done .t { color: #7f8fa4; }
+.ent { font-size: 0.78rem; max-height: 172px; overflow-y: auto; }
+.ent div { display: flex; justify-content: space-between; gap: 10px; padding: 2px 0; border-bottom: 1px solid #eef2f6; }
+.ent .m { color: #7f8fa4; }
+a.pm { color: #2e86c1; text-decoration: none; font-weight: 600; font-size: 0.79rem; }
+a.pm:hover { text-decoration: underline; }
+
+/* ── dispatch grid ──────────────────────────────────────────────────────── */
+.grid { display: grid; gap: 1px; background: #d0dce8; border: 1px solid #d0dce8; border-radius: 8px; overflow: hidden; min-width: 900px; }
+.gc { background: #fff; padding: 7px 9px; min-height: 46px; }
+.gh { background: #f4f6f9; font-size: 0.72rem; font-weight: 700; color: #1a5276; text-transform: uppercase; letter-spacing: 0.5px; text-align: center; padding: 8px; }
+.gw { background: #f4f6f9; font-size: 0.79rem; font-weight: 700; color: #1a5276; display: flex; align-items: center; padding: 8px 10px; }
+.ev { font-size: 0.72rem; padding: 4px 6px; border-radius: 5px; margin-bottom: 3px; background: #eaf2f8; border-left: 3px solid #2e86c1; line-height: 1.3; }
+.ev .p { font-weight: 700; color: #1a5276; }
+.ev .a { color: #7f8fa4; }
+.ev.paint { background:#f6eefc; border-left-color:#8e44ad; }
+.ev.maintenance { background:#fdeceb; border-left-color:#c0392b; }
+.ev.cleaning { background:#e6f6f3; border-left-color:#16a085; }
+.ev.carpet { background:#fdf3e2; border-left-color:#d68910; }
+.ev.final-walk { background:#e8ecf0; border-left-color:#2c3e50; }
+
+.err { background:#fbe3e0; border:1px solid #f0b8b0; border-left:4px solid #c0392b; border-radius:8px; padding:10px 14px; font-size:0.82rem; color:#8a2c22; }
+.caveat { background:#fdf6e3; border:1px solid #f0d9a0; border-left:4px solid #d68910; border-radius:8px; padding:10px 14px; font-size:0.82rem; color:#6b5518; margin-bottom:10px; }
+.empty { padding: 30px; text-align: center; color: #7f8fa4; font-size: 0.85rem; }
+@media print {
+  nav, .bar, .kpis, header .stamp { display: none; }
+  section { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>Turns Hub</h1>
+    <div class="sub">Every turn, every fact, one page — pipeline · dispatch · costs · completed · vacancy</div>
+  </div>
+  <div class="stamp" id="stamp">Loading…</div>
+</header>
+
+<nav id="nav">
+  <a href="#pipeline" class="on">Pipeline</a>
+  <a href="#dispatch">Dispatch</a>
+  <a href="#costs">Costs</a>
+  <a href="#completed">Completed</a>
+  <a href="#vacancy">Vacancy</a>
+</nav>
+
+<div class="wrap">
+  <div class="kpis" id="kpis"></div>
+
+  <section id="pipeline">
+    <div class="shead"><h2>Turn Pipeline</h2><span class="note">Every unit in a turn right now. Click any row for its full dossier.</span></div>
+    <div class="bar">
+      <input type="text" id="q" placeholder="Search property, unit, address…" oninput="renderPipe()">
+      <select id="fRegion" onchange="renderPipe()"><option value="">All regions</option></select>
+      <select id="fStage" onchange="renderPipe()"><option value="">All stages</option></select>
+      <select id="fStatus" onchange="renderPipe()">
+        <option value="live">Live turns</option>
+        <option value="active">Active only</option>
+        <option value="ready">Ready</option>
+        <option value="notice">On notice</option>
+        <option value="complete">Complete</option>
+        <option value="">Everything</option>
+      </select>
+      <button class="pill risk" id="fRisk" onclick="toggleRisk()">⚠ At risk only</button>
+      <span class="count" id="pipeCount"></span>
+    </div>
+    <div class="tw" id="pipeWrap"><div class="empty">Loading…</div></div>
+  </section>
+
+  <section id="dispatch">
+    <div class="shead"><h2>Crew Dispatch</h2><span class="note">Who is where, this week. Printable.</span></div>
+    <div class="bar">
+      <select id="dRegion" onchange="renderDispatch()"></select>
+      <button class="pill" onclick="shiftWeek(-1)">← Prev</button>
+      <button class="pill on" id="dThis" onclick="shiftWeek(0)">This week</button>
+      <button class="pill" onclick="shiftWeek(1)">Next →</button>
+      <span class="count" id="dCount"></span>
+    </div>
+    <div style="overflow-x:auto" id="dispWrap"><div class="empty">Loading…</div></div>
+  </section>
+
+  <section id="costs">
+    <div class="shead"><h2>Turn Costs by Property</h2><span class="note">Labor + materials + vendor bills in the selected period. Per-unit cost lives in each row's dossier above.</span></div>
+    <div class="bar">
+      <button class="pill on" onclick="setCostPeriod('thisMo',this)">This month</button>
+      <button class="pill" onclick="setCostPeriod('lastMo',this)">Last month</button>
+      <button class="pill" onclick="setCostPeriod('last3mo',this)">Last 3 mo</button>
+      <button class="pill" onclick="setCostPeriod('ytd',this)">YTD</button>
+      <button class="pill" onclick="setCostPeriod('all',this)">All time</button>
+      <span class="count" id="costCount"></span>
+    </div>
+    <div class="tw" id="costWrap"><div class="empty">Loading…</div></div>
+  </section>
+
+  <section id="completed">
+    <div class="shead"><h2>Completed Turns</h2><span class="note">A turn lands in a range when it completed in that range. Cost is the whole turn.</span></div>
+    <div class="bar">
+      <button class="pill on" onclick="setDonePeriod('thisMo',this)">This month</button>
+      <button class="pill" onclick="setDonePeriod('lastMo',this)">Last month</button>
+      <button class="pill" onclick="setDonePeriod('last3mo',this)">Last 3 mo</button>
+      <button class="pill" onclick="setDonePeriod('ytd',this)">YTD</button>
+      <button class="pill" onclick="setDonePeriod('all',this)">All time</button>
+      <input type="date" id="dFrom"><span style="color:#bdc3c7">–</span><input type="date" id="dTo">
+      <button class="pill" onclick="setDonePeriod('custom',null)">Go</button>
+      <span class="count" id="doneCount"></span>
+    </div>
+    <div class="tw" id="doneWrap"><div class="empty">Loading…</div></div>
+  </section>
+
+  <section id="vacancy">
+    <div class="shead"><h2>Vacancy &amp; Availability</h2><span class="note">The leasing-facing view: how long vacant, when available, what it's costing.</span></div>
+    <div class="bar">
+      <select id="vRegion" onchange="renderVac()"><option value="">All regions</option></select>
+      <select id="vFilter" onchange="renderVac()">
+        <option value="vacant">Vacant now</option>
+        <option value="unrented">Vacant &amp; unrented</option>
+        <option value="notice">On notice</option>
+        <option value="">All</option>
+      </select>
+      <span class="count" id="vacCount"></span>
+    </div>
+    <div class="tw" id="vacWrap"><div class="empty">Loading…</div></div>
+  </section>
+</div>
+
+<script>
+// ── state ───────────────────────────────────────────────────────────────────
+let HUB = null, SCHED = null, COSTS = null, DONE = null;
+let riskOnly = false, weekOffset = 0;
+let COST_FROM = '', COST_TO = '', DONE_FROM = '', DONE_TO = '';
+let pipeSort = { k: 'risk', dir: -1 }, costSort = { k: 'total', dir: -1 }, doneSort = { k: 'completed', dir: -1 }, vacSort = { k: 'days_vacant', dir: -1 };
+const TODAY = new Date().toLocaleDateString('en-CA');
+
+// ── helpers ─────────────────────────────────────────────────────────────────
+const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const money = n => '$' + Math.round(n || 0).toLocaleString('en-US');
+const fdate = s => s ? (s.slice(5, 7) + '/' + s.slice(8, 10) + '/' + s.slice(2, 4)) : null;
+const short = s => s ? (+s.slice(5, 7) + '/' + +s.slice(8, 10)) : null;
+const dash = '<span class="blank">—</span>';
+const cell = v => v == null || v === '' ? dash : v;
+const dbetween = (a, b) => (a && b) ? Math.round((new Date(b + 'T12:00:00Z') - new Date(a + 'T12:00:00Z')) / 864e5) : null;
+// Blanks sort last in both directions so "—" never reads as smallest or largest.
+function cmp(x, y, dir) {
+  if (x == null && y == null) return 0;
+  if (x == null) return 1;
+  if (y == null) return -1;
+  if (typeof x === 'number' && typeof y === 'number') return (x - y) * dir;
+  return String(x).localeCompare(String(y)) * dir;
+}
+function arrows(sel, key, dir) {
+  document.querySelectorAll(sel + ' th[data-k]').forEach(th => {
+    th.classList.toggle('sorted', th.dataset.k === key);
+    const a = th.querySelector('.ar'); if (a) a.remove();
+    if (th.dataset.k === key) th.insertAdjacentHTML('beforeend', '<span class="ar">' + (dir === 1 ? '▲' : '▼') + '</span>');
+  });
+}
+// Each section renders independently: one failure shows in that section only and
+// never blanks the rest of the page (the old report's whole-chain failure mode).
+function guard(name, fn) {
+  try { fn(); } catch (e) {
+    console.error(name, e);
+    const el = document.getElementById(name);
+    if (el) el.innerHTML = '<div class="err"><strong>' + name + ' failed to render.</strong> ' + esc(e.message) + '</div>';
+  }
+}
+
+// ── load ────────────────────────────────────────────────────────────────────
+(async function load() {
+  const get = async u => { try { const r = await fetch(u + '?t=' + Date.now()); return r.ok ? await r.json() : null; } catch (e) { return null; } };
+  [HUB, SCHED, COSTS, DONE] = await Promise.all([
+    get('./data/turns_hub.json'), get('./data/turn_schedule.json'),
+    get('./data/turn_costs.json'), get('./data/turns_completed_all.json'),
+  ]);
+  if (!HUB) {
+    document.getElementById('stamp').textContent = 'Could not load data';
+    document.getElementById('pipeWrap').innerHTML = '<div class="err">turns_hub.json not available. Run <code>FETCH_ONLY=costs-only node scripts/fetch-data.js</code>.</div>';
+    return;
+  }
+  const ts = new Date(HUB.fetched_at);
+  document.getElementById('stamp').innerHTML = 'Updated <span>' + ts.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) + ' · ' +
+    ts.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }) + '</span>';
+
+  // filter options
+  const regions = [...new Set(HUB.rows.map(r => r.region).filter(Boolean))].sort();
+  const stages  = [...new Set(HUB.rows.map(r => r.stage).filter(Boolean))].sort();
+  for (const s of regions) { document.getElementById('fRegion').insertAdjacentHTML('beforeend', `<option>${esc(s)}</option>`); document.getElementById('vRegion').insertAdjacentHTML('beforeend', `<option>${esc(s)}</option>`); }
+  for (const s of stages)  document.getElementById('fStage').insertAdjacentHTML('beforeend', `<option>${esc(s)}</option>`);
+  const dr = document.getElementById('dRegion');
+  for (const s of ((SCHED && SCHED.regions) || regions)) dr.insertAdjacentHTML('beforeend', `<option>${esc(s)}</option>`);
+
+  setCostPeriod('thisMo', null); setDonePeriod('thisMo', null);
+  guard('kpis', renderKPIs);
+  guard('pipeline', renderPipe);
+  guard('dispatch', renderDispatch);
+  guard('costs', renderCosts);
+  guard('completed', renderDone);
+  guard('vacancy', renderVac);
+  spy();
+})();
+
+// ── KPIs ────────────────────────────────────────────────────────────────────
+function renderKPIs() {
+  const s = HUB.summary, ds = (DONE && DONE.rows) || [];
+  const mtd = ds.filter(r => r.completed.slice(0, 7) === TODAY.slice(0, 7));
+  const mtdCost = mtd.reduce((a, r) => a + r.total_cost, 0);
+  const k = [
+    { lbl: 'Active Turns', val: s.active, sub: money(s.accruing) + ' accruing', cls: '', f: () => { setStatus('active'); } },
+    { lbl: 'At Risk', val: s.at_risk, sub: s.at_risk ? 'need a decision' : 'all clear', cls: s.at_risk ? 'bad' : 'good', f: () => { setStatus('live'); riskOnly = true; syncRisk(); } },
+    { lbl: 'Unscheduled', val: s.unscheduled, sub: 'no appointment booked', cls: s.unscheduled ? 'warn' : 'good', f: () => { setStatus('active'); riskOnly = true; syncRisk(); } },
+    { lbl: 'Avg Days Open', val: s.avg_days_open == null ? '—' : s.avg_days_open, sub: 'move-out → today', cls: '' },
+    { lbl: 'Ready to Show', val: s.ready, sub: 'rent ready', cls: 'good', f: () => { setStatus('ready'); } },
+    { lbl: 'Completed MTD', val: mtd.length, sub: money(mtdCost), cls: '', f: () => document.getElementById('completed').scrollIntoView({ behavior: 'smooth' }) },
+    { lbl: 'Revenue at Risk', val: money(s.revenue_at_risk) + '/day', sub: 'active turns, lost rent', cls: 'warn' },
+  ];
+  document.getElementById('kpis').innerHTML = k.map((x, i) =>
+    `<div class="k ${x.cls}${x.f ? ' click' : ''}" ${x.f ? `onclick="KPIF[${i}]()"` : ''}>
+       <div class="lbl">${x.lbl}</div><div class="val">${x.val}</div><div class="sub">${x.sub}</div></div>`).join('');
+  window.KPIF = k.map(x => x.f || (() => {}));
+}
+function setStatus(v) {
+  document.getElementById('fStatus').value = v;
+  riskOnly = false; syncRisk();
+  document.getElementById('pipeline').scrollIntoView({ behavior: 'smooth' });
+}
+function syncRisk() { document.getElementById('fRisk').classList.toggle('on', riskOnly); renderPipe(); }
+function toggleRisk() { riskOnly = !riskOnly; syncRisk(); }
+
+// ── PIPELINE ────────────────────────────────────────────────────────────────
+function pipeRows() {
+  const q = (document.getElementById('q').value || '').toLowerCase();
+  const rg = document.getElementById('fRegion').value;
+  const st = document.getElementById('fStage').value;
+  const su = document.getElementById('fStatus').value;
+  return HUB.rows.filter(r => {
+    if (riskOnly && !r.at_risk.length) return false;
+    if (rg && r.region !== rg) return false;
+    if (st && r.stage !== st) return false;
+    if (su === 'live') { if (r.status !== 'active' && r.status !== 'ready' && r.status !== 'notice') return false; }
+    else if (su && r.status !== su) return false;
+    if (q && !((r.prop + ' ' + r.unit + ' ' + (r.addr || '') + ' ' + (r.property_name || '')).toLowerCase().includes(q))) return false;
+    return true;
+  });
+}
+function sortPipe(k) { pipeSort = { k, dir: pipeSort.k === k ? -pipeSort.dir : (k === 'prop' || k === 'unit' || k === 'stage' ? 1 : -1) }; renderPipe(); }
+function renderPipe() {
+  const rows = pipeRows();
+  const val = r => ({
+    risk: r.at_risk.length, prop: r.prop, unit: r.unit, region: r.region, stage: r.stage_ord,
+    status: r.status, days: r.days_elapsed, next: r.next_appt ? r.next_appt.date : null,
+    avail: r.available_on, cost: r.cost ? r.cost.total : 0, est: r.cost ? r.cost.estimate : 0,
+  }[pipeSort.k]);
+  const sorted = [...rows].sort((a, b) => cmp(val(a), val(b), pipeSort.dir) || String(a.prop).localeCompare(String(b.prop)));
+
+  const head = [['risk', '⚠'], ['prop', 'Property'], ['unit', 'Unit'], ['region', 'Region'], ['status', 'Status'],
+    ['stage', 'Stage'], ['days', 'Days'], ['next', 'Next Up'], ['avail', 'Available'], ['cost', 'Actual'], ['est', 'Estimate']];
+  document.getElementById('pipeWrap').innerHTML = `<table id="pipeTbl">
+    <thead><tr>${head.map(([k, l]) => `<th data-k="${k}" onclick="sortPipe('${k}')">${l}</th>`).join('')}<th></th></tr></thead>
+    <tbody>${sorted.map((r, i) => rowHtml(r, i)).join('') || `<tr><td colspan="12" class="empty">No units match these filters</td></tr>`}</tbody>
+  </table>`;
+  document.getElementById('pipeCount').textContent = rows.length + ' of ' + HUB.rows.length + ' units';
+  arrows('#pipeTbl', pipeSort.k, pipeSort.dir);
+}
+// "Suggested cleaning — 3 business days after in-house done (2026-08-10)" is a
+// scheduler note, not a label. Strip the meld's "A - " ordering prefix, drop the
+// parenthetical, and cap it so one verbose brief can't blow out the column. The
+// full text stays on the tooltip.
+function nextLabel(na) {
+  let s = String(na.brief || na.cat || '').replace(/^[a-z]\s*[-–]\s*/i, '').replace(/\s*[—-]\s*\d+\s*business days.*$/i, '').replace(/\s*\([^)]*\)\s*$/, '').trim();
+  if (!s) s = na.cat || '';
+  return s.length > 24 ? s.slice(0, 23) + '…' : s;
+}
+const nextCat = c => String(c || '').replace(/^suggested-/, '');
+
+function rowHtml(r, i) {
+  const na = r.next_appt;
+  return `<tr class="row" onclick="toggleDet(${i})">
+    <td>${r.at_risk.length ? `<span class="b risk" title="${esc(r.at_risk.join(' · '))}">${r.at_risk.length}</span>` : ''}</td>
+    <td><strong>${esc(r.prop)}</strong></td>
+    <td>${esc(r.unit)}</td>
+    <td>${cell(esc(r.region))}</td>
+    <td><span class="b ${r.status}">${r.status === 'active' ? 'Active' : r.status === 'ready' ? 'Ready' : r.status === 'notice' ? 'Notice' : r.status === 'complete' ? 'Complete' : 'Other'}</span></td>
+    <td>${r.stage ? `<span class="b stage">${esc(r.stage)}</span>` : dash}</td>
+    <td>${r.days_elapsed == null ? dash : '<strong>' + r.days_elapsed + '</strong>d'}</td>
+    <td>${na ? `<span class="b cat-${esc(nextCat(na.cat))}" title="${esc(na.brief || na.cat)}${na.who ? ' · ' + esc(na.who) : ''}">${short(na.date)} ${esc(nextLabel(na))}</span>` : dash}</td>
+    <td>${cell(fdate(r.available_on))}</td>
+    <td>${r.cost && r.cost.total > 0 ? money(r.cost.total) : dash}</td>
+    <td>${r.cost && r.cost.estimate > 0 ? money(r.cost.estimate) : dash}</td>
+    <td><span style="color:#2e86c1;font-size:.78rem" id="ar${i}">▼</span></td>
+  </tr>
+  <tr class="det" id="det${i}"><td colspan="12">${dossier(r)}</td></tr>`;
+}
+function toggleDet(i) {
+  const d = document.getElementById('det' + i), a = document.getElementById('ar' + i);
+  const open = d.classList.toggle('open');
+  a.textContent = open ? '▲' : '▼';
+}
+function dossier(r) {
+  const kv = (o) => `<dl class="kv">${Object.entries(o).map(([k, v]) => `<dt>${k}</dt><dd>${v == null || v === '' ? dash : v}</dd>`).join('')}</dl>`;
+
+  // Timeline: the milestones a turn passes through, in order, with what's done.
+  const steps = [
+    ['Move-out', r.move_out, !!r.move_out],
+    ['Work started', r.pm && r.pm.first_appt, !!(r.pm && r.pm.first_appt && r.pm.first_appt <= TODAY)],
+    ['Final walk', (r.pm && (r.pm.final_walk_done || r.pm.final_walk)) || null, !!(r.pm && r.pm.final_walk_done)],
+    ['Turn end', r.turn_end, !!r.turn_end],
+    ['Available', r.available_on, r.rent_ready === 'Yes'],
+    ['Move-in', r.next_move_in, false],
+  ];
+  let nextHit = false;
+  const tl = steps.map(([lbl, d, done]) => {
+    const isNext = !done && !nextHit && !!d; if (isNext) nextHit = true;
+    return `<div class="step ${done ? 'done' : ''}"><span class="dot ${done ? 'done' : isNext ? 'next' : ''}"></span>
+      <span class="t">${lbl}</span><span class="d">${d ? fdate(d) : '—'}</span></div>`;
+  }).join('');
+
+  const tasks = (r.pm && r.pm.tasks) ? r.pm.tasks.map(t =>
+    `<div class="step ${t.done ? 'done' : ''}"><span class="dot ${t.done ? 'done' : ''}"></span>
+      <span class="t">${esc(t.task)}</span>
+      <span class="d">${t.done ? (t.completed ? fdate(t.completed) : '✓') : (t.date ? short(t.date) : '—')}${t.who ? ' · ' + esc(t.who) : ''}</span></div>`).join('')
+    : '<div class="blank" style="font-size:.81rem">No PropertyMeld checklist for this turn.</div>';
+
+  const c = r.cost || {};
+  const ents = [...(c.laborEntries || []).map(e => ({ d: e.d, l: e.emp + ' · ' + e.hrs + 'h', a: e.cost })),
+                ...(c.materialEntries || []).map(e => ({ d: e.d, l: (e.ln || 'materials') + (e.src === 'qbo' ? ' · bill' : ''), a: e.amt }))]
+    .sort((a, b) => String(b.d).localeCompare(String(a.d)));
+  const delta = c.estimate > 0 ? c.estimate - c.total : null;
+
+  return `<div class="dos">
+    <div class="panel"><h4>Timeline</h4><div class="steps">${tl}</div>
+      ${r.at_risk.length ? `<div style="margin-top:11px">${r.at_risk.map(x => `<span class="b risk">${esc(x)}</span>`).join(' ')}</div>` : ''}
+    </div>
+    <div class="panel"><h4>Checklist${r.pm ? ` — ${r.pm.done}/${r.pm.total} done` : ''}</h4><div class="steps">${tasks}</div>
+      ${r.pm && r.pm.projId ? `<div style="margin-top:10px"><a class="pm" target="_blank" href="https://app.propertymeld.com/2975/m/2975/project/${r.pm.projId}/summary/">Open in PropertyMeld ↗</a></div>` : ''}
+    </div>
+    <div class="panel"><h4>Cost</h4>
+      ${kv({ Labor: money(c.labor), Materials: money(c.materials), Actual: '<strong>' + money(c.total) + '</strong>',
+             Estimate: c.estimate > 0 ? money(c.estimate) : null,
+             'Δ Est − Actual': delta == null ? null : `<span style="color:${delta >= 0 ? '#1e8449' : '#c0392b'}">${delta >= 0 ? '+' : ''}${money(delta)}</span>` })}
+      ${ents.length ? `<div class="ent" style="margin-top:9px">${ents.map(e => `<div><span class="m">${short(e.d)} ${esc(e.l)}</span><span>${money(e.a)}</span></div>`).join('')}</div>`
+        : '<div class="blank" style="font-size:.79rem;margin-top:8px">No unit-tagged spend. Property-coded turn spend appears in the Costs section.</div>'}
+    </div>
+    <div class="panel"><h4>Unit</h4>
+      ${kv({ Address: esc(r.addr || ''), Region: esc(r.region || ''), 'Bed/Bath': esc(r.bed_bath || ''), 'Sq ft': r.sqft,
+             Rent: r.rent ? money(r.rent) : null, Status: esc(r.unit_status || ''), 'Rent ready': esc(r.rent_ready || ''),
+             'Days vacant': r.days_vacant, 'Target date': fdate(r.target_date), 'AppFolio turn end': fdate(r.af_turn_end) })}
+    </div>
+  </div>`;
+}
+
+// ── DISPATCH ────────────────────────────────────────────────────────────────
+function shiftWeek(d) {
+  weekOffset = d === 0 ? 0 : weekOffset + d;
+  document.querySelectorAll('#dispatch .pill').forEach(b => b.classList.remove('on'));
+  if (weekOffset === 0) document.getElementById('dThis').classList.add('on');
+  renderDispatch();
+}
+function renderDispatch() {
+  const el = document.getElementById('dispWrap');
+  if (!SCHED || !SCHED.events) { el.innerHTML = '<div class="empty">Schedule data not available.</div>'; return; }
+  const region = document.getElementById('dRegion').value;
+  const base = new Date(TODAY + 'T12:00:00');
+  base.setDate(base.getDate() - ((base.getDay() + 6) % 7) + weekOffset * 7);   // Monday
+  const dayList = [...Array(5)].map((_, i) => { const d = new Date(base); d.setDate(d.getDate() + i); return d.toLocaleDateString('en-CA'); });
+
+  const evs = SCHED.events.filter(e => dayList.includes(e.date) && !/CANCEL/i.test(e.status || '') && (!region || e.region === region));
+  const crews = [...new Set(evs.map(e => e.who || 'Unassigned'))].sort();
+  if (!crews.length) { el.innerHTML = `<div class="empty">Nothing scheduled ${region ? 'in ' + esc(region) + ' ' : ''}for ${short(dayList[0])} – ${short(dayList[4])}.</div>`; return; }
+
+  const dn = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
+  let html = `<div class="grid" style="grid-template-columns:150px repeat(5,1fr)"><div class="gh"></div>` +
+    dayList.map((d, i) => `<div class="gh">${dn[i]} ${short(d)}${d === TODAY ? ' •' : ''}</div>`).join('');
+  for (const c of crews) {
+    html += `<div class="gw">${esc(c)}</div>`;
+    for (const d of dayList) {
+      const cell = evs.filter(e => (e.who || 'Unassigned') === c && e.date === d);
+      html += `<div class="gc">${cell.map(e => `<div class="ev ${esc(e.category)}">
+        <span class="p">${esc(e.prop)} ${esc(e.unit)}</span> ${esc(e.brief || e.category)}<br>
+        <span class="a">${esc(e.addr || '')}${e.start ? ' · ' + esc(e.start) : ''}</span></div>`).join('')}</div>`;
+    }
+  }
+  el.innerHTML = html + '</div>';
+  document.getElementById('dCount').textContent = evs.length + ' appointments · ' + short(dayList[0]) + ' – ' + short(dayList[4]);
+}
+
+// ── COSTS ───────────────────────────────────────────────────────────────────
+function period(mode) {
+  const now = new Date(), p = n => String(n).padStart(2, '0'), ymd = d => d.toLocaleDateString('en-CA');
+  if (mode === 'all')     return ['', ''];
+  if (mode === 'ytd')     return [now.getFullYear() + '-01-01', ymd(now)];
+  if (mode === 'thisMo')  return [now.getFullYear() + '-' + p(now.getMonth() + 1) + '-01', ymd(now)];
+  if (mode === 'lastMo')  { const l = new Date(now.getFullYear(), now.getMonth(), 0); return [l.getFullYear() + '-' + p(l.getMonth() + 1) + '-01', ymd(l)]; }
+  if (mode === 'last3mo') return [ymd(new Date(now.getFullYear(), now.getMonth() - 2, 1)), ymd(now)];
+  return ['', ''];
+}
+function setCostPeriod(mode, btn) {
+  [COST_FROM, COST_TO] = period(mode);
+  if (btn) { document.querySelectorAll('#costs .pill').forEach(b => b.classList.remove('on')); btn.classList.add('on'); }
+  if (COSTS) renderCosts();
+}
+function sortCost(k) { costSort = { k, dir: costSort.k === k ? -costSort.dir : (k === 'prop' ? 1 : -1) }; renderCosts(); }
+function renderCosts() {
+  const el = document.getElementById('costWrap');
+  if (!COSTS || !COSTS.propSpend) { el.innerHTML = '<div class="empty">Cost data not available.</div>'; return; }
+  const inRange = m => Object.entries(m || {}).reduce((s, [d, v]) => s + ((!COST_FROM || d >= COST_FROM) && (!COST_TO || d <= COST_TO) ? v : 0), 0);
+  const all = m => Object.values(m || {}).reduce((s, v) => s + v, 0);
+  const rows = Object.entries(COSTS.propSpend).map(([prop, p]) => {
+    const labor = inRange(p.labor), mats = inRange(p.materials);
+    const turns = (COSTS.propTurns || {})[prop] || 0;
+    return { prop, labor, mats, total: labor + mats, turns, avg: turns ? (all(p.labor) + all(p.materials)) / turns : null };
+  }).filter(r => r.total > 0);
+  rows.sort((a, b) => cmp(a[costSort.k], b[costSort.k], costSort.dir));
+
+  const head = [['prop', 'Property'], ['labor', 'Labor'], ['mats', 'Materials'], ['total', 'Spent'], ['turns', 'Turns to Date'], ['avg', 'Avg $/Turn (all-time)']];
+  el.innerHTML = `<table id="costTbl"><thead><tr>${head.map(([k, l], i) => `<th data-k="${k}" onclick="sortCost('${k}')" class="${i ? 'num' : ''}">${l}</th>`).join('')}</tr></thead>
+    <tbody>${rows.map(r => `<tr><td><strong>${esc(r.prop)}</strong></td>
+      <td class="num">${r.labor > 0 ? money(r.labor) : dash}</td><td class="num">${r.mats > 0 ? money(r.mats) : dash}</td>
+      <td class="num"><strong>${money(r.total)}</strong></td><td class="num">${r.turns || dash}</td>
+      <td class="num">${r.avg ? money(r.avg) : dash}</td></tr>`).join('') || `<tr><td colspan="6" class="empty">No turn spend in this period</td></tr>`}</tbody>
+    <tfoot><tr><td>${rows.length} propert${rows.length === 1 ? 'y' : 'ies'}</td>
+      <td class="num">${money(rows.reduce((s, r) => s + r.labor, 0))}</td><td class="num">${money(rows.reduce((s, r) => s + r.mats, 0))}</td>
+      <td class="num">${money(rows.reduce((s, r) => s + r.total, 0))}</td><td colspan="2"></td></tr></tfoot></table>`;
+  document.getElementById('costCount').textContent = COST_FROM ? fdate(COST_FROM) + ' – ' + fdate(COST_TO) : 'all time';
+  arrows('#costTbl', costSort.k, costSort.dir);
+}
+
+// ── COMPLETED ───────────────────────────────────────────────────────────────
+function setDonePeriod(mode, btn) {
+  if (mode === 'custom') {
+    const f = document.getElementById('dFrom').value, t = document.getElementById('dTo').value;
+    if (!f || !t) { alert('Please enter both dates.'); return; }
+    if (f > t) { alert('Start date must be before end date.'); return; }
+    DONE_FROM = f; DONE_TO = t;
+    document.querySelectorAll('#completed .pill').forEach(b => b.classList.remove('on'));
+  } else {
+    [DONE_FROM, DONE_TO] = period(mode);
+    if (btn) { document.querySelectorAll('#completed .pill').forEach(b => b.classList.remove('on')); btn.classList.add('on'); }
+  }
+  document.getElementById('dFrom').value = DONE_FROM; document.getElementById('dTo').value = DONE_TO;
+  if (DONE) renderDone();
+}
+function sortDone(k) { doneSort = { k, dir: doneSort.k === k ? -doneSort.dir : (k === 'property' || k === 'unit' ? 1 : -1) }; renderDone(); }
+function renderDone() {
+  const el = document.getElementById('doneWrap');
+  if (!DONE || !DONE.rows) { el.innerHTML = '<div class="empty">Completed-turn history not available.</div>'; return; }
+  const rows = DONE.rows.filter(r => (!DONE_FROM || r.completed >= DONE_FROM) && (!DONE_TO || r.completed <= DONE_TO));
+  const sorted = [...rows].sort((a, b) => cmp(a[doneSort.k], b[doneSort.k], doneSort.dir));
+  const avg = k => { const v = rows.map(r => r[k]).filter(x => x != null); return v.length ? Math.round(v.reduce((s, x) => s + x, 0) / v.length) : null; };
+  const withReady = rows.filter(r => r.ready_date).length;
+
+  const head = [['completed', 'Completed'], ['property', 'Property'], ['unit', 'Unit'], ['total_cost', 'Total Cost'],
+    ['days_to_complete', 'Days to Complete'], ['days_to_turn', 'Days to Turn']];
+  const warn = rows.length && withReady < rows.length
+    ? `<div class="caveat">
+        <strong>${rows.length - withReady}</strong> of ${rows.length} turns have no AppFolio rent-ready date, so the day-count averages cover the other <strong>${withReady}</strong>.
+        Those dates disappear once a unit re-rents and were only captured from 2026-08-10 on, so coverage thins the further back you look. Blank means not captured, never zero.</div>` : '';
+
+  el.outerHTML = `<div id="doneWrap">${warn}<div class="tw"><table id="doneTbl">
+    <thead><tr>${head.map(([k, l], i) => `<th data-k="${k}" onclick="sortDone('${k}')" class="${i > 2 ? 'num' : ''}">${l}</th>`).join('')}</tr></thead>
+    <tbody>${sorted.map(r => `<tr><td>${fdate(r.completed)}</td><td><strong>${esc(r.property)}</strong></td><td>${esc(r.unit)}</td>
+      <td class="num">${r.total_cost > 0 ? money(r.total_cost) : dash}</td>
+      <td class="num">${r.days_to_complete != null ? r.days_to_complete + 'd' : dash}</td>
+      <td class="num">${r.days_to_turn != null ? r.days_to_turn + 'd' : dash}</td></tr>`).join('') || `<tr><td colspan="6" class="empty">No turns completed in this range</td></tr>`}</tbody>
+    <tfoot><tr><td colspan="3">${rows.length} turn${rows.length === 1 ? '' : 's'}</td>
+      <td class="num">${money(rows.reduce((s, r) => s + r.total_cost, 0))}</td>
+      <td class="num">${avg('days_to_complete') == null ? '—' : 'avg ' + avg('days_to_complete') + 'd'}</td>
+      <td class="num">${avg('days_to_turn') == null ? '—' : 'avg ' + avg('days_to_turn') + 'd'}</td></tr></tfoot>
+  </table></div></div>`;
+  document.getElementById('doneCount').textContent = rows.length + ' turns · ' + (DONE_FROM ? fdate(DONE_FROM) + ' – ' + fdate(DONE_TO) : 'all time');
+  arrows('#doneTbl', doneSort.k, doneSort.dir);
+}
+
+// ── VACANCY ─────────────────────────────────────────────────────────────────
+function sortVac(k) { vacSort = { k, dir: vacSort.k === k ? -vacSort.dir : (k === 'prop' || k === 'unit' ? 1 : -1) }; renderVac(); }
+function renderVac() {
+  const el = document.getElementById('vacWrap');
+  const rg = document.getElementById('vRegion').value, f = document.getElementById('vFilter').value;
+  const rows = HUB.rows.filter(r => {
+    if (rg && r.region !== rg) return false;
+    if (f === 'vacant'   && !r.vacant) return false;
+    if (f === 'unrented' && !(r.vacant && !r.next_move_in)) return false;
+    if (f === 'notice'   && r.status !== 'notice') return false;
+    return true;
+  });
+  const val = r => ({ prop: r.prop, unit: r.unit, region: r.region, days_vacant: r.days_vacant,
+    move_out: r.move_out, available_on: r.available_on, next_move_in: r.next_move_in,
+    rent: parseFloat(r.rent) || null, lost: (parseFloat(r.rent) || 0) / 30 * (r.days_vacant || 0) }[vacSort.k]);
+  const sorted = [...rows].sort((a, b) => cmp(val(a), val(b), vacSort.dir));
+  const lost = rows.reduce((s, r) => s + (parseFloat(r.rent) || 0) / 30 * (r.days_vacant || 0), 0);
+
+  const head = [['prop', 'Property'], ['unit', 'Unit'], ['region', 'Region'], ['days_vacant', 'Days Vacant'],
+    ['move_out', 'Move-Out'], ['available_on', 'Available'], ['next_move_in', 'Next Move-In'], ['rent', 'Rent'], ['lost', 'Lost to Date']];
+  el.innerHTML = `<table id="vacTbl"><thead><tr>${head.map(([k, l], i) => `<th data-k="${k}" onclick="sortVac('${k}')" class="${i > 2 ? 'num' : ''}">${l}</th>`).join('')}</tr></thead>
+    <tbody>${sorted.map(r => `<tr><td><strong>${esc(r.prop)}</strong></td><td>${esc(r.unit)}</td><td>${cell(esc(r.region))}</td>
+      <td class="num">${r.days_vacant == null ? dash : '<strong>' + r.days_vacant + '</strong>d'}</td>
+      <td class="num">${cell(fdate(r.move_out))}</td><td class="num">${cell(fdate(r.available_on))}</td>
+      <td class="num">${r.next_move_in ? fdate(r.next_move_in) : dash}</td>
+      <td class="num">${r.rent ? money(r.rent) : dash}</td>
+      <td class="num">${r.days_vacant && r.rent ? money(parseFloat(r.rent) / 30 * r.days_vacant) : dash}</td></tr>`).join('')
+      || `<tr><td colspan="9" class="empty">No units match</td></tr>`}</tbody>
+    <tfoot><tr><td colspan="8">${rows.length} unit${rows.length === 1 ? '' : 's'}</td><td class="num">${money(lost)}</td></tr></tfoot></table>`;
+  document.getElementById('vacCount').textContent = rows.length + ' units · ' + money(lost) + ' lost to date';
+  arrows('#vacTbl', vacSort.k, vacSort.dir);
+}
+
+// ── nav highlight ───────────────────────────────────────────────────────────
+function spy() {
+  const links = [...document.querySelectorAll('nav a')];
+  const secs = links.map(a => document.getElementById(a.getAttribute('href').slice(1)));
+  const io = new IntersectionObserver(es => {
+    es.forEach(e => { if (e.isIntersecting) { links.forEach(l => l.classList.remove('on')); links[secs.indexOf(e.target)].classList.add('on'); } });
+  }, { rootMargin: '-45px 0px -70% 0px' });
+  secs.forEach(s => s && io.observe(s));
+}
+setInterval(() => location.reload(), 15 * 60 * 1000);
+</script>
+</body>
+</html>
