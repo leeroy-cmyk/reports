@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-08-11T14:52:48.560Z",
-  "last_checked": "2026-08-11T14:52:48.560Z",
+  "generated_at": "2026-08-13T14:52:00.376Z",
+  "last_checked": "2026-08-13T14:52:00.376Z",
   "source": "leeroy-cmyk/pm-scheduling/CLAUDE.md",
-  "count": 56,
+  "count": 61,
   "rules": [
     {
       "group": "General",
@@ -135,9 +135,12 @@
     {
       "group": "Tacoma",
       "category": "",
-      "text": "**Only Jonas Hoard and Armani Mitchell work Tacoma.** Jonas takes all non-turn repairs; Armani takes turns.",
+      "text": "**Three techs work Tacoma: Jonas Hoard (repairs), Armani Mitchell and Gordon Esborg (turns).** Jonas takes all non-turn repairs; Armani and Gordon take turns.",
       "details": [
-        "Any non-turn tc68/tc34 job found on a different tech is **reassigned to Jonas** (e.g. Margarito is Tri-Cities, not Tacoma)."
+        "**Gordon Esborg (63372) started 2026-08-12** as Tacoma's second turn tech, for tc34 and tc68 (Lee Roy). Tacoma had been a **single-tech region** and every turn rule here was written around one person — the 4-in-house-day structure, the walkthrough-stacking constraint, and self-QC all existed because Armani was alone. Now: both turn techs do walkthrough + paint + maintenance, **one tech per unit** (whoever paints a unit also maintains it), and the 1-hour initial walkthrough is split between them — the same model as Spokane (Ron + Magoon) and Tri-Cities.",
+        "**Final walkthrough / QC is now an INDEPENDENT set of eyes.** It goes to whichever turn tech did *not* do that unit's paint/maintenance, so nobody signs off on their own work — matching Spokane (David Sanchez) and Tri-Cities (Margarito). Previously Armani QC'd his own work purely because there was no one else. If both techs worked a unit, the run logs a `⚠self-QC` warning rather than silently pretending it was independent.",
+        "Any non-turn tc68/tc34 job found on a different tech is **reassigned to Jonas** (e.g. Margarito is Tri-Cities, not Tacoma).",
+        "⚠️ **Adding a tech does NOT by itself relieve a booked-out backlog.** When Gordon started, all 25 open Tacoma turns already had every in-house meld placed on Armani, out to **2027-02-02** — so gap-fill (which only schedules melds with *no* appointment) had **zero** work to give him, and he would have sat idle behind a six-month queue. Distributing an existing backlog onto a new tech means moving already-placed work, which the append-only rule forbids without an explicit authorised decision. **When a region gains a tech, check the existing backlog, don't just add them to the tech list.**"
       ]
     },
     {
@@ -163,7 +166,7 @@
     {
       "group": "Tacoma",
       "category": "",
-      "text": "**Turns** (project melds) go to Armani; the repair scheduler leaves them alone. (Dulce Salinas legitimately appears on \"AppFolio Estimate\" turn melds.)",
+      "text": "**Turns** (project melds) go to Armani and Gordon via `pm_tacoma_turn_scheduler.js`; the repair scheduler leaves them alone. (Dulce Salinas legitimately appears on \"AppFolio Estimate\" turn melds.)",
       "details": []
     },
     {
@@ -311,9 +314,24 @@
     },
     {
       "group": "Turns",
-      "category": "Techs",
-      "text": "Ron Cramer and Micheal Magoon do the in-house work (Scott Higley no longer works here). These are the **only two turn techs** — no additional hires (an earlier note claimed two more start July 20, 2026; that hire never happened — corrected 2026-07-17). Ron and Michael only do **maintenance and paint** — cleaning and flooring are vendors.",
-      "details": []
+      "category": "",
+      "text": "**Techs — per region.** In-house turn work is always **paint and maintenance only**; cleaning and flooring are vendors everywhere.",
+      "details": [
+        "**Spokane:** Ron Cramer and Micheal Magoon (Scott Higley no longer works here). These two are Spokane's **only** turn techs — no additional Spokane hires (an earlier note claimed two more start July 20, 2026; that hire never happened — corrected 2026-07-17).",
+        "**Tri-Cities:** James Dunlap + Ryan Robson (paint/maint), Margarito Saldana (walkthroughs only).",
+        "**Tacoma:** Armani Mitchell + **Gordon Esborg (started 2026-08-12)** — both do walkthrough, paint and maintenance. See the Tacoma section for the 2-paint-**2**-maint exception and independent QC."
+      ]
+    },
+    {
+      "group": "Turns",
+      "category": "",
+      "text": "**When a region GAINS a tech, the backlog does not move on its own — check it (learned twice, 2026-08-12).** Gap-fill only schedules melds with **no appointment**, so where every open turn is already placed the new tech gets **nothing** and sits idle behind the queue (Gordon: 25 Tacoma turns all on Armani to 2027-02-02; Justin: 65 Spokane turns all on Ron + Magoon to 2026-12-02, him 0). Redistributing means moving placed work, so it needs an explicit authorisation — the tool is `turn_rebalance_plan.js` (read-only, `REGION=tacoma|spokane`) then `turn_rebalance_apply.js`.",
+      "details": [
+        "🔑 **GAIN-ONLY is the default and the reason it is safe.** A unit's re-placement is kept **only if that unit finishes strictly earlier**; otherwise it is rolled back and the unit keeps exactly what it had. Without it a full re-pack only helps a backlog *concentrated* on too few techs: on an already-distributed, densely-packed schedule it reshuffles instead of improving (Spokane's first pass pushed **28** vacant units later for a 13-day tail gain; a Tacoma re-run pushed **13** later). Both were refused by the forward-only check — but refusing is not the same as doing the useful subset.",
+        "⚠️ **When a placement is rolled back, its ORIGINAL days must be re-blocked.** They were freed during seeding on the assumption the unit would move; keeping the unit means those days are occupied again. Missing this put `c702 #A201` straight on top of the rolled-back `a210 #8`'s 09-02/09-03/09-07 on Magoon — caught by the apply pre-flight.",
+        "⚠️ **The apply script re-checks forward-only itself.** The planner refuses to *recommend* a regressive plan but still leaves the plan file on disk, which a careless apply would use. Enforce the ceiling twice.",
+        "⚠️ **Only a conflict the write CAUSES is fatal.** Pre-existing clashes between appointments already on the calendar (e.g. two short repairs in one hour on a repairs tech) are reported, not blocking — otherwise the check can never pass on a messy calendar."
+      ]
     },
     {
       "group": "Turns",
@@ -330,6 +348,27 @@
     {
       "group": "Turns",
       "category": "",
+      "text": "**NEVER schedule in-house work on or before the move-out date — AppFolio is the authority, NOT PropertyMeld's project start_date (firm rule, Lee Roy 2026-08-12).** A turn's in-house work can only start the **day after the resident actually leaves**. PropertyMeld's project `start_date` is stamped when the turn is **created** and is **never updated if the move-out is later rescheduled**, so it silently goes stale and cannot be used as the floor.",
+      "details": [
+        "Real incident (2026-08-12): **tc68 #A06**'s notice moved out to **2026-08-27** while PM still said `start_date` 2026-07-28. A rebalance floored on `start_date` therefore booked paint for **08-17** — on an apartment the resident was still living in. Caught by an audit comparing every unit's first in-house day against its AppFolio `last_move_out`; it was the only unit affected, and the work was moved to 11-09.",
+        "`last_move_out` in the `unit_vacancy` report holds the **scheduled future** move-out for a `Notice-*` unit, so it is the right field for both vacant and on-notice units. Floor every unit at `max(LEAD_DAYS, project start, move-out + 1)`.",
+        "**A unit that is still occupied AND booked too early goes to the BACK of the queue** — it can't be worked yet, and an unleased future vacancy is the lowest priority tier anyway. But a not-yet-vacant unit whose work is **already validly placed after its move-out keeps its slot**: pushing valid work later would breach the never-move-work-out rule for no reason (tc68 #B60, move-out 09-01 with work from 09-23, was briefly shoved 37 days out by a blanket version of this rule — don't reintroduce that).",
+        "Implemented in `pm_tacoma_turn_scheduler.js` + the rebalance planner. ⚠️ **Spokane and Tri-Cities do NOT have this floor yet** — they still trust `start_date`. Worth adding."
+      ]
+    },
+    {
+      "group": "Turns",
+      "category": "",
+      "text": "**Vendor work sitting on a tech's calendar is VISIBILITY ONLY and must never block his own work (firm rule, Lee Roy 2026-08-12).** Armani puts the vendor stages (**F - Cleaning**, **E - Carpet Cleaning**) on his own calendar so he can see the whole turn pipeline — *\"he only puts vendor work on his calendar for visibility, it's not a task he's actually doing\"*. Treating those as all-day blocks costs real capacity for work no tech performs: it was holding roughly **11 days** of Tacoma turn schedule hostage and skewing the two-tech split.",
+      "details": [
+        "So when building a tech's busy days, **skip cleaning and carpet melds** even when he is an `in_house_servicer` on them. Test carpet first so \"E - Carpet Cleaning\" reads as carpet rather than cleaning.",
+        "The **final walkthrough is NOT vendor work** — a tech really does that QC, so it still occupies his calendar (as a short appointment).",
+        "This is separate from the older lesson that busy blocks must cover a tech's **entire** calendar: they still must, but a visibility-only vendor meld is not really his work in the first place."
+      ]
+    },
+    {
+      "group": "Turns",
+      "category": "",
       "text": "**Lead time — a few days' notice, never today/tomorrow (firm rule, Lee Roy 2026-07-27).** Newly-scheduled turn work (initial walkthrough, paint, maintenance, and the final QC walkthrough) is placed no sooner than **3 days out** (`LEAD_DAYS`, env-overridable in every turn scheduler + both final-walkthrough scripts) so the team always has a few days to adapt — the automation never books work on today or tomorrow. Already-scheduled work is untouched (append-only).",
       "details": []
     },
@@ -338,6 +377,25 @@
       "category": "Order of scheduling",
       "text": "applies **only to new, unscheduled turns** as they're added — it never re-orders or pulls forward turns already on the calendar (see the append-only rule in \"General\"). New turns are sequenced by a strict priority ladder: **(1) leased units first** (a new tenant is already lined up, so the move-in deadline is firm), by soonest move-in date; then **(2) units with a Converted application**, by earliest desired move-in date; then **(3) units with a Converting application**, by earliest desired move-in date; then **(4) most days vacant** (longest-vacant unit first, to clear the oldest vacancies fastest); then **(5) highest scheduled rent**. Only **Converted** and **Converting** applications count toward the desired-move-in tiers — **Converted always outranks Converting** — because those are the prospects actually likely to sign; every other application status is ignored for scheduling priority.",
       "details": []
+    },
+    {
+      "group": "Turns",
+      "category": "FINAL WALKTHROUGH / QC",
+      "text": "who does it, per region (rewritten 2026-08-12, Lee Roy).",
+      "details": [
+        "**Spokane: a TURN TECH does the QC, but NEVER the tech who turned the unit.** *\"if michael turns the unit, ron will do the walkthrough. if matt turns the unit brady will do the walkthrough or vise versa.\"* Pairs: **Magoon ↔ Ron**, **Matt Romme ↔ Brady Smith**. Justin Gutierrez has no fixed partner yet, so he falls back to \"any turn tech who didn't work on it\". This **retires David Sanchez from turn QC** — he keeps grounds/lawn. If every configured tech worked a unit, the run logs it rather than allowing self-QC.",
+        "**Tacoma: Armani does ALL walkthroughs, including on units he turned himself.** *\"in tacoma, armani does all the walkthroughs even if he turned the unit.\"* A deliberate exception — do not \"fix\" this toward independence. (Earlier the same day it was changed to split QC with Gordon on the assumption independence was wanted; that was reversed.)",
+        "**Tri-Cities:** Margarito Saldana does walkthroughs only (no paint/maint), so it is independent by construction."
+      ]
+    },
+    {
+      "group": "Turns",
+      "category": "",
+      "text": "**A QC IS NEVER BOOKED AFTER THE TENANT MOVES IN — the move-in beats LEAD_DAYS (added 2026-08-12).** The 3-day lead-time floor exists to give the team notice; a committed move-in is a harder constraint, so where they conflict the floor yields and the QC is pulled in front of the move-in.",
+      "details": [
+        "This was a real silent regression: **c313 #33, w117 #3 and c302 #5** all had their make-ready work finished but their QC sitting *after* the tenant's move-in. They were corrected by hand, and the very next scheduler run would have pushed them straight back — the script recomputes the date from the vendor chain and had no notion of a move-in.",
+        "⚠️ **The pull-in only applies if the WORK is already finished by the earlier date.** Signing off before the work exists is meaningless: a naive version of this clamp yanked `k104 #101-1` (paint 09-17, maint 09-22) back to 08-13. When the *work* is what's late, moving the QC cannot fix it — the run surfaces it as **\"work finishes after the tenant moves in\"** for a person to reschedule or to tell the tenant."
+      ]
     },
     {
       "group": "Turns",
@@ -351,6 +409,10 @@
       "text": "once the work is scheduled, the unit's **Available date and Ready-to-Show date are set to the same day**, and **Rent Ready is set to \"No.\"**",
       "details": [
         "**Rent Ready is now set in BOTH directions, on verified evidence only (changed 2026-08-04, Lee Roy).** This supersedes the old \"only the turn manager sets Yes — the automation never does\" rule, which left finished turns sitting at No until a person noticed: ps25 #F43, rl16 #A04 and ps17 #A3 were all found that way, up to five weeks after their turns completed. The automation may now set **Yes** when a turn is **verified complete** — a final walkthrough COMPLETED after the move-out — and **No** when it can prove the unit was not turned since the move-out. The evidence bar is identical in both directions, and **no evidence means no change** in either. Manual overrides still win: `pm_avail_plan_manual.json` beats any builder row for the same unit. The available date is **3 days after the final walkthrough** (a buffer for punch-list items found at the walkthrough or vendor delays); until the vendor steps are automated, it's an interim **7 days after maintenance is completed**.",
+        "⚠️ **A LEASED UNIT IS NEVER \"AVAILABLE\" AFTER ITS TENANT ARRIVES — cap the date at the move-in (firm rule, Lee Roy 2026-08-12: *\"why are their available dates for after the move in date???\"*).** The **+3** in *final walkthrough + 3* is a punch-list / vendor-slip buffer for **marketing a vacant unit**. Applied blindly to a unit that is **already leased**, it advertises the unit as unavailable on a day somebody is moving in — a contradiction that was live on **5 units** (c313 #33 7d after, w117 #3 6d, s129 #9 7d, e328 #4 3d, k104 #101-1 1d).",
+        "So: `available_on = min(final walk + 3, next_move_in)`. Capping is always a move **CLOSER**, so the ratchet permits it with no authorisation.",
+        "**Hitting the cap is itself a signal** — it means the turn has **zero slack** before the tenant arrives, so the runs report a `capped at move-in` count rather than swallowing it.",
+        "Fixed in `pm_avail_plan.js`, `pm_avail_plan_tc.js`, `pm_avail_plan_tac.js` and `af_portfolio_plan.js` — at the source, so the daily run cannot reintroduce it.",
         "**Available dates only move CLOSER, never OUT (firm rule, Lee Roy 2026-07-27).** An available date may be moved **earlier** (closer) whenever the turn will finish sooner, but is **never** pushed **later** (out) — for ANY unit. This is absolute for a **leased / Converted / Converting** unit, whose date is a commitment to a prospect: never move it out under any circumstance. (This is the standing ratchet, stated as a hard rule — the avail-write step must ratchet each date down-only and skip any write that would move a date later.)",
         "**Don't churn small pull-ins (Lee Roy 2026-07-27):** only bother pulling an available date **closer** when it's more than **~2 weeks (14 days, `AVAIL_PULL_THRESHOLD`)** beyond the new projection; a smaller improvement is left as-is. (Implemented in `pm_avail_plan.js` + `pm_avail_plan_tc.js`.)"
       ]
@@ -362,6 +424,9 @@
       "details": [
         "**Every VACATED unit is checked, not just the ones with turn work already scheduled (firm rule, Lee Roy 2026-08-03).** The riskiest unit is the one that just went vacant with **no turn scheduled at all** — it has no projected available date, and for months that meant it was filtered out before the Rent Ready check ever ran. That is exactly how **tc68 #D096** sat advertised as Rent Ready with a 7/30 move-out and no turn project in PropertyMeld. Only the **date** write depends on having a projection; the Rent Ready check never does.",
         "**Read turn completion from PropertyMeld directly, across OPEN and CLOSED projects.** A fully-turned unit's project is **closed**, so it is absent from the turns report feed — and reading completion from that feed makes a genuinely-turned unit look never-turned. (On 2026-08-03 this would have wrongly flipped 6 Tacoma units: tc34 #A106, tc68 #C64/#C65/#C67/#D080/#D094.) Always go to the source, and include closed projects.",
+        "⚠️ **`pm_avail_plan_manual.json` IS APPLY-ONCE-THEN-DELETE, and a stale row silently undoes correct work (2026-08-12).** A manual row beats any builder row for the same unit, so a row left behind after its situation changed keeps forcing an obsolete date forever — and because the write \"succeeds\" and verifies against its own stale target, it reports ✅. `af_run.js` says so in a comment (\"the file is not auto-generated; delete it once applied\") but nothing enforces it.",
+        "Real incident: 19 rows written 2026-08-06 for the **single-tech Tacoma de-collide** schedule survived two full reschedules (the Gordon rebalance + a final-walkthrough refresh). On the next `af_run.js all` they **suppressed 11 Tacoma pull-ins** (e.g. tc68 #D088 forced to 11-01 when the real projection was 09-27) and **reverted tc68 #A02 from an authorised 08-20 push-out back to 08-13** — leaving it advertised *earlier* than it can actually be ready, which the ratchet then makes permanent.",
+        "Rules: **prune a manual row the moment its basis changes**; a row whose `why` cites a schedule that no longer exists is obsolete by construction. Before any `af_run.js` run, diff the manual file against the fresh builder output and question every collision. Keep only rows encoding **evidence the builders cannot derive** (turn verified complete, melds cancelled instead of completed, a pest-date correction) — never rows that merely restate a schedule, because schedules move.",
         "**A Rent-Ready-only correction must not disturb the available date.** When a unit needs Rent Ready = No but has no new projected date, write its **existing** date straight back unchanged so the ratchet is untouched. If it has no date at all, there is **no safe automated write** — surface it for a person instead of writing a blank."
       ]
     },
@@ -395,9 +460,14 @@
     },
     {
       "group": "Turns",
-      "category": "Move-out changes",
-      "text": "AppFolio is checked **daily** for move-out dates that change or move-outs that get cancelled, and the turn schedule (and the available date) is updated to match. A cancelled move-out triggers the delete-the-turn rule above; a changed move-out date shifts the turn's start (new work is added per the append-only rule — existing placed work is not moved).",
-      "details": []
+      "category": "",
+      "text": "**Move-out changes — checked daily by `af_moveout_watch.js` (built 2026-08-12, Lee Roy asked for it explicitly).** AppFolio is compared against every open turn each day, looking for move-out dates that **changed** and for units that **dropped off the vacancy report because the resident never left**. A cancelled move-out triggers the delete-the-turn rule above; a changed move-out date shifts the turn's start (new work is added per the append-only rule — existing placed work is not moved), and work that would now land on an occupied unit must be pushed past the move-out. 1. in-house work scheduled **on/before** a unit's move-out (the hard violation); 2. PropertyMeld `start_date` **earlier** than move-out + 1 — meaning the move-out was pushed back after the turn was created and PM never followed. **Direction matters:** *earlier* is the dangerous A06 pattern, while *later* just means the turn was created after the resident had already gone (harmless, ~55 units, summarised not listed). And an early start_date is only **live risk while the move-out is still in the future** — once the resident has gone the LEAD_DAYS floor covers it. Filtering that way cut the noise from 66 rows to 2 real ones; a daily check that lists 66 benign rows is a daily check nobody reads. 3. an open turn whose unit is **absent from `unit_vacancy` entirely** — that report only ever returns `Vacant-*` / `Notice-*` units, so disappearing *is* the \"they didn't move out\" signal. A turn with completed work is flagged for human review rather than deletion (same carve-out `pm_cancelled_turn_cleanup.js` makes).",
+      "details": [
+        "⚠️ **This bullet used to claim the daily check existed when it did not.** Only the *cancellation* half was ever implemented (`pm_cancelled_turn_cleanup.js`); nothing watched a move-out **date** move. That is precisely how tc68 #A06 slipped through. Don't let the rulebook describe intentions as if they were code.",
+        "It runs as **step 2 of `C:/Users/lrphi/af_daily.cmd`** (the local daily AppFolio run — it needs AppFolio, which has no write API and no cloud-friendly login). It is **read-only**: it reports and it remembers, never reschedules or deletes. It **always exits 0** so findings can't abort the availability write behind it.",
+        "What it checks — three **stateless** invariants that fire correctly even on a first run, plus a day-over-day diff against `moveout_baseline.json`:",
+        "Output: `moveout_watch.json` + a printed ACTION NEEDED summary; baseline suppressed with `NO_BASELINE_WRITE=1` for a repeatable comparison."
+      ]
     },
     {
       "group": "Turns",
