@@ -1,15 +1,15 @@
 {
   "ok": true,
-  "fetched_at": "2026-08-13T17:15:05.435Z",
+  "fetched_at": "2026-08-13T18:11:04.165Z",
   "summary": {
     "as_of": "2026-08-13",
-    "units": 236,
+    "units": 237,
     "active": 77,
     "ready": 1,
-    "notice": 20,
+    "notice": 21,
     "at_risk": 21,
     "unscheduled": 10,
-    "accruing": 12772.84,
+    "accruing": 13531.18,
     "avg_days_open": 25,
     "revenue_at_risk": 3611.73
   },
@@ -1070,8 +1070,8 @@
       "cost": {
         "code": "kn47-k1-C109",
         "labor": 463.44,
-        "materials": 57.9,
-        "total": 521.34,
+        "materials": 816.24,
+        "total": 1279.68,
         "estimate": 0,
         "laborEntries": [
           {
@@ -1195,6 +1195,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-08-12",
+            "amt": 758.34,
+            "cat": "Turn",
+            "ln": "saldana",
+            "src": "ramp"
+          },
           {
             "d": "2026-08-12",
             "amt": 35.1,
@@ -10514,6 +10521,44 @@
       "days_elapsed": null,
       "days_to_turn": null,
       "status": "active"
+    },
+    {
+      "key": "c702|h301",
+      "prop": "c702",
+      "unit": "H301",
+      "at_risk": [],
+      "property_name": "c702",
+      "city": "Spokane",
+      "addr": "7008 N Wiscomb St H301 Spokane, WA 99208",
+      "unit_id": 1413,
+      "unit_status": "Notice-Unrented",
+      "rent_ready": null,
+      "vacant": false,
+      "days_vacant": null,
+      "move_out": "2026-08-31",
+      "available_on": "2026-09-20",
+      "ready_on": "2026-09-20",
+      "target_date": "2026-09-20",
+      "next_move_in": null,
+      "rent": "1695.00",
+      "bed_bath": "3/2.00",
+      "sqft": 1250,
+      "region": "Spokane",
+      "next_appt": null,
+      "cost": {
+        "code": "c702-H301",
+        "labor": 0,
+        "materials": 0,
+        "total": 0,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": []
+      },
+      "stage": "Move-out",
+      "stage_ord": 0,
+      "days_elapsed": 0,
+      "days_to_turn": null,
+      "status": "notice"
     },
     {
       "key": "c702|j103",
@@ -30110,8 +30155,8 @@
       "cost": {
         "code": "ps17-A10",
         "labor": 355.85,
-        "materials": 350,
-        "total": 705.85,
+        "materials": 593.1,
+        "total": 948.95,
         "estimate": 933.94,
         "laborEntries": [
           {
@@ -30151,6 +30196,27 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-08-13",
+            "amt": 8.47,
+            "cat": "Turn",
+            "ln": "saldana",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-08-10",
+            "amt": 228.1,
+            "cat": "Turn",
+            "ln": "saldana",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-08-10",
+            "amt": 6.53,
+            "cat": "Turn",
+            "ln": "saldana",
+            "src": "ramp"
+          },
           {
             "d": "2025-05-07",
             "amt": 350,
