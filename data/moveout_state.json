@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-08-13T06:02:16.005Z",
+  "fetched_at": "2026-08-13T09:13:42.579Z",
   "units": {
     "2": {
       "moveOut": "2026-07-31",
@@ -554,13 +554,6 @@
       "unit": "31",
       "city": "Spokane"
     },
-    "741": {
-      "moveOut": "2026-07-31",
-      "status": "Vacant-Rented",
-      "prop": "c313",
-      "unit": "33",
-      "city": "Spokane"
-    },
     "745": {
       "moveOut": "2026-07-27",
       "status": "Vacant-Unrented",
@@ -757,13 +750,6 @@
       "unit": "E106",
       "city": "Kennewick"
     },
-    "1077": {
-      "moveOut": "2026-06-30",
-      "status": "Vacant-Rented",
-      "prop": "kn47-k3",
-      "unit": "K202",
-      "city": "Kennewick"
-    },
     "1100": {
       "moveOut": "2026-07-15",
       "status": "Vacant-Unrented",
@@ -881,13 +867,6 @@
       "status": "Vacant-Unrented",
       "prop": "tc68",
       "unit": "C63",
-      "city": "Tacoma"
-    },
-    "1213": {
-      "moveOut": "2026-04-23",
-      "status": "Vacant-Rented",
-      "prop": "tc68",
-      "unit": "C64",
       "city": "Tacoma"
     },
     "1216": {
@@ -2635,6 +2614,36 @@
       "unit": "B12",
       "city": "Richland",
       "to": "2026-09-04"
+    },
+    {
+      "date": "2026-08-13",
+      "type": "moveout_removed",
+      "unit_id": "741",
+      "prop": "c313",
+      "unit": "33",
+      "city": "Spokane",
+      "from": "2026-07-31",
+      "was_status": "Vacant-Rented"
+    },
+    {
+      "date": "2026-08-13",
+      "type": "moveout_removed",
+      "unit_id": "1077",
+      "prop": "kn47-k3",
+      "unit": "K202",
+      "city": "Kennewick",
+      "from": "2026-06-30",
+      "was_status": "Vacant-Rented"
+    },
+    {
+      "date": "2026-08-13",
+      "type": "moveout_removed",
+      "unit_id": "1213",
+      "prop": "tc68",
+      "unit": "C64",
+      "city": "Tacoma",
+      "from": "2026-04-23",
+      "was_status": "Vacant-Rented"
     }
   ]
 }
