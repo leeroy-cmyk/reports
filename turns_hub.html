@@ -70,6 +70,22 @@ tfoot td { background: #f4f6f9; font-weight: 700; color: #1a5276; border-top: 2p
 .blank { color: #c3ccd6; font-style: italic; }
 .num { text-align: right; }
 
+/* ── turn-stage progress bar ────────────────────────────────────────────── */
+/* One segment per checklist task, in turn order, coloured by state. Ported from
+   the old report's Turns tab — the at-a-glance "how far along is this turn". */
+.tp { display: flex; align-items: center; gap: 7px; min-width: 150px; }
+.tp-bar { display: flex; gap: 2px; flex: 1; min-width: 84px; }
+.tp-seg { flex: 1; height: 11px; border-radius: 2px; background: #dfe6ec; }
+.tp-seg.done  { background: #27ae60; }
+.tp-seg.late  { background: #e74c3c; }
+.tp-seg.today { background: #f39c12; }
+.tp-seg.sched { background: #5dade2; }
+.tp-n { font-size: 0.74rem; font-weight: 700; color: #1a5276; white-space: nowrap; }
+.tp-n.all { color: #1e8449; }
+.tp-none { color: #b3bfcb; font-size: 0.76rem; }
+.lg { display: flex; gap: 13px; align-items: center; font-size: 0.72rem; color: #7f8fa4; margin-left: 4px; }
+.lg i { display: inline-block; width: 9px; height: 9px; border-radius: 2px; margin-right: 4px; vertical-align: -1px; }
+
 /* ── badges ─────────────────────────────────────────────────────────────── */
 .b { display: inline-block; padding: 2px 9px; border-radius: 11px; font-size: 0.7rem; font-weight: 600; white-space: nowrap; }
 .b.active { background: #fdf0d5; color: #92400e; }
@@ -99,7 +115,10 @@ tfoot td { background: #f4f6f9; font-weight: 700; color: #1a5276; border-top: 2p
 .steps { display: flex; flex-direction: column; gap: 6px; }
 .step { display: flex; align-items: center; gap: 8px; font-size: 0.81rem; }
 .dot { width: 9px; height: 9px; border-radius: 50%; background: #d0dce8; flex: none; }
-.dot.done { background: #1e8449; }
+.dot.done { background: #27ae60; }
+.dot.late { background: #e74c3c; }
+.dot.today { background: #f39c12; }
+.dot.sched { background: #5dade2; }
 .dot.next { background: #d68910; box-shadow: 0 0 0 3px #fdf0d5; }
 .step .t { flex: 1; }
 .step .d { color: #7f8fa4; font-size: 0.76rem; }
@@ -169,6 +188,7 @@ a.pm:hover { text-decoration: underline; }
         <option value="">Everything</option>
       </select>
       <button class="pill risk" id="fRisk" onclick="toggleRisk()">⚠ At risk only</button>
+      <span class="lg"><span><i style="background:#27ae60"></i>done</span><span><i style="background:#e74c3c"></i>late</span><span><i style="background:#f39c12"></i>today</span><span><i style="background:#5dade2"></i>scheduled</span><span><i style="background:#dfe6ec"></i>unscheduled</span></span>
       <span class="count" id="pipeCount"></span>
     </div>
     <div class="tw" id="pipeWrap"><div class="empty">Loading…</div></div>
@@ -355,14 +375,15 @@ function renderPipe() {
     risk: r.at_risk.length, prop: r.prop, unit: r.unit, region: r.region, stage: r.stage_ord,
     status: r.status, days: r.days_elapsed, next: r.next_appt ? r.next_appt.date : null,
     avail: r.available_on, cost: r.cost ? r.cost.total : 0, est: r.cost ? r.cost.estimate : 0,
+    prog: (s => s ? s.pct : null)(turnStats(r)),
   }[pipeSort.k]);
   const sorted = [...rows].sort((a, b) => cmp(val(a), val(b), pipeSort.dir) || String(a.prop).localeCompare(String(b.prop)));
 
   const head = [['risk', '⚠'], ['prop', 'Property'], ['unit', 'Unit'], ['region', 'Region'], ['status', 'Status'],
-    ['stage', 'Stage'], ['days', 'Days'], ['next', 'Next Up'], ['avail', 'Available'], ['cost', 'Actual'], ['est', 'Estimate']];
+    ['stage', 'Stage'], ['prog', 'Progress'], ['days', 'Days'], ['next', 'Next Up'], ['avail', 'Available'], ['cost', 'Actual'], ['est', 'Estimate']];
   document.getElementById('pipeWrap').innerHTML = `<table id="pipeTbl">
     <thead><tr>${head.map(([k, l]) => `<th data-k="${k}" onclick="sortPipe('${k}')">${l}</th>`).join('')}<th></th></tr></thead>
-    <tbody>${sorted.map((r, i) => rowHtml(r, i)).join('') || `<tr><td colspan="12" class="empty">No units match these filters</td></tr>`}</tbody>
+    <tbody>${sorted.map((r, i) => rowHtml(r, i)).join('') || `<tr><td colspan="13" class="empty">No units match these filters</td></tr>`}</tbody>
   </table>`;
   document.getElementById('pipeCount').textContent = rows.length + ' of ' + HUB.rows.length + ' units';
   arrows('#pipeTbl', pipeSort.k, pipeSort.dir);
@@ -378,6 +399,36 @@ function nextLabel(na) {
 }
 const nextCat = c => String(c || '').replace(/^suggested-/, '');
 
+// State of one checklist task, same five states the old report used:
+// done · late (scheduled before today, not done) · today · sched · open (no date).
+function taskState(t) {
+  if (t.done) return 'done';
+  if (!t.date) return 'open';
+  if (t.date < TODAY) return 'late';
+  if (t.date === TODAY) return 'today';
+  return 'sched';
+}
+function turnStats(r) {
+  const tk = r.pm && r.pm.tasks;
+  if (!tk || !tk.length) return null;
+  const st = tk.map(taskState);
+  return { total: tk.length, done: st.filter(s => s === 'done').length, late: st.filter(s => s === 'late').length, states: st, tasks: tk,
+           pct: st.filter(s => s === 'done').length / tk.length };
+}
+// Segmented bar: one segment per task, in checklist order, so the shape of the bar
+// reads as "where in the turn are we" and not just a percentage.
+function progressCell(r) {
+  const s = turnStats(r);
+  if (!s) return `<td><span class="tp-none">no checklist</span></td>`;
+  const segs = s.states.map((st, i) => {
+    const t = s.tasks[i];
+    const tip = `${t.task}${t.date ? ' — ' + fdate(t.date) : ' — not scheduled'}${t.done ? ' ✓ done' : ''}${t.who ? ' · ' + t.who : ''}`;
+    return `<span class="tp-seg ${st}" title="${esc(tip)}"></span>`;
+  }).join('');
+  return `<td><div class="tp"><span class="tp-bar">${segs}</span>
+    <span class="tp-n${s.done === s.total ? ' all' : ''}">${s.done}/${s.total}${s.late ? ` <span style="color:#c0392b">⚠${s.late}</span>` : ''}</span></div></td>`;
+}
+
 function rowHtml(r, i) {
   const na = r.next_appt;
   return `<tr class="row" onclick="toggleDet(${i})">
@@ -387,6 +438,7 @@ function rowHtml(r, i) {
     <td>${cell(esc(r.region))}</td>
     <td><span class="b ${r.status}">${r.status === 'active' ? 'Active' : r.status === 'ready' ? 'Ready' : r.status === 'notice' ? 'Notice' : r.status === 'complete' ? 'Complete' : 'Other'}</span></td>
     <td>${r.stage ? `<span class="b stage">${esc(r.stage)}</span>` : dash}</td>
+    ${progressCell(r)}
     <td>${r.days_elapsed == null ? dash : '<strong>' + r.days_elapsed + '</strong>d'}</td>
     <td>${na ? `<span class="b cat-${esc(nextCat(na.cat))}" title="${esc(na.brief || na.cat)}${na.who ? ' · ' + esc(na.who) : ''}">${short(na.date)} ${esc(nextLabel(na))}</span>` : dash}</td>
     <td>${cell(fdate(r.available_on))}</td>
@@ -394,7 +446,7 @@ function rowHtml(r, i) {
     <td>${r.cost && r.cost.estimate > 0 ? money(r.cost.estimate) : dash}</td>
     <td><span style="color:#2e86c1;font-size:.78rem" id="ar${i}">▼</span></td>
   </tr>
-  <tr class="det" id="det${i}"><td colspan="12">${dossier(r)}</td></tr>`;
+  <tr class="det" id="det${i}"><td colspan="13">${dossier(r)}</td></tr>`;
 }
 function toggleDet(i) {
   const d = document.getElementById('det' + i), a = document.getElementById('ar' + i);
@@ -420,11 +472,14 @@ function dossier(r) {
       <span class="t">${lbl}</span><span class="d">${d ? fdate(d) : '—'}</span></div>`;
   }).join('');
 
-  const tasks = (r.pm && r.pm.tasks) ? r.pm.tasks.map(t =>
-    `<div class="step ${t.done ? 'done' : ''}"><span class="dot ${t.done ? 'done' : ''}"></span>
+  // Same five states as the progress bar, so a red segment above and a red dot
+  // here are the same fact rather than two different colour languages.
+  const tasks = (r.pm && r.pm.tasks) ? r.pm.tasks.map(t => {
+    const st = taskState(t);
+    return `<div class="step ${t.done ? 'done' : ''}"><span class="dot ${st}"></span>
       <span class="t">${esc(t.task)}</span>
-      <span class="d">${t.done ? (t.completed ? fdate(t.completed) : '✓') : (t.date ? short(t.date) : '—')}${t.who ? ' · ' + esc(t.who) : ''}</span></div>`).join('')
-    : '<div class="blank" style="font-size:.81rem">No PropertyMeld checklist for this turn.</div>';
+      <span class="d">${t.done ? (t.completed ? fdate(t.completed) : '✓') : (t.date ? short(t.date) : 'unscheduled')}${t.who ? ' · ' + esc(t.who) : ''}</span></div>`;
+  }).join('') : '<div class="blank" style="font-size:.81rem">No PropertyMeld checklist for this turn.</div>';
 
   const c = r.cost || {};
   const ents = [...(c.laborEntries || []).map(e => ({ d: e.d, l: e.emp + ' · ' + e.hrs + 'h', a: e.cost })),
