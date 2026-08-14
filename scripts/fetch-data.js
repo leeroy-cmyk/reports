@@ -543,6 +543,10 @@ const TC_QBO_NAME_CATS = {
   'capex turn - contractor':'CapEx', 'capex turn - material':'CapEx',
   'r&m - contractor':'R&M',          'r&m - material':'R&M',
   'grounds - contractor':'Grounds',  'grounds - material':'Grounds',
+  // Word-order variant seen 2026-08-14 (Virtel Flooring, ps25-D23). Same bucket as
+  // 'capex turn - *'. ⚠️ 'CapEX - Appliance' stays unmapped on purpose — appliance
+  // capital is not turn cost.
+  'capex - turn':'CapEx',
 };
 
 function extractUnitCode(propField) {
