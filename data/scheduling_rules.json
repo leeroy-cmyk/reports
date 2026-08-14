@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-08-13T14:52:00.376Z",
-  "last_checked": "2026-08-13T14:52:00.376Z",
+  "generated_at": "2026-08-14T14:45:47.199Z",
+  "last_checked": "2026-08-14T14:45:47.199Z",
   "source": "leeroy-cmyk/pm-scheduling/CLAUDE.md",
-  "count": 61,
+  "count": 63,
   "rules": [
     {
       "group": "General",
@@ -395,6 +395,32 @@
       "details": [
         "This was a real silent regression: **c313 #33, w117 #3 and c302 #5** all had their make-ready work finished but their QC sitting *after* the tenant's move-in. They were corrected by hand, and the very next scheduler run would have pushed them straight back — the script recomputes the date from the vendor chain and had no notion of a move-in.",
         "⚠️ **The pull-in only applies if the WORK is already finished by the earlier date.** Signing off before the work exists is meaningless: a naive version of this clamp yanked `k104 #101-1` (paint 09-17, maint 09-22) back to 08-13. When the *work* is what's late, moving the QC cannot fix it — the run surfaces it as **\"work finishes after the tenant moves in\"** for a person to reschedule or to tell the tenant."
+      ]
+    },
+    {
+      "group": "Turns",
+      "category": "SPOKANE HAS TWO SEPARATE TURN CREWS",
+      "text": "NOT INTERCHANGEABLE (firm rule, Lee Roy 2026-08-13).",
+      "details": [
+        "**c702 → Matt Romme (63325) + Brady Smith (63324), EXCLUSIVELY.** They were onboarded for the 19 c702 turns and hold only c702 work; c702 is their whole scope. **Empty weekdays on their calendars once the current c702 turns are done are EXPECTED, not a scheduling fault.**",
+        "**Everything else in Spokane → Ron + Magoon + Justin, EXCLUSIVELY.**",
+        "This mirrors the cleaning split (c702 = U&K, rest = SPO Cleaning) and the QC pairing (Matt ↔ Brady, Magoon ↔ Ron).",
+        "⚠️ **HOW THIS BROKE: a rebalance that does not list every tech will STRIP the ones it cannot see.** On 2026-08-12 the Spokane rebalance listed only Ron/Magoon/Justin, read Matt's and Brady's days as free, and moved **10 c702 units off them** — leaving two techs with empty weekdays from late August. **Any tool that reassigns turns must list EVERY tech (so their calendars are respected) AND enforce the crew split.** Fixed in `pm_spokane_turn_scheduler.js` (`crewFor()`) and `turn_rebalance_plan.js` (a `crews` config plus `wrongCrew` detection).",
+        "**Work on the wrong crew MUST move even if it lands later** — the correct crew is smaller, so returning c702 to two people cost 2–9 days per unit. That is the accepted price of correct assignment, and it is exempt from the forward-only ceiling (like a move-out violation)."
+      ]
+    },
+    {
+      "group": "Turns",
+      "category": "",
+      "text": "**CLEANING IS AUTOMATED FOR SPOKANE (added 2026-08-13, Lee Roy).** `pm_spokane_cleaning.js`, step 5 of the Spokane turn workflow — it runs **before** the final walkthrough on purpose, because the QC date is derived from the last vendor task.",
+      "details": [
+        "**Who gets it:** every Spokane property **except c702** → **SPO Cleaning** (id `97680`, `sierrazinnerman@spocleaningmaids.com` — this *is* \"Spo Cleaning Maids\"; the PropertyMeld record is just named \"SPO Cleaning\"). **c702** → **U&K Properties LLC** (id `77472`).",
+        "**⛔ Carpet cleaning is NOT scheduled** — \"E - Carpet Cleaning\" melds are left alone entirely. Carpet is tested *first* in the matcher so \"E - Carpet Cleaning\" can never be mistaken for the cleaning meld.",
+        "**Requested date = last in-house day + 3 business days**, floored at the next business day — the same rule the final-walkthrough scheduler uses, so cleaning and QC stay consistent.",
+        "🔑 **VENDOR ASSIGNMENT *IS* AVAILABLE BY API — the old note saying it wasn't is wrong.** `PATCH /api/melds/{id}/assign-maintenance/` with `{ maintenance: [{ id: <vendorId>, type: 'Vendor' }], user_groups: [] }`. The endpoint is generic; `type` discriminates a vendor from an in-house tech. It creates the `vendor_assignment_request`, moves the meld to `PENDING_VENDOR`, notifies the vendor, and sets `accept_by` ~4 days out.",
+        "⚠️ **BUT WE CANNOT SET THE VENDOR'S DATE — the vendor books it.** `assignments/{id}/segments/` returns 400 before acceptance (\"Can't update an assignment that hasn't been accepted\") and 500 after; `vendor-appointments/{id}/schedule/` 500s on every payload shape; PATCH on the appointment is 405. Decisive evidence: **every pre-existing cleaning appointment was created by the vendor's persona (`org_type: \"v\"`)**, never by management. So the requested date is sent as a **vendor-visible comment** (`hidden_from_vendor: false`, `response_required: true`) carrying an `[auto-cleaning]` marker for idempotency, and the vendor confirms.",
+        "⚠️ **`POST /api/add-new-vendor-appointment/meld/{id}/` returns 201 but persists only an EMPTY placeholder appointment** — a misleading success that leaves the meld stuck in `PENDING_MORE_VENDOR_AVAILABILITY`. Don't use it.",
+        "**Append-only:** a cleaning meld that already has a vendor appointment is never touched; an existing assignment is never duplicated. Safe to re-run daily, which also re-assigns anything whose ~4-day accept window lapsed."
       ]
     },
     {
