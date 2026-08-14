@@ -1,9 +1,9 @@
 {
   "ok": true,
-  "fetched_at": "2026-08-14T11:59:28.374Z",
+  "fetched_at": "2026-08-14T13:25:15.558Z",
   "summary": {
     "as_of": "2026-08-14",
-    "units": 235,
+    "units": 236,
     "active": 74,
     "ready": 2,
     "notice": 21,
@@ -44023,6 +44023,89 @@
       "stage_ord": 7,
       "days_elapsed": 30,
       "days_to_turn": 30,
+      "status": "complete"
+    },
+    {
+      "key": "s300|3",
+      "prop": "s300",
+      "unit": "3",
+      "at_risk": [],
+      "property_name": "s300",
+      "city": "Spokane Valley",
+      "addr": "9300 E Sprague Avenue - 3 Spokane Valley, WA 99206",
+      "unit_id": 61,
+      "unit_status": "Notice-Unrented",
+      "rent_ready": null,
+      "vacant": false,
+      "days_vacant": null,
+      "move_out": "2026-10-31",
+      "available_on": "2026-11-20",
+      "ready_on": "2026-11-20",
+      "target_date": "2026-11-20",
+      "next_move_in": null,
+      "rent": "979.00",
+      "bed_bath": "1/1.00",
+      "sqft": 310,
+      "region": "Spokane",
+      "pm": {
+        "projId": 189655,
+        "name": "Turn - 9300 E Sprague Avenue - 3 UNIT 3",
+        "status": "COMPLETE",
+        "done": 7,
+        "total": 7,
+        "first_appt": "2025-09-29",
+        "final_walk": "2025-10-07",
+        "final_walk_done": "2025-10-07",
+        "completed_date": "2025-10-14",
+        "due": "2025-10-08",
+        "next_task": null,
+        "tasks": null
+      },
+      "next_appt": null,
+      "cost": {
+        "code": "s300-3",
+        "labor": 148.61,
+        "materials": 77,
+        "total": 225.61,
+        "estimate": 0,
+        "laborEntries": [
+          {
+            "d": "2025-10-08",
+            "emp": "Ronald D. Cramer",
+            "hrs": 0.37,
+            "cost": 9.53,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-09-29",
+            "emp": "Ronald D. Cramer",
+            "hrs": 2.73,
+            "cost": 70.3,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-09-29",
+            "emp": "Scott Higley",
+            "hrs": 2.15,
+            "cost": 68.78,
+            "cat": "Turn"
+          }
+        ],
+        "materialEntries": [
+          {
+            "d": "2025-10-13",
+            "amt": 77,
+            "cat": "Turn",
+            "ln": "montiel",
+            "src": "ramp"
+          }
+        ]
+      },
+      "turn_end": "2025-10-07",
+      "stage": "Move-out",
+      "stage_ord": 0,
+      "days_elapsed": 0,
+      "days_to_turn": -389,
       "status": "complete"
     },
     {
