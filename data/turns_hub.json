@@ -1,17 +1,17 @@
 {
   "ok": true,
-  "fetched_at": "2026-08-14T17:31:44.041Z",
+  "fetched_at": "2026-08-14T17:40:45.256Z",
   "summary": {
     "as_of": "2026-08-14",
     "units": 236,
-    "active": 74,
+    "active": 75,
     "ready": 2,
-    "notice": 21,
+    "notice": 20,
     "at_risk": 20,
     "unscheduled": 10,
     "accruing": 15058.64,
-    "avg_days_open": 25,
-    "revenue_at_risk": 3484
+    "avg_days_open": 24,
+    "revenue_at_risk": 3540.5
   },
   "rows": [
     {
@@ -9460,14 +9460,14 @@
       "city": "Spokane",
       "addr": "7020 N Colton St B301 Spokane, WA 99208",
       "unit_id": 1299,
-      "unit_status": "Notice-Unrented",
-      "rent_ready": null,
-      "vacant": false,
-      "days_vacant": null,
-      "move_out": "2026-08-14",
-      "available_on": "2026-10-11",
-      "ready_on": "2026-10-11",
-      "target_date": "2026-09-03",
+      "unit_status": "Vacant-Unrented",
+      "rent_ready": "No",
+      "vacant": true,
+      "days_vacant": 1,
+      "move_out": "2026-08-13",
+      "available_on": "2026-09-02",
+      "ready_on": "2026-09-02",
+      "target_date": "2026-09-02",
       "next_move_in": null,
       "rent": "1695.00",
       "bed_bath": "3/2.00",
@@ -9571,9 +9571,9 @@
       },
       "stage": "Maintenance",
       "stage_ord": 3,
-      "days_elapsed": 0,
+      "days_elapsed": 1,
       "days_to_turn": null,
-      "status": "notice"
+      "status": "active"
     },
     {
       "key": "c702|c102",
@@ -16915,7 +16915,7 @@
       "addr": "632 N Arthur Street B104 Kennewick, WA 99336",
       "unit_id": 1011,
       "unit_status": "Vacant-Unrented",
-      "rent_ready": "No",
+      "rent_ready": "Yes",
       "vacant": true,
       "days_vacant": 1,
       "move_out": "2026-08-13",
@@ -16989,8 +16989,8 @@
         ]
       },
       "turn_end": "2025-11-03",
-      "stage": null,
-      "stage_ord": 0,
+      "stage": "Ready",
+      "stage_ord": 7,
       "days_elapsed": 0,
       "days_to_turn": -283,
       "status": "complete"
