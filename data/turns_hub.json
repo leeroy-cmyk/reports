@@ -1,17 +1,17 @@
 {
   "ok": true,
-  "fetched_at": "2026-08-14T23:25:06.075Z",
+  "fetched_at": "2026-08-14T23:50:36.916Z",
   "summary": {
     "as_of": "2026-08-14",
     "units": 237,
-    "active": 73,
-    "ready": 3,
+    "active": 72,
+    "ready": 4,
     "notice": 21,
-    "at_risk": 20,
-    "unscheduled": 10,
+    "at_risk": 19,
+    "unscheduled": 9,
     "accruing": 15647.26,
     "avg_days_open": 24,
-    "revenue_at_risk": 3458.3
+    "revenue_at_risk": 3415.2
   },
   "rows": [
     {
@@ -567,124 +567,6 @@
       "stage": null,
       "stage_ord": 0,
       "days_elapsed": null,
-      "days_to_turn": null,
-      "status": "active"
-    },
-    {
-      "key": "hl65|9",
-      "prop": "hl65",
-      "unit": "9",
-      "at_risk": [
-        "Nothing scheduled"
-      ],
-      "property_name": "hl65",
-      "city": "Helena",
-      "addr": "645 N Ewing - 9 Helena, MT 59601",
-      "unit_id": 203,
-      "unit_status": "Vacant-Rented",
-      "rent_ready": "No",
-      "vacant": true,
-      "days_vacant": 14,
-      "move_out": "2026-07-31",
-      "available_on": "2026-09-14",
-      "ready_on": "2026-09-14",
-      "target_date": "2026-08-20",
-      "next_move_in": "2026-09-14",
-      "rent": "1293.00",
-      "bed_bath": "1/1.00",
-      "sqft": 600,
-      "region": null,
-      "pm": {
-        "projId": 229352,
-        "name": "Standard Unit Turn",
-        "status": "ACTIVE",
-        "done": 0,
-        "total": 7,
-        "first_appt": null,
-        "final_walk": null,
-        "final_walk_done": null,
-        "completed_date": null,
-        "due": null,
-        "next_task": null,
-        "tasks": [
-          {
-            "task": "A - Initial walkthrough",
-            "cat": "walkthrough",
-            "done": false,
-            "date": null,
-            "who": "Florencia Sola",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Appfolio Estimate",
-            "cat": "estimate",
-            "done": false,
-            "date": null,
-            "who": "Dulce Salinas",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "C - Paint",
-            "cat": "paint",
-            "done": false,
-            "date": null,
-            "who": "Florencia Sola",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "D - Maintenance",
-            "cat": "maintenance",
-            "done": false,
-            "date": null,
-            "who": "Florencia Sola",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "E - Carpet Cleaning",
-            "cat": "carpet",
-            "done": false,
-            "date": null,
-            "who": "Florencia Sola",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "F - Cleaning",
-            "cat": "cleaning",
-            "done": false,
-            "date": null,
-            "who": "Florencia Sola",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Final Walkthrough",
-            "cat": "final-walk",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": null,
-      "cost": {
-        "code": "hl65-9",
-        "labor": 0,
-        "materials": 0,
-        "total": 0,
-        "estimate": 0,
-        "laborEntries": [],
-        "materialEntries": []
-      },
-      "stage": "Walkthrough",
-      "stage_ord": 1,
-      "days_elapsed": 14,
       "days_to_turn": null,
       "status": "active"
     },
@@ -12190,6 +12072,122 @@
       "days_elapsed": null,
       "days_to_turn": null,
       "status": "complete"
+    },
+    {
+      "key": "hl65|9",
+      "prop": "hl65",
+      "unit": "9",
+      "at_risk": [],
+      "property_name": "hl65",
+      "city": "Helena",
+      "addr": "645 N Ewing - 9 Helena, MT 59601",
+      "unit_id": 203,
+      "unit_status": "Vacant-Rented",
+      "rent_ready": "Yes",
+      "vacant": true,
+      "days_vacant": 14,
+      "move_out": "2026-07-31",
+      "available_on": null,
+      "ready_on": "2026-09-14",
+      "target_date": "2026-08-20",
+      "next_move_in": "2026-09-14",
+      "rent": "1293.00",
+      "bed_bath": "1/1.00",
+      "sqft": 600,
+      "region": null,
+      "pm": {
+        "projId": 229352,
+        "name": "Standard Unit Turn",
+        "status": "ACTIVE",
+        "done": 0,
+        "total": 7,
+        "first_appt": null,
+        "final_walk": null,
+        "final_walk_done": null,
+        "completed_date": null,
+        "due": null,
+        "next_task": null,
+        "tasks": [
+          {
+            "task": "A - Initial walkthrough",
+            "cat": "walkthrough",
+            "done": false,
+            "date": null,
+            "who": "Florencia Sola",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Appfolio Estimate",
+            "cat": "estimate",
+            "done": false,
+            "date": null,
+            "who": "Dulce Salinas",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "C - Paint",
+            "cat": "paint",
+            "done": false,
+            "date": null,
+            "who": "Florencia Sola",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "D - Maintenance",
+            "cat": "maintenance",
+            "done": false,
+            "date": null,
+            "who": "Florencia Sola",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "E - Carpet Cleaning",
+            "cat": "carpet",
+            "done": false,
+            "date": null,
+            "who": "Florencia Sola",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "F - Cleaning",
+            "cat": "cleaning",
+            "done": false,
+            "date": null,
+            "who": "Florencia Sola",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Final Walkthrough",
+            "cat": "final-walk",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          }
+        ]
+      },
+      "next_appt": null,
+      "cost": {
+        "code": "hl65-9",
+        "labor": 0,
+        "materials": 0,
+        "total": 0,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": []
+      },
+      "stage": "Ready",
+      "stage_ord": 7,
+      "days_elapsed": 14,
+      "days_to_turn": null,
+      "status": "ready"
     },
     {
       "key": "j312|3104",
