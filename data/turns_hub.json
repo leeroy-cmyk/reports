@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "fetched_at": "2026-08-14T14:33:00.784Z",
+  "fetched_at": "2026-08-14T15:35:22.992Z",
   "summary": {
     "as_of": "2026-08-14",
     "units": 236,
@@ -1798,12 +1798,12 @@
         "done": 1,
         "total": 7,
         "first_appt": "2026-08-03",
-        "final_walk": "2026-08-20",
+        "final_walk": "2026-08-17",
         "final_walk_done": null,
         "completed_date": "2026-08-04",
         "due": "2026-08-21",
         "next_task": {
-          "date": "2026-08-20",
+          "date": "2026-08-17",
           "task": "final-walk"
         },
         "tasks": [
@@ -1865,7 +1865,7 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": "2026-08-20",
+            "date": "2026-08-17",
             "who": "Margarito Saldana",
             "completed": null,
             "vendor": false
@@ -4468,7 +4468,7 @@
         "status": "ACTIVE",
         "done": 0,
         "total": 7,
-        "first_appt": "2026-09-02",
+        "first_appt": "2026-08-25",
         "final_walk": "2026-09-14",
         "final_walk_done": null,
         "completed_date": null,
@@ -4500,7 +4500,7 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-09-02",
+            "date": "2026-08-25",
             "who": "Justin Gutierrez",
             "completed": null,
             "vendor": false
@@ -24248,12 +24248,15 @@
         "status": "ACTIVE",
         "done": 5,
         "total": 10,
-        "first_appt": null,
+        "first_appt": "2026-10-12",
         "final_walk": null,
         "final_walk_done": "2026-04-13",
         "completed_date": "2026-05-18",
         "due": "2026-08-20",
-        "next_task": null,
+        "next_task": {
+          "date": "2026-10-12",
+          "task": "paint"
+        },
         "tasks": [
           {
             "task": "A - Initial Walkthrough (clone)",
@@ -24277,8 +24280,8 @@
             "task": "C - Paint (clone)",
             "cat": "paint",
             "done": false,
-            "date": null,
-            "who": null,
+            "date": "2026-10-12",
+            "who": "Ryan Robson",
             "completed": null,
             "vendor": false
           },
@@ -24286,8 +24289,8 @@
             "task": "D - Maintenance (clone)",
             "cat": "maintenance",
             "done": false,
-            "date": null,
-            "who": null,
+            "date": "2026-10-14",
+            "who": "Ryan Robson",
             "completed": null,
             "vendor": false
           },
@@ -24338,7 +24341,12 @@
           }
         ]
       },
-      "next_appt": null,
+      "next_appt": {
+        "date": "2026-10-12",
+        "cat": "paint",
+        "who": "Ryan Robson",
+        "brief": "C - Paint Prep / Paint (clone)"
+      },
       "cost": {
         "code": "kn47-k1-L105",
         "labor": 779.96,
