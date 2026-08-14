@@ -1,17 +1,17 @@
 {
   "ok": true,
-  "fetched_at": "2026-08-14T21:52:57.560Z",
+  "fetched_at": "2026-08-14T22:25:44.895Z",
   "summary": {
     "as_of": "2026-08-14",
     "units": 236,
-    "active": 74,
-    "ready": 2,
+    "active": 73,
+    "ready": 3,
     "notice": 20,
     "at_risk": 20,
     "unscheduled": 10,
-    "accruing": 15682.07,
-    "avg_days_open": 25,
-    "revenue_at_risk": 3502.77
+    "accruing": 15647.26,
+    "avg_days_open": 24,
+    "revenue_at_risk": 3458.3
   },
   "rows": [
     {
@@ -12716,11 +12716,11 @@
       "addr": "101 E. Spence 1 Medical Lake, WA 99022",
       "unit_id": 345,
       "unit_status": "Vacant-Rented",
-      "rent_ready": "No",
+      "rent_ready": "Yes",
       "vacant": true,
       "days_vacant": 45,
       "move_out": "2026-06-30",
-      "available_on": "2026-09-10",
+      "available_on": null,
       "ready_on": "2026-09-10",
       "target_date": "2026-07-20",
       "next_move_in": "2026-09-10",
@@ -12839,11 +12839,11 @@
         ],
         "materialEntries": []
       },
-      "stage": "Maintenance",
-      "stage_ord": 3,
+      "stage": "Ready",
+      "stage_ord": 7,
       "days_elapsed": 45,
       "days_to_turn": null,
-      "status": "active"
+      "status": "ready"
     },
     {
       "key": "k104|1013",
@@ -12858,10 +12858,10 @@
       "rent_ready": null,
       "vacant": false,
       "days_vacant": null,
-      "move_out": "2026-09-15",
-      "available_on": "2026-11-15",
-      "ready_on": "2026-11-15",
-      "target_date": "2026-10-05",
+      "move_out": "2026-09-19",
+      "available_on": "2026-10-09",
+      "ready_on": "2026-10-09",
+      "target_date": "2026-10-09",
       "next_move_in": null,
       "rent": "1334.00",
       "bed_bath": "2/1.00",
@@ -44273,9 +44273,9 @@
       },
       "cost": {
         "code": "s129-9",
-        "labor": 236.51,
+        "labor": 282.01,
         "materials": 0,
-        "total": 236.51,
+        "total": 282.01,
         "estimate": 0,
         "laborEntries": [
           {
@@ -44311,6 +44311,13 @@
             "emp": "Micheal N. Magoon",
             "hrs": 0.02,
             "cost": 0.5,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-14",
+            "emp": "Micheal N. Magoon",
+            "hrs": 1.82,
+            "cost": 45.5,
             "cat": "Turn"
           },
           {
