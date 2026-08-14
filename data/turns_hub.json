@@ -1,17 +1,17 @@
 {
   "ok": true,
-  "fetched_at": "2026-08-14T18:35:31.061Z",
+  "fetched_at": "2026-08-14T19:39:02.420Z",
   "summary": {
     "as_of": "2026-08-14",
     "units": 236,
-    "active": 75,
+    "active": 74,
     "ready": 2,
     "notice": 20,
     "at_risk": 20,
     "unscheduled": 10,
-    "accruing": 15102.83,
-    "avg_days_open": 24,
-    "revenue_at_risk": 3540.5
+    "accruing": 15282.41,
+    "avg_days_open": 25,
+    "revenue_at_risk": 3502.77
   },
   "rows": [
     {
@@ -1069,9 +1069,9 @@
       },
       "cost": {
         "code": "kn47-k1-C109",
-        "labor": 836.18,
+        "labor": 852.05,
         "materials": 2951.06,
-        "total": 3787.24,
+        "total": 3803.11,
         "estimate": 0,
         "laborEntries": [
           {
@@ -1149,6 +1149,27 @@
             "emp": "Ryan G. Robson",
             "hrs": 0.12,
             "cost": 2.76,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-14",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.28,
+            "cost": 6.44,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-14",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.13,
+            "cost": 2.99,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-14",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.28,
+            "cost": 6.44,
             "cat": "CapEx"
           },
           {
@@ -1971,9 +1992,9 @@
       },
       "cost": {
         "code": "rl21-9",
-        "labor": 1806.18,
+        "labor": 1903.31,
         "materials": 1715.34,
-        "total": 3521.52,
+        "total": 3618.65,
         "estimate": 0,
         "laborEntries": [
           {
@@ -2320,6 +2341,13 @@
             "cat": "Turn"
           },
           {
+            "d": "2026-08-05",
+            "emp": "Margarito Saldana",
+            "hrs": 1.5,
+            "cost": 42.6,
+            "cat": "CapEx"
+          },
+          {
             "d": "2026-08-04",
             "emp": "James Dunlap",
             "hrs": 2,
@@ -2339,6 +2367,20 @@
             "hrs": 0.73,
             "cost": 16.79,
             "cat": "Turn"
+          },
+          {
+            "d": "2026-08-04",
+            "emp": "Margarito Saldana",
+            "hrs": 1.25,
+            "cost": 35.5,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-04",
+            "emp": "Margarito Saldana",
+            "hrs": 0.67,
+            "cost": 19.03,
+            "cat": "CapEx"
           },
           {
             "d": "2026-07-21",
@@ -16722,11 +16764,19 @@
       },
       "cost": {
         "code": "kn47-k2-A104",
-        "labor": 0,
+        "labor": 21.3,
         "materials": 326.4,
-        "total": 326.4,
+        "total": 347.7,
         "estimate": 0,
-        "laborEntries": [],
+        "laborEntries": [
+          {
+            "d": "2026-08-03",
+            "emp": "Margarito Saldana",
+            "hrs": 0.75,
+            "cost": 21.3,
+            "cat": "CapEx"
+          }
+        ],
         "materialEntries": [
           {
             "d": "2025-07-24",
@@ -19452,19 +19502,28 @@
         "brief": "C - Paint Prep / Paint"
       },
       "cost": {
-        "code": "kn47-D201",
-        "labor": 0,
+        "code": "kn47-k2-D201",
+        "labor": 28.4,
         "materials": 0,
-        "total": 0,
+        "total": 28.4,
         "estimate": 0,
-        "laborEntries": [],
+        "laborEntries": [
+          {
+            "d": "2026-08-05",
+            "emp": "Margarito Saldana",
+            "hrs": 1,
+            "cost": 28.4,
+            "cat": "CapEx"
+          }
+        ],
         "materialEntries": []
       },
+      "turn_end": "2025-08-29",
       "stage": "Maintenance",
       "stage_ord": 3,
-      "days_elapsed": 12,
-      "days_to_turn": null,
-      "status": "active"
+      "days_elapsed": 0,
+      "days_to_turn": -338,
+      "status": "complete"
     },
     {
       "key": "kn47|d205",
@@ -21907,9 +21966,9 @@
       "next_appt": null,
       "cost": {
         "code": "kn47-k1-H101",
-        "labor": 253.06,
+        "labor": 281.46,
         "materials": 1138.87,
-        "total": 1391.93,
+        "total": 1420.33,
         "estimate": 0,
         "laborEntries": [
           {
@@ -21945,6 +22004,13 @@
             "emp": "James Dunlap",
             "hrs": 1.93,
             "cost": 44.39,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-03",
+            "emp": "Margarito Saldana",
+            "hrs": 1,
+            "cost": 28.4,
             "cat": "Turn"
           },
           {
@@ -23749,9 +23815,9 @@
       "next_appt": null,
       "cost": {
         "code": "kn47-k3-k202",
-        "labor": 1028.98,
+        "labor": 1071.58,
         "materials": 2097.42,
-        "total": 3126.4,
+        "total": 3169,
         "estimate": 0,
         "laborEntries": [
           {
@@ -23830,6 +23896,13 @@
             "hrs": 0.97,
             "cost": 22.31,
             "cat": "Turn"
+          },
+          {
+            "d": "2026-08-04",
+            "emp": "Margarito Saldana",
+            "hrs": 1.5,
+            "cost": 42.6,
+            "cat": "CapEx"
           },
           {
             "d": "2026-08-03",
@@ -30892,11 +30965,18 @@
       },
       "cost": {
         "code": "ps17-A7",
-        "labor": 1303.56,
+        "labor": 1339.06,
         "materials": 1208.12,
-        "total": 2511.68,
+        "total": 2547.18,
         "estimate": 0,
         "laborEntries": [
+          {
+            "d": "2026-08-05",
+            "emp": "Margarito Saldana",
+            "hrs": 1.25,
+            "cost": 35.5,
+            "cat": "CapEx"
+          },
           {
             "d": "2026-07-31",
             "emp": "Margarito Saldana",
@@ -32392,9 +32472,9 @@
       },
       "cost": {
         "code": "ps17-B5",
-        "labor": 1520.91,
+        "labor": 1549.31,
         "materials": 1691.73,
-        "total": 3212.64,
+        "total": 3241.04,
         "estimate": 0,
         "laborEntries": [
           {
@@ -32507,6 +32587,13 @@
             "emp": "Ryan G. Robson",
             "hrs": 0.67,
             "cost": 15.41,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-05",
+            "emp": "Margarito Saldana",
+            "hrs": 1,
+            "cost": 28.4,
             "cat": "Turn"
           },
           {
@@ -38841,11 +38928,18 @@
       },
       "cost": {
         "code": "rl16-A17",
-        "labor": 28.4,
+        "labor": 56.8,
         "materials": 0,
-        "total": 28.4,
+        "total": 56.8,
         "estimate": 0,
         "laborEntries": [
+          {
+            "d": "2026-08-04",
+            "emp": "Margarito Saldana",
+            "hrs": 1,
+            "cost": 28.4,
+            "cat": "Turn"
+          },
           {
             "d": "2026-07-30",
             "emp": "Margarito Saldana",
@@ -39572,11 +39666,19 @@
       },
       "cost": {
         "code": "rl16-B01",
-        "labor": 0,
+        "labor": 11.93,
         "materials": 0,
-        "total": 0,
+        "total": 11.93,
         "estimate": 0,
-        "laborEntries": [],
+        "laborEntries": [
+          {
+            "d": "2026-08-04",
+            "emp": "Margarito Saldana",
+            "hrs": 0.42,
+            "cost": 11.93,
+            "cat": "CapEx"
+          }
+        ],
         "materialEntries": []
       },
       "stage": "Maintenance",
@@ -42237,11 +42339,18 @@
       },
       "cost": {
         "code": "rl16-D14",
-        "labor": 118.43,
+        "labor": 142,
         "materials": 674.52,
-        "total": 792.95,
+        "total": 816.52,
         "estimate": 0,
         "laborEntries": [
+          {
+            "d": "2026-08-04",
+            "emp": "Margarito Saldana",
+            "hrs": 0.83,
+            "cost": 23.57,
+            "cat": "CapEx"
+          },
           {
             "d": "2025-06-16",
             "emp": "Margarito Saldana",
@@ -44002,9 +44111,9 @@
       },
       "cost": {
         "code": "s129-9",
-        "labor": 166.51,
+        "labor": 192.76,
         "materials": 0,
-        "total": 166.51,
+        "total": 192.76,
         "estimate": 0,
         "laborEntries": [
           {
@@ -44019,6 +44128,13 @@
             "emp": "Micheal N. Magoon",
             "hrs": 1.12,
             "cost": 28,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-14",
+            "emp": "Micheal N. Magoon",
+            "hrs": 1.05,
+            "cost": 26.25,
             "cat": "Turn"
           },
           {
