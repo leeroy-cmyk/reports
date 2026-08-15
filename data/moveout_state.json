@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-08-15T05:52:31.448Z",
+  "fetched_at": "2026-08-15T09:41:34.463Z",
   "units": {
     "2": {
       "moveOut": "2026-07-31",
@@ -183,13 +183,6 @@
       "unit": "107-7",
       "city": "Medical Lake"
     },
-    "356": {
-      "moveOut": "2026-05-04",
-      "status": "Vacant-Rented",
-      "prop": "k104- LeFevre",
-      "unit": "314-12",
-      "city": "Medical Lake"
-    },
     "364": {
       "moveOut": "2026-08-31",
       "status": "Notice-Unrented",
@@ -321,13 +314,6 @@
       "status": "Vacant-Unrented",
       "prop": "w117",
       "unit": "10",
-      "city": "Spokane"
-    },
-    "459": {
-      "moveOut": "2026-06-30",
-      "status": "Vacant-Rented",
-      "prop": "c302",
-      "unit": "5",
       "city": "Spokane"
     },
     "461": {
@@ -549,7 +535,7 @@
     },
     "756": {
       "moveOut": "2026-08-14",
-      "status": "Notice-Unrented",
+      "status": "Vacant-Unrented",
       "prop": "rl21",
       "unit": "2",
       "city": "Richland"
@@ -1116,7 +1102,7 @@
     },
     "1391": {
       "moveOut": "2026-08-14",
-      "status": "Notice-Unrented",
+      "status": "Vacant-Unrented",
       "prop": "c702",
       "unit": "G205",
       "city": "Spokane"
@@ -2747,6 +2733,26 @@
       "unit": "G205",
       "city": "Spokane",
       "to": "2026-08-14"
+    },
+    {
+      "date": "2026-08-15",
+      "type": "moveout_removed",
+      "unit_id": "356",
+      "prop": "k104- LeFevre",
+      "unit": "314-12",
+      "city": "Medical Lake",
+      "from": "2026-05-04",
+      "was_status": "Vacant-Rented"
+    },
+    {
+      "date": "2026-08-15",
+      "type": "moveout_removed",
+      "unit_id": "459",
+      "prop": "c302",
+      "unit": "5",
+      "city": "Spokane",
+      "from": "2026-06-30",
+      "was_status": "Vacant-Rented"
     }
   ]
 }
