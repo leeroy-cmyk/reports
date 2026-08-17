@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "fetched_at": "2026-08-17T21:05:03.209Z",
+  "fetched_at": "2026-08-17T21:43:40.988Z",
   "summary": {
     "as_of": "2026-08-17",
     "units": 238,
@@ -9,7 +9,7 @@
     "notice": 21,
     "at_risk": 22,
     "unscheduled": 10,
-    "accruing": 13797.71,
+    "accruing": 14311.97,
     "avg_days_open": 26,
     "revenue_at_risk": 3272.47
   },
@@ -43698,8 +43698,8 @@
       "cost": {
         "code": "s129-13",
         "labor": 182.06,
-        "materials": 0,
-        "total": 182.06,
+        "materials": 514.26,
+        "total": 696.32,
         "estimate": 0,
         "laborEntries": [
           {
@@ -43731,7 +43731,22 @@
             "cat": "Turn"
           }
         ],
-        "materialEntries": []
+        "materialEntries": [
+          {
+            "d": "2026-08-17",
+            "amt": 13.06,
+            "cat": "Turn",
+            "ln": "cramer",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-08-17",
+            "amt": 501.2,
+            "cat": "Turn",
+            "ln": "cramer",
+            "src": "ramp"
+          }
+        ]
       },
       "stage": "Walkthrough",
       "stage_ord": 1,
@@ -53931,23 +53946,8 @@
       "key": "w117|7",
       "prop": "w117",
       "unit": "7",
-      "at_risk": [],
       "property_name": "w117",
-      "city": "Spokane",
-      "addr": "1117 W 5th Ave - 7 Spokane, WA 9204",
-      "unit_id": 448,
-      "unit_status": "Vacant-Unrented",
-      "rent_ready": "No",
-      "vacant": true,
-      "days_vacant": 17,
-      "move_out": "2026-07-31",
-      "available_on": "2026-10-29",
-      "ready_on": "2026-10-29",
-      "target_date": "2026-08-20",
-      "next_move_in": null,
-      "rent": "925.00",
-      "bed_bath": "0/1.00",
-      "sqft": 437,
+      "at_risk": [],
       "region": "Spokane",
       "pm": {
         "projId": 238498,
@@ -54113,10 +54113,11 @@
         ]
       },
       "turn_end": "2026-01-28",
+      "af_turn_end": "2026-02-04",
       "stage": "Walkthrough",
       "stage_ord": 1,
-      "days_elapsed": 0,
-      "days_to_turn": -184,
+      "days_elapsed": null,
+      "days_to_turn": null,
       "status": "complete"
     },
     {
