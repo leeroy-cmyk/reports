@@ -1,9 +1,9 @@
 {
   "ok": true,
-  "fetched_at": "2026-08-17T01:52:01.033Z",
+  "fetched_at": "2026-08-17T03:02:25.280Z",
   "summary": {
     "as_of": "2026-08-16",
-    "units": 237,
+    "units": 238,
     "active": 72,
     "ready": 5,
     "notice": 20,
@@ -4749,6 +4749,89 @@
       "stage_ord": 6,
       "days_elapsed": null,
       "days_to_turn": null,
+      "status": "complete"
+    },
+    {
+      "key": "a916|5",
+      "prop": "a916",
+      "unit": "5",
+      "at_risk": [],
+      "property_name": "a916",
+      "city": "Spokane",
+      "addr": "916 W Augusta Avenue - 5 Spokane, WA 99205",
+      "unit_id": 6,
+      "unit_status": "Notice-Unrented",
+      "rent_ready": null,
+      "vacant": false,
+      "days_vacant": null,
+      "move_out": "2026-08-16",
+      "available_on": "2026-09-05",
+      "ready_on": "2026-09-05",
+      "target_date": "2026-09-05",
+      "next_move_in": null,
+      "rent": "1030.00",
+      "bed_bath": "1/1.00",
+      "sqft": 400,
+      "region": "Spokane",
+      "pm": {
+        "projId": 189272,
+        "name": "Turn - 916 W Augusta Avenue - 5 UNIT 5",
+        "status": "COMPLETE",
+        "done": 7,
+        "total": 7,
+        "first_appt": "2025-09-23",
+        "final_walk": null,
+        "final_walk_done": "2025-10-03",
+        "completed_date": "2025-10-17",
+        "due": "2025-10-01",
+        "next_task": null,
+        "tasks": null
+      },
+      "next_appt": null,
+      "cost": {
+        "code": "a916-5",
+        "labor": 69.79,
+        "materials": 60.91,
+        "total": 130.7,
+        "estimate": 0,
+        "laborEntries": [
+          {
+            "d": "2025-10-01",
+            "emp": "Scott Higley",
+            "hrs": 0.47,
+            "cost": 15.04,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-09-23",
+            "emp": "Micheal N. Magoon",
+            "hrs": 1.42,
+            "cost": 35.5,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-09-23",
+            "emp": "Micheal N. Magoon",
+            "hrs": 0.77,
+            "cost": 19.25,
+            "cat": "Turn"
+          }
+        ],
+        "materialEntries": [
+          {
+            "d": "2025-09-23",
+            "amt": 60.91,
+            "cat": "Turn",
+            "ln": "magoon",
+            "src": "ramp"
+          }
+        ]
+      },
+      "turn_end": "2025-10-03",
+      "stage": "Move-out",
+      "stage_ord": 0,
+      "days_elapsed": 0,
+      "days_to_turn": -317,
       "status": "complete"
     },
     {
