@@ -1,15 +1,15 @@
 {
   "ok": true,
-  "fetched_at": "2026-08-18T19:00:52.236Z",
+  "fetched_at": "2026-08-18T19:35:16.420Z",
   "summary": {
     "as_of": "2026-08-18",
     "units": 235,
     "active": 70,
     "ready": 7,
-    "notice": 20,
+    "notice": 19,
     "at_risk": 24,
     "unscheduled": 11,
-    "accruing": 15099.87,
+    "accruing": 15167.67,
     "avg_days_open": 26,
     "revenue_at_risk": 3328.97
   },
@@ -1502,9 +1502,9 @@
       },
       "cost": {
         "code": "kn47-k1-C109",
-        "labor": 1293.78,
+        "labor": 1313.33,
         "materials": 3183.58,
-        "total": 4477.36,
+        "total": 4496.91,
         "estimate": 0,
         "laborEntries": [
           {
@@ -1575,6 +1575,27 @@
             "emp": "Ryan G. Robson",
             "hrs": 0.72,
             "cost": 16.56,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-18",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.28,
+            "cost": 6.44,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-18",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.5,
+            "cost": 11.5,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-18",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.07,
+            "cost": 1.61,
             "cat": "CapEx"
           },
           {
@@ -1904,27 +1925,6 @@
             "emp": "Ryan G. Robson",
             "hrs": 1.48,
             "cost": 34.04,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-12",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.75,
-            "cost": 17.25,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-12",
-            "emp": "Margarito Saldana",
-            "hrs": 1.25,
-            "cost": 35.5,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-12",
-            "emp": "Margarito Saldana",
-            "hrs": 1.5,
-            "cost": 42.6,
             "cat": "CapEx"
           }
         ],
@@ -19816,23 +19816,8 @@
       "key": "kn47|e106",
       "prop": "kn47",
       "unit": "E106",
-      "at_risk": [],
       "property_name": "kn47 K2",
-      "city": "Kennewick",
-      "addr": "632 N Arthur Street E106 Kennewick, WA 99336",
-      "unit_id": 1061,
-      "unit_status": "Notice-Unrented",
-      "rent_ready": null,
-      "vacant": false,
-      "days_vacant": null,
-      "move_out": "2026-08-30",
-      "available_on": "2026-10-25",
-      "ready_on": "2026-10-25",
-      "target_date": "2026-09-19",
-      "next_move_in": null,
-      "rent": "1132.00",
-      "bed_bath": "1/1.00",
-      "sqft": 575,
+      "at_risk": [],
       "region": "Tri-Cities",
       "pm": {
         "projId": 238494,
@@ -19941,9 +19926,9 @@
       },
       "stage": "Walkthrough",
       "stage_ord": 1,
-      "days_elapsed": 0,
+      "days_elapsed": null,
       "days_to_turn": null,
-      "status": "notice"
+      "status": "other"
     },
     {
       "key": "kn47|e204",
@@ -44044,9 +44029,9 @@
       },
       "cost": {
         "code": "s129-9",
-        "labor": 465.26,
+        "labor": 513.51,
         "materials": 242.2,
-        "total": 707.46,
+        "total": 755.71,
         "estimate": 0,
         "laborEntries": [
           {
@@ -44054,6 +44039,13 @@
             "emp": "Micheal N. Magoon",
             "hrs": 0.77,
             "cost": 19.25,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-18",
+            "emp": "Micheal N. Magoon",
+            "hrs": 1.93,
+            "cost": 48.25,
             "cat": "Turn"
           },
           {
@@ -44187,7 +44179,7 @@
       "city": "Spokane",
       "addr": "9300 E Sprague Avenue - 12 Spokane, WA 99206",
       "unit_id": 40,
-      "unit_status": "Vacant-Unrented",
+      "unit_status": "Vacant-Rented",
       "rent_ready": "Yes",
       "vacant": true,
       "days_vacant": 79,
@@ -44195,7 +44187,7 @@
       "available_on": "2026-07-03",
       "ready_on": "2026-07-03",
       "target_date": "2026-06-20",
-      "next_move_in": null,
+      "next_move_in": "2026-09-05",
       "rent": "966.00",
       "bed_bath": "1/1.00",
       "sqft": 310,

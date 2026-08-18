@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-08-18T18:58:46.721Z",
+  "fetched_at": "2026-08-18T19:33:22.659Z",
   "units": {
     "2": {
       "moveOut": "2026-07-31",
@@ -17,7 +17,7 @@
     },
     "40": {
       "moveOut": "2026-05-31",
-      "status": "Vacant-Unrented",
+      "status": "Vacant-Rented",
       "prop": "s300",
       "unit": "12",
       "city": "Spokane"
@@ -734,13 +734,6 @@
       "status": "Vacant-Rented",
       "prop": "kn47 K2",
       "unit": "D205",
-      "city": "Kennewick"
-    },
-    "1061": {
-      "moveOut": "2026-08-30",
-      "status": "Notice-Unrented",
-      "prop": "kn47 K2",
-      "unit": "E106",
       "city": "Kennewick"
     },
     "1100": {
@@ -2852,6 +2845,16 @@
       "unit": "A3",
       "city": "Pasco",
       "to": "2026-06-30"
+    },
+    {
+      "date": "2026-08-18",
+      "type": "moveout_removed",
+      "unit_id": "1061",
+      "prop": "kn47 K2",
+      "unit": "E106",
+      "city": "Kennewick",
+      "from": "2026-08-30",
+      "was_status": "Notice-Unrented"
     }
   ]
 }
