@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "fetched_at": "2026-08-18T17:06:28.973Z",
+  "fetched_at": "2026-08-18T17:45:33.687Z",
   "summary": {
     "as_of": "2026-08-18",
     "units": 235,
@@ -9,7 +9,7 @@
     "notice": 20,
     "at_risk": 24,
     "unscheduled": 11,
-    "accruing": 14761.06,
+    "accruing": 14795.55,
     "avg_days_open": 26,
     "revenue_at_risk": 3328.97
   },
@@ -1502,9 +1502,9 @@
       },
       "cost": {
         "code": "kn47-k1-C109",
-        "labor": 1253.3,
+        "labor": 1268.02,
         "materials": 3183.58,
-        "total": 4436.88,
+        "total": 4451.6,
         "estimate": 0,
         "laborEntries": [
           {
@@ -1540,6 +1540,20 @@
             "emp": "Ryan G. Robson",
             "hrs": 0.3,
             "cost": 6.9,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-18",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.32,
+            "cost": 7.36,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-18",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.32,
+            "cost": 7.36,
             "cat": "CapEx"
           },
           {
@@ -1911,20 +1925,6 @@
             "emp": "Ryan G. Robson",
             "hrs": 1.75,
             "cost": 40.25,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-07-28",
-            "emp": "Margarito Saldana",
-            "hrs": 0.5,
-            "cost": 14.2,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-07-28",
-            "emp": "Margarito Saldana",
-            "hrs": 1,
-            "cost": 28.4,
             "cat": "CapEx"
           }
         ],
@@ -30224,8 +30224,23 @@
       "key": "ps17|a3",
       "prop": "ps17",
       "unit": "A3",
-      "property_name": "ps17",
       "at_risk": [],
+      "property_name": "ps17",
+      "city": "Pasco",
+      "addr": "1740 N 5th - A3 Pasco, WA 99301",
+      "unit_id": 405,
+      "unit_status": "Vacant-Unrented",
+      "rent_ready": "Yes",
+      "vacant": true,
+      "days_vacant": 49,
+      "move_out": "2026-06-30",
+      "available_on": "2026-07-27",
+      "ready_on": "2026-07-27",
+      "target_date": "2026-07-20",
+      "next_move_in": null,
+      "rent": "956.00",
+      "bed_bath": "1/1.00",
+      "sqft": 340,
       "region": "Tri-Cities",
       "pm": {
         "projId": 223847,
@@ -30695,10 +30710,10 @@
       },
       "turn_end": "2026-07-30",
       "af_turn_end": "2026-07-28",
-      "stage": "Final Walk",
-      "stage_ord": 6,
-      "days_elapsed": null,
-      "days_to_turn": null,
+      "stage": "Ready",
+      "stage_ord": 7,
+      "days_elapsed": 30,
+      "days_to_turn": 30,
       "status": "complete"
     },
     {
@@ -43343,9 +43358,9 @@
       },
       "cost": {
         "code": "s129-13",
-        "labor": 273.23,
+        "labor": 273.75,
         "materials": 514.26,
-        "total": 787.49,
+        "total": 788.01,
         "estimate": 0,
         "laborEntries": [
           {
@@ -43358,8 +43373,8 @@
           {
             "d": "2026-08-18",
             "emp": "Ronald D. Cramer",
-            "hrs": 0.4,
-            "cost": 10.3,
+            "hrs": 0.42,
+            "cost": 10.82,
             "cat": "Turn"
           },
           {
@@ -44015,11 +44030,18 @@
       },
       "cost": {
         "code": "s129-9",
-        "labor": 446.01,
+        "labor": 465.26,
         "materials": 0,
-        "total": 446.01,
+        "total": 465.26,
         "estimate": 0,
         "laborEntries": [
+          {
+            "d": "2026-08-18",
+            "emp": "Micheal N. Magoon",
+            "hrs": 0.77,
+            "cost": 19.25,
+            "cat": "Turn"
+          },
           {
             "d": "2026-08-17",
             "emp": "Micheal N. Magoon",
