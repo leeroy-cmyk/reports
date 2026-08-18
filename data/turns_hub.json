@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "fetched_at": "2026-08-18T17:45:33.687Z",
+  "fetched_at": "2026-08-18T18:14:48.085Z",
   "summary": {
     "as_of": "2026-08-18",
     "units": 235,
@@ -9,7 +9,7 @@
     "notice": 20,
     "at_risk": 24,
     "unscheduled": 11,
-    "accruing": 14795.55,
+    "accruing": 15052.99,
     "avg_days_open": 26,
     "revenue_at_risk": 3328.97
   },
@@ -43359,8 +43359,8 @@
       "cost": {
         "code": "s129-13",
         "labor": 273.75,
-        "materials": 514.26,
-        "total": 788.01,
+        "materials": 529.5,
+        "total": 803.25,
         "estimate": 0,
         "laborEntries": [
           {
@@ -43428,6 +43428,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-08-18",
+            "amt": 15.24,
+            "cat": "Turn",
+            "ln": "cramer",
+            "src": "ramp"
+          },
           {
             "d": "2026-08-17",
             "amt": 13.06,
@@ -44031,8 +44038,8 @@
       "cost": {
         "code": "s129-9",
         "labor": 465.26,
-        "materials": 0,
-        "total": 465.26,
+        "materials": 242.2,
+        "total": 707.46,
         "estimate": 0,
         "laborEntries": [
           {
@@ -44148,7 +44155,15 @@
             "cat": "Turn"
           }
         ],
-        "materialEntries": []
+        "materialEntries": [
+          {
+            "d": "2026-08-18",
+            "amt": 242.2,
+            "cat": "Turn",
+            "ln": "magoon",
+            "src": "ramp"
+          }
+        ]
       },
       "stage": "Maintenance",
       "stage_ord": 3,
