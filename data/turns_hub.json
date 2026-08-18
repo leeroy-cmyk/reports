@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "fetched_at": "2026-08-18T21:39:49.550Z",
+  "fetched_at": "2026-08-18T21:59:54.576Z",
   "summary": {
     "as_of": "2026-08-18",
     "units": 236,
@@ -9,7 +9,7 @@
     "notice": 19,
     "at_risk": 24,
     "unscheduled": 11,
-    "accruing": 15269.77,
+    "accruing": 16427.43,
     "avg_days_open": 26,
     "revenue_at_risk": 3328.97
   },
@@ -1503,8 +1503,8 @@
       "cost": {
         "code": "kn47-k1-C109",
         "labor": 1359.56,
-        "materials": 3183.58,
-        "total": 4543.14,
+        "materials": 3406.46,
+        "total": 4766.02,
         "estimate": 0,
         "laborEntries": [
           {
@@ -1929,6 +1929,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-08-18",
+            "amt": 222.88,
+            "cat": "Turn",
+            "ln": "robson",
+            "src": "ramp"
+          },
           {
             "d": "2026-08-18",
             "amt": 146.99,
@@ -8974,11 +8981,19 @@
       "cost": {
         "code": "c702-A102",
         "labor": 0,
-        "materials": 0,
-        "total": 0,
+        "materials": 213.73,
+        "total": 213.73,
         "estimate": 0,
         "laborEntries": [],
-        "materialEntries": []
+        "materialEntries": [
+          {
+            "d": "2026-08-13",
+            "amt": 213.73,
+            "cat": "Turn",
+            "ln": "phillips",
+            "src": "ramp"
+          }
+        ]
       },
       "stage": "Maintenance",
       "stage_ord": 3,
@@ -10996,11 +11011,33 @@
       "cost": {
         "code": "c702-K303",
         "labor": 0,
-        "materials": 0,
-        "total": 0,
+        "materials": 721.05,
+        "total": 721.05,
         "estimate": 0,
         "laborEntries": [],
-        "materialEntries": []
+        "materialEntries": [
+          {
+            "d": "2026-08-17",
+            "amt": 241.63,
+            "cat": "Turn",
+            "ln": "phillips",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-08-15",
+            "amt": 454.37,
+            "cat": "Turn",
+            "ln": "phillips",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-08-13",
+            "amt": 25.05,
+            "cat": "Turn",
+            "ln": "phillips",
+            "src": "ramp"
+          }
+        ]
       },
       "stage": "Maintenance",
       "stage_ord": 3,
