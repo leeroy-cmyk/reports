@@ -1,14 +1,14 @@
 {
   "ok": true,
-  "fetched_at": "2026-08-18T14:40:43.333Z",
+  "fetched_at": "2026-08-18T15:14:46.456Z",
   "summary": {
     "as_of": "2026-08-18",
-    "units": 236,
+    "units": 235,
     "active": 70,
     "ready": 7,
     "notice": 20,
     "at_risk": 24,
-    "unscheduled": 13,
+    "unscheduled": 11,
     "accruing": 14522.35,
     "avg_days_open": 26,
     "revenue_at_risk": 3328.97
@@ -130,603 +130,6 @@
       "stage": "Paint",
       "stage_ord": 2,
       "days_elapsed": 49,
-      "days_to_turn": null,
-      "status": "active"
-    },
-    {
-      "key": "rl21|9",
-      "prop": "rl21",
-      "unit": "9",
-      "at_risk": [
-        "Nothing scheduled",
-        "Over 45 days vacant"
-      ],
-      "property_name": "rl21",
-      "city": "Richland",
-      "addr": "2153 Stevens Drive #9 Richland, WA 99354",
-      "unit_id": 763,
-      "unit_status": "Vacant-Rented",
-      "rent_ready": "No",
-      "vacant": true,
-      "days_vacant": 140,
-      "move_out": "2026-03-31",
-      "available_on": "2026-08-20",
-      "ready_on": "2026-08-20",
-      "target_date": "2026-04-20",
-      "next_move_in": "2026-08-22",
-      "rent": "850.00",
-      "bed_bath": "0/1.00",
-      "sqft": 260,
-      "region": "Tri-Cities",
-      "pm": {
-        "projId": 223616,
-        "name": "Standard Unit Turn",
-        "status": "ACTIVE",
-        "done": 1,
-        "total": 7,
-        "first_appt": "2026-08-03",
-        "final_walk": "2026-08-17",
-        "final_walk_done": null,
-        "completed_date": "2026-08-04",
-        "due": "2026-08-21",
-        "next_task": null,
-        "tasks": [
-          {
-            "task": "A - Initial walkthrough - Estimate pending",
-            "cat": "walkthrough",
-            "done": true,
-            "date": "2026-08-03",
-            "who": "Margarito Saldana",
-            "completed": "2026-08-04",
-            "vendor": false
-          },
-          {
-            "task": "Appfolio Estimate",
-            "cat": "estimate",
-            "done": false,
-            "date": null,
-            "who": "Dulce Salinas",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "C - Paint",
-            "cat": "paint",
-            "done": false,
-            "date": "2026-08-03",
-            "who": "James Dunlap",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "D - Maintenance",
-            "cat": "maintenance",
-            "done": false,
-            "date": "2026-08-10",
-            "who": "James Dunlap",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "E - Carpet Cleaning",
-            "cat": "carpet",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "F - Cleaning",
-            "cat": "cleaning",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Final Walkthrough",
-            "cat": "final-walk",
-            "done": false,
-            "date": "2026-08-17",
-            "who": "Margarito Saldana",
-            "completed": null,
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": null,
-      "cost": {
-        "code": "rl21-9",
-        "labor": 2293.81,
-        "materials": 1715.34,
-        "total": 4009.15,
-        "estimate": 0,
-        "laborEntries": [
-          {
-            "d": "2026-08-14",
-            "emp": "Margarito Saldana",
-            "hrs": 1.5,
-            "cost": 42.6,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-14",
-            "emp": "Margarito Saldana",
-            "hrs": 0.5,
-            "cost": 14.2,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-14",
-            "emp": "Margarito Saldana",
-            "hrs": 1.75,
-            "cost": 49.7,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-13",
-            "emp": "Margarito Saldana",
-            "hrs": 0.5,
-            "cost": 14.2,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-13",
-            "emp": "Margarito Saldana",
-            "hrs": 1,
-            "cost": 28.4,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-12",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.73,
-            "cost": 39.79,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-12",
-            "emp": "James Dunlap",
-            "hrs": 1.42,
-            "cost": 32.66,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-12",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.53,
-            "cost": 35.19,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-12",
-            "emp": "James Dunlap",
-            "hrs": 1.6,
-            "cost": 36.8,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-12",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.35,
-            "cost": 8.05,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-12",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.52,
-            "cost": 11.96,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-12",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.47,
-            "cost": 33.81,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-12",
-            "emp": "James Dunlap",
-            "hrs": 1.72,
-            "cost": 39.56,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-12",
-            "emp": "Margarito Saldana",
-            "hrs": 0.72,
-            "cost": 20.45,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-12",
-            "emp": "Margarito Saldana",
-            "hrs": 0.5,
-            "cost": 14.2,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-12",
-            "emp": "Margarito Saldana",
-            "hrs": 1.6,
-            "cost": 45.44,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-12",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.63,
-            "cost": 14.49,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-12",
-            "emp": "James Dunlap",
-            "hrs": 1.95,
-            "cost": 44.85,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-12",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.7,
-            "cost": 16.1,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-12",
-            "emp": "Margarito Saldana",
-            "hrs": 0.5,
-            "cost": 14.2,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-11",
-            "emp": "James Dunlap",
-            "hrs": 1.25,
-            "cost": 28.75,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-11",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.7,
-            "cost": 39.1,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-11",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.6,
-            "cost": 36.8,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-11",
-            "emp": "Margarito Saldana",
-            "hrs": 6.47,
-            "cost": 183.75,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-11",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.15,
-            "cost": 26.45,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-11",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.03,
-            "cost": 23.69,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-11",
-            "emp": "James Dunlap",
-            "hrs": 1.08,
-            "cost": 24.84,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-11",
-            "emp": "James Dunlap",
-            "hrs": 1.38,
-            "cost": 31.74,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-11",
-            "emp": "James Dunlap",
-            "hrs": 1.38,
-            "cost": 31.74,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-11",
-            "emp": "Ryan G. Robson",
-            "hrs": 1,
-            "cost": 23,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-11",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.77,
-            "cost": 40.71,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-11",
-            "emp": "James Dunlap",
-            "hrs": 1.45,
-            "cost": 33.35,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-11",
-            "emp": "Margarito Saldana",
-            "hrs": 1.5,
-            "cost": 42.6,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-11",
-            "emp": "Margarito Saldana",
-            "hrs": 1,
-            "cost": 28.4,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-11",
-            "emp": "Margarito Saldana",
-            "hrs": 0.75,
-            "cost": 21.3,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-11",
-            "emp": "Margarito Saldana",
-            "hrs": 0.75,
-            "cost": 21.3,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-11",
-            "emp": "Margarito Saldana",
-            "hrs": 1.33,
-            "cost": 37.77,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-11",
-            "emp": "James Dunlap",
-            "hrs": 0.75,
-            "cost": 17.25,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-11",
-            "emp": "James Dunlap",
-            "hrs": 0.92,
-            "cost": 21.16,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-11",
-            "emp": "Margarito Saldana",
-            "hrs": 0.67,
-            "cost": 19.03,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-10",
-            "emp": "James Dunlap",
-            "hrs": 1.1,
-            "cost": 25.3,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-10",
-            "emp": "James Dunlap",
-            "hrs": 1.93,
-            "cost": 44.39,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-10",
-            "emp": "James Dunlap",
-            "hrs": 1.08,
-            "cost": 24.84,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-10",
-            "emp": "James Dunlap",
-            "hrs": 1.73,
-            "cost": 39.79,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-10",
-            "emp": "James Dunlap",
-            "hrs": 0.7,
-            "cost": 16.1,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-10",
-            "emp": "James Dunlap",
-            "hrs": 0.9,
-            "cost": 20.7,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-07",
-            "emp": "James Dunlap",
-            "hrs": 1.47,
-            "cost": 33.81,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-07",
-            "emp": "James Dunlap",
-            "hrs": 1.57,
-            "cost": 36.11,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-07",
-            "emp": "James Dunlap",
-            "hrs": 0.6,
-            "cost": 13.8,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-07",
-            "emp": "James Dunlap",
-            "hrs": 0.65,
-            "cost": 14.95,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-07",
-            "emp": "James Dunlap",
-            "hrs": 0.28,
-            "cost": 6.44,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-07",
-            "emp": "James Dunlap",
-            "hrs": 1.32,
-            "cost": 30.36,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-07",
-            "emp": "James Dunlap",
-            "hrs": 1.62,
-            "cost": 37.26,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-06",
-            "emp": "James Dunlap",
-            "hrs": 1.93,
-            "cost": 44.39,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-06",
-            "emp": "James Dunlap",
-            "hrs": 1.55,
-            "cost": 35.65,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-06",
-            "emp": "James Dunlap",
-            "hrs": 1.65,
-            "cost": 37.95,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-06",
-            "emp": "James Dunlap",
-            "hrs": 0.88,
-            "cost": 20.24,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-06",
-            "emp": "James Dunlap",
-            "hrs": 0.98,
-            "cost": 22.54,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-06",
-            "emp": "Margarito Saldana",
-            "hrs": 1.5,
-            "cost": 42.6,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-06",
-            "emp": "Margarito Saldana",
-            "hrs": 1,
-            "cost": 28.4,
-            "cat": "CapEx"
-          }
-        ],
-        "materialEntries": [
-          {
-            "d": "2026-08-12",
-            "amt": 569.24,
-            "cat": "Turn",
-            "ln": "dunlap",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-07",
-            "amt": 4.34,
-            "cat": "Turn",
-            "ln": "dunlap",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-07",
-            "amt": 12.6,
-            "cat": "Turn",
-            "ln": "dunlap",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-07",
-            "amt": 153.2,
-            "cat": "Turn",
-            "ln": "dunlap",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-06",
-            "amt": 7.61,
-            "cat": "Turn",
-            "ln": "dunlap",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-06",
-            "amt": 173.46,
-            "cat": "Turn",
-            "ln": "dunlap",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-06",
-            "amt": 675.33,
-            "cat": "Turn",
-            "ln": "dunlap",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-04",
-            "amt": 119.56,
-            "cat": "Turn",
-            "ln": "dunlap",
-            "src": "ramp"
-          }
-        ]
-      },
-      "stage": "Maintenance",
-      "stage_ord": 3,
-      "days_elapsed": 140,
       "days_to_turn": null,
       "status": "active"
     },
@@ -2008,7 +1411,7 @@
         "done": 6,
         "total": 8,
         "first_appt": "2026-07-30",
-        "final_walk": "2026-08-17",
+        "final_walk": "2026-08-21",
         "final_walk_done": null,
         "completed_date": "2026-08-12",
         "due": "2026-08-14",
@@ -2084,14 +1487,19 @@
             "task": "E - CapEx Final Walkthough",
             "cat": "final-walk",
             "done": false,
-            "date": "2026-08-17",
+            "date": "2026-08-21",
             "who": "Margarito Saldana",
             "completed": null,
             "vendor": false
           }
         ]
       },
-      "next_appt": null,
+      "next_appt": {
+        "date": "2026-08-21",
+        "cat": "final-walk",
+        "who": "Margarito Saldana",
+        "brief": "E - CapEx Final Walkthough"
+      },
       "cost": {
         "code": "kn47-k1-C109",
         "labor": 1171.88,
@@ -2807,7 +2215,7 @@
             "task": "A - Initial walkthrough",
             "cat": "walkthrough",
             "done": false,
-            "date": "2026-08-31",
+            "date": "2026-08-24",
             "who": "Margarito Saldana",
             "completed": null,
             "vendor": false
@@ -2878,7 +2286,7 @@
         ]
       },
       "next_appt": {
-        "date": "2026-08-31",
+        "date": "2026-08-24",
         "cat": "walkthrough",
         "who": "Margarito Saldana",
         "brief": "A - Initial walkthrough"
@@ -2895,6 +2303,610 @@
       "stage": "Walkthrough",
       "stage_ord": 1,
       "days_elapsed": 69,
+      "days_to_turn": null,
+      "status": "active"
+    },
+    {
+      "key": "rl21|9",
+      "prop": "rl21",
+      "unit": "9",
+      "at_risk": [
+        "Over 45 days vacant"
+      ],
+      "property_name": "rl21",
+      "city": "Richland",
+      "addr": "2153 Stevens Drive #9 Richland, WA 99354",
+      "unit_id": 763,
+      "unit_status": "Vacant-Rented",
+      "rent_ready": "No",
+      "vacant": true,
+      "days_vacant": 140,
+      "move_out": "2026-03-31",
+      "available_on": "2026-08-20",
+      "ready_on": "2026-08-20",
+      "target_date": "2026-04-20",
+      "next_move_in": "2026-08-22",
+      "rent": "850.00",
+      "bed_bath": "0/1.00",
+      "sqft": 260,
+      "region": "Tri-Cities",
+      "pm": {
+        "projId": 223616,
+        "name": "Standard Unit Turn",
+        "status": "ACTIVE",
+        "done": 1,
+        "total": 7,
+        "first_appt": "2026-08-03",
+        "final_walk": "2026-08-21",
+        "final_walk_done": null,
+        "completed_date": "2026-08-04",
+        "due": "2026-08-21",
+        "next_task": {
+          "date": "2026-08-21",
+          "task": "final-walk"
+        },
+        "tasks": [
+          {
+            "task": "A - Initial walkthrough - Estimate pending",
+            "cat": "walkthrough",
+            "done": true,
+            "date": "2026-08-03",
+            "who": "Margarito Saldana",
+            "completed": "2026-08-04",
+            "vendor": false
+          },
+          {
+            "task": "Appfolio Estimate",
+            "cat": "estimate",
+            "done": false,
+            "date": null,
+            "who": "Dulce Salinas",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "C - Paint",
+            "cat": "paint",
+            "done": false,
+            "date": "2026-08-03",
+            "who": "James Dunlap",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "D - Maintenance",
+            "cat": "maintenance",
+            "done": false,
+            "date": "2026-08-10",
+            "who": "James Dunlap",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "E - Carpet Cleaning",
+            "cat": "carpet",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "F - Cleaning",
+            "cat": "cleaning",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Final Walkthrough",
+            "cat": "final-walk",
+            "done": false,
+            "date": "2026-08-21",
+            "who": "Margarito Saldana",
+            "completed": null,
+            "vendor": false
+          }
+        ]
+      },
+      "next_appt": {
+        "date": "2026-08-21",
+        "cat": "final-walk",
+        "who": "Margarito Saldana",
+        "brief": "Final Walkthrough"
+      },
+      "cost": {
+        "code": "rl21-9",
+        "labor": 2293.81,
+        "materials": 1715.34,
+        "total": 4009.15,
+        "estimate": 0,
+        "laborEntries": [
+          {
+            "d": "2026-08-14",
+            "emp": "Margarito Saldana",
+            "hrs": 1.5,
+            "cost": 42.6,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-14",
+            "emp": "Margarito Saldana",
+            "hrs": 0.5,
+            "cost": 14.2,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-14",
+            "emp": "Margarito Saldana",
+            "hrs": 1.75,
+            "cost": 49.7,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-13",
+            "emp": "Margarito Saldana",
+            "hrs": 0.5,
+            "cost": 14.2,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-13",
+            "emp": "Margarito Saldana",
+            "hrs": 1,
+            "cost": 28.4,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-12",
+            "emp": "Ryan G. Robson",
+            "hrs": 1.73,
+            "cost": 39.79,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-12",
+            "emp": "James Dunlap",
+            "hrs": 1.42,
+            "cost": 32.66,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-12",
+            "emp": "Ryan G. Robson",
+            "hrs": 1.53,
+            "cost": 35.19,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-12",
+            "emp": "James Dunlap",
+            "hrs": 1.6,
+            "cost": 36.8,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-12",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.35,
+            "cost": 8.05,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-12",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.52,
+            "cost": 11.96,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-12",
+            "emp": "Ryan G. Robson",
+            "hrs": 1.47,
+            "cost": 33.81,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-12",
+            "emp": "James Dunlap",
+            "hrs": 1.72,
+            "cost": 39.56,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-12",
+            "emp": "Margarito Saldana",
+            "hrs": 0.72,
+            "cost": 20.45,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-12",
+            "emp": "Margarito Saldana",
+            "hrs": 0.5,
+            "cost": 14.2,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-12",
+            "emp": "Margarito Saldana",
+            "hrs": 1.6,
+            "cost": 45.44,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-12",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.63,
+            "cost": 14.49,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-12",
+            "emp": "James Dunlap",
+            "hrs": 1.95,
+            "cost": 44.85,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-12",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.7,
+            "cost": 16.1,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-12",
+            "emp": "Margarito Saldana",
+            "hrs": 0.5,
+            "cost": 14.2,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-11",
+            "emp": "James Dunlap",
+            "hrs": 1.25,
+            "cost": 28.75,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-11",
+            "emp": "Ryan G. Robson",
+            "hrs": 1.7,
+            "cost": 39.1,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-11",
+            "emp": "Ryan G. Robson",
+            "hrs": 1.6,
+            "cost": 36.8,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-11",
+            "emp": "Margarito Saldana",
+            "hrs": 6.47,
+            "cost": 183.75,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-11",
+            "emp": "Ryan G. Robson",
+            "hrs": 1.15,
+            "cost": 26.45,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-11",
+            "emp": "Ryan G. Robson",
+            "hrs": 1.03,
+            "cost": 23.69,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-11",
+            "emp": "James Dunlap",
+            "hrs": 1.08,
+            "cost": 24.84,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-11",
+            "emp": "James Dunlap",
+            "hrs": 1.38,
+            "cost": 31.74,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-11",
+            "emp": "James Dunlap",
+            "hrs": 1.38,
+            "cost": 31.74,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-11",
+            "emp": "Ryan G. Robson",
+            "hrs": 1,
+            "cost": 23,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-11",
+            "emp": "Ryan G. Robson",
+            "hrs": 1.77,
+            "cost": 40.71,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-11",
+            "emp": "James Dunlap",
+            "hrs": 1.45,
+            "cost": 33.35,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-11",
+            "emp": "Margarito Saldana",
+            "hrs": 1.5,
+            "cost": 42.6,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-11",
+            "emp": "Margarito Saldana",
+            "hrs": 1,
+            "cost": 28.4,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-11",
+            "emp": "Margarito Saldana",
+            "hrs": 0.75,
+            "cost": 21.3,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-11",
+            "emp": "Margarito Saldana",
+            "hrs": 0.75,
+            "cost": 21.3,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-11",
+            "emp": "Margarito Saldana",
+            "hrs": 1.33,
+            "cost": 37.77,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-11",
+            "emp": "James Dunlap",
+            "hrs": 0.75,
+            "cost": 17.25,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-11",
+            "emp": "James Dunlap",
+            "hrs": 0.92,
+            "cost": 21.16,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-11",
+            "emp": "Margarito Saldana",
+            "hrs": 0.67,
+            "cost": 19.03,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-10",
+            "emp": "James Dunlap",
+            "hrs": 1.1,
+            "cost": 25.3,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-10",
+            "emp": "James Dunlap",
+            "hrs": 1.93,
+            "cost": 44.39,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-10",
+            "emp": "James Dunlap",
+            "hrs": 1.08,
+            "cost": 24.84,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-10",
+            "emp": "James Dunlap",
+            "hrs": 1.73,
+            "cost": 39.79,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-10",
+            "emp": "James Dunlap",
+            "hrs": 0.7,
+            "cost": 16.1,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-10",
+            "emp": "James Dunlap",
+            "hrs": 0.9,
+            "cost": 20.7,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-07",
+            "emp": "James Dunlap",
+            "hrs": 1.47,
+            "cost": 33.81,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-07",
+            "emp": "James Dunlap",
+            "hrs": 1.57,
+            "cost": 36.11,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-07",
+            "emp": "James Dunlap",
+            "hrs": 0.6,
+            "cost": 13.8,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-07",
+            "emp": "James Dunlap",
+            "hrs": 0.65,
+            "cost": 14.95,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-07",
+            "emp": "James Dunlap",
+            "hrs": 0.28,
+            "cost": 6.44,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-07",
+            "emp": "James Dunlap",
+            "hrs": 1.32,
+            "cost": 30.36,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-07",
+            "emp": "James Dunlap",
+            "hrs": 1.62,
+            "cost": 37.26,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-06",
+            "emp": "James Dunlap",
+            "hrs": 1.93,
+            "cost": 44.39,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-06",
+            "emp": "James Dunlap",
+            "hrs": 1.55,
+            "cost": 35.65,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-06",
+            "emp": "James Dunlap",
+            "hrs": 1.65,
+            "cost": 37.95,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-06",
+            "emp": "James Dunlap",
+            "hrs": 0.88,
+            "cost": 20.24,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-06",
+            "emp": "James Dunlap",
+            "hrs": 0.98,
+            "cost": 22.54,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-06",
+            "emp": "Margarito Saldana",
+            "hrs": 1.5,
+            "cost": 42.6,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-06",
+            "emp": "Margarito Saldana",
+            "hrs": 1,
+            "cost": 28.4,
+            "cat": "CapEx"
+          }
+        ],
+        "materialEntries": [
+          {
+            "d": "2026-08-12",
+            "amt": 569.24,
+            "cat": "Turn",
+            "ln": "dunlap",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-08-07",
+            "amt": 4.34,
+            "cat": "Turn",
+            "ln": "dunlap",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-08-07",
+            "amt": 12.6,
+            "cat": "Turn",
+            "ln": "dunlap",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-08-07",
+            "amt": 153.2,
+            "cat": "Turn",
+            "ln": "dunlap",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-08-06",
+            "amt": 7.61,
+            "cat": "Turn",
+            "ln": "dunlap",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-08-06",
+            "amt": 173.46,
+            "cat": "Turn",
+            "ln": "dunlap",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-08-06",
+            "amt": 675.33,
+            "cat": "Turn",
+            "ln": "dunlap",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-08-04",
+            "amt": 119.56,
+            "cat": "Turn",
+            "ln": "dunlap",
+            "src": "ramp"
+          }
+        ]
+      },
+      "stage": "Maintenance",
+      "stage_ord": 3,
+      "days_elapsed": 140,
       "days_to_turn": null,
       "status": "active"
     },
@@ -3903,8 +3915,8 @@
         "status": "ACTIVE",
         "done": 0,
         "total": 7,
-        "first_appt": "2026-09-23",
-        "final_walk": "2026-10-05",
+        "first_appt": "2026-09-22",
+        "final_walk": "2026-10-01",
         "final_walk_done": null,
         "completed_date": null,
         "due": "2026-09-11",
@@ -3935,7 +3947,7 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-09-23",
+            "date": "2026-09-22",
             "who": "Justin Gutierrez",
             "completed": null,
             "vendor": false
@@ -3944,7 +3956,7 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-09-28",
+            "date": "2026-09-24",
             "who": "Justin Gutierrez",
             "completed": null,
             "vendor": false
@@ -3971,7 +3983,7 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": "2026-10-05",
+            "date": "2026-10-01",
             "who": "Micheal Magoon",
             "completed": null,
             "vendor": false
@@ -4931,14 +4943,14 @@
       "city": "Spokane",
       "addr": "916 W Augusta Avenue - 5 Spokane, WA 99205",
       "unit_id": 6,
-      "unit_status": "Vacant-Unrented",
-      "rent_ready": "No",
-      "vacant": true,
-      "days_vacant": 2,
-      "move_out": "2026-08-16",
-      "available_on": "2026-09-05",
-      "ready_on": "2026-09-05",
-      "target_date": "2026-09-05",
+      "unit_status": "Notice-Unrented",
+      "rent_ready": null,
+      "vacant": false,
+      "days_vacant": null,
+      "move_out": "2026-08-19",
+      "available_on": "2026-09-08",
+      "ready_on": "2026-09-08",
+      "target_date": "2026-09-08",
       "next_move_in": null,
       "rent": "1030.00",
       "bed_bath": "1/1.00",
@@ -4999,10 +5011,10 @@
         ]
       },
       "turn_end": "2025-10-03",
-      "stage": null,
+      "stage": "Move-out",
       "stage_ord": 0,
       "days_elapsed": 0,
-      "days_to_turn": -317,
+      "days_to_turn": -320,
       "status": "complete"
     },
     {
@@ -5089,8 +5101,8 @@
         "status": "ACTIVE",
         "done": 1,
         "total": 7,
-        "first_appt": "2026-10-12",
-        "final_walk": "2026-10-21",
+        "first_appt": "2026-09-21",
+        "final_walk": "2026-09-30",
         "final_walk_done": null,
         "completed_date": "2026-08-17",
         "due": "2026-09-08",
@@ -5121,7 +5133,7 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-10-12",
+            "date": "2026-09-21",
             "who": "Ron Cramer",
             "completed": null,
             "vendor": false
@@ -5130,7 +5142,7 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-10-14",
+            "date": "2026-09-23",
             "who": "Ron Cramer",
             "completed": null,
             "vendor": false
@@ -5157,7 +5169,7 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": "2026-10-21",
+            "date": "2026-09-30",
             "who": "Micheal Magoon",
             "completed": null,
             "vendor": false
@@ -7788,7 +7800,7 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-10-01",
+            "date": "2026-09-30",
             "who": "Justin Gutierrez",
             "completed": null,
             "vendor": false
@@ -11290,7 +11302,7 @@
             "task": "A - Initial walkthrough",
             "cat": "walkthrough",
             "done": false,
-            "date": "2026-10-12",
+            "date": "2026-10-08",
             "who": "Ron Cramer",
             "completed": null,
             "vendor": false
@@ -11475,8 +11487,8 @@
         "status": "ACTIVE",
         "done": 1,
         "total": 8,
-        "first_appt": "2026-10-21",
-        "final_walk": "2026-11-02",
+        "first_appt": "2026-10-12",
+        "final_walk": "2026-10-21",
         "final_walk_done": null,
         "completed_date": "2026-08-06",
         "due": "2026-10-01",
@@ -11507,7 +11519,7 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-10-21",
+            "date": "2026-10-12",
             "who": "Ron Cramer",
             "completed": null,
             "vendor": false
@@ -11516,7 +11528,7 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-10-26",
+            "date": "2026-10-14",
             "who": "Ron Cramer",
             "completed": null,
             "vendor": false
@@ -11552,7 +11564,7 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": "2026-11-02",
+            "date": "2026-10-21",
             "who": "Micheal Magoon",
             "completed": null,
             "vendor": false
@@ -12292,7 +12304,7 @@
         "status": "ACTIVE",
         "done": 0,
         "total": 7,
-        "first_appt": "2026-10-05",
+        "first_appt": "2026-10-01",
         "final_walk": "2026-10-20",
         "final_walk_done": null,
         "completed_date": null,
@@ -12324,7 +12336,7 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-10-05",
+            "date": "2026-10-01",
             "who": "Justin Gutierrez",
             "completed": null,
             "vendor": false
@@ -12333,7 +12345,7 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-10-07",
+            "date": "2026-10-06",
             "who": "Justin Gutierrez",
             "completed": null,
             "vendor": false
@@ -12705,13 +12717,13 @@
         "status": "ACTIVE",
         "done": 0,
         "total": 8,
-        "first_appt": "2026-09-29",
+        "first_appt": "2026-09-24",
         "final_walk": "2026-11-12",
         "final_walk_done": null,
         "completed_date": null,
         "due": "2026-09-30",
         "next_task": {
-          "date": "2026-09-28",
+          "date": "2026-09-24",
           "task": "paint"
         },
         "tasks": [
@@ -12719,7 +12731,7 @@
             "task": "A - Initial walkthrough",
             "cat": "walkthrough",
             "done": false,
-            "date": "2026-10-06",
+            "date": "2026-10-05",
             "who": "Ron Cramer",
             "completed": null,
             "vendor": false
@@ -12737,7 +12749,7 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-09-29",
+            "date": "2026-09-24",
             "who": "Ron Cramer",
             "completed": null,
             "vendor": false
@@ -12746,7 +12758,7 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-10-05",
+            "date": "2026-09-29",
             "who": "Ron Cramer",
             "completed": null,
             "vendor": false
@@ -12790,7 +12802,7 @@
         ]
       },
       "next_appt": {
-        "date": "2026-09-28",
+        "date": "2026-09-24",
         "cat": "paint",
         "who": "Ron Cramer",
         "brief": "C - Paint Prep / Paint"
@@ -14083,7 +14095,7 @@
         "status": "ACTIVE",
         "done": 0,
         "total": 7,
-        "first_appt": "2026-10-06",
+        "first_appt": "2026-10-05",
         "final_walk": "2026-11-05",
         "final_walk_done": null,
         "completed_date": null,
@@ -14115,7 +14127,7 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-10-06",
+            "date": "2026-10-05",
             "who": "Ron Cramer",
             "completed": null,
             "vendor": false
@@ -14124,7 +14136,7 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-10-08",
+            "date": "2026-10-07",
             "who": "Ron Cramer",
             "completed": null,
             "vendor": false
@@ -14245,13 +14257,13 @@
         "status": "ACTIVE",
         "done": 0,
         "total": 7,
-        "first_appt": "2026-09-14",
+        "first_appt": "2026-09-10",
         "final_walk": "2026-10-05",
         "final_walk_done": null,
         "completed_date": null,
         "due": "2026-09-09",
         "next_task": {
-          "date": "2026-09-14",
+          "date": "2026-09-10",
           "task": "paint"
         },
         "tasks": [
@@ -14277,7 +14289,7 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-09-14",
+            "date": "2026-09-10",
             "who": "Justin Gutierrez",
             "completed": null,
             "vendor": false
@@ -14286,7 +14298,7 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-09-16",
+            "date": "2026-09-15",
             "who": "Justin Gutierrez",
             "completed": null,
             "vendor": false
@@ -14321,7 +14333,7 @@
         ]
       },
       "next_appt": {
-        "date": "2026-09-14",
+        "date": "2026-09-10",
         "cat": "paint",
         "who": "Justin Gutierrez",
         "brief": "C - Paint Prep / Paint"
@@ -15056,8 +15068,8 @@
         "status": "ACTIVE",
         "done": 1,
         "total": 7,
-        "first_appt": "2026-09-21",
-        "final_walk": "2026-09-29",
+        "first_appt": "2026-09-16",
+        "final_walk": "2026-09-28",
         "final_walk_done": null,
         "completed_date": "2026-08-17",
         "due": "2026-09-11",
@@ -15088,7 +15100,7 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-09-21",
+            "date": "2026-09-16",
             "who": "Justin Gutierrez",
             "completed": null,
             "vendor": false
@@ -15097,7 +15109,7 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-09-22",
+            "date": "2026-09-21",
             "who": "Justin Gutierrez",
             "completed": null,
             "vendor": false
@@ -15124,7 +15136,7 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": "2026-09-29",
+            "date": "2026-09-28",
             "who": "Micheal Magoon",
             "completed": null,
             "vendor": false
@@ -17866,13 +17878,13 @@
         "status": "ACTIVE",
         "done": 0,
         "total": 7,
-        "first_appt": "2026-09-16",
-        "final_walk": "2026-09-28",
+        "first_appt": "2026-09-15",
+        "final_walk": "2026-09-24",
         "final_walk_done": null,
         "completed_date": null,
         "due": "2026-10-05",
         "next_task": {
-          "date": "2026-09-02",
+          "date": "2026-09-01",
           "task": "walkthrough"
         },
         "tasks": [
@@ -17880,7 +17892,7 @@
             "task": "A - Initial walkthrough",
             "cat": "walkthrough",
             "done": false,
-            "date": "2026-09-02",
+            "date": "2026-09-01",
             "who": "Margarito Saldana",
             "completed": null,
             "vendor": false
@@ -17898,7 +17910,7 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-09-16",
+            "date": "2026-09-15",
             "who": "James Dunlap",
             "completed": null,
             "vendor": false
@@ -17907,7 +17919,7 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-09-21",
+            "date": "2026-09-17",
             "who": "James Dunlap",
             "completed": null,
             "vendor": false
@@ -17934,7 +17946,7 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": "2026-09-28",
+            "date": "2026-09-24",
             "who": "Margarito Saldana",
             "completed": null,
             "vendor": false
@@ -17942,7 +17954,7 @@
         ]
       },
       "next_appt": {
-        "date": "2026-09-02",
+        "date": "2026-09-01",
         "cat": "walkthrough",
         "who": "Margarito Saldana",
         "brief": "A - Initial walkthrough"
@@ -28366,13 +28378,13 @@
         "status": "ACTIVE",
         "done": 3,
         "total": 7,
-        "first_appt": "2026-10-08",
+        "first_appt": "2026-10-07",
         "final_walk": null,
         "final_walk_done": "2026-04-14",
         "completed_date": "2026-04-14",
         "due": "2026-04-29",
         "next_task": {
-          "date": "2026-10-08",
+          "date": "2026-10-07",
           "task": "paint"
         },
         "tasks": [
@@ -28380,7 +28392,7 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-10-08",
+            "date": "2026-10-07",
             "who": "Justin Gutierrez",
             "completed": null,
             "vendor": false
@@ -28442,7 +28454,7 @@
         ]
       },
       "next_appt": {
-        "date": "2026-10-08",
+        "date": "2026-10-07",
         "cat": "paint",
         "who": "Justin Gutierrez",
         "brief": "C - Paint Prep / Paint"
@@ -32827,7 +32839,7 @@
         "completed_date": null,
         "due": "2026-10-12",
         "next_task": {
-          "date": "2026-09-02",
+          "date": "2026-09-01",
           "task": "walkthrough"
         },
         "tasks": [
@@ -32835,7 +32847,7 @@
             "task": "A - Initial walkthrough",
             "cat": "walkthrough",
             "done": false,
-            "date": "2026-09-02",
+            "date": "2026-09-01",
             "who": "Margarito Saldana",
             "completed": null,
             "vendor": false
@@ -32897,7 +32909,7 @@
         ]
       },
       "next_appt": {
-        "date": "2026-09-02",
+        "date": "2026-09-01",
         "cat": "walkthrough",
         "who": "Margarito Saldana",
         "brief": "A - Initial walkthrough"
@@ -53440,184 +53452,6 @@
       "stage_ord": 6,
       "days_elapsed": 0,
       "days_to_turn": -4,
-      "status": "complete"
-    },
-    {
-      "key": "w117|7",
-      "prop": "w117",
-      "unit": "7",
-      "property_name": "w117",
-      "at_risk": [],
-      "region": "Spokane",
-      "pm": {
-        "projId": 238498,
-        "name": "Standard Unit Turn",
-        "status": "ACTIVE",
-        "done": 0,
-        "total": 8,
-        "first_appt": "2026-09-21",
-        "final_walk": "2026-10-26",
-        "final_walk_done": null,
-        "completed_date": null,
-        "due": "2026-08-15",
-        "next_task": {
-          "date": "2026-09-01",
-          "task": "walkthrough"
-        },
-        "tasks": [
-          {
-            "task": "A - Initial walkthrough",
-            "cat": "walkthrough",
-            "done": false,
-            "date": "2026-09-01",
-            "who": "Ron Cramer",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Appfolio Estimate",
-            "cat": "estimate",
-            "done": false,
-            "date": null,
-            "who": "Dulce Salinas",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "C - Paint",
-            "cat": "paint",
-            "done": false,
-            "date": "2026-09-21",
-            "who": "Ron Cramer",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "D - Maintenance",
-            "cat": "maintenance",
-            "done": false,
-            "date": "2026-09-23",
-            "who": "Ron Cramer",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "E - Carpet Cleaning",
-            "cat": "carpet",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "F - Cleaning",
-            "cat": "cleaning",
-            "done": false,
-            "date": "2026-10-22",
-            "who": "SPO Cleaning",
-            "completed": null,
-            "vendor": true
-          },
-          {
-            "task": "G - Verify Mailbox Lockbox & Mailbox Keys",
-            "cat": "other",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Final Walkthrough",
-            "cat": "final-walk",
-            "done": false,
-            "date": "2026-10-26",
-            "who": "Micheal Magoon",
-            "completed": null,
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": {
-        "date": "2026-08-21",
-        "cat": "maintenance",
-        "who": "Eden Pest Control",
-        "brief": "B - Initial Inspection"
-      },
-      "cost": {
-        "code": "w117-7",
-        "labor": 321.55,
-        "materials": 354.82,
-        "total": 676.37,
-        "estimate": 0,
-        "laborEntries": [
-          {
-            "d": "2026-01-16",
-            "emp": "Micheal N. Magoon",
-            "hrs": 1.07,
-            "cost": 26.75,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-01-15",
-            "emp": "Micheal N. Magoon",
-            "hrs": 5.15,
-            "cost": 128.75,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-01-15",
-            "emp": "Ronald D. Cramer",
-            "hrs": 2.97,
-            "cost": 76.48,
-            "cat": "Turn"
-          },
-          {
-            "d": "2025-10-17",
-            "emp": "Scott Higley",
-            "hrs": 0.7,
-            "cost": 22.39,
-            "cat": "Turn"
-          },
-          {
-            "d": "2025-09-29",
-            "emp": "Scott Higley",
-            "hrs": 2.1,
-            "cost": 67.18,
-            "cat": "Turn"
-          }
-        ],
-        "materialEntries": [
-          {
-            "d": "2026-01-28",
-            "amt": 154,
-            "cat": "Turn",
-            "ln": "montiel",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-01-20",
-            "amt": 154,
-            "cat": "Turn",
-            "ln": "montiel",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-01-15",
-            "amt": 46.82,
-            "cat": "Turn",
-            "ln": "magoon",
-            "src": "ramp"
-          }
-        ]
-      },
-      "turn_end": "2026-01-28",
-      "af_turn_end": "2026-02-04",
-      "stage": "Walkthrough",
-      "stage_ord": 1,
-      "days_elapsed": null,
-      "days_to_turn": null,
       "status": "complete"
     },
     {
