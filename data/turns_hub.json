@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "fetched_at": "2026-08-20T20:48:53.435Z",
+  "fetched_at": "2026-08-20T21:30:46.107Z",
   "summary": {
     "as_of": "2026-08-20",
     "units": 235,
@@ -9,7 +9,7 @@
     "notice": 23,
     "at_risk": 25,
     "unscheduled": 10,
-    "accruing": 17524.53,
+    "accruing": 17594.78,
     "avg_days_open": 29,
     "revenue_at_risk": 3364.37
   },
@@ -9935,12 +9935,12 @@
         "projId": 239140,
         "name": "Standard Unit Turn",
         "status": "ACTIVE",
-        "done": 0,
+        "done": 2,
         "total": 8,
         "first_appt": "2026-09-28",
         "final_walk": "2026-10-07",
         "final_walk_done": null,
-        "completed_date": null,
+        "completed_date": "2026-08-20",
         "due": "2026-08-25",
         "next_task": {
           "date": "2026-09-28",
@@ -9959,19 +9959,19 @@
           {
             "task": "C - Paint",
             "cat": "paint",
-            "done": false,
+            "done": true,
             "date": "2026-09-28",
             "who": "Brady Smith",
-            "completed": null,
+            "completed": "2026-08-20",
             "vendor": false
           },
           {
             "task": "D - Maintenance",
             "cat": "maintenance",
-            "done": false,
+            "done": true,
             "date": "2026-09-30",
             "who": "Brady Smith",
-            "completed": null,
+            "completed": "2026-08-20",
             "vendor": false
           },
           {
@@ -10013,10 +10013,10 @@
         ]
       },
       "next_appt": {
-        "date": "2026-09-28",
-        "cat": "paint",
-        "who": "Brady Smith",
-        "brief": "C - Paint Prep / Paint"
+        "date": "2026-10-05",
+        "cat": "suggested-cleaning",
+        "who": "SPO Cleaning",
+        "brief": "Suggested cleaning — 3 business days after in-house done (2026-09-30)"
       },
       "cost": {
         "code": "c702-C205",
@@ -10821,12 +10821,12 @@
         "projId": 239158,
         "name": "Standard Unit Turn",
         "status": "ACTIVE",
-        "done": 2,
+        "done": 3,
         "total": 8,
         "first_appt": "2026-08-17",
         "final_walk": "2026-08-26",
         "final_walk_done": null,
-        "completed_date": "2026-08-17",
+        "completed_date": "2026-08-20",
         "due": "2026-08-15",
         "next_task": {
           "date": "2026-08-26",
@@ -10854,10 +10854,10 @@
           {
             "task": "D - Maintenance",
             "cat": "maintenance",
-            "done": false,
+            "done": true,
             "date": "2026-08-19",
             "who": "Brady Smith",
-            "completed": null,
+            "completed": "2026-08-20",
             "vendor": false
           },
           {
@@ -43460,9 +43460,9 @@
       },
       "cost": {
         "code": "s129-13",
-        "labor": 797.25,
+        "labor": 848.75,
         "materials": 529.5,
-        "total": 1326.75,
+        "total": 1378.25,
         "estimate": 0,
         "laborEntries": [
           {
@@ -43470,6 +43470,13 @@
             "emp": "Ronald D. Cramer",
             "hrs": 1.75,
             "cost": 45.06,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-20",
+            "emp": "Ronald D. Cramer",
+            "hrs": 2,
+            "cost": 51.5,
             "cat": "Turn"
           },
           {
@@ -44216,9 +44223,9 @@
       },
       "cost": {
         "code": "s129-9",
-        "labor": 881.76,
+        "labor": 900.51,
         "materials": 242.2,
-        "total": 1123.96,
+        "total": 1142.71,
         "estimate": 0,
         "laborEntries": [
           {
@@ -44233,6 +44240,13 @@
             "emp": "Micheal N. Magoon",
             "hrs": 1.53,
             "cost": 38.25,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-20",
+            "emp": "Micheal N. Magoon",
+            "hrs": 0.75,
+            "cost": 18.75,
             "cat": "Turn"
           },
           {
