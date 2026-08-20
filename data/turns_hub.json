@@ -1,17 +1,17 @@
 {
   "ok": true,
-  "fetched_at": "2026-08-20T15:37:03.478Z",
+  "fetched_at": "2026-08-20T16:53:11.406Z",
   "summary": {
     "as_of": "2026-08-20",
-    "units": 234,
-    "active": 71,
-    "ready": 5,
-    "notice": 22,
-    "at_risk": 23,
+    "units": 235,
+    "active": 72,
+    "ready": 3,
+    "notice": 23,
+    "at_risk": 24,
     "unscheduled": 10,
-    "accruing": 17208.01,
+    "accruing": 17320.96,
     "avg_days_open": 28,
-    "revenue_at_risk": 3365.47
+    "revenue_at_risk": 3423.97
   },
   "rows": [
     {
@@ -3062,6 +3062,132 @@
       "status": "active"
     },
     {
+      "key": "tc68|d082",
+      "prop": "tc68",
+      "unit": "D082",
+      "at_risk": [
+        "Over 45 days vacant"
+      ],
+      "property_name": "tc68",
+      "city": "Tacoma",
+      "addr": "6830 Tacoma Mall Blvd Apt D082 Tacoma, WA 98409",
+      "unit_id": 1231,
+      "unit_status": "Vacant-Rented",
+      "rent_ready": "No",
+      "vacant": true,
+      "days_vacant": 63,
+      "move_out": "2026-06-18",
+      "available_on": "2026-09-04",
+      "ready_on": "2026-09-04",
+      "target_date": "2026-07-08",
+      "next_move_in": "2026-10-01",
+      "rent": "1775.00",
+      "bed_bath": "2/1.00",
+      "sqft": 980,
+      "region": "Tacoma",
+      "pm": {
+        "projId": 228916,
+        "name": "Standard Unit Turn",
+        "status": "ACTIVE",
+        "done": 2,
+        "total": 7,
+        "first_appt": "2026-08-04",
+        "final_walk": "2026-09-01",
+        "final_walk_done": null,
+        "completed_date": "2026-06-26",
+        "due": "2026-07-30",
+        "next_task": {
+          "date": "2026-08-24",
+          "task": "maintenance"
+        },
+        "tasks": [
+          {
+            "task": "A - Initial walkthrough",
+            "cat": "walkthrough",
+            "done": true,
+            "date": "2026-06-22",
+            "who": "Armani Mitchell",
+            "completed": "2026-06-24",
+            "vendor": false
+          },
+          {
+            "task": "Appfolio Estimate",
+            "cat": "estimate",
+            "done": false,
+            "date": null,
+            "who": "Dulce Salinas",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "C - Paint",
+            "cat": "paint",
+            "done": true,
+            "date": "2026-08-04",
+            "who": "Armani Mitchell",
+            "completed": "2026-06-26",
+            "vendor": false
+          },
+          {
+            "task": "D - Maintenance",
+            "cat": "maintenance",
+            "done": false,
+            "date": "2026-08-24",
+            "who": "Armani Mitchell",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "E - Carpet Cleaning",
+            "cat": "carpet",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "F - Cleaning",
+            "cat": "cleaning",
+            "done": false,
+            "date": "2026-09-14",
+            "who": "Armani Mitchell",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Final Walkthrough",
+            "cat": "final-walk",
+            "done": false,
+            "date": "2026-09-01",
+            "who": "Armani Mitchell",
+            "completed": null,
+            "vendor": false
+          }
+        ]
+      },
+      "next_appt": {
+        "date": "2026-08-24",
+        "cat": "maintenance",
+        "who": "Armani Mitchell",
+        "brief": "D - Maintenance"
+      },
+      "cost": {
+        "code": "tc68-D082",
+        "labor": 0,
+        "materials": 0,
+        "total": 0,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": []
+      },
+      "stage": "Maintenance",
+      "stage_ord": 3,
+      "days_elapsed": 63,
+      "days_to_turn": null,
+      "status": "active"
+    },
+    {
       "key": "tc68|d088",
       "prop": "tc68",
       "unit": "D088",
@@ -3077,8 +3203,8 @@
       "vacant": true,
       "days_vacant": 112,
       "move_out": "2026-04-30",
-      "available_on": "2026-09-06",
-      "ready_on": "2026-09-06",
+      "available_on": "2026-08-26",
+      "ready_on": "2026-08-26",
       "target_date": "2026-05-20",
       "next_move_in": null,
       "rent": "1775.00",
@@ -3094,7 +3220,7 @@
         "first_appt": "2026-07-13",
         "final_walk": "2026-09-03",
         "final_walk_done": null,
-        "completed_date": "2026-07-16",
+        "completed_date": "2026-08-20",
         "due": "2026-07-14",
         "next_task": {
           "date": "2026-08-24",
@@ -3122,10 +3248,10 @@
           {
             "task": "C - Paint",
             "cat": "paint",
-            "done": false,
+            "done": true,
             "date": "2026-08-24",
             "who": "Chris Phillips",
-            "completed": null,
+            "completed": "2026-08-20",
             "vendor": false
           },
           {
@@ -3167,10 +3293,10 @@
         ]
       },
       "next_appt": {
-        "date": "2026-08-24",
-        "cat": "paint",
-        "who": "Chris Phillips",
-        "brief": "C - Paint Prep / Paint"
+        "date": "2026-08-26",
+        "cat": "maintenance",
+        "who": "Armani Mitchell",
+        "brief": "D - Maintenance (clone)"
       },
       "cost": {
         "code": "tc68-D088",
@@ -3181,8 +3307,8 @@
         "laborEntries": [],
         "materialEntries": []
       },
-      "stage": "Paint",
-      "stage_ord": 2,
+      "stage": "Maintenance",
+      "stage_ord": 3,
       "days_elapsed": 112,
       "days_to_turn": null,
       "status": "active"
@@ -3323,52 +3449,52 @@
       "status": "active"
     },
     {
-      "key": "tc68|d091",
+      "key": "tc68|d106",
       "prop": "tc68",
-      "unit": "D091",
+      "unit": "D106",
       "at_risk": [
         "Over 45 days vacant"
       ],
       "property_name": "tc68",
       "city": "Tacoma",
-      "addr": "6830 Tacoma Mall Blvd Apt D091 Tacoma, WA 98409",
-      "unit_id": 1240,
-      "unit_status": "Vacant-Unrented",
+      "addr": "6830 Tacoma Mall Blvd Apt D106 Tacoma, WA 98409",
+      "unit_id": 1255,
+      "unit_status": "Vacant-Rented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 53,
-      "move_out": "2026-06-28",
-      "available_on": "2026-08-29",
-      "ready_on": "2026-08-29",
-      "target_date": "2026-07-18",
-      "next_move_in": null,
-      "rent": "1795.00",
+      "days_vacant": 66,
+      "move_out": "2026-06-15",
+      "available_on": "2026-08-27",
+      "ready_on": "2026-08-27",
+      "target_date": "2026-07-05",
+      "next_move_in": "2026-09-09",
+      "rent": "1775.00",
       "bed_bath": "2/1.00",
       "sqft": 980,
       "region": "Tacoma",
       "pm": {
-        "projId": 222911,
+        "projId": 227505,
         "name": "Standard Unit Turn",
         "status": "ACTIVE",
         "done": 2,
         "total": 7,
-        "first_appt": "2026-08-13",
-        "final_walk": "2026-08-26",
+        "first_appt": "2026-07-20",
+        "final_walk": "2026-08-24",
         "final_walk_done": null,
-        "completed_date": "2026-08-14",
-        "due": "2026-08-10",
+        "completed_date": "2026-06-24",
+        "due": "2026-07-29",
         "next_task": {
-          "date": "2026-08-24",
-          "task": "carpet"
+          "date": "2026-08-20",
+          "task": "cleaning"
         },
         "tasks": [
           {
             "task": "A - Initial walkthrough",
             "cat": "walkthrough",
             "done": true,
-            "date": "2026-06-26",
+            "date": "2026-06-23",
             "who": "Armani Mitchell",
-            "completed": "2026-06-30",
+            "completed": "2026-06-24",
             "vendor": false
           },
           {
@@ -3381,19 +3507,10 @@
             "vendor": false
           },
           {
-            "task": "C - Paint",
-            "cat": "paint",
-            "done": true,
-            "date": "2026-08-13",
-            "who": "Armani Mitchell",
-            "completed": "2026-08-14",
-            "vendor": false
-          },
-          {
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-08-19",
+            "date": "2026-08-17",
             "who": "Armani Mitchell",
             "completed": null,
             "vendor": false
@@ -3402,7 +3519,7 @@
             "task": "E - Carpet Cleaning",
             "cat": "carpet",
             "done": false,
-            "date": "2026-08-24",
+            "date": "2026-08-18",
             "who": "Armani Mitchell",
             "completed": null,
             "vendor": false
@@ -3411,7 +3528,7 @@
             "task": "F - Cleaning",
             "cat": "cleaning",
             "done": false,
-            "date": "2026-08-31",
+            "date": "2026-08-20",
             "who": "Armani Mitchell",
             "completed": null,
             "vendor": false
@@ -3420,7 +3537,7 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": "2026-08-26",
+            "date": "2026-08-24",
             "who": "Armani Mitchell",
             "completed": null,
             "vendor": false
@@ -3428,13 +3545,13 @@
         ]
       },
       "next_appt": {
-        "date": "2026-08-24",
-        "cat": "carpet",
+        "date": "2026-08-20",
+        "cat": "cleaning",
         "who": "Armani Mitchell",
-        "brief": "E - Carpet Cleaning"
+        "brief": "F - Cleaning"
       },
       "cost": {
-        "code": "tc68-D091",
+        "code": "tc68-D106",
         "labor": 0,
         "materials": 0,
         "total": 0,
@@ -3444,7 +3561,7 @@
       },
       "stage": "Maintenance",
       "stage_ord": 3,
-      "days_elapsed": 53,
+      "days_elapsed": 66,
       "days_to_turn": null,
       "status": "active"
     },
@@ -6094,6 +6211,44 @@
       "days_elapsed": null,
       "days_to_turn": null,
       "status": "complete"
+    },
+    {
+      "key": "c313|1",
+      "prop": "c313",
+      "unit": "1",
+      "at_risk": [],
+      "property_name": "c313",
+      "city": "Spokane",
+      "addr": "3131 So Cook St 1 Spokane, WA 99223",
+      "unit_id": 709,
+      "unit_status": "Notice-Unrented",
+      "rent_ready": null,
+      "vacant": false,
+      "days_vacant": null,
+      "move_out": "2026-08-21",
+      "available_on": "2026-09-10",
+      "ready_on": "2026-09-10",
+      "target_date": "2026-09-10",
+      "next_move_in": null,
+      "rent": "1645.00",
+      "bed_bath": "2/2.00",
+      "sqft": 1050,
+      "region": "Spokane",
+      "next_appt": null,
+      "cost": {
+        "code": "c313-1",
+        "labor": 0,
+        "materials": 0,
+        "total": 0,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": []
+      },
+      "stage": "Move-out",
+      "stage_ord": 0,
+      "days_elapsed": 0,
+      "days_to_turn": null,
+      "status": "notice"
     },
     {
       "key": "c313|10",
@@ -43129,11 +43284,18 @@
       },
       "cost": {
         "code": "s129-13",
-        "labor": 697.86,
+        "labor": 739.06,
         "materials": 529.5,
-        "total": 1227.36,
+        "total": 1268.56,
         "estimate": 0,
         "laborEntries": [
+          {
+            "d": "2026-08-20",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.6,
+            "cost": 41.2,
+            "cat": "Turn"
+          },
           {
             "d": "2026-08-19",
             "emp": "Ronald D. Cramer",
@@ -43871,9 +44033,9 @@
       },
       "cost": {
         "code": "s129-9",
-        "labor": 733.01,
+        "labor": 804.76,
         "materials": 242.2,
-        "total": 975.21,
+        "total": 1046.96,
         "estimate": 0,
         "laborEntries": [
           {
@@ -43888,6 +44050,13 @@
             "emp": "Micheal N. Magoon",
             "hrs": 2.48,
             "cost": 62,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-19",
+            "emp": "Micheal N. Magoon",
+            "hrs": 2.87,
+            "cost": 71.75,
             "cat": "Turn"
           },
           {
@@ -47073,8 +47242,8 @@
       "vacant": true,
       "days_vacant": 20,
       "move_out": "2026-07-31",
-      "available_on": "2026-10-09",
-      "ready_on": "2026-10-09",
+      "available_on": "2026-09-01",
+      "ready_on": "2026-09-01",
       "target_date": "2026-08-20",
       "next_move_in": null,
       "rent": "1775.00",
@@ -51136,116 +51305,108 @@
       "status": "complete"
     },
     {
-      "key": "tc68|d082",
+      "key": "tc68|d091",
       "prop": "tc68",
-      "unit": "D082",
+      "unit": "D091",
       "at_risk": [],
       "property_name": "tc68",
       "city": "Tacoma",
-      "addr": "6830 Tacoma Mall Blvd Apt D082 Tacoma, WA 98409",
-      "unit_id": 1231,
-      "unit_status": "Vacant-Rented",
+      "addr": "6830 Tacoma Mall Blvd Apt D091 Tacoma, WA 98409",
+      "unit_id": 1240,
+      "unit_status": "Vacant-Unrented",
       "rent_ready": "Yes",
       "vacant": true,
-      "days_vacant": 63,
-      "move_out": "2026-06-18",
-      "available_on": "2026-09-04",
-      "ready_on": "2026-09-04",
-      "target_date": "2026-07-08",
-      "next_move_in": "2026-10-01",
-      "rent": "1775.00",
+      "days_vacant": 53,
+      "move_out": "2026-06-28",
+      "available_on": "2026-08-21",
+      "ready_on": "2026-08-21",
+      "target_date": "2026-07-18",
+      "next_move_in": null,
+      "rent": "1795.00",
       "bed_bath": "2/1.00",
       "sqft": 980,
       "region": "Tacoma",
       "pm": {
-        "projId": 228916,
+        "projId": 222911,
         "name": "Standard Unit Turn",
-        "status": "ACTIVE",
-        "done": 2,
+        "status": "COMPLETE",
+        "done": 7,
         "total": 7,
-        "first_appt": "2026-08-04",
-        "final_walk": "2026-09-01",
-        "final_walk_done": null,
-        "completed_date": "2026-06-26",
-        "due": "2026-07-30",
-        "next_task": {
-          "date": "2026-08-24",
-          "task": "maintenance"
-        },
+        "first_appt": "2026-08-13",
+        "final_walk": "2026-08-26",
+        "final_walk_done": "2026-08-20",
+        "completed_date": "2026-08-20",
+        "due": "2026-08-10",
+        "next_task": null,
         "tasks": [
           {
             "task": "A - Initial walkthrough",
             "cat": "walkthrough",
             "done": true,
-            "date": "2026-06-22",
+            "date": "2026-06-26",
             "who": "Armani Mitchell",
-            "completed": "2026-06-24",
+            "completed": "2026-06-30",
             "vendor": false
           },
           {
             "task": "Appfolio Estimate",
             "cat": "estimate",
-            "done": false,
+            "done": true,
             "date": null,
             "who": "Dulce Salinas",
-            "completed": null,
+            "completed": "2026-08-20",
             "vendor": false
           },
           {
             "task": "C - Paint",
             "cat": "paint",
             "done": true,
-            "date": "2026-08-04",
+            "date": "2026-08-13",
             "who": "Armani Mitchell",
-            "completed": "2026-06-26",
+            "completed": "2026-08-14",
             "vendor": false
           },
           {
             "task": "D - Maintenance",
             "cat": "maintenance",
-            "done": false,
-            "date": "2026-08-24",
+            "done": true,
+            "date": "2026-08-19",
             "who": "Armani Mitchell",
-            "completed": null,
+            "completed": "2026-08-20",
             "vendor": false
           },
           {
             "task": "E - Carpet Cleaning",
             "cat": "carpet",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
+            "done": true,
+            "date": "2026-08-24",
+            "who": "Armani Mitchell",
+            "completed": "2026-08-20",
             "vendor": false
           },
           {
             "task": "F - Cleaning",
             "cat": "cleaning",
-            "done": false,
-            "date": "2026-09-14",
+            "done": true,
+            "date": "2026-08-31",
             "who": "Armani Mitchell",
-            "completed": null,
+            "completed": "2026-08-20",
             "vendor": false
           },
           {
             "task": "Final Walkthrough",
             "cat": "final-walk",
-            "done": false,
-            "date": "2026-09-01",
+            "done": true,
+            "date": "2026-08-26",
             "who": "Armani Mitchell",
-            "completed": null,
+            "completed": "2026-08-20",
             "vendor": false
           }
         ]
       },
-      "next_appt": {
-        "date": "2026-08-24",
-        "cat": "maintenance",
-        "who": "Armani Mitchell",
-        "brief": "D - Maintenance"
-      },
+      "next_appt": null,
       "cost": {
-        "code": "tc68-D082",
+        "code": "tc68-D091",
         "labor": 0,
         "materials": 0,
         "total": 0,
@@ -51253,11 +51414,12 @@
         "laborEntries": [],
         "materialEntries": []
       },
+      "turn_end": "2026-08-20",
       "stage": "Ready",
       "stage_ord": 7,
-      "days_elapsed": 63,
-      "days_to_turn": null,
-      "status": "ready"
+      "days_elapsed": 53,
+      "days_to_turn": 53,
+      "status": "complete"
     },
     {
       "key": "tc68|d093",
@@ -51769,121 +51931,6 @@
       "days_elapsed": 0,
       "days_to_turn": null,
       "status": "notice"
-    },
-    {
-      "key": "tc68|d106",
-      "prop": "tc68",
-      "unit": "D106",
-      "at_risk": [],
-      "property_name": "tc68",
-      "city": "Tacoma",
-      "addr": "6830 Tacoma Mall Blvd Apt D106 Tacoma, WA 98409",
-      "unit_id": 1255,
-      "unit_status": "Vacant-Rented",
-      "rent_ready": "Yes",
-      "vacant": true,
-      "days_vacant": 66,
-      "move_out": "2026-06-15",
-      "available_on": "2026-08-27",
-      "ready_on": "2026-08-27",
-      "target_date": "2026-07-05",
-      "next_move_in": "2026-09-09",
-      "rent": "1775.00",
-      "bed_bath": "2/1.00",
-      "sqft": 980,
-      "region": "Tacoma",
-      "pm": {
-        "projId": 227505,
-        "name": "Standard Unit Turn",
-        "status": "ACTIVE",
-        "done": 2,
-        "total": 7,
-        "first_appt": "2026-07-20",
-        "final_walk": "2026-08-24",
-        "final_walk_done": null,
-        "completed_date": "2026-06-24",
-        "due": "2026-07-29",
-        "next_task": {
-          "date": "2026-08-20",
-          "task": "cleaning"
-        },
-        "tasks": [
-          {
-            "task": "A - Initial walkthrough",
-            "cat": "walkthrough",
-            "done": true,
-            "date": "2026-06-23",
-            "who": "Armani Mitchell",
-            "completed": "2026-06-24",
-            "vendor": false
-          },
-          {
-            "task": "Appfolio Estimate",
-            "cat": "estimate",
-            "done": false,
-            "date": null,
-            "who": "Dulce Salinas",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "D - Maintenance",
-            "cat": "maintenance",
-            "done": false,
-            "date": "2026-08-17",
-            "who": "Armani Mitchell",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "E - Carpet Cleaning",
-            "cat": "carpet",
-            "done": false,
-            "date": "2026-08-18",
-            "who": "Armani Mitchell",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "F - Cleaning",
-            "cat": "cleaning",
-            "done": false,
-            "date": "2026-08-20",
-            "who": "Armani Mitchell",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Final Walkthrough",
-            "cat": "final-walk",
-            "done": false,
-            "date": "2026-08-24",
-            "who": "Armani Mitchell",
-            "completed": null,
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": {
-        "date": "2026-08-20",
-        "cat": "cleaning",
-        "who": "Armani Mitchell",
-        "brief": "F - Cleaning"
-      },
-      "cost": {
-        "code": "tc68-D106",
-        "labor": 0,
-        "materials": 0,
-        "total": 0,
-        "estimate": 0,
-        "laborEntries": [],
-        "materialEntries": []
-      },
-      "stage": "Ready",
-      "stage_ord": 7,
-      "days_elapsed": 66,
-      "days_to_turn": null,
-      "status": "ready"
     },
     {
       "key": "v202|1",
