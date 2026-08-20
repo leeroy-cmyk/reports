@@ -1,17 +1,17 @@
 {
   "ok": true,
-  "fetched_at": "2026-08-20T16:53:11.406Z",
+  "fetched_at": "2026-08-20T17:32:29.422Z",
   "summary": {
     "as_of": "2026-08-20",
     "units": 235,
-    "active": 72,
-    "ready": 3,
+    "active": 71,
+    "ready": 4,
     "notice": 23,
-    "at_risk": 24,
+    "at_risk": 25,
     "unscheduled": 10,
-    "accruing": 17320.96,
-    "avg_days_open": 28,
-    "revenue_at_risk": 3423.97
+    "accruing": 17389.34,
+    "avg_days_open": 29,
+    "revenue_at_risk": 3364.37
   },
   "rows": [
     {
@@ -1237,6 +1237,147 @@
       "stage": "Walkthrough",
       "stage_ord": 1,
       "days_elapsed": 22,
+      "days_to_turn": null,
+      "status": "active"
+    },
+    {
+      "key": "k104|1011",
+      "prop": "k104",
+      "unit": "101-1",
+      "at_risk": [
+        "Over 45 days vacant"
+      ],
+      "property_name": "k104- LeFevre",
+      "city": "Medical Lake",
+      "addr": "101 E. Spence 1 Medical Lake, WA 99022",
+      "unit_id": 345,
+      "unit_status": "Vacant-Rented",
+      "rent_ready": "No",
+      "vacant": true,
+      "days_vacant": 51,
+      "move_out": "2026-06-30",
+      "available_on": "2026-09-04",
+      "ready_on": "2026-09-04",
+      "target_date": "2026-07-20",
+      "next_move_in": "2026-09-10",
+      "rent": "1334.00",
+      "bed_bath": "2/1.00",
+      "sqft": 1140,
+      "region": "Spokane",
+      "pm": {
+        "projId": 222928,
+        "name": "Standard Unit Turn",
+        "status": "ACTIVE",
+        "done": 1,
+        "total": 7,
+        "first_appt": "2026-08-20",
+        "final_walk": "2026-09-01",
+        "final_walk_done": null,
+        "completed_date": "2026-07-02",
+        "due": "2026-08-10",
+        "next_task": {
+          "date": "2026-08-20",
+          "task": "paint"
+        },
+        "tasks": [
+          {
+            "task": "A - Initial walkthrough",
+            "cat": "walkthrough",
+            "done": true,
+            "date": "2026-07-02",
+            "who": "Scott Higley",
+            "completed": "2026-07-02",
+            "vendor": false
+          },
+          {
+            "task": "Appfolio Estimate",
+            "cat": "estimate",
+            "done": false,
+            "date": null,
+            "who": "Dulce Salinas",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "C - Paint",
+            "cat": "paint",
+            "done": false,
+            "date": "2026-08-20",
+            "who": "Justin Gutierrez",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "D - Maintenance",
+            "cat": "maintenance",
+            "done": false,
+            "date": "2026-08-25",
+            "who": "Justin Gutierrez",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "E - Carpet Cleaning",
+            "cat": "carpet",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "F - Cleaning",
+            "cat": "cleaning",
+            "done": false,
+            "date": "2026-09-04",
+            "who": "SPO Cleaning",
+            "completed": null,
+            "vendor": true
+          },
+          {
+            "task": "Final Walkthrough",
+            "cat": "final-walk",
+            "done": false,
+            "date": "2026-09-01",
+            "who": "Micheal Magoon",
+            "completed": null,
+            "vendor": false
+          }
+        ]
+      },
+      "next_appt": {
+        "date": "2026-08-20",
+        "cat": "paint",
+        "who": "Justin Gutierrez",
+        "brief": "C - Paint Prep / Paint"
+      },
+      "cost": {
+        "code": "k104-101-1",
+        "labor": 80.31,
+        "materials": 0,
+        "total": 80.31,
+        "estimate": 0,
+        "laborEntries": [
+          {
+            "d": "2026-07-02",
+            "emp": "Scott Higley",
+            "hrs": 1.48,
+            "cost": 47.35,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-06-03",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.28,
+            "cost": 32.96,
+            "cat": "Turn"
+          }
+        ],
+        "materialEntries": []
+      },
+      "stage": "Maintenance",
+      "stage_ord": 3,
+      "days_elapsed": 51,
       "days_to_turn": null,
       "status": "active"
     },
@@ -2901,8 +3042,8 @@
       "vacant": true,
       "days_vacant": 48,
       "move_out": "2026-07-03",
-      "available_on": "2026-09-13",
-      "ready_on": "2026-09-13",
+      "available_on": "2026-09-20",
+      "ready_on": "2026-09-20",
       "target_date": "2026-07-23",
       "next_move_in": null,
       "rent": "1775.00",
@@ -3077,8 +3218,8 @@
       "vacant": true,
       "days_vacant": 63,
       "move_out": "2026-06-18",
-      "available_on": "2026-09-04",
-      "ready_on": "2026-09-04",
+      "available_on": "2026-09-13",
+      "ready_on": "2026-09-13",
       "target_date": "2026-07-08",
       "next_move_in": "2026-10-01",
       "rent": "1775.00",
@@ -3464,8 +3605,8 @@
       "vacant": true,
       "days_vacant": 66,
       "move_out": "2026-06-15",
-      "available_on": "2026-08-27",
-      "ready_on": "2026-08-27",
+      "available_on": "2026-09-06",
+      "ready_on": "2026-09-06",
       "target_date": "2026-07-05",
       "next_move_in": "2026-09-09",
       "rent": "1775.00",
@@ -8823,11 +8964,11 @@
       "addr": "7022 N Colton St A103 Spokane, WA 99208",
       "unit_id": 1273,
       "unit_status": "Vacant-Rented",
-      "rent_ready": "No",
+      "rent_ready": "Yes",
       "vacant": true,
       "days_vacant": 20,
       "move_out": "2026-07-31",
-      "available_on": "2026-09-13",
+      "available_on": null,
       "ready_on": "2026-09-13",
       "target_date": "2026-08-20",
       "next_move_in": "2026-09-13",
@@ -8931,11 +9072,11 @@
         "laborEntries": [],
         "materialEntries": []
       },
-      "stage": "Maintenance",
-      "stage_ord": 3,
+      "stage": "Ready",
+      "stage_ord": 7,
       "days_elapsed": 20,
       "days_to_turn": null,
-      "status": "active"
+      "status": "ready"
     },
     {
       "key": "c702|a201",
@@ -12767,145 +12908,6 @@
       "status": "complete"
     },
     {
-      "key": "k104|1011",
-      "prop": "k104",
-      "unit": "101-1",
-      "at_risk": [],
-      "property_name": "k104- LeFevre",
-      "city": "Medical Lake",
-      "addr": "101 E. Spence 1 Medical Lake, WA 99022",
-      "unit_id": 345,
-      "unit_status": "Vacant-Rented",
-      "rent_ready": "Yes",
-      "vacant": true,
-      "days_vacant": 51,
-      "move_out": "2026-06-30",
-      "available_on": "2026-09-04",
-      "ready_on": "2026-09-04",
-      "target_date": "2026-07-20",
-      "next_move_in": "2026-09-10",
-      "rent": "1334.00",
-      "bed_bath": "2/1.00",
-      "sqft": 1140,
-      "region": "Spokane",
-      "pm": {
-        "projId": 222928,
-        "name": "Standard Unit Turn",
-        "status": "ACTIVE",
-        "done": 1,
-        "total": 7,
-        "first_appt": "2026-08-20",
-        "final_walk": "2026-09-01",
-        "final_walk_done": null,
-        "completed_date": "2026-07-02",
-        "due": "2026-08-10",
-        "next_task": {
-          "date": "2026-08-20",
-          "task": "paint"
-        },
-        "tasks": [
-          {
-            "task": "A - Initial walkthrough",
-            "cat": "walkthrough",
-            "done": true,
-            "date": "2026-07-02",
-            "who": "Scott Higley",
-            "completed": "2026-07-02",
-            "vendor": false
-          },
-          {
-            "task": "Appfolio Estimate",
-            "cat": "estimate",
-            "done": false,
-            "date": null,
-            "who": "Dulce Salinas",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "C - Paint",
-            "cat": "paint",
-            "done": false,
-            "date": "2026-08-20",
-            "who": "Justin Gutierrez",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "D - Maintenance",
-            "cat": "maintenance",
-            "done": false,
-            "date": "2026-08-25",
-            "who": "Justin Gutierrez",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "E - Carpet Cleaning",
-            "cat": "carpet",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "F - Cleaning",
-            "cat": "cleaning",
-            "done": false,
-            "date": "2026-09-04",
-            "who": "SPO Cleaning",
-            "completed": null,
-            "vendor": true
-          },
-          {
-            "task": "Final Walkthrough",
-            "cat": "final-walk",
-            "done": false,
-            "date": "2026-09-01",
-            "who": "Micheal Magoon",
-            "completed": null,
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": {
-        "date": "2026-08-20",
-        "cat": "paint",
-        "who": "Justin Gutierrez",
-        "brief": "C - Paint Prep / Paint"
-      },
-      "cost": {
-        "code": "k104-101-1",
-        "labor": 80.31,
-        "materials": 0,
-        "total": 80.31,
-        "estimate": 0,
-        "laborEntries": [
-          {
-            "d": "2026-07-02",
-            "emp": "Scott Higley",
-            "hrs": 1.48,
-            "cost": 47.35,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-06-03",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.28,
-            "cost": 32.96,
-            "cat": "Turn"
-          }
-        ],
-        "materialEntries": []
-      },
-      "stage": "Ready",
-      "stage_ord": 7,
-      "days_elapsed": 51,
-      "days_to_turn": null,
-      "status": "ready"
-    },
-    {
       "key": "k104|1013",
       "prop": "k104",
       "unit": "101-3",
@@ -14677,8 +14679,8 @@
       "vacant": true,
       "days_vacant": 20,
       "move_out": "2026-07-31",
-      "available_on": "2026-10-30",
-      "ready_on": "2026-10-30",
+      "available_on": "2026-10-29",
+      "ready_on": "2026-10-29",
       "target_date": "2026-08-20",
       "next_move_in": null,
       "rent": "1267.00",
@@ -21989,8 +21991,8 @@
       "vacant": true,
       "days_vacant": 51,
       "move_out": "2026-06-30",
-      "available_on": null,
-      "ready_on": "2026-08-10",
+      "available_on": "2026-08-13",
+      "ready_on": "2026-08-13",
       "target_date": "2026-07-20",
       "next_move_in": "2026-08-21",
       "rent": "1132.00",
@@ -32695,7 +32697,7 @@
       "vacant": true,
       "days_vacant": 112,
       "move_out": "2026-04-30",
-      "available_on": null,
+      "available_on": "2026-05-29",
       "ready_on": "2026-05-29",
       "target_date": "2026-05-20",
       "next_move_in": "2026-09-01",
@@ -39236,11 +39238,11 @@
       "addr": "1621 George Washington Way B01 Richland, WA 99354",
       "unit_id": 538,
       "unit_status": "Vacant-Rented",
-      "rent_ready": "No",
+      "rent_ready": "Yes",
       "vacant": true,
       "days_vacant": 20,
       "move_out": "2026-07-31",
-      "available_on": "2026-09-10",
+      "available_on": null,
       "ready_on": "2026-09-10",
       "target_date": "2026-08-20",
       "next_move_in": "2026-09-10",
@@ -39352,11 +39354,11 @@
         ],
         "materialEntries": []
       },
-      "stage": "Maintenance",
-      "stage_ord": 3,
+      "stage": "Ready",
+      "stage_ord": 7,
       "days_elapsed": 20,
       "days_to_turn": null,
-      "status": "active"
+      "status": "ready"
     },
     {
       "key": "rl16|b11",
@@ -44663,8 +44665,8 @@
       "vacant": false,
       "days_vacant": null,
       "move_out": "2026-08-31",
-      "available_on": "2026-04-18",
-      "ready_on": "2026-04-18",
+      "available_on": "2026-11-22",
+      "ready_on": "2026-11-22",
       "target_date": "2026-09-20",
       "next_move_in": null,
       "rent": "1265.00",
@@ -46526,8 +46528,8 @@
       "vacant": true,
       "days_vacant": 39,
       "move_out": "2026-07-12",
-      "available_on": "2026-09-25",
-      "ready_on": "2026-09-25",
+      "available_on": "2026-10-02",
+      "ready_on": "2026-10-02",
       "target_date": "2026-08-01",
       "next_move_in": null,
       "rent": "1775.00",
@@ -47839,8 +47841,8 @@
       "vacant": true,
       "days_vacant": 42,
       "move_out": "2026-07-09",
-      "available_on": "2026-09-18",
-      "ready_on": "2026-09-18",
+      "available_on": "2026-09-25",
+      "ready_on": "2026-09-25",
       "target_date": "2026-07-29",
       "next_move_in": null,
       "rent": "1775.00",
@@ -51182,7 +51184,7 @@
       "vacant": true,
       "days_vacant": 144,
       "move_out": "2026-03-29",
-      "available_on": null,
+      "available_on": "2026-07-12",
       "ready_on": "2026-07-12",
       "target_date": "2026-04-18",
       "next_move_in": "2026-08-31",
