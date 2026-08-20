@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "fetched_at": "2026-08-20T14:57:15.047Z",
+  "fetched_at": "2026-08-20T15:37:03.478Z",
   "summary": {
     "as_of": "2026-08-20",
     "units": 234,
@@ -10812,19 +10812,22 @@
         "status": "ACTIVE",
         "done": 0,
         "total": 8,
-        "first_appt": null,
-        "final_walk": null,
+        "first_appt": "2026-10-07",
+        "final_walk": "2026-10-19",
         "final_walk_done": null,
         "completed_date": null,
         "due": "2026-10-11",
-        "next_task": null,
+        "next_task": {
+          "date": "2026-09-29",
+          "task": "walkthrough"
+        },
         "tasks": [
           {
             "task": "A - Initial walkthrough",
             "cat": "walkthrough",
             "done": false,
-            "date": null,
-            "who": null,
+            "date": "2026-09-29",
+            "who": "Matt Romme",
             "completed": null,
             "vendor": false
           },
@@ -10841,8 +10844,8 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": null,
-            "who": null,
+            "date": "2026-10-07",
+            "who": "Matt Romme",
             "completed": null,
             "vendor": false
           },
@@ -10850,8 +10853,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": null,
-            "who": null,
+            "date": "2026-10-12",
+            "who": "Matt Romme",
             "completed": null,
             "vendor": false
           },
@@ -10886,14 +10889,19 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": null,
-            "who": null,
+            "date": "2026-10-19",
+            "who": "Brady Smith",
             "completed": null,
             "vendor": false
           }
         ]
       },
-      "next_appt": null,
+      "next_appt": {
+        "date": "2026-09-29",
+        "cat": "walkthrough",
+        "who": "Matt Romme",
+        "brief": "A - Initial walkthrough"
+      },
       "cost": {
         "code": "c702-K106",
         "labor": 0,
@@ -11069,11 +11077,14 @@
         "done": 4,
         "total": 7,
         "first_appt": "2026-08-10",
-        "final_walk": "2026-08-19",
+        "final_walk": "2026-08-24",
         "final_walk_done": null,
         "completed_date": "2026-08-17",
         "due": "2026-08-15",
-        "next_task": null,
+        "next_task": {
+          "date": "2026-08-24",
+          "task": "final-walk"
+        },
         "tasks": [
           {
             "task": "A - Initial walkthrough",
@@ -11133,14 +11144,19 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": "2026-08-19",
+            "date": "2026-08-24",
             "who": "Micheal Magoon",
             "completed": null,
             "vendor": false
           }
         ]
       },
-      "next_appt": null,
+      "next_appt": {
+        "date": "2026-08-24",
+        "cat": "final-walk",
+        "who": "Micheal Magoon",
+        "brief": "Final Walkthrough"
+      },
       "cost": {
         "code": "e328-4",
         "labor": 485.59,
@@ -14520,8 +14536,8 @@
         "status": "ACTIVE",
         "done": 1,
         "total": 8,
-        "first_appt": "2026-10-15",
-        "final_walk": "2026-10-27",
+        "first_appt": "2026-10-14",
+        "final_walk": "2026-10-26",
         "final_walk_done": null,
         "completed_date": "2026-08-05",
         "due": "2026-08-15",
@@ -14552,7 +14568,7 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-10-15",
+            "date": "2026-10-14",
             "who": "Ron Cramer",
             "completed": null,
             "vendor": false
@@ -14561,7 +14577,7 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-10-20",
+            "date": "2026-10-19",
             "who": "Ron Cramer",
             "completed": null,
             "vendor": false
@@ -14597,7 +14613,7 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": "2026-10-27",
+            "date": "2026-10-26",
             "who": "Micheal Magoon",
             "completed": null,
             "vendor": false
