@@ -1,9 +1,9 @@
 {
   "ok": true,
-  "fetched_at": "2026-08-21T13:48:33.985Z",
+  "fetched_at": "2026-08-21T14:38:49.501Z",
   "summary": {
     "as_of": "2026-08-21",
-    "units": 234,
+    "units": 235,
     "active": 72,
     "ready": 4,
     "notice": 22,
@@ -22675,6 +22675,191 @@
       "stage_ord": 7,
       "days_elapsed": 61,
       "days_to_turn": 61,
+      "status": "complete"
+    },
+    {
+      "key": "kn47|h204",
+      "prop": "kn47",
+      "unit": "H204",
+      "at_risk": [],
+      "property_name": "kn47 K1",
+      "city": "Kennewick",
+      "addr": "4711 W Metaline Avenue H204 Kennewick, WA 99336",
+      "unit_id": 930,
+      "unit_status": "Notice-Unrented",
+      "rent_ready": null,
+      "vacant": false,
+      "days_vacant": null,
+      "move_out": "2026-08-25",
+      "available_on": "2026-09-14",
+      "ready_on": "2026-09-14",
+      "target_date": "2026-09-14",
+      "next_move_in": null,
+      "rent": "1132.00",
+      "bed_bath": "1/1.00",
+      "sqft": 575,
+      "region": "Tri-Cities",
+      "pm": {
+        "projId": 215675,
+        "name": "Turn - 4711 W Metaline Avenue UNIT H204",
+        "status": "COMPLETE",
+        "done": 6,
+        "total": 6,
+        "first_appt": "2026-04-09",
+        "final_walk": "2026-04-21",
+        "final_walk_done": "2026-04-24",
+        "completed_date": "2026-04-24",
+        "due": "2026-04-21",
+        "next_task": null,
+        "tasks": [
+          {
+            "task": "C - Paint",
+            "cat": "paint",
+            "done": true,
+            "date": "2026-04-09",
+            "who": "Bryon McQuaid",
+            "completed": "2026-04-17",
+            "vendor": false
+          },
+          {
+            "task": "D - Maintenance",
+            "cat": "maintenance",
+            "done": true,
+            "date": "2026-04-14",
+            "who": "Bryon McQuaid",
+            "completed": "2026-04-17",
+            "vendor": false
+          },
+          {
+            "task": "E - Carpet Cleaning",
+            "cat": "carpet",
+            "done": true,
+            "date": "2026-04-18",
+            "who": "SOS Carpet",
+            "completed": "2026-04-18",
+            "vendor": true
+          },
+          {
+            "task": "F - Cleaning",
+            "cat": "cleaning",
+            "done": true,
+            "date": "2026-04-22",
+            "who": "Duo Cleaning Company LLC",
+            "completed": "2026-04-21",
+            "vendor": true
+          },
+          {
+            "task": "Final Walkthrough",
+            "cat": "final-walk",
+            "done": true,
+            "date": "2026-04-21",
+            "who": "Margarito Saldana",
+            "completed": "2026-04-24",
+            "vendor": false
+          }
+        ]
+      },
+      "next_appt": null,
+      "cost": {
+        "code": "kn47-k1-H204",
+        "labor": 213,
+        "materials": 417.21,
+        "total": 630.21,
+        "estimate": 0,
+        "laborEntries": [
+          {
+            "d": "2026-07-07",
+            "emp": "Margarito Saldana",
+            "hrs": 1.75,
+            "cost": 49.7,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-05-27",
+            "emp": "Margarito Saldana",
+            "hrs": 0.75,
+            "cost": 21.3,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-04-09",
+            "emp": "Margarito Saldana",
+            "hrs": 1,
+            "cost": 28.4,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-04-09",
+            "emp": "Margarito Saldana",
+            "hrs": 1,
+            "cost": 28.4,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-04-09",
+            "emp": "Margarito Saldana",
+            "hrs": 1,
+            "cost": 28.4,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-04-09",
+            "emp": "Margarito Saldana",
+            "hrs": 2,
+            "cost": 56.8,
+            "cat": "Turn"
+          }
+        ],
+        "materialEntries": [
+          {
+            "d": "2026-06-12",
+            "amt": 350,
+            "cat": "Turn",
+            "ln": "Duo Cleaning Compa",
+            "src": "qbo"
+          },
+          {
+            "d": "2026-04-14",
+            "amt": -18.49,
+            "cat": "Turn",
+            "ln": "mcquaid",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-04-13",
+            "amt": 20.2,
+            "cat": "Turn",
+            "ln": "mcquaid",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-04-11",
+            "amt": -15.21,
+            "cat": "Turn",
+            "ln": "mcquaid",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-04-10",
+            "amt": 2.99,
+            "cat": "Turn",
+            "ln": "mcquaid",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-04-10",
+            "amt": 77.72,
+            "cat": "Turn",
+            "ln": "mcquaid",
+            "src": "ramp"
+          }
+        ]
+      },
+      "turn_end": "2026-04-24",
+      "stage": "Final Walk",
+      "stage_ord": 6,
+      "days_elapsed": 0,
+      "days_to_turn": -123,
       "status": "complete"
     },
     {
