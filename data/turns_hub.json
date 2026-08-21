@@ -1,15 +1,15 @@
 {
   "ok": true,
-  "fetched_at": "2026-08-21T15:53:02.315Z",
+  "fetched_at": "2026-08-21T16:38:06.717Z",
   "summary": {
     "as_of": "2026-08-21",
-    "units": 235,
+    "units": 236,
     "active": 72,
     "ready": 4,
-    "notice": 22,
+    "notice": 23,
     "at_risk": 25,
     "unscheduled": 10,
-    "accruing": 17867.79,
+    "accruing": 17906.6,
     "avg_days_open": 29,
     "revenue_at_risk": 3420.87
   },
@@ -43108,11 +43108,18 @@
       },
       "cost": {
         "code": "s129-13",
-        "labor": 892.01,
-        "materials": 529.5,
-        "total": 1421.51,
+        "labor": 921.11,
+        "materials": 539.21,
+        "total": 1460.32,
         "estimate": 0,
         "laborEntries": [
+          {
+            "d": "2026-08-21",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.13,
+            "cost": 29.1,
+            "cat": "Turn"
+          },
           {
             "d": "2026-08-20",
             "emp": "Ronald D. Cramer",
@@ -43269,6 +43276,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-08-21",
+            "amt": 9.71,
+            "cat": "Turn",
+            "ln": "cramer",
+            "src": "ramp"
+          },
           {
             "d": "2026-08-18",
             "amt": 15.24,
@@ -44528,6 +44542,44 @@
       "days_elapsed": 0,
       "days_to_turn": -389,
       "status": "complete"
+    },
+    {
+      "key": "s300|4",
+      "prop": "s300",
+      "unit": "4",
+      "at_risk": [],
+      "property_name": "s300",
+      "city": "Spokane",
+      "addr": "9300 E Sprague Avenue - 4 Spokane, WA 99206",
+      "unit_id": 34,
+      "unit_status": "Notice-Unrented",
+      "rent_ready": null,
+      "vacant": false,
+      "days_vacant": null,
+      "move_out": "2026-09-07",
+      "available_on": "2026-09-27",
+      "ready_on": "2026-09-27",
+      "target_date": "2026-09-27",
+      "next_move_in": null,
+      "rent": "1025.00",
+      "bed_bath": "1/1.00",
+      "sqft": 310,
+      "region": "Spokane",
+      "next_appt": null,
+      "cost": {
+        "code": "s300-4",
+        "labor": 0,
+        "materials": 0,
+        "total": 0,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": []
+      },
+      "stage": "Move-out",
+      "stage_ord": 0,
+      "days_elapsed": 0,
+      "days_to_turn": null,
+      "status": "notice"
     },
     {
       "key": "tc34|a101",
