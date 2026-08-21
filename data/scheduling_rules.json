@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-08-18T14:26:55.382Z",
-  "last_checked": "2026-08-18T14:26:55.382Z",
+  "generated_at": "2026-08-21T14:28:39.854Z",
+  "last_checked": "2026-08-21T14:28:39.854Z",
   "source": "leeroy-cmyk/pm-scheduling/CLAUDE.md",
-  "count": 67,
+  "count": 68,
   "rules": [
     {
       "group": "General",
@@ -133,14 +133,26 @@
       "details": []
     },
     {
+      "group": "General",
+      "category": "",
+      "text": "**Repairs budget-floor list (Florencia, 2026-08-20) — Spokane and Tri-Cities repairs only (Tacoma has no flagged properties currently).** A property that ran over its AppFolio Repairs budget gets a hard floor of **2026-09-01** on any NEW or rescheduled non-emergency date — no non-emergency work is placed there before that date. This overrides every other rule in this section (freeze, compaction, past-due reshuffle, property clustering/gap-fill, daily cap, etc.) **except a manual appointment placed by a human directly in PropertyMeld** — the manual-move exemption above still applies, since the source data itself is manually verified. **Emergency/Urgent always proceeds regardless** — confirmed explicitly by Florencia, do not defer a real emergency for budget reasons.",
+      "details": [
+        "Current list: **ps25, rl21** (Tri-Cities) and **k104, p705, j312, a511** (Spokane). Source of truth is `https://raw.githubusercontent.com/Florencia83/Reports/main/data/repairs-budget-floor.json` — built from the manually-verified \"weekly update\" tab of Florencia's P&L Google Sheet, **NOT** the automated `weekly-mtd.json` pipeline (that feed had known gaps as of 2026-08-20: a stale third-party QBO feed, plus CapEx/Turn purchases counted as R&M). Update that JSON file (and its `floor_date`) whenever the sheet changes — there's no automatic sync yet.",
+        "Implemented as `loadBudgetFloor()`/`applyBudgetFloor()` in `pm_spokane_scheduler.js` and `pm_tricities_scheduler.js` (each has its own copy, matching this repo's existing no-shared-lib convention for these two files) — gates `findNextSlot`/`findSlotOnDate` only, which is sufficient because the emergency path (`insertEmergencyToday`/the Spokane reserved-slot queue) never calls either function. `forceSlotOnDate` (stated-preference fallback) is deliberately NOT gated — an explicit resident/manager date preference is left alone rather than guessed about.",
+        "**Auto-releases on its own — no need to remember to edit the JSON off on Sept 1.** `applyBudgetFloor()` is a no-op once today's date reaches/passes `floor_date`, so a stale `over_budget_repairs` entry left in the file past that date has zero effect (a real reschedule attempt after the floor date can never propose an earlier date anyway, since `findNextSlot` always searches forward from today).",
+        "**Proactive move of already-scheduled work, effective 2026-08-21 (\"a partir de mañana\" — Florencia was explicit the change should not touch anything today, only take effect starting the next day):** a NEW step, run once at the end of each scheduler's `main()`, scans every non-emergency repair for a flagged property and — if its current appointment date is **before** the floor and **not today** — moves it to the next open slot on/after the floor, using the standard `add-management-appointment` reschedule + cancel-if-future idiom. **Today's date is explicitly excluded** (\"el día de hoy queda excluido en el movimiento\" — Florencia): a meld already on today's calendar is never touched, only future August dates. This is a genuine exception to the repo's append-only rule (like the cancelled-move-out and wrong-crew exceptions above) — justified the same way: reclaiming/relocating work that shouldn't be there, not arbitrary reshuffling. It overrides a stated preference lock too (per Florencia: \"supera todas las reglas excepto movimiento manual\" — literally every rule except a manual move), so a preference-locked meld for one of these properties dated before the floor WILL still be moved; only `wasManuallyMoved()` exempts a meld. Guarded by the same auto-release check (`today<floorDate`), so it stops running the moment the floor date passes.",
+        "Tested `DRY_RUN=1` both regions 2026-08-20 (both the gating and the proactive-move pass), ran clean — Tri-Cities moved a real RL21 meld from 08-21→09-01, Spokane moved a real one from 08-27→09-02 (09-01 is a Monday, blocked), no crashes."
+      ]
+    },
+    {
       "group": "Tacoma",
       "category": "",
-      "text": "**Three techs work Tacoma: Jonas Hoard (repairs), Armani Mitchell and Gordon Esborg (turns).** Jonas takes all non-turn repairs; Armani and Gordon take turns.",
+      "text": "**Three techs work Tacoma: Jonas Hoard (repairs), Chris Phillips (turn PAINT) and Armani Mitchell (turn MAINTENANCE + all walkthroughs).** Jonas takes all non-turn repairs.",
       "details": [
-        "**Gordon Esborg (63372) started 2026-08-12** as Tacoma's second turn tech, for tc34 and tc68 (Lee Roy). Tacoma had been a **single-tech region** and every turn rule here was written around one person — the 4-in-house-day structure, the walkthrough-stacking constraint, and self-QC all existed because Armani was alone. Now: both turn techs do walkthrough + paint + maintenance, **one tech per unit** (whoever paints a unit also maintains it), and the 1-hour initial walkthrough is split between them — the same model as Spokane (Ron + Magoon) and Tri-Cities.",
+        "**Tacoma history, for context only:** it was a SINGLE-tech region and every rule here was written around one person — the 4-in-house-day structure, the walkthrough-stacking constraint and self-QC all existed because Armani was alone. A second turn tech was added 2026-08-12 and left 2026-08-19. Since 2026-08-19 the region runs SPLIT ROLES: Chris Phillips paints, Armani maintains and does every walkthrough. **Not one-tech-per-unit** — see the table above.",
         "**Final walkthrough / QC is now an INDEPENDENT set of eyes.** It goes to whichever turn tech did *not* do that unit's paint/maintenance, so nobody signs off on their own work — matching Spokane (David Sanchez) and Tri-Cities (Margarito). Previously Armani QC'd his own work purely because there was no one else. If both techs worked a unit, the run logs a `⚠self-QC` warning rather than silently pretending it was independent.",
         "Any non-turn tc68/tc34 job found on a different tech is **reassigned to Jonas** (e.g. Margarito is Tri-Cities, not Tacoma).",
-        "⚠️ **Adding a tech does NOT by itself relieve a booked-out backlog.** When Gordon started, all 25 open Tacoma turns already had every in-house meld placed on Armani, out to **2027-02-02** — so gap-fill (which only schedules melds with *no* appointment) had **zero** work to give him, and he would have sat idle behind a six-month queue. Distributing an existing backlog onto a new tech means moving already-placed work, which the append-only rule forbids without an explicit authorised decision. **When a region gains a tech, check the existing backlog, don't just add them to the tech list.**"
+        "⚠️ **Adding a tech does NOT by itself relieve a booked-out backlog.** When Tacoma gained a second turn tech, all 25 open turns there already had every in-house meld placed on Armani, out to **2027-02-02** — so gap-fill (which only schedules melds with *no* appointment) had **zero** work to give him, and he would have sat idle behind a six-month queue. Distributing an existing backlog onto a new tech means moving already-placed work, which the append-only rule forbids without an explicit authorised decision. **When a region gains a tech, check the existing backlog, don't just add them to the tech list.**"
       ]
     },
     {
@@ -166,7 +178,7 @@
     {
       "group": "Tacoma",
       "category": "",
-      "text": "**Turns** (project melds) go to Armani and Gordon via `pm_tacoma_turn_scheduler.js`; the repair scheduler leaves them alone. (Dulce Salinas legitimately appears on \"AppFolio Estimate\" turn melds.)",
+      "text": "**Turns** (project melds) go to Chris (paint) and Armani (maint + walks) via `pm_tacoma_turn_scheduler.js`; the repair scheduler leaves them alone. (Dulce Salinas legitimately appears on \"AppFolio Estimate\" turn melds.)",
       "details": []
     },
     {
@@ -349,13 +361,13 @@
       "details": [
         "**Spokane:** Ron Cramer and Micheal Magoon (Scott Higley no longer works here). These two are Spokane's **only** turn techs — no additional Spokane hires (an earlier note claimed two more start July 20, 2026; that hire never happened — corrected 2026-07-17).",
         "**Tri-Cities:** James Dunlap + Ryan Robson (paint/maint), Margarito Saldana (walkthroughs only).",
-        "**Tacoma:** Armani Mitchell + **Gordon Esborg (started 2026-08-12)** — both do walkthrough, paint and maintenance. See the Tacoma section for the 2-paint-**2**-maint exception and independent QC."
+        "**Tacoma:** **Chris Phillips paints, Armani Mitchell maintains and does every walkthrough** (split roles, 2026-08-19). See the Tacoma section for the 2-paint-**2**-maint exception; QC is always Armani, own units included."
       ]
     },
     {
       "group": "Turns",
       "category": "",
-      "text": "**When a region GAINS a tech, the backlog does not move on its own — check it (learned twice, 2026-08-12).** Gap-fill only schedules melds with **no appointment**, so where every open turn is already placed the new tech gets **nothing** and sits idle behind the queue (Gordon: 25 Tacoma turns all on Armani to 2027-02-02; Justin: 65 Spokane turns all on Ron + Magoon to 2026-12-02, him 0). Redistributing means moving placed work, so it needs an explicit authorisation — the tool is `turn_rebalance_plan.js` (read-only, `REGION=tacoma|spokane`) then `turn_rebalance_apply.js`.",
+      "text": "**When a region GAINS a tech, the backlog does not move on its own — check it (learned twice, 2026-08-12).** Gap-fill only schedules melds with **no appointment**, so where every open turn is already placed the new tech gets **nothing** and sits idle behind the queue (Tacoma: 25 turns all on Armani to 2027-02-02 when a second tech arrived; Spokane: 65 turns all on Ron + Magoon to 2026-12-02 when Justin moved over, him 0). Redistributing means moving placed work, so it needs an explicit authorisation — the tool is `turn_rebalance_plan.js` (read-only, `REGION=tacoma|spokane`) then `turn_rebalance_apply.js`.",
       "details": [
         "🔑 **GAIN-ONLY is the default and the reason it is safe.** A unit's re-placement is kept **only if that unit finishes strictly earlier**; otherwise it is rolled back and the unit keeps exactly what it had. Without it a full re-pack only helps a backlog *concentrated* on too few techs: on an already-distributed, densely-packed schedule it reshuffles instead of improving (Spokane's first pass pushed **28** vacant units later for a 13-day tail gain; a Tacoma re-run pushed **13** later). Both were refused by the forward-only check — but refusing is not the same as doing the useful subset.",
         "⚠️ **When a placement is rolled back, its ORIGINAL days must be re-blocked.** They were freed during seeding on the assumption the unit would move; keeping the unit means those days are occupied again. Missing this put `c702 #A201` straight on top of the rolled-back `a210 #8`'s 09-02/09-03/09-07 on Magoon — caught by the apply pre-flight.",
@@ -414,7 +426,7 @@
       "text": "who does it, per region (rewritten 2026-08-12, Lee Roy).",
       "details": [
         "**Spokane: a TURN TECH does the QC, but NEVER the tech who turned the unit.** *\"if michael turns the unit, ron will do the walkthrough. if matt turns the unit brady will do the walkthrough or vise versa.\"* Pairs: **Magoon ↔ Ron**, **Matt Romme ↔ Brady Smith**. Justin Gutierrez has no fixed partner yet, so he falls back to \"any turn tech who didn't work on it\". This **retires David Sanchez from turn QC** — he keeps grounds/lawn. If every configured tech worked a unit, the run logs it rather than allowing self-QC.",
-        "**Tacoma: Armani does ALL walkthroughs, including on units he turned himself.** *\"in tacoma, armani does all the walkthroughs even if he turned the unit.\"* A deliberate exception — do not \"fix\" this toward independence. (Earlier the same day it was changed to split QC with Gordon on the assumption independence was wanted; that was reversed.)",
+        "**Tacoma: Armani does ALL walkthroughs, including on units he turned himself.** *\"in tacoma, armani does all the walkthroughs even if he turned the unit.\"* A deliberate exception — do not \"fix\" this toward independence. (Earlier the same day it was changed to split QC across two techs on the assumption independence was wanted; that was reversed.)",
         "**Tri-Cities:** Margarito Saldana does walkthroughs only (no paint/maint), so it is independent by construction."
       ]
     },
@@ -488,7 +500,7 @@
         "**Every VACATED unit is checked, not just the ones with turn work already scheduled (firm rule, Lee Roy 2026-08-03).** The riskiest unit is the one that just went vacant with **no turn scheduled at all** — it has no projected available date, and for months that meant it was filtered out before the Rent Ready check ever ran. That is exactly how **tc68 #D096** sat advertised as Rent Ready with a 7/30 move-out and no turn project in PropertyMeld. Only the **date** write depends on having a projection; the Rent Ready check never does.",
         "**Read turn completion from PropertyMeld directly, across OPEN and CLOSED projects.** A fully-turned unit's project is **closed**, so it is absent from the turns report feed — and reading completion from that feed makes a genuinely-turned unit look never-turned. (On 2026-08-03 this would have wrongly flipped 6 Tacoma units: tc34 #A106, tc68 #C64/#C65/#C67/#D080/#D094.) Always go to the source, and include closed projects.",
         "⚠️ **`pm_avail_plan_manual.json` IS APPLY-ONCE-THEN-DELETE, and a stale row silently undoes correct work (2026-08-12).** A manual row beats any builder row for the same unit, so a row left behind after its situation changed keeps forcing an obsolete date forever — and because the write \"succeeds\" and verifies against its own stale target, it reports ✅. `af_run.js` says so in a comment (\"the file is not auto-generated; delete it once applied\") but nothing enforces it.",
-        "Real incident: 19 rows written 2026-08-06 for the **single-tech Tacoma de-collide** schedule survived two full reschedules (the Gordon rebalance + a final-walkthrough refresh). On the next `af_run.js all` they **suppressed 11 Tacoma pull-ins** (e.g. tc68 #D088 forced to 11-01 when the real projection was 09-27) and **reverted tc68 #A02 from an authorised 08-20 push-out back to 08-13** — leaving it advertised *earlier* than it can actually be ready, which the ratchet then makes permanent.",
+        "Real incident: 19 rows written 2026-08-06 for the **single-tech Tacoma de-collide** schedule survived two full reschedules (a tech rebalance + a final-walkthrough refresh). On the next `af_run.js all` they **suppressed 11 Tacoma pull-ins** (e.g. tc68 #D088 forced to 11-01 when the real projection was 09-27) and **reverted tc68 #A02 from an authorised 08-20 push-out back to 08-13** — leaving it advertised *earlier* than it can actually be ready, which the ratchet then makes permanent.",
         "Rules: **prune a manual row the moment its basis changes**; a row whose `why` cites a schedule that no longer exists is obsolete by construction. Before any `af_run.js` run, diff the manual file against the fresh builder output and question every collision. Keep only rows encoding **evidence the builders cannot derive** (turn verified complete, melds cancelled instead of completed, a pest-date correction) — never rows that merely restate a schedule, because schedules move.",
         "**A Rent-Ready-only correction must not disturb the available date.** When a unit needs Rent Ready = No but has no new projected date, write its **existing** date straight back unchanged so the ratchet is untouched. If it has no date at all, there is **no safe automated write** — surface it for a person instead of writing a blank."
       ]
