@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "fetched_at": "2026-08-21T14:38:49.501Z",
+  "fetched_at": "2026-08-21T15:16:23.549Z",
   "summary": {
     "as_of": "2026-08-21",
     "units": 235,
@@ -6389,19 +6389,22 @@
         "status": "ACTIVE",
         "done": 0,
         "total": 8,
-        "first_appt": null,
-        "final_walk": null,
+        "first_appt": "2026-10-21",
+        "final_walk": "2026-10-29",
         "final_walk_done": null,
         "completed_date": null,
         "due": "2026-09-05",
-        "next_task": null,
+        "next_task": {
+          "date": "2026-08-25",
+          "task": "walkthrough"
+        },
         "tasks": [
           {
             "task": "A - Initial walkthrough",
             "cat": "walkthrough",
             "done": false,
-            "date": null,
-            "who": null,
+            "date": "2026-08-25",
+            "who": "Ron Cramer",
             "completed": null,
             "vendor": false
           },
@@ -6418,8 +6421,8 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": null,
-            "who": null,
+            "date": "2026-10-21",
+            "who": "Ron Cramer",
             "completed": null,
             "vendor": false
           },
@@ -6427,8 +6430,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": null,
-            "who": null,
+            "date": "2026-10-22",
+            "who": "Ron Cramer",
             "completed": null,
             "vendor": false
           },
@@ -6463,14 +6466,19 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": null,
-            "who": null,
+            "date": "2026-10-29",
+            "who": "Micheal Magoon",
             "completed": null,
             "vendor": false
           }
         ]
       },
-      "next_appt": null,
+      "next_appt": {
+        "date": "2026-08-25",
+        "cat": "walkthrough",
+        "who": "Ron Cramer",
+        "brief": "A - Initial walkthrough"
+      },
       "cost": {
         "code": "c313-1",
         "labor": 0,
@@ -37721,19 +37729,22 @@
         "status": "ACTIVE",
         "done": 0,
         "total": 8,
-        "first_appt": null,
-        "final_walk": null,
+        "first_appt": "2026-10-21",
+        "final_walk": "2026-11-02",
         "final_walk_done": null,
         "completed_date": null,
         "due": "2026-10-15",
-        "next_task": null,
+        "next_task": {
+          "date": "2026-10-01",
+          "task": "walkthrough"
+        },
         "tasks": [
           {
             "task": "A - Initial walkthrough",
             "cat": "walkthrough",
             "done": false,
-            "date": null,
-            "who": null,
+            "date": "2026-10-01",
+            "who": "Margarito Saldana",
             "completed": null,
             "vendor": false
           },
@@ -37750,8 +37761,8 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": null,
-            "who": null,
+            "date": "2026-10-21",
+            "who": "James Dunlap",
             "completed": null,
             "vendor": false
           },
@@ -37759,8 +37770,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": null,
-            "who": null,
+            "date": "2026-10-26",
+            "who": "James Dunlap",
             "completed": null,
             "vendor": false
           },
@@ -37795,14 +37806,19 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": null,
-            "who": null,
+            "date": "2026-11-02",
+            "who": "Margarito Saldana",
             "completed": null,
             "vendor": false
           }
         ]
       },
-      "next_appt": null,
+      "next_appt": {
+        "date": "2026-10-01",
+        "cat": "walkthrough",
+        "who": "Margarito Saldana",
+        "brief": "A - Initial walkthrough"
+      },
       "cost": {
         "code": "rl16-A14",
         "labor": 0,
@@ -46179,7 +46195,7 @@
       "vacant": true,
       "days_vacant": 52,
       "move_out": "2026-06-30",
-      "available_on": "2026-08-15",
+      "available_on": null,
       "ready_on": "2026-08-15",
       "target_date": "2026-07-20",
       "next_move_in": "2026-09-01",
