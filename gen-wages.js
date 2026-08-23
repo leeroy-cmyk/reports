@@ -59,6 +59,8 @@ const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<script src="auth.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Team Wages</title>
 <style>
