@@ -1,17 +1,17 @@
 {
   "ok": true,
-  "fetched_at": "2026-08-24T15:58:06.322Z",
+  "fetched_at": "2026-08-24T17:17:26.812Z",
   "summary": {
     "as_of": "2026-08-24",
-    "units": 236,
-    "active": 70,
-    "ready": 4,
+    "units": 237,
+    "active": 71,
+    "ready": 3,
     "notice": 23,
     "at_risk": 26,
     "unscheduled": 10,
     "accruing": 13586.14,
-    "avg_days_open": 30,
-    "revenue_at_risk": 3342.7
+    "avg_days_open": 29,
+    "revenue_at_risk": 3397.53
   },
   "rows": [
     {
@@ -1751,7 +1751,7 @@
             "cat": "walkthrough",
             "done": false,
             "date": "2026-08-03",
-            "who": "Ryan Robson",
+            "who": "Margarito Saldana",
             "completed": null,
             "vendor": false
           },
@@ -2534,7 +2534,7 @@
             "cat": "paint",
             "done": false,
             "date": "2026-09-21",
-            "who": "Ryan Robson",
+            "who": "Margarito Saldana",
             "completed": null,
             "vendor": false
           },
@@ -2543,7 +2543,7 @@
             "cat": "maintenance",
             "done": false,
             "date": "2026-09-23",
-            "who": "Ryan Robson",
+            "who": "Margarito Saldana",
             "completed": null,
             "vendor": false
           },
@@ -5901,12 +5901,12 @@
       "addr": "3131 So Cook St 1 Spokane, WA 99223",
       "unit_id": 709,
       "unit_status": "Vacant-Unrented",
-      "rent_ready": "Yes",
+      "rent_ready": "No",
       "vacant": true,
       "days_vacant": 3,
       "move_out": "2026-08-21",
-      "available_on": "2026-09-10",
-      "ready_on": "2026-09-10",
+      "available_on": "2026-11-01",
+      "ready_on": "2026-11-01",
       "target_date": "2026-09-10",
       "next_move_in": null,
       "rent": "1645.00",
@@ -6018,11 +6018,11 @@
         "laborEntries": [],
         "materialEntries": []
       },
-      "stage": "Ready",
-      "stage_ord": 7,
+      "stage": "Walkthrough",
+      "stage_ord": 1,
       "days_elapsed": 3,
       "days_to_turn": null,
-      "status": "ready"
+      "status": "active"
     },
     {
       "key": "c313|10",
@@ -6283,11 +6283,18 @@
       },
       "cost": {
         "code": "c313-18",
-        "labor": 1027.62,
+        "labor": 1092.51,
         "materials": 274.88,
-        "total": 1302.5,
+        "total": 1367.39,
         "estimate": 0,
         "laborEntries": [
+          {
+            "d": "2026-08-24",
+            "emp": "Ronald D. Cramer",
+            "hrs": 2.52,
+            "cost": 64.89,
+            "cat": "Turn"
+          },
           {
             "d": "2026-08-14",
             "emp": "Micheal N. Magoon",
@@ -10356,7 +10363,7 @@
       "days_vacant": 24,
       "move_out": "2026-07-31",
       "available_on": "2026-08-20",
-      "ready_on": "2026-08-29",
+      "ready_on": "2026-08-20",
       "target_date": "2026-08-20",
       "next_move_in": null,
       "rent": "1495.00",
@@ -10854,7 +10861,7 @@
       "days_vacant": 24,
       "move_out": "2026-07-31",
       "available_on": "2026-08-20",
-      "ready_on": "2026-08-29",
+      "ready_on": "2026-08-20",
       "target_date": "2026-08-20",
       "next_move_in": null,
       "rent": "1495.00",
@@ -16330,7 +16337,7 @@
             "cat": "paint",
             "done": false,
             "date": "2026-09-09",
-            "who": "Ryan Robson",
+            "who": "Margarito Saldana",
             "completed": null,
             "vendor": false
           },
@@ -16339,7 +16346,7 @@
             "cat": "maintenance",
             "done": false,
             "date": "2026-09-14",
-            "who": "Ryan Robson",
+            "who": "Margarito Saldana",
             "completed": null,
             "vendor": false
           },
@@ -16485,7 +16492,7 @@
             "cat": "paint",
             "done": false,
             "date": "2026-09-21",
-            "who": "James Dunlap",
+            "who": "Matthew Williams",
             "completed": null,
             "vendor": false
           },
@@ -16494,7 +16501,7 @@
             "cat": "maintenance",
             "done": false,
             "date": "2026-09-23",
-            "who": "James Dunlap",
+            "who": "Matthew Williams",
             "completed": null,
             "vendor": false
           },
@@ -16530,7 +16537,7 @@
       "next_appt": {
         "date": "2026-09-21",
         "cat": "paint",
-        "who": "James Dunlap",
+        "who": "Matthew Williams",
         "brief": "C - Paint Prep / Paint"
       },
       "cost": {
@@ -16829,7 +16836,7 @@
             "cat": "paint",
             "done": false,
             "date": "2026-10-12",
-            "who": "James Dunlap",
+            "who": "Matthew Williams",
             "completed": null,
             "vendor": false
           },
@@ -16838,7 +16845,7 @@
             "cat": "maintenance",
             "done": false,
             "date": "2026-10-14",
-            "who": "James Dunlap",
+            "who": "Matthew Williams",
             "completed": null,
             "vendor": false
           },
@@ -17280,7 +17287,7 @@
             "cat": "paint",
             "done": false,
             "date": "2026-08-17",
-            "who": "Ryan Robson",
+            "who": "Margarito Saldana",
             "completed": null,
             "vendor": false
           },
@@ -17289,7 +17296,7 @@
             "cat": "maintenance",
             "done": false,
             "date": "2026-10-15",
-            "who": "Ryan Robson",
+            "who": "Margarito Saldana",
             "completed": null,
             "vendor": false
           },
@@ -17334,7 +17341,7 @@
       "next_appt": {
         "date": "2026-10-15",
         "cat": "maintenance",
-        "who": "Ryan Robson",
+        "who": "Margarito Saldana",
         "brief": "D - Maintenance"
       },
       "cost": {
@@ -17820,7 +17827,7 @@
             "cat": "paint",
             "done": false,
             "date": "2026-09-15",
-            "who": "James Dunlap",
+            "who": "Matthew Williams",
             "completed": null,
             "vendor": false
           },
@@ -17829,7 +17836,7 @@
             "cat": "maintenance",
             "done": false,
             "date": "2026-09-17",
-            "who": "James Dunlap",
+            "who": "Matthew Williams",
             "completed": null,
             "vendor": false
           },
@@ -18605,7 +18612,7 @@
             "cat": "paint",
             "done": false,
             "date": "2026-09-24",
-            "who": "Ryan Robson",
+            "who": "Margarito Saldana",
             "completed": null,
             "vendor": false
           },
@@ -18614,7 +18621,7 @@
             "cat": "maintenance",
             "done": false,
             "date": "2026-09-29",
-            "who": "Ryan Robson",
+            "who": "Margarito Saldana",
             "completed": null,
             "vendor": false
           },
@@ -18650,7 +18657,7 @@
       "next_appt": {
         "date": "2026-09-24",
         "cat": "paint",
-        "who": "Ryan Robson",
+        "who": "Margarito Saldana",
         "brief": "C - Paint Prep / Paint"
       },
       "cost": {
@@ -19320,7 +19327,7 @@
             "cat": "paint",
             "done": false,
             "date": "2026-09-28",
-            "who": "James Dunlap",
+            "who": "Matthew Williams",
             "completed": null,
             "vendor": false
           },
@@ -19329,7 +19336,7 @@
             "cat": "maintenance",
             "done": false,
             "date": "2026-09-29",
-            "who": "James Dunlap",
+            "who": "Matthew Williams",
             "completed": null,
             "vendor": false
           },
@@ -19365,7 +19372,7 @@
       "next_appt": {
         "date": "2026-09-24",
         "cat": "paint",
-        "who": "James Dunlap",
+        "who": "Matthew Williams",
         "brief": "C - Paint Prep / Paint"
       },
       "cost": {
@@ -19712,6 +19719,117 @@
       "stage_ord": 7,
       "days_elapsed": 36,
       "days_to_turn": 36,
+      "status": "complete"
+    },
+    {
+      "key": "kn47|e101",
+      "prop": "kn47",
+      "unit": "E101",
+      "at_risk": [],
+      "property_name": "kn47 K1",
+      "city": "Kennewick",
+      "addr": "4711 W Metaline Avenue E101 Kennewick, WA 99336",
+      "unit_id": 879,
+      "unit_status": "Vacant-Unrented",
+      "rent_ready": "No",
+      "vacant": true,
+      "days_vacant": 3,
+      "move_out": "2026-08-21",
+      "available_on": "2026-09-10",
+      "ready_on": "2026-09-10",
+      "target_date": "2026-09-10",
+      "next_move_in": null,
+      "rent": "931.00",
+      "bed_bath": "1/1.00",
+      "sqft": 600,
+      "region": "Tri-Cities",
+      "pm": {
+        "projId": 192557,
+        "name": "Turn - 4711 W Metaline Avenue UNIT E101",
+        "status": "COMPLETE",
+        "done": 7,
+        "total": 7,
+        "first_appt": "2025-10-22",
+        "final_walk": "2025-10-24",
+        "final_walk_done": "2025-10-28",
+        "completed_date": "2025-10-28",
+        "due": "2026-06-05",
+        "next_task": null,
+        "tasks": null
+      },
+      "next_appt": null,
+      "cost": {
+        "code": "kn47-k1-E101",
+        "labor": 541.65,
+        "materials": 1488.09,
+        "total": 2029.74,
+        "estimate": 0,
+        "laborEntries": [
+          {
+            "d": "2025-10-17",
+            "emp": "Ryan G. Robson",
+            "hrs": 3.37,
+            "cost": 77.51,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-10-16",
+            "emp": "Ryan G. Robson",
+            "hrs": 10.5,
+            "cost": 241.5,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-10-15",
+            "emp": "Ryan G. Robson",
+            "hrs": 9.68,
+            "cost": 222.64,
+            "cat": "Turn"
+          }
+        ],
+        "materialEntries": [
+          {
+            "d": "2025-10-27",
+            "amt": 180,
+            "cat": "Turn",
+            "ln": "montiel",
+            "src": "ramp"
+          },
+          {
+            "d": "2025-10-23",
+            "amt": 350,
+            "cat": "Turn",
+            "ln": "montiel",
+            "src": "ramp"
+          },
+          {
+            "d": "2025-10-16",
+            "amt": 6.51,
+            "cat": "Turn",
+            "ln": "robson",
+            "src": "ramp"
+          },
+          {
+            "d": "2025-10-16",
+            "amt": 376.85,
+            "cat": "Turn",
+            "ln": "robson",
+            "src": "ramp"
+          },
+          {
+            "d": "2025-10-15",
+            "amt": 574.73,
+            "cat": "Turn",
+            "ln": "robson",
+            "src": "ramp"
+          }
+        ]
+      },
+      "turn_end": "2025-10-28",
+      "stage": null,
+      "stage_ord": 0,
+      "days_elapsed": 0,
+      "days_to_turn": -297,
       "status": "complete"
     },
     {
@@ -22199,8 +22317,8 @@
       "vacant": false,
       "days_vacant": null,
       "move_out": "2026-08-25",
-      "available_on": "2026-09-14",
-      "ready_on": "2026-09-14",
+      "available_on": "2026-11-08",
+      "ready_on": "2026-11-08",
       "target_date": "2026-09-14",
       "next_move_in": null,
       "rent": "1132.00",
@@ -22208,20 +22326,101 @@
       "sqft": 575,
       "region": "Tri-Cities",
       "pm": {
-        "projId": 215675,
-        "name": "Turn - 4711 W Metaline Avenue UNIT H204",
-        "status": "COMPLETE",
-        "done": 6,
-        "total": 6,
-        "first_appt": "2026-04-09",
-        "final_walk": "2026-04-21",
-        "final_walk_done": "2026-04-24",
-        "completed_date": "2026-04-24",
-        "due": "2026-04-21",
-        "next_task": null,
-        "tasks": null
+        "projId": 241042,
+        "name": "Standard Unit Turn",
+        "status": "ACTIVE",
+        "done": 0,
+        "total": 8,
+        "first_appt": "2026-10-26",
+        "final_walk": "2026-11-05",
+        "final_walk_done": null,
+        "completed_date": null,
+        "due": "2026-09-09",
+        "next_task": {
+          "date": "2026-08-27",
+          "task": "walkthrough"
+        },
+        "tasks": [
+          {
+            "task": "A - Initial walkthrough",
+            "cat": "walkthrough",
+            "done": false,
+            "date": "2026-08-27",
+            "who": "Margarito Saldana",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Appfolio Estimate",
+            "cat": "estimate",
+            "done": false,
+            "date": null,
+            "who": "Dulce Salinas",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "C - Paint",
+            "cat": "paint",
+            "done": false,
+            "date": "2026-10-26",
+            "who": "Margarito Saldana",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "D - Maintenance",
+            "cat": "maintenance",
+            "done": false,
+            "date": "2026-10-29",
+            "who": "Margarito Saldana",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "E - Carpet Cleaning",
+            "cat": "carpet",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "F - Cleaning",
+            "cat": "cleaning",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "G - Verify Mailbox Lockbox & Mailbox Keys",
+            "cat": "other",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Final Walkthrough",
+            "cat": "final-walk",
+            "done": false,
+            "date": "2026-11-05",
+            "who": "Margarito Saldana",
+            "completed": null,
+            "vendor": false
+          }
+        ]
       },
-      "next_appt": null,
+      "next_appt": {
+        "date": "2026-08-27",
+        "cat": "walkthrough",
+        "who": "Margarito Saldana",
+        "brief": "A - Initial walkthrough"
+      },
       "cost": {
         "code": "kn47-k1-H204",
         "labor": 213,
@@ -22318,8 +22517,8 @@
         ]
       },
       "turn_end": "2026-04-24",
-      "stage": "Move-out",
-      "stage_ord": 0,
+      "stage": "Walkthrough",
+      "stage_ord": 1,
       "days_elapsed": 0,
       "days_to_turn": -123,
       "status": "complete"
@@ -22385,7 +22584,7 @@
             "cat": "paint",
             "done": false,
             "date": "2026-09-30",
-            "who": "James Dunlap",
+            "who": "Matthew Williams",
             "completed": null,
             "vendor": false
           },
@@ -22394,7 +22593,7 @@
             "cat": "maintenance",
             "done": false,
             "date": "2026-10-05",
-            "who": "James Dunlap",
+            "who": "Matthew Williams",
             "completed": null,
             "vendor": false
           },
@@ -22430,7 +22629,7 @@
       "next_appt": {
         "date": "2026-09-30",
         "cat": "paint",
-        "who": "James Dunlap",
+        "who": "Matthew Williams",
         "brief": "C - Paint Prep / Paint"
       },
       "cost": {
@@ -23868,7 +24067,7 @@
             "cat": "paint",
             "done": false,
             "date": "2026-10-12",
-            "who": "Ryan Robson",
+            "who": "Margarito Saldana",
             "completed": null,
             "vendor": false
           },
@@ -23877,7 +24076,7 @@
             "cat": "maintenance",
             "done": false,
             "date": "2026-10-14",
-            "who": "Ryan Robson",
+            "who": "Margarito Saldana",
             "completed": null,
             "vendor": false
           },
@@ -23931,7 +24130,7 @@
       "next_appt": {
         "date": "2026-10-12",
         "cat": "paint",
-        "who": "Ryan Robson",
+        "who": "Margarito Saldana",
         "brief": "C - Paint Prep / Paint (clone)"
       },
       "cost": {
@@ -24511,7 +24710,7 @@
             "cat": "paint",
             "done": false,
             "date": "2026-08-19",
-            "who": "Ryan Robson",
+            "who": "Margarito Saldana",
             "completed": null,
             "vendor": false
           },
@@ -24520,7 +24719,7 @@
             "cat": "maintenance",
             "done": false,
             "date": "2026-08-24",
-            "who": "Ryan Robson",
+            "who": "Margarito Saldana",
             "completed": null,
             "vendor": false
           },
@@ -24565,7 +24764,7 @@
       "next_appt": {
         "date": "2026-08-24",
         "cat": "maintenance",
-        "who": "Ryan Robson",
+        "who": "Margarito Saldana",
         "brief": "D - Maintenance"
       },
       "cost": {
@@ -25116,15 +25315,110 @@
       "vacant": false,
       "days_vacant": null,
       "move_out": "2026-08-25",
-      "available_on": "2026-09-14",
-      "ready_on": "2026-09-14",
+      "available_on": "2026-11-08",
+      "ready_on": "2026-11-08",
       "target_date": "2026-09-14",
       "next_move_in": null,
       "rent": "1132.00",
       "bed_bath": "1/1.00",
       "sqft": 575,
       "region": "Tri-Cities",
-      "next_appt": null,
+      "pm": {
+        "projId": 241043,
+        "name": "Standard Unit Turn",
+        "status": "ACTIVE",
+        "done": 0,
+        "total": 8,
+        "first_appt": "2026-10-27",
+        "final_walk": "2026-11-05",
+        "final_walk_done": null,
+        "completed_date": null,
+        "due": "2026-09-09",
+        "next_task": {
+          "date": "2026-08-27",
+          "task": "walkthrough"
+        },
+        "tasks": [
+          {
+            "task": "A - Initial walkthrough",
+            "cat": "walkthrough",
+            "done": false,
+            "date": "2026-08-27",
+            "who": "Margarito Saldana",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Appfolio Estimate",
+            "cat": "estimate",
+            "done": false,
+            "date": null,
+            "who": "Dulce Salinas",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "C - Paint",
+            "cat": "paint",
+            "done": false,
+            "date": "2026-10-27",
+            "who": "Matthew Williams",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "D - Maintenance",
+            "cat": "maintenance",
+            "done": false,
+            "date": "2026-10-29",
+            "who": "Matthew Williams",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "E - Carpet Cleaning",
+            "cat": "carpet",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "F - Cleaning",
+            "cat": "cleaning",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "G - Verify Mailbox Lockbox & Mailbox Keys",
+            "cat": "other",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Final Walkthrough",
+            "cat": "final-walk",
+            "done": false,
+            "date": "2026-11-05",
+            "who": "Margarito Saldana",
+            "completed": null,
+            "vendor": false
+          }
+        ]
+      },
+      "next_appt": {
+        "date": "2026-08-27",
+        "cat": "walkthrough",
+        "who": "Margarito Saldana",
+        "brief": "A - Initial walkthrough"
+      },
       "cost": {
         "code": "kn47-M202",
         "labor": 0,
@@ -25134,8 +25428,8 @@
         "laborEntries": [],
         "materialEntries": []
       },
-      "stage": "Move-out",
-      "stage_ord": 0,
+      "stage": "Walkthrough",
+      "stage_ord": 1,
       "days_elapsed": 0,
       "days_to_turn": null,
       "status": "notice"
@@ -29309,7 +29603,7 @@
             "cat": "paint",
             "done": false,
             "date": "2026-09-30",
-            "who": "Ryan Robson",
+            "who": "Margarito Saldana",
             "completed": null,
             "vendor": false
           },
@@ -29318,7 +29612,7 @@
             "cat": "maintenance",
             "done": false,
             "date": "2026-10-05",
-            "who": "Ryan Robson",
+            "who": "Margarito Saldana",
             "completed": null,
             "vendor": false
           },
@@ -29960,7 +30254,7 @@
             "cat": "paint",
             "done": false,
             "date": "2026-10-06",
-            "who": "Ryan Robson",
+            "who": "Margarito Saldana",
             "completed": null,
             "vendor": false
           },
@@ -29969,7 +30263,7 @@
             "cat": "maintenance",
             "done": false,
             "date": "2026-10-08",
-            "who": "Ryan Robson",
+            "who": "Margarito Saldana",
             "completed": null,
             "vendor": false
           },
@@ -30005,7 +30299,7 @@
       "next_appt": {
         "date": "2026-10-06",
         "cat": "paint",
-        "who": "Ryan Robson",
+        "who": "Margarito Saldana",
         "brief": "C - Paint Prep / Paint"
       },
       "cost": {
@@ -31787,7 +32081,7 @@
             "cat": "paint",
             "done": false,
             "date": "2026-09-16",
-            "who": "Ryan Robson",
+            "who": "Margarito Saldana",
             "completed": null,
             "vendor": false
           },
@@ -31796,7 +32090,7 @@
             "cat": "maintenance",
             "done": false,
             "date": "2026-09-17",
-            "who": "Ryan Robson",
+            "who": "Margarito Saldana",
             "completed": null,
             "vendor": false
           },
@@ -32858,7 +33152,7 @@
       "vacant": true,
       "days_vacant": 85,
       "move_out": "2026-05-31",
-      "available_on": null,
+      "available_on": "2026-07-04",
       "ready_on": "2026-07-04",
       "target_date": "2026-06-20",
       "next_move_in": "2026-09-01",
@@ -33312,7 +33606,7 @@
             "cat": "paint",
             "done": false,
             "date": "2026-10-15",
-            "who": "James Dunlap",
+            "who": "Matthew Williams",
             "completed": null,
             "vendor": false
           },
@@ -33321,7 +33615,7 @@
             "cat": "maintenance",
             "done": false,
             "date": "2026-10-20",
-            "who": "James Dunlap",
+            "who": "Matthew Williams",
             "completed": null,
             "vendor": false
           },
@@ -33878,7 +34172,7 @@
             "cat": "paint",
             "done": false,
             "date": "2026-08-25",
-            "who": "Ryan Robson",
+            "who": "Margarito Saldana",
             "completed": null,
             "vendor": false
           },
@@ -33887,7 +34181,7 @@
             "cat": "maintenance",
             "done": false,
             "date": "2026-08-27",
-            "who": "Ryan Robson",
+            "who": "Margarito Saldana",
             "completed": null,
             "vendor": false
           },
@@ -33923,7 +34217,7 @@
       "next_appt": {
         "date": "2026-08-25",
         "cat": "paint",
-        "who": "Ryan Robson",
+        "who": "Margarito Saldana",
         "brief": "C - Paint Prep / Paint"
       },
       "cost": {
@@ -36670,7 +36964,7 @@
             "cat": "paint",
             "done": false,
             "date": "2026-09-02",
-            "who": "James Dunlap",
+            "who": "Matthew Williams",
             "completed": null,
             "vendor": false
           },
@@ -36679,7 +36973,7 @@
             "cat": "maintenance",
             "done": false,
             "date": "2026-09-03",
-            "who": "James Dunlap",
+            "who": "Matthew Williams",
             "completed": null,
             "vendor": false
           },
@@ -36723,9 +37017,9 @@
       },
       "next_appt": {
         "date": "2026-09-01",
-        "cat": "paint",
-        "who": "James Dunlap",
-        "brief": "C - Paint Prep / Paint"
+        "cat": "walkthrough",
+        "who": "Margarito Saldana",
+        "brief": "A - Initial walkthrough"
       },
       "cost": {
         "code": "rl16-A08",
@@ -37187,8 +37481,8 @@
       "vacant": false,
       "days_vacant": null,
       "move_out": "2026-09-30",
-      "available_on": "2026-10-20",
-      "ready_on": "2026-10-20",
+      "available_on": "2026-11-05",
+      "ready_on": "2026-11-05",
       "target_date": "2026-10-20",
       "next_move_in": null,
       "rent": "1443.00",
@@ -37234,7 +37528,7 @@
             "cat": "paint",
             "done": false,
             "date": "2026-10-21",
-            "who": "James Dunlap",
+            "who": "Matthew Williams",
             "completed": null,
             "vendor": false
           },
@@ -37243,7 +37537,7 @@
             "cat": "maintenance",
             "done": false,
             "date": "2026-10-26",
-            "who": "James Dunlap",
+            "who": "Matthew Williams",
             "completed": null,
             "vendor": false
           },
@@ -37845,7 +38139,7 @@
             "cat": "paint",
             "done": false,
             "date": "2026-08-31",
-            "who": "Ryan Robson",
+            "who": "Margarito Saldana",
             "completed": null,
             "vendor": false
           },
@@ -37854,7 +38148,7 @@
             "cat": "maintenance",
             "done": false,
             "date": "2026-09-02",
-            "who": "Ryan Robson",
+            "who": "Margarito Saldana",
             "completed": null,
             "vendor": false
           },
@@ -37890,7 +38184,7 @@
       "next_appt": {
         "date": "2026-08-31",
         "cat": "paint",
-        "who": "Ryan Robson",
+        "who": "Margarito Saldana",
         "brief": "C - Paint Prep / Paint"
       },
       "cost": {
@@ -38536,7 +38830,7 @@
       "vacant": true,
       "days_vacant": 24,
       "move_out": "2026-07-31",
-      "available_on": null,
+      "available_on": "2026-09-10",
       "ready_on": "2026-09-10",
       "target_date": "2026-08-20",
       "next_move_in": "2026-09-10",
@@ -38583,7 +38877,7 @@
             "cat": "paint",
             "done": false,
             "date": "2026-08-26",
-            "who": "James Dunlap",
+            "who": "Matthew Williams",
             "completed": null,
             "vendor": false
           },
@@ -38592,7 +38886,7 @@
             "cat": "maintenance",
             "done": false,
             "date": "2026-08-31",
-            "who": "James Dunlap",
+            "who": "Matthew Williams",
             "completed": null,
             "vendor": false
           },
@@ -38628,7 +38922,7 @@
       "next_appt": {
         "date": "2026-08-26",
         "cat": "paint",
-        "who": "James Dunlap",
+        "who": "Matthew Williams",
         "brief": "C - Paint Prep / Paint"
       },
       "cost": {
@@ -38715,7 +39009,7 @@
             "cat": "paint",
             "done": false,
             "date": "2026-08-24",
-            "who": "James Dunlap",
+            "who": "Matthew Williams",
             "completed": null,
             "vendor": false
           },
@@ -38724,7 +39018,7 @@
             "cat": "maintenance",
             "done": false,
             "date": "2026-08-25",
-            "who": "James Dunlap",
+            "who": "Matthew Williams",
             "completed": null,
             "vendor": false
           },
@@ -38760,7 +39054,7 @@
       "next_appt": {
         "date": "2026-08-24",
         "cat": "paint",
-        "who": "James Dunlap",
+        "who": "Matthew Williams",
         "brief": "C - Paint Prep / Paint"
       },
       "cost": {
@@ -38855,7 +39149,7 @@
             "cat": "paint",
             "done": false,
             "date": "2026-10-19",
-            "who": "Ryan Robson",
+            "who": "Margarito Saldana",
             "completed": null,
             "vendor": false
           },
@@ -38864,7 +39158,7 @@
             "cat": "maintenance",
             "done": false,
             "date": "2026-10-21",
-            "who": "Ryan Robson",
+            "who": "Margarito Saldana",
             "completed": null,
             "vendor": false
           },
@@ -40394,7 +40688,7 @@
             "cat": "paint",
             "done": false,
             "date": "2026-10-06",
-            "who": "James Dunlap",
+            "who": "Matthew Williams",
             "completed": null,
             "vendor": false
           },
@@ -40403,7 +40697,7 @@
             "cat": "maintenance",
             "done": false,
             "date": "2026-10-08",
-            "who": "James Dunlap",
+            "who": "Matthew Williams",
             "completed": null,
             "vendor": false
           },
@@ -41019,7 +41313,7 @@
             "cat": "paint",
             "done": false,
             "date": "2026-09-03",
-            "who": "Ryan Robson",
+            "who": "Margarito Saldana",
             "completed": null,
             "vendor": false
           },
@@ -41028,7 +41322,7 @@
             "cat": "maintenance",
             "done": false,
             "date": "2026-09-08",
-            "who": "Ryan Robson",
+            "who": "Margarito Saldana",
             "completed": null,
             "vendor": false
           },
@@ -41161,7 +41455,7 @@
             "cat": "paint",
             "done": false,
             "date": "2026-09-07",
-            "who": "James Dunlap",
+            "who": "Matthew Williams",
             "completed": null,
             "vendor": false
           },
@@ -41170,7 +41464,7 @@
             "cat": "maintenance",
             "done": false,
             "date": "2026-09-09",
-            "who": "James Dunlap",
+            "who": "Matthew Williams",
             "completed": null,
             "vendor": false
           },
@@ -41351,7 +41645,7 @@
             "cat": "paint",
             "done": false,
             "date": "2026-08-06",
-            "who": "James Dunlap",
+            "who": "Matthew Williams",
             "completed": null,
             "vendor": false
           },
@@ -41360,7 +41654,7 @@
             "cat": "maintenance",
             "done": false,
             "date": "2026-09-14",
-            "who": "James Dunlap",
+            "who": "Matthew Williams",
             "completed": null,
             "vendor": false
           },
@@ -41396,7 +41690,7 @@
       "next_appt": {
         "date": "2026-09-14",
         "cat": "maintenance",
-        "who": "James Dunlap",
+        "who": "Matthew Williams",
         "brief": "D - Maintenance"
       },
       "cost": {
@@ -41839,7 +42133,7 @@
             "cat": "paint",
             "done": false,
             "date": "2026-08-17",
-            "who": "James Dunlap",
+            "who": "Matthew Williams",
             "completed": null,
             "vendor": false
           },
@@ -41848,7 +42142,7 @@
             "cat": "maintenance",
             "done": false,
             "date": "2026-09-10",
-            "who": "James Dunlap",
+            "who": "Matthew Williams",
             "completed": null,
             "vendor": false
           },
@@ -41893,7 +42187,7 @@
       "next_appt": {
         "date": "2026-09-10",
         "cat": "maintenance",
-        "who": "James Dunlap",
+        "who": "Matthew Williams",
         "brief": "D - Maintenance"
       },
       "cost": {
@@ -44065,6 +44359,93 @@
       "bed_bath": "1/1.00",
       "sqft": 310,
       "region": "Spokane",
+      "pm": {
+        "projId": 241044,
+        "name": "Standard Unit Turn",
+        "status": "ACTIVE",
+        "done": 0,
+        "total": 8,
+        "first_appt": null,
+        "final_walk": null,
+        "final_walk_done": null,
+        "completed_date": null,
+        "due": "2026-09-22",
+        "next_task": null,
+        "tasks": [
+          {
+            "task": "A - Initial walkthrough",
+            "cat": "walkthrough",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Appfolio Estimate",
+            "cat": "estimate",
+            "done": false,
+            "date": null,
+            "who": "Dulce Salinas",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "C - Paint",
+            "cat": "paint",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "D - Maintenance",
+            "cat": "maintenance",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "E - Carpet Cleaning",
+            "cat": "carpet",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "F - Cleaning",
+            "cat": "cleaning",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "G - Verify Mailbox Lockbox & Mailbox Keys",
+            "cat": "other",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Final Walkthrough",
+            "cat": "final-walk",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          }
+        ]
+      },
       "next_appt": null,
       "cost": {
         "code": "s300-4",
@@ -44075,8 +44456,8 @@
         "laborEntries": [],
         "materialEntries": []
       },
-      "stage": "Move-out",
-      "stage_ord": 0,
+      "stage": "Walkthrough",
+      "stage_ord": 1,
       "days_elapsed": 0,
       "days_to_turn": null,
       "status": "notice"
@@ -45747,8 +46128,8 @@
       "vacant": true,
       "days_vacant": 55,
       "move_out": "2026-06-30",
-      "available_on": null,
-      "ready_on": "2026-08-15",
+      "available_on": "2026-08-20",
+      "ready_on": "2026-08-20",
       "target_date": "2026-07-20",
       "next_move_in": "2026-09-01",
       "rent": "1775.00",
