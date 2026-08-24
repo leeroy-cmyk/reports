@@ -1,11 +1,11 @@
 {
   "ok": true,
-  "fetched_at": "2026-08-24T03:57:19.760Z",
+  "fetched_at": "2026-08-24T05:40:27.559Z",
   "summary": {
     "as_of": "2026-08-23",
     "units": 236,
     "active": 70,
-    "ready": 6,
+    "ready": 4,
     "notice": 23,
     "at_risk": 25,
     "unscheduled": 10,
@@ -10240,26 +10240,23 @@
       "pm": {
         "projId": 239158,
         "name": "Standard Unit Turn",
-        "status": "ACTIVE",
-        "done": 3,
+        "status": "COMPLETE",
+        "done": 8,
         "total": 8,
         "first_appt": "2026-08-17",
         "final_walk": "2026-08-26",
-        "final_walk_done": null,
-        "completed_date": "2026-08-20",
+        "final_walk_done": "2026-08-23",
+        "completed_date": "2026-08-23",
         "due": "2026-08-15",
-        "next_task": {
-          "date": "2026-08-26",
-          "task": "final-walk"
-        },
+        "next_task": null,
         "tasks": [
           {
             "task": "Appfolio Estimate",
             "cat": "estimate",
-            "done": false,
+            "done": true,
             "date": null,
             "who": "Dulce Salinas",
-            "completed": null,
+            "completed": "2026-08-23",
             "vendor": false
           },
           {
@@ -10283,10 +10280,10 @@
           {
             "task": "E - Carpet Cleaning",
             "cat": "carpet",
-            "done": false,
+            "done": true,
             "date": null,
             "who": null,
-            "completed": null,
+            "completed": "2026-08-23",
             "vendor": false
           },
           {
@@ -10301,29 +10298,24 @@
           {
             "task": "G - Verify Mailbox Lockbox & Mailbox Keys",
             "cat": "other",
-            "done": false,
+            "done": true,
             "date": null,
             "who": null,
-            "completed": null,
+            "completed": "2026-08-23",
             "vendor": false
           },
           {
             "task": "Final Walkthrough",
             "cat": "final-walk",
-            "done": false,
+            "done": true,
             "date": "2026-08-26",
             "who": "Matt Romme",
-            "completed": null,
+            "completed": "2026-08-23",
             "vendor": false
           }
         ]
       },
-      "next_appt": {
-        "date": "2026-08-26",
-        "cat": "final-walk",
-        "who": "Matt Romme",
-        "brief": "Final Walkthrough"
-      },
+      "next_appt": null,
       "cost": {
         "code": "c702-J103",
         "labor": 0,
@@ -10333,11 +10325,12 @@
         "laborEntries": [],
         "materialEntries": []
       },
+      "turn_end": "2026-08-23",
       "stage": "Ready",
       "stage_ord": 7,
       "days_elapsed": 23,
-      "days_to_turn": null,
-      "status": "ready"
+      "days_to_turn": 23,
+      "status": "complete"
     },
     {
       "key": "c702|j301",
@@ -10745,26 +10738,23 @@
       "pm": {
         "projId": 239157,
         "name": "Standard Unit Turn",
-        "status": "ACTIVE",
-        "done": 2,
+        "status": "COMPLETE",
+        "done": 8,
         "total": 8,
         "first_appt": "2026-08-17",
         "final_walk": "2026-08-26",
-        "final_walk_done": null,
-        "completed_date": "2026-08-18",
+        "final_walk_done": "2026-08-23",
+        "completed_date": "2026-08-23",
         "due": "2026-08-15",
-        "next_task": {
-          "date": "2026-08-26",
-          "task": "final-walk"
-        },
+        "next_task": null,
         "tasks": [
           {
             "task": "Appfolio Estimate",
             "cat": "estimate",
-            "done": false,
+            "done": true,
             "date": null,
             "who": "Dulce Salinas",
-            "completed": null,
+            "completed": "2026-08-23",
             "vendor": false
           },
           {
@@ -10786,49 +10776,35 @@
             "vendor": false
           },
           {
-            "task": "E - Carpet Cleaning",
-            "cat": "carpet",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
             "task": "F - Cleaning",
             "cat": "cleaning",
-            "done": false,
+            "done": true,
             "date": null,
             "who": "U&K Properties LLC",
-            "completed": null,
+            "completed": "2026-08-23",
             "vendor": true
           },
           {
             "task": "G - Verify Mailbox Lockbox & Mailbox Keys",
             "cat": "other",
-            "done": false,
+            "done": true,
             "date": null,
             "who": null,
-            "completed": null,
+            "completed": "2026-08-23",
             "vendor": false
           },
           {
             "task": "Final Walkthrough",
             "cat": "final-walk",
-            "done": false,
+            "done": true,
             "date": "2026-08-26",
             "who": "Brady Smith",
-            "completed": null,
+            "completed": "2026-08-23",
             "vendor": false
           }
         ]
       },
-      "next_appt": {
-        "date": "2026-08-24",
-        "cat": "suggested-cleaning",
-        "who": "SPO Cleaning",
-        "brief": "Suggested cleaning — 3 business days after in-house done (2026-08-19)"
-      },
+      "next_appt": null,
       "cost": {
         "code": "c702-K303",
         "labor": 0,
@@ -10860,11 +10836,12 @@
           }
         ]
       },
+      "turn_end": "2026-08-23",
       "stage": "Ready",
       "stage_ord": 7,
       "days_elapsed": 23,
-      "days_to_turn": null,
-      "status": "ready"
+      "days_to_turn": 23,
+      "status": "complete"
     },
     {
       "key": "e328|4",
@@ -27063,7 +27040,7 @@
             "task": "F - Cleaning",
             "cat": "cleaning",
             "done": false,
-            "date": "2026-08-21",
+            "date": "2026-08-31",
             "who": "SPO Cleaning",
             "completed": null,
             "vendor": true
@@ -43190,7 +43167,7 @@
         "completed_date": "2026-07-23",
         "due": "2026-08-20",
         "next_task": {
-          "date": "2026-08-25",
+          "date": "2026-08-24",
           "task": "cleaning"
         },
         "tasks": [
@@ -43260,7 +43237,7 @@
         ]
       },
       "next_appt": {
-        "date": "2026-08-25",
+        "date": "2026-08-24",
         "cat": "cleaning",
         "who": "SPO Cleaning",
         "brief": "F - Cleaning"
