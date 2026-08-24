@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "fetched_at": "2026-08-24T20:50:44.364Z",
+  "fetched_at": "2026-08-24T21:32:41.539Z",
   "summary": {
     "as_of": "2026-08-24",
     "units": 237,
@@ -19759,18 +19759,91 @@
       "sqft": 600,
       "region": "Tri-Cities",
       "pm": {
-        "projId": 192557,
-        "name": "Turn - 4711 W Metaline Avenue UNIT E101",
-        "status": "COMPLETE",
-        "done": 7,
-        "total": 7,
-        "first_appt": "2025-10-22",
-        "final_walk": "2025-10-24",
-        "final_walk_done": "2025-10-28",
-        "completed_date": "2025-10-28",
-        "due": "2026-06-05",
+        "projId": 241092,
+        "name": "Standard Unit Turn",
+        "status": "ACTIVE",
+        "done": 0,
+        "total": 8,
+        "first_appt": null,
+        "final_walk": null,
+        "final_walk_done": null,
+        "completed_date": null,
+        "due": "2026-09-05",
         "next_task": null,
-        "tasks": null
+        "tasks": [
+          {
+            "task": "A - Initial walkthrough",
+            "cat": "walkthrough",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Appfolio Estimate",
+            "cat": "estimate",
+            "done": false,
+            "date": null,
+            "who": "Dulce Salinas",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "C - Paint",
+            "cat": "paint",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "D - Maintenance",
+            "cat": "maintenance",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "E - Carpet Cleaning",
+            "cat": "carpet",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "F - Cleaning",
+            "cat": "cleaning",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "G - Verify Mailbox Lockbox & Mailbox Keys",
+            "cat": "other",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Final Walkthrough",
+            "cat": "final-walk",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          }
+        ]
       },
       "next_appt": null,
       "cost": {
@@ -19841,8 +19914,8 @@
         ]
       },
       "turn_end": "2025-10-28",
-      "stage": null,
-      "stage_ord": 0,
+      "stage": "Walkthrough",
+      "stage_ord": 1,
       "days_elapsed": 0,
       "days_to_turn": -297,
       "status": "complete"
@@ -43595,12 +43668,12 @@
         "projId": 228490,
         "name": "Standard Unit Turn",
         "status": "ACTIVE",
-        "done": 2,
+        "done": 4,
         "total": 7,
         "first_appt": "2026-08-18",
         "final_walk": "2026-08-27",
         "final_walk_done": null,
-        "completed_date": "2026-07-23",
+        "completed_date": "2026-08-24",
         "due": "2026-08-20",
         "next_task": {
           "date": "2026-08-24",
@@ -43628,19 +43701,19 @@
           {
             "task": "C - Paint",
             "cat": "paint",
-            "done": false,
+            "done": true,
             "date": "2026-08-18",
             "who": "Micheal Magoon",
-            "completed": null,
+            "completed": "2026-08-24",
             "vendor": false
           },
           {
             "task": "D - Maintenance",
             "cat": "maintenance",
-            "done": false,
+            "done": true,
             "date": "2026-08-20",
             "who": "Micheal Magoon",
-            "completed": null,
+            "completed": "2026-08-24",
             "vendor": false
           },
           {
@@ -44032,8 +44105,8 @@
       "cost": {
         "code": "s300-12",
         "labor": 684.77,
-        "materials": 896.29,
-        "total": 1581.06,
+        "materials": 927.33,
+        "total": 1612.1,
         "estimate": 2869.19,
         "laborEntries": [
           {
@@ -44150,6 +44223,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-08-24",
+            "amt": 31.04,
+            "cat": "Turn",
+            "ln": "cramer",
+            "src": "ramp"
+          },
           {
             "d": "2026-06-30",
             "amt": 25.02,
