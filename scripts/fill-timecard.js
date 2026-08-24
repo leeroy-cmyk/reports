@@ -5,7 +5,17 @@ const TOKEN = process.env.QBT_TOKEN;
 if (!TOKEN) { console.error('QBT_TOKEN not set'); process.exit(1); }
 
 const USER_ID = 5249464, JOBCODE_ID = 29656266;
-const CF = { '25056': 'r203', '25068': 'r203' };
+// ⛔ CLASS IS ALWAYS 'r203:Turn - Admin' (Lee Roy 2026-08-16: "im no longer working on R&M or grounds
+// admin, so all of my time should go to Turn admin"). This file was still writing the bare default
+// 'r203' for BOTH fields, so every entry the nightly cron created was mis-classed — 49 entries /
+// ~48h over 08-17..08-21 alone. Custom-field values are NAMES, not ids: the class must read exactly
+// 'r203:Turn - Admin', matching what qbt-recode-write-*.js writes.
+// PROPERTY stays 'r203' here deliberately — the billable half is spend-weighted from Ramp turn spend,
+// which this cron cannot reach. The periodic recode assigns it. A FILLED DAY IS NOT A FINISHED DAY:
+// fill -> re-note from the calendar -> recode class+property.
+const ADMIN_CLASS = 'r203:Turn - Admin';
+const NO_PROPERTY = 'r203';
+const CF = { '25056': ADMIN_CLASS, '25068': NO_PROPERTY };
 const month = new Date().getUTCMonth();
 const TZ = (month >= 3 && month <= 9) ? '-07:00' : '-08:00'; // PDT Apr-Oct, PST Nov-Mar
 const sleep = ms => new Promise(r => setTimeout(r, ms));
@@ -38,6 +48,7 @@ function prevWeekday(d) {
 }
 
 // Weighted random — biased toward short entries (realistic timecard)
+const MAX_PIECE_MIN = 115;   // strictly under 2h
 function randSize(remaining) {
   if (remaining <= 30) return remaining;
   const r = Math.random();
@@ -45,8 +56,10 @@ function randSize(remaining) {
   if (r < 0.40) s = 20 + Math.floor(Math.random() * 21);   // 20-40 min  (40%)
   else if (r < 0.72) s = 41 + Math.floor(Math.random() * 35);  // 41-75 min  (32%)
   else if (r < 0.92) s = 76 + Math.floor(Math.random() * 30);  // 76-105 min (20%)
-  else s = 106 + Math.floor(Math.random() * 15);               // 106-120 min (8%)
-  return Math.min(s, 120, remaining);
+  else s = 106 + Math.floor(Math.random() * 10);               // 106-115 min (8%)
+  // ⛔ 115, never 120: an entry of exactly 2.00h breaks the rule (Lee Roy 2026-08-03 — "they should
+  // be axactly less than 2 hrs"). The old cap of 120 could land precisely on it.
+  return Math.min(s, MAX_PIECE_MIN, remaining);
 }
 
 const NOTES = {
