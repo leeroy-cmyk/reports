@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "fetched_at": "2026-08-24T20:05:04.963Z",
+  "fetched_at": "2026-08-24T20:50:44.364Z",
   "summary": {
     "as_of": "2026-08-24",
     "units": 237,
@@ -9,7 +9,7 @@
     "notice": 23,
     "at_risk": 26,
     "unscheduled": 10,
-    "accruing": 13586.14,
+    "accruing": 13631.72,
     "avg_days_open": 29,
     "revenue_at_risk": 3397.53
   },
@@ -6011,11 +6011,19 @@
       },
       "cost": {
         "code": "c313-1",
-        "labor": 0,
+        "labor": 45.58,
         "materials": 0,
-        "total": 0,
+        "total": 45.58,
         "estimate": 0,
-        "laborEntries": [],
+        "laborEntries": [
+          {
+            "d": "2026-08-24",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.77,
+            "cost": 45.58,
+            "cat": "Turn"
+          }
+        ],
         "materialEntries": []
       },
       "stage": "Walkthrough",
@@ -25855,7 +25863,7 @@
       "city": "Spokane",
       "addr": "1221 N Monroe St  - 31 Spokane, WA 99201",
       "unit_id": 430,
-      "unit_status": "Vacant-Unrented",
+      "unit_status": "Vacant-Rented",
       "rent_ready": "Yes",
       "vacant": true,
       "days_vacant": 85,
@@ -25863,7 +25871,7 @@
       "available_on": "2026-07-18",
       "ready_on": "2026-07-18",
       "target_date": "2026-06-20",
-      "next_move_in": null,
+      "next_move_in": "2026-08-26",
       "rent": "1252.00",
       "bed_bath": "2/1.00",
       "sqft": 600,
