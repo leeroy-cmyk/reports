@@ -1,15 +1,15 @@
 {
   "ok": true,
-  "fetched_at": "2026-08-24T23:10:58.204Z",
+  "fetched_at": "2026-08-24T23:37:47.071Z",
   "summary": {
     "as_of": "2026-08-24",
     "units": 237,
     "active": 71,
     "ready": 3,
-    "notice": 23,
+    "notice": 22,
     "at_risk": 26,
     "unscheduled": 10,
-    "accruing": 13631.72,
+    "accruing": 13665.97,
     "avg_days_open": 29,
     "revenue_at_risk": 3397.53
   },
@@ -2446,11 +2446,18 @@
       },
       "cost": {
         "code": "p705-17",
-        "labor": 15.25,
+        "labor": 49.5,
         "materials": 0,
-        "total": 15.25,
+        "total": 49.5,
         "estimate": 0,
         "laborEntries": [
+          {
+            "d": "2026-08-24",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.33,
+            "cost": 34.25,
+            "cat": "Turn"
+          },
           {
             "d": "2026-06-04",
             "emp": "Micheal N. Magoon",
@@ -27278,8 +27285,8 @@
       "vacant": false,
       "days_vacant": null,
       "move_out": "2026-08-31",
-      "available_on": "2026-09-20",
-      "ready_on": "2026-09-20",
+      "available_on": "2026-10-15",
+      "ready_on": "2026-10-15",
       "target_date": "2026-09-20",
       "next_move_in": null,
       "rent": "973.00",
@@ -36995,23 +37002,8 @@
       "key": "rl16|a08",
       "prop": "rl16",
       "unit": "A08",
-      "at_risk": [],
       "property_name": "rl16",
-      "city": "Richland",
-      "addr": "1621 George Washington Way - A08 A08 Richland, WA 99354",
-      "unit_id": 521,
-      "unit_status": "Notice-Unrented",
-      "rent_ready": null,
-      "vacant": false,
-      "days_vacant": null,
-      "move_out": "2026-08-31",
-      "available_on": "2026-09-13",
-      "ready_on": "2026-09-13",
-      "target_date": "2026-09-20",
-      "next_move_in": null,
-      "rent": "1627.00",
-      "bed_bath": "3/2.00",
-      "sqft": 1115,
+      "at_risk": [],
       "region": "Tri-Cities",
       "pm": {
         "projId": 235866,
@@ -37120,9 +37112,9 @@
       },
       "stage": "Walkthrough",
       "stage_ord": 1,
-      "days_elapsed": 0,
+      "days_elapsed": null,
       "days_to_turn": null,
-      "status": "notice"
+      "status": "other"
     },
     {
       "key": "rl16|a11",
