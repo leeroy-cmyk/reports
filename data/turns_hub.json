@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "fetched_at": "2026-08-25T15:07:34.359Z",
+  "fetched_at": "2026-08-25T16:02:29.357Z",
   "summary": {
     "as_of": "2026-08-25",
     "units": 232,
@@ -6217,11 +6217,14 @@
         "done": 2,
         "total": 7,
         "first_appt": "2026-08-12",
-        "final_walk": "2026-08-24",
+        "final_walk": "2026-08-28",
         "final_walk_done": null,
         "completed_date": "2026-08-20",
         "due": "2026-08-10",
-        "next_task": null,
+        "next_task": {
+          "date": "2026-08-28",
+          "task": "final-walk"
+        },
         "tasks": [
           {
             "task": "A - Initial walkthrough",
@@ -6281,14 +6284,19 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": "2026-08-24",
+            "date": "2026-08-28",
             "who": "Ron Cramer",
             "completed": null,
             "vendor": false
           }
         ]
       },
-      "next_appt": null,
+      "next_appt": {
+        "date": "2026-08-28",
+        "cat": "final-walk",
+        "who": "Ron Cramer",
+        "brief": "Final Walkthrough"
+      },
       "cost": {
         "code": "c313-18",
         "labor": 1104.87,
@@ -11005,11 +11013,14 @@
         "done": 4,
         "total": 7,
         "first_appt": "2026-08-10",
-        "final_walk": "2026-08-24",
+        "final_walk": "2026-08-28",
         "final_walk_done": null,
         "completed_date": "2026-08-17",
         "due": "2026-08-15",
-        "next_task": null,
+        "next_task": {
+          "date": "2026-08-28",
+          "task": "final-walk"
+        },
         "tasks": [
           {
             "task": "A - Initial walkthrough",
@@ -11069,14 +11080,19 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": "2026-08-24",
+            "date": "2026-08-28",
             "who": "Micheal Magoon",
             "completed": null,
             "vendor": false
           }
         ]
       },
-      "next_appt": null,
+      "next_appt": {
+        "date": "2026-08-28",
+        "cat": "final-walk",
+        "who": "Micheal Magoon",
+        "brief": "Final Walkthrough"
+      },
       "cost": {
         "code": "e328-4",
         "labor": 485.59,
@@ -15715,13 +15731,13 @@
         "status": "ACTIVE",
         "done": 1,
         "total": 7,
-        "first_appt": "2026-09-21",
-        "final_walk": "2026-09-30",
+        "first_appt": "2026-09-03",
+        "final_walk": "2026-09-21",
         "final_walk_done": null,
         "completed_date": "2026-08-04",
         "due": "2026-09-11",
         "next_task": {
-          "date": "2026-09-21",
+          "date": "2026-09-02",
           "task": "paint"
         },
         "tasks": [
@@ -15747,7 +15763,7 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-09-21",
+            "date": "2026-09-03",
             "who": "Matthew Williams",
             "completed": null,
             "vendor": false
@@ -15756,7 +15772,7 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-09-23",
+            "date": "2026-09-14",
             "who": "Matthew Williams",
             "completed": null,
             "vendor": false
@@ -15783,7 +15799,7 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": "2026-09-30",
+            "date": "2026-09-21",
             "who": "Margarito Saldana",
             "completed": null,
             "vendor": false
@@ -15791,7 +15807,7 @@
         ]
       },
       "next_appt": {
-        "date": "2026-09-21",
+        "date": "2026-09-02",
         "cat": "paint",
         "who": "Matthew Williams",
         "brief": "C - Paint Prep / Paint"
@@ -16059,13 +16075,13 @@
         "status": "ACTIVE",
         "done": 0,
         "total": 8,
-        "first_appt": "2026-10-12",
-        "final_walk": "2026-10-21",
+        "first_appt": "2026-10-01",
+        "final_walk": "2026-10-12",
         "final_walk_done": null,
         "completed_date": null,
         "due": "2026-08-28",
         "next_task": {
-          "date": "2026-10-12",
+          "date": "2026-09-30",
           "task": "paint"
         },
         "tasks": [
@@ -16091,7 +16107,7 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-10-12",
+            "date": "2026-10-01",
             "who": "Matthew Williams",
             "completed": null,
             "vendor": false
@@ -16100,7 +16116,7 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-10-14",
+            "date": "2026-10-05",
             "who": "Matthew Williams",
             "completed": null,
             "vendor": false
@@ -16136,7 +16152,7 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": "2026-10-21",
+            "date": "2026-10-12",
             "who": "Margarito Saldana",
             "completed": null,
             "vendor": false
@@ -16144,7 +16160,7 @@
         ]
       },
       "next_appt": {
-        "date": "2026-10-12",
+        "date": "2026-09-30",
         "cat": "paint",
         "who": "Matthew Williams",
         "brief": "C - Paint Prep / Paint"
@@ -18270,13 +18286,13 @@
         "status": "ACTIVE",
         "done": 1,
         "total": 7,
-        "first_appt": "2026-09-28",
-        "final_walk": "2026-10-06",
+        "first_appt": "2026-09-21",
+        "final_walk": "2026-09-30",
         "final_walk_done": null,
         "completed_date": "2026-08-04",
         "due": "2026-09-03",
         "next_task": {
-          "date": "2026-09-24",
+          "date": "2026-09-21",
           "task": "paint"
         },
         "tasks": [
@@ -18302,7 +18318,7 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-09-28",
+            "date": "2026-09-21",
             "who": "Matthew Williams",
             "completed": null,
             "vendor": false
@@ -18311,7 +18327,7 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-09-29",
+            "date": "2026-09-23",
             "who": "Matthew Williams",
             "completed": null,
             "vendor": false
@@ -18338,7 +18354,7 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": "2026-10-06",
+            "date": "2026-09-30",
             "who": "Margarito Saldana",
             "completed": null,
             "vendor": false
@@ -18346,7 +18362,7 @@
         ]
       },
       "next_appt": {
-        "date": "2026-09-24",
+        "date": "2026-09-21",
         "cat": "paint",
         "who": "Matthew Williams",
         "brief": "C - Paint Prep / Paint"
@@ -18725,19 +18741,22 @@
         "status": "ACTIVE",
         "done": 0,
         "total": 8,
-        "first_appt": null,
-        "final_walk": null,
+        "first_appt": "2026-10-28",
+        "final_walk": "2026-11-05",
         "final_walk_done": null,
         "completed_date": null,
         "due": "2026-09-05",
-        "next_task": null,
+        "next_task": {
+          "date": "2026-08-31",
+          "task": "walkthrough"
+        },
         "tasks": [
           {
             "task": "A - Initial walkthrough",
             "cat": "walkthrough",
             "done": false,
-            "date": null,
-            "who": null,
+            "date": "2026-08-31",
+            "who": "Margarito Saldana",
             "completed": null,
             "vendor": false
           },
@@ -18754,8 +18773,8 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": null,
-            "who": null,
+            "date": "2026-10-28",
+            "who": "Matthew Williams",
             "completed": null,
             "vendor": false
           },
@@ -18763,8 +18782,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": null,
-            "who": null,
+            "date": "2026-10-29",
+            "who": "Matthew Williams",
             "completed": null,
             "vendor": false
           },
@@ -18799,14 +18818,19 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": null,
-            "who": null,
+            "date": "2026-11-05",
+            "who": "Margarito Saldana",
             "completed": null,
             "vendor": false
           }
         ]
       },
-      "next_appt": null,
+      "next_appt": {
+        "date": "2026-08-31",
+        "cat": "walkthrough",
+        "who": "Margarito Saldana",
+        "brief": "A - Initial walkthrough"
+      },
       "cost": {
         "code": "kn47-k1-E101",
         "labor": 541.65,
@@ -21381,7 +21405,7 @@
         "done": 0,
         "total": 8,
         "first_appt": "2026-10-26",
-        "final_walk": "2026-11-05",
+        "final_walk": "2026-11-03",
         "final_walk_done": null,
         "completed_date": null,
         "due": "2026-09-09",
@@ -21421,7 +21445,7 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-10-29",
+            "date": "2026-10-27",
             "who": "Margarito Saldana",
             "completed": null,
             "vendor": false
@@ -21457,7 +21481,7 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": "2026-11-05",
+            "date": "2026-11-03",
             "who": "Margarito Saldana",
             "completed": null,
             "vendor": false
@@ -21600,13 +21624,13 @@
         "status": "ACTIVE",
         "done": 1,
         "total": 7,
-        "first_appt": "2026-09-30",
-        "final_walk": "2026-10-12",
+        "first_appt": "2026-09-28",
+        "final_walk": "2026-10-06",
         "final_walk_done": null,
         "completed_date": "2026-08-07",
         "due": "2026-09-14",
         "next_task": {
-          "date": "2026-09-30",
+          "date": "2026-09-24",
           "task": "paint"
         },
         "tasks": [
@@ -21632,7 +21656,7 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-09-30",
+            "date": "2026-09-28",
             "who": "Matthew Williams",
             "completed": null,
             "vendor": false
@@ -21641,7 +21665,7 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-10-05",
+            "date": "2026-09-29",
             "who": "Matthew Williams",
             "completed": null,
             "vendor": false
@@ -21668,7 +21692,7 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": "2026-10-12",
+            "date": "2026-10-06",
             "who": "Margarito Saldana",
             "completed": null,
             "vendor": false
@@ -21676,7 +21700,7 @@
         ]
       },
       "next_appt": {
-        "date": "2026-09-30",
+        "date": "2026-09-24",
         "cat": "paint",
         "who": "Matthew Williams",
         "brief": "C - Paint Prep / Paint"
@@ -24378,8 +24402,8 @@
         "status": "ACTIVE",
         "done": 0,
         "total": 8,
-        "first_appt": "2026-10-27",
-        "final_walk": "2026-11-05",
+        "first_appt": "2026-10-22",
+        "final_walk": "2026-11-02",
         "final_walk_done": null,
         "completed_date": null,
         "due": "2026-09-09",
@@ -24410,7 +24434,7 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-10-27",
+            "date": "2026-10-22",
             "who": "Matthew Williams",
             "completed": null,
             "vendor": false
@@ -24419,7 +24443,7 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-10-29",
+            "date": "2026-10-26",
             "who": "Matthew Williams",
             "completed": null,
             "vendor": false
@@ -24455,7 +24479,7 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": "2026-11-05",
+            "date": "2026-11-02",
             "who": "Margarito Saldana",
             "completed": null,
             "vendor": false
@@ -32660,8 +32684,8 @@
         "status": "ACTIVE",
         "done": 0,
         "total": 8,
-        "first_appt": "2026-10-15",
-        "final_walk": "2026-10-27",
+        "first_appt": "2026-10-13",
+        "final_walk": "2026-10-21",
         "final_walk_done": null,
         "completed_date": null,
         "due": "2026-09-15",
@@ -32692,7 +32716,7 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-10-15",
+            "date": "2026-10-13",
             "who": "Matthew Williams",
             "completed": null,
             "vendor": false
@@ -32701,7 +32725,7 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-10-20",
+            "date": "2026-10-14",
             "who": "Matthew Williams",
             "completed": null,
             "vendor": false
@@ -32737,7 +32761,7 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": "2026-10-27",
+            "date": "2026-10-21",
             "who": "Margarito Saldana",
             "completed": null,
             "vendor": false
@@ -35558,122 +35582,87 @@
       "status": "complete"
     },
     {
-      "key": "rl16|a08",
+      "key": "rl16|a06",
       "prop": "rl16",
-      "unit": "A08",
-      "property_name": "rl16",
+      "unit": "A06",
       "at_risk": [],
+      "property_name": "rl16",
+      "city": "Richland",
+      "addr": "1621 George Washington Way A06 Richland, WA 99354",
+      "unit_id": 519,
+      "unit_status": "Notice-Unrented",
+      "rent_ready": null,
+      "vacant": false,
+      "days_vacant": null,
+      "move_out": "2026-10-31",
+      "available_on": "2026-11-20",
+      "ready_on": "2026-11-20",
+      "target_date": "2026-11-20",
+      "next_move_in": null,
+      "rent": "1443.00",
+      "bed_bath": "2/1.50",
+      "sqft": 975,
       "region": "Tri-Cities",
       "pm": {
-        "projId": 235866,
-        "name": "Standard Unit Turn",
-        "status": "ACTIVE",
-        "done": 0,
+        "projId": 185873,
+        "name": "Turn - 1621 George Washington Way UNIT A06",
+        "status": "COMPLETE",
+        "done": 8,
         "total": 8,
-        "first_appt": "2026-09-02",
-        "final_walk": "2026-09-10",
-        "final_walk_done": null,
-        "completed_date": null,
-        "due": "2026-09-15",
-        "next_task": {
-          "date": "2026-09-01",
-          "task": "paint"
-        },
-        "tasks": [
+        "first_appt": "2025-10-17",
+        "final_walk": "2025-10-22",
+        "final_walk_done": "2025-10-28",
+        "completed_date": "2025-10-28",
+        "due": "2025-10-20",
+        "next_task": null,
+        "tasks": null
+      },
+      "next_appt": null,
+      "cost": {
+        "code": "rl16-A06",
+        "labor": 68.73,
+        "materials": 457.4,
+        "total": 526.13,
+        "estimate": 0,
+        "laborEntries": [
           {
-            "task": "A - Initial walkthrough",
-            "cat": "walkthrough",
-            "done": false,
-            "date": "2026-09-01",
-            "who": "Margarito Saldana",
-            "completed": null,
-            "vendor": false
+            "d": "2025-10-17",
+            "emp": "Margarito Saldana",
+            "hrs": 1.75,
+            "cost": 49.7,
+            "cat": "Turn"
           },
           {
-            "task": "Appfolio Estimate",
-            "cat": "estimate",
-            "done": false,
-            "date": null,
-            "who": "Dulce Salinas",
-            "completed": null,
-            "vendor": false
+            "d": "2025-10-06",
+            "emp": "Margarito Saldana",
+            "hrs": 0.67,
+            "cost": 19.03,
+            "cat": "Turn"
+          }
+        ],
+        "materialEntries": [
+          {
+            "d": "2025-10-21",
+            "amt": 350,
+            "cat": "Turn",
+            "ln": "montiel",
+            "src": "ramp"
           },
           {
-            "task": "C - Paint",
-            "cat": "paint",
-            "done": false,
-            "date": "2026-09-02",
-            "who": "Matthew Williams",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "D - Maintenance",
-            "cat": "maintenance",
-            "done": false,
-            "date": "2026-09-03",
-            "who": "Matthew Williams",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "E - Carpet Cleaning",
-            "cat": "carpet",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "F - Cleaning",
-            "cat": "cleaning",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "G - Verify Mailbox Lockbox & Mailbox Keys",
-            "cat": "other",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Final Walkthrough",
-            "cat": "final-walk",
-            "done": false,
-            "date": "2026-09-10",
-            "who": "Margarito Saldana",
-            "completed": null,
-            "vendor": false
+            "d": "2025-10-17",
+            "amt": 107.4,
+            "cat": "Turn",
+            "ln": "saldana",
+            "src": "ramp"
           }
         ]
       },
-      "next_appt": {
-        "date": "2026-09-01",
-        "cat": "walkthrough",
-        "who": "Margarito Saldana",
-        "brief": "A - Initial walkthrough"
-      },
-      "cost": {
-        "code": "rl16-A08",
-        "labor": 0,
-        "materials": 0,
-        "total": 0,
-        "estimate": 0,
-        "laborEntries": [],
-        "materialEntries": []
-      },
-      "stage": "Walkthrough",
-      "stage_ord": 1,
-      "days_elapsed": null,
-      "days_to_turn": null,
-      "status": "other"
+      "turn_end": "2025-10-28",
+      "stage": "Move-out",
+      "stage_ord": 0,
+      "days_elapsed": 0,
+      "days_to_turn": -368,
+      "status": "complete"
     },
     {
       "key": "rl16|a11",
@@ -36134,8 +36123,8 @@
         "status": "ACTIVE",
         "done": 0,
         "total": 8,
-        "first_appt": "2026-10-21",
-        "final_walk": "2026-11-02",
+        "first_appt": "2026-10-19",
+        "final_walk": "2026-10-27",
         "final_walk_done": null,
         "completed_date": null,
         "due": "2026-10-15",
@@ -36166,7 +36155,7 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-10-21",
+            "date": "2026-10-19",
             "who": "Matthew Williams",
             "completed": null,
             "vendor": false
@@ -36175,7 +36164,7 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-10-26",
+            "date": "2026-10-20",
             "who": "Matthew Williams",
             "completed": null,
             "vendor": false
@@ -36211,7 +36200,7 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": "2026-11-02",
+            "date": "2026-10-27",
             "who": "Margarito Saldana",
             "completed": null,
             "vendor": false
@@ -39707,12 +39696,12 @@
         "done": 1,
         "total": 7,
         "first_appt": "2026-08-06",
-        "final_walk": "2026-09-21",
+        "final_walk": "2026-09-08",
         "final_walk_done": null,
         "completed_date": "2026-08-05",
         "due": "2026-09-09",
         "next_task": {
-          "date": "2026-09-14",
+          "date": "2026-09-01",
           "task": "maintenance"
         },
         "tasks": [
@@ -39747,7 +39736,7 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-09-14",
+            "date": "2026-09-01",
             "who": "Matthew Williams",
             "completed": null,
             "vendor": false
@@ -39774,7 +39763,7 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": "2026-09-21",
+            "date": "2026-09-08",
             "who": "Margarito Saldana",
             "completed": null,
             "vendor": false
@@ -39782,7 +39771,7 @@
         ]
       },
       "next_appt": {
-        "date": "2026-09-14",
+        "date": "2026-09-01",
         "cat": "maintenance",
         "who": "Matthew Williams",
         "brief": "D - Maintenance"
@@ -42466,19 +42455,22 @@
         "status": "ACTIVE",
         "done": 0,
         "total": 8,
-        "first_appt": null,
-        "final_walk": null,
+        "first_appt": "2026-10-26",
+        "final_walk": "2026-11-04",
         "final_walk_done": null,
         "completed_date": null,
         "due": "2026-09-22",
-        "next_task": null,
+        "next_task": {
+          "date": "2026-09-08",
+          "task": "walkthrough"
+        },
         "tasks": [
           {
             "task": "A - Initial walkthrough",
             "cat": "walkthrough",
             "done": false,
-            "date": null,
-            "who": null,
+            "date": "2026-09-08",
+            "who": "Micheal Magoon",
             "completed": null,
             "vendor": false
           },
@@ -42495,8 +42487,8 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": null,
-            "who": null,
+            "date": "2026-10-26",
+            "who": "Micheal Magoon",
             "completed": null,
             "vendor": false
           },
@@ -42504,8 +42496,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": null,
-            "who": null,
+            "date": "2026-10-28",
+            "who": "Micheal Magoon",
             "completed": null,
             "vendor": false
           },
@@ -42540,14 +42532,19 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": null,
-            "who": null,
+            "date": "2026-11-04",
+            "who": "Ron Cramer",
             "completed": null,
             "vendor": false
           }
         ]
       },
-      "next_appt": null,
+      "next_appt": {
+        "date": "2026-09-08",
+        "cat": "walkthrough",
+        "who": "Micheal Magoon",
+        "brief": "A - Initial walkthrough"
+      },
       "cost": {
         "code": "s300-4",
         "labor": 0,
