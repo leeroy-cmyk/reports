@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "fetched_at": "2026-08-25T16:51:04.011Z",
+  "fetched_at": "2026-08-25T17:35:11.973Z",
   "summary": {
     "as_of": "2026-08-25",
     "units": 232,
@@ -4839,7 +4839,7 @@
       "city": "Spokane",
       "addr": "1010 W Boone Ave. - 8 Spokane, WA 99201",
       "unit_id": 171,
-      "unit_status": "Vacant-Unrented",
+      "unit_status": "Vacant-Rented",
       "rent_ready": "Yes",
       "vacant": true,
       "days_vacant": 60,
@@ -4847,7 +4847,7 @@
       "available_on": "2026-08-09",
       "ready_on": "2026-08-09",
       "target_date": "2026-07-16",
-      "next_move_in": null,
+      "next_move_in": "2026-08-27",
       "rent": "870.00",
       "bed_bath": "1/1.00",
       "sqft": 300,
@@ -8001,12 +8001,12 @@
         "projId": 239147,
         "name": "Standard Unit Turn",
         "status": "ACTIVE",
-        "done": 0,
+        "done": 4,
         "total": 8,
         "first_appt": "2026-08-20",
         "final_walk": "2026-09-01",
         "final_walk_done": null,
-        "completed_date": null,
+        "completed_date": "2026-08-25",
         "due": "2026-08-16",
         "next_task": {
           "date": "2026-08-25",
@@ -8025,28 +8025,19 @@
           {
             "task": "C - Paint",
             "cat": "paint",
-            "done": false,
+            "done": true,
             "date": "2026-08-20",
             "who": "Matt Romme",
-            "completed": null,
+            "completed": "2026-08-25",
             "vendor": false
           },
           {
             "task": "D - Maintenance",
             "cat": "maintenance",
-            "done": false,
+            "done": true,
             "date": "2026-08-25",
             "who": "Matt Romme",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "E - Carpet Cleaning",
-            "cat": "carpet",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
+            "completed": "2026-08-25",
             "vendor": false
           },
           {
@@ -8079,10 +8070,10 @@
         ]
       },
       "next_appt": {
-        "date": "2026-08-25",
-        "cat": "maintenance",
-        "who": "Matt Romme",
-        "brief": "D - Maintenance"
+        "date": "2026-08-28",
+        "cat": "suggested-cleaning",
+        "who": "SPO Cleaning",
+        "brief": "Suggested cleaning — 3 business days after in-house done (2026-08-25)"
       },
       "cost": {
         "code": "c702-A102",
@@ -8135,14 +8126,14 @@
         "status": "ACTIVE",
         "done": 0,
         "total": 8,
-        "first_appt": "2026-09-01",
+        "first_appt": "2026-09-28",
         "final_walk": "2026-09-10",
         "final_walk_done": null,
         "completed_date": null,
         "due": "2026-08-15",
         "next_task": {
-          "date": "2026-09-01",
-          "task": "paint"
+          "date": "2026-09-10",
+          "task": "final-walk"
         },
         "tasks": [
           {
@@ -8158,7 +8149,7 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-09-01",
+            "date": "2026-09-28",
             "who": "Brady Smith",
             "completed": null,
             "vendor": false
@@ -8167,7 +8158,7 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-09-03",
+            "date": "2026-09-30",
             "who": "Brady Smith",
             "completed": null,
             "vendor": false
@@ -8211,10 +8202,10 @@
         ]
       },
       "next_appt": {
-        "date": "2026-09-01",
-        "cat": "paint",
-        "who": "Brady Smith",
-        "brief": "C - Paint Prep / Paint"
+        "date": "2026-09-10",
+        "cat": "final-walk",
+        "who": "Matt Romme",
+        "brief": "Final Walkthrough"
       },
       "cost": {
         "code": "c702-A103",
@@ -8259,13 +8250,13 @@
         "status": "ACTIVE",
         "done": 0,
         "total": 8,
-        "first_appt": "2026-09-01",
+        "first_appt": "2026-09-14",
         "final_walk": "2026-09-10",
         "final_walk_done": null,
         "completed_date": null,
         "due": "2026-08-25",
         "next_task": {
-          "date": "2026-09-01",
+          "date": "2026-09-10",
           "task": "paint"
         },
         "tasks": [
@@ -8282,7 +8273,7 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-09-01",
+            "date": "2026-09-14",
             "who": "Matt Romme",
             "completed": null,
             "vendor": false
@@ -8291,7 +8282,7 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-09-03",
+            "date": "2026-09-15",
             "who": "Matt Romme",
             "completed": null,
             "vendor": false
@@ -8335,10 +8326,10 @@
         ]
       },
       "next_appt": {
-        "date": "2026-09-01",
-        "cat": "paint",
-        "who": "Matt Romme",
-        "brief": "C - Paint Prep / Paint"
+        "date": "2026-09-10",
+        "cat": "final-walk",
+        "who": "Brady Smith",
+        "brief": "Final Walkthrough"
       },
       "cost": {
         "code": "c702-A201",
@@ -8383,13 +8374,13 @@
         "status": "ACTIVE",
         "done": 0,
         "total": 8,
-        "first_appt": "2026-09-07",
+        "first_appt": "2026-09-17",
         "final_walk": "2026-09-16",
         "final_walk_done": null,
         "completed_date": null,
         "due": "2026-08-25",
         "next_task": {
-          "date": "2026-09-07",
+          "date": "2026-09-16",
           "task": "paint"
         },
         "tasks": [
@@ -8406,7 +8397,7 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-09-07",
+            "date": "2026-09-17",
             "who": "Matt Romme",
             "completed": null,
             "vendor": false
@@ -8415,7 +8406,7 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-09-09",
+            "date": "2026-09-21",
             "who": "Matt Romme",
             "completed": null,
             "vendor": false
@@ -8459,10 +8450,10 @@
         ]
       },
       "next_appt": {
-        "date": "2026-09-07",
-        "cat": "paint",
-        "who": "Matt Romme",
-        "brief": "C - Paint Prep / Paint"
+        "date": "2026-09-16",
+        "cat": "final-walk",
+        "who": "Brady Smith",
+        "brief": "Final Walkthrough"
       },
       "cost": {
         "code": "c702-A203",
@@ -8507,13 +8498,13 @@
         "status": "ACTIVE",
         "done": 0,
         "total": 8,
-        "first_appt": "2026-08-26",
+        "first_appt": "2026-09-07",
         "final_walk": "2026-09-07",
         "final_walk_done": null,
         "completed_date": null,
         "due": "2026-08-15",
         "next_task": {
-          "date": "2026-08-26",
+          "date": "2026-09-07",
           "task": "paint"
         },
         "tasks": [
@@ -8530,7 +8521,7 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-08-26",
+            "date": "2026-09-07",
             "who": "Brady Smith",
             "completed": null,
             "vendor": false
@@ -8539,7 +8530,7 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-08-31",
+            "date": "2026-09-09",
             "who": "Brady Smith",
             "completed": null,
             "vendor": false
@@ -8583,7 +8574,7 @@
         ]
       },
       "next_appt": {
-        "date": "2026-08-26",
+        "date": "2026-09-07",
         "cat": "paint",
         "who": "Brady Smith",
         "brief": "C - Paint Prep / Paint"
@@ -8631,8 +8622,132 @@
         "status": "ACTIVE",
         "done": 0,
         "total": 8,
-        "first_appt": "2026-09-10",
+        "first_appt": "2026-09-16",
         "final_walk": "2026-09-22",
+        "final_walk_done": null,
+        "completed_date": null,
+        "due": "2026-08-25",
+        "next_task": {
+          "date": "2026-09-16",
+          "task": "paint"
+        },
+        "tasks": [
+          {
+            "task": "Appfolio Estimate",
+            "cat": "estimate",
+            "done": false,
+            "date": null,
+            "who": "Dulce Salinas",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "C - Paint",
+            "cat": "paint",
+            "done": false,
+            "date": "2026-09-16",
+            "who": "Brady Smith",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "D - Maintenance",
+            "cat": "maintenance",
+            "done": false,
+            "date": "2026-09-21",
+            "who": "Brady Smith",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "E - Carpet Cleaning",
+            "cat": "carpet",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "F - Cleaning",
+            "cat": "cleaning",
+            "done": false,
+            "date": null,
+            "who": "U&K Properties LLC",
+            "completed": null,
+            "vendor": true
+          },
+          {
+            "task": "G - Verify Mailbox Lockbox & Mailbox Keys",
+            "cat": "other",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Final Walkthrough",
+            "cat": "final-walk",
+            "done": false,
+            "date": "2026-09-22",
+            "who": "Matt Romme",
+            "completed": null,
+            "vendor": false
+          }
+        ]
+      },
+      "next_appt": {
+        "date": "2026-09-16",
+        "cat": "paint",
+        "who": "Brady Smith",
+        "brief": "C - Paint Prep / Paint"
+      },
+      "cost": {
+        "code": "c702-C102",
+        "labor": 0,
+        "materials": 0,
+        "total": 0,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": []
+      },
+      "stage": "Maintenance",
+      "stage_ord": 3,
+      "days_elapsed": null,
+      "days_to_turn": null,
+      "status": "active"
+    },
+    {
+      "key": "c702|c202",
+      "prop": "c702",
+      "unit": "C202",
+      "at_risk": [],
+      "property_name": "c702",
+      "city": "Spokane",
+      "addr": "7002 N Colton St C202 Spokane, WA 99208",
+      "unit_id": 1312,
+      "unit_status": "Vacant-Unrented",
+      "rent_ready": "No",
+      "vacant": true,
+      "days_vacant": 0,
+      "move_out": null,
+      "available_on": "2026-09-19",
+      "ready_on": "2026-09-19",
+      "target_date": null,
+      "next_move_in": null,
+      "rent": "1395.00",
+      "bed_bath": "2/2.00",
+      "sqft": 1025,
+      "region": "Spokane",
+      "pm": {
+        "projId": 239153,
+        "name": "Standard Unit Turn",
+        "status": "ACTIVE",
+        "done": 0,
+        "total": 8,
+        "first_appt": "2026-09-10",
+        "final_walk": "2026-09-16",
         "final_walk_done": null,
         "completed_date": null,
         "due": "2026-08-25",
@@ -8699,130 +8814,6 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": "2026-09-22",
-            "who": "Matt Romme",
-            "completed": null,
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": {
-        "date": "2026-09-10",
-        "cat": "paint",
-        "who": "Brady Smith",
-        "brief": "C - Paint Prep / Paint"
-      },
-      "cost": {
-        "code": "c702-C102",
-        "labor": 0,
-        "materials": 0,
-        "total": 0,
-        "estimate": 0,
-        "laborEntries": [],
-        "materialEntries": []
-      },
-      "stage": "Maintenance",
-      "stage_ord": 3,
-      "days_elapsed": null,
-      "days_to_turn": null,
-      "status": "active"
-    },
-    {
-      "key": "c702|c202",
-      "prop": "c702",
-      "unit": "C202",
-      "at_risk": [],
-      "property_name": "c702",
-      "city": "Spokane",
-      "addr": "7002 N Colton St C202 Spokane, WA 99208",
-      "unit_id": 1312,
-      "unit_status": "Vacant-Unrented",
-      "rent_ready": "No",
-      "vacant": true,
-      "days_vacant": 0,
-      "move_out": null,
-      "available_on": "2026-09-19",
-      "ready_on": "2026-09-19",
-      "target_date": null,
-      "next_move_in": null,
-      "rent": "1395.00",
-      "bed_bath": "2/2.00",
-      "sqft": 1025,
-      "region": "Spokane",
-      "pm": {
-        "projId": 239153,
-        "name": "Standard Unit Turn",
-        "status": "ACTIVE",
-        "done": 0,
-        "total": 8,
-        "first_appt": "2026-09-07",
-        "final_walk": "2026-09-16",
-        "final_walk_done": null,
-        "completed_date": null,
-        "due": "2026-08-25",
-        "next_task": {
-          "date": "2026-09-07",
-          "task": "paint"
-        },
-        "tasks": [
-          {
-            "task": "Appfolio Estimate",
-            "cat": "estimate",
-            "done": false,
-            "date": null,
-            "who": "Dulce Salinas",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "C - Paint",
-            "cat": "paint",
-            "done": false,
-            "date": "2026-09-07",
-            "who": "Brady Smith",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "D - Maintenance",
-            "cat": "maintenance",
-            "done": false,
-            "date": "2026-09-09",
-            "who": "Brady Smith",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "E - Carpet Cleaning",
-            "cat": "carpet",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "F - Cleaning",
-            "cat": "cleaning",
-            "done": false,
-            "date": null,
-            "who": "U&K Properties LLC",
-            "completed": null,
-            "vendor": true
-          },
-          {
-            "task": "G - Verify Mailbox Lockbox & Mailbox Keys",
-            "cat": "other",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Final Walkthrough",
-            "cat": "final-walk",
-            "done": false,
             "date": "2026-09-16",
             "who": "Matt Romme",
             "completed": null,
@@ -8831,7 +8822,7 @@
         ]
       },
       "next_appt": {
-        "date": "2026-09-07",
+        "date": "2026-09-10",
         "cat": "paint",
         "who": "Brady Smith",
         "brief": "C - Paint Prep / Paint"
@@ -8879,13 +8870,13 @@
         "status": "ACTIVE",
         "done": 0,
         "total": 8,
-        "first_appt": "2026-09-22",
+        "first_appt": "2026-09-01",
         "final_walk": "2026-10-01",
         "final_walk_done": null,
         "completed_date": null,
         "due": "2026-08-25",
         "next_task": {
-          "date": "2026-09-22",
+          "date": "2026-09-01",
           "task": "paint"
         },
         "tasks": [
@@ -8902,8 +8893,8 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-09-22",
-            "who": "Matt Romme",
+            "date": "2026-09-01",
+            "who": "Brady Smith",
             "completed": null,
             "vendor": false
           },
@@ -8911,8 +8902,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-09-24",
-            "who": "Matt Romme",
+            "date": "2026-09-03",
+            "who": "Brady Smith",
             "completed": null,
             "vendor": false
           },
@@ -8955,9 +8946,9 @@
         ]
       },
       "next_appt": {
-        "date": "2026-09-22",
+        "date": "2026-09-01",
         "cat": "paint",
-        "who": "Matt Romme",
+        "who": "Brady Smith",
         "brief": "C - Paint Prep / Paint"
       },
       "cost": {
@@ -9127,13 +9118,13 @@
         "status": "ACTIVE",
         "done": 0,
         "total": 8,
-        "first_appt": "2026-09-10",
+        "first_appt": "2026-09-23",
         "final_walk": "2026-09-22",
         "final_walk_done": null,
         "completed_date": null,
         "due": "2026-08-25",
         "next_task": {
-          "date": "2026-09-10",
+          "date": "2026-09-22",
           "task": "paint"
         },
         "tasks": [
@@ -9150,7 +9141,7 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-09-10",
+            "date": "2026-09-23",
             "who": "Matt Romme",
             "completed": null,
             "vendor": false
@@ -9159,7 +9150,7 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-09-15",
+            "date": "2026-09-24",
             "who": "Matt Romme",
             "completed": null,
             "vendor": false
@@ -9203,10 +9194,10 @@
         ]
       },
       "next_appt": {
-        "date": "2026-09-10",
-        "cat": "paint",
-        "who": "Matt Romme",
-        "brief": "C - Paint Prep / Paint"
+        "date": "2026-09-22",
+        "cat": "final-walk",
+        "who": "Brady Smith",
+        "brief": "Final Walkthrough"
       },
       "cost": {
         "code": "c702-C304",
@@ -9251,13 +9242,13 @@
         "status": "ACTIVE",
         "done": 0,
         "total": 8,
-        "first_appt": "2026-09-16",
+        "first_appt": "2026-08-27",
         "final_walk": "2026-09-28",
         "final_walk_done": null,
         "completed_date": null,
         "due": "2026-08-25",
         "next_task": {
-          "date": "2026-09-16",
+          "date": "2026-08-26",
           "task": "paint"
         },
         "tasks": [
@@ -9274,7 +9265,7 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-09-16",
+            "date": "2026-08-27",
             "who": "Matt Romme",
             "completed": null,
             "vendor": false
@@ -9283,7 +9274,7 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-09-21",
+            "date": "2026-08-31",
             "who": "Matt Romme",
             "completed": null,
             "vendor": false
@@ -9327,7 +9318,7 @@
         ]
       },
       "next_appt": {
-        "date": "2026-09-16",
+        "date": "2026-08-26",
         "cat": "paint",
         "who": "Matt Romme",
         "brief": "C - Paint Prep / Paint"
@@ -9375,13 +9366,13 @@
         "status": "ACTIVE",
         "done": 0,
         "total": 8,
-        "first_appt": "2026-10-01",
+        "first_appt": "2026-09-02",
         "final_walk": "2026-10-13",
         "final_walk_done": null,
         "completed_date": null,
         "due": "2026-08-25",
         "next_task": {
-          "date": "2026-10-01",
+          "date": "2026-09-01",
           "task": "paint"
         },
         "tasks": [
@@ -9398,8 +9389,8 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-10-01",
-            "who": "Brady Smith",
+            "date": "2026-09-02",
+            "who": "Matt Romme",
             "completed": null,
             "vendor": false
           },
@@ -9407,8 +9398,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-10-06",
-            "who": "Brady Smith",
+            "date": "2026-09-03",
+            "who": "Matt Romme",
             "completed": null,
             "vendor": false
           },
@@ -9451,9 +9442,9 @@
         ]
       },
       "next_appt": {
-        "date": "2026-10-01",
+        "date": "2026-09-01",
         "cat": "paint",
-        "who": "Brady Smith",
+        "who": "Matt Romme",
         "brief": "C - Paint Prep / Paint"
       },
       "cost": {
@@ -9499,13 +9490,13 @@
         "status": "ACTIVE",
         "done": 0,
         "total": 8,
-        "first_appt": "2026-09-22",
+        "first_appt": "2026-08-27",
         "final_walk": "2026-10-01",
         "final_walk_done": null,
         "completed_date": null,
         "due": "2026-08-25",
         "next_task": {
-          "date": "2026-09-22",
+          "date": "2026-08-26",
           "task": "paint"
         },
         "tasks": [
@@ -9522,7 +9513,7 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-09-22",
+            "date": "2026-08-27",
             "who": "Brady Smith",
             "completed": null,
             "vendor": false
@@ -9531,7 +9522,7 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-09-24",
+            "date": "2026-08-31",
             "who": "Brady Smith",
             "completed": null,
             "vendor": false
@@ -9575,7 +9566,7 @@
         ]
       },
       "next_appt": {
-        "date": "2026-09-22",
+        "date": "2026-08-26",
         "cat": "paint",
         "who": "Brady Smith",
         "brief": "C - Paint Prep / Paint"
@@ -10006,13 +9997,13 @@
         "status": "ACTIVE",
         "done": 0,
         "total": 8,
-        "first_appt": "2026-08-26",
+        "first_appt": "2026-09-08",
         "final_walk": "2026-09-07",
         "final_walk_done": null,
         "completed_date": null,
         "due": "2026-08-25",
         "next_task": {
-          "date": "2026-08-26",
+          "date": "2026-09-07",
           "task": "paint"
         },
         "tasks": [
@@ -10029,7 +10020,7 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-08-26",
+            "date": "2026-09-08",
             "who": "Matt Romme",
             "completed": null,
             "vendor": false
@@ -10038,7 +10029,7 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-08-31",
+            "date": "2026-09-09",
             "who": "Matt Romme",
             "completed": null,
             "vendor": false
@@ -10082,10 +10073,10 @@
         ]
       },
       "next_appt": {
-        "date": "2026-08-26",
-        "cat": "paint",
-        "who": "Matt Romme",
-        "brief": "C - Paint Prep / Paint"
+        "date": "2026-09-07",
+        "cat": "final-walk",
+        "who": "Brady Smith",
+        "brief": "Final Walkthrough"
       },
       "cost": {
         "code": "c702-J301",
@@ -10130,13 +10121,13 @@
         "status": "ACTIVE",
         "done": 0,
         "total": 8,
-        "first_appt": "2026-09-16",
+        "first_appt": "2026-09-22",
         "final_walk": "2026-09-28",
         "final_walk_done": null,
         "completed_date": null,
         "due": "2026-08-25",
         "next_task": {
-          "date": "2026-09-16",
+          "date": "2026-09-22",
           "task": "paint"
         },
         "tasks": [
@@ -10153,7 +10144,7 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-09-16",
+            "date": "2026-09-22",
             "who": "Brady Smith",
             "completed": null,
             "vendor": false
@@ -10162,7 +10153,7 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-09-21",
+            "date": "2026-09-24",
             "who": "Brady Smith",
             "completed": null,
             "vendor": false
@@ -10206,7 +10197,7 @@
         ]
       },
       "next_appt": {
-        "date": "2026-09-16",
+        "date": "2026-09-22",
         "cat": "paint",
         "who": "Brady Smith",
         "brief": "C - Paint Prep / Paint"
