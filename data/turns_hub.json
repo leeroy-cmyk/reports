@@ -1,647 +1,19 @@
 {
   "ok": true,
-  "fetched_at": "2026-08-25T20:03:40.414Z",
+  "fetched_at": "2026-08-25T20:48:34.861Z",
   "summary": {
     "as_of": "2026-08-25",
     "units": 232,
-    "active": 73,
-    "ready": 1,
+    "active": 71,
+    "ready": 2,
     "notice": 20,
-    "at_risk": 27,
+    "at_risk": 25,
     "unscheduled": 11,
-    "accruing": 13852.09,
-    "avg_days_open": 30,
-    "revenue_at_risk": 3490.47
+    "accruing": 9073.51,
+    "avg_days_open": 27,
+    "revenue_at_risk": 3400.27
   },
   "rows": [
-    {
-      "key": "kn47|c109",
-      "prop": "kn47",
-      "unit": "C109",
-      "at_risk": [
-        "Available date passed",
-        "Over 45 days vacant"
-      ],
-      "property_name": "kn47 K1",
-      "city": "Kennewick",
-      "addr": "4711 W Metaline Avenue C109 Kennewick, WA 99336",
-      "unit_id": 851,
-      "unit_status": "Vacant-Unrented",
-      "rent_ready": "No",
-      "vacant": true,
-      "days_vacant": 151,
-      "move_out": "2026-03-27",
-      "available_on": "2026-08-24",
-      "ready_on": "2026-08-24",
-      "target_date": "2026-04-16",
-      "next_move_in": null,
-      "rent": "931.00",
-      "bed_bath": "1/1.00",
-      "sqft": 600,
-      "region": "Tri-Cities",
-      "pm": {
-        "projId": 222151,
-        "name": "CapEx Turn",
-        "status": "ACTIVE",
-        "done": 6,
-        "total": 8,
-        "first_appt": "2026-07-30",
-        "final_walk": "2026-08-25",
-        "final_walk_done": null,
-        "completed_date": "2026-08-12",
-        "due": "2026-08-14",
-        "next_task": {
-          "date": "2026-08-25",
-          "task": "final-walk"
-        },
-        "tasks": [
-          {
-            "task": "A - CapEx Maintenance",
-            "cat": "walkthrough",
-            "done": false,
-            "date": "2026-08-03",
-            "who": "Margarito Saldana",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "B - CapEx Paint",
-            "cat": "paint",
-            "done": true,
-            "date": "2026-07-30",
-            "who": "Ryan Robson",
-            "completed": "2026-08-06",
-            "vendor": false
-          },
-          {
-            "task": "C - CapEx Flooring",
-            "cat": "paint",
-            "done": true,
-            "date": null,
-            "who": "Virtel flooring services 8",
-            "completed": "2026-08-06",
-            "vendor": true
-          },
-          {
-            "task": "D - Cleaning",
-            "cat": "cleaning",
-            "done": true,
-            "date": "2026-08-18",
-            "who": "Ryan Robson",
-            "completed": "2026-08-12",
-            "vendor": false
-          },
-          {
-            "task": "F - Invoice",
-            "cat": "cleaning",
-            "done": true,
-            "date": null,
-            "who": "Dulce Salinas",
-            "completed": "2026-07-21",
-            "vendor": false
-          },
-          {
-            "task": "CapEx Initial Walkthrough",
-            "cat": "walkthrough",
-            "done": true,
-            "date": "2026-05-15",
-            "who": "Margarito Saldana",
-            "completed": "2026-06-01",
-            "vendor": false
-          },
-          {
-            "task": "CapEx Initial Walkthrough (clone)",
-            "cat": "walkthrough",
-            "done": true,
-            "date": "2026-07-16",
-            "who": "Margarito Saldana",
-            "completed": "2026-07-20",
-            "vendor": false
-          },
-          {
-            "task": "E - CapEx Final Walkthough",
-            "cat": "final-walk",
-            "done": false,
-            "date": "2026-08-25",
-            "who": "Margarito Saldana",
-            "completed": null,
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": {
-        "date": "2026-08-25",
-        "cat": "final-walk",
-        "who": "Margarito Saldana",
-        "brief": "E - CapEx Final Walkthough"
-      },
-      "cost": {
-        "code": "kn47-k1-C109",
-        "labor": 1377.27,
-        "materials": 3406.46,
-        "total": 4783.73,
-        "estimate": 0,
-        "laborEntries": [
-          {
-            "d": "2026-08-19",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.77,
-            "cost": 17.71,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-18",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.72,
-            "cost": 39.56,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-18",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.15,
-            "cost": 26.45,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-18",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.1,
-            "cost": 2.3,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-18",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.27,
-            "cost": 6.21,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-18",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.3,
-            "cost": 6.9,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-18",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.32,
-            "cost": 7.36,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-18",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.32,
-            "cost": 7.36,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-18",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.25,
-            "cost": 5.75,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-18",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.15,
-            "cost": 3.45,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-18",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.72,
-            "cost": 16.56,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-18",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.28,
-            "cost": 6.44,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-18",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.5,
-            "cost": 11.5,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-18",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.07,
-            "cost": 1.61,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-18",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.13,
-            "cost": 2.99,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-18",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.47,
-            "cost": 10.81,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-18",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.58,
-            "cost": 13.34,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-18",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.83,
-            "cost": 19.09,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-17",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.62,
-            "cost": 37.26,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-17",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.37,
-            "cost": 31.51,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-17",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.62,
-            "cost": 14.26,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-17",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.37,
-            "cost": 8.51,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-17",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.23,
-            "cost": 5.29,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-17",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.55,
-            "cost": 12.65,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-17",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.48,
-            "cost": 11.04,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-17",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.65,
-            "cost": 37.95,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-17",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.28,
-            "cost": 6.44,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-17",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.42,
-            "cost": 9.66,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-17",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.32,
-            "cost": 7.36,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-17",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.2,
-            "cost": 4.6,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-17",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.93,
-            "cost": 21.39,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-14",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.63,
-            "cost": 37.49,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-14",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.7,
-            "cost": 16.1,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-14",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.43,
-            "cost": 9.89,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-14",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.08,
-            "cost": 1.84,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-14",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.32,
-            "cost": 7.36,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-14",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.63,
-            "cost": 14.49,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-14",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.07,
-            "cost": 1.61,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-14",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.07,
-            "cost": 1.61,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-14",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.42,
-            "cost": 9.66,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-14",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.27,
-            "cost": 6.21,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-14",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.12,
-            "cost": 2.76,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-14",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.28,
-            "cost": 6.44,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-14",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.13,
-            "cost": 2.99,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-14",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.28,
-            "cost": 6.44,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-14",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.92,
-            "cost": 21.16,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-14",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.55,
-            "cost": 12.65,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-13",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.53,
-            "cost": 35.19,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-13",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.25,
-            "cost": 28.75,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-13",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.75,
-            "cost": 17.25,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-13",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.12,
-            "cost": 2.76,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-13",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.05,
-            "cost": 1.15,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-13",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.22,
-            "cost": 28.06,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-13",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.18,
-            "cost": 4.14,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-13",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.98,
-            "cost": 22.54,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-13",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.85,
-            "cost": 19.55,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-13",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.32,
-            "cost": 7.36,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-13",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.05,
-            "cost": 1.15,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-13",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.77,
-            "cost": 17.71,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-13",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.57,
-            "cost": 13.11,
-            "cat": "CapEx"
-          }
-        ],
-        "materialEntries": [
-          {
-            "d": "2026-08-18",
-            "amt": 222.88,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-18",
-            "amt": 146.99,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-17",
-            "amt": 33.23,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-14",
-            "amt": 52.3,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-13",
-            "amt": 135.88,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-12",
-            "amt": 758.34,
-            "cat": "Turn",
-            "ln": "saldana",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-12",
-            "amt": 35.1,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-07",
-            "amt": 350,
-            "cat": "Turn",
-            "ln": "Duo Cleaning Compa",
-            "src": "qbo"
-          },
-          {
-            "d": "2026-08-05",
-            "amt": 1648.94,
-            "cat": "CapEx",
-            "ln": "Virtel Flooring Se",
-            "src": "qbo"
-          },
-          {
-            "d": "2026-07-28",
-            "amt": 22.8,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          }
-        ]
-      },
-      "stage": "Walkthrough",
-      "stage_ord": 1,
-      "days_elapsed": 151,
-      "days_to_turn": null,
-      "status": "active"
-    },
     {
       "key": "kn47|maintenancegarages2",
       "prop": "kn47",
@@ -2565,9 +1937,9 @@
       },
       "cost": {
         "code": "p705-17",
-        "labor": 156.1,
+        "labor": 161.25,
         "materials": 79.52,
-        "total": 235.62,
+        "total": 240.77,
         "estimate": 0,
         "laborEntries": [
           {
@@ -2582,6 +1954,13 @@
             "emp": "Ronald D. Cramer",
             "hrs": 2.47,
             "cost": 63.6,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-25",
+            "emp": "Ronald D. Cramer",
+            "hrs": 0.2,
+            "cost": 5.15,
             "cat": "Turn"
           },
           {
@@ -3183,132 +2562,6 @@
       "status": "active"
     },
     {
-      "key": "tc68|d088",
-      "prop": "tc68",
-      "unit": "D088",
-      "at_risk": [
-        "Over 45 days vacant"
-      ],
-      "property_name": "tc68",
-      "city": "Tacoma",
-      "addr": "6830 Tacoma Mall Blvd Apt D088 Tacoma, WA 98409",
-      "unit_id": 1237,
-      "unit_status": "Vacant-Unrented",
-      "rent_ready": "No",
-      "vacant": true,
-      "days_vacant": 117,
-      "move_out": "2026-04-30",
-      "available_on": "2026-08-26",
-      "ready_on": "2026-08-26",
-      "target_date": "2026-05-20",
-      "next_move_in": null,
-      "rent": "1775.00",
-      "bed_bath": "2/1.00",
-      "sqft": 980,
-      "region": "Tacoma",
-      "pm": {
-        "projId": 226013,
-        "name": "Standard Unit Turn",
-        "status": "ACTIVE",
-        "done": 4,
-        "total": 8,
-        "first_appt": "2026-07-13",
-        "final_walk": "2026-09-01",
-        "final_walk_done": null,
-        "completed_date": "2026-08-20",
-        "due": "2026-07-14",
-        "next_task": {
-          "date": "2026-08-25",
-          "task": "maintenance"
-        },
-        "tasks": [
-          {
-            "task": "A - Initial walkthrough",
-            "cat": "walkthrough",
-            "done": true,
-            "date": "2026-06-25",
-            "who": "Armani Mitchell",
-            "completed": "2026-07-01",
-            "vendor": false
-          },
-          {
-            "task": "Appfolio Estimate APPROVED",
-            "cat": "estimate",
-            "done": true,
-            "date": null,
-            "who": "Dulce Salinas",
-            "completed": "2026-07-16",
-            "vendor": false
-          },
-          {
-            "task": "C - Paint",
-            "cat": "paint",
-            "done": true,
-            "date": "2026-08-24",
-            "who": "Chris Phillips",
-            "completed": "2026-08-20",
-            "vendor": false
-          },
-          {
-            "task": "D - Maintenance (clone)",
-            "cat": "maintenance",
-            "done": false,
-            "date": "2026-08-25",
-            "who": "Armani Mitchell",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "E - Carpet Cleaning",
-            "cat": "carpet",
-            "done": false,
-            "date": null,
-            "who": "Armani Mitchell",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "F - Cleaning",
-            "cat": "cleaning",
-            "done": false,
-            "date": null,
-            "who": "Armani Mitchell",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Final Walkthrough",
-            "cat": "final-walk",
-            "done": false,
-            "date": "2026-09-01",
-            "who": "Armani Mitchell",
-            "completed": null,
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": {
-        "date": "2026-08-25",
-        "cat": "maintenance",
-        "who": "Armani Mitchell",
-        "brief": "D - Maintenance (clone)"
-      },
-      "cost": {
-        "code": "tc68-D088",
-        "labor": 0,
-        "materials": 0,
-        "total": 0,
-        "estimate": 2415,
-        "laborEntries": [],
-        "materialEntries": []
-      },
-      "stage": "Maintenance",
-      "stage_ord": 3,
-      "days_elapsed": 117,
-      "days_to_turn": null,
-      "status": "active"
-    },
-    {
       "key": "tc68|d089",
       "prop": "tc68",
       "unit": "D089",
@@ -3471,12 +2724,12 @@
         "projId": 227505,
         "name": "Standard Unit Turn",
         "status": "ACTIVE",
-        "done": 2,
+        "done": 3,
         "total": 7,
         "first_appt": "2026-07-20",
         "final_walk": "2026-09-03",
         "final_walk_done": null,
-        "completed_date": "2026-06-24",
+        "completed_date": "2026-08-25",
         "due": "2026-07-29",
         "next_task": {
           "date": "2026-08-26",
@@ -3504,10 +2757,10 @@
           {
             "task": "D - Maintenance",
             "cat": "maintenance",
-            "done": false,
+            "done": true,
             "date": "2026-08-27",
             "who": "Armani Mitchell",
-            "completed": null,
+            "completed": "2026-08-25",
             "vendor": false
           },
           {
@@ -3540,10 +2793,10 @@
         ]
       },
       "next_appt": {
-        "date": "2026-08-26",
-        "cat": "maintenance",
+        "date": "2026-09-03",
+        "cat": "final-walk",
         "who": "Armani Mitchell",
-        "brief": "D - Maintenance"
+        "brief": "Final Walkthrough"
       },
       "cost": {
         "code": "tc68-D106",
@@ -16230,6 +15483,632 @@
       "status": "complete"
     },
     {
+      "key": "kn47|c109",
+      "prop": "kn47",
+      "unit": "C109",
+      "at_risk": [],
+      "property_name": "kn47 K1",
+      "city": "Kennewick",
+      "addr": "4711 W Metaline Avenue C109 Kennewick, WA 99336",
+      "unit_id": 851,
+      "unit_status": "Vacant-Unrented",
+      "rent_ready": "Yes",
+      "vacant": true,
+      "days_vacant": 151,
+      "move_out": "2026-03-27",
+      "available_on": "2026-08-24",
+      "ready_on": "2026-08-24",
+      "target_date": "2026-04-16",
+      "next_move_in": null,
+      "rent": "931.00",
+      "bed_bath": "1/1.00",
+      "sqft": 600,
+      "region": "Tri-Cities",
+      "pm": {
+        "projId": 222151,
+        "name": "CapEx Turn",
+        "status": "ACTIVE",
+        "done": 6,
+        "total": 8,
+        "first_appt": "2026-07-30",
+        "final_walk": "2026-08-25",
+        "final_walk_done": null,
+        "completed_date": "2026-08-12",
+        "due": "2026-08-14",
+        "next_task": {
+          "date": "2026-08-25",
+          "task": "final-walk"
+        },
+        "tasks": [
+          {
+            "task": "A - CapEx Maintenance",
+            "cat": "walkthrough",
+            "done": false,
+            "date": "2026-08-03",
+            "who": "Margarito Saldana",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "B - CapEx Paint",
+            "cat": "paint",
+            "done": true,
+            "date": "2026-07-30",
+            "who": "Ryan Robson",
+            "completed": "2026-08-06",
+            "vendor": false
+          },
+          {
+            "task": "C - CapEx Flooring",
+            "cat": "paint",
+            "done": true,
+            "date": null,
+            "who": "Virtel flooring services 8",
+            "completed": "2026-08-06",
+            "vendor": true
+          },
+          {
+            "task": "D - Cleaning",
+            "cat": "cleaning",
+            "done": true,
+            "date": "2026-08-18",
+            "who": "Ryan Robson",
+            "completed": "2026-08-12",
+            "vendor": false
+          },
+          {
+            "task": "F - Invoice",
+            "cat": "cleaning",
+            "done": true,
+            "date": null,
+            "who": "Dulce Salinas",
+            "completed": "2026-07-21",
+            "vendor": false
+          },
+          {
+            "task": "CapEx Initial Walkthrough",
+            "cat": "walkthrough",
+            "done": true,
+            "date": "2026-05-15",
+            "who": "Margarito Saldana",
+            "completed": "2026-06-01",
+            "vendor": false
+          },
+          {
+            "task": "CapEx Initial Walkthrough (clone)",
+            "cat": "walkthrough",
+            "done": true,
+            "date": "2026-07-16",
+            "who": "Margarito Saldana",
+            "completed": "2026-07-20",
+            "vendor": false
+          },
+          {
+            "task": "E - CapEx Final Walkthough",
+            "cat": "final-walk",
+            "done": false,
+            "date": "2026-08-25",
+            "who": "Margarito Saldana",
+            "completed": null,
+            "vendor": false
+          }
+        ]
+      },
+      "next_appt": {
+        "date": "2026-08-25",
+        "cat": "final-walk",
+        "who": "Margarito Saldana",
+        "brief": "E - CapEx Final Walkthough"
+      },
+      "cost": {
+        "code": "kn47-k1-C109",
+        "labor": 1377.27,
+        "materials": 3406.46,
+        "total": 4783.73,
+        "estimate": 0,
+        "laborEntries": [
+          {
+            "d": "2026-08-19",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.77,
+            "cost": 17.71,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-18",
+            "emp": "Ryan G. Robson",
+            "hrs": 1.72,
+            "cost": 39.56,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-18",
+            "emp": "Ryan G. Robson",
+            "hrs": 1.15,
+            "cost": 26.45,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-18",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.1,
+            "cost": 2.3,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-18",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.27,
+            "cost": 6.21,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-18",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.3,
+            "cost": 6.9,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-18",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.32,
+            "cost": 7.36,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-18",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.32,
+            "cost": 7.36,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-18",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.25,
+            "cost": 5.75,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-18",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.15,
+            "cost": 3.45,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-18",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.72,
+            "cost": 16.56,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-18",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.28,
+            "cost": 6.44,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-18",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.5,
+            "cost": 11.5,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-18",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.07,
+            "cost": 1.61,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-18",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.13,
+            "cost": 2.99,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-18",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.47,
+            "cost": 10.81,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-18",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.58,
+            "cost": 13.34,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-18",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.83,
+            "cost": 19.09,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-17",
+            "emp": "Ryan G. Robson",
+            "hrs": 1.62,
+            "cost": 37.26,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-17",
+            "emp": "Ryan G. Robson",
+            "hrs": 1.37,
+            "cost": 31.51,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-17",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.62,
+            "cost": 14.26,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-17",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.37,
+            "cost": 8.51,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-17",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.23,
+            "cost": 5.29,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-17",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.55,
+            "cost": 12.65,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-17",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.48,
+            "cost": 11.04,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-17",
+            "emp": "Ryan G. Robson",
+            "hrs": 1.65,
+            "cost": 37.95,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-17",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.28,
+            "cost": 6.44,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-17",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.42,
+            "cost": 9.66,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-17",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.32,
+            "cost": 7.36,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-17",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.2,
+            "cost": 4.6,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-17",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.93,
+            "cost": 21.39,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-14",
+            "emp": "Ryan G. Robson",
+            "hrs": 1.63,
+            "cost": 37.49,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-14",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.7,
+            "cost": 16.1,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-14",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.43,
+            "cost": 9.89,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-14",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.08,
+            "cost": 1.84,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-14",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.32,
+            "cost": 7.36,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-14",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.63,
+            "cost": 14.49,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-14",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.07,
+            "cost": 1.61,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-14",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.07,
+            "cost": 1.61,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-14",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.42,
+            "cost": 9.66,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-14",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.27,
+            "cost": 6.21,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-14",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.12,
+            "cost": 2.76,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-14",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.28,
+            "cost": 6.44,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-14",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.13,
+            "cost": 2.99,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-14",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.28,
+            "cost": 6.44,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-14",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.92,
+            "cost": 21.16,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-14",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.55,
+            "cost": 12.65,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-13",
+            "emp": "Ryan G. Robson",
+            "hrs": 1.53,
+            "cost": 35.19,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-13",
+            "emp": "Ryan G. Robson",
+            "hrs": 1.25,
+            "cost": 28.75,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-13",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.75,
+            "cost": 17.25,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-13",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.12,
+            "cost": 2.76,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-13",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.05,
+            "cost": 1.15,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-13",
+            "emp": "Ryan G. Robson",
+            "hrs": 1.22,
+            "cost": 28.06,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-13",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.18,
+            "cost": 4.14,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-13",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.98,
+            "cost": 22.54,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-13",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.85,
+            "cost": 19.55,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-13",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.32,
+            "cost": 7.36,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-13",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.05,
+            "cost": 1.15,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-13",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.77,
+            "cost": 17.71,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-13",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.57,
+            "cost": 13.11,
+            "cat": "CapEx"
+          }
+        ],
+        "materialEntries": [
+          {
+            "d": "2026-08-18",
+            "amt": 222.88,
+            "cat": "Turn",
+            "ln": "robson",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-08-18",
+            "amt": 146.99,
+            "cat": "Turn",
+            "ln": "robson",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-08-17",
+            "amt": 33.23,
+            "cat": "Turn",
+            "ln": "robson",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-08-14",
+            "amt": 52.3,
+            "cat": "Turn",
+            "ln": "robson",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-08-13",
+            "amt": 135.88,
+            "cat": "Turn",
+            "ln": "robson",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-08-12",
+            "amt": 758.34,
+            "cat": "Turn",
+            "ln": "saldana",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-08-12",
+            "amt": 35.1,
+            "cat": "Turn",
+            "ln": "robson",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-08-07",
+            "amt": 350,
+            "cat": "Turn",
+            "ln": "Duo Cleaning Compa",
+            "src": "qbo"
+          },
+          {
+            "d": "2026-08-05",
+            "amt": 1648.94,
+            "cat": "CapEx",
+            "ln": "Virtel Flooring Se",
+            "src": "qbo"
+          },
+          {
+            "d": "2026-07-28",
+            "amt": 22.8,
+            "cat": "Turn",
+            "ln": "robson",
+            "src": "ramp"
+          }
+        ]
+      },
+      "af_turn_end": "2026-08-25",
+      "stage": "Ready",
+      "stage_ord": 7,
+      "days_elapsed": 151,
+      "days_to_turn": null,
+      "status": "ready"
+    },
+    {
       "key": "kn47|c203",
       "prop": "kn47",
       "unit": "C203",
@@ -16763,6 +16642,7 @@
         ]
       },
       "turn_end": "2026-07-10",
+      "af_turn_end": "2026-08-25",
       "stage": "Ready",
       "stage_ord": 7,
       "days_elapsed": 40,
@@ -18727,6 +18607,7 @@
         ]
       },
       "turn_end": "2026-08-13",
+      "af_turn_end": "2026-08-25",
       "stage": "Ready",
       "stage_ord": 7,
       "days_elapsed": 36,
@@ -19371,6 +19252,7 @@
         ]
       },
       "turn_end": "2026-06-08",
+      "af_turn_end": "2026-08-25",
       "stage": "Final Walk",
       "stage_ord": 6,
       "days_elapsed": null,
@@ -20464,6 +20346,7 @@
         ]
       },
       "turn_end": "2026-08-07",
+      "af_turn_end": "2026-08-25",
       "stage": "Final Walk",
       "stage_ord": 6,
       "days_elapsed": null,
@@ -22331,6 +22214,7 @@
         ]
       },
       "turn_end": "2026-06-30",
+      "af_turn_end": "2026-08-25",
       "stage": "Final Walk",
       "stage_ord": 6,
       "days_elapsed": null,
@@ -22848,6 +22732,7 @@
         ]
       },
       "turn_end": "2026-08-07",
+      "af_turn_end": "2026-08-25",
       "stage": "Final Walk",
       "stage_ord": 6,
       "days_elapsed": null,
@@ -23736,6 +23621,7 @@
         ]
       },
       "turn_end": "2026-06-01",
+      "af_turn_end": "2026-08-25",
       "stage": "Final Walk",
       "stage_ord": 6,
       "days_elapsed": null,
@@ -37867,9 +37753,9 @@
       },
       "cost": {
         "code": "rl16-B11",
-        "labor": 142,
+        "labor": 188.29,
         "materials": 0,
-        "total": 142,
+        "total": 188.29,
         "estimate": 0,
         "laborEntries": [
           {
@@ -37878,6 +37764,13 @@
             "hrs": 2,
             "cost": 56.8,
             "cat": "Turn"
+          },
+          {
+            "d": "2026-08-25",
+            "emp": "Margarito Saldana",
+            "hrs": 1.63,
+            "cost": 46.29,
+            "cat": "CapEx"
           },
           {
             "d": "2026-07-30",
@@ -48918,6 +48811,124 @@
       "stage_ord": 7,
       "days_elapsed": 102,
       "days_to_turn": 102,
+      "status": "complete"
+    },
+    {
+      "key": "tc68|d088",
+      "prop": "tc68",
+      "unit": "D088",
+      "at_risk": [],
+      "property_name": "tc68",
+      "city": "Tacoma",
+      "addr": "6830 Tacoma Mall Blvd Apt D088 Tacoma, WA 98409",
+      "unit_id": 1237,
+      "unit_status": "Vacant-Unrented",
+      "rent_ready": "Yes",
+      "vacant": true,
+      "days_vacant": 117,
+      "move_out": "2026-04-30",
+      "available_on": "2026-08-26",
+      "ready_on": "2026-08-26",
+      "target_date": "2026-05-20",
+      "next_move_in": null,
+      "rent": "1775.00",
+      "bed_bath": "2/1.00",
+      "sqft": 980,
+      "region": "Tacoma",
+      "pm": {
+        "projId": 226013,
+        "name": "Standard Unit Turn",
+        "status": "COMPLETE",
+        "done": 8,
+        "total": 8,
+        "first_appt": "2026-07-13",
+        "final_walk": "2026-09-01",
+        "final_walk_done": "2026-08-25",
+        "completed_date": "2026-08-25",
+        "due": "2026-07-14",
+        "next_task": null,
+        "tasks": [
+          {
+            "task": "A - Initial walkthrough",
+            "cat": "walkthrough",
+            "done": true,
+            "date": "2026-06-25",
+            "who": "Armani Mitchell",
+            "completed": "2026-07-01",
+            "vendor": false
+          },
+          {
+            "task": "Appfolio Estimate APPROVED",
+            "cat": "estimate",
+            "done": true,
+            "date": null,
+            "who": "Dulce Salinas",
+            "completed": "2026-07-16",
+            "vendor": false
+          },
+          {
+            "task": "C - Paint",
+            "cat": "paint",
+            "done": true,
+            "date": "2026-08-24",
+            "who": "Chris Phillips",
+            "completed": "2026-08-20",
+            "vendor": false
+          },
+          {
+            "task": "D - Maintenance (clone)",
+            "cat": "maintenance",
+            "done": true,
+            "date": "2026-08-25",
+            "who": "Armani Mitchell",
+            "completed": "2026-08-25",
+            "vendor": false
+          },
+          {
+            "task": "E - Carpet Cleaning",
+            "cat": "carpet",
+            "done": true,
+            "date": null,
+            "who": "Armani Mitchell",
+            "completed": "2026-08-25",
+            "vendor": false
+          },
+          {
+            "task": "F - Cleaning",
+            "cat": "cleaning",
+            "done": true,
+            "date": null,
+            "who": "Armani Mitchell",
+            "completed": "2026-08-25",
+            "vendor": false
+          },
+          {
+            "task": "Final Walkthrough",
+            "cat": "final-walk",
+            "done": true,
+            "date": "2026-09-01",
+            "who": "Armani Mitchell",
+            "completed": "2026-08-25",
+            "vendor": false
+          }
+        ]
+      },
+      "next_appt": null,
+      "cost": {
+        "code": "tc68-D088",
+        "labor": 0,
+        "materials": 0,
+        "total": 0,
+        "estimate": 2415,
+        "laborEntries": [],
+        "materialEntries": []
+      },
+      "turn_end": "2026-08-25",
+      "af_turn_end": "2026-08-25",
+      "stage": "Ready",
+      "stage_ord": 7,
+      "days_elapsed": 117,
+      "days_to_turn": 117,
       "status": "complete"
     },
     {
