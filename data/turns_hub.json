@@ -1,12 +1,12 @@
 {
   "ok": true,
-  "fetched_at": "2026-08-25T20:48:34.861Z",
+  "fetched_at": "2026-08-25T21:31:57.477Z",
   "summary": {
     "as_of": "2026-08-25",
-    "units": 232,
+    "units": 233,
     "active": 71,
-    "ready": 2,
-    "notice": 20,
+    "ready": 1,
+    "notice": 22,
     "at_risk": 25,
     "unscheduled": 11,
     "accruing": 9073.51,
@@ -11950,6 +11950,44 @@
       "status": "notice"
     },
     {
+      "key": "k104|1075",
+      "prop": "k104",
+      "unit": "107-5",
+      "at_risk": [],
+      "property_name": "k104- LeFevre",
+      "city": "Medical Lake",
+      "addr": "107 E. Spence 5 Medical Lake, WA 99022",
+      "unit_id": 349,
+      "unit_status": "Notice-Unrented",
+      "rent_ready": null,
+      "vacant": false,
+      "days_vacant": null,
+      "move_out": "2026-08-31",
+      "available_on": "2026-09-20",
+      "ready_on": "2026-09-20",
+      "target_date": "2026-09-20",
+      "next_move_in": null,
+      "rent": "1334.00",
+      "bed_bath": "2/1.00",
+      "sqft": 1140,
+      "region": "Spokane",
+      "next_appt": null,
+      "cost": {
+        "code": "k104-107-5",
+        "labor": 0,
+        "materials": 0,
+        "total": 0,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": []
+      },
+      "stage": "Move-out",
+      "stage_ord": 0,
+      "days_elapsed": 0,
+      "days_to_turn": null,
+      "status": "notice"
+    },
+    {
       "key": "k104|31412",
       "prop": "k104",
       "unit": "314-12",
@@ -15507,26 +15545,23 @@
       "pm": {
         "projId": 222151,
         "name": "CapEx Turn",
-        "status": "ACTIVE",
-        "done": 6,
+        "status": "COMPLETE",
+        "done": 8,
         "total": 8,
         "first_appt": "2026-07-30",
         "final_walk": "2026-08-25",
-        "final_walk_done": null,
-        "completed_date": "2026-08-12",
-        "due": "2026-08-14",
-        "next_task": {
-          "date": "2026-08-25",
-          "task": "final-walk"
-        },
+        "final_walk_done": "2026-08-25",
+        "completed_date": "2026-08-25",
+        "due": "2026-06-17",
+        "next_task": null,
         "tasks": [
           {
             "task": "A - CapEx Maintenance",
             "cat": "walkthrough",
-            "done": false,
+            "done": true,
             "date": "2026-08-03",
             "who": "Margarito Saldana",
-            "completed": null,
+            "completed": "2026-08-25",
             "vendor": false
           },
           {
@@ -15586,20 +15621,15 @@
           {
             "task": "E - CapEx Final Walkthough",
             "cat": "final-walk",
-            "done": false,
+            "done": true,
             "date": "2026-08-25",
             "who": "Margarito Saldana",
-            "completed": null,
+            "completed": "2026-08-25",
             "vendor": false
           }
         ]
       },
-      "next_appt": {
-        "date": "2026-08-25",
-        "cat": "final-walk",
-        "who": "Margarito Saldana",
-        "brief": "E - CapEx Final Walkthough"
-      },
+      "next_appt": null,
       "cost": {
         "code": "kn47-k1-C109",
         "labor": 1377.27,
@@ -16101,12 +16131,13 @@
           }
         ]
       },
+      "turn_end": "2026-08-25",
       "af_turn_end": "2026-08-25",
       "stage": "Ready",
       "stage_ord": 7,
       "days_elapsed": 151,
-      "days_to_turn": null,
-      "status": "ready"
+      "days_to_turn": 151,
+      "status": "complete"
     },
     {
       "key": "kn47|c203",
@@ -44648,8 +44679,23 @@
       "key": "tc68|a06",
       "prop": "tc68",
       "unit": "A06",
-      "property_name": "tc68",
       "at_risk": [],
+      "property_name": "tc68",
+      "city": "Tacoma",
+      "addr": "6830 Tacoma Mall Blvd Apt A06 Tacoma, WA 98409",
+      "unit_id": 1155,
+      "unit_status": "Notice-Unrented",
+      "rent_ready": null,
+      "vacant": false,
+      "days_vacant": null,
+      "move_out": "2026-09-17",
+      "available_on": "2026-10-07",
+      "ready_on": "2026-10-07",
+      "target_date": "2026-10-07",
+      "next_move_in": null,
+      "rent": "1595.00",
+      "bed_bath": "2/1.00",
+      "sqft": 980,
       "region": "Tacoma",
       "pm": {
         "projId": 230648,
@@ -44749,9 +44795,9 @@
       },
       "stage": "Walkthrough",
       "stage_ord": 1,
-      "days_elapsed": null,
+      "days_elapsed": 0,
       "days_to_turn": null,
-      "status": "other"
+      "status": "notice"
     },
     {
       "key": "tc68|a07",
