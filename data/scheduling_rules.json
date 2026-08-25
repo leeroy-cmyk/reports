@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-08-21T14:28:39.854Z",
-  "last_checked": "2026-08-21T14:28:39.854Z",
+  "generated_at": "2026-08-25T14:38:45.280Z",
+  "last_checked": "2026-08-25T14:38:45.280Z",
   "source": "leeroy-cmyk/pm-scheduling/CLAUDE.md",
-  "count": 68,
+  "count": 69,
   "rules": [
     {
       "group": "General",
@@ -202,7 +202,16 @@
     {
       "group": "Spokane",
       "category": "",
-      "text": "**Jacob Jett + David Wright split repairs by PROPERTY, priority plays no part at all (rule dates back to 2026-08-07 for Jacob/Justin, now Jacob/David after the 2026-08-17 reshuffle — see the team bullets above).** A property is decided fresh each run purely by ownership/load: a property with an existing assigned meld stays with that team (clustering); a brand-new property with no existing assignee goes to whichever of Jacob/David has fewer total melds right now. This only decides a NEW/unassigned/reclaimed meld — one that already has a tech is never reassigned. An Emergency/Urgent meld is handled as an emergency (see the Emergency/Urgent queue rule) and nothing more — it has no special effect on who gets assigned.",
+      "text": "**Edward Villa joined Spokane repairs 2026-08-24 (Florencia) — INDEPENDENT of the Jacob/David pair, but ON HOLD for new work.** (\"trabaja independiente\" — Florencia, 2026-08-24; same day, also: \"no agendes nada de lo nuevo tampoco, solo espera\"). Unlike David, he is NOT added to `PAIRS` — he's a standalone tech with his own property ownership once activated, so `pairOf(EDWARD_ID)` falls back to a solo `[EDWARD_ID]` team, same idiom Jacob used before David's pairing activated. He IS in `TECHS` (so his shadow-day melds stay tracked as his, not reclaimed) but deliberately EXCLUDED from `ASSIGNABLE` for now — same one-line pause Jacob got on 2026-08-17 — so the daily scheduler won't route any new/unassigned melds to him yet. Real agent id `EDWARD_ID` (63595) confirmed live the same day. **Don't add him back to `ASSIGNABLE` until Florencia explicitly says to start giving him new work.**",
+      "details": [
+        "**First-day shadow (2026-08-24, one-time, NOT a scheduler rule):** Florencia asked for Edward to be co-assigned onto every meld David had scheduled *that day only*, so he could shadow him — done directly via `assign-maintenance` (keeping David, adding Edward) in `pm_edward_shadow_david_onetime.js`, plus the same stale-appointment-snapshot refresh the Chad Cariquist swap needed (`pm_edward_refresh_snapshot_onetime.js`, see Tri-Cities Grounds/Lawn section) for the 2 of the 5 melds whose appointment time had already elapsed. This does not recur — Edward's own independent property ownership starts building from here forward via the normal least-loaded-tech assignment path.",
+        "⚠️ **Backlog risk, same known gotcha as Gordon/Justin (see \"Turns\" below): a brand-new independent tech only ever earns NEW/unassigned melds going forward — the existing Jacob/David backlog does not move to him on its own.** If new Spokane repair volume is thin, Edward could sit comparatively idle for a while unless/until an explicit authorised rebalance moves some of Jacob/David's existing load to him (same mechanism as `pm_spokane_david_jason_split_onetime.js`) — not done automatically as part of onboarding him into the scheduler."
+      ]
+    },
+    {
+      "group": "Spokane",
+      "category": "",
+      "text": "**Jacob Jett + David Wright split repairs by PROPERTY as a team; Edward Villa competes independently for new properties (rule dates back to 2026-08-07 for Jacob/Justin, updated 2026-08-17 for Jacob/David, updated again 2026-08-24 for Edward — see the team bullets above).** A property is decided fresh each run purely by ownership/load: a property with an existing assigned meld stays with whoever/whichever team already owns it (clustering); a brand-new property with no existing assignee goes to whichever of the Jacob/David team or Edward currently has fewer total melds. This only decides a NEW/unassigned/reclaimed meld — one that already has a tech is never reassigned. An Emergency/Urgent meld is handled as an emergency (see the Emergency/Urgent queue rule) and nothing more — it has no special effect on who gets assigned.",
       "details": []
     },
     {
@@ -315,7 +324,7 @@
     {
       "group": "Tri-Cities Grounds/Lawn",
       "category": "",
-      "text": "**Reynaldo Leonides (\"Rey\")** handles lawn, city-clustered: Mon+Tue kn47-K1 (two weekly blocks), Wed kn47-K1 \"extras\" (periodic items — bed weeding, irrigation checks, tree limb clearance, flower bed refresh, weed spraying — each has its own fixed Wednesday slot so simultaneous due-dates never overlap), Thu Richland (rl16 + rl21), Fri Pasco (ps17 + ps25 + ps91).",
+      "text": "**Chad Cariquist** (started 2026-08-24, replacing Taylor Perez, who replaced Reynaldo Leonides \"Rey\", fired 2026-08-17) handles lawn, city-clustered: Mon+Tue kn47-K1 (two weekly blocks), Wed kn47-K1 \"extras\" (periodic items — bed weeding, irrigation checks, tree limb clearance, flower bed refresh, weed spraying — each has its own fixed Wednesday slot so simultaneous due-dates never overlap), Thu Richland (rl16 + rl21), Fri Pasco (ps17 + ps25 + ps91). Each swap in this seat keeps the exact same template — no change to the split itself, just a name swap (`CHAD_TEMPLATE`, née `TAYLOR_TEMPLATE`, née `REY_TEMPLATE`, in `pm_tricities_grounds_scheduler.js`).",
       "details": []
     },
     {
@@ -333,7 +342,7 @@
     {
       "group": "Tri-Cities Grounds/Lawn",
       "category": "",
-      "text": "**No Monday reserve** — unlike Tacoma/Spokane, Rey and Hannah work a normal Mon–Fri week (no emergency-driven Monday hold), same as Spokane's David/Alexander.",
+      "text": "**No Monday reserve** — unlike Tacoma/Spokane, Chad and Hannah work a normal Mon–Fri week (no emergency-driven Monday hold), same as Spokane's David/Alexander.",
       "details": []
     },
     {
@@ -360,7 +369,7 @@
       "text": "**Techs — per region.** In-house turn work is always **paint and maintenance only**; cleaning and flooring are vendors everywhere.",
       "details": [
         "**Spokane:** Ron Cramer and Micheal Magoon (Scott Higley no longer works here). These two are Spokane's **only** turn techs — no additional Spokane hires (an earlier note claimed two more start July 20, 2026; that hire never happened — corrected 2026-07-17).",
-        "**Tri-Cities:** James Dunlap + Ryan Robson (paint/maint), Margarito Saldana (walkthroughs only).",
+        "**Tri-Cities:** **Matthew Williams (paint/maint, started 2026-08-24)** + **Margarito Saldana**, who does paint/maint AND every initial walkthrough and final QC. James Dunlap and Ryan Robson left 2026-08-24. ⚠️ Margarito is no longer walkthrough-only, so zero all-day work for him is now a real problem, not the expected state — and he QCs units he turned himself (the Tacoma model, not the Spokane one; unruled).",
         "**Tacoma:** **Chris Phillips paints, Armani Mitchell maintains and does every walkthrough** (split roles, 2026-08-19). See the Tacoma section for the 2-paint-**2**-maint exception; QC is always Armani, own units included."
       ]
     },
