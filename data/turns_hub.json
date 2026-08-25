@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "fetched_at": "2026-08-25T18:59:14.622Z",
+  "fetched_at": "2026-08-25T19:39:08.959Z",
   "summary": {
     "as_of": "2026-08-25",
     "units": 232,
@@ -9,7 +9,7 @@
     "notice": 20,
     "at_risk": 27,
     "unscheduled": 11,
-    "accruing": 13691.72,
+    "accruing": 13771.24,
     "avg_days_open": 30,
     "revenue_at_risk": 3490.47
   },
@@ -2566,8 +2566,8 @@
       "cost": {
         "code": "p705-17",
         "labor": 75.25,
-        "materials": 0,
-        "total": 75.25,
+        "materials": 79.52,
+        "total": 154.77,
         "estimate": 0,
         "laborEntries": [
           {
@@ -2599,7 +2599,15 @@
             "cat": "Turn"
           }
         ],
-        "materialEntries": []
+        "materialEntries": [
+          {
+            "d": "2026-08-25",
+            "amt": 79.52,
+            "cat": "Turn",
+            "ln": "cramer",
+            "src": "ramp"
+          }
+        ]
       },
       "stage": "Paint",
       "stage_ord": 2,
