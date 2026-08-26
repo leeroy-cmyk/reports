@@ -1,11 +1,11 @@
 {
   "ok": true,
-  "fetched_at": "2026-08-26T16:19:31.093Z",
+  "fetched_at": "2026-08-26T18:17:04.245Z",
   "summary": {
     "as_of": "2026-08-26",
     "units": 233,
     "active": 71,
-    "ready": 2,
+    "ready": 1,
     "notice": 21,
     "at_risk": 26,
     "unscheduled": 11,
@@ -2715,12 +2715,12 @@
         "projId": 238496,
         "name": "Standard Unit Turn",
         "status": "ACTIVE",
-        "done": 0,
+        "done": 1,
         "total": 8,
         "first_appt": "2026-08-27",
         "final_walk": "2026-09-15",
         "final_walk_done": null,
-        "completed_date": null,
+        "completed_date": "2026-08-26",
         "due": "2026-07-16",
         "next_task": {
           "date": "2026-08-26",
@@ -2748,10 +2748,10 @@
           {
             "task": "C - Paint",
             "cat": "paint",
-            "done": false,
+            "done": true,
             "date": "2026-08-27",
             "who": "Chris Phillips",
-            "completed": null,
+            "completed": "2026-08-26",
             "vendor": false
           },
           {
@@ -2802,10 +2802,10 @@
         ]
       },
       "next_appt": {
-        "date": "2026-08-26",
-        "cat": "paint",
-        "who": "Chris Phillips",
-        "brief": "C - Paint Prep / Paint"
+        "date": "2026-09-07",
+        "cat": "maintenance",
+        "who": "Armani Mitchell",
+        "brief": "D - Maintenance"
       },
       "cost": {
         "code": "tc68-D089",
@@ -2851,7 +2851,7 @@
         "name": "Standard Unit Turn",
         "status": "ACTIVE",
         "done": 3,
-        "total": 7,
+        "total": 9,
         "first_appt": "2026-07-20",
         "final_walk": "2026-09-03",
         "final_walk_done": null,
@@ -2859,7 +2859,7 @@
         "due": "2026-07-29",
         "next_task": {
           "date": "2026-08-26",
-          "task": "maintenance"
+          "task": "paint"
         },
         "tasks": [
           {
@@ -2881,12 +2881,30 @@
             "vendor": false
           },
           {
+            "task": "C - Paint (clone)",
+            "cat": "paint",
+            "done": false,
+            "date": "2026-08-26",
+            "who": "Chris Phillips",
+            "completed": null,
+            "vendor": false
+          },
+          {
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": true,
             "date": "2026-08-27",
             "who": "Armani Mitchell",
             "completed": "2026-08-25",
+            "vendor": false
+          },
+          {
+            "task": "D - Maintenance (clone)",
+            "cat": "maintenance",
+            "done": false,
+            "date": "2026-08-31",
+            "who": "Armani Mitchell",
+            "completed": null,
             "vendor": false
           },
           {
@@ -2919,10 +2937,10 @@
         ]
       },
       "next_appt": {
-        "date": "2026-09-03",
-        "cat": "final-walk",
-        "who": "Armani Mitchell",
-        "brief": "Final Walkthrough"
+        "date": "2026-08-26",
+        "cat": "paint",
+        "who": "Chris Phillips",
+        "brief": "C - Paint Prep / Paint (clone)"
       },
       "cost": {
         "code": "tc68-D106",
@@ -7894,7 +7912,7 @@
       "vacant": true,
       "days_vacant": 26,
       "move_out": "2026-07-31",
-      "available_on": "2026-09-04",
+      "available_on": "2026-09-25",
       "ready_on": "2026-09-04",
       "target_date": "2026-08-20",
       "next_move_in": null,
@@ -17225,8 +17243,8 @@
         "status": "ACTIVE",
         "done": 0,
         "total": 8,
-        "first_appt": null,
-        "final_walk": null,
+        "first_appt": "2026-11-03",
+        "final_walk": "2026-11-11",
         "final_walk_done": null,
         "completed_date": null,
         "due": "2026-09-15",
@@ -17239,8 +17257,8 @@
             "task": "A - Initial walkthrough",
             "cat": "walkthrough",
             "done": false,
-            "date": null,
-            "who": null,
+            "date": "2026-10-05",
+            "who": "Margarito Saldana",
             "completed": null,
             "vendor": false
           },
@@ -17257,8 +17275,8 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": null,
-            "who": null,
+            "date": "2026-11-03",
+            "who": "Matthew Williams",
             "completed": null,
             "vendor": false
           },
@@ -17266,8 +17284,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": null,
-            "who": null,
+            "date": "2026-11-04",
+            "who": "Matthew Williams",
             "completed": null,
             "vendor": false
           },
@@ -17302,8 +17320,8 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": null,
-            "who": null,
+            "date": "2026-11-11",
+            "who": "Margarito Saldana",
             "completed": null,
             "vendor": false
           }
@@ -25673,19 +25691,22 @@
         "status": "ACTIVE",
         "done": 0,
         "total": 8,
-        "first_appt": null,
-        "final_walk": null,
+        "first_appt": "2026-10-26",
+        "final_walk": "2026-11-04",
         "final_walk_done": null,
         "completed_date": null,
         "due": "2026-09-21",
-        "next_task": null,
+        "next_task": {
+          "date": "2026-09-07",
+          "task": "walkthrough"
+        },
         "tasks": [
           {
             "task": "A - Initial walkthrough",
             "cat": "walkthrough",
             "done": false,
-            "date": null,
-            "who": null,
+            "date": "2026-09-07",
+            "who": "Justin Gutierrez",
             "completed": null,
             "vendor": false
           },
@@ -25702,8 +25723,8 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": null,
-            "who": null,
+            "date": "2026-10-26",
+            "who": "Ron Cramer",
             "completed": null,
             "vendor": false
           },
@@ -25711,8 +25732,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": null,
-            "who": null,
+            "date": "2026-10-28",
+            "who": "Ron Cramer",
             "completed": null,
             "vendor": false
           },
@@ -25747,14 +25768,19 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": null,
-            "who": null,
+            "date": "2026-11-04",
+            "who": "Micheal Magoon",
             "completed": null,
             "vendor": false
           }
         ]
       },
-      "next_appt": null,
+      "next_appt": {
+        "date": "2026-09-07",
+        "cat": "walkthrough",
+        "who": "Justin Gutierrez",
+        "brief": "A - Initial walkthrough"
+      },
       "cost": {
         "code": "m405-DB",
         "labor": 0,
@@ -35535,19 +35561,22 @@
         "status": "ACTIVE",
         "done": 0,
         "total": 8,
-        "first_appt": null,
-        "final_walk": null,
+        "first_appt": "2026-11-02",
+        "final_walk": "2026-11-11",
         "final_walk_done": null,
         "completed_date": null,
         "due": "2026-11-15",
-        "next_task": null,
+        "next_task": {
+          "date": "2026-11-02",
+          "task": "paint"
+        },
         "tasks": [
           {
             "task": "A - Initial walkthrough",
             "cat": "walkthrough",
             "done": false,
-            "date": null,
-            "who": null,
+            "date": "2026-11-02",
+            "who": "Margarito Saldana",
             "completed": null,
             "vendor": false
           },
@@ -35564,8 +35593,8 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": null,
-            "who": null,
+            "date": "2026-11-02",
+            "who": "Margarito Saldana",
             "completed": null,
             "vendor": false
           },
@@ -35573,8 +35602,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": null,
-            "who": null,
+            "date": "2026-11-04",
+            "who": "Margarito Saldana",
             "completed": null,
             "vendor": false
           },
@@ -35609,14 +35638,19 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": null,
-            "who": null,
+            "date": "2026-11-11",
+            "who": "Margarito Saldana",
             "completed": null,
             "vendor": false
           }
         ]
       },
-      "next_appt": null,
+      "next_appt": {
+        "date": "2026-11-02",
+        "cat": "paint",
+        "who": "Margarito Saldana",
+        "brief": "C - Paint Prep / Paint"
+      },
       "cost": {
         "code": "rl16-A06",
         "labor": 68.73,
@@ -45185,18 +45219,15 @@
       "pm": {
         "projId": 226985,
         "name": "Standard Unit Turn",
-        "status": "ACTIVE",
-        "done": 1,
+        "status": "COMPLETE",
+        "done": 7,
         "total": 7,
         "first_appt": "2026-08-25",
         "final_walk": "2026-09-08",
-        "final_walk_done": null,
-        "completed_date": "2026-08-12",
+        "final_walk_done": "2026-08-26",
+        "completed_date": "2026-08-26",
         "due": "2026-09-09",
-        "next_task": {
-          "date": "2026-08-31",
-          "task": "maintenance"
-        },
+        "next_task": null,
         "tasks": [
           {
             "task": "A - Initial walkthrough",
@@ -45210,65 +45241,60 @@
           {
             "task": "Appfolio Estimate",
             "cat": "estimate",
-            "done": false,
+            "done": true,
             "date": null,
             "who": "Dulce Salinas",
-            "completed": null,
+            "completed": "2026-08-26",
             "vendor": false
           },
           {
             "task": "C - Paint",
             "cat": "paint",
-            "done": false,
+            "done": true,
             "date": "2026-08-25",
             "who": "Chris Phillips",
-            "completed": null,
+            "completed": "2026-08-26",
             "vendor": false
           },
           {
             "task": "D - Maintenance",
             "cat": "maintenance",
-            "done": false,
+            "done": true,
             "date": "2026-08-31",
             "who": "Armani Mitchell",
-            "completed": null,
+            "completed": "2026-08-26",
             "vendor": false
           },
           {
             "task": "E - Carpet Cleaning",
             "cat": "carpet",
-            "done": false,
+            "done": true,
             "date": null,
             "who": null,
-            "completed": null,
+            "completed": "2026-08-26",
             "vendor": false
           },
           {
             "task": "F - Cleaning",
             "cat": "cleaning",
-            "done": false,
+            "done": true,
             "date": "2026-09-23",
             "who": "Armani Mitchell",
-            "completed": null,
+            "completed": "2026-08-26",
             "vendor": false
           },
           {
             "task": "Final Walkthrough",
             "cat": "final-walk",
-            "done": false,
+            "done": true,
             "date": "2026-09-08",
             "who": "Armani Mitchell",
-            "completed": null,
+            "completed": "2026-08-26",
             "vendor": false
           }
         ]
       },
-      "next_appt": {
-        "date": "2026-08-31",
-        "cat": "maintenance",
-        "who": "Armani Mitchell",
-        "brief": "D - Maintenance"
-      },
+      "next_appt": null,
       "cost": {
         "code": "tc68-A12",
         "labor": 0,
@@ -45278,11 +45304,12 @@
         "laborEntries": [],
         "materialEntries": []
       },
+      "turn_end": "2026-08-26",
       "stage": "Ready",
       "stage_ord": 7,
       "days_elapsed": 26,
-      "days_to_turn": null,
-      "status": "ready"
+      "days_to_turn": 26,
+      "status": "complete"
     },
     {
       "key": "tc68|a13",
