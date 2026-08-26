@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-08-26T20:10:54.758Z",
+  "fetched_at": "2026-08-26T23:35:14.128Z",
   "units": {
     "2": {
       "moveOut": "2026-07-31",
@@ -80,7 +80,7 @@
     },
     "210": {
       "moveOut": "2026-08-31",
-      "status": "Notice-Unrented",
+      "status": "Notice-Rented",
       "prop": "ms22",
       "unit": "2256",
       "city": "Missoula"
@@ -1154,13 +1154,6 @@
       "status": "Vacant-Unrented",
       "prop": "c702",
       "unit": "H301",
-      "city": "Spokane"
-    },
-    "1419": {
-      "moveOut": "2026-07-31",
-      "status": "Vacant-Rented",
-      "prop": "c702",
-      "unit": "J103",
       "city": "Spokane"
     },
     "1429": {
@@ -3116,6 +3109,16 @@
       "unit": "J201",
       "city": "Kennewick",
       "to": "2026-08-27"
+    },
+    {
+      "date": "2026-08-26",
+      "type": "moveout_removed",
+      "unit_id": "1419",
+      "prop": "c702",
+      "unit": "J103",
+      "city": "Spokane",
+      "from": "2026-07-31",
+      "was_status": "Vacant-Rented"
     }
   ]
 }
