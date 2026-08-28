@@ -1,15 +1,15 @@
 {
   "ok": true,
-  "fetched_at": "2026-08-28T12:49:24.462Z",
+  "fetched_at": "2026-08-28T22:57:39.289Z",
   "summary": {
     "as_of": "2026-08-28",
-    "units": 246,
+    "units": 249,
     "active": 70,
     "ready": 0,
-    "notice": 26,
+    "notice": 28,
     "at_risk": 27,
     "unscheduled": 11,
-    "accruing": 8708.09,
+    "accruing": 11713.1,
     "avg_days_open": 28,
     "revenue_at_risk": 3346.4
   },
@@ -1641,11 +1641,18 @@
       },
       "cost": {
         "code": "k104-101-1",
-        "labor": 447.81,
-        "materials": 0,
-        "total": 447.81,
+        "labor": 619.56,
+        "materials": 1097.12,
+        "total": 1716.68,
         "estimate": 0,
         "laborEntries": [
+          {
+            "d": "2026-08-27",
+            "emp": "Justin Gutierrez",
+            "hrs": 6.87,
+            "cost": 171.75,
+            "cat": "Turn"
+          },
           {
             "d": "2026-08-21",
             "emp": "Justin Gutierrez",
@@ -1675,7 +1682,36 @@
             "cat": "Turn"
           }
         ],
-        "materialEntries": []
+        "materialEntries": [
+          {
+            "d": "2026-08-25",
+            "amt": 719.74,
+            "cat": "Turn",
+            "ln": "gutierrez",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-08-21",
+            "amt": 53.61,
+            "cat": "Turn",
+            "ln": "gutierrez",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-08-20",
+            "amt": 98.8,
+            "cat": "Turn",
+            "ln": "gutierrez",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-08-20",
+            "amt": 224.97,
+            "cat": "Turn",
+            "ln": "gutierrez",
+            "src": "ramp"
+          }
+        ]
       },
       "stage": "Maintenance",
       "stage_ord": 3,
@@ -1937,11 +1973,74 @@
       },
       "cost": {
         "code": "p705-17",
-        "labor": 319.1,
-        "materials": 606.74,
-        "total": 925.84,
+        "labor": 660.03,
+        "materials": 779.82,
+        "total": 1439.85,
         "estimate": 0,
         "laborEntries": [
+          {
+            "d": "2026-08-28",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.32,
+            "cost": 33.99,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-28",
+            "emp": "Ronald D. Cramer",
+            "hrs": 0.87,
+            "cost": 22.4,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-28",
+            "emp": "Ronald D. Cramer",
+            "hrs": 0.73,
+            "cost": 18.8,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-27",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.63,
+            "cost": 41.97,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-27",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1,
+            "cost": 25.75,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-27",
+            "emp": "Ronald D. Cramer",
+            "hrs": 0.47,
+            "cost": 12.1,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-27",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.45,
+            "cost": 37.34,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-27",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.4,
+            "cost": 36.05,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-27",
+            "emp": "Ronald D. Cramer",
+            "hrs": 0.7,
+            "cost": 18.02,
+            "cat": "Turn"
+          },
           {
             "d": "2026-08-26",
             "emp": "Ronald D. Cramer",
@@ -1971,6 +2070,27 @@
             "cat": "Turn"
           },
           {
+            "d": "2026-08-26",
+            "emp": "Ronald D. Cramer",
+            "hrs": 2,
+            "cost": 51.5,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-26",
+            "emp": "Ronald D. Cramer",
+            "hrs": 0.22,
+            "cost": 5.67,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-26",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.1,
+            "cost": 28.33,
+            "cat": "Turn"
+          },
+          {
             "d": "2026-08-25",
             "emp": "Ronald D. Cramer",
             "hrs": 1.35,
@@ -1987,8 +2107,8 @@
           {
             "d": "2026-08-25",
             "emp": "Ronald D. Cramer",
-            "hrs": 1.65,
-            "cost": 42.49,
+            "hrs": 2,
+            "cost": 51.5,
             "cat": "Turn"
           },
           {
@@ -2014,6 +2134,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-08-28",
+            "amt": 173.08,
+            "cat": "Turn",
+            "ln": "cramer",
+            "src": "ramp"
+          },
           {
             "d": "2026-08-27",
             "amt": 527.22,
@@ -3222,11 +3349,18 @@
       "next_appt": null,
       "cost": {
         "code": "a210-4",
-        "labor": 626.14,
+        "labor": 693.64,
         "materials": 1294.8,
-        "total": 1920.94,
+        "total": 1988.44,
         "estimate": 1561.01,
         "laborEntries": [
+          {
+            "d": "2026-08-26",
+            "emp": "Armani Mitchell",
+            "hrs": 2.5,
+            "cost": 67.5,
+            "cat": "Turn"
+          },
           {
             "d": "2026-08-10",
             "emp": "Micheal N. Magoon",
@@ -5376,12 +5510,12 @@
         "projId": 223796,
         "name": "Standard Unit Turn",
         "status": "ACTIVE",
-        "done": 2,
+        "done": 3,
         "total": 7,
         "first_appt": "2026-08-12",
         "final_walk": "2026-08-28",
-        "final_walk_done": null,
-        "completed_date": "2026-08-20",
+        "final_walk_done": "2026-08-28",
+        "completed_date": "2026-08-28",
         "due": "2026-08-10",
         "next_task": {
           "date": "2026-08-28",
@@ -5445,27 +5579,36 @@
           {
             "task": "Final Walkthrough",
             "cat": "final-walk",
-            "done": false,
+            "done": true,
             "date": "2026-08-28",
             "who": "Ron Cramer",
-            "completed": null,
+            "completed": "2026-08-28",
             "vendor": false
           }
         ]
       },
-      "next_appt": {
-        "date": "2026-08-28",
-        "cat": "final-walk",
-        "who": "Ron Cramer",
-        "brief": "Final Walkthrough"
-      },
+      "next_appt": null,
       "cost": {
         "code": "c313-18",
-        "labor": 1104.87,
-        "materials": 274.88,
-        "total": 1379.75,
+        "labor": 1176.46,
+        "materials": 279.56,
+        "total": 1456.02,
         "estimate": 0,
         "laborEntries": [
+          {
+            "d": "2026-08-28",
+            "emp": "Ronald D. Cramer",
+            "hrs": 2,
+            "cost": 51.5,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-28",
+            "emp": "Ronald D. Cramer",
+            "hrs": 0.78,
+            "cost": 20.09,
+            "cat": "Turn"
+          },
           {
             "d": "2026-08-24",
             "emp": "Ronald D. Cramer",
@@ -5700,6 +5843,13 @@
         ],
         "materialEntries": [
           {
+            "d": "2026-08-28",
+            "amt": 4.68,
+            "cat": "Turn",
+            "ln": "cramer",
+            "src": "ramp"
+          },
+          {
             "d": "2026-08-14",
             "amt": 70.73,
             "cat": "Turn",
@@ -5722,7 +5872,7 @@
           }
         ]
       },
-      "turn_end": "2025-07-31",
+      "turn_end": "2026-08-28",
       "stage": "Maintenance",
       "stage_ord": 3,
       "days_elapsed": null,
@@ -6726,7 +6876,7 @@
       "city": "Spokane",
       "addr": "3131 So Cook St 37 Spokane, WA 99223",
       "unit_id": 745,
-      "unit_status": "Vacant-Unrented",
+      "unit_status": "Vacant-Rented",
       "rent_ready": "Yes",
       "vacant": true,
       "days_vacant": 32,
@@ -6734,7 +6884,7 @@
       "available_on": "2026-08-20",
       "ready_on": "2026-08-20",
       "target_date": "2026-08-16",
-      "next_move_in": null,
+      "next_move_in": "2026-08-29",
       "rent": "1220.00",
       "bed_bath": "1/1.00",
       "sqft": 700,
@@ -7497,11 +7647,18 @@
       "cost": {
         "code": "c702-A102",
         "labor": 0,
-        "materials": 213.73,
-        "total": 213.73,
+        "materials": 706.39,
+        "total": 706.39,
         "estimate": 0,
         "laborEntries": [],
         "materialEntries": [
+          {
+            "d": "2026-08-26",
+            "amt": 492.66,
+            "cat": "Turn",
+            "ln": "romme",
+            "src": "ramp"
+          },
           {
             "d": "2026-08-13",
             "amt": 213.73,
@@ -8012,6 +8169,44 @@
       "days_elapsed": 28,
       "days_to_turn": null,
       "status": "active"
+    },
+    {
+      "key": "c702|b301",
+      "prop": "c702",
+      "unit": "B301",
+      "at_risk": [],
+      "property_name": "c702",
+      "city": "Spokane",
+      "addr": "7020 N Colton St B301 Spokane, WA 99208",
+      "unit_id": 1299,
+      "unit_status": "Notice-Unrented",
+      "rent_ready": null,
+      "vacant": false,
+      "days_vacant": null,
+      "move_out": "2026-09-10",
+      "available_on": "2026-09-30",
+      "ready_on": "2026-09-30",
+      "target_date": "2026-09-30",
+      "next_move_in": null,
+      "rent": "1695.00",
+      "bed_bath": "3/2.00",
+      "sqft": 1250,
+      "region": "Spokane",
+      "next_appt": null,
+      "cost": {
+        "code": "c702-B301",
+        "labor": 0,
+        "materials": 0,
+        "total": 0,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": []
+      },
+      "stage": "Move-out",
+      "stage_ord": 0,
+      "days_elapsed": 0,
+      "days_to_turn": null,
+      "status": "notice"
     },
     {
       "key": "c702|c102",
@@ -27204,23 +27399,8 @@
       "key": "o155|d4",
       "prop": "o155",
       "unit": "D4",
-      "at_risk": [],
       "property_name": "o155-Oak",
-      "city": "Spokane",
-      "addr": "155 S Oak St D4 Spokane, WA 99201",
-      "unit_id": 1125,
-      "unit_status": "Notice-Unrented",
-      "rent_ready": null,
-      "vacant": false,
-      "days_vacant": null,
-      "move_out": "2026-09-30",
-      "available_on": "2026-10-20",
-      "ready_on": "2026-10-20",
-      "target_date": "2026-10-20",
-      "next_move_in": null,
-      "rent": "1225.00",
-      "bed_bath": "2/1.00",
-      "sqft": 900,
+      "at_risk": [],
       "region": "Spokane",
       "pm": {
         "projId": 241650,
@@ -27329,9 +27509,9 @@
       },
       "stage": "Walkthrough",
       "stage_ord": 1,
-      "days_elapsed": 0,
+      "days_elapsed": null,
       "days_to_turn": null,
-      "status": "notice"
+      "status": "other"
     },
     {
       "key": "o155|g",
@@ -27893,6 +28073,44 @@
       },
       "stage": "Walkthrough",
       "stage_ord": 1,
+      "days_elapsed": 0,
+      "days_to_turn": null,
+      "status": "notice"
+    },
+    {
+      "key": "p705|06",
+      "prop": "p705",
+      "unit": "06",
+      "at_risk": [],
+      "property_name": "p705",
+      "city": "Spokane Valley",
+      "addr": "2715 N Pines Rd - 06 Spokane Valley, WA 99206",
+      "unit_id": 222,
+      "unit_status": "Notice-Unrented",
+      "rent_ready": null,
+      "vacant": false,
+      "days_vacant": null,
+      "move_out": "2026-09-30",
+      "available_on": "2026-10-20",
+      "ready_on": "2026-10-20",
+      "target_date": "2026-10-20",
+      "next_move_in": null,
+      "rent": "1315.00",
+      "bed_bath": "2/1.00",
+      "sqft": 840,
+      "region": "Spokane",
+      "next_appt": null,
+      "cost": {
+        "code": "p705-06",
+        "labor": 0,
+        "materials": 0,
+        "total": 0,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": []
+      },
+      "stage": "Move-out",
+      "stage_ord": 0,
       "days_elapsed": 0,
       "days_to_turn": null,
       "status": "notice"
@@ -32063,7 +32281,7 @@
         "completed_date": "2026-05-26",
         "due": "2026-08-19",
         "next_task": {
-          "date": "2026-08-31",
+          "date": "2026-08-28",
           "task": "other"
         },
         "tasks": [
@@ -33074,11 +33292,18 @@
       "next_appt": null,
       "cost": {
         "code": "ps25-B9",
-        "labor": 545.73,
+        "labor": 652.23,
         "materials": 953.71,
-        "total": 1499.44,
+        "total": 1605.94,
         "estimate": 0,
         "laborEntries": [
+          {
+            "d": "2026-08-27",
+            "emp": "Margarito Saldana",
+            "hrs": 3.75,
+            "cost": 106.5,
+            "cat": "CapEx"
+          },
           {
             "d": "2026-06-18",
             "emp": "Ryan G. Robson",
@@ -35051,11 +35276,18 @@
       "next_appt": null,
       "cost": {
         "code": "ps91-918",
-        "labor": 1404.48,
+        "labor": 1426.35,
         "materials": 500.44,
-        "total": 1904.92,
+        "total": 1926.79,
         "estimate": 0,
         "laborEntries": [
+          {
+            "d": "2026-08-26",
+            "emp": "Margarito Saldana",
+            "hrs": 0.77,
+            "cost": 21.87,
+            "cat": "CapEx"
+          },
           {
             "d": "2026-05-27",
             "emp": "Ryan G. Robson",
@@ -38444,9 +38676,9 @@
       },
       "cost": {
         "code": "rl16-B11",
-        "labor": 387.94,
+        "labor": 547.26,
         "materials": 10.87,
-        "total": 398.81,
+        "total": 558.13,
         "estimate": 0,
         "laborEntries": [
           {
@@ -38468,6 +38700,48 @@
             "emp": "Margarito Saldana",
             "hrs": 0.5,
             "cost": 14.2,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-26",
+            "emp": "Margarito Saldana",
+            "hrs": 1.15,
+            "cost": 32.66,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-26",
+            "emp": "Margarito Saldana",
+            "hrs": 0.73,
+            "cost": 20.73,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-26",
+            "emp": "Margarito Saldana",
+            "hrs": 0.9,
+            "cost": 25.56,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-26",
+            "emp": "Margarito Saldana",
+            "hrs": 2,
+            "cost": 56.8,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-26",
+            "emp": "Margarito Saldana",
+            "hrs": 0.55,
+            "cost": 15.62,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-26",
+            "emp": "Margarito Saldana",
+            "hrs": 0.28,
+            "cost": 7.95,
             "cat": "CapEx"
           },
           {
@@ -43833,11 +44107,18 @@
       "next_appt": null,
       "cost": {
         "code": "s129-9",
-        "labor": 1130.01,
+        "labor": 1177.65,
         "materials": 242.2,
-        "total": 1372.21,
+        "total": 1419.85,
         "estimate": 0,
         "laborEntries": [
+          {
+            "d": "2026-08-27",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.85,
+            "cost": 47.64,
+            "cat": "Turn"
+          },
           {
             "d": "2026-08-21",
             "emp": "Micheal N. Magoon",
@@ -47234,11 +47515,26 @@
       "next_appt": null,
       "cost": {
         "code": "tc68-A12",
-        "labor": 0,
+        "labor": 128.25,
         "materials": 198.02,
-        "total": 198.02,
+        "total": 326.27,
         "estimate": 0,
-        "laborEntries": [],
+        "laborEntries": [
+          {
+            "d": "2026-08-26",
+            "emp": "Armani Mitchell",
+            "hrs": 4.58,
+            "cost": 123.66,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-26",
+            "emp": "Armani Mitchell",
+            "hrs": 0.17,
+            "cost": 4.59,
+            "cat": "Turn"
+          }
+        ],
         "materialEntries": [
           {
             "d": "2026-08-25",
@@ -48188,6 +48484,44 @@
       "status": "complete"
     },
     {
+      "key": "tc68|b33",
+      "prop": "tc68",
+      "unit": "B33",
+      "at_risk": [],
+      "property_name": "tc68",
+      "city": "Tacoma",
+      "addr": "6830 Tacoma Mall Blvd Apt B33 Tacoma, WA 98409",
+      "unit_id": 1182,
+      "unit_status": "Notice-Unrented",
+      "rent_ready": null,
+      "vacant": false,
+      "days_vacant": null,
+      "move_out": "2026-12-15",
+      "available_on": "2027-01-04",
+      "ready_on": "2027-01-04",
+      "target_date": "2027-01-04",
+      "next_move_in": null,
+      "rent": "1595.00",
+      "bed_bath": "2/1.00",
+      "sqft": 980,
+      "region": "Tacoma",
+      "next_appt": null,
+      "cost": {
+        "code": "tc68-B33",
+        "labor": 0,
+        "materials": 0,
+        "total": 0,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": []
+      },
+      "stage": "Move-out",
+      "stage_ord": 0,
+      "days_elapsed": 0,
+      "days_to_turn": null,
+      "status": "notice"
+    },
+    {
       "key": "tc68|b37",
       "prop": "tc68",
       "unit": "B37",
@@ -48441,8 +48775,8 @@
       "cost": {
         "code": "tc68-B54",
         "labor": 1334.88,
-        "materials": 0,
-        "total": 1334.88,
+        "materials": 729.47,
+        "total": 2064.35,
         "estimate": 0,
         "laborEntries": [
           {
@@ -48677,7 +49011,22 @@
             "cat": "Turn"
           }
         ],
-        "materialEntries": []
+        "materialEntries": [
+          {
+            "d": "2026-08-06",
+            "amt": 390.92,
+            "cat": "Turn",
+            "ln": "hoard",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-08-05",
+            "amt": 338.55,
+            "cat": "Turn",
+            "ln": "hoard",
+            "src": "ramp"
+          }
+        ]
       },
       "stage": "Paint",
       "stage_ord": 2,
@@ -49600,7 +49949,7 @@
       "city": "Tacoma",
       "addr": "6830 Tacoma Mall Blvd Apt C67 Tacoma, WA 98409",
       "unit_id": 1216,
-      "unit_status": "Vacant-Unrented",
+      "unit_status": "Vacant-Rented",
       "rent_ready": "Yes",
       "vacant": true,
       "days_vacant": 101,
@@ -49608,7 +49957,7 @@
       "available_on": "2026-07-28",
       "ready_on": "2026-07-28",
       "target_date": "2026-06-08",
-      "next_move_in": null,
+      "next_move_in": "2026-09-16",
       "rent": "1795.00",
       "bed_bath": "2/1.00",
       "sqft": 980,
@@ -49975,7 +50324,7 @@
       "vacant": true,
       "days_vacant": 89,
       "move_out": "2026-05-31",
-      "available_on": "2026-08-14",
+      "available_on": null,
       "ready_on": "2026-08-14",
       "target_date": "2026-06-20",
       "next_move_in": "2026-09-19",

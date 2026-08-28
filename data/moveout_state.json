@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-08-28T12:47:11.437Z",
+  "fetched_at": "2026-08-28T22:55:34.944Z",
   "units": {
     "2": {
       "moveOut": "2026-07-31",
@@ -84,6 +84,13 @@
       "prop": "ms22",
       "unit": "2258",
       "city": "Missoula"
+    },
+    "222": {
+      "moveOut": "2026-09-30",
+      "status": "Notice-Unrented",
+      "prop": "p705",
+      "unit": "06",
+      "city": "Spokane Valley"
     },
     "227": {
       "moveOut": "2026-08-31",
@@ -612,7 +619,7 @@
     },
     "745": {
       "moveOut": "2026-07-27",
-      "status": "Vacant-Unrented",
+      "status": "Vacant-Rented",
       "prop": "c313",
       "unit": "37",
       "city": "Spokane"
@@ -862,13 +869,6 @@
       "unit": "C9",
       "city": "Spokane"
     },
-    "1125": {
-      "moveOut": "2026-09-30",
-      "status": "Notice-Unrented",
-      "prop": "o155-Oak",
-      "unit": "D4",
-      "city": "Spokane"
-    },
     "1136": {
       "moveOut": "2026-07-31",
       "status": "Vacant-Unrented",
@@ -916,6 +916,13 @@
       "status": "Vacant-Unrented",
       "prop": "tc68",
       "unit": "A19",
+      "city": "Tacoma"
+    },
+    "1182": {
+      "moveOut": "2026-12-15",
+      "status": "Notice-Unrented",
+      "prop": "tc68",
+      "unit": "B33",
       "city": "Tacoma"
     },
     "1186": {
@@ -969,7 +976,7 @@
     },
     "1216": {
       "moveOut": "2026-05-19",
-      "status": "Vacant-Unrented",
+      "status": "Vacant-Rented",
       "prop": "tc68",
       "unit": "C67",
       "city": "Tacoma"
@@ -1119,6 +1126,13 @@
       "status": "Vacant-Unrented",
       "prop": "c702",
       "unit": "B106",
+      "city": "Spokane"
+    },
+    "1299": {
+      "moveOut": "2026-09-10",
+      "status": "Notice-Unrented",
+      "prop": "c702",
+      "unit": "B301",
       "city": "Spokane"
     },
     "1304": {
@@ -3515,6 +3529,43 @@
       "city": "Kennewick",
       "from": "2026-05-31",
       "was_status": "Vacant-Rented"
+    },
+    {
+      "date": "2026-08-28",
+      "type": "moveout_new",
+      "unit_id": "222",
+      "prop": "p705",
+      "unit": "06",
+      "city": "Spokane Valley",
+      "to": "2026-09-30"
+    },
+    {
+      "date": "2026-08-28",
+      "type": "moveout_new",
+      "unit_id": "1182",
+      "prop": "tc68",
+      "unit": "B33",
+      "city": "Tacoma",
+      "to": "2026-12-15"
+    },
+    {
+      "date": "2026-08-28",
+      "type": "moveout_new",
+      "unit_id": "1299",
+      "prop": "c702",
+      "unit": "B301",
+      "city": "Spokane",
+      "to": "2026-09-10"
+    },
+    {
+      "date": "2026-08-28",
+      "type": "moveout_removed",
+      "unit_id": "1125",
+      "prop": "o155-Oak",
+      "unit": "D4",
+      "city": "Spokane",
+      "from": "2026-09-30",
+      "was_status": "Notice-Unrented"
     }
   ]
 }
