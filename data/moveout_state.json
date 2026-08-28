@@ -1,11 +1,18 @@
 {
-  "fetched_at": "2026-08-27T16:31:21.938Z",
+  "fetched_at": "2026-08-28T01:09:01.938Z",
   "units": {
     "2": {
       "moveOut": "2026-07-31",
       "status": "Vacant-Unrented",
       "prop": "a916",
       "unit": "1",
+      "city": "Spokane"
+    },
+    "5": {
+      "moveOut": "2026-10-01",
+      "status": "Notice-Unrented",
+      "prop": "a916",
+      "unit": "4",
       "city": "Spokane"
     },
     "6": {
@@ -72,7 +79,7 @@
       "city": "Missoula"
     },
     "211": {
-      "moveOut": "2026-09-30",
+      "moveOut": "2026-09-05",
       "status": "Notice-Unrented",
       "prop": "ms22",
       "unit": "2258",
@@ -106,13 +113,6 @@
       "unit": "4",
       "city": "Helena"
     },
-    "260": {
-      "moveOut": "2026-09-30",
-      "status": "Notice-Unrented",
-      "prop": "m405",
-      "unit": "15",
-      "city": "Spokane"
-    },
     "265": {
       "moveOut": "2026-07-31",
       "status": "Vacant-Unrented",
@@ -135,7 +135,7 @@
       "city": "Medical Lake"
     },
     "309": {
-      "moveOut": "2026-09-30",
+      "moveOut": "2026-10-01",
       "status": "Notice-Unrented",
       "prop": "k104- LeFevre",
       "unit": "519-3",
@@ -296,7 +296,7 @@
       "city": "Pasco"
     },
     "413": {
-      "moveOut": "2026-09-30",
+      "moveOut": "2026-10-01",
       "status": "Notice-Unrented",
       "prop": "ps17",
       "unit": "A11",
@@ -414,13 +414,6 @@
       "unit": "A06",
       "city": "Richland"
     },
-    "521": {
-      "moveOut": "2026-08-31",
-      "status": "Notice-Unrented",
-      "prop": "rl16",
-      "unit": "A08",
-      "city": "Richland"
-    },
     "527": {
       "moveOut": "2026-09-30",
       "status": "Notice-Unrented",
@@ -471,7 +464,7 @@
       "city": "Richland"
     },
     "560": {
-      "moveOut": "2026-09-30",
+      "moveOut": "2026-10-01",
       "status": "Notice-Unrented",
       "prop": "rl16",
       "unit": "B23",
@@ -492,14 +485,14 @@
       "city": "Richland"
     },
     "581": {
-      "moveOut": "2026-09-30",
+      "moveOut": "2026-10-01",
       "status": "Notice-Unrented",
       "prop": "rl16",
       "unit": "C20",
       "city": "Richland"
     },
     "585": {
-      "moveOut": "2026-09-30",
+      "moveOut": "2026-10-01",
       "status": "Notice-Unrented",
       "prop": "rl16",
       "unit": "C24",
@@ -534,7 +527,7 @@
       "city": "Richland"
     },
     "657": {
-      "moveOut": "2026-09-30",
+      "moveOut": "2026-10-01",
       "status": "Notice-Unrented",
       "prop": "s129",
       "unit": "6",
@@ -694,9 +687,16 @@
       "unit": "A103",
       "city": "Kennewick"
     },
+    "847": {
+      "moveOut": "2026-08-31",
+      "status": "Notice-Unrented",
+      "prop": "kn47 K1",
+      "unit": "C105",
+      "city": "Kennewick"
+    },
     "851": {
       "moveOut": "2026-03-27",
-      "status": "Vacant-Unrented",
+      "status": "Vacant-Rented",
       "prop": "kn47 K1",
       "unit": "C109",
       "city": "Kennewick"
@@ -799,8 +799,15 @@
       "unit": "B104",
       "city": "Kennewick"
     },
+    "1012": {
+      "moveOut": "2026-06-25",
+      "status": "Vacant-Rented",
+      "prop": "kn47 K2",
+      "unit": "B105",
+      "city": "Kennewick"
+    },
     "1033": {
-      "moveOut": "2026-09-30",
+      "moveOut": "2026-10-01",
       "status": "Notice-Unrented",
       "prop": "kn47 K2",
       "unit": "C202",
@@ -814,7 +821,7 @@
       "city": "Kennewick"
     },
     "1043": {
-      "moveOut": "2026-09-30",
+      "moveOut": "2026-10-01",
       "status": "Notice-Unrented",
       "prop": "kn47 K2",
       "unit": "D104",
@@ -3365,6 +3372,143 @@
       "city": "Spokane",
       "from": "2026-06-26",
       "was_status": "Vacant-Rented"
+    },
+    {
+      "date": "2026-08-27",
+      "type": "moveout_new",
+      "unit_id": "5",
+      "prop": "a916",
+      "unit": "4",
+      "city": "Spokane",
+      "to": "2026-10-01"
+    },
+    {
+      "date": "2026-08-27",
+      "type": "moveout_changed",
+      "unit_id": "211",
+      "prop": "ms22",
+      "unit": "2258",
+      "city": "Missoula",
+      "from": "2026-09-30",
+      "to": "2026-09-05"
+    },
+    {
+      "date": "2026-08-27",
+      "type": "moveout_changed",
+      "unit_id": "309",
+      "prop": "k104- LeFevre",
+      "unit": "519-3",
+      "city": "Medical Lake",
+      "from": "2026-09-30",
+      "to": "2026-10-01"
+    },
+    {
+      "date": "2026-08-27",
+      "type": "moveout_changed",
+      "unit_id": "413",
+      "prop": "ps17",
+      "unit": "A11",
+      "city": "Pasco",
+      "from": "2026-09-30",
+      "to": "2026-10-01"
+    },
+    {
+      "date": "2026-08-27",
+      "type": "moveout_changed",
+      "unit_id": "560",
+      "prop": "rl16",
+      "unit": "B23",
+      "city": "Richland",
+      "from": "2026-09-30",
+      "to": "2026-10-01"
+    },
+    {
+      "date": "2026-08-27",
+      "type": "moveout_changed",
+      "unit_id": "581",
+      "prop": "rl16",
+      "unit": "C20",
+      "city": "Richland",
+      "from": "2026-09-30",
+      "to": "2026-10-01"
+    },
+    {
+      "date": "2026-08-27",
+      "type": "moveout_changed",
+      "unit_id": "585",
+      "prop": "rl16",
+      "unit": "C24",
+      "city": "Richland",
+      "from": "2026-09-30",
+      "to": "2026-10-01"
+    },
+    {
+      "date": "2026-08-27",
+      "type": "moveout_changed",
+      "unit_id": "657",
+      "prop": "s129",
+      "unit": "6",
+      "city": "Spokane Valley",
+      "from": "2026-09-30",
+      "to": "2026-10-01"
+    },
+    {
+      "date": "2026-08-27",
+      "type": "moveout_new",
+      "unit_id": "847",
+      "prop": "kn47 K1",
+      "unit": "C105",
+      "city": "Kennewick",
+      "to": "2026-08-31"
+    },
+    {
+      "date": "2026-08-27",
+      "type": "moveout_new",
+      "unit_id": "1012",
+      "prop": "kn47 K2",
+      "unit": "B105",
+      "city": "Kennewick",
+      "to": "2026-06-25"
+    },
+    {
+      "date": "2026-08-27",
+      "type": "moveout_changed",
+      "unit_id": "1033",
+      "prop": "kn47 K2",
+      "unit": "C202",
+      "city": "Kennewick",
+      "from": "2026-09-30",
+      "to": "2026-10-01"
+    },
+    {
+      "date": "2026-08-27",
+      "type": "moveout_changed",
+      "unit_id": "1043",
+      "prop": "kn47 K2",
+      "unit": "D104",
+      "city": "Kennewick",
+      "from": "2026-09-30",
+      "to": "2026-10-01"
+    },
+    {
+      "date": "2026-08-27",
+      "type": "moveout_removed",
+      "unit_id": "260",
+      "prop": "m405",
+      "unit": "15",
+      "city": "Spokane",
+      "from": "2026-09-30",
+      "was_status": "Notice-Unrented"
+    },
+    {
+      "date": "2026-08-27",
+      "type": "moveout_removed",
+      "unit_id": "521",
+      "prop": "rl16",
+      "unit": "A08",
+      "city": "Richland",
+      "from": "2026-08-31",
+      "was_status": "Notice-Unrented"
     }
   ]
 }
