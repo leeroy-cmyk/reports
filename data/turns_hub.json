@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "fetched_at": "2026-08-29T15:40:47.629Z",
+  "fetched_at": "2026-08-29T18:54:47.981Z",
   "summary": {
     "as_of": "2026-08-29",
     "units": 244,
@@ -9563,11 +9563,14 @@
         "done": 4,
         "total": 7,
         "first_appt": "2026-08-10",
-        "final_walk": "2026-08-28",
+        "final_walk": "2026-09-01",
         "final_walk_done": null,
         "completed_date": "2026-08-17",
         "due": "2026-08-15",
-        "next_task": null,
+        "next_task": {
+          "date": "2026-09-01",
+          "task": "final-walk"
+        },
         "tasks": [
           {
             "task": "A - Initial walkthrough",
@@ -9627,14 +9630,19 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": "2026-08-28",
+            "date": "2026-09-01",
             "who": "Micheal Magoon",
             "completed": null,
             "vendor": false
           }
         ]
       },
-      "next_appt": null,
+      "next_appt": {
+        "date": "2026-09-01",
+        "cat": "final-walk",
+        "who": "Micheal Magoon",
+        "brief": "Final Walkthrough"
+      },
       "cost": {
         "code": "e328-4",
         "labor": 485.59,
