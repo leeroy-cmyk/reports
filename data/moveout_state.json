@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-08-31T00:54:32.869Z",
+  "fetched_at": "2026-08-31T14:54:10.688Z",
   "units": {
     "2": {
       "moveOut": "2026-07-31",
@@ -188,13 +188,6 @@
       "status": "Notice-Unrented",
       "prop": "k104- LeFevre",
       "unit": "507-4",
-      "city": "Medical Lake"
-    },
-    "339": {
-      "moveOut": "2026-05-31",
-      "status": "Vacant-Rented",
-      "prop": "k104- LeFevre",
-      "unit": "505-3",
       "city": "Medical Lake"
     },
     "345": {
@@ -570,7 +563,7 @@
     },
     "700": {
       "moveOut": "2026-08-30",
-      "status": "Notice-Unrented",
+      "status": "Vacant-Unrented",
       "prop": "l912 (Multi-Family)",
       "unit": "104",
       "city": "Spokane"
@@ -1009,13 +1002,6 @@
       "unit": "D079",
       "city": "Tacoma"
     },
-    "1229": {
-      "moveOut": "2026-03-29",
-      "status": "Vacant-Rented",
-      "prop": "tc68",
-      "unit": "D080",
-      "city": "Tacoma"
-    },
     "1231": {
       "moveOut": "2026-06-18",
       "status": "Vacant-Rented",
@@ -1035,13 +1021,6 @@
       "status": "Vacant-Unrented",
       "prop": "tc68",
       "unit": "D089",
-      "city": "Tacoma"
-    },
-    "1240": {
-      "moveOut": "2026-06-28",
-      "status": "Vacant-Rented",
-      "prop": "tc68",
-      "unit": "D091",
       "city": "Tacoma"
     },
     "1242": {
@@ -3607,6 +3586,36 @@
       "unit": "37",
       "city": "Spokane",
       "to": "2026-07-27"
+    },
+    {
+      "date": "2026-08-31",
+      "type": "moveout_removed",
+      "unit_id": "339",
+      "prop": "k104- LeFevre",
+      "unit": "505-3",
+      "city": "Medical Lake",
+      "from": "2026-05-31",
+      "was_status": "Vacant-Rented"
+    },
+    {
+      "date": "2026-08-31",
+      "type": "moveout_removed",
+      "unit_id": "1229",
+      "prop": "tc68",
+      "unit": "D080",
+      "city": "Tacoma",
+      "from": "2026-03-29",
+      "was_status": "Vacant-Rented"
+    },
+    {
+      "date": "2026-08-31",
+      "type": "moveout_removed",
+      "unit_id": "1240",
+      "prop": "tc68",
+      "unit": "D091",
+      "city": "Tacoma",
+      "from": "2026-06-28",
+      "was_status": "Vacant-Rented"
     }
   ]
 }
