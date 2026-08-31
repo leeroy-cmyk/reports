@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-08-31T14:54:10.688Z",
+  "fetched_at": "2026-08-31T20:41:39.985Z",
   "units": {
     "2": {
       "moveOut": "2026-07-31",
@@ -421,6 +421,13 @@
       "unit": "A06",
       "city": "Richland"
     },
+    "526": {
+      "moveOut": "2026-09-30",
+      "status": "Notice-Unrented",
+      "prop": "rl16",
+      "unit": "A13",
+      "city": "Richland"
+    },
     "527": {
       "moveOut": "2026-09-30",
       "status": "Notice-Unrented",
@@ -482,13 +489,6 @@
       "status": "Vacant-Unrented",
       "prop": "rl16",
       "unit": "C02",
-      "city": "Richland"
-    },
-    "568": {
-      "moveOut": "2026-09-12",
-      "status": "Notice-Unrented",
-      "prop": "rl16",
-      "unit": "C07",
       "city": "Richland"
     },
     "581": {
@@ -766,7 +766,7 @@
     },
     "972": {
       "moveOut": "2026-07-23",
-      "status": "Vacant-Unrented",
+      "status": "Vacant-Rented",
       "prop": "kn47 K1",
       "unit": "L205",
       "city": "Kennewick"
@@ -899,7 +899,7 @@
     },
     "1161": {
       "moveOut": "2026-07-31",
-      "status": "Vacant-Unrented",
+      "status": "Vacant-Rented",
       "prop": "tc68",
       "unit": "A12",
       "city": "Tacoma"
@@ -3616,6 +3616,25 @@
       "city": "Tacoma",
       "from": "2026-06-28",
       "was_status": "Vacant-Rented"
+    },
+    {
+      "date": "2026-08-31",
+      "type": "moveout_new",
+      "unit_id": "526",
+      "prop": "rl16",
+      "unit": "A13",
+      "city": "Richland",
+      "to": "2026-09-30"
+    },
+    {
+      "date": "2026-08-31",
+      "type": "moveout_removed",
+      "unit_id": "568",
+      "prop": "rl16",
+      "unit": "C07",
+      "city": "Richland",
+      "from": "2026-09-12",
+      "was_status": "Notice-Unrented"
     }
   ]
 }

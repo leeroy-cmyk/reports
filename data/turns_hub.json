@@ -1,17 +1,17 @@
 {
   "ok": true,
-  "fetched_at": "2026-08-31T14:56:15.348Z",
+  "fetched_at": "2026-08-31T20:43:15.382Z",
   "summary": {
     "as_of": "2026-08-31",
     "units": 244,
-    "active": 69,
-    "ready": 1,
-    "notice": 27,
-    "at_risk": 28,
-    "unscheduled": 11,
+    "active": 70,
+    "ready": 0,
+    "notice": 29,
+    "at_risk": 29,
+    "unscheduled": 12,
     "accruing": 11745.8,
     "avg_days_open": 30,
-    "revenue_at_risk": 3287.23
+    "revenue_at_risk": 3343.73
   },
   "rows": [
     {
@@ -1322,7 +1322,7 @@
         "status": "ACTIVE",
         "done": 0,
         "total": 7,
-        "first_appt": null,
+        "first_appt": "2026-09-01",
         "final_walk": null,
         "final_walk_done": null,
         "completed_date": null,
@@ -1351,8 +1351,8 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": null,
-            "who": "Florencia Sola",
+            "date": "2026-09-01",
+            "who": "Micheal Magoon",
             "completed": null,
             "vendor": false
           },
@@ -1360,8 +1360,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": null,
-            "who": "Florencia Sola",
+            "date": "2026-09-02",
+            "who": "Micheal Magoon",
             "completed": null,
             "vendor": false
           },
@@ -1440,7 +1440,7 @@
         "status": "ACTIVE",
         "done": 0,
         "total": 7,
-        "first_appt": null,
+        "first_appt": "2026-09-03",
         "final_walk": null,
         "final_walk_done": null,
         "completed_date": null,
@@ -1469,8 +1469,8 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": null,
-            "who": "Florencia Sola",
+            "date": "2026-09-03",
+            "who": "Micheal Magoon",
             "completed": null,
             "vendor": false
           },
@@ -1478,8 +1478,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": null,
-            "who": "Florencia Sola",
+            "date": "2026-09-04",
+            "who": "Micheal Magoon",
             "completed": null,
             "vendor": false
           },
@@ -1559,12 +1559,12 @@
         "done": 1,
         "total": 7,
         "first_appt": "2026-08-20",
-        "final_walk": "2026-09-01",
+        "final_walk": "2026-09-03",
         "final_walk_done": null,
         "completed_date": "2026-07-02",
         "due": "2026-08-10",
         "next_task": {
-          "date": "2026-09-01",
+          "date": "2026-09-03",
           "task": "final-walk"
         },
         "tasks": [
@@ -1626,7 +1626,7 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": "2026-09-01",
+            "date": "2026-09-03",
             "who": "Micheal Magoon",
             "completed": null,
             "vendor": false
@@ -1634,7 +1634,7 @@
         ]
       },
       "next_appt": {
-        "date": "2026-09-01",
+        "date": "2026-09-03",
         "cat": "final-walk",
         "who": "Micheal Magoon",
         "brief": "Final Walkthrough"
@@ -1857,6 +1857,133 @@
       "stage": "Maintenance",
       "stage_ord": 3,
       "days_elapsed": 92,
+      "days_to_turn": null,
+      "status": "active"
+    },
+    {
+      "key": "l912|104",
+      "prop": "l912",
+      "unit": "104",
+      "at_risk": [
+        "Nothing scheduled"
+      ],
+      "property_name": "l912 (Multi-Family)",
+      "city": "Spokane",
+      "addr": "912 W Lincoln Pl 104 Spokane, WA 99204",
+      "unit_id": 700,
+      "unit_status": "Vacant-Unrented",
+      "rent_ready": "No",
+      "vacant": true,
+      "days_vacant": 1,
+      "move_out": "2026-08-30",
+      "available_on": "2026-09-19",
+      "ready_on": "2026-09-19",
+      "target_date": "2026-09-19",
+      "next_move_in": null,
+      "rent": "1695.00",
+      "bed_bath": "2/2.00",
+      "sqft": 1100,
+      "region": "Spokane",
+      "pm": {
+        "projId": 238507,
+        "name": "Standard Unit Turn",
+        "status": "ACTIVE",
+        "done": 0,
+        "total": 8,
+        "first_appt": null,
+        "final_walk": null,
+        "final_walk_done": null,
+        "completed_date": null,
+        "due": "2026-09-14",
+        "next_task": null,
+        "tasks": [
+          {
+            "task": "A - Initial walkthrough",
+            "cat": "walkthrough",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Appfolio Estimate",
+            "cat": "estimate",
+            "done": false,
+            "date": null,
+            "who": "Dulce Salinas",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "C - Paint",
+            "cat": "paint",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "D - Maintenance",
+            "cat": "maintenance",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "E - Carpet Cleaning",
+            "cat": "carpet",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "F - Cleaning",
+            "cat": "cleaning",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "G - Verify Mailbox Lockbox & Mailbox Keys",
+            "cat": "other",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Final Walkthrough",
+            "cat": "final-walk",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          }
+        ]
+      },
+      "next_appt": null,
+      "cost": {
+        "code": "l912-104",
+        "labor": 0,
+        "materials": 0,
+        "total": 0,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": []
+      },
+      "stage": "Walkthrough",
+      "stage_ord": 1,
+      "days_elapsed": 1,
       "days_to_turn": null,
       "status": "active"
     },
@@ -5681,12 +5808,12 @@
         "done": 1,
         "total": 8,
         "first_appt": "2026-09-14",
-        "final_walk": "2026-09-23",
+        "final_walk": "2026-09-22",
         "final_walk_done": null,
         "completed_date": "2026-08-05",
         "due": "2026-08-15",
         "next_task": {
-          "date": "2026-09-14",
+          "date": "2026-09-10",
           "task": "paint"
         },
         "tasks": [
@@ -5721,7 +5848,7 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-09-16",
+            "date": "2026-09-15",
             "who": "Micheal Magoon",
             "completed": null,
             "vendor": false
@@ -5757,7 +5884,7 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": "2026-09-23",
+            "date": "2026-09-22",
             "who": "Ron Cramer",
             "completed": null,
             "vendor": false
@@ -5765,7 +5892,7 @@
         ]
       },
       "next_appt": {
-        "date": "2026-09-14",
+        "date": "2026-09-10",
         "cat": "paint",
         "who": "Micheal Magoon",
         "brief": "C - Paint Prep / Paint"
@@ -7500,7 +7627,7 @@
         "due": "2026-08-16",
         "next_task": {
           "date": "2026-08-31",
-          "task": "final-walk"
+          "task": "cleaning"
         },
         "tasks": [
           {
@@ -7534,7 +7661,7 @@
             "task": "F - Cleaning",
             "cat": "cleaning",
             "done": false,
-            "date": null,
+            "date": "2026-08-31",
             "who": "U&K Properties LLC",
             "completed": null,
             "vendor": true
@@ -8113,7 +8240,102 @@
       "bed_bath": "3/2.00",
       "sqft": 1250,
       "region": "Spokane",
-      "next_appt": null,
+      "pm": {
+        "projId": 242068,
+        "name": "Standard Unit Turn",
+        "status": "ACTIVE",
+        "done": 0,
+        "total": 8,
+        "first_appt": "2026-10-01",
+        "final_walk": "2026-10-13",
+        "final_walk_done": null,
+        "completed_date": null,
+        "due": "2026-09-25",
+        "next_task": {
+          "date": "2026-09-14",
+          "task": "walkthrough"
+        },
+        "tasks": [
+          {
+            "task": "A - Initial walkthrough",
+            "cat": "walkthrough",
+            "done": false,
+            "date": "2026-09-14",
+            "who": "Brady Smith",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Appfolio Estimate",
+            "cat": "estimate",
+            "done": false,
+            "date": null,
+            "who": "Dulce Salinas",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "C - Paint",
+            "cat": "paint",
+            "done": false,
+            "date": "2026-10-01",
+            "who": "Brady Smith",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "D - Maintenance",
+            "cat": "maintenance",
+            "done": false,
+            "date": "2026-10-06",
+            "who": "Brady Smith",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "E - Carpet Cleaning",
+            "cat": "carpet",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "F - Cleaning",
+            "cat": "cleaning",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "G - Verify Mailbox Lockbox & Mailbox Keys",
+            "cat": "other",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Final Walkthrough",
+            "cat": "final-walk",
+            "done": false,
+            "date": "2026-10-13",
+            "who": "Matt Romme",
+            "completed": null,
+            "vendor": false
+          }
+        ]
+      },
+      "next_appt": {
+        "date": "2026-09-14",
+        "cat": "walkthrough",
+        "who": "Brady Smith",
+        "brief": "A - Initial walkthrough"
+      },
       "cost": {
         "code": "c702-B301",
         "labor": 0,
@@ -8123,8 +8345,8 @@
         "laborEntries": [],
         "materialEntries": []
       },
-      "stage": "Move-out",
-      "stage_ord": 0,
+      "stage": "Walkthrough",
+      "stage_ord": 1,
       "days_elapsed": 0,
       "days_to_turn": null,
       "status": "notice"
@@ -10014,12 +10236,12 @@
         "done": 4,
         "total": 7,
         "first_appt": "2026-08-10",
-        "final_walk": "2026-09-01",
+        "final_walk": "2026-09-03",
         "final_walk_done": null,
         "completed_date": "2026-08-17",
         "due": "2026-08-15",
         "next_task": {
-          "date": "2026-09-01",
+          "date": "2026-09-03",
           "task": "final-walk"
         },
         "tasks": [
@@ -10081,7 +10303,7 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": "2026-09-01",
+            "date": "2026-09-03",
             "who": "Micheal Magoon",
             "completed": null,
             "vendor": false
@@ -10089,7 +10311,7 @@
         ]
       },
       "next_appt": {
-        "date": "2026-09-01",
+        "date": "2026-09-03",
         "cat": "final-walk",
         "who": "Micheal Magoon",
         "brief": "Final Walkthrough"
@@ -13195,12 +13417,12 @@
         "done": 1,
         "total": 8,
         "first_appt": "2026-09-08",
-        "final_walk": "2026-09-17",
+        "final_walk": "2026-09-16",
         "final_walk_done": null,
         "completed_date": "2026-08-17",
         "due": "2026-08-14",
         "next_task": {
-          "date": "2026-09-08",
+          "date": "2026-09-07",
           "task": "paint"
         },
         "tasks": [
@@ -13235,7 +13457,7 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-09-10",
+            "date": "2026-09-09",
             "who": "Micheal Magoon",
             "completed": null,
             "vendor": false
@@ -13271,7 +13493,7 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": "2026-09-17",
+            "date": "2026-09-16",
             "who": "Ron Cramer",
             "completed": null,
             "vendor": false
@@ -13279,7 +13501,7 @@
         ]
       },
       "next_appt": {
-        "date": "2026-09-08",
+        "date": "2026-09-07",
         "cat": "paint",
         "who": "Micheal Magoon",
         "brief": "C - Paint Prep / Paint"
@@ -15259,20 +15481,101 @@
       "sqft": 575,
       "region": "Tri-Cities",
       "pm": {
-        "projId": 170196,
-        "name": "Turn - 632 N Arthur Street UNIT C105",
-        "status": "COMPLETE",
-        "done": 7,
-        "total": 7,
-        "first_appt": null,
-        "final_walk": null,
-        "final_walk_done": "2025-06-10",
-        "completed_date": "2025-06-10",
-        "due": "2025-07-01",
-        "next_task": null,
-        "tasks": null
+        "projId": 242069,
+        "name": "Standard Unit Turn",
+        "status": "ACTIVE",
+        "done": 0,
+        "total": 8,
+        "first_appt": "2026-12-03",
+        "final_walk": "2026-12-14",
+        "final_walk_done": null,
+        "completed_date": null,
+        "due": "2026-09-15",
+        "next_task": {
+          "date": "2026-09-03",
+          "task": "walkthrough"
+        },
+        "tasks": [
+          {
+            "task": "A - Initial walkthrough",
+            "cat": "walkthrough",
+            "done": false,
+            "date": "2026-09-03",
+            "who": "Margarito Saldana",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Appfolio Estimate",
+            "cat": "estimate",
+            "done": false,
+            "date": null,
+            "who": "Dulce Salinas",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "C - Paint",
+            "cat": "paint",
+            "done": false,
+            "date": "2026-12-03",
+            "who": "Matthew Williams",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "D - Maintenance",
+            "cat": "maintenance",
+            "done": false,
+            "date": "2026-12-07",
+            "who": "Matthew Williams",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "E - Carpet Cleaning",
+            "cat": "carpet",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "F - Cleaning",
+            "cat": "cleaning",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "G - Verify Mailbox Lockbox & Mailbox Keys",
+            "cat": "other",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Final Walkthrough",
+            "cat": "final-walk",
+            "done": false,
+            "date": "2026-12-14",
+            "who": "Margarito Saldana",
+            "completed": null,
+            "vendor": false
+          }
+        ]
       },
-      "next_appt": null,
+      "next_appt": {
+        "date": "2026-09-03",
+        "cat": "walkthrough",
+        "who": "Margarito Saldana",
+        "brief": "A - Initial walkthrough"
+      },
       "cost": {
         "code": "kn47-k1-C105",
         "labor": 42.6,
@@ -15290,12 +15593,11 @@
         ],
         "materialEntries": []
       },
-      "turn_end": "2025-06-10",
-      "stage": "Move-out",
-      "stage_ord": 0,
+      "stage": "Walkthrough",
+      "stage_ord": 1,
       "days_elapsed": 0,
-      "days_to_turn": -447,
-      "status": "complete"
+      "days_to_turn": null,
+      "status": "notice"
     },
     {
       "key": "kn47|c109",
@@ -23715,7 +24017,7 @@
       "city": "Kennewick",
       "addr": "4711 W Metaline Avenue L205 Kennewick, WA 99336",
       "unit_id": 972,
-      "unit_status": "Vacant-Unrented",
+      "unit_status": "Vacant-Rented",
       "rent_ready": "No",
       "vacant": true,
       "days_vacant": 39,
@@ -23723,7 +24025,7 @@
       "available_on": "2026-09-03",
       "ready_on": "2026-09-03",
       "target_date": "2026-08-12",
-      "next_move_in": null,
+      "next_move_in": "2026-09-03",
       "rent": "931.00",
       "bed_bath": "1/1.00",
       "sqft": 600,
@@ -24500,131 +24802,6 @@
       "status": "active"
     },
     {
-      "key": "l912|104",
-      "prop": "l912",
-      "unit": "104",
-      "at_risk": [],
-      "property_name": "l912 (Multi-Family)",
-      "city": "Spokane",
-      "addr": "912 W Lincoln Pl 104 Spokane, WA 99204",
-      "unit_id": 700,
-      "unit_status": "Vacant-Unrented",
-      "rent_ready": "Yes",
-      "vacant": true,
-      "days_vacant": 1,
-      "move_out": "2026-08-30",
-      "available_on": "2026-09-19",
-      "ready_on": "2026-09-19",
-      "target_date": "2026-09-19",
-      "next_move_in": null,
-      "rent": "1695.00",
-      "bed_bath": "2/2.00",
-      "sqft": 1100,
-      "region": "Spokane",
-      "pm": {
-        "projId": 238507,
-        "name": "Standard Unit Turn",
-        "status": "ACTIVE",
-        "done": 0,
-        "total": 8,
-        "first_appt": null,
-        "final_walk": null,
-        "final_walk_done": null,
-        "completed_date": null,
-        "due": "2026-09-14",
-        "next_task": null,
-        "tasks": [
-          {
-            "task": "A - Initial walkthrough",
-            "cat": "walkthrough",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Appfolio Estimate",
-            "cat": "estimate",
-            "done": false,
-            "date": null,
-            "who": "Dulce Salinas",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "C - Paint",
-            "cat": "paint",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "D - Maintenance",
-            "cat": "maintenance",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "E - Carpet Cleaning",
-            "cat": "carpet",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "F - Cleaning",
-            "cat": "cleaning",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "G - Verify Mailbox Lockbox & Mailbox Keys",
-            "cat": "other",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Final Walkthrough",
-            "cat": "final-walk",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": null,
-      "cost": {
-        "code": "l912-104",
-        "labor": 0,
-        "materials": 0,
-        "total": 0,
-        "estimate": 0,
-        "laborEntries": [],
-        "materialEntries": []
-      },
-      "stage": "Ready",
-      "stage_ord": 7,
-      "days_elapsed": 1,
-      "days_to_turn": null,
-      "status": "ready"
-    },
-    {
       "key": "m221|2",
       "prop": "m221",
       "unit": "2",
@@ -25165,7 +25342,7 @@
         "done": 0,
         "total": 7,
         "first_appt": "2026-08-27",
-        "final_walk": "2026-09-08",
+        "final_walk": "2026-10-08",
         "final_walk_done": null,
         "completed_date": null,
         "due": "2026-09-10",
@@ -25205,8 +25382,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-09-01",
-            "who": "Micheal Magoon",
+            "date": "2026-10-01",
+            "who": "Ron Cramer",
             "completed": null,
             "vendor": false
           },
@@ -25232,8 +25409,8 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": "2026-09-08",
-            "who": "Ron Cramer",
+            "date": "2026-10-08",
+            "who": "Matt Romme",
             "completed": null,
             "vendor": false
           }
@@ -26676,14 +26853,14 @@
         "status": "ACTIVE",
         "done": 0,
         "total": 8,
-        "first_appt": "2026-09-02",
-        "final_walk": "2026-09-14",
+        "first_appt": "2026-09-03",
+        "final_walk": "2026-11-16",
         "final_walk_done": null,
         "completed_date": null,
         "due": "2026-08-12",
         "next_task": {
-          "date": "2026-09-02",
-          "task": "paint"
+          "date": "2026-09-03",
+          "task": "maintenance"
         },
         "tasks": [
           {
@@ -26708,8 +26885,8 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-09-02",
-            "who": "Micheal Magoon",
+            "date": "2026-11-09",
+            "who": "Justin Gutierrez",
             "completed": null,
             "vendor": false
           },
@@ -26717,7 +26894,7 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-09-07",
+            "date": "2026-09-03",
             "who": "Micheal Magoon",
             "completed": null,
             "vendor": false
@@ -26753,7 +26930,7 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": "2026-09-14",
+            "date": "2026-11-16",
             "who": "Ron Cramer",
             "completed": null,
             "vendor": false
@@ -26761,10 +26938,10 @@
         ]
       },
       "next_appt": {
-        "date": "2026-09-02",
-        "cat": "paint",
+        "date": "2026-09-03",
+        "cat": "maintenance",
         "who": "Micheal Magoon",
-        "brief": "C - Paint Prep / Paint"
+        "brief": "D - Maintenance"
       },
       "cost": {
         "code": "o155-B3",
@@ -27459,7 +27636,7 @@
         "done": 0,
         "total": 8,
         "first_appt": "2026-09-29",
-        "final_walk": "2026-10-14",
+        "final_walk": "2026-10-07",
         "final_walk_done": null,
         "completed_date": null,
         "due": "2026-09-15",
@@ -27499,7 +27676,7 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-10-07",
+            "date": "2026-09-30",
             "who": "Micheal Magoon",
             "completed": null,
             "vendor": false
@@ -27535,7 +27712,7 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": "2026-10-14",
+            "date": "2026-10-07",
             "who": "Ron Cramer",
             "completed": null,
             "vendor": false
@@ -27585,7 +27762,102 @@
       "bed_bath": "2/1.00",
       "sqft": 840,
       "region": "Spokane",
-      "next_appt": null,
+      "pm": {
+        "projId": 242070,
+        "name": "Standard Unit Turn",
+        "status": "ACTIVE",
+        "done": 0,
+        "total": 8,
+        "first_appt": "2026-11-05",
+        "final_walk": "2026-11-17",
+        "final_walk_done": null,
+        "completed_date": null,
+        "due": "2026-10-15",
+        "next_task": {
+          "date": "2026-10-01",
+          "task": "walkthrough"
+        },
+        "tasks": [
+          {
+            "task": "A - Initial walkthrough",
+            "cat": "walkthrough",
+            "done": false,
+            "date": "2026-10-01",
+            "who": "Ron Cramer",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Appfolio Estimate",
+            "cat": "estimate",
+            "done": false,
+            "date": null,
+            "who": "Dulce Salinas",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "C - Paint",
+            "cat": "paint",
+            "done": false,
+            "date": "2026-11-05",
+            "who": "Ron Cramer",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "D - Maintenance",
+            "cat": "maintenance",
+            "done": false,
+            "date": "2026-11-10",
+            "who": "Ron Cramer",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "E - Carpet Cleaning",
+            "cat": "carpet",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "F - Cleaning",
+            "cat": "cleaning",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "G - Verify Mailbox Lockbox & Mailbox Keys",
+            "cat": "other",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Final Walkthrough",
+            "cat": "final-walk",
+            "done": false,
+            "date": "2026-11-17",
+            "who": "Micheal Magoon",
+            "completed": null,
+            "vendor": false
+          }
+        ]
+      },
+      "next_appt": {
+        "date": "2026-10-01",
+        "cat": "walkthrough",
+        "who": "Ron Cramer",
+        "brief": "A - Initial walkthrough"
+      },
       "cost": {
         "code": "p705-06",
         "labor": 0,
@@ -27595,8 +27867,8 @@
         "laborEntries": [],
         "materialEntries": []
       },
-      "stage": "Move-out",
-      "stage_ord": 0,
+      "stage": "Walkthrough",
+      "stage_ord": 1,
       "days_elapsed": 0,
       "days_to_turn": null,
       "status": "notice"
@@ -27630,7 +27902,7 @@
         "done": 0,
         "total": 8,
         "first_appt": "2026-09-23",
-        "final_walk": "2026-10-05",
+        "final_walk": "2026-10-01",
         "final_walk_done": null,
         "completed_date": null,
         "due": "2026-09-15",
@@ -27670,7 +27942,7 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-09-28",
+            "date": "2026-09-24",
             "who": "Micheal Magoon",
             "completed": null,
             "vendor": false
@@ -27706,7 +27978,7 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": "2026-10-05",
+            "date": "2026-10-01",
             "who": "Ron Cramer",
             "completed": null,
             "vendor": false
@@ -28312,7 +28584,7 @@
         "done": 0,
         "total": 7,
         "first_appt": "2026-09-17",
-        "final_walk": "2026-09-29",
+        "final_walk": "2026-09-28",
         "final_walk_done": null,
         "completed_date": null,
         "due": "2026-08-15",
@@ -28352,7 +28624,7 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-09-22",
+            "date": "2026-09-21",
             "who": "Micheal Magoon",
             "completed": null,
             "vendor": false
@@ -28379,7 +28651,7 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": "2026-09-29",
+            "date": "2026-09-28",
             "who": "Ron Cramer",
             "completed": null,
             "vendor": false
@@ -31247,7 +31519,7 @@
       "addr": "1740 N 5th - B5 Pasco, WA 99301",
       "unit_id": 419,
       "unit_status": "Vacant-Rented",
-      "rent_ready": "No",
+      "rent_ready": "Yes",
       "vacant": true,
       "days_vacant": 31,
       "move_out": "2026-07-31",
@@ -31551,8 +31823,8 @@
         ]
       },
       "turn_end": "2026-08-13",
-      "stage": "Maintenance",
-      "stage_ord": 3,
+      "stage": "Ready",
+      "stage_ord": 7,
       "days_elapsed": 13,
       "days_to_turn": 13,
       "status": "complete"
@@ -36571,6 +36843,139 @@
       "status": "complete"
     },
     {
+      "key": "rl16|a13",
+      "prop": "rl16",
+      "unit": "A13",
+      "at_risk": [],
+      "property_name": "rl16",
+      "city": "Richland",
+      "addr": "1621 George Washington Way A13 Richland, WA 99354",
+      "unit_id": 526,
+      "unit_status": "Notice-Unrented",
+      "rent_ready": null,
+      "vacant": false,
+      "days_vacant": null,
+      "move_out": "2026-09-30",
+      "available_on": "2026-10-20",
+      "ready_on": "2026-10-20",
+      "target_date": "2026-10-20",
+      "next_move_in": null,
+      "rent": "1443.00",
+      "bed_bath": "2/1.50",
+      "sqft": 975,
+      "region": "Tri-Cities",
+      "pm": {
+        "projId": 242071,
+        "name": "Standard Unit Turn",
+        "status": "ACTIVE",
+        "done": 0,
+        "total": 8,
+        "first_appt": "2026-11-05",
+        "final_walk": "2026-11-17",
+        "final_walk_done": null,
+        "completed_date": null,
+        "due": "2026-10-15",
+        "next_task": {
+          "date": "2026-10-29",
+          "task": "walkthrough"
+        },
+        "tasks": [
+          {
+            "task": "A - Initial walkthrough",
+            "cat": "walkthrough",
+            "done": false,
+            "date": "2026-10-29",
+            "who": "Margarito Saldana",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Appfolio Estimate",
+            "cat": "estimate",
+            "done": false,
+            "date": null,
+            "who": "Dulce Salinas",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "C - Paint",
+            "cat": "paint",
+            "done": false,
+            "date": "2026-11-05",
+            "who": "Margarito Saldana",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "D - Maintenance",
+            "cat": "maintenance",
+            "done": false,
+            "date": "2026-11-10",
+            "who": "Margarito Saldana",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "E - Carpet Cleaning",
+            "cat": "carpet",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "F - Cleaning",
+            "cat": "cleaning",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "G - Verify Mailbox Lockbox & Mailbox Keys",
+            "cat": "other",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Final Walkthrough",
+            "cat": "final-walk",
+            "done": false,
+            "date": "2026-11-17",
+            "who": "Margarito Saldana",
+            "completed": null,
+            "vendor": false
+          }
+        ]
+      },
+      "next_appt": {
+        "date": "2026-10-29",
+        "cat": "walkthrough",
+        "who": "Margarito Saldana",
+        "brief": "A - Initial walkthrough"
+      },
+      "cost": {
+        "code": "rl16-A13",
+        "labor": 0,
+        "materials": 0,
+        "total": 0,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": []
+      },
+      "stage": "Walkthrough",
+      "stage_ord": 1,
+      "days_elapsed": 0,
+      "days_to_turn": null,
+      "status": "notice"
+    },
+    {
       "key": "rl16|a14",
       "prop": "rl16",
       "unit": "A14",
@@ -39341,261 +39746,6 @@
       "stage_ord": 7,
       "days_elapsed": 6,
       "days_to_turn": 6,
-      "status": "complete"
-    },
-    {
-      "key": "rl16|c07",
-      "prop": "rl16",
-      "unit": "C07",
-      "at_risk": [],
-      "property_name": "rl16",
-      "city": "Richland",
-      "addr": "1621 George Washington Way C07 Richland, WA 99354",
-      "unit_id": 568,
-      "unit_status": "Notice-Unrented",
-      "rent_ready": null,
-      "vacant": false,
-      "days_vacant": null,
-      "move_out": "2026-09-12",
-      "available_on": "2026-10-02",
-      "ready_on": "2026-10-02",
-      "target_date": "2026-10-02",
-      "next_move_in": null,
-      "rent": "1627.00",
-      "bed_bath": "3/2.00",
-      "sqft": 1115,
-      "region": "Tri-Cities",
-      "pm": {
-        "projId": 241656,
-        "name": "Standard Unit Turn",
-        "status": "ACTIVE",
-        "done": 0,
-        "total": 8,
-        "first_appt": "2026-11-05",
-        "final_walk": "2026-11-17",
-        "final_walk_done": null,
-        "completed_date": null,
-        "due": "2026-09-27",
-        "next_task": {
-          "date": "2026-09-14",
-          "task": "walkthrough"
-        },
-        "tasks": [
-          {
-            "task": "A - Initial walkthrough",
-            "cat": "walkthrough",
-            "done": false,
-            "date": "2026-09-14",
-            "who": "Margarito Saldana",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Appfolio Estimate",
-            "cat": "estimate",
-            "done": false,
-            "date": null,
-            "who": "Dulce Salinas",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "C - Paint",
-            "cat": "paint",
-            "done": false,
-            "date": "2026-11-05",
-            "who": "Margarito Saldana",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "D - Maintenance",
-            "cat": "maintenance",
-            "done": false,
-            "date": "2026-11-10",
-            "who": "Margarito Saldana",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "E - Carpet Cleaning",
-            "cat": "carpet",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "F - Cleaning",
-            "cat": "cleaning",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "G - Verify Mailbox Lockbox & Mailbox Keys",
-            "cat": "other",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Final Walkthrough",
-            "cat": "final-walk",
-            "done": false,
-            "date": "2026-11-17",
-            "who": "Margarito Saldana",
-            "completed": null,
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": {
-        "date": "2026-09-14",
-        "cat": "walkthrough",
-        "who": "Margarito Saldana",
-        "brief": "A - Initial walkthrough"
-      },
-      "cost": {
-        "code": "rl16-C07",
-        "labor": 1070.17,
-        "materials": 2431.27,
-        "total": 3501.44,
-        "estimate": 0,
-        "laborEntries": [
-          {
-            "d": "2025-09-09",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.27,
-            "cost": 29.21,
-            "cat": "Turn"
-          },
-          {
-            "d": "2025-09-08",
-            "emp": "Ryan G. Robson",
-            "hrs": 8.27,
-            "cost": 190.21,
-            "cat": "Turn"
-          },
-          {
-            "d": "2025-09-05",
-            "emp": "Ryan G. Robson",
-            "hrs": 8.05,
-            "cost": 185.15,
-            "cat": "Turn"
-          },
-          {
-            "d": "2025-09-04",
-            "emp": "Ryan G. Robson",
-            "hrs": 8,
-            "cost": 184,
-            "cat": "Turn"
-          },
-          {
-            "d": "2025-09-03",
-            "emp": "Ryan G. Robson",
-            "hrs": 8,
-            "cost": 184,
-            "cat": "Turn"
-          },
-          {
-            "d": "2025-09-02",
-            "emp": "Ryan G. Robson",
-            "hrs": 8,
-            "cost": 184,
-            "cat": "Turn"
-          },
-          {
-            "d": "2025-09-02",
-            "emp": "Margarito Saldana",
-            "hrs": 4,
-            "cost": 113.6,
-            "cat": "Turn"
-          }
-        ],
-        "materialEntries": [
-          {
-            "d": "2025-10-14",
-            "amt": 230,
-            "cat": "Turn",
-            "ln": "montiel",
-            "src": "ramp"
-          },
-          {
-            "d": "2025-10-13",
-            "amt": 230,
-            "cat": "Turn",
-            "ln": "montiel",
-            "src": "ramp"
-          },
-          {
-            "d": "2025-09-09",
-            "amt": 525,
-            "cat": "Turn",
-            "ln": "saldana",
-            "src": "ramp"
-          },
-          {
-            "d": "2025-09-08",
-            "amt": 51.11,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          },
-          {
-            "d": "2025-09-05",
-            "amt": 55.43,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          },
-          {
-            "d": "2025-09-04",
-            "amt": 28.22,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          },
-          {
-            "d": "2025-09-03",
-            "amt": 90.94,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          },
-          {
-            "d": "2025-09-03",
-            "amt": 79.08,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          },
-          {
-            "d": "2025-09-03",
-            "amt": 298.93,
-            "cat": "Turn",
-            "ln": "saldana",
-            "src": "ramp"
-          },
-          {
-            "d": "2025-09-02",
-            "amt": 842.56,
-            "cat": "Turn",
-            "ln": "saldana",
-            "src": "ramp"
-          }
-        ]
-      },
-      "turn_end": "2025-09-11",
-      "stage": "Walkthrough",
-      "stage_ord": 1,
-      "days_elapsed": 0,
-      "days_to_turn": -366,
       "status": "complete"
     },
     {
@@ -42522,12 +42672,12 @@
         "done": 4,
         "total": 7,
         "first_appt": "2026-08-20",
-        "final_walk": "2026-09-01",
+        "final_walk": "2026-09-03",
         "final_walk_done": null,
         "completed_date": "2026-08-28",
         "due": "2026-09-10",
         "next_task": {
-          "date": "2026-09-01",
+          "date": "2026-09-03",
           "task": "final-walk"
         },
         "tasks": [
@@ -42589,7 +42739,7 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": "2026-09-01",
+            "date": "2026-09-03",
             "who": "Micheal Magoon",
             "completed": null,
             "vendor": false
@@ -46892,15 +47042,15 @@
       "city": "Tacoma",
       "addr": "6830 Tacoma Mall Blvd Apt A12 Tacoma, WA 98409",
       "unit_id": 1161,
-      "unit_status": "Vacant-Unrented",
-      "rent_ready": "No",
+      "unit_status": "Vacant-Rented",
+      "rent_ready": "Yes",
       "vacant": true,
       "days_vacant": 31,
       "move_out": "2026-07-31",
       "available_on": "2026-08-27",
       "ready_on": "2026-08-27",
       "target_date": "2026-08-20",
-      "next_move_in": null,
+      "next_move_in": "2026-09-02",
       "rent": "1775.00",
       "bed_bath": "2/1.00",
       "sqft": 980,
@@ -47018,8 +47168,8 @@
       },
       "turn_end": "2026-08-26",
       "af_turn_end": "2026-08-26",
-      "stage": "Final Walk",
-      "stage_ord": 6,
+      "stage": "Ready",
+      "stage_ord": 7,
       "days_elapsed": 26,
       "days_to_turn": 26,
       "status": "complete"
@@ -47976,7 +48126,102 @@
       "bed_bath": "2/1.00",
       "sqft": 980,
       "region": "Tacoma",
-      "next_appt": null,
+      "pm": {
+        "projId": 242072,
+        "name": "Standard Unit Turn",
+        "status": "ACTIVE",
+        "done": 0,
+        "total": 8,
+        "first_appt": "2026-12-21",
+        "final_walk": "2026-12-30",
+        "final_walk_done": null,
+        "completed_date": null,
+        "due": "2026-12-30",
+        "next_task": {
+          "date": "2026-12-16",
+          "task": "walkthrough"
+        },
+        "tasks": [
+          {
+            "task": "A - Initial walkthrough",
+            "cat": "walkthrough",
+            "done": false,
+            "date": "2026-12-16",
+            "who": "Armani Mitchell",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Appfolio Estimate",
+            "cat": "estimate",
+            "done": false,
+            "date": null,
+            "who": "Dulce Salinas",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "C - Paint",
+            "cat": "paint",
+            "done": false,
+            "date": "2026-12-21",
+            "who": "Chris Phillips",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "D - Maintenance",
+            "cat": "maintenance",
+            "done": false,
+            "date": "2026-12-22",
+            "who": "Armani Mitchell",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "E - Carpet Cleaning",
+            "cat": "carpet",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "F - Cleaning",
+            "cat": "cleaning",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "G - Verify Mailbox Lockbox & Mailbox Keys",
+            "cat": "other",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Final Walkthrough",
+            "cat": "final-walk",
+            "done": false,
+            "date": "2026-12-30",
+            "who": "Armani Mitchell",
+            "completed": null,
+            "vendor": false
+          }
+        ]
+      },
+      "next_appt": {
+        "date": "2026-12-16",
+        "cat": "walkthrough",
+        "who": "Armani Mitchell",
+        "brief": "A - Initial walkthrough"
+      },
       "cost": {
         "code": "tc68-B33",
         "labor": 0,
@@ -47986,8 +48231,8 @@
         "laborEntries": [],
         "materialEntries": []
       },
-      "stage": "Move-out",
-      "stage_ord": 0,
+      "stage": "Walkthrough",
+      "stage_ord": 1,
       "days_elapsed": 0,
       "days_to_turn": null,
       "status": "notice"
@@ -50227,12 +50472,12 @@
       "addr": "6830 Tacoma Mall Blvd Apt D089 Tacoma, WA 98409",
       "unit_id": 1238,
       "unit_status": "Vacant-Unrented",
-      "rent_ready": "No",
+      "rent_ready": "Yes",
       "vacant": true,
       "days_vacant": 61,
       "move_out": "2026-07-01",
-      "available_on": "2026-09-18",
-      "ready_on": "2026-09-18",
+      "available_on": "2026-08-28",
+      "ready_on": "2026-08-31",
       "target_date": "2026-07-21",
       "next_move_in": null,
       "rent": "1775.00",
@@ -50243,12 +50488,12 @@
         "projId": 238496,
         "name": "Standard Unit Turn",
         "status": "ACTIVE",
-        "done": 5,
+        "done": 7,
         "total": 8,
         "first_appt": "2026-08-27",
         "final_walk": "2026-09-15",
         "final_walk_done": "2026-08-28",
-        "completed_date": "2026-08-28",
+        "completed_date": "2026-08-31",
         "due": "2026-07-16",
         "next_task": {
           "date": "2026-09-07",
@@ -50267,10 +50512,10 @@
           {
             "task": "Appfolio Estimate",
             "cat": "estimate",
-            "done": false,
+            "done": true,
             "date": null,
             "who": "Dulce Salinas",
-            "completed": null,
+            "completed": "2026-08-31",
             "vendor": false
           },
           {
@@ -50303,10 +50548,10 @@
           {
             "task": "F - Cleaning",
             "cat": "cleaning",
-            "done": false,
+            "done": true,
             "date": null,
             "who": null,
-            "completed": null,
+            "completed": "2026-08-31",
             "vendor": false
           },
           {
@@ -50329,12 +50574,7 @@
           }
         ]
       },
-      "next_appt": {
-        "date": "2026-09-11",
-        "cat": "suggested-cleaning",
-        "who": "Dana's Quality Cleaning",
-        "brief": "Suggested cleaning — 3 business days after in-house done (2026-09-08)"
-      },
+      "next_appt": null,
       "cost": {
         "code": "tc68-D089",
         "labor": 0,
@@ -50345,8 +50585,8 @@
         "materialEntries": []
       },
       "turn_end": "2026-08-28",
-      "stage": "Maintenance",
-      "stage_ord": 3,
+      "stage": "Ready",
+      "stage_ord": 7,
       "days_elapsed": 58,
       "days_to_turn": 58,
       "status": "complete"
@@ -52579,84 +52819,101 @@
       "sqft": 552,
       "region": "Spokane",
       "pm": {
-        "projId": 222918,
+        "projId": 242073,
         "name": "Standard Unit Turn",
-        "status": "COMPLETE",
-        "done": 7,
-        "total": 7,
-        "first_appt": "2026-07-23",
-        "final_walk": "2026-08-17",
-        "final_walk_done": "2026-08-13",
-        "completed_date": "2026-08-13",
-        "due": "2026-08-14",
-        "next_task": null,
+        "status": "ACTIVE",
+        "done": 0,
+        "total": 8,
+        "first_appt": "2026-11-04",
+        "final_walk": "2026-11-16",
+        "final_walk_done": null,
+        "completed_date": null,
+        "due": "2026-09-01",
+        "next_task": {
+          "date": "2026-09-03",
+          "task": "walkthrough"
+        },
         "tasks": [
           {
             "task": "A - Initial walkthrough",
             "cat": "walkthrough",
-            "done": true,
-            "date": "2026-07-01",
-            "who": "Scott Higley",
-            "completed": "2026-07-02",
+            "done": false,
+            "date": "2026-09-03",
+            "who": "Ron Cramer",
+            "completed": null,
             "vendor": false
           },
           {
             "task": "Appfolio Estimate",
             "cat": "estimate",
-            "done": true,
+            "done": false,
             "date": null,
             "who": "Dulce Salinas",
-            "completed": "2026-07-03",
+            "completed": null,
             "vendor": false
           },
           {
             "task": "C - Paint",
             "cat": "paint",
-            "done": true,
-            "date": "2026-07-23",
-            "who": "Ron Cramer",
-            "completed": "2026-07-23",
+            "done": false,
+            "date": "2026-11-04",
+            "who": "Micheal Magoon",
+            "completed": null,
             "vendor": false
           },
           {
             "task": "D - Maintenance",
             "cat": "maintenance",
-            "done": true,
-            "date": "2026-07-28",
-            "who": "Ron Cramer",
-            "completed": "2026-07-28",
+            "done": false,
+            "date": "2026-11-09",
+            "who": "Micheal Magoon",
+            "completed": null,
             "vendor": false
           },
           {
-            "task": "E - Carpet Replacement",
+            "task": "E - Carpet Cleaning",
             "cat": "carpet",
-            "done": true,
-            "date": "2026-07-29",
-            "who": "INLAND PACIFIC FLOORING INC",
-            "completed": "2026-07-29",
-            "vendor": true
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
           },
           {
             "task": "F - Cleaning",
             "cat": "cleaning",
-            "done": true,
-            "date": "2026-07-31",
-            "who": "SPO Cleaning",
-            "completed": "2026-07-31",
-            "vendor": true
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "G - Verify Mailbox Lockbox & Mailbox Keys",
+            "cat": "other",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
           },
           {
             "task": "Final Walkthrough",
             "cat": "final-walk",
-            "done": true,
-            "date": "2026-08-17",
-            "who": "Micheal Magoon",
-            "completed": "2026-08-13",
+            "done": false,
+            "date": "2026-11-16",
+            "who": "Ron Cramer",
+            "completed": null,
             "vendor": false
           }
         ]
       },
-      "next_appt": null,
+      "next_appt": {
+        "date": "2026-09-03",
+        "cat": "walkthrough",
+        "who": "Ron Cramer",
+        "brief": "A - Initial walkthrough"
+      },
       "cost": {
         "code": "w117-3",
         "labor": 248.92,
@@ -52725,8 +52982,8 @@
         ]
       },
       "turn_end": "2026-08-13",
-      "stage": "Final Walk",
-      "stage_ord": 6,
+      "stage": "Walkthrough",
+      "stage_ord": 1,
       "days_elapsed": 0,
       "days_to_turn": -4,
       "status": "complete"
