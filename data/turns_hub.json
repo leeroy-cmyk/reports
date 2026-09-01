@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "fetched_at": "2026-09-01T18:15:38.215Z",
+  "fetched_at": "2026-09-01T21:12:14.200Z",
   "summary": {
     "as_of": "2026-09-01",
     "units": 239,
@@ -9,7 +9,7 @@
     "notice": 19,
     "at_risk": 32,
     "unscheduled": 14,
-    "accruing": 14913.19,
+    "accruing": 14988,
     "avg_days_open": 27,
     "revenue_at_risk": 3761.03
   },
@@ -1578,8 +1578,8 @@
       "cost": {
         "code": "hl65-9",
         "labor": 282.75,
-        "materials": 148.4,
-        "total": 431.15,
+        "materials": 223.21,
+        "total": 505.96,
         "estimate": 0,
         "laborEntries": [
           {
@@ -1654,6 +1654,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-09-01",
+            "amt": 74.81,
+            "cat": "Turn",
+            "ln": "magoon",
+            "src": "ramp"
+          },
           {
             "d": "2026-08-31",
             "amt": 148.4,
@@ -15124,14 +15131,14 @@
       "city": "Kennewick",
       "addr": "4711 W Metaline Avenue A103 Kennewick, WA 99336",
       "unit_id": 829,
-      "unit_status": "Vacant-Unrented",
-      "rent_ready": "No",
-      "vacant": true,
-      "days_vacant": 1,
-      "move_out": "2026-08-31",
-      "available_on": "2026-09-24",
-      "ready_on": "2026-09-24",
-      "target_date": "2026-09-20",
+      "unit_status": "Notice-Unrented",
+      "rent_ready": null,
+      "vacant": false,
+      "days_vacant": null,
+      "move_out": "2026-09-30",
+      "available_on": "2026-10-20",
+      "ready_on": "2026-10-20",
+      "target_date": "2026-10-20",
       "next_move_in": null,
       "rent": "1358.00",
       "bed_bath": "2/1.00",
@@ -15267,7 +15274,7 @@
       "stage": "Walkthrough",
       "stage_ord": 1,
       "days_elapsed": 0,
-      "days_to_turn": -466,
+      "days_to_turn": -496,
       "status": "complete"
     },
     {
@@ -21005,7 +21012,7 @@
       "city": "Kennewick",
       "addr": "4711 W Metaline Avenue H202 Kennewick, WA 99336",
       "unit_id": 928,
-      "unit_status": "Vacant-Unrented",
+      "unit_status": "Vacant-Rented",
       "rent_ready": "Yes",
       "vacant": true,
       "days_vacant": 290,
@@ -21013,10 +21020,10 @@
       "available_on": "2026-01-18",
       "ready_on": "2026-01-18",
       "target_date": "2025-12-05",
-      "next_move_in": null,
-      "rent": "1132.00",
+      "next_move_in": "2026-09-21",
+      "rent": "931.00",
       "bed_bath": "1/1.00",
-      "sqft": 575,
+      "sqft": 600,
       "region": "Tri-Cities",
       "pm": {
         "projId": 197710,
