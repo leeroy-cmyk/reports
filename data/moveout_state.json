@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-09-01T14:54:28.920Z",
+  "fetched_at": "2026-09-01T18:13:39.532Z",
   "units": {
     "2": {
       "moveOut": "2026-07-31",
@@ -442,13 +442,6 @@
       "unit": "B16",
       "city": "Richland"
     },
-    "560": {
-      "moveOut": "2026-10-01",
-      "status": "Notice-Unrented",
-      "prop": "rl16",
-      "unit": "B23",
-      "city": "Richland"
-    },
     "563": {
       "moveOut": "2026-03-31",
       "status": "Vacant-Unrented",
@@ -619,7 +612,7 @@
     },
     "811": {
       "moveOut": "2026-05-31",
-      "status": "Vacant-Unrented",
+      "status": "Vacant-Rented",
       "prop": "tc34",
       "unit": "A106",
       "city": "Tacoma"
@@ -3665,6 +3658,16 @@
       "city": "Tacoma",
       "from": "2026-04-30",
       "was_status": "Vacant-Rented"
+    },
+    {
+      "date": "2026-09-01",
+      "type": "moveout_removed",
+      "unit_id": "560",
+      "prop": "rl16",
+      "unit": "B23",
+      "city": "Richland",
+      "from": "2026-10-01",
+      "was_status": "Notice-Unrented"
     }
   ]
 }
