@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-09-01T21:11:10.226Z",
+  "fetched_at": "2026-09-01T23:18:58.956Z",
   "units": {
     "2": {
       "moveOut": "2026-07-31",
@@ -379,13 +379,6 @@
       "unit": "A04",
       "city": "Richland"
     },
-    "519": {
-      "moveOut": "2026-10-31",
-      "status": "Notice-Unrented",
-      "prop": "rl16",
-      "unit": "A06",
-      "city": "Richland"
-    },
     "526": {
       "moveOut": "2026-09-30",
       "status": "Notice-Unrented",
@@ -741,6 +734,13 @@
       "status": "Vacant-Unrented",
       "prop": "kn47 K2",
       "unit": "B104",
+      "city": "Kennewick"
+    },
+    "1012": {
+      "moveOut": "2026-06-25",
+      "status": "Vacant-Rented",
+      "prop": "kn47 K2",
+      "unit": "B105",
       "city": "Kennewick"
     },
     "1033": {
@@ -3678,6 +3678,25 @@
       "city": "Kennewick",
       "from": "2026-08-31",
       "to": "2026-09-30"
+    },
+    {
+      "date": "2026-09-01",
+      "type": "moveout_new",
+      "unit_id": "1012",
+      "prop": "kn47 K2",
+      "unit": "B105",
+      "city": "Kennewick",
+      "to": "2026-06-25"
+    },
+    {
+      "date": "2026-09-01",
+      "type": "moveout_removed",
+      "unit_id": "519",
+      "prop": "rl16",
+      "unit": "A06",
+      "city": "Richland",
+      "from": "2026-10-31",
+      "was_status": "Notice-Unrented"
     }
   ]
 }
