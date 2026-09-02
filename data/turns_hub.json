@@ -1,15 +1,15 @@
 {
   "ok": true,
-  "fetched_at": "2026-09-02T18:37:03.117Z",
+  "fetched_at": "2026-09-02T21:21:24.984Z",
   "summary": {
     "as_of": "2026-09-02",
-    "units": 239,
+    "units": 240,
     "active": 80,
     "ready": 1,
-    "notice": 18,
+    "notice": 19,
     "at_risk": 31,
     "unscheduled": 13,
-    "accruing": 15239.8,
+    "accruing": 15361.55,
     "avg_days_open": 27,
     "revenue_at_risk": 3820.87
   },
@@ -1705,11 +1705,25 @@
       "next_appt": null,
       "cost": {
         "code": "hl73-4",
-        "labor": 101.5,
+        "labor": 171.75,
         "materials": 0,
-        "total": 101.5,
+        "total": 171.75,
         "estimate": 0,
         "laborEntries": [
+          {
+            "d": "2026-09-02",
+            "emp": "Micheal N. Magoon",
+            "hrs": 2.08,
+            "cost": 52,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-02",
+            "emp": "Micheal N. Magoon",
+            "hrs": 0.73,
+            "cost": 18.25,
+            "cat": "Turn"
+          },
           {
             "d": "2026-09-01",
             "emp": "Micheal N. Magoon",
@@ -2627,11 +2641,18 @@
       },
       "cost": {
         "code": "p705-17",
-        "labor": 1144.91,
+        "labor": 1196.41,
         "materials": 779.82,
-        "total": 1924.73,
+        "total": 1976.23,
         "estimate": 0,
         "laborEntries": [
+          {
+            "d": "2026-09-02",
+            "emp": "Ronald D. Cramer",
+            "hrs": 2,
+            "cost": 51.5,
+            "cat": "Turn"
+          },
           {
             "d": "2026-09-01",
             "emp": "Ronald D. Cramer",
@@ -5959,6 +5980,13 @@
         "total": 1577.94,
         "estimate": 1643.95,
         "laborEntries": [
+          {
+            "d": "2026-09-02",
+            "emp": "LeeRoy",
+            "hrs": 0,
+            "cost": 0,
+            "cat": "Turn"
+          },
           {
             "d": "2026-08-14",
             "emp": "Ronald D. Cramer",
@@ -9856,6 +9884,44 @@
       "days_elapsed": null,
       "days_to_turn": null,
       "status": "active"
+    },
+    {
+      "key": "c702|g202",
+      "prop": "c702",
+      "unit": "G202",
+      "at_risk": [],
+      "property_name": "c702",
+      "city": "Spokane",
+      "addr": "7012 N Colton St G202 Spokane, WA 99208",
+      "unit_id": 1388,
+      "unit_status": "Notice-Unrented",
+      "rent_ready": null,
+      "vacant": false,
+      "days_vacant": null,
+      "move_out": "2026-09-18",
+      "available_on": "2026-10-08",
+      "ready_on": "2026-10-08",
+      "target_date": "2026-10-08",
+      "next_move_in": null,
+      "rent": "1395.00",
+      "bed_bath": "2/2.00",
+      "sqft": 1025,
+      "region": "Spokane",
+      "next_appt": null,
+      "cost": {
+        "code": "c702-G202",
+        "labor": 0,
+        "materials": 0,
+        "total": 0,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": []
+      },
+      "stage": "Move-out",
+      "stage_ord": 0,
+      "days_elapsed": 0,
+      "days_to_turn": null,
+      "status": "notice"
     },
     {
       "key": "c702|g205",
@@ -52004,7 +52070,7 @@
       "city": "Spokane",
       "addr": "1117 W 5th Ave - 3 Spokane, WA 9204",
       "unit_id": 450,
-      "unit_status": "Vacant-Unrented",
+      "unit_status": "Vacant-Rented",
       "rent_ready": "No",
       "vacant": true,
       "days_vacant": 16,
@@ -52012,7 +52078,7 @@
       "available_on": "2026-08-20",
       "ready_on": "2026-08-20",
       "target_date": "2026-09-06",
-      "next_move_in": null,
+      "next_move_in": "2026-09-11",
       "rent": "925.00",
       "bed_bath": "1/1.00",
       "sqft": 552,
