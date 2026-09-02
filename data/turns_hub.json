@@ -1,15 +1,15 @@
 {
   "ok": true,
-  "fetched_at": "2026-09-02T21:21:24.984Z",
+  "fetched_at": "2026-09-02T23:31:44.375Z",
   "summary": {
     "as_of": "2026-09-02",
-    "units": 240,
+    "units": 242,
     "active": 80,
     "ready": 1,
-    "notice": 19,
+    "notice": 21,
     "at_risk": 31,
     "unscheduled": 13,
-    "accruing": 15361.55,
+    "accruing": 15475.05,
     "avg_days_open": 27,
     "revenue_at_risk": 3820.87
   },
@@ -1705,9 +1705,9 @@
       "next_appt": null,
       "cost": {
         "code": "hl73-4",
-        "labor": 171.75,
+        "labor": 216.75,
         "materials": 0,
-        "total": 171.75,
+        "total": 216.75,
         "estimate": 0,
         "laborEntries": [
           {
@@ -1722,6 +1722,13 @@
             "emp": "Micheal N. Magoon",
             "hrs": 0.73,
             "cost": 18.25,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-02",
+            "emp": "Micheal N. Magoon",
+            "hrs": 1.8,
+            "cost": 45,
             "cat": "Turn"
           },
           {
@@ -2641,9 +2648,9 @@
       },
       "cost": {
         "code": "p705-17",
-        "labor": 1196.41,
+        "labor": 1247.4,
         "materials": 779.82,
-        "total": 1976.23,
+        "total": 2027.22,
         "estimate": 0,
         "laborEntries": [
           {
@@ -2651,6 +2658,13 @@
             "emp": "Ronald D. Cramer",
             "hrs": 2,
             "cost": 51.5,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-02",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.98,
+            "cost": 50.99,
             "cat": "Turn"
           },
           {
@@ -33958,6 +33972,44 @@
       "status": "active"
     },
     {
+      "key": "ps25|f41",
+      "prop": "ps25",
+      "unit": "F41",
+      "at_risk": [],
+      "property_name": "ps25",
+      "city": "Pasco",
+      "addr": "2524 W Sylvester St. - F41 Pasco, WA 99301",
+      "unit_id": 399,
+      "unit_status": "Notice-Unrented",
+      "rent_ready": null,
+      "vacant": false,
+      "days_vacant": null,
+      "move_out": "2026-09-30",
+      "available_on": "2026-10-20",
+      "ready_on": "2026-10-20",
+      "target_date": "2026-10-20",
+      "next_move_in": null,
+      "rent": "1395.00",
+      "bed_bath": "2/1.00",
+      "sqft": 811,
+      "region": "Tri-Cities",
+      "next_appt": null,
+      "cost": {
+        "code": "ps25-F41",
+        "labor": 0,
+        "materials": 0,
+        "total": 0,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": []
+      },
+      "stage": "Move-out",
+      "stage_ord": 0,
+      "days_elapsed": 0,
+      "days_to_turn": null,
+      "status": "notice"
+    },
+    {
       "key": "ps25|f43",
       "prop": "ps25",
       "unit": "F43",
@@ -38634,6 +38686,44 @@
       },
       "stage": "Walkthrough",
       "stage_ord": 1,
+      "days_elapsed": 0,
+      "days_to_turn": null,
+      "status": "notice"
+    },
+    {
+      "key": "rl16|b15",
+      "prop": "rl16",
+      "unit": "B15",
+      "at_risk": [],
+      "property_name": "rl16",
+      "city": "Richland",
+      "addr": "1621 George Washington Way B15 Richland, WA 99354",
+      "unit_id": 552,
+      "unit_status": "Notice-Unrented",
+      "rent_ready": null,
+      "vacant": false,
+      "days_vacant": null,
+      "move_out": "2026-09-30",
+      "available_on": "2026-10-20",
+      "ready_on": "2026-10-20",
+      "target_date": "2026-10-20",
+      "next_move_in": null,
+      "rent": "1627.00",
+      "bed_bath": "3/2.00",
+      "sqft": 1115,
+      "region": "Tri-Cities",
+      "next_appt": null,
+      "cost": {
+        "code": "rl16-B15",
+        "labor": 0,
+        "materials": 0,
+        "total": 0,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": []
+      },
+      "stage": "Move-out",
+      "stage_ord": 0,
       "days_elapsed": 0,
       "days_to_turn": null,
       "status": "notice"
@@ -44052,10 +44142,10 @@
       "rent_ready": null,
       "vacant": false,
       "days_vacant": null,
-      "move_out": "2026-09-07",
-      "available_on": "2026-11-04",
-      "ready_on": "2026-11-04",
-      "target_date": "2026-09-27",
+      "move_out": "2026-09-17",
+      "available_on": "2026-10-07",
+      "ready_on": "2026-10-07",
+      "target_date": "2026-10-07",
       "next_move_in": null,
       "rent": "1025.00",
       "bed_bath": "1/1.00",
@@ -44170,7 +44260,7 @@
       "stage": "Walkthrough",
       "stage_ord": 1,
       "days_elapsed": 0,
-      "days_to_turn": -13,
+      "days_to_turn": -23,
       "status": "complete"
     },
     {
@@ -52078,7 +52168,7 @@
       "available_on": "2026-08-20",
       "ready_on": "2026-08-20",
       "target_date": "2026-09-06",
-      "next_move_in": "2026-09-11",
+      "next_move_in": "2026-09-25",
       "rent": "925.00",
       "bed_bath": "1/1.00",
       "sqft": 552,
@@ -52884,11 +52974,18 @@
       },
       "cost": {
         "code": "w226-7",
-        "labor": 79.25,
+        "labor": 96.76,
         "materials": 0,
-        "total": 79.25,
+        "total": 96.76,
         "estimate": 0,
         "laborEntries": [
+          {
+            "d": "2026-09-02",
+            "emp": "Ronald D. Cramer",
+            "hrs": 0.68,
+            "cost": 17.51,
+            "cat": "Turn"
+          },
           {
             "d": "2026-08-24",
             "emp": "Micheal N. Magoon",
