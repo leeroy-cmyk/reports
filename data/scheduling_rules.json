@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-08-25T14:38:45.280Z",
-  "last_checked": "2026-08-25T14:38:45.280Z",
+  "generated_at": "2026-09-02T17:33:28.516Z",
+  "last_checked": "2026-09-02T17:33:28.516Z",
   "source": "leeroy-cmyk/pm-scheduling/CLAUDE.md",
-  "count": 69,
+  "count": 73,
   "rules": [
     {
       "group": "General",
@@ -143,6 +143,24 @@
         "**Proactive move of already-scheduled work, effective 2026-08-21 (\"a partir de mañana\" — Florencia was explicit the change should not touch anything today, only take effect starting the next day):** a NEW step, run once at the end of each scheduler's `main()`, scans every non-emergency repair for a flagged property and — if its current appointment date is **before** the floor and **not today** — moves it to the next open slot on/after the floor, using the standard `add-management-appointment` reschedule + cancel-if-future idiom. **Today's date is explicitly excluded** (\"el día de hoy queda excluido en el movimiento\" — Florencia): a meld already on today's calendar is never touched, only future August dates. This is a genuine exception to the repo's append-only rule (like the cancelled-move-out and wrong-crew exceptions above) — justified the same way: reclaiming/relocating work that shouldn't be there, not arbitrary reshuffling. It overrides a stated preference lock too (per Florencia: \"supera todas las reglas excepto movimiento manual\" — literally every rule except a manual move), so a preference-locked meld for one of these properties dated before the floor WILL still be moved; only `wasManuallyMoved()` exempts a meld. Guarded by the same auto-release check (`today<floorDate`), so it stops running the moment the floor date passes.",
         "Tested `DRY_RUN=1` both regions 2026-08-20 (both the gating and the proactive-move pass), ran clean — Tri-Cities moved a real RL21 meld from 08-21→09-01, Spokane moved a real one from 08-27→09-02 (09-01 is a Monday, blocked), no crashes."
       ]
+    },
+    {
+      "group": "Turn warranty",
+      "category": "Window",
+      "text": "`meld created < move-in + 30 days`. Move-in comes from AppFolio `tenant_directory` (`move_in`), which is the only report carrying it for a CURRENT resident — `unit_vacancy` only covers `Vacant-*`/`Notice-*` units, so a moved-in unit is absent from it by definition.",
+      "details": []
+    },
+    {
+      "group": "Turn warranty",
+      "category": "",
+      "text": "These melds are **NOT part of a turn project** — they are ordinary work orders — so any check that identifies turn work by project membership will not see them. That is exactly why they looked like misassignment during the 2026-09-02 Tri-Cities audit: 5 melds on Margarito (mailbox keys, missing appliances, inoperable fan, shower faucet, mailbox key) all sat 0–6 days past move-in.",
+      "details": []
+    },
+    {
+      "group": "Turn warranty",
+      "category": "",
+      "text": "⚠️ **The repairs scheduler must not claim them.** A warranty work order arrives unassigned like any other repair, so without an explicit carve-out the region's repair scheduler will assign it to a repair tech on its next run. \"Manual assignment is sacred\" only protects it once a human has already put it on the turn crew.",
+      "details": []
     },
     {
       "group": "Tacoma",
@@ -368,9 +386,26 @@
       "category": "",
       "text": "**Techs — per region.** In-house turn work is always **paint and maintenance only**; cleaning and flooring are vendors everywhere.",
       "details": [
-        "**Spokane:** Ron Cramer and Micheal Magoon (Scott Higley no longer works here). These two are Spokane's **only** turn techs — no additional Spokane hires (an earlier note claimed two more start July 20, 2026; that hire never happened — corrected 2026-07-17).",
-        "**Tri-Cities:** **Matthew Williams (paint/maint, started 2026-08-24)** + **Margarito Saldana**, who does paint/maint AND every initial walkthrough and final QC. James Dunlap and Ryan Robson left 2026-08-24. ⚠️ Margarito is no longer walkthrough-only, so zero all-day work for him is now a real problem, not the expected state — and he QCs units he turned himself (the Tacoma model, not the Spokane one; unruled).",
+        "**Spokane:** Ron Cramer and Micheal Magoon for everything except c702 (Matt Romme + Brady Smith). Scott Higley no longer works here; **Justin Gutierrez was terminated 2026-09-02** after three weeks on the crew. Ron and Magoon are the **only** general-crew turn techs — no additional Spokane hires (an earlier note claimed two more start July 20, 2026; that hire never happened — corrected 2026-07-17).",
+        "**Tri-Cities (updated 2026-09-02, Lee Roy):** **Matthew Williams (63593, started 2026-08-24)** + **Danny Halfacre (63873, started 2026-09-02)** do paint/maint, **split evenly** between them. **Margarito Saldana (48464) does the walkthroughs** — every initial walkthrough and final QC — **plus up to 2 days of turn work per week** (\"Margarito can work on turns for 2 days per week\"). Three turn team members, no others. James Dunlap and Ryan Robson left 2026-08-24.",
+        "This ends the 2026-08-24 stopgap that had Margarito on **full-time** paint/maint (4 days most weeks) because James and Ryan had gone and Matthew was the only turn tech. Walkthroughs are his job again; turn work is the capacity he absorbs around them.",
+        "**The 2-day cap is `WEEK_CAP` in `pm_tricities_turn_scheduler.js`** (env `MARG_TURN_DAYS_PER_WEEK`). Two things about it are load-bearing:",
+        "⛔ **It must be checked CUMULATIVELY across the days being placed, not one day at a time.** Paint is 2 consecutive days; testing each against a count not yet updated sees \"1 used, cap 2\" twice and books both, landing him on 3. `canTakeDays()` sums the whole request per ISO week before agreeing to any of it.",
+        "⛔ **A capped tech is a FALLBACK, not a peer.** The tech-selection tie-break prefers whoever has fewer booked days — and a capped tech always has fewer, so left alone he wins every tie and absorbs the rota he is meant to be a relief valve for. `beats()` prefers an uncapped tech on an equal start day; Margarito only wins by being strictly earlier.",
+        "\"Evenly\" between Matthew and Danny needs no special algorithm: earliest start wins, lighter calendar breaks the tie, which self-balances across two techs.",
+        "⚠️ `occ` must cover the walk tech too, not just `TURN_TECHS`. `walkSlot()` reads `occ[WALK_TECH.id]` to cap a day he is already booked on down to a single 1-hour overlay; leaving it undefined makes the cap `SLOTS.length` and the scheduler stacks up to seven walkthroughs onto a day he is out painting.",
+        "**Backlog handed over 2026-09-02** — see the one-time `pm_tricities_role_split.js` note below.",
         "**Tacoma:** **Chris Phillips paints, Armani Mitchell maintains and does every walkthrough** (split roles, 2026-08-19). See the Tacoma section for the 2-paint-**2**-maint exception; QC is always Armani, own units included."
+      ]
+    },
+    {
+      "group": "Turns",
+      "category": "",
+      "text": "**Tri-Cities backlog handover, 2026-09-02 — `pm_tricities_role_split.js` (one-time, applied).** Adding Danny changed nothing on its own: all 41 open Tri-Cities turns were already booked (Matthew 52 days to 12-01, Margarito 48 to 11-24, Danny 0), and gap-fill only touches melds with no appointment. **35 melds across 18 turns were reassigned**, trimming Margarito to his 2-day-a-week cap and splitting the rest evenly — final: Matthew 40 days, Danny 41, Margarito 24.",
+      "details": [
+        "🔑 **This was the SAFE class of rebalance because NO DATE MOVED.** Danny's calendar was empty, so every date was already free on him: it is a change of *who*, never of *when*. Nothing downstream (QC chain, AppFolio availability) needed recomputing, no available date could move OUT, and the append-only rule was never even engaged — no appointment was created or cancelled, only `in_house_servicers` changed. That also makes it genuinely reversible, which a date change would not be (cancelled PM appointments cannot be read back). Snapshot at `C:/Users/lrphi/tricities_rebalance_snapshot.json`; `node pm_tricities_role_split.js revert apply` puts every meld back.",
+        "🔑 **The movable unit is the TURN, not the meld or the day.** A unit's paint and maintenance must stay on one tech, so moving melds individually would silently break that rule. Verified after the write: no double-bookings, no unit split across techs, 0 dates changed, 35/35 confirmed by independent read-back.",
+        "⚠️ **3 turns could not be placed without moving dates** (kn47 K1 #A103, rl16 #C20, ps25 #D29) and were left alone, so Margarito is still over his 2-day cap in 3 weeks (W36, W43, W45). Correcting those needs date moves and therefore separate authorisation — it was not done silently."
       ]
     },
     {
