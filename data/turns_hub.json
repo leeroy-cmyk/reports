@@ -1,15 +1,15 @@
 {
   "ok": true,
-  "fetched_at": "2026-09-03T18:43:14.368Z",
+  "fetched_at": "2026-09-03T21:24:12.336Z",
   "summary": {
     "as_of": "2026-09-03",
-    "units": 240,
+    "units": 241,
     "active": 79,
     "ready": 1,
-    "notice": 22,
+    "notice": 23,
     "at_risk": 31,
     "unscheduled": 14,
-    "accruing": 17617.4,
+    "accruing": 17677.08,
     "avg_days_open": 28,
     "revenue_at_risk": 3789.83
   },
@@ -9364,11 +9364,18 @@
       "cost": {
         "code": "c702-C203",
         "labor": 0,
-        "materials": 294.41,
-        "total": 294.41,
+        "materials": 354.09,
+        "total": 354.09,
         "estimate": 0,
         "laborEntries": [],
         "materialEntries": [
+          {
+            "d": "2026-09-03",
+            "amt": 59.68,
+            "cat": "Turn",
+            "ln": "smith",
+            "src": "ramp"
+          },
           {
             "d": "2026-09-02",
             "amt": 294.41,
@@ -45724,6 +45731,44 @@
       "days_elapsed": null,
       "days_to_turn": null,
       "status": "complete"
+    },
+    {
+      "key": "tc68|a01",
+      "prop": "tc68",
+      "unit": "A01",
+      "at_risk": [],
+      "property_name": "tc68",
+      "city": "Tacoma",
+      "addr": "6830 Tacoma Mall Blvd Apt A01 Tacoma, WA 98409",
+      "unit_id": 1150,
+      "unit_status": "Notice-Unrented",
+      "rent_ready": null,
+      "vacant": false,
+      "days_vacant": null,
+      "move_out": "2026-09-30",
+      "available_on": "2026-10-20",
+      "ready_on": "2026-10-20",
+      "target_date": "2026-10-20",
+      "next_move_in": null,
+      "rent": "1795.00",
+      "bed_bath": "2/1.00",
+      "sqft": 980,
+      "region": "Tacoma",
+      "next_appt": null,
+      "cost": {
+        "code": "tc68-A01",
+        "labor": 0,
+        "materials": 0,
+        "total": 0,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": []
+      },
+      "stage": "Move-out",
+      "stage_ord": 0,
+      "days_elapsed": 0,
+      "days_to_turn": null,
+      "status": "notice"
     },
     {
       "key": "tc68|a02",
