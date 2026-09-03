@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-02T17:33:28.516Z",
-  "last_checked": "2026-09-02T17:33:28.516Z",
+  "generated_at": "2026-09-03T17:27:20.830Z",
+  "last_checked": "2026-09-03T17:27:20.830Z",
   "source": "leeroy-cmyk/pm-scheduling/CLAUDE.md",
   "count": 73,
   "rules": [
@@ -469,7 +469,13 @@
       "category": "FINAL WALKTHROUGH / QC",
       "text": "who does it, per region (rewritten 2026-08-12, Lee Roy).",
       "details": [
-        "**Spokane: a TURN TECH does the QC, but NEVER the tech who turned the unit.** *\"if michael turns the unit, ron will do the walkthrough. if matt turns the unit brady will do the walkthrough or vise versa.\"* Pairs: **Magoon ↔ Ron**, **Matt Romme ↔ Brady Smith**. Justin Gutierrez has no fixed partner yet, so he falls back to \"any turn tech who didn't work on it\". This **retires David Sanchez from turn QC** — he keeps grounds/lawn. If every configured tech worked a unit, the run logs it rather than allowing self-QC.",
+        "⛔ **Spokane, from 2026-09-02 (Lee Roy): MATT ROMME (63325) DOES EVERY WALKTHROUGH, INITIAL AND FINAL, FOR THE WHOLE REGION — and they are 2-HOUR appointments, not 1.** *\"Matt is going to be on point for all intital walkthroughs and final walkthroughs from now on… So matt for the entire spokane region doing walkthoughs initial and final.\"*",
+        "**He therefore does NO paint/maint** — he is out of `C702_CREW`, so c702 in-house is Brady Smith alone. This is a capacity fact, not an inference: Spokane has 129 open walkthroughs (47 initial + 82 final); at 2h each and at most 2/day before they hit the half-day block, that is ~65 working days, about **16 weeks** of Mon-Thu.",
+        "✅ **Independent QC now holds BY CONSTRUCTION** — Matt never turns a unit, so he can never sign off his own work. The Magoon↔Ron / Matt↔Brady `PAIRS` model is **retired**; `pickQC()` takes no argument and cannot fail. Same shape as Tri-Cities' Margarito.",
+        "⚠️ **A 2-hour walk can no longer piggyback a day that already holds all-day work** (2h > the 1h overlay allowance), and **two of them block a day** (4h = `HALF_DAY`). That is intended — a two-hour inspection is not something you tuck around a full paint day — and it is the mechanical reason the walkthrough tech cannot also carry paint.",
+        "⚠️ **`FINAL_WALK_MAX_PER_DAY` (4 = a full 8am-4pm day) is load-bearing.** The final-walk script picks its date from the vendor chain and used to place the tech *regardless of their other work* — fine when four techs shared 1-hour sign-offs, wrong when all of Spokane's land on one person at two hours. Without it the first run put 4 finals on one day plus 3 on each of six others, before counting initials. Overflow slides to the next business day.",
+        "⚠️ **A slid QC makes the advertised available date optimistic** — `available_on = QC + 3` and the ratchet only moves a date CLOSER, so it cannot follow the QC out. Every slid unit is listed at the end of the run. If the queue stays deep the answer is a second walkthrough tech, not a later date.",
+        "**Spokane, historical (2026-08-12 → 2026-09-02): a TURN TECH did the QC, but NEVER the tech who turned the unit.** *\"if michael turns the unit, ron will do the walkthrough. if matt turns the unit brady will do the walkthrough or vise versa.\"* Pairs: **Magoon ↔ Ron**, **Matt Romme ↔ Brady Smith**. Justin Gutierrez has no fixed partner yet, so he falls back to \"any turn tech who didn't work on it\". This **retires David Sanchez from turn QC** — he keeps grounds/lawn. If every configured tech worked a unit, the run logs it rather than allowing self-QC.",
         "**Tacoma: Armani does ALL walkthroughs, including on units he turned himself.** *\"in tacoma, armani does all the walkthroughs even if he turned the unit.\"* A deliberate exception — do not \"fix\" this toward independence. (Earlier the same day it was changed to split QC across two techs on the assumption independence was wanted; that was reversed.)",
         "**Tri-Cities:** Margarito Saldana does walkthroughs only (no paint/maint), so it is independent by construction."
       ]
