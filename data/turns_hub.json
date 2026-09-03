@@ -1,15 +1,15 @@
 {
   "ok": true,
-  "fetched_at": "2026-09-02T23:31:44.375Z",
+  "fetched_at": "2026-09-03T01:25:24.069Z",
   "summary": {
     "as_of": "2026-09-02",
-    "units": 242,
+    "units": 240,
     "active": 80,
     "ready": 1,
     "notice": 21,
     "at_risk": 31,
     "unscheduled": 13,
-    "accruing": 15475.05,
+    "accruing": 15534.3,
     "avg_days_open": 27,
     "revenue_at_risk": 3820.87
   },
@@ -1705,9 +1705,9 @@
       "next_appt": null,
       "cost": {
         "code": "hl73-4",
-        "labor": 216.75,
+        "labor": 276,
         "materials": 0,
-        "total": 216.75,
+        "total": 276,
         "estimate": 0,
         "laborEntries": [
           {
@@ -1729,6 +1729,13 @@
             "emp": "Micheal N. Magoon",
             "hrs": 1.8,
             "cost": 45,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-02",
+            "emp": "Micheal N. Magoon",
+            "hrs": 2.37,
+            "cost": 59.25,
             "cat": "Turn"
           },
           {
@@ -26745,7 +26752,7 @@
       "city": "Missoula",
       "addr": "2258 W Central Ave Missoula, MT 59801",
       "unit_id": 211,
-      "unit_status": "Notice-Unrented",
+      "unit_status": "Notice-Rented",
       "rent_ready": null,
       "vacant": false,
       "days_vacant": null,
@@ -26753,7 +26760,7 @@
       "available_on": "2026-09-25",
       "ready_on": "2026-09-25",
       "target_date": "2026-09-25",
-      "next_move_in": null,
+      "next_move_in": "2026-10-07",
       "rent": "973.00",
       "bed_bath": "1/1.00",
       "sqft": 215,
@@ -33336,61 +33343,6 @@
       "days_elapsed": 2,
       "days_to_turn": null,
       "status": "active"
-    },
-    {
-      "key": "ps25|c22",
-      "prop": "ps25",
-      "unit": "C22",
-      "property_name": "ps25",
-      "at_risk": [],
-      "region": "Tri-Cities",
-      "pm": {
-        "projId": 222234,
-        "name": "Standard Unit Turn",
-        "status": "COMPLETE",
-        "done": 7,
-        "total": 7,
-        "first_appt": null,
-        "final_walk": null,
-        "final_walk_done": null,
-        "completed_date": "2026-06-04",
-        "due": "2026-07-15",
-        "next_task": null,
-        "tasks": [
-          {
-            "task": "A - Initial walkthrough",
-            "cat": "walkthrough",
-            "done": true,
-            "date": "2026-06-04",
-            "who": "Margarito Saldana",
-            "completed": "2026-06-04",
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": null,
-      "cost": {
-        "code": "ps25-C22",
-        "labor": 21.3,
-        "materials": 0,
-        "total": 21.3,
-        "estimate": 0,
-        "laborEntries": [
-          {
-            "d": "2026-06-04",
-            "emp": "Margarito Saldana",
-            "hrs": 0.75,
-            "cost": 21.3,
-            "cat": "CapEx"
-          }
-        ],
-        "materialEntries": []
-      },
-      "stage": "Final Walk",
-      "stage_ord": 6,
-      "days_elapsed": null,
-      "days_to_turn": null,
-      "status": "other"
     },
     {
       "key": "ps25|d27",
@@ -46647,479 +46599,6 @@
       },
       "turn_end": "2026-08-26",
       "af_turn_end": "2026-08-26",
-      "stage": "Final Walk",
-      "stage_ord": 6,
-      "days_elapsed": null,
-      "days_to_turn": null,
-      "status": "complete"
-    },
-    {
-      "key": "tc68|a13",
-      "prop": "tc68",
-      "unit": "A13",
-      "property_name": "tc68",
-      "at_risk": [],
-      "region": "Tacoma",
-      "pm": {
-        "projId": 213415,
-        "name": "CapEx Turn - 6830 Tacoma Mall Blvd UNIT A13",
-        "status": "COMPLETE",
-        "done": 9,
-        "total": 9,
-        "first_appt": "2026-04-22",
-        "final_walk": "2026-06-05",
-        "final_walk_done": "2026-06-04",
-        "completed_date": "2026-06-04",
-        "due": "2026-04-18",
-        "next_task": null,
-        "tasks": [
-          {
-            "task": "A - CapEx Maintenance",
-            "cat": "walkthrough",
-            "done": true,
-            "date": "2026-05-12",
-            "who": "Jonas Hoard",
-            "completed": "2026-05-18",
-            "vendor": false
-          },
-          {
-            "task": "B - CapEx Paint",
-            "cat": "paint",
-            "done": true,
-            "date": "2026-05-11",
-            "who": "Jonas Hoard",
-            "completed": "2026-05-11",
-            "vendor": false
-          },
-          {
-            "task": "C - CapEx Flooring",
-            "cat": "paint",
-            "done": true,
-            "date": "2026-05-05",
-            "who": "Jonas Hoard",
-            "completed": "2026-05-06",
-            "vendor": false
-          },
-          {
-            "task": "D - Cleaning",
-            "cat": "cleaning",
-            "done": true,
-            "date": "2026-04-22",
-            "who": "Dana's Quality Cleaning",
-            "completed": "2026-04-23",
-            "vendor": true
-          },
-          {
-            "task": "D - Cleaning (clone)",
-            "cat": "cleaning",
-            "done": true,
-            "date": "2026-05-20",
-            "who": "Armani Mitchell",
-            "completed": "2026-05-19",
-            "vendor": false
-          },
-          {
-            "task": "F - Invoice",
-            "cat": "cleaning",
-            "done": true,
-            "date": null,
-            "who": null,
-            "completed": "2026-06-04",
-            "vendor": false
-          },
-          {
-            "task": "Initial walkthrough",
-            "cat": "walkthrough",
-            "done": true,
-            "date": "2026-04-20",
-            "who": "Armani Mitchell",
-            "completed": "2026-04-20",
-            "vendor": false
-          },
-          {
-            "task": "Door stove replacement (the cleaners broke it)",
-            "cat": "other",
-            "done": true,
-            "date": "2026-06-03",
-            "who": "Armani Mitchell",
-            "completed": "2026-06-04",
-            "vendor": false
-          },
-          {
-            "task": "E - CapEx Final Walkthough",
-            "cat": "final-walk",
-            "done": true,
-            "date": "2026-06-05",
-            "who": "Armani Mitchell",
-            "completed": "2026-06-04",
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": null,
-      "cost": {
-        "code": "tc68-A13",
-        "labor": 1372.68,
-        "materials": 1257.11,
-        "total": 2629.79,
-        "estimate": 0,
-        "laborEntries": [
-          {
-            "d": "2026-05-18",
-            "emp": "Jonas Hoard",
-            "hrs": 0.98,
-            "cost": 26.46,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-18",
-            "emp": "Jonas Hoard",
-            "hrs": 0.5,
-            "cost": 13.5,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-18",
-            "emp": "Jonas Hoard",
-            "hrs": 1.02,
-            "cost": 27.54,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-18",
-            "emp": "Jonas Hoard",
-            "hrs": 0.58,
-            "cost": 15.66,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-12",
-            "emp": "Jonas Hoard",
-            "hrs": 2,
-            "cost": 54,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-12",
-            "emp": "Jonas Hoard",
-            "hrs": 1,
-            "cost": 27,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-12",
-            "emp": "Jonas Hoard",
-            "hrs": 0.67,
-            "cost": 18.09,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-11",
-            "emp": "Jonas Hoard",
-            "hrs": 1.37,
-            "cost": 36.99,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-11",
-            "emp": "Jonas Hoard",
-            "hrs": 1.68,
-            "cost": 45.36,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-11",
-            "emp": "Jonas Hoard",
-            "hrs": 1.55,
-            "cost": 41.85,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-11",
-            "emp": "Jonas Hoard",
-            "hrs": 0.7,
-            "cost": 18.9,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-11",
-            "emp": "Jonas Hoard",
-            "hrs": 0.48,
-            "cost": 12.96,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-10",
-            "emp": "Jonas Hoard",
-            "hrs": 0.47,
-            "cost": 12.69,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-10",
-            "emp": "Jonas Hoard",
-            "hrs": 0.03,
-            "cost": 0.81,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-10",
-            "emp": "Jonas Hoard",
-            "hrs": 2,
-            "cost": 54,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-10",
-            "emp": "Jonas Hoard",
-            "hrs": 1.97,
-            "cost": 53.19,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-10",
-            "emp": "Jonas Hoard",
-            "hrs": 1.85,
-            "cost": 49.95,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-06",
-            "emp": "Jonas Hoard",
-            "hrs": 2,
-            "cost": 54,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-06",
-            "emp": "Jonas Hoard",
-            "hrs": 0.43,
-            "cost": 11.61,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-05",
-            "emp": "Jonas Hoard",
-            "hrs": 0.65,
-            "cost": 17.55,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-05",
-            "emp": "Jonas Hoard",
-            "hrs": 1.52,
-            "cost": 41.04,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-05",
-            "emp": "Jonas Hoard",
-            "hrs": 0.42,
-            "cost": 11.34,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-05",
-            "emp": "Jonas Hoard",
-            "hrs": 1,
-            "cost": 27,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-05",
-            "emp": "Jonas Hoard",
-            "hrs": 1.45,
-            "cost": 39.15,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-05",
-            "emp": "Jonas Hoard",
-            "hrs": 0.47,
-            "cost": 12.69,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-04",
-            "emp": "Jonas Hoard",
-            "hrs": 1.82,
-            "cost": 49.14,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-04",
-            "emp": "Jonas Hoard",
-            "hrs": 1.47,
-            "cost": 39.69,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-01",
-            "emp": "Jonas Hoard",
-            "hrs": 0.53,
-            "cost": 14.31,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-04-30",
-            "emp": "Jonas Hoard",
-            "hrs": 2,
-            "cost": 54,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-04-30",
-            "emp": "Jonas Hoard",
-            "hrs": 1.62,
-            "cost": 43.74,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-04-29",
-            "emp": "Jonas Hoard",
-            "hrs": 1.37,
-            "cost": 36.99,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-04-29",
-            "emp": "Jonas Hoard",
-            "hrs": 0.92,
-            "cost": 24.84,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-04-29",
-            "emp": "Jonas Hoard",
-            "hrs": 0.83,
-            "cost": 22.41,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-04-28",
-            "emp": "Jonas Hoard",
-            "hrs": 1.15,
-            "cost": 31.05,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-04-28",
-            "emp": "Jonas Hoard",
-            "hrs": 0.63,
-            "cost": 17.01,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-04-28",
-            "emp": "Jonas Hoard",
-            "hrs": 0.4,
-            "cost": 10.8,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-04-28",
-            "emp": "Jonas Hoard",
-            "hrs": 1.45,
-            "cost": 39.15,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-04-28",
-            "emp": "Jonas Hoard",
-            "hrs": 1.03,
-            "cost": 27.81,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-04-28",
-            "emp": "Jonas Hoard",
-            "hrs": 1.37,
-            "cost": 36.99,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-04-28",
-            "emp": "Jonas Hoard",
-            "hrs": 1.95,
-            "cost": 52.65,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-04-27",
-            "emp": "Jonas Hoard",
-            "hrs": 0.98,
-            "cost": 26.46,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-04-27",
-            "emp": "Jonas Hoard",
-            "hrs": 0.63,
-            "cost": 17.01,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-04-27",
-            "emp": "Jonas Hoard",
-            "hrs": 0.65,
-            "cost": 17.55,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-04-24",
-            "emp": "Jonas Hoard",
-            "hrs": 1.55,
-            "cost": 41.85,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-04-20",
-            "emp": "Armani Mitchell",
-            "hrs": 1.7,
-            "cost": 45.9,
-            "cat": "Turn"
-          }
-        ],
-        "materialEntries": [
-          {
-            "d": "2026-05-18",
-            "amt": 136.48,
-            "cat": "Turn",
-            "ln": "hoard",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-05-12",
-            "amt": 40.85,
-            "cat": "Turn",
-            "ln": "hoard",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-05-11",
-            "amt": 251.4,
-            "cat": "Turn",
-            "ln": "hoard",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-05-05",
-            "amt": 436.44,
-            "cat": "Turn",
-            "ln": "hoard",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-04-29",
-            "amt": 391.94,
-            "cat": "Turn",
-            "ln": "hoard",
-            "src": "ramp"
-          }
-        ]
-      },
-      "turn_end": "2026-06-04",
-      "af_turn_end": "2026-06-04",
       "stage": "Final Walk",
       "stage_ord": 6,
       "days_elapsed": null,
