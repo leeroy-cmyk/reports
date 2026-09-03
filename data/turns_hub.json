@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "fetched_at": "2026-09-03T21:24:12.336Z",
+  "fetched_at": "2026-09-03T23:28:25.157Z",
   "summary": {
     "as_of": "2026-09-03",
     "units": 241,
@@ -9,7 +9,7 @@
     "notice": 23,
     "at_risk": 31,
     "unscheduled": 14,
-    "accruing": 17677.08,
+    "accruing": 17922.83,
     "avg_days_open": 28,
     "revenue_at_risk": 3789.83
   },
@@ -1719,11 +1719,18 @@
       "next_appt": null,
       "cost": {
         "code": "hl73-4",
-        "labor": 276,
+        "labor": 367.25,
         "materials": 169.89,
-        "total": 445.89,
+        "total": 537.14,
         "estimate": 0,
         "laborEntries": [
+          {
+            "d": "2026-09-03",
+            "emp": "Micheal N. Magoon",
+            "hrs": 3.65,
+            "cost": 91.25,
+            "cat": "Turn"
+          },
           {
             "d": "2026-09-02",
             "emp": "Micheal N. Magoon",
@@ -2672,11 +2679,32 @@
       },
       "cost": {
         "code": "p705-17",
-        "labor": 1247.4,
+        "labor": 1401.9,
         "materials": 779.82,
-        "total": 2027.22,
+        "total": 2181.72,
         "estimate": 0,
         "laborEntries": [
+          {
+            "d": "2026-09-03",
+            "emp": "Ronald D. Cramer",
+            "hrs": 2,
+            "cost": 51.5,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-03",
+            "emp": "Ronald D. Cramer",
+            "hrs": 2,
+            "cost": 51.5,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-03",
+            "emp": "Ronald D. Cramer",
+            "hrs": 2,
+            "cost": 51.5,
+            "cat": "Turn"
+          },
           {
             "d": "2026-09-02",
             "emp": "Ronald D. Cramer",
@@ -24285,11 +24313,18 @@
       },
       "cost": {
         "code": "kn47-k1-L205",
-        "labor": 170.69,
+        "labor": 186.88,
         "materials": 647.11,
-        "total": 817.8,
+        "total": 833.99,
         "estimate": 0,
         "laborEntries": [
+          {
+            "d": "2026-09-01",
+            "emp": "Margarito Saldana",
+            "hrs": 0.57,
+            "cost": 16.19,
+            "cat": "CapEx"
+          },
           {
             "d": "2026-08-19",
             "emp": "Margarito Saldana",
@@ -32909,7 +32944,7 @@
       "city": "Pasco",
       "addr": "2524 W Sylvester St. - B9 Pasco, WA 99301",
       "unit_id": 367,
-      "unit_status": "Vacant-Unrented",
+      "unit_status": "Vacant-Rented",
       "rent_ready": "Yes",
       "vacant": true,
       "days_vacant": 95,
@@ -32917,7 +32952,7 @@
       "available_on": "2026-07-04",
       "ready_on": "2026-07-04",
       "target_date": "2026-06-20",
-      "next_move_in": null,
+      "next_move_in": "2026-10-01",
       "rent": "1395.00",
       "bed_bath": "2/1.00",
       "sqft": 811,
