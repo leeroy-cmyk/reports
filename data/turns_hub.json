@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "fetched_at": "2026-09-04T18:18:18.928Z",
+  "fetched_at": "2026-09-04T20:57:41.787Z",
   "summary": {
     "as_of": "2026-09-04",
     "units": 240,
@@ -9,7 +9,7 @@
     "notice": 23,
     "at_risk": 33,
     "unscheduled": 14,
-    "accruing": 18061.63,
+    "accruing": 18699.32,
     "avg_days_open": 29,
     "revenue_at_risk": 3789.83
   },
@@ -2852,8 +2852,8 @@
       "cost": {
         "code": "p705-17",
         "labor": 1540.7,
-        "materials": 779.82,
-        "total": 2320.52,
+        "materials": 1262.01,
+        "total": 2802.71,
         "estimate": 0,
         "laborEntries": [
           {
@@ -3194,6 +3194,20 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-09-04",
+            "amt": 246.25,
+            "cat": "Turn",
+            "ln": "cramer",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-09-04",
+            "amt": 235.94,
+            "cat": "Turn",
+            "ln": "cramer",
+            "src": "ramp"
+          },
           {
             "d": "2026-08-28",
             "amt": 173.08,
@@ -9848,11 +9862,18 @@
       "cost": {
         "code": "c702-C203",
         "labor": 0,
-        "materials": 354.09,
-        "total": 354.09,
+        "materials": 509.59,
+        "total": 509.59,
         "estimate": 0,
         "laborEntries": [],
         "materialEntries": [
+          {
+            "d": "2026-09-04",
+            "amt": 155.5,
+            "cat": "Turn",
+            "ln": "smith",
+            "src": "ramp"
+          },
           {
             "d": "2026-09-03",
             "amt": 59.68,
@@ -35578,7 +35599,7 @@
       "city": "Richland",
       "addr": "1621 George Washington Way A03 Richland, WA 99354",
       "unit_id": 516,
-      "unit_status": "Vacant-Unrented",
+      "unit_status": "Vacant-Rented",
       "rent_ready": "Yes",
       "vacant": true,
       "days_vacant": 127,
@@ -35586,7 +35607,7 @@
       "available_on": "2026-05-16",
       "ready_on": "2026-05-16",
       "target_date": "2026-05-20",
-      "next_move_in": null,
+      "next_move_in": "2026-09-16",
       "rent": "1443.00",
       "bed_bath": "2/1.50",
       "sqft": 975,
