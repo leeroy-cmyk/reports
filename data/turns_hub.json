@@ -1,19 +1,434 @@
 {
   "ok": true,
-  "fetched_at": "2026-09-05T04:59:00.408Z",
+  "fetched_at": "2026-09-05T12:31:30.095Z",
   "summary": {
-    "as_of": "2026-09-04",
+    "as_of": "2026-09-05",
     "units": 240,
-    "active": 79,
+    "active": 78,
     "ready": 1,
     "notice": 23,
     "at_risk": 33,
     "unscheduled": 14,
-    "accruing": 18738.98,
+    "accruing": 18189.27,
     "avg_days_open": 29,
-    "revenue_at_risk": 3789.83
+    "revenue_at_risk": 3746.73
   },
   "rows": [
+    {
+      "key": "c702|a102",
+      "prop": "c702",
+      "unit": "A102",
+      "at_risk": [
+        "Available date passed",
+        "Nothing scheduled"
+      ],
+      "property_name": "c702",
+      "city": "Spokane",
+      "addr": "7022 N Colton St A102 Spokane, WA 99208",
+      "unit_id": 1272,
+      "unit_status": "Vacant-Rented",
+      "rent_ready": "No",
+      "vacant": true,
+      "days_vacant": 35,
+      "move_out": "2026-08-01",
+      "available_on": "2026-09-03",
+      "ready_on": "2026-09-03",
+      "target_date": "2026-08-21",
+      "next_move_in": "2026-09-13",
+      "rent": "1395.00",
+      "bed_bath": "2/2.00",
+      "sqft": 1025,
+      "region": "Spokane",
+      "pm": {
+        "projId": 239147,
+        "name": "Standard Unit Turn",
+        "status": "ACTIVE",
+        "done": 5,
+        "total": 8,
+        "first_appt": "2026-08-20",
+        "final_walk": "2026-09-04",
+        "final_walk_done": null,
+        "completed_date": "2026-08-31",
+        "due": "2026-08-16",
+        "next_task": null,
+        "tasks": [
+          {
+            "task": "Appfolio Estimate",
+            "cat": "estimate",
+            "done": false,
+            "date": null,
+            "who": "Dulce Salinas",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "C - Paint",
+            "cat": "paint",
+            "done": true,
+            "date": "2026-08-20",
+            "who": "Matt Romme",
+            "completed": "2026-08-25",
+            "vendor": false
+          },
+          {
+            "task": "D - Maintenance",
+            "cat": "maintenance",
+            "done": true,
+            "date": "2026-08-25",
+            "who": "Matt Romme",
+            "completed": "2026-08-25",
+            "vendor": false
+          },
+          {
+            "task": "F - Cleaning",
+            "cat": "cleaning",
+            "done": true,
+            "date": "2026-08-31",
+            "who": "U&K Properties LLC",
+            "completed": "2026-08-31",
+            "vendor": true
+          },
+          {
+            "task": "G - Verify Mailbox Lockbox & Mailbox Keys",
+            "cat": "other",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Final Walkthrough",
+            "cat": "final-walk",
+            "done": false,
+            "date": "2026-09-04",
+            "who": "Matt Romme",
+            "completed": null,
+            "vendor": false
+          }
+        ]
+      },
+      "next_appt": null,
+      "cost": {
+        "code": "c702-A102",
+        "labor": 0,
+        "materials": 1379.61,
+        "total": 1379.61,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": [
+          {
+            "d": "2026-08-26",
+            "amt": 492.66,
+            "cat": "Turn",
+            "ln": "romme",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-08-25",
+            "amt": 60.4,
+            "cat": "Turn",
+            "ln": "romme",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-08-21",
+            "amt": 91.59,
+            "cat": "Turn",
+            "ln": "romme",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-08-19",
+            "amt": 212.61,
+            "cat": "Turn",
+            "ln": "romme",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-08-19",
+            "amt": 82.85,
+            "cat": "Turn",
+            "ln": "romme",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-08-18",
+            "amt": 225.77,
+            "cat": "Turn",
+            "ln": "romme",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-08-13",
+            "amt": 213.73,
+            "cat": "Turn",
+            "ln": "phillips",
+            "src": "ramp"
+          }
+        ]
+      },
+      "stage": "Maintenance",
+      "stage_ord": 3,
+      "days_elapsed": 35,
+      "days_to_turn": null,
+      "status": "active"
+    },
+    {
+      "key": "k104|1011",
+      "prop": "k104",
+      "unit": "101-1",
+      "at_risk": [
+        "Available date passed",
+        "Over 45 days vacant"
+      ],
+      "property_name": "k104- LeFevre",
+      "city": "Medical Lake",
+      "addr": "101 E. Spence 1 Medical Lake, WA 99022",
+      "unit_id": 345,
+      "unit_status": "Vacant-Rented",
+      "rent_ready": "No",
+      "vacant": true,
+      "days_vacant": 67,
+      "move_out": "2026-06-30",
+      "available_on": "2026-09-04",
+      "ready_on": "2026-09-04",
+      "target_date": "2026-07-20",
+      "next_move_in": "2026-09-10",
+      "rent": "1334.00",
+      "bed_bath": "2/1.00",
+      "sqft": 1140,
+      "region": "Spokane",
+      "pm": {
+        "projId": 222928,
+        "name": "Standard Unit Turn",
+        "status": "ACTIVE",
+        "done": 1,
+        "total": 7,
+        "first_appt": "2026-08-25",
+        "final_walk": "2026-11-17",
+        "final_walk_done": null,
+        "completed_date": "2026-07-02",
+        "due": "2026-08-10",
+        "next_task": {
+          "date": "2026-11-10",
+          "task": "paint"
+        },
+        "tasks": [
+          {
+            "task": "A - Initial walkthrough",
+            "cat": "walkthrough",
+            "done": true,
+            "date": "2026-07-02",
+            "who": "Scott Higley",
+            "completed": "2026-07-02",
+            "vendor": false
+          },
+          {
+            "task": "Appfolio Estimate",
+            "cat": "estimate",
+            "done": false,
+            "date": null,
+            "who": "Dulce Salinas",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "C - Paint",
+            "cat": "paint",
+            "done": false,
+            "date": "2026-11-10",
+            "who": "Micheal Magoon",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "D - Maintenance",
+            "cat": "maintenance",
+            "done": false,
+            "date": "2026-08-25",
+            "who": "Micheal Magoon",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "E - Carpet Cleaning",
+            "cat": "carpet",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "F - Cleaning",
+            "cat": "cleaning",
+            "done": false,
+            "date": "2026-09-04",
+            "who": "SPO Cleaning",
+            "completed": null,
+            "vendor": true
+          },
+          {
+            "task": "Final Walkthrough",
+            "cat": "final-walk",
+            "done": false,
+            "date": "2026-11-17",
+            "who": "Matt Romme",
+            "completed": null,
+            "vendor": false
+          }
+        ]
+      },
+      "next_appt": {
+        "date": "2026-09-07",
+        "cat": "suggested-carpet",
+        "who": "Allklean",
+        "brief": "Suggested carpet cleaning — business day after cleaning"
+      },
+      "cost": {
+        "code": "k104-101-1",
+        "labor": 978.56,
+        "materials": 1097.12,
+        "total": 2075.68,
+        "estimate": 0,
+        "laborEntries": [
+          {
+            "d": "2026-08-27",
+            "emp": "Justin Gutierrez",
+            "hrs": 6.87,
+            "cost": 171.75,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-25",
+            "emp": "Justin Gutierrez",
+            "hrs": 1.35,
+            "cost": 33.75,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-25",
+            "emp": "Justin Gutierrez",
+            "hrs": 1.58,
+            "cost": 39.5,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-25",
+            "emp": "Justin Gutierrez",
+            "hrs": 1.67,
+            "cost": 41.75,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-25",
+            "emp": "Justin Gutierrez",
+            "hrs": 1.42,
+            "cost": 35.5,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-25",
+            "emp": "Justin Gutierrez",
+            "hrs": 1.8,
+            "cost": 45,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-21",
+            "emp": "Justin Gutierrez",
+            "hrs": 8.17,
+            "cost": 204.25,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-20",
+            "emp": "Justin Gutierrez",
+            "hrs": 6.53,
+            "cost": 163.25,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-20",
+            "emp": "Justin Gutierrez",
+            "hrs": 1.42,
+            "cost": 35.5,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-20",
+            "emp": "Justin Gutierrez",
+            "hrs": 1.45,
+            "cost": 36.25,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-20",
+            "emp": "Justin Gutierrez",
+            "hrs": 1.75,
+            "cost": 43.75,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-20",
+            "emp": "Justin Gutierrez",
+            "hrs": 1.92,
+            "cost": 48,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-07-02",
+            "emp": "Scott Higley",
+            "hrs": 1.48,
+            "cost": 47.35,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-06-03",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.28,
+            "cost": 32.96,
+            "cat": "Turn"
+          }
+        ],
+        "materialEntries": [
+          {
+            "d": "2026-08-25",
+            "amt": 719.74,
+            "cat": "Turn",
+            "ln": "gutierrez",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-08-21",
+            "amt": 53.61,
+            "cat": "Turn",
+            "ln": "gutierrez",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-08-20",
+            "amt": 98.8,
+            "cat": "Turn",
+            "ln": "gutierrez",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-08-20",
+            "amt": 224.97,
+            "cat": "Turn",
+            "ln": "gutierrez",
+            "src": "ramp"
+          }
+        ]
+      },
+      "stage": "Maintenance",
+      "stage_ord": 3,
+      "days_elapsed": 67,
+      "days_to_turn": null,
+      "status": "active"
+    },
     {
       "key": "kn47|maintenancegarages2",
       "prop": "kn47",
@@ -29,7 +444,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 36,
+      "days_vacant": 37,
       "move_out": "2026-07-30",
       "available_on": "2026-08-19",
       "ready_on": "2026-08-19",
@@ -51,7 +466,7 @@
       },
       "stage": null,
       "stage_ord": 0,
-      "days_elapsed": 36,
+      "days_elapsed": 37,
       "days_to_turn": null,
       "status": "active"
     },
@@ -70,7 +485,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 66,
+      "days_vacant": 67,
       "move_out": "2026-06-30",
       "available_on": "2026-09-16",
       "ready_on": "2026-09-16",
@@ -170,7 +585,7 @@
       },
       "stage": "Paint",
       "stage_ord": 2,
-      "days_elapsed": 66,
+      "days_elapsed": 67,
       "days_to_turn": null,
       "status": "active"
     },
@@ -189,7 +604,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 35,
+      "days_vacant": 36,
       "move_out": "2026-07-31",
       "available_on": "2026-08-20",
       "ready_on": "2026-08-20",
@@ -211,7 +626,7 @@
       },
       "stage": null,
       "stage_ord": 0,
-      "days_elapsed": 35,
+      "days_elapsed": 36,
       "days_to_turn": null,
       "status": "active"
     },
@@ -229,7 +644,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 69,
+      "days_vacant": 70,
       "move_out": "2026-06-27",
       "available_on": "2026-09-19",
       "ready_on": "2026-09-19",
@@ -245,8 +660,8 @@
         "status": "ACTIVE",
         "done": 3,
         "total": 7,
-        "first_appt": "2026-11-24",
-        "final_walk": "2026-12-02",
+        "first_appt": "2026-11-19",
+        "final_walk": "2026-12-01",
         "final_walk_done": null,
         "completed_date": "2026-07-14",
         "due": "2026-08-06",
@@ -277,7 +692,7 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-11-24",
+            "date": "2026-11-19",
             "who": "Micheal Magoon",
             "completed": null,
             "vendor": false
@@ -286,7 +701,7 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-11-25",
+            "date": "2026-11-24",
             "who": "Micheal Magoon",
             "completed": null,
             "vendor": false
@@ -313,7 +728,7 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": "2026-12-02",
+            "date": "2026-12-01",
             "who": "Matt Romme",
             "completed": null,
             "vendor": false
@@ -337,7 +752,7 @@
       },
       "stage": "Paint",
       "stage_ord": 2,
-      "days_elapsed": 69,
+      "days_elapsed": 70,
       "days_to_turn": null,
       "status": "active"
     },
@@ -355,7 +770,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 58,
+      "days_vacant": 59,
       "move_out": "2026-07-08",
       "available_on": "2026-10-30",
       "ready_on": "2026-10-30",
@@ -507,7 +922,7 @@
       },
       "stage": "Walkthrough",
       "stage_ord": 1,
-      "days_elapsed": 58,
+      "days_elapsed": 59,
       "days_to_turn": null,
       "status": "active"
     },
@@ -525,7 +940,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 66,
+      "days_vacant": 67,
       "move_out": "2026-06-30",
       "available_on": "2026-10-11",
       "ready_on": "2026-10-11",
@@ -712,7 +1127,7 @@
       },
       "stage": "Maintenance",
       "stage_ord": 3,
-      "days_elapsed": 66,
+      "days_elapsed": 67,
       "days_to_turn": null,
       "status": "active"
     },
@@ -730,7 +1145,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 66,
+      "days_vacant": 67,
       "move_out": "2026-06-30",
       "available_on": "2026-10-23",
       "ready_on": "2026-10-23",
@@ -873,7 +1288,7 @@
       },
       "stage": "Paint",
       "stage_ord": 2,
-      "days_elapsed": 66,
+      "days_elapsed": 67,
       "days_to_turn": null,
       "status": "active"
     },
@@ -891,7 +1306,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 96,
+      "days_vacant": 97,
       "move_out": "2026-05-31",
       "available_on": "2026-09-10",
       "ready_on": "2026-09-10",
@@ -983,10 +1398,10 @@
         ]
       },
       "next_appt": {
-        "date": "2026-09-04",
-        "cat": "suggested-carpet",
-        "who": "Allklean",
-        "brief": "Suggested carpet cleaning — business day after cleaning"
+        "date": "2026-11-12",
+        "cat": "paint",
+        "who": "Ron Cramer",
+        "brief": "C - Paint Prep / Paint"
       },
       "cost": {
         "code": "c313-24",
@@ -1119,49 +1534,46 @@
       },
       "stage": "Maintenance",
       "stage_ord": 3,
-      "days_elapsed": 96,
+      "days_elapsed": 97,
       "days_to_turn": null,
       "status": "active"
     },
     {
-      "key": "c702|a102",
+      "key": "c702|c306",
       "prop": "c702",
-      "unit": "A102",
+      "unit": "C306",
       "at_risk": [
-        "Available date passed"
+        "Nothing scheduled"
       ],
       "property_name": "c702",
       "city": "Spokane",
-      "addr": "7022 N Colton St A102 Spokane, WA 99208",
-      "unit_id": 1272,
-      "unit_status": "Vacant-Rented",
+      "addr": "7002 N Colton St C306 Spokane, WA 99208",
+      "unit_id": 1323,
+      "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 34,
-      "move_out": "2026-08-01",
-      "available_on": "2026-09-03",
-      "ready_on": "2026-09-03",
-      "target_date": "2026-08-21",
-      "next_move_in": "2026-09-13",
-      "rent": "1395.00",
+      "days_vacant": 0,
+      "move_out": null,
+      "available_on": "2026-09-10",
+      "ready_on": "2026-09-10",
+      "target_date": null,
+      "next_move_in": null,
+      "rent": "1495.00",
       "bed_bath": "2/2.00",
-      "sqft": 1025,
+      "sqft": 1140,
       "region": "Spokane",
       "pm": {
-        "projId": 239147,
+        "projId": 239139,
         "name": "Standard Unit Turn",
         "status": "ACTIVE",
-        "done": 5,
+        "done": 2,
         "total": 8,
-        "first_appt": "2026-08-20",
+        "first_appt": "2026-08-27",
         "final_walk": "2026-09-04",
         "final_walk_done": null,
-        "completed_date": "2026-08-31",
-        "due": "2026-08-16",
-        "next_task": {
-          "date": "2026-09-04",
-          "task": "final-walk"
-        },
+        "completed_date": "2026-09-01",
+        "due": "2026-08-25",
+        "next_task": null,
         "tasks": [
           {
             "task": "Appfolio Estimate",
@@ -1175,28 +1587,28 @@
           {
             "task": "C - Paint",
             "cat": "paint",
-            "done": true,
-            "date": "2026-08-20",
+            "done": false,
+            "date": "2026-08-27",
             "who": "Matt Romme",
-            "completed": "2026-08-25",
+            "completed": null,
             "vendor": false
           },
           {
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": true,
-            "date": "2026-08-25",
+            "date": "2026-08-31",
             "who": "Matt Romme",
-            "completed": "2026-08-25",
+            "completed": "2026-09-01",
             "vendor": false
           },
           {
             "task": "F - Cleaning",
             "cat": "cleaning",
-            "done": true,
-            "date": "2026-08-31",
+            "done": false,
+            "date": "2026-09-02",
             "who": "U&K Properties LLC",
-            "completed": "2026-08-31",
+            "completed": null,
             "vendor": true
           },
           {
@@ -1219,74 +1631,48 @@
           }
         ]
       },
-      "next_appt": {
-        "date": "2026-09-04",
-        "cat": "final-walk",
-        "who": "Matt Romme",
-        "brief": "Final Walkthrough"
-      },
+      "next_appt": null,
       "cost": {
-        "code": "c702-A102",
+        "code": "c702-C306",
         "labor": 0,
-        "materials": 1379.61,
-        "total": 1379.61,
+        "materials": 844.9,
+        "total": 844.9,
         "estimate": 0,
         "laborEntries": [],
         "materialEntries": [
           {
+            "d": "2026-08-28",
+            "amt": 198.62,
+            "cat": "Turn",
+            "ln": "romme",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-08-27",
+            "amt": 125.33,
+            "cat": "Turn",
+            "ln": "romme",
+            "src": "ramp"
+          },
+          {
             "d": "2026-08-26",
-            "amt": 492.66,
+            "amt": 113.95,
             "cat": "Turn",
             "ln": "romme",
             "src": "ramp"
           },
           {
             "d": "2026-08-25",
-            "amt": 60.4,
+            "amt": 407,
             "cat": "Turn",
             "ln": "romme",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-21",
-            "amt": 91.59,
-            "cat": "Turn",
-            "ln": "romme",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-19",
-            "amt": 212.61,
-            "cat": "Turn",
-            "ln": "romme",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-19",
-            "amt": 82.85,
-            "cat": "Turn",
-            "ln": "romme",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-18",
-            "amt": 225.77,
-            "cat": "Turn",
-            "ln": "romme",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-13",
-            "amt": 213.73,
-            "cat": "Turn",
-            "ln": "phillips",
             "src": "ramp"
           }
         ]
       },
       "stage": "Maintenance",
       "stage_ord": 3,
-      "days_elapsed": 34,
+      "days_elapsed": null,
       "days_to_turn": null,
       "status": "active"
     },
@@ -1464,7 +1850,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 18,
+      "days_vacant": 19,
       "move_out": "2026-08-17",
       "available_on": null,
       "ready_on": null,
@@ -1486,7 +1872,7 @@
       },
       "stage": null,
       "stage_ord": 0,
-      "days_elapsed": 18,
+      "days_elapsed": 19,
       "days_to_turn": null,
       "status": "active"
     },
@@ -1571,217 +1957,6 @@
       "status": "active"
     },
     {
-      "key": "hl65|9",
-      "prop": "hl65",
-      "unit": "9",
-      "at_risk": [
-        "Nothing scheduled"
-      ],
-      "property_name": "hl65",
-      "city": "Helena",
-      "addr": "645 N Ewing - 9 Helena, MT 59601",
-      "unit_id": 203,
-      "unit_status": "Vacant-Rented",
-      "rent_ready": "No",
-      "vacant": true,
-      "days_vacant": 35,
-      "move_out": "2026-07-31",
-      "available_on": "2026-09-05",
-      "ready_on": "2026-09-14",
-      "target_date": "2026-08-20",
-      "next_move_in": "2026-09-05",
-      "rent": "1293.00",
-      "bed_bath": "1/1.00",
-      "sqft": 600,
-      "region": null,
-      "pm": {
-        "projId": 229352,
-        "name": "Standard Unit Turn",
-        "status": "ACTIVE",
-        "done": 0,
-        "total": 7,
-        "first_appt": "2026-09-01",
-        "final_walk": null,
-        "final_walk_done": null,
-        "completed_date": null,
-        "due": null,
-        "next_task": null,
-        "tasks": [
-          {
-            "task": "A - Initial walkthrough",
-            "cat": "walkthrough",
-            "done": false,
-            "date": null,
-            "who": "Florencia Sola",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Appfolio Estimate",
-            "cat": "estimate",
-            "done": false,
-            "date": null,
-            "who": "Dulce Salinas",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "C - Paint",
-            "cat": "paint",
-            "done": false,
-            "date": "2026-09-01",
-            "who": "Micheal Magoon",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "D - Maintenance",
-            "cat": "maintenance",
-            "done": false,
-            "date": "2026-09-02",
-            "who": "Micheal Magoon",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "E - Carpet Cleaning",
-            "cat": "carpet",
-            "done": false,
-            "date": null,
-            "who": "Florencia Sola",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "F - Cleaning",
-            "cat": "cleaning",
-            "done": false,
-            "date": null,
-            "who": "Florencia Sola",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Final Walkthrough",
-            "cat": "final-walk",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": null,
-      "cost": {
-        "code": "hl65-9",
-        "labor": 326.5,
-        "materials": 223.21,
-        "total": 549.71,
-        "estimate": 0,
-        "laborEntries": [
-          {
-            "d": "2026-09-01",
-            "emp": "Micheal N. Magoon",
-            "hrs": 1.85,
-            "cost": 46.25,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-09-01",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.67,
-            "cost": 16.75,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-09-01",
-            "emp": "Micheal N. Magoon",
-            "hrs": 1.75,
-            "cost": 43.75,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-31",
-            "emp": "Micheal N. Magoon",
-            "hrs": 1.1,
-            "cost": 27.5,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-31",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.38,
-            "cost": 9.5,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-31",
-            "emp": "Micheal N. Magoon",
-            "hrs": 1.12,
-            "cost": 28,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-31",
-            "emp": "Micheal N. Magoon",
-            "hrs": 1,
-            "cost": 25,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-31",
-            "emp": "Micheal N. Magoon",
-            "hrs": 1.05,
-            "cost": 26.25,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-31",
-            "emp": "Micheal N. Magoon",
-            "hrs": 1.08,
-            "cost": 27,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-31",
-            "emp": "Micheal N. Magoon",
-            "hrs": 1.33,
-            "cost": 33.25,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-31",
-            "emp": "Micheal N. Magoon",
-            "hrs": 1.73,
-            "cost": 43.25,
-            "cat": "Turn"
-          }
-        ],
-        "materialEntries": [
-          {
-            "d": "2026-09-01",
-            "amt": 74.81,
-            "cat": "Turn",
-            "ln": "magoon",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-31",
-            "amt": 148.4,
-            "cat": "Turn",
-            "ln": "magoon",
-            "src": "ramp"
-          }
-        ]
-      },
-      "stage": "Walkthrough",
-      "stage_ord": 1,
-      "days_elapsed": 35,
-      "days_to_turn": null,
-      "status": "active"
-    },
-    {
       "key": "hl73|4",
       "prop": "hl73",
       "unit": "4",
@@ -1795,7 +1970,7 @@
       "unit_status": "Vacant-Rented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 37,
+      "days_vacant": 38,
       "move_out": "2026-07-29",
       "available_on": "2026-09-12",
       "ready_on": "2026-09-12",
@@ -1823,7 +1998,7 @@
             "cat": "walkthrough",
             "done": false,
             "date": null,
-            "who": "Florencia Sola",
+            "who": "LeeRoy Phillips",
             "completed": null,
             "vendor": false
           },
@@ -1832,7 +2007,7 @@
             "cat": "estimate",
             "done": false,
             "date": null,
-            "who": "Dulce Salinas",
+            "who": "LeeRoy Phillips",
             "completed": null,
             "vendor": false
           },
@@ -1859,7 +2034,7 @@
             "cat": "carpet",
             "done": false,
             "date": null,
-            "who": "Florencia Sola",
+            "who": "LeeRoy Phillips",
             "completed": null,
             "vendor": false
           },
@@ -1868,7 +2043,7 @@
             "cat": "cleaning",
             "done": false,
             "date": null,
-            "who": "Florencia Sola",
+            "who": "LeeRoy Phillips",
             "completed": null,
             "vendor": false
           },
@@ -1877,7 +2052,7 @@
             "cat": "final-walk",
             "done": false,
             "date": null,
-            "who": "Florencia Sola",
+            "who": "LeeRoy Phillips",
             "completed": null,
             "vendor": false
           }
@@ -1960,261 +2135,7 @@
       },
       "stage": "Walkthrough",
       "stage_ord": 1,
-      "days_elapsed": 37,
-      "days_to_turn": null,
-      "status": "active"
-    },
-    {
-      "key": "k104|1011",
-      "prop": "k104",
-      "unit": "101-1",
-      "at_risk": [
-        "Over 45 days vacant"
-      ],
-      "property_name": "k104- LeFevre",
-      "city": "Medical Lake",
-      "addr": "101 E. Spence 1 Medical Lake, WA 99022",
-      "unit_id": 345,
-      "unit_status": "Vacant-Rented",
-      "rent_ready": "No",
-      "vacant": true,
-      "days_vacant": 66,
-      "move_out": "2026-06-30",
-      "available_on": "2026-09-04",
-      "ready_on": "2026-09-04",
-      "target_date": "2026-07-20",
-      "next_move_in": "2026-09-10",
-      "rent": "1334.00",
-      "bed_bath": "2/1.00",
-      "sqft": 1140,
-      "region": "Spokane",
-      "pm": {
-        "projId": 222928,
-        "name": "Standard Unit Turn",
-        "status": "ACTIVE",
-        "done": 1,
-        "total": 7,
-        "first_appt": "2026-08-25",
-        "final_walk": "2026-11-17",
-        "final_walk_done": null,
-        "completed_date": "2026-07-02",
-        "due": "2026-08-10",
-        "next_task": {
-          "date": "2026-09-04",
-          "task": "cleaning"
-        },
-        "tasks": [
-          {
-            "task": "A - Initial walkthrough",
-            "cat": "walkthrough",
-            "done": true,
-            "date": "2026-07-02",
-            "who": "Scott Higley",
-            "completed": "2026-07-02",
-            "vendor": false
-          },
-          {
-            "task": "Appfolio Estimate",
-            "cat": "estimate",
-            "done": false,
-            "date": null,
-            "who": "Dulce Salinas",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "C - Paint",
-            "cat": "paint",
-            "done": false,
-            "date": "2026-11-10",
-            "who": "Micheal Magoon",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "D - Maintenance",
-            "cat": "maintenance",
-            "done": false,
-            "date": "2026-08-25",
-            "who": "Micheal Magoon",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "E - Carpet Cleaning",
-            "cat": "carpet",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "F - Cleaning",
-            "cat": "cleaning",
-            "done": false,
-            "date": "2026-09-04",
-            "who": "SPO Cleaning",
-            "completed": null,
-            "vendor": true
-          },
-          {
-            "task": "Final Walkthrough",
-            "cat": "final-walk",
-            "done": false,
-            "date": "2026-11-17",
-            "who": "Matt Romme",
-            "completed": null,
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": {
-        "date": "2026-09-04",
-        "cat": "cleaning",
-        "who": "SPO Cleaning",
-        "brief": "F - Cleaning"
-      },
-      "cost": {
-        "code": "k104-101-1",
-        "labor": 978.56,
-        "materials": 1097.12,
-        "total": 2075.68,
-        "estimate": 0,
-        "laborEntries": [
-          {
-            "d": "2026-08-27",
-            "emp": "Justin Gutierrez",
-            "hrs": 6.87,
-            "cost": 171.75,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-25",
-            "emp": "Justin Gutierrez",
-            "hrs": 1.35,
-            "cost": 33.75,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-25",
-            "emp": "Justin Gutierrez",
-            "hrs": 1.58,
-            "cost": 39.5,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-25",
-            "emp": "Justin Gutierrez",
-            "hrs": 1.67,
-            "cost": 41.75,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-25",
-            "emp": "Justin Gutierrez",
-            "hrs": 1.42,
-            "cost": 35.5,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-25",
-            "emp": "Justin Gutierrez",
-            "hrs": 1.8,
-            "cost": 45,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-21",
-            "emp": "Justin Gutierrez",
-            "hrs": 8.17,
-            "cost": 204.25,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-20",
-            "emp": "Justin Gutierrez",
-            "hrs": 6.53,
-            "cost": 163.25,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-20",
-            "emp": "Justin Gutierrez",
-            "hrs": 1.42,
-            "cost": 35.5,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-20",
-            "emp": "Justin Gutierrez",
-            "hrs": 1.45,
-            "cost": 36.25,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-20",
-            "emp": "Justin Gutierrez",
-            "hrs": 1.75,
-            "cost": 43.75,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-20",
-            "emp": "Justin Gutierrez",
-            "hrs": 1.92,
-            "cost": 48,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-02",
-            "emp": "Scott Higley",
-            "hrs": 1.48,
-            "cost": 47.35,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-06-03",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.28,
-            "cost": 32.96,
-            "cat": "Turn"
-          }
-        ],
-        "materialEntries": [
-          {
-            "d": "2026-08-25",
-            "amt": 719.74,
-            "cat": "Turn",
-            "ln": "gutierrez",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-21",
-            "amt": 53.61,
-            "cat": "Turn",
-            "ln": "gutierrez",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-20",
-            "amt": 98.8,
-            "cat": "Turn",
-            "ln": "gutierrez",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-20",
-            "amt": 224.97,
-            "cat": "Turn",
-            "ln": "gutierrez",
-            "src": "ramp"
-          }
-        ]
-      },
-      "stage": "Maintenance",
-      "stage_ord": 3,
-      "days_elapsed": 66,
+      "days_elapsed": 38,
       "days_to_turn": null,
       "status": "active"
     },
@@ -2232,7 +2153,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 96,
+      "days_vacant": 97,
       "move_out": "2026-05-31",
       "available_on": "2026-09-13",
       "ready_on": "2026-09-13",
@@ -2355,7 +2276,7 @@
       },
       "stage": "Maintenance",
       "stage_ord": 3,
-      "days_elapsed": 96,
+      "days_elapsed": 97,
       "days_to_turn": null,
       "status": "active"
     },
@@ -2373,7 +2294,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 5,
+      "days_vacant": 6,
       "move_out": "2026-08-30",
       "available_on": "2026-09-19",
       "ready_on": "2026-09-19",
@@ -2482,7 +2403,7 @@
       },
       "stage": "Walkthrough",
       "stage_ord": 1,
-      "days_elapsed": 5,
+      "days_elapsed": 6,
       "days_to_turn": null,
       "status": "active"
     },
@@ -2500,7 +2421,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 51,
+      "days_vacant": 52,
       "move_out": "2026-07-15",
       "available_on": "2026-09-05",
       "ready_on": "2026-09-05",
@@ -2608,7 +2529,7 @@
       },
       "stage": "Paint",
       "stage_ord": 2,
-      "days_elapsed": 51,
+      "days_elapsed": 52,
       "days_to_turn": null,
       "status": "active"
     },
@@ -2626,7 +2547,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 49,
+      "days_vacant": 50,
       "move_out": "2026-07-17",
       "available_on": "2026-11-05",
       "ready_on": "2026-11-05",
@@ -2734,7 +2655,7 @@
       },
       "stage": "Maintenance",
       "stage_ord": 3,
-      "days_elapsed": 49,
+      "days_elapsed": 50,
       "days_to_turn": null,
       "status": "active"
     },
@@ -2752,7 +2673,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 95,
+      "days_vacant": 96,
       "move_out": "2026-06-01",
       "available_on": "2026-09-10",
       "ready_on": "2026-09-10",
@@ -3247,7 +3168,7 @@
       },
       "stage": "Paint",
       "stage_ord": 2,
-      "days_elapsed": 95,
+      "days_elapsed": 96,
       "days_to_turn": null,
       "status": "active"
     },
@@ -3265,7 +3186,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 86,
+      "days_vacant": 87,
       "move_out": "2026-06-10",
       "available_on": "2026-10-03",
       "ready_on": "2026-10-03",
@@ -3379,7 +3300,7 @@
       },
       "stage": "Walkthrough",
       "stage_ord": 1,
-      "days_elapsed": 86,
+      "days_elapsed": 87,
       "days_to_turn": null,
       "status": "active"
     },
@@ -3388,7 +3309,7 @@
       "prop": "s129",
       "unit": "13",
       "at_risk": [
-        "Nothing scheduled"
+        "Available date passed"
       ],
       "property_name": "s129",
       "city": "Spokane Valley",
@@ -3397,7 +3318,7 @@
       "unit_status": "Vacant-Rented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 35,
+      "days_vacant": 36,
       "move_out": "2026-07-31",
       "available_on": "2026-09-04",
       "ready_on": "2026-09-04",
@@ -3414,11 +3335,14 @@
         "done": 4,
         "total": 7,
         "first_appt": "2026-08-20",
-        "final_walk": "2026-09-03",
+        "final_walk": "2026-09-07",
         "final_walk_done": null,
         "completed_date": "2026-08-28",
         "due": "2026-09-10",
-        "next_task": null,
+        "next_task": {
+          "date": "2026-09-07",
+          "task": "final-walk"
+        },
         "tasks": [
           {
             "task": "A - Initial walkthrough",
@@ -3478,14 +3402,19 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": "2026-09-03",
+            "date": "2026-09-07",
             "who": "Matt Romme",
             "completed": null,
             "vendor": false
           }
         ]
       },
-      "next_appt": null,
+      "next_appt": {
+        "date": "2026-09-07",
+        "cat": "final-walk",
+        "who": "Matt Romme",
+        "brief": "Final Walkthrough"
+      },
       "cost": {
         "code": "s129-13",
         "labor": 1304.54,
@@ -3793,7 +3722,7 @@
       },
       "stage": "Maintenance",
       "stage_ord": 3,
-      "days_elapsed": 35,
+      "days_elapsed": 36,
       "days_to_turn": null,
       "status": "active"
     },
@@ -3811,7 +3740,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 54,
+      "days_vacant": 55,
       "move_out": "2026-07-12",
       "available_on": "2026-10-02",
       "ready_on": "2026-10-02",
@@ -3936,7 +3865,7 @@
       },
       "stage": "Walkthrough",
       "stage_ord": 1,
-      "days_elapsed": 54,
+      "days_elapsed": 55,
       "days_to_turn": null,
       "status": "active"
     },
@@ -3954,7 +3883,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 57,
+      "days_vacant": 58,
       "move_out": "2026-07-09",
       "available_on": "2026-09-25",
       "ready_on": "2026-09-25",
@@ -4070,7 +3999,7 @@
       },
       "stage": "Walkthrough",
       "stage_ord": 1,
-      "days_elapsed": 57,
+      "days_elapsed": 58,
       "days_to_turn": null,
       "status": "active"
     },
@@ -4088,7 +4017,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 63,
+      "days_vacant": 64,
       "move_out": "2026-07-03",
       "available_on": "2026-09-20",
       "ready_on": "2026-09-20",
@@ -4246,7 +4175,7 @@
       },
       "stage": "Paint",
       "stage_ord": 2,
-      "days_elapsed": 63,
+      "days_elapsed": 64,
       "days_to_turn": null,
       "status": "active"
     },
@@ -4264,7 +4193,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 51,
+      "days_vacant": 52,
       "move_out": "2026-07-15",
       "available_on": "2026-10-04",
       "ready_on": "2026-10-04",
@@ -4541,7 +4470,7 @@
       },
       "stage": "Walkthrough",
       "stage_ord": 1,
-      "days_elapsed": 51,
+      "days_elapsed": 52,
       "days_to_turn": null,
       "status": "active"
     },
@@ -4559,7 +4488,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 55,
+      "days_vacant": 56,
       "move_out": "2026-07-11",
       "available_on": "2026-09-27",
       "ready_on": "2026-09-27",
@@ -4667,7 +4596,7 @@
       },
       "stage": "Maintenance",
       "stage_ord": 3,
-      "days_elapsed": 55,
+      "days_elapsed": 56,
       "days_to_turn": null,
       "status": "active"
     },
@@ -4685,7 +4614,7 @@
       "unit_status": "Vacant-Rented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 78,
+      "days_vacant": 79,
       "move_out": "2026-06-18",
       "available_on": "2026-09-13",
       "ready_on": "2026-09-13",
@@ -4793,7 +4722,7 @@
       },
       "stage": "Maintenance",
       "stage_ord": 3,
-      "days_elapsed": 78,
+      "days_elapsed": 79,
       "days_to_turn": null,
       "status": "active"
     },
@@ -4811,7 +4740,7 @@
       "unit_status": "Vacant-Rented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 81,
+      "days_vacant": 82,
       "move_out": "2026-06-15",
       "available_on": "2026-09-06",
       "ready_on": "2026-09-06",
@@ -5000,7 +4929,7 @@
       },
       "stage": "Maintenance",
       "stage_ord": 3,
-      "days_elapsed": 81,
+      "days_elapsed": 82,
       "days_to_turn": null,
       "status": "active"
     },
@@ -5308,7 +5237,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 35,
+      "days_vacant": 36,
       "move_out": "2026-07-31",
       "available_on": "2026-10-04",
       "ready_on": "2026-10-04",
@@ -5953,7 +5882,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 16,
+      "days_vacant": 17,
       "move_out": "2026-08-19",
       "available_on": "2026-11-01",
       "ready_on": "2026-11-01",
@@ -6173,7 +6102,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 38,
+      "days_vacant": 39,
       "move_out": "2026-07-28",
       "available_on": "2026-10-03",
       "ready_on": "2026-10-03",
@@ -6412,7 +6341,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "Yes",
       "vacant": true,
-      "days_vacant": 70,
+      "days_vacant": 71,
       "move_out": "2026-06-26",
       "available_on": "2026-08-09",
       "ready_on": "2026-08-09",
@@ -6985,7 +6914,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 14,
+      "days_vacant": 15,
       "move_out": "2026-08-21",
       "available_on": "2026-11-01",
       "ready_on": "2026-11-01",
@@ -7102,7 +7031,7 @@
       },
       "stage": "Walkthrough",
       "stage_ord": 1,
-      "days_elapsed": 14,
+      "days_elapsed": 15,
       "days_to_turn": null,
       "status": "active"
     },
@@ -7118,7 +7047,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 35,
+      "days_vacant": 36,
       "move_out": "2026-07-31",
       "available_on": "2026-09-26",
       "ready_on": "2026-09-26",
@@ -7250,7 +7179,7 @@
       },
       "stage": "Maintenance",
       "stage_ord": 3,
-      "days_elapsed": 35,
+      "days_elapsed": 36,
       "days_to_turn": null,
       "status": "active"
     },
@@ -7807,7 +7736,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 11,
+      "days_vacant": 12,
       "move_out": "2026-08-24",
       "available_on": "2026-10-10",
       "ready_on": "2026-10-10",
@@ -7823,8 +7752,8 @@
         "status": "ACTIVE",
         "done": 0,
         "total": 8,
-        "first_appt": "2026-12-09",
-        "final_walk": "2026-12-17",
+        "first_appt": "2026-12-03",
+        "final_walk": "2026-12-15",
         "final_walk_done": null,
         "completed_date": null,
         "due": "2026-09-08",
@@ -7855,7 +7784,7 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-12-09",
+            "date": "2026-12-03",
             "who": "Micheal Magoon",
             "completed": null,
             "vendor": false
@@ -7864,7 +7793,7 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-12-10",
+            "date": "2026-12-08",
             "who": "Micheal Magoon",
             "completed": null,
             "vendor": false
@@ -7900,7 +7829,7 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": "2026-12-17",
+            "date": "2026-12-15",
             "who": "Matt Romme",
             "completed": null,
             "vendor": false
@@ -7924,7 +7853,7 @@
       },
       "stage": "Walkthrough",
       "stage_ord": 1,
-      "days_elapsed": 11,
+      "days_elapsed": 12,
       "days_to_turn": null,
       "status": "active"
     },
@@ -8792,7 +8721,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 35,
+      "days_vacant": 36,
       "move_out": "2026-07-31",
       "available_on": "2026-09-04",
       "ready_on": "2026-09-04",
@@ -8908,7 +8837,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 35,
+      "days_vacant": 36,
       "move_out": "2026-07-31",
       "available_on": "2026-09-13",
       "ready_on": "2026-09-13",
@@ -9016,7 +8945,7 @@
       },
       "stage": "Maintenance",
       "stage_ord": 3,
-      "days_elapsed": 35,
+      "days_elapsed": 36,
       "days_to_turn": null,
       "status": "active"
     },
@@ -9280,7 +9209,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 35,
+      "days_vacant": 36,
       "move_out": "2026-07-31",
       "available_on": "2026-09-19",
       "ready_on": "2026-09-19",
@@ -9388,7 +9317,7 @@
       },
       "stage": "Maintenance",
       "stage_ord": 3,
-      "days_elapsed": 35,
+      "days_elapsed": 36,
       "days_to_turn": null,
       "status": "active"
     },
@@ -10159,150 +10088,6 @@
       "status": "active"
     },
     {
-      "key": "c702|c306",
-      "prop": "c702",
-      "unit": "C306",
-      "at_risk": [],
-      "property_name": "c702",
-      "city": "Spokane",
-      "addr": "7002 N Colton St C306 Spokane, WA 99208",
-      "unit_id": 1323,
-      "unit_status": "Vacant-Unrented",
-      "rent_ready": "No",
-      "vacant": true,
-      "days_vacant": 0,
-      "move_out": null,
-      "available_on": "2026-09-10",
-      "ready_on": "2026-09-10",
-      "target_date": null,
-      "next_move_in": null,
-      "rent": "1495.00",
-      "bed_bath": "2/2.00",
-      "sqft": 1140,
-      "region": "Spokane",
-      "pm": {
-        "projId": 239139,
-        "name": "Standard Unit Turn",
-        "status": "ACTIVE",
-        "done": 2,
-        "total": 8,
-        "first_appt": "2026-08-27",
-        "final_walk": "2026-09-04",
-        "final_walk_done": null,
-        "completed_date": "2026-09-01",
-        "due": "2026-08-25",
-        "next_task": {
-          "date": "2026-09-04",
-          "task": "final-walk"
-        },
-        "tasks": [
-          {
-            "task": "Appfolio Estimate",
-            "cat": "estimate",
-            "done": false,
-            "date": null,
-            "who": "Dulce Salinas",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "C - Paint",
-            "cat": "paint",
-            "done": false,
-            "date": "2026-08-27",
-            "who": "Matt Romme",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "D - Maintenance",
-            "cat": "maintenance",
-            "done": true,
-            "date": "2026-08-31",
-            "who": "Matt Romme",
-            "completed": "2026-09-01",
-            "vendor": false
-          },
-          {
-            "task": "F - Cleaning",
-            "cat": "cleaning",
-            "done": false,
-            "date": "2026-09-02",
-            "who": "U&K Properties LLC",
-            "completed": null,
-            "vendor": true
-          },
-          {
-            "task": "G - Verify Mailbox Lockbox & Mailbox Keys",
-            "cat": "other",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Final Walkthrough",
-            "cat": "final-walk",
-            "done": false,
-            "date": "2026-09-04",
-            "who": "Matt Romme",
-            "completed": null,
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": {
-        "date": "2026-09-04",
-        "cat": "final-walk",
-        "who": "Matt Romme",
-        "brief": "Final Walkthrough"
-      },
-      "cost": {
-        "code": "c702-C306",
-        "labor": 0,
-        "materials": 844.9,
-        "total": 844.9,
-        "estimate": 0,
-        "laborEntries": [],
-        "materialEntries": [
-          {
-            "d": "2026-08-28",
-            "amt": 198.62,
-            "cat": "Turn",
-            "ln": "romme",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-27",
-            "amt": 125.33,
-            "cat": "Turn",
-            "ln": "romme",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-26",
-            "amt": 113.95,
-            "cat": "Turn",
-            "ln": "romme",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-25",
-            "amt": 407,
-            "cat": "Turn",
-            "ln": "romme",
-            "src": "ramp"
-          }
-        ]
-      },
-      "stage": "Maintenance",
-      "stage_ord": 3,
-      "days_elapsed": null,
-      "days_to_turn": null,
-      "status": "active"
-    },
-    {
       "key": "c702|e102",
       "prop": "c702",
       "unit": "E102",
@@ -10336,8 +10121,8 @@
         "completed_date": null,
         "due": "2026-08-25",
         "next_task": {
-          "date": "2026-09-04",
-          "task": "cleaning"
+          "date": "2026-09-09",
+          "task": "final-walk"
         },
         "tasks": [
           {
@@ -10397,10 +10182,10 @@
         ]
       },
       "next_appt": {
-        "date": "2026-09-04",
-        "cat": "cleaning",
-        "who": "U&K Properties LLC",
-        "brief": "F - Cleaning"
+        "date": "2026-09-09",
+        "cat": "final-walk",
+        "who": "Matt Romme",
+        "brief": "Final Walkthrough"
       },
       "cost": {
         "code": "c702-E102",
@@ -10591,7 +10376,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 21,
+      "days_vacant": 22,
       "move_out": "2026-08-14",
       "available_on": "2026-10-10",
       "ready_on": "2026-10-10",
@@ -10708,7 +10493,7 @@
       },
       "stage": "Walkthrough",
       "stage_ord": 1,
-      "days_elapsed": 21,
+      "days_elapsed": 22,
       "days_to_turn": null,
       "status": "active"
     },
@@ -10724,7 +10509,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 15,
+      "days_vacant": 16,
       "move_out": "2026-08-20",
       "available_on": "2026-10-16",
       "ready_on": "2026-10-16",
@@ -10841,7 +10626,7 @@
       },
       "stage": "Walkthrough",
       "stage_ord": 1,
-      "days_elapsed": 15,
+      "days_elapsed": 16,
       "days_to_turn": null,
       "status": "active"
     },
@@ -11348,7 +11133,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "Yes",
       "vacant": true,
-      "days_vacant": 35,
+      "days_vacant": 36,
       "move_out": "2026-07-31",
       "available_on": "2026-08-20",
       "ready_on": "2026-08-20",
@@ -11480,11 +11265,14 @@
         "done": 4,
         "total": 7,
         "first_appt": "2026-08-10",
-        "final_walk": "2026-09-03",
+        "final_walk": "2026-09-08",
         "final_walk_done": null,
         "completed_date": "2026-08-17",
         "due": "2026-08-15",
-        "next_task": null,
+        "next_task": {
+          "date": "2026-09-08",
+          "task": "final-walk"
+        },
         "tasks": [
           {
             "task": "A - Initial walkthrough",
@@ -11544,14 +11332,19 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": "2026-09-03",
+            "date": "2026-09-08",
             "who": "Matt Romme",
             "completed": null,
             "vendor": false
           }
         ]
       },
-      "next_appt": null,
+      "next_appt": {
+        "date": "2026-09-08",
+        "cat": "final-walk",
+        "who": "Matt Romme",
+        "brief": "Final Walkthrough"
+      },
       "cost": {
         "code": "e328-4",
         "labor": 485.59,
@@ -12060,7 +11853,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "Yes",
       "vacant": true,
-      "days_vacant": 66,
+      "days_vacant": 67,
       "move_out": "2026-06-30",
       "available_on": "2026-08-15",
       "ready_on": "2026-08-15",
@@ -12337,6 +12130,200 @@
       "days_elapsed": null,
       "days_to_turn": null,
       "status": "complete"
+    },
+    {
+      "key": "hl65|9",
+      "prop": "hl65",
+      "unit": "9",
+      "property_name": "hl65",
+      "at_risk": [],
+      "region": null,
+      "pm": {
+        "projId": 229352,
+        "name": "Standard Unit Turn",
+        "status": "ACTIVE",
+        "done": 0,
+        "total": 7,
+        "first_appt": "2026-09-01",
+        "final_walk": null,
+        "final_walk_done": null,
+        "completed_date": null,
+        "due": null,
+        "next_task": null,
+        "tasks": [
+          {
+            "task": "A - Initial walkthrough",
+            "cat": "walkthrough",
+            "done": false,
+            "date": null,
+            "who": "LeeRoy Phillips",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Appfolio Estimate",
+            "cat": "estimate",
+            "done": false,
+            "date": null,
+            "who": "LeeRoy Phillips",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "C - Paint",
+            "cat": "paint",
+            "done": false,
+            "date": "2026-09-01",
+            "who": "Micheal Magoon",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "D - Maintenance",
+            "cat": "maintenance",
+            "done": false,
+            "date": "2026-09-02",
+            "who": "Micheal Magoon",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "E - Carpet Cleaning",
+            "cat": "carpet",
+            "done": false,
+            "date": null,
+            "who": "LeeRoy Phillips",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "F - Cleaning",
+            "cat": "cleaning",
+            "done": false,
+            "date": null,
+            "who": "LeeRoy Phillips",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Final Walkthrough",
+            "cat": "final-walk",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          }
+        ]
+      },
+      "next_appt": null,
+      "cost": {
+        "code": "hl65-9",
+        "labor": 326.5,
+        "materials": 223.21,
+        "total": 549.71,
+        "estimate": 0,
+        "laborEntries": [
+          {
+            "d": "2026-09-01",
+            "emp": "Micheal N. Magoon",
+            "hrs": 1.85,
+            "cost": 46.25,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-01",
+            "emp": "Micheal N. Magoon",
+            "hrs": 0.67,
+            "cost": 16.75,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-01",
+            "emp": "Micheal N. Magoon",
+            "hrs": 1.75,
+            "cost": 43.75,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-31",
+            "emp": "Micheal N. Magoon",
+            "hrs": 1.1,
+            "cost": 27.5,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-31",
+            "emp": "Micheal N. Magoon",
+            "hrs": 0.38,
+            "cost": 9.5,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-31",
+            "emp": "Micheal N. Magoon",
+            "hrs": 1.12,
+            "cost": 28,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-31",
+            "emp": "Micheal N. Magoon",
+            "hrs": 1,
+            "cost": 25,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-31",
+            "emp": "Micheal N. Magoon",
+            "hrs": 1.05,
+            "cost": 26.25,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-31",
+            "emp": "Micheal N. Magoon",
+            "hrs": 1.08,
+            "cost": 27,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-31",
+            "emp": "Micheal N. Magoon",
+            "hrs": 1.33,
+            "cost": 33.25,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-31",
+            "emp": "Micheal N. Magoon",
+            "hrs": 1.73,
+            "cost": 43.25,
+            "cat": "Turn"
+          }
+        ],
+        "materialEntries": [
+          {
+            "d": "2026-09-01",
+            "amt": 74.81,
+            "cat": "Turn",
+            "ln": "magoon",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-08-31",
+            "amt": 148.4,
+            "cat": "Turn",
+            "ln": "magoon",
+            "src": "ramp"
+          }
+        ]
+      },
+      "stage": "Walkthrough",
+      "stage_ord": 1,
+      "days_elapsed": null,
+      "days_to_turn": null,
+      "status": "other"
     },
     {
       "key": "j312|3104",
@@ -12629,7 +12616,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 4,
+      "days_vacant": 5,
       "move_out": "2026-08-31",
       "available_on": "2026-10-16",
       "ready_on": "2026-10-16",
@@ -13036,7 +13023,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 4,
+      "days_vacant": 5,
       "move_out": "2026-08-31",
       "available_on": "2026-09-20",
       "ready_on": "2026-09-20",
@@ -13153,7 +13140,7 @@
       },
       "stage": "Walkthrough",
       "stage_ord": 1,
-      "days_elapsed": 4,
+      "days_elapsed": 5,
       "days_to_turn": null,
       "status": "active"
     },
@@ -14001,7 +13988,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 4,
+      "days_vacant": 5,
       "move_out": "2026-08-31",
       "available_on": "2026-10-17",
       "ready_on": "2026-10-17",
@@ -14163,7 +14150,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 35,
+      "days_vacant": 36,
       "move_out": "2026-07-31",
       "available_on": "2026-09-25",
       "ready_on": "2026-09-25",
@@ -14381,7 +14368,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 35,
+      "days_vacant": 36,
       "move_out": "2026-07-31",
       "available_on": "2026-10-29",
       "ready_on": "2026-10-29",
@@ -14636,7 +14623,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 36,
+      "days_vacant": 37,
       "move_out": "2026-07-30",
       "available_on": "2026-09-20",
       "ready_on": "2026-09-20",
@@ -14768,7 +14755,7 @@
       },
       "stage": "Maintenance",
       "stage_ord": 3,
-      "days_elapsed": 36,
+      "days_elapsed": 37,
       "days_to_turn": null,
       "status": "active"
     },
@@ -14784,7 +14771,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 35,
+      "days_vacant": 36,
       "move_out": "2026-07-31",
       "available_on": "2026-10-23",
       "ready_on": "2026-10-23",
@@ -14981,7 +14968,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 35,
+      "days_vacant": 36,
       "move_out": "2026-07-31",
       "available_on": "2026-10-01",
       "ready_on": "2026-10-01",
@@ -14997,8 +14984,8 @@
         "status": "ACTIVE",
         "done": 1,
         "total": 7,
-        "first_appt": "2026-12-03",
-        "final_walk": "2026-12-14",
+        "first_appt": "2026-11-25",
+        "final_walk": "2026-12-09",
         "final_walk_done": null,
         "completed_date": "2026-08-17",
         "due": "2026-09-11",
@@ -15029,7 +15016,7 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-12-03",
+            "date": "2026-11-25",
             "who": "Micheal Magoon",
             "completed": null,
             "vendor": false
@@ -15038,7 +15025,7 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-12-07",
+            "date": "2026-12-02",
             "who": "Micheal Magoon",
             "completed": null,
             "vendor": false
@@ -15065,7 +15052,7 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": "2026-12-14",
+            "date": "2026-12-09",
             "who": "Matt Romme",
             "completed": null,
             "vendor": false
@@ -15119,7 +15106,7 @@
       },
       "stage": "Maintenance",
       "stage_ord": 3,
-      "days_elapsed": 35,
+      "days_elapsed": 36,
       "days_to_turn": null,
       "status": "active"
     },
@@ -15151,8 +15138,8 @@
         "status": "ACTIVE",
         "done": 0,
         "total": 8,
-        "first_appt": "2026-12-14",
-        "final_walk": "2026-12-23",
+        "first_appt": "2026-12-09",
+        "final_walk": "2026-12-21",
         "final_walk_done": null,
         "completed_date": null,
         "due": "2026-10-15",
@@ -15183,7 +15170,7 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-12-14",
+            "date": "2026-12-09",
             "who": "Micheal Magoon",
             "completed": null,
             "vendor": false
@@ -15192,7 +15179,7 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-12-16",
+            "date": "2026-12-14",
             "who": "Micheal Magoon",
             "completed": null,
             "vendor": false
@@ -15228,7 +15215,7 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": "2026-12-23",
+            "date": "2026-12-21",
             "who": "Matt Romme",
             "completed": null,
             "vendor": false
@@ -15911,7 +15898,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 35,
+      "days_vacant": 36,
       "move_out": "2026-07-31",
       "available_on": "2026-09-24",
       "ready_on": "2026-09-24",
@@ -16255,7 +16242,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 22,
+      "days_vacant": 23,
       "move_out": "2026-08-13",
       "available_on": "2026-10-15",
       "ready_on": "2026-10-15",
@@ -16426,7 +16413,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 4,
+      "days_vacant": 5,
       "move_out": "2026-08-31",
       "available_on": "2026-09-20",
       "ready_on": "2026-09-20",
@@ -16551,7 +16538,7 @@
       },
       "stage": "Walkthrough",
       "stage_ord": 1,
-      "days_elapsed": 4,
+      "days_elapsed": 5,
       "days_to_turn": null,
       "status": "active"
     },
@@ -16567,7 +16554,7 @@
       "unit_status": "Vacant-Rented",
       "rent_ready": "Yes",
       "vacant": true,
-      "days_vacant": 161,
+      "days_vacant": 162,
       "move_out": "2026-03-27",
       "available_on": "2026-08-24",
       "ready_on": "2026-08-24",
@@ -17202,8 +17189,8 @@
         "status": "ACTIVE",
         "done": 0,
         "total": 8,
-        "first_appt": "2026-11-04",
-        "final_walk": "2026-11-12",
+        "first_appt": "2026-11-02",
+        "final_walk": "2026-11-11",
         "final_walk_done": null,
         "completed_date": null,
         "due": "2026-10-16",
@@ -17234,7 +17221,7 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-11-04",
+            "date": "2026-11-02",
             "who": "Matthew Williams",
             "completed": null,
             "vendor": false
@@ -17243,7 +17230,7 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-11-05",
+            "date": "2026-11-04",
             "who": "Matthew Williams",
             "completed": null,
             "vendor": false
@@ -17279,7 +17266,7 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": "2026-11-12",
+            "date": "2026-11-11",
             "who": "Margarito Saldana",
             "completed": null,
             "vendor": false
@@ -17319,7 +17306,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 31,
+      "days_vacant": 32,
       "move_out": "2026-08-04",
       "available_on": "2026-10-25",
       "ready_on": "2026-10-25",
@@ -17444,7 +17431,7 @@
       },
       "stage": "Maintenance",
       "stage_ord": 3,
-      "days_elapsed": 31,
+      "days_elapsed": 32,
       "days_to_turn": null,
       "status": "active"
     },
@@ -17460,7 +17447,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "Yes",
       "vacant": true,
-      "days_vacant": 96,
+      "days_vacant": 97,
       "move_out": "2026-05-31",
       "available_on": "2026-07-13",
       "ready_on": "2026-07-13",
@@ -17860,7 +17847,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 4,
+      "days_vacant": 5,
       "move_out": "2026-08-31",
       "available_on": "2026-09-27",
       "ready_on": "2026-09-27",
@@ -18500,7 +18487,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 29,
+      "days_vacant": 30,
       "move_out": "2026-08-06",
       "available_on": "2026-10-09",
       "ready_on": "2026-10-09",
@@ -18929,7 +18916,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 33,
+      "days_vacant": 34,
       "move_out": "2026-08-02",
       "available_on": "2026-10-03",
       "ready_on": "2026-10-03",
@@ -19062,7 +19049,7 @@
       "unit_status": "Vacant-Rented",
       "rent_ready": "Yes",
       "vacant": true,
-      "days_vacant": 58,
+      "days_vacant": 59,
       "move_out": "2026-07-08",
       "available_on": "2026-08-20",
       "ready_on": "2026-08-20",
@@ -19385,7 +19372,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 14,
+      "days_vacant": 15,
       "move_out": "2026-08-21",
       "available_on": "2026-11-08",
       "ready_on": "2026-11-08",
@@ -21637,7 +21624,7 @@
       "unit_status": "Vacant-Rented",
       "rent_ready": "Yes",
       "vacant": true,
-      "days_vacant": 293,
+      "days_vacant": 294,
       "move_out": "2025-11-15",
       "available_on": "2026-01-18",
       "ready_on": "2026-01-18",
@@ -22050,7 +22037,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 10,
+      "days_vacant": 11,
       "move_out": "2026-08-25",
       "available_on": "2026-11-06",
       "ready_on": "2026-11-06",
@@ -22277,7 +22264,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 33,
+      "days_vacant": 34,
       "move_out": "2026-08-02",
       "available_on": "2026-10-09",
       "ready_on": "2026-10-09",
@@ -22460,7 +22447,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 8,
+      "days_vacant": 9,
       "move_out": "2026-08-27",
       "available_on": "2026-09-16",
       "ready_on": "2026-09-16",
@@ -22757,7 +22744,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "Yes",
       "vacant": true,
-      "days_vacant": 278,
+      "days_vacant": 279,
       "move_out": "2025-11-30",
       "available_on": "2026-01-15",
       "ready_on": "2026-01-15",
@@ -24059,7 +24046,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "Yes",
       "vacant": true,
-      "days_vacant": 442,
+      "days_vacant": 443,
       "move_out": "2025-06-19",
       "available_on": "2026-04-16",
       "ready_on": "2026-04-16",
@@ -24702,12 +24689,12 @@
         "projId": 235886,
         "name": "Standard Unit Turn",
         "status": "ACTIVE",
-        "done": 3,
+        "done": 4,
         "total": 8,
         "first_appt": "2026-09-03",
         "final_walk": "2026-09-09",
         "final_walk_done": null,
-        "completed_date": "2026-09-03",
+        "completed_date": "2026-09-04",
         "due": "2026-09-01",
         "next_task": {
           "date": "2026-09-09",
@@ -24744,10 +24731,10 @@
           {
             "task": "D - Maintenance",
             "cat": "maintenance",
-            "done": false,
+            "done": true,
             "date": "2026-09-03",
             "who": "Margarito Saldana",
-            "completed": null,
+            "completed": "2026-09-04",
             "vendor": false
           },
           {
@@ -25409,7 +25396,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 10,
+      "days_vacant": 11,
       "move_out": "2026-08-25",
       "available_on": "2026-11-05",
       "ready_on": "2026-11-05",
@@ -25534,7 +25521,7 @@
       },
       "stage": "Maintenance",
       "stage_ord": 3,
-      "days_elapsed": 10,
+      "days_elapsed": 11,
       "days_to_turn": null,
       "status": "active"
     },
@@ -26047,7 +26034,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 40,
+      "days_vacant": 41,
       "move_out": "2026-07-26",
       "available_on": "2026-09-11",
       "ready_on": "2026-09-11",
@@ -26069,8 +26056,8 @@
         "completed_date": "2026-09-04",
         "due": "2026-09-10",
         "next_task": {
-          "date": "2026-09-04",
-          "task": "cleaning"
+          "date": "2026-10-01",
+          "task": "maintenance"
         },
         "tasks": [
           {
@@ -26241,7 +26228,7 @@
       },
       "stage": "Walkthrough",
       "stage_ord": 1,
-      "days_elapsed": 40,
+      "days_elapsed": 41,
       "days_to_turn": null,
       "status": "active"
     },
@@ -26257,7 +26244,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 35,
+      "days_vacant": 36,
       "move_out": "2026-07-31",
       "available_on": "2026-09-27",
       "ready_on": "2026-09-27",
@@ -26882,7 +26869,7 @@
       "unit_status": "Vacant-Rented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 4,
+      "days_vacant": 5,
       "move_out": "2026-08-31",
       "available_on": "2026-09-18",
       "ready_on": "2026-09-18",
@@ -26999,7 +26986,7 @@
       },
       "stage": "Walkthrough",
       "stage_ord": 1,
-      "days_elapsed": 4,
+      "days_elapsed": 5,
       "days_to_turn": null,
       "status": "active"
     },
@@ -27371,7 +27358,7 @@
       "unit_status": "Vacant-Rented",
       "rent_ready": "Yes",
       "vacant": true,
-      "days_vacant": 4,
+      "days_vacant": 5,
       "move_out": "2026-08-31",
       "available_on": "2026-10-15",
       "ready_on": "2026-10-15",
@@ -27393,7 +27380,7 @@
       },
       "stage": "Ready",
       "stage_ord": 7,
-      "days_elapsed": 4,
+      "days_elapsed": 5,
       "days_to_turn": null,
       "status": "ready"
     },
@@ -27645,7 +27632,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 38,
+      "days_vacant": 39,
       "move_out": "2026-07-28",
       "available_on": "2026-09-17",
       "ready_on": "2026-09-17",
@@ -27762,7 +27749,7 @@
       },
       "stage": "Walkthrough",
       "stage_ord": 1,
-      "days_elapsed": 38,
+      "days_elapsed": 39,
       "days_to_turn": null,
       "status": "active"
     },
@@ -27982,7 +27969,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 35,
+      "days_vacant": 36,
       "move_out": "2026-07-31",
       "available_on": "2026-09-24",
       "ready_on": "2026-09-24",
@@ -28090,7 +28077,7 @@
       },
       "stage": "Walkthrough",
       "stage_ord": 1,
-      "days_elapsed": 35,
+      "days_elapsed": 36,
       "days_to_turn": null,
       "status": "active"
     },
@@ -28302,7 +28289,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 4,
+      "days_vacant": 5,
       "move_out": "2026-08-31",
       "available_on": "2026-10-17",
       "ready_on": "2026-10-17",
@@ -28419,7 +28406,7 @@
       },
       "stage": "Walkthrough",
       "stage_ord": 1,
-      "days_elapsed": 4,
+      "days_elapsed": 5,
       "days_to_turn": null,
       "status": "active"
     },
@@ -28568,7 +28555,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 4,
+      "days_vacant": 5,
       "move_out": "2026-08-31",
       "available_on": "2026-10-08",
       "ready_on": "2026-10-08",
@@ -29250,7 +29237,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 35,
+      "days_vacant": 36,
       "move_out": "2026-07-31",
       "available_on": "2026-10-02",
       "ready_on": "2026-10-02",
@@ -29447,7 +29434,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "Yes",
       "vacant": true,
-      "days_vacant": 53,
+      "days_vacant": 54,
       "move_out": "2026-07-13",
       "available_on": "2026-08-16",
       "ready_on": "2026-08-16",
@@ -29889,7 +29876,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 4,
+      "days_vacant": 5,
       "move_out": "2026-08-31",
       "available_on": "2026-10-15",
       "ready_on": "2026-10-15",
@@ -30609,7 +30596,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 39,
+      "days_vacant": 40,
       "move_out": "2026-07-27",
       "available_on": "2026-10-17",
       "ready_on": "2026-10-17",
@@ -30932,7 +30919,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "Yes",
       "vacant": true,
-      "days_vacant": 96,
+      "days_vacant": 97,
       "move_out": "2026-05-31",
       "available_on": "2026-06-20",
       "ready_on": "2026-06-20",
@@ -31371,7 +31358,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "Yes",
       "vacant": true,
-      "days_vacant": 66,
+      "days_vacant": 67,
       "move_out": "2026-06-30",
       "available_on": "2026-08-02",
       "ready_on": "2026-08-02",
@@ -32273,7 +32260,7 @@
       "unit_status": "Vacant-Rented",
       "rent_ready": "Yes",
       "vacant": true,
-      "days_vacant": 35,
+      "days_vacant": 36,
       "move_out": "2026-07-31",
       "available_on": "2026-08-16",
       "ready_on": "2026-08-16",
@@ -32628,7 +32615,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 4,
+      "days_vacant": 5,
       "move_out": "2026-08-31",
       "available_on": "2026-09-27",
       "ready_on": "2026-09-27",
@@ -33435,7 +33422,7 @@
       "unit_status": "Vacant-Rented",
       "rent_ready": "Yes",
       "vacant": true,
-      "days_vacant": 96,
+      "days_vacant": 97,
       "move_out": "2026-05-31",
       "available_on": "2026-07-04",
       "ready_on": "2026-07-04",
@@ -33877,7 +33864,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 4,
+      "days_vacant": 5,
       "move_out": "2026-08-31",
       "available_on": "2026-10-24",
       "ready_on": "2026-10-24",
@@ -33994,7 +33981,7 @@
       },
       "stage": "Walkthrough",
       "stage_ord": 1,
-      "days_elapsed": 4,
+      "days_elapsed": 5,
       "days_to_turn": null,
       "status": "active"
     },
@@ -34373,7 +34360,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 42,
+      "days_vacant": 43,
       "move_out": "2026-07-24",
       "available_on": "2026-09-06",
       "ready_on": "2026-09-06",
@@ -34595,7 +34582,7 @@
       },
       "stage": "Maintenance",
       "stage_ord": 3,
-      "days_elapsed": 42,
+      "days_elapsed": 43,
       "days_to_turn": null,
       "status": "active"
     },
@@ -34649,7 +34636,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "Yes",
       "vacant": true,
-      "days_vacant": 66,
+      "days_vacant": 67,
       "move_out": "2026-06-30",
       "available_on": "2026-07-22",
       "ready_on": "2026-07-22",
@@ -35014,7 +35001,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "Yes",
       "vacant": true,
-      "days_vacant": 157,
+      "days_vacant": 158,
       "move_out": "2026-03-31",
       "available_on": "2026-04-29",
       "ready_on": "2026-04-29",
@@ -35616,7 +35603,7 @@
       "unit_status": "Vacant-Rented",
       "rent_ready": "Yes",
       "vacant": true,
-      "days_vacant": 127,
+      "days_vacant": 128,
       "move_out": "2026-04-30",
       "available_on": "2026-05-16",
       "ready_on": "2026-05-16",
@@ -35901,7 +35888,7 @@
       "unit_status": "Vacant-Rented",
       "rent_ready": "Yes",
       "vacant": true,
-      "days_vacant": 66,
+      "days_vacant": 67,
       "move_out": "2026-06-30",
       "available_on": null,
       "ready_on": "2026-07-22",
@@ -37441,7 +37428,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 35,
+      "days_vacant": 36,
       "move_out": "2026-07-31",
       "available_on": "2026-09-12",
       "ready_on": "2026-09-12",
@@ -37564,7 +37551,7 @@
       },
       "stage": "Maintenance",
       "stage_ord": 3,
-      "days_elapsed": 35,
+      "days_elapsed": 36,
       "days_to_turn": null,
       "status": "active"
     },
@@ -37580,7 +37567,7 @@
       "unit_status": "Vacant-Rented",
       "rent_ready": "Yes",
       "vacant": true,
-      "days_vacant": 135,
+      "days_vacant": 136,
       "move_out": "2026-04-22",
       "available_on": null,
       "ready_on": "2026-05-16",
@@ -38179,7 +38166,7 @@
       "unit_status": "Vacant-Rented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 35,
+      "days_vacant": 36,
       "move_out": "2026-07-31",
       "available_on": "2026-09-10",
       "ready_on": "2026-09-10",
@@ -38271,10 +38258,10 @@
         ]
       },
       "next_appt": {
-        "date": "2026-09-04",
-        "cat": "suggested-carpet",
-        "who": "SOS Carpet",
-        "brief": "Suggested carpet cleaning — business day after cleaning"
+        "date": "2026-09-07",
+        "cat": "final-walk",
+        "who": "Margarito Saldana",
+        "brief": "Final Walkthrough"
       },
       "cost": {
         "code": "rl16-B01",
@@ -38295,7 +38282,7 @@
       },
       "stage": "Maintenance",
       "stage_ord": 3,
-      "days_elapsed": 35,
+      "days_elapsed": 36,
       "days_to_turn": null,
       "status": "active"
     },
@@ -39042,7 +39029,7 @@
       "unit_status": "Vacant-Rented",
       "rent_ready": "Yes",
       "vacant": true,
-      "days_vacant": 157,
+      "days_vacant": 158,
       "move_out": "2026-03-31",
       "available_on": null,
       "ready_on": "2026-04-15",
@@ -39955,7 +39942,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 4,
+      "days_vacant": 5,
       "move_out": "2026-08-31",
       "available_on": "2026-10-18",
       "ready_on": "2026-10-18",
@@ -40072,7 +40059,7 @@
       },
       "stage": "Walkthrough",
       "stage_ord": 1,
-      "days_elapsed": 4,
+      "days_elapsed": 5,
       "days_to_turn": null,
       "status": "active"
     },
@@ -40580,7 +40567,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 4,
+      "days_vacant": 5,
       "move_out": "2026-08-31",
       "available_on": "2026-09-18",
       "ready_on": "2026-09-18",
@@ -40706,7 +40693,7 @@
       "af_turn_end": "2024-12-02",
       "stage": "Walkthrough",
       "stage_ord": 1,
-      "days_elapsed": 4,
+      "days_elapsed": 5,
       "days_to_turn": null,
       "status": "active"
     },
@@ -40722,7 +40709,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 4,
+      "days_vacant": 5,
       "move_out": "2026-08-31",
       "available_on": "2026-09-19",
       "ready_on": "2026-09-19",
@@ -40912,7 +40899,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 35,
+      "days_vacant": 36,
       "move_out": "2026-07-31",
       "available_on": "2026-09-11",
       "ready_on": "2026-09-11",
@@ -41004,10 +40991,10 @@
         ]
       },
       "next_appt": {
-        "date": "2026-09-04",
-        "cat": "suggested-cleaning",
-        "who": "Duo Cleaning",
-        "brief": "Suggested cleaning — 3 business days after in-house done (2026-09-01)"
+        "date": "2026-09-07",
+        "cat": "suggested-carpet",
+        "who": "SOS Carpet",
+        "brief": "Suggested carpet cleaning — business day after cleaning"
       },
       "cost": {
         "code": "rl16-D14",
@@ -41403,7 +41390,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 21,
+      "days_vacant": 22,
       "move_out": "2026-08-14",
       "available_on": "2026-09-20",
       "ready_on": "2026-09-20",
@@ -43223,7 +43210,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "Yes",
       "vacant": true,
-      "days_vacant": 96,
+      "days_vacant": 97,
       "move_out": "2026-05-31",
       "available_on": "2026-07-03",
       "ready_on": "2026-07-03",
@@ -43797,7 +43784,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 4,
+      "days_vacant": 5,
       "move_out": "2026-08-31",
       "available_on": "2026-11-22",
       "ready_on": "2026-11-22",
@@ -43914,7 +43901,7 @@
       },
       "stage": "Walkthrough",
       "stage_ord": 1,
-      "days_elapsed": 4,
+      "days_elapsed": 5,
       "days_to_turn": null,
       "status": "active"
     },
@@ -43930,7 +43917,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 35,
+      "days_vacant": 36,
       "move_out": "2026-07-31",
       "available_on": "2026-10-16",
       "ready_on": "2026-10-16",
@@ -44077,7 +44064,7 @@
       },
       "stage": "Walkthrough",
       "stage_ord": 1,
-      "days_elapsed": 35,
+      "days_elapsed": 36,
       "days_to_turn": null,
       "status": "active"
     },
@@ -44093,7 +44080,7 @@
       "unit_status": "Vacant-Rented",
       "rent_ready": "Yes",
       "vacant": true,
-      "days_vacant": 96,
+      "days_vacant": 97,
       "move_out": "2026-05-31",
       "available_on": "2026-06-15",
       "ready_on": "2026-06-15",
@@ -44378,7 +44365,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 35,
+      "days_vacant": 36,
       "move_out": "2026-07-31",
       "available_on": "2026-10-18",
       "ready_on": "2026-10-18",
@@ -44511,7 +44498,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 28,
+      "days_vacant": 29,
       "move_out": "2026-08-07",
       "available_on": "2026-10-30",
       "ready_on": "2026-10-30",
@@ -47328,7 +47315,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 30,
+      "days_vacant": 31,
       "move_out": "2026-08-05",
       "available_on": "2026-10-23",
       "ready_on": "2026-10-23",
@@ -47460,7 +47447,7 @@
       },
       "stage": "Walkthrough",
       "stage_ord": 1,
-      "days_elapsed": 30,
+      "days_elapsed": 31,
       "days_to_turn": null,
       "status": "active"
     },
@@ -47476,7 +47463,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 3,
+      "days_vacant": 4,
       "move_out": "2026-09-01",
       "available_on": "2026-11-01",
       "ready_on": "2026-11-01",
@@ -47584,7 +47571,7 @@
       },
       "stage": "Walkthrough",
       "stage_ord": 1,
-      "days_elapsed": 3,
+      "days_elapsed": 4,
       "days_to_turn": null,
       "status": "active"
     },
@@ -47600,7 +47587,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 39,
+      "days_vacant": 40,
       "move_out": "2026-07-27",
       "available_on": "2026-10-09",
       "ready_on": "2026-10-09",
@@ -47708,7 +47695,7 @@
       },
       "stage": "Walkthrough",
       "stage_ord": 1,
-      "days_elapsed": 39,
+      "days_elapsed": 40,
       "days_to_turn": null,
       "status": "active"
     },
@@ -47941,7 +47928,7 @@
       "unit_status": "Vacant-Rented",
       "rent_ready": "Yes",
       "vacant": true,
-      "days_vacant": 108,
+      "days_vacant": 109,
       "move_out": "2026-05-19",
       "available_on": "2026-07-28",
       "ready_on": "2026-07-28",
@@ -48203,7 +48190,7 @@
       "unit_status": "Vacant-Rented",
       "rent_ready": "Yes",
       "vacant": true,
-      "days_vacant": 96,
+      "days_vacant": 97,
       "move_out": "2026-05-31",
       "available_on": null,
       "ready_on": "2026-08-14",
@@ -48561,7 +48548,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 30,
+      "days_vacant": 31,
       "move_out": "2026-08-05",
       "available_on": "2026-10-25",
       "ready_on": "2026-10-25",
@@ -48677,7 +48664,7 @@
       },
       "stage": "Walkthrough",
       "stage_ord": 1,
-      "days_elapsed": 30,
+      "days_elapsed": 31,
       "days_to_turn": null,
       "status": "active"
     },
@@ -49132,7 +49119,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 4,
+      "days_vacant": 5,
       "move_out": "2026-08-31",
       "available_on": "2026-11-06",
       "ready_on": "2026-11-06",
@@ -49249,7 +49236,7 @@
       },
       "stage": "Walkthrough",
       "stage_ord": 1,
-      "days_elapsed": 4,
+      "days_elapsed": 5,
       "days_to_turn": null,
       "status": "active"
     },
@@ -49377,7 +49364,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 36,
+      "days_vacant": 37,
       "move_out": "2026-07-30",
       "available_on": "2026-10-11",
       "ready_on": "2026-10-11",
@@ -49494,7 +49481,7 @@
       },
       "stage": "Maintenance",
       "stage_ord": 3,
-      "days_elapsed": 36,
+      "days_elapsed": 37,
       "days_to_turn": null,
       "status": "active"
     },
@@ -50884,7 +50871,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 66,
+      "days_vacant": 67,
       "move_out": "2026-06-30",
       "available_on": "2026-09-13",
       "ready_on": "2026-09-13",
@@ -51235,7 +51222,7 @@
       "unit_status": "Vacant-Rented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 18,
+      "days_vacant": 19,
       "move_out": "2026-08-17",
       "available_on": "2026-08-20",
       "ready_on": "2026-08-20",
@@ -51938,7 +51925,7 @@
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
-      "days_vacant": 23,
+      "days_vacant": 24,
       "move_out": "2026-08-12",
       "available_on": "2026-10-10",
       "ready_on": "2026-10-10",
@@ -52091,7 +52078,7 @@
       },
       "stage": "Walkthrough",
       "stage_ord": 1,
-      "days_elapsed": 23,
+      "days_elapsed": 24,
       "days_to_turn": null,
       "status": "active"
     }
