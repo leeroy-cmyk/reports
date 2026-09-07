@@ -1,15 +1,15 @@
 {
   "ok": true,
-  "fetched_at": "2026-09-07T20:47:04.019Z",
+  "fetched_at": "2026-09-07T23:21:28.328Z",
   "summary": {
     "as_of": "2026-09-07",
     "units": 245,
     "active": 81,
     "ready": 2,
-    "notice": 24,
+    "notice": 23,
     "at_risk": 37,
     "unscheduled": 17,
-    "accruing": 18818.86,
+    "accruing": 19094.62,
     "avg_days_open": 30,
     "revenue_at_risk": 3876.33
   },
@@ -6155,23 +6155,8 @@
       "key": "a916|4",
       "prop": "a916",
       "unit": "4",
-      "at_risk": [],
       "property_name": "a916",
-      "city": "Spokane",
-      "addr": "916 W Augusta Avenue - 4 Spokane, WA 99205",
-      "unit_id": 5,
-      "unit_status": "Notice-Unrented",
-      "rent_ready": null,
-      "vacant": false,
-      "days_vacant": null,
-      "move_out": "2026-10-01",
-      "available_on": "2026-10-21",
-      "ready_on": "2026-10-21",
-      "target_date": "2026-10-21",
-      "next_move_in": null,
-      "rent": "956.00",
-      "bed_bath": "0/1.00",
-      "sqft": 300,
+      "at_risk": [],
       "region": "Spokane",
       "pm": {
         "projId": 241643,
@@ -6280,9 +6265,9 @@
       },
       "stage": "Walkthrough",
       "stage_ord": 1,
-      "days_elapsed": 0,
+      "days_elapsed": null,
       "days_to_turn": null,
-      "status": "notice"
+      "status": "other"
     },
     {
       "key": "a916|5",
@@ -9761,11 +9746,19 @@
       "cost": {
         "code": "c702-B106",
         "labor": 0,
-        "materials": 0,
-        "total": 0,
+        "materials": 275.76,
+        "total": 275.76,
         "estimate": 0,
         "laborEntries": [],
-        "materialEntries": []
+        "materialEntries": [
+          {
+            "d": "2026-09-07",
+            "amt": 275.76,
+            "cat": "Turn",
+            "ln": "smith",
+            "src": "ramp"
+          }
+        ]
       },
       "stage": "Maintenance",
       "stage_ord": 3,
@@ -26685,7 +26678,7 @@
       "city": "Spokane",
       "addr": "405 S Maple St 20 Spokane, WA 99201",
       "unit_id": 265,
-      "unit_status": "Vacant-Unrented",
+      "unit_status": "Vacant-Rented",
       "rent_ready": "No",
       "vacant": true,
       "days_vacant": 38,
@@ -26693,7 +26686,7 @@
       "available_on": "2026-09-27",
       "ready_on": "2026-09-27",
       "target_date": "2026-08-20",
-      "next_move_in": null,
+      "next_move_in": "2026-09-27",
       "rent": "950.00",
       "bed_bath": "1/1.00",
       "sqft": 500,
@@ -41184,8 +41177,8 @@
       "cost": {
         "code": "rl16-D14",
         "labor": 142,
-        "materials": 674.52,
-        "total": 816.52,
+        "materials": 944.53,
+        "total": 1086.53,
         "estimate": 0,
         "laborEntries": [
           {
@@ -41211,6 +41204,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-09-07",
+            "amt": 270.01,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          },
           {
             "d": "2026-05-04",
             "amt": 225,
