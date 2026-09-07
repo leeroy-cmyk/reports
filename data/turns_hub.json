@@ -1,15 +1,15 @@
 {
   "ok": true,
-  "fetched_at": "2026-09-07T00:54:45.385Z",
+  "fetched_at": "2026-09-07T05:48:41.258Z",
   "summary": {
     "as_of": "2026-09-06",
-    "units": 241,
+    "units": 243,
     "active": 78,
-    "ready": 1,
+    "ready": 2,
     "notice": 25,
     "at_risk": 33,
     "unscheduled": 14,
-    "accruing": 18303.48,
+    "accruing": 18779.83,
     "avg_days_open": 30,
     "revenue_at_risk": 3746.73
   },
@@ -1533,8 +1533,8 @@
       "cost": {
         "code": "c313-24",
         "labor": 580.88,
-        "materials": 0,
-        "total": 580.88,
+        "materials": 442.36,
+        "total": 1023.24,
         "estimate": 0,
         "laborEntries": [
           {
@@ -1657,7 +1657,29 @@
             "cat": "Turn"
           }
         ],
-        "materialEntries": []
+        "materialEntries": [
+          {
+            "d": "2026-08-27",
+            "amt": 160.92,
+            "cat": "Turn",
+            "ln": "gutierrez",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-08-27",
+            "amt": 196.37,
+            "cat": "Turn",
+            "ln": "gutierrez",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-08-27",
+            "amt": 85.07,
+            "cat": "Turn",
+            "ln": "gutierrez",
+            "src": "ramp"
+          }
+        ]
       },
       "stage": "Maintenance",
       "stage_ord": 3,
@@ -26180,8 +26202,8 @@
       "cost": {
         "code": "m221-33",
         "labor": 354.25,
-        "materials": 7.61,
-        "total": 361.86,
+        "materials": 41.6,
+        "total": 395.85,
         "estimate": 0,
         "laborEntries": [
           {
@@ -26266,6 +26288,13 @@
           {
             "d": "2026-08-28",
             "amt": 7.61,
+            "cat": "Turn",
+            "ln": "magoon",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-08-27",
+            "amt": 33.99,
             "cat": "Turn",
             "ln": "magoon",
             "src": "ramp"
@@ -34876,6 +34905,145 @@
       "status": "complete"
     },
     {
+      "key": "ps91|4",
+      "prop": "ps91",
+      "unit": "4",
+      "at_risk": [],
+      "property_name": "ps91",
+      "city": "Pasco",
+      "addr": "908 W Ruby - 4 Pasco, WA 99301",
+      "unit_id": 493,
+      "unit_status": "Vacant-Unrented",
+      "rent_ready": "No",
+      "vacant": true,
+      "days_vacant": 31,
+      "move_out": "2026-08-06",
+      "available_on": "2026-08-26",
+      "ready_on": "2026-08-26",
+      "target_date": "2026-08-26",
+      "next_move_in": null,
+      "rent": "1175.00",
+      "bed_bath": "1/1.00",
+      "sqft": 636,
+      "region": "Tri-Cities",
+      "pm": {
+        "projId": 185864,
+        "name": "Turn - 908 W Ruby - 4 UNIT 4",
+        "status": "COMPLETE",
+        "done": 8,
+        "total": 8,
+        "first_appt": "2025-09-23",
+        "final_walk": "2025-09-29",
+        "final_walk_done": "2025-09-30",
+        "completed_date": "2025-09-30",
+        "due": "2026-02-28",
+        "next_task": null,
+        "tasks": null
+      },
+      "next_appt": null,
+      "cost": {
+        "code": "ps91-4",
+        "labor": 475,
+        "materials": 629.57,
+        "total": 1104.57,
+        "estimate": 0,
+        "laborEntries": [
+          {
+            "d": "2025-09-26",
+            "emp": "James Dunlap",
+            "hrs": 1.62,
+            "cost": 37.26,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-09-25",
+            "emp": "James Dunlap",
+            "hrs": 2.95,
+            "cost": 67.85,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-09-24",
+            "emp": "James Dunlap",
+            "hrs": 1.92,
+            "cost": 44.16,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-09-24",
+            "emp": "Margarito Saldana",
+            "hrs": 1.5,
+            "cost": 42.6,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-09-23",
+            "emp": "Ryan G. Robson",
+            "hrs": 7.48,
+            "cost": 172.04,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-09-22",
+            "emp": "Ryan G. Robson",
+            "hrs": 4.83,
+            "cost": 111.09,
+            "cat": "Turn"
+          }
+        ],
+        "materialEntries": [
+          {
+            "d": "2025-09-25",
+            "amt": 20.08,
+            "cat": "Turn",
+            "ln": "saldana",
+            "src": "ramp"
+          },
+          {
+            "d": "2025-09-25",
+            "amt": 350,
+            "cat": "Turn",
+            "ln": "saldana",
+            "src": "ramp"
+          },
+          {
+            "d": "2025-09-24",
+            "amt": 29.4,
+            "cat": "Turn",
+            "ln": "saldana",
+            "src": "ramp"
+          },
+          {
+            "d": "2025-09-23",
+            "amt": 20.67,
+            "cat": "Turn",
+            "ln": "robson",
+            "src": "ramp"
+          },
+          {
+            "d": "2025-09-22",
+            "amt": 32.6,
+            "cat": "Turn",
+            "ln": "robson",
+            "src": "ramp"
+          },
+          {
+            "d": "2025-09-22",
+            "amt": 176.82,
+            "cat": "Turn",
+            "ln": "robson",
+            "src": "ramp"
+          }
+        ]
+      },
+      "turn_end": "2025-09-30",
+      "stage": null,
+      "stage_ord": 0,
+      "days_elapsed": 0,
+      "days_to_turn": -310,
+      "status": "complete"
+    },
+    {
       "key": "ps91|918",
       "prop": "ps91",
       "unit": "918",
@@ -40950,6 +41118,58 @@
       "status": "complete"
     },
     {
+      "key": "rl16|d22",
+      "prop": "rl16",
+      "unit": "D22",
+      "at_risk": [],
+      "property_name": "rl16",
+      "city": "Richland",
+      "addr": "1621 George Washington Way D22 Richland, WA 99354",
+      "unit_id": 607,
+      "unit_status": "Vacant-Unrented",
+      "rent_ready": "Yes",
+      "vacant": true,
+      "days_vacant": 37,
+      "move_out": "2026-07-31",
+      "available_on": "2026-08-20",
+      "ready_on": "2026-08-20",
+      "target_date": "2026-08-20",
+      "next_move_in": null,
+      "rent": "1443.00",
+      "bed_bath": "2/1.50",
+      "sqft": 975,
+      "region": "Tri-Cities",
+      "pm": {
+        "projId": 149255,
+        "name": "Turn - 1621 George Washington Way UNIT D22",
+        "status": "COMPLETE",
+        "done": 6,
+        "total": 6,
+        "first_appt": "2025-01-04",
+        "final_walk": null,
+        "final_walk_done": null,
+        "completed_date": "2025-01-09",
+        "due": "2025-01-10",
+        "next_task": null,
+        "tasks": null
+      },
+      "next_appt": null,
+      "cost": {
+        "code": "rl16-D22",
+        "labor": 0,
+        "materials": 0,
+        "total": 0,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": []
+      },
+      "stage": "Ready",
+      "stage_ord": 7,
+      "days_elapsed": 37,
+      "days_to_turn": null,
+      "status": "ready"
+    },
+    {
       "key": "rl21|16",
       "prop": "rl21",
       "unit": "16",
@@ -43270,8 +43490,8 @@
       "cost": {
         "code": "s129-9",
         "labor": 1518.65,
-        "materials": 242.2,
-        "total": 1760.85,
+        "materials": 565.09,
+        "total": 2083.74,
         "estimate": 0,
         "laborEntries": [
           {
@@ -43584,6 +43804,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-08-20",
+            "amt": 322.89,
+            "cat": "Turn",
+            "ln": "magoon",
+            "src": "ramp"
+          },
           {
             "d": "2026-08-18",
             "amt": 242.2,
