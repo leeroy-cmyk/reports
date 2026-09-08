@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "fetched_at": "2026-09-08T21:40:49.356Z",
+  "fetched_at": "2026-09-08T23:42:03.550Z",
   "summary": {
     "as_of": "2026-09-08",
     "units": 244,
@@ -9,7 +9,7 @@
     "notice": 23,
     "at_risk": 37,
     "unscheduled": 20,
-    "accruing": 17875,
+    "accruing": 17981.66,
     "avg_days_open": 31,
     "revenue_at_risk": 3866.73
   },
@@ -15295,8 +15295,8 @@
       "cost": {
         "code": "k104-509-4",
         "labor": 277.5,
-        "materials": 0,
-        "total": 277.5,
+        "materials": 106.66,
+        "total": 384.16,
         "estimate": 0,
         "laborEntries": [
           {
@@ -15328,7 +15328,15 @@
             "cat": "Turn"
           }
         ],
-        "materialEntries": []
+        "materialEntries": [
+          {
+            "d": "2026-09-08",
+            "amt": 106.66,
+            "cat": "Turn",
+            "ln": "magoon",
+            "src": "ramp"
+          }
+        ]
       },
       "stage": "Maintenance",
       "stage_ord": 3,
@@ -22356,9 +22364,9 @@
       "ready_on": "2026-01-15",
       "target_date": "2025-12-20",
       "next_move_in": "2026-10-25",
-      "rent": "1132.00",
+      "rent": "931.00",
       "bed_bath": "1/1.00",
-      "sqft": 575,
+      "sqft": 600,
       "region": "Tri-Cities",
       "pm": {
         "projId": 197868,
