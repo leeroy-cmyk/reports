@@ -1,17 +1,17 @@
 {
   "ok": true,
-  "fetched_at": "2026-09-08T15:21:26.658Z",
+  "fetched_at": "2026-09-08T18:55:02.645Z",
   "summary": {
     "as_of": "2026-09-08",
-    "units": 243,
+    "units": 244,
     "active": 81,
-    "ready": 2,
+    "ready": 3,
     "notice": 23,
-    "at_risk": 38,
+    "at_risk": 37,
     "unscheduled": 20,
-    "accruing": 19094.62,
+    "accruing": 17875,
     "avg_days_open": 31,
-    "revenue_at_risk": 3876.33
+    "revenue_at_risk": 3866.73
   },
   "rows": [
     {
@@ -696,11 +696,18 @@
       "next_appt": null,
       "cost": {
         "code": "p705-17",
-        "labor": 1580.36,
+        "labor": 1708.6,
         "materials": 1262.01,
-        "total": 2842.37,
+        "total": 2970.61,
         "estimate": 0,
         "laborEntries": [
+          {
+            "d": "2026-09-08",
+            "emp": "Ronald D. Cramer",
+            "hrs": 4.98,
+            "cost": 128.24,
+            "cat": "Turn"
+          },
           {
             "d": "2026-09-04",
             "emp": "Ronald D. Cramer",
@@ -2990,173 +2997,6 @@
       "stage": "Maintenance",
       "stage_ord": 3,
       "days_elapsed": 100,
-      "days_to_turn": null,
-      "status": "active"
-    },
-    {
-      "key": "c702|a102",
-      "prop": "c702",
-      "unit": "A102",
-      "at_risk": [
-        "Available date passed"
-      ],
-      "property_name": "c702",
-      "city": "Spokane",
-      "addr": "7022 N Colton St A102 Spokane, WA 99208",
-      "unit_id": 1272,
-      "unit_status": "Vacant-Rented",
-      "rent_ready": "No",
-      "vacant": true,
-      "days_vacant": 38,
-      "move_out": "2026-08-01",
-      "available_on": "2026-09-03",
-      "ready_on": "2026-09-03",
-      "target_date": "2026-08-21",
-      "next_move_in": "2026-09-13",
-      "rent": "1395.00",
-      "bed_bath": "2/2.00",
-      "sqft": 1025,
-      "region": "Spokane",
-      "pm": {
-        "projId": 239147,
-        "name": "Standard Unit Turn",
-        "status": "ACTIVE",
-        "done": 5,
-        "total": 8,
-        "first_appt": "2026-08-20",
-        "final_walk": "2026-09-08",
-        "final_walk_done": null,
-        "completed_date": "2026-08-31",
-        "due": "2026-08-16",
-        "next_task": {
-          "date": "2026-09-08",
-          "task": "final-walk"
-        },
-        "tasks": [
-          {
-            "task": "Appfolio Estimate",
-            "cat": "estimate",
-            "done": false,
-            "date": null,
-            "who": "Dulce Salinas",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "C - Paint",
-            "cat": "paint",
-            "done": true,
-            "date": "2026-08-20",
-            "who": "Matt Romme",
-            "completed": "2026-08-25",
-            "vendor": false
-          },
-          {
-            "task": "D - Maintenance",
-            "cat": "maintenance",
-            "done": true,
-            "date": "2026-08-25",
-            "who": "Matt Romme",
-            "completed": "2026-08-25",
-            "vendor": false
-          },
-          {
-            "task": "F - Cleaning",
-            "cat": "cleaning",
-            "done": true,
-            "date": "2026-08-31",
-            "who": "U&K Properties LLC",
-            "completed": "2026-08-31",
-            "vendor": true
-          },
-          {
-            "task": "G - Verify Mailbox Lockbox & Mailbox Keys",
-            "cat": "other",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Final Walkthrough",
-            "cat": "final-walk",
-            "done": false,
-            "date": "2026-09-08",
-            "who": "Matt Romme",
-            "completed": null,
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": {
-        "date": "2026-09-08",
-        "cat": "final-walk",
-        "who": "Matt Romme",
-        "brief": "Final Walkthrough"
-      },
-      "cost": {
-        "code": "c702-A102",
-        "labor": 0,
-        "materials": 1379.61,
-        "total": 1379.61,
-        "estimate": 0,
-        "laborEntries": [],
-        "materialEntries": [
-          {
-            "d": "2026-08-26",
-            "amt": 492.66,
-            "cat": "Turn",
-            "ln": "romme",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-25",
-            "amt": 60.4,
-            "cat": "Turn",
-            "ln": "romme",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-21",
-            "amt": 91.59,
-            "cat": "Turn",
-            "ln": "romme",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-19",
-            "amt": 212.61,
-            "cat": "Turn",
-            "ln": "romme",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-19",
-            "amt": 82.85,
-            "cat": "Turn",
-            "ln": "romme",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-18",
-            "amt": 225.77,
-            "cat": "Turn",
-            "ln": "romme",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-13",
-            "amt": 213.73,
-            "cat": "Turn",
-            "ln": "phillips",
-            "src": "ramp"
-          }
-        ]
-      },
-      "stage": "Maintenance",
-      "stage_ord": 3,
-      "days_elapsed": 38,
       "days_to_turn": null,
       "status": "active"
     },
@@ -9211,7 +9051,7 @@
       "addr": "7022 N Colton St A101 Spokane, WA 99208",
       "unit_id": 1271,
       "unit_status": "Vacant-Unrented",
-      "rent_ready": "No",
+      "rent_ready": "Yes",
       "vacant": true,
       "days_vacant": 39,
       "move_out": "2026-07-31",
@@ -9311,11 +9151,176 @@
         ]
       },
       "turn_end": "2026-09-01",
-      "stage": "Maintenance",
-      "stage_ord": 3,
+      "stage": "Ready",
+      "stage_ord": 7,
       "days_elapsed": 32,
       "days_to_turn": 32,
       "status": "complete"
+    },
+    {
+      "key": "c702|a102",
+      "prop": "c702",
+      "unit": "A102",
+      "at_risk": [],
+      "property_name": "c702",
+      "city": "Spokane",
+      "addr": "7022 N Colton St A102 Spokane, WA 99208",
+      "unit_id": 1272,
+      "unit_status": "Vacant-Rented",
+      "rent_ready": "Yes",
+      "vacant": true,
+      "days_vacant": 38,
+      "move_out": "2026-08-01",
+      "available_on": "2026-09-03",
+      "ready_on": "2026-09-03",
+      "target_date": "2026-08-21",
+      "next_move_in": "2026-09-13",
+      "rent": "1395.00",
+      "bed_bath": "2/2.00",
+      "sqft": 1025,
+      "region": "Spokane",
+      "pm": {
+        "projId": 239147,
+        "name": "Standard Unit Turn",
+        "status": "ACTIVE",
+        "done": 5,
+        "total": 8,
+        "first_appt": "2026-08-20",
+        "final_walk": "2026-09-08",
+        "final_walk_done": null,
+        "completed_date": "2026-08-31",
+        "due": "2026-08-16",
+        "next_task": {
+          "date": "2026-09-08",
+          "task": "final-walk"
+        },
+        "tasks": [
+          {
+            "task": "Appfolio Estimate",
+            "cat": "estimate",
+            "done": false,
+            "date": null,
+            "who": "Dulce Salinas",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "C - Paint",
+            "cat": "paint",
+            "done": true,
+            "date": "2026-08-20",
+            "who": "Matt Romme",
+            "completed": "2026-08-25",
+            "vendor": false
+          },
+          {
+            "task": "D - Maintenance",
+            "cat": "maintenance",
+            "done": true,
+            "date": "2026-08-25",
+            "who": "Matt Romme",
+            "completed": "2026-08-25",
+            "vendor": false
+          },
+          {
+            "task": "F - Cleaning",
+            "cat": "cleaning",
+            "done": true,
+            "date": "2026-08-31",
+            "who": "U&K Properties LLC",
+            "completed": "2026-08-31",
+            "vendor": true
+          },
+          {
+            "task": "G - Verify Mailbox Lockbox & Mailbox Keys",
+            "cat": "other",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Final Walkthrough",
+            "cat": "final-walk",
+            "done": false,
+            "date": "2026-09-08",
+            "who": "Matt Romme",
+            "completed": null,
+            "vendor": false
+          }
+        ]
+      },
+      "next_appt": {
+        "date": "2026-09-08",
+        "cat": "final-walk",
+        "who": "Matt Romme",
+        "brief": "Final Walkthrough"
+      },
+      "cost": {
+        "code": "c702-A102",
+        "labor": 0,
+        "materials": 1379.61,
+        "total": 1379.61,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": [
+          {
+            "d": "2026-08-26",
+            "amt": 492.66,
+            "cat": "Turn",
+            "ln": "romme",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-08-25",
+            "amt": 60.4,
+            "cat": "Turn",
+            "ln": "romme",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-08-21",
+            "amt": 91.59,
+            "cat": "Turn",
+            "ln": "romme",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-08-19",
+            "amt": 212.61,
+            "cat": "Turn",
+            "ln": "romme",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-08-19",
+            "amt": 82.85,
+            "cat": "Turn",
+            "ln": "romme",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-08-18",
+            "amt": 225.77,
+            "cat": "Turn",
+            "ln": "romme",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-08-13",
+            "amt": 213.73,
+            "cat": "Turn",
+            "ln": "phillips",
+            "src": "ramp"
+          }
+        ]
+      },
+      "stage": "Ready",
+      "stage_ord": 7,
+      "days_elapsed": 38,
+      "days_to_turn": null,
+      "status": "ready"
     },
     {
       "key": "c702|a103",
@@ -15289,11 +15294,25 @@
       },
       "cost": {
         "code": "k104-509-4",
-        "labor": 245.75,
+        "labor": 277.5,
         "materials": 0,
-        "total": 245.75,
+        "total": 277.5,
         "estimate": 0,
         "laborEntries": [
+          {
+            "d": "2026-09-08",
+            "emp": "Micheal N. Magoon",
+            "hrs": 0.45,
+            "cost": 11.25,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-08",
+            "emp": "Micheal N. Magoon",
+            "hrs": 0.82,
+            "cost": 20.5,
+            "cat": "Turn"
+          },
           {
             "d": "2026-08-19",
             "emp": "Justin Gutierrez",
@@ -17363,8 +17382,8 @@
       "vacant": true,
       "days_vacant": 35,
       "move_out": "2026-08-04",
-      "available_on": "2026-10-25",
-      "ready_on": "2026-10-25",
+      "available_on": "2026-09-25",
+      "ready_on": "2026-09-25",
       "target_date": "2026-08-24",
       "next_move_in": null,
       "rent": "931.00",
@@ -19414,8 +19433,8 @@
       "vacant": true,
       "days_vacant": 18,
       "move_out": "2026-08-21",
-      "available_on": "2026-11-08",
-      "ready_on": "2026-11-08",
+      "available_on": "2026-10-15",
+      "ready_on": "2026-10-15",
       "target_date": "2026-09-10",
       "next_move_in": null,
       "rent": "931.00",
@@ -21626,8 +21645,8 @@
       "vacant": true,
       "days_vacant": 14,
       "move_out": "2026-08-25",
-      "available_on": "2026-11-06",
-      "ready_on": "2026-11-06",
+      "available_on": "2026-10-04",
+      "ready_on": "2026-10-04",
       "target_date": "2026-09-14",
       "next_move_in": null,
       "rent": "1132.00",
@@ -25843,7 +25862,7 @@
       "available_on": "2026-09-27",
       "ready_on": "2026-09-27",
       "target_date": "2026-08-20",
-      "next_move_in": "2026-09-27",
+      "next_move_in": "2026-10-01",
       "rent": "950.00",
       "bed_bath": "1/1.00",
       "sqft": 500,
@@ -26328,7 +26347,7 @@
       "addr": "411 S Maple St Spokane, WA 99201",
       "unit_id": 272,
       "unit_status": "Vacant-Unrented",
-      "rent_ready": "Yes",
+      "rent_ready": "No",
       "vacant": true,
       "days_vacant": 2,
       "move_out": "2026-09-06",
@@ -26445,11 +26464,11 @@
         "laborEntries": [],
         "materialEntries": []
       },
-      "stage": "Ready",
-      "stage_ord": 7,
+      "stage": "Walkthrough",
+      "stage_ord": 1,
       "days_elapsed": 2,
       "days_to_turn": null,
-      "status": "ready"
+      "status": "active"
     },
     {
       "key": "m608|4",
@@ -35225,7 +35244,7 @@
       "vacant": true,
       "days_vacant": 70,
       "move_out": "2026-06-30",
-      "available_on": null,
+      "available_on": "2026-07-22",
       "ready_on": "2026-07-22",
       "target_date": "2026-07-20",
       "next_move_in": "2026-09-15",
@@ -38226,7 +38245,7 @@
       "vacant": true,
       "days_vacant": 161,
       "move_out": "2026-03-31",
-      "available_on": null,
+      "available_on": "2026-04-15",
       "ready_on": "2026-04-15",
       "target_date": "2026-04-20",
       "next_move_in": "2026-09-15",
@@ -45931,6 +45950,44 @@
       "days_elapsed": null,
       "days_to_turn": null,
       "status": "complete"
+    },
+    {
+      "key": "tc68|a20",
+      "prop": "tc68",
+      "unit": "A20",
+      "at_risk": [],
+      "property_name": "tc68",
+      "city": "Tacoma",
+      "addr": "6830 Tacoma Mall Blvd Apt A20 Tacoma, WA 98409",
+      "unit_id": 1169,
+      "unit_status": "Vacant-Unrented",
+      "rent_ready": "Yes",
+      "vacant": true,
+      "days_vacant": 39,
+      "move_out": "2026-07-31",
+      "available_on": "2026-09-28",
+      "ready_on": "2026-09-28",
+      "target_date": "2026-08-20",
+      "next_move_in": null,
+      "rent": "1775.00",
+      "bed_bath": "2/1.00",
+      "sqft": 980,
+      "region": "Tacoma",
+      "next_appt": null,
+      "cost": {
+        "code": "tc68-A20",
+        "labor": 0,
+        "materials": 0,
+        "total": 0,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": []
+      },
+      "stage": "Ready",
+      "stage_ord": 7,
+      "days_elapsed": 39,
+      "days_to_turn": null,
+      "status": "ready"
     },
     {
       "key": "tc68|a24",
