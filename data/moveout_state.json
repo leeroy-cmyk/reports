@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-09-09T16:13:39.323Z",
+  "fetched_at": "2026-09-09T19:18:43.087Z",
   "units": {
     "2": {
       "moveOut": "2026-07-31",
@@ -351,6 +351,13 @@
       "unit": "4",
       "city": "Pasco"
     },
+    "495": {
+      "moveOut": "2026-09-30",
+      "status": "Notice-Unrented",
+      "prop": "ps91",
+      "unit": "6",
+      "city": "Pasco"
+    },
     "503": {
       "moveOut": "2026-03-31",
       "status": "Vacant-Unrented",
@@ -538,27 +545,6 @@
       "status": "Vacant-Unrented",
       "prop": "j312",
       "unit": "3134",
-      "city": "Spokane"
-    },
-    "700": {
-      "moveOut": "2026-08-30",
-      "status": "Vacant-Unrented",
-      "prop": "l912 (Multi-Family)",
-      "unit": "104",
-      "city": "Spokane"
-    },
-    "702": {
-      "moveOut": "2026-06-30",
-      "status": "Vacant-Unrented",
-      "prop": "l912 (Multi-Family)",
-      "unit": "202",
-      "city": "Spokane"
-    },
-    "706": {
-      "moveOut": "2026-07-31",
-      "status": "Vacant-Unrented",
-      "prop": "l912 (Multi-Family)",
-      "unit": "302",
       "city": "Spokane"
     },
     "709": {
@@ -3904,6 +3890,45 @@
       "unit": "9",
       "city": "Spokane Valley",
       "to": "2026-08-30"
+    },
+    {
+      "date": "2026-09-09",
+      "type": "moveout_new",
+      "unit_id": "495",
+      "prop": "ps91",
+      "unit": "6",
+      "city": "Pasco",
+      "to": "2026-09-30"
+    },
+    {
+      "date": "2026-09-09",
+      "type": "moveout_removed",
+      "unit_id": "700",
+      "prop": "l912 (Multi-Family)",
+      "unit": "104",
+      "city": "Spokane",
+      "from": "2026-08-30",
+      "was_status": "Vacant-Unrented"
+    },
+    {
+      "date": "2026-09-09",
+      "type": "moveout_removed",
+      "unit_id": "702",
+      "prop": "l912 (Multi-Family)",
+      "unit": "202",
+      "city": "Spokane",
+      "from": "2026-06-30",
+      "was_status": "Vacant-Unrented"
+    },
+    {
+      "date": "2026-09-09",
+      "type": "moveout_removed",
+      "unit_id": "706",
+      "prop": "l912 (Multi-Family)",
+      "unit": "302",
+      "city": "Spokane",
+      "from": "2026-07-31",
+      "was_status": "Vacant-Unrented"
     }
   ]
 }
