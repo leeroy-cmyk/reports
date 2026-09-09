@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "fetched_at": "2026-09-09T19:20:51.898Z",
+  "fetched_at": "2026-09-09T21:52:21.085Z",
   "summary": {
     "as_of": "2026-09-09",
     "units": 242,
@@ -9,7 +9,7 @@
     "notice": 23,
     "at_risk": 32,
     "unscheduled": 11,
-    "accruing": 17032.74,
+    "accruing": 18683.26,
     "avg_days_open": 31,
     "revenue_at_risk": 3687.23
   },
@@ -129,8 +129,8 @@
       "cost": {
         "code": "k104-101-1",
         "labor": 978.56,
-        "materials": 1097.12,
-        "total": 2075.68,
+        "materials": 2075.94,
+        "total": 3054.5,
         "estimate": 0,
         "laborEntries": [
           {
@@ -233,6 +233,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-09-09",
+            "amt": 978.82,
+            "cat": "Turn",
+            "ln": "romme",
+            "src": "ramp"
+          },
           {
             "d": "2026-08-25",
             "amt": 719.74,
@@ -2586,11 +2593,46 @@
       },
       "cost": {
         "code": "p705-17",
-        "labor": 1816.49,
+        "labor": 1919.49,
         "materials": 1262.01,
-        "total": 3078.5,
+        "total": 3181.5,
         "estimate": 0,
         "laborEntries": [
+          {
+            "d": "2026-09-09",
+            "emp": "Ronald D. Cramer",
+            "hrs": 0.7,
+            "cost": 18.02,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-09",
+            "emp": "Ronald D. Cramer",
+            "hrs": 0.92,
+            "cost": 23.69,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-09",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.03,
+            "cost": 26.52,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-09",
+            "emp": "Ronald D. Cramer",
+            "hrs": 0.93,
+            "cost": 23.95,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-09",
+            "emp": "Ronald D. Cramer",
+            "hrs": 0.42,
+            "cost": 10.82,
+            "cat": "Turn"
+          },
           {
             "d": "2026-09-08",
             "emp": "Ronald D. Cramer",
@@ -3134,11 +3176,46 @@
       },
       "cost": {
         "code": "rl16-B01",
-        "labor": 11.93,
+        "labor": 558.63,
         "materials": 0,
-        "total": 11.93,
+        "total": 558.63,
         "estimate": 0,
         "laborEntries": [
+          {
+            "d": "2026-09-08",
+            "emp": "Margarito Saldana",
+            "hrs": 9.5,
+            "cost": 269.8,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-09-07",
+            "emp": "Margarito Saldana",
+            "hrs": 1,
+            "cost": 28.4,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-09-07",
+            "emp": "Margarito Saldana",
+            "hrs": 2,
+            "cost": 56.8,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-09-07",
+            "emp": "Margarito Saldana",
+            "hrs": 2,
+            "cost": 56.8,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-09-07",
+            "emp": "Margarito Saldana",
+            "hrs": 4.75,
+            "cost": 134.9,
+            "cat": "CapEx"
+          },
           {
             "d": "2026-08-04",
             "emp": "Margarito Saldana",
@@ -15064,11 +15141,18 @@
       },
       "cost": {
         "code": "k104-509-4",
-        "labor": 418.75,
+        "labor": 440.75,
         "materials": 106.66,
-        "total": 525.41,
+        "total": 547.41,
         "estimate": 0,
         "laborEntries": [
+          {
+            "d": "2026-09-09",
+            "emp": "Micheal N. Magoon",
+            "hrs": 0.88,
+            "cost": 22,
+            "cat": "Turn"
+          },
           {
             "d": "2026-09-08",
             "emp": "Micheal N. Magoon",
@@ -18364,7 +18448,7 @@
       "city": "Kennewick",
       "addr": "632 N Arthur Street D106 Kennewick, WA 99336",
       "unit_id": 1045,
-      "unit_status": "Vacant-Unrented",
+      "unit_status": "Vacant-Rented",
       "rent_ready": "No",
       "vacant": true,
       "days_vacant": 34,
@@ -18372,7 +18456,7 @@
       "available_on": "2026-10-09",
       "ready_on": "2026-10-09",
       "target_date": "2026-08-26",
-      "next_move_in": null,
+      "next_move_in": "2026-11-06",
       "rent": "1132.00",
       "bed_bath": "1/1.00",
       "sqft": 575,
