@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "fetched_at": "2026-09-10T19:35:41.953Z",
+  "fetched_at": "2026-09-10T21:56:54.361Z",
   "summary": {
     "as_of": "2026-09-10",
     "units": 241,
@@ -9,7 +9,7 @@
     "notice": 23,
     "at_risk": 30,
     "unscheduled": 10,
-    "accruing": 14560.54,
+    "accruing": 15058.75,
     "avg_days_open": 31,
     "revenue_at_risk": 3492.2
   },
@@ -2415,11 +2415,32 @@
       },
       "cost": {
         "code": "p705-17",
-        "labor": 1919.49,
+        "labor": 2052.88,
         "materials": 1262.01,
-        "total": 3181.5,
+        "total": 3314.89,
         "estimate": 0,
         "laborEntries": [
+          {
+            "d": "2026-09-10",
+            "emp": "Ronald D. Cramer",
+            "hrs": 2,
+            "cost": 51.5,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-10",
+            "emp": "Ronald D. Cramer",
+            "hrs": 2,
+            "cost": 51.5,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-10",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.18,
+            "cost": 30.39,
+            "cat": "Turn"
+          },
           {
             "d": "2026-09-09",
             "emp": "Ronald D. Cramer",
@@ -2817,27 +2838,6 @@
             "emp": "Ronald D. Cramer",
             "hrs": 1.13,
             "cost": 29.1,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-24",
-            "emp": "Ronald D. Cramer",
-            "hrs": 0.87,
-            "cost": 22.4,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-04",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.18,
-            "cost": 4.5,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-04",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.43,
-            "cost": 10.75,
             "cat": "Turn"
           }
         ],
@@ -4097,11 +4097,18 @@
       },
       "cost": {
         "code": "tc68-B44",
-        "labor": 336.96,
+        "labor": 606.42,
         "materials": 0,
-        "total": 336.96,
+        "total": 606.42,
         "estimate": 2758,
         "laborEntries": [
+          {
+            "d": "2026-09-09",
+            "emp": "Armani Mitchell",
+            "hrs": 9.98,
+            "cost": 269.46,
+            "cat": "Turn"
+          },
           {
             "d": "2026-09-04",
             "emp": "Armani Mitchell",
@@ -5167,7 +5174,7 @@
       "next_move_in": null,
       "rent": "1033.00",
       "bed_bath": "1/1.00",
-      "sqft": 512,
+      "sqft": null,
       "region": "Spokane",
       "pm": {
         "projId": 229357,
@@ -13144,11 +13151,25 @@
       },
       "cost": {
         "code": "k104-101-1",
-        "labor": 978.56,
+        "labor": 1271.44,
         "materials": 2380.46,
-        "total": 3359.02,
+        "total": 3651.9,
         "estimate": 0,
         "laborEntries": [
+          {
+            "d": "2026-09-09",
+            "emp": "Micheal N. Magoon",
+            "hrs": 6.05,
+            "cost": 151.25,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-09",
+            "emp": "Ronald D. Cramer",
+            "hrs": 5.5,
+            "cost": 141.63,
+            "cat": "Turn"
+          },
           {
             "d": "2026-08-27",
             "emp": "Justin Gutierrez",
@@ -15159,11 +15180,25 @@
       },
       "cost": {
         "code": "k104-509-4",
-        "labor": 440.75,
+        "labor": 523.75,
         "materials": 106.66,
-        "total": 547.41,
+        "total": 630.41,
         "estimate": 0,
         "laborEntries": [
+          {
+            "d": "2026-09-10",
+            "emp": "Micheal N. Magoon",
+            "hrs": 2.17,
+            "cost": 54.25,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-10",
+            "emp": "Micheal N. Magoon",
+            "hrs": 1.15,
+            "cost": 28.75,
+            "cat": "Turn"
+          },
           {
             "d": "2026-09-09",
             "emp": "Micheal N. Magoon",
@@ -21908,7 +21943,7 @@
       "city": "Kennewick",
       "addr": "4711 W Metaline Avenue J101 Kennewick, WA 99336",
       "unit_id": 935,
-      "unit_status": "Vacant-Unrented",
+      "unit_status": "Vacant-Rented",
       "rent_ready": "No",
       "vacant": true,
       "days_vacant": 39,
@@ -21916,7 +21951,7 @@
       "available_on": "2026-10-09",
       "ready_on": "2026-10-09",
       "target_date": "2026-08-22",
-      "next_move_in": null,
+      "next_move_in": "2026-10-27",
       "rent": "931.00",
       "bed_bath": "1/1.00",
       "sqft": 600,
@@ -39772,23 +39807,8 @@
       "key": "rl16|d11",
       "prop": "rl16",
       "unit": "D11",
-      "at_risk": [],
       "property_name": "rl16",
-      "city": "Richland",
-      "addr": "1621 George Washington Way D11 Richland, WA 99354",
-      "unit_id": 596,
-      "unit_status": "Vacant-Unrented",
-      "rent_ready": "No",
-      "vacant": true,
-      "days_vacant": 10,
-      "move_out": "2026-08-31",
-      "available_on": "2026-09-19",
-      "ready_on": "2026-09-19",
-      "target_date": "2026-09-20",
-      "next_move_in": null,
-      "rent": "1443.00",
-      "bed_bath": "2/1.50",
-      "sqft": 975,
+      "at_risk": [],
       "region": "Tri-Cities",
       "pm": {
         "projId": 234782,
@@ -39952,10 +39972,11 @@
         ]
       },
       "turn_end": "2025-07-21",
+      "af_turn_end": "2025-08-16",
       "stage": "Walkthrough",
       "stage_ord": 1,
-      "days_elapsed": 0,
-      "days_to_turn": -406,
+      "days_elapsed": null,
+      "days_to_turn": null,
       "status": "complete"
     },
     {
@@ -52257,11 +52278,18 @@
       },
       "cost": {
         "code": "w226-7",
-        "labor": 96.76,
+        "labor": 109.12,
         "materials": 0,
-        "total": 96.76,
+        "total": 109.12,
         "estimate": 0,
         "laborEntries": [
+          {
+            "d": "2026-09-10",
+            "emp": "Ronald D. Cramer",
+            "hrs": 0.48,
+            "cost": 12.36,
+            "cat": "Turn"
+          },
           {
             "d": "2026-09-02",
             "emp": "Ronald D. Cramer",
