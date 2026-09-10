@@ -1,15 +1,15 @@
 {
   "ok": true,
-  "fetched_at": "2026-09-10T21:56:54.361Z",
+  "fetched_at": "2026-09-10T23:51:06.056Z",
   "summary": {
     "as_of": "2026-09-10",
-    "units": 241,
+    "units": 242,
     "active": 74,
     "ready": 1,
     "notice": 23,
     "at_risk": 30,
     "unscheduled": 10,
-    "accruing": 15058.75,
+    "accruing": 15167.25,
     "avg_days_open": 31,
     "revenue_at_risk": 3492.2
   },
@@ -15180,9 +15180,9 @@
       },
       "cost": {
         "code": "k104-509-4",
-        "labor": 523.75,
+        "labor": 580.75,
         "materials": 106.66,
-        "total": 630.41,
+        "total": 687.41,
         "estimate": 0,
         "laborEntries": [
           {
@@ -15197,6 +15197,13 @@
             "emp": "Micheal N. Magoon",
             "hrs": 1.15,
             "cost": 28.75,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-10",
+            "emp": "Micheal N. Magoon",
+            "hrs": 2.28,
+            "cost": 57,
             "cat": "Turn"
           },
           {
@@ -25758,6 +25765,124 @@
       "stage_ord": 1,
       "days_elapsed": 0,
       "days_to_turn": -420,
+      "status": "complete"
+    },
+    {
+      "key": "m405|21",
+      "prop": "m405",
+      "unit": "21",
+      "at_risk": [],
+      "property_name": "m405",
+      "city": "Spokane",
+      "addr": "405 S Maple St 21 Spokane, WA 99201",
+      "unit_id": 266,
+      "unit_status": "Notice-Unrented",
+      "rent_ready": null,
+      "vacant": false,
+      "days_vacant": null,
+      "move_out": "2026-12-31",
+      "available_on": "2027-01-20",
+      "ready_on": "2027-01-20",
+      "target_date": "2027-01-20",
+      "next_move_in": null,
+      "rent": "950.00",
+      "bed_bath": "1/1.00",
+      "sqft": 500,
+      "region": "Spokane",
+      "pm": {
+        "projId": 176392,
+        "name": "Turn - 405 S Maple St UNIT 21",
+        "status": "COMPLETE",
+        "done": 7,
+        "total": 7,
+        "first_appt": null,
+        "final_walk": null,
+        "final_walk_done": "2025-07-31",
+        "completed_date": "2025-07-31",
+        "due": "2025-07-21",
+        "next_task": null,
+        "tasks": null
+      },
+      "next_appt": null,
+      "cost": {
+        "code": "m405-21",
+        "labor": 182.09,
+        "materials": 395.06,
+        "total": 577.15,
+        "estimate": 0,
+        "laborEntries": [
+          {
+            "d": "2025-07-03",
+            "emp": "Micheal N. Magoon",
+            "hrs": 0.73,
+            "cost": 18.25,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-07-02",
+            "emp": "Micheal N. Magoon",
+            "hrs": 1.02,
+            "cost": 25.5,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-07-02",
+            "emp": "Scott Higley",
+            "hrs": 0.47,
+            "cost": 15.04,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-07-01",
+            "emp": "Micheal N. Magoon",
+            "hrs": 2.5,
+            "cost": 62.5,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-07-01",
+            "emp": "Scott Higley",
+            "hrs": 1.08,
+            "cost": 34.55,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-07-01",
+            "emp": "Micheal N. Magoon",
+            "hrs": 1.05,
+            "cost": 26.25,
+            "cat": "Turn"
+          }
+        ],
+        "materialEntries": [
+          {
+            "d": "2025-08-21",
+            "amt": 115.5,
+            "cat": "Turn",
+            "ln": "meng",
+            "src": "ramp"
+          },
+          {
+            "d": "2025-07-02",
+            "amt": 56.58,
+            "cat": "Turn",
+            "ln": "magoon",
+            "src": "ramp"
+          },
+          {
+            "d": "2025-07-01",
+            "amt": 222.98,
+            "cat": "Turn",
+            "ln": "magoon",
+            "src": "ramp"
+          }
+        ]
+      },
+      "turn_end": "2025-07-31",
+      "stage": "Move-out",
+      "stage_ord": 0,
+      "days_elapsed": 0,
+      "days_to_turn": -518,
       "status": "complete"
     },
     {
@@ -52278,9 +52403,9 @@
       },
       "cost": {
         "code": "w226-7",
-        "labor": 109.12,
+        "labor": 160.62,
         "materials": 0,
-        "total": 109.12,
+        "total": 160.62,
         "estimate": 0,
         "laborEntries": [
           {
@@ -52288,6 +52413,13 @@
             "emp": "Ronald D. Cramer",
             "hrs": 0.48,
             "cost": 12.36,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-10",
+            "emp": "Ronald D. Cramer",
+            "hrs": 2,
+            "cost": 51.5,
             "cat": "Turn"
           },
           {
