@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-09-11T16:59:14.679Z",
+  "fetched_at": "2026-09-11T19:33:56.457Z",
   "units": {
     "2": {
       "moveOut": "2026-07-31",
@@ -332,7 +332,7 @@
     },
     "453": {
       "moveOut": "2026-06-30",
-      "status": "Vacant-Unrented",
+      "status": "Vacant-Rented",
       "prop": "w117",
       "unit": "10",
       "city": "Spokane"
@@ -496,13 +496,6 @@
       "status": "Notice-Unrented",
       "prop": "s129",
       "unit": "6",
-      "city": "Spokane Valley"
-    },
-    "659": {
-      "moveOut": "2026-09-30",
-      "status": "Notice-Unrented",
-      "prop": "s129",
-      "unit": "8",
       "city": "Spokane Valley"
     },
     "660": {
@@ -3989,6 +3982,16 @@
       "unit": "11",
       "city": "Spokane",
       "to": "2026-09-30"
+    },
+    {
+      "date": "2026-09-11",
+      "type": "moveout_removed",
+      "unit_id": "659",
+      "prop": "s129",
+      "unit": "8",
+      "city": "Spokane Valley",
+      "from": "2026-09-30",
+      "was_status": "Notice-Unrented"
     }
   ]
 }
