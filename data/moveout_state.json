@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-09-11T12:57:23.473Z",
+  "fetched_at": "2026-09-11T16:59:14.679Z",
   "units": {
     "2": {
       "moveOut": "2026-07-31",
@@ -122,7 +122,7 @@
     },
     "265": {
       "moveOut": "2026-07-31",
-      "status": "Vacant-Rented",
+      "status": "Vacant-Unrented",
       "prop": "m405",
       "unit": "20",
       "city": "Spokane"
@@ -545,6 +545,13 @@
       "status": "Vacant-Unrented",
       "prop": "c313",
       "unit": "10",
+      "city": "Spokane"
+    },
+    "719": {
+      "moveOut": "2026-09-30",
+      "status": "Notice-Unrented",
+      "prop": "c313",
+      "unit": "11",
       "city": "Spokane"
     },
     "720": {
@@ -3973,6 +3980,15 @@
       "city": "Richland",
       "from": "2026-04-30",
       "was_status": "Vacant-Rented"
+    },
+    {
+      "date": "2026-09-11",
+      "type": "moveout_new",
+      "unit_id": "719",
+      "prop": "c313",
+      "unit": "11",
+      "city": "Spokane",
+      "to": "2026-09-30"
     }
   ]
 }
