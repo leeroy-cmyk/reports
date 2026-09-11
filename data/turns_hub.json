@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "fetched_at": "2026-09-10T23:51:06.056Z",
+  "fetched_at": "2026-09-11T03:36:39.965Z",
   "summary": {
     "as_of": "2026-09-10",
     "units": 242,
@@ -9,7 +9,7 @@
     "notice": 23,
     "at_risk": 30,
     "unscheduled": 10,
-    "accruing": 15167.25,
+    "accruing": 16139.78,
     "avg_days_open": 31,
     "revenue_at_risk": 3492.2
   },
@@ -9785,11 +9785,19 @@
       "cost": {
         "code": "c702-C202",
         "labor": 0,
-        "materials": 0,
-        "total": 0,
+        "materials": 341.28,
+        "total": 341.28,
         "estimate": 0,
         "laborEntries": [],
-        "materialEntries": []
+        "materialEntries": [
+          {
+            "d": "2026-09-10",
+            "amt": 341.28,
+            "cat": "Turn",
+            "ln": "smith",
+            "src": "ramp"
+          }
+        ]
       },
       "stage": "Maintenance",
       "stage_ord": 3,
@@ -11443,7 +11451,7 @@
       "city": "Spokane",
       "addr": "7014 N Colton St K303 Spokane, WA 99208",
       "unit_id": 1446,
-      "unit_status": "Vacant-Unrented",
+      "unit_status": "Vacant-Rented",
       "rent_ready": "Yes",
       "vacant": true,
       "days_vacant": 41,
@@ -11451,7 +11459,7 @@
       "available_on": "2026-08-20",
       "ready_on": "2026-08-20",
       "target_date": "2026-08-20",
-      "next_move_in": null,
+      "next_move_in": "2026-10-02",
       "rent": "1495.00",
       "bed_bath": "2/2.00",
       "sqft": 1140,
@@ -15180,9 +15188,9 @@
       },
       "cost": {
         "code": "k104-509-4",
-        "labor": 580.75,
+        "labor": 634.5,
         "materials": 106.66,
-        "total": 687.41,
+        "total": 741.16,
         "estimate": 0,
         "laborEntries": [
           {
@@ -15204,6 +15212,13 @@
             "emp": "Micheal N. Magoon",
             "hrs": 2.28,
             "cost": 57,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-10",
+            "emp": "Micheal N. Magoon",
+            "hrs": 2.15,
+            "cost": 53.75,
             "cat": "Turn"
           },
           {
@@ -48114,7 +48129,7 @@
       "vacant": true,
       "days_vacant": 114,
       "move_out": "2026-05-19",
-      "available_on": "2026-07-28",
+      "available_on": null,
       "ready_on": "2026-07-28",
       "target_date": "2026-06-08",
       "next_move_in": "2026-09-16",
@@ -52403,9 +52418,9 @@
       },
       "cost": {
         "code": "w226-7",
-        "labor": 160.62,
-        "materials": 0,
-        "total": 160.62,
+        "labor": 197.19,
+        "materials": 540.93,
+        "total": 738.12,
         "estimate": 0,
         "laborEntries": [
           {
@@ -52420,6 +52435,13 @@
             "emp": "Ronald D. Cramer",
             "hrs": 2,
             "cost": 51.5,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-10",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.42,
+            "cost": 36.57,
             "cat": "Turn"
           },
           {
@@ -52458,7 +52480,15 @@
             "cat": "Turn"
           }
         ],
-        "materialEntries": []
+        "materialEntries": [
+          {
+            "d": "2026-09-10",
+            "amt": 540.93,
+            "cat": "Turn",
+            "ln": "cramer",
+            "src": "ramp"
+          }
+        ]
       },
       "stage": "Maintenance",
       "stage_ord": 3,
