@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-09T17:29:04.382Z",
-  "last_checked": "2026-09-09T17:29:04.382Z",
+  "generated_at": "2026-09-11T17:28:03.111Z",
+  "last_checked": "2026-09-11T17:28:03.111Z",
   "source": "leeroy-cmyk/pm-scheduling/CLAUDE.md",
   "count": 77,
   "rules": [
@@ -159,10 +159,15 @@
     {
       "group": "Walkthroughs outrank turn work, for whoever does them",
       "category": "",
-      "text": "⛔ **NO OVERLAPS, AND WALKTHROUGHS RUN BACK-TO-BACK** (Lee Roy 2026-09-09). Slots are **08-10, 10-12, 12-14, 14-16** — four 2-hour walks fill an 8-4 day exactly, with no gap and no stacking. shared 1-hour sign-offs; once one tech took all of Spokane's it produced **84 overlapping pairs across 23 days** — five appointments at 08:00 on 10-01 and again on 10-07. The daily cap added on 09-02 limited how MANY finals a day could hold but never WHEN, so it read as managed while being physically impossible. A cap on count is not a cap on time. scheduled and simply never happens.",
+      "text": "⛔ **NO OVERLAPS, AND WALKTHROUGHS RUN BACK-TO-BACK** (Lee Roy 2026-09-09). Slots are **08-10, 10-12, 12-14, 14-16** — four 2-hour walks fill an 8-4 day exactly, with no gap and no stacking. shared 1-hour sign-offs; once one tech took all of Spokane's it produced **84 overlapping pairs across 23 days** — five appointments at 08:00 on 10-01 and again on 10-07. The daily cap added on 09-02 limited how MANY finals a day could hold but never WHEN, so it read as managed while being physically impossible. A cap on count is not a cap on time. scheduled and simply never happens. `pm_tricities_final_walkthrough.js` still hardcoded every final to **08:00-09:00 with no daily cap**, so Margarito's 09-14 carried **four finals at 08:00**. Ported from Spokane: `FINAL_WALK_HRS=2`, `FINAL_MAX_PER_DAY=4`, staggered 08-10/10-12/12-14/14-16. Three further things were needed, and each is a distinct trap: all 45 finals \"already correct\", so the run that introduced 2h slots would have changed nothing. It now also checks duration and start hour. was blind to the INITIAL walkthroughs on the same calendar — and Margarito holds both. Without the seed it planned finals straight on top of the 13 past-due initials. Same lesson as the 09-09 Spokane crash: respect a tech's whole calendar, not the slice one script owns. reading `finalLoad` again after an `await` returns what other concurrent tasks have since incremented. Three finals all computed 12:00-14:00 on 09-18 and two computed 14:00-16:00 on 09-17. The counter was right — reading it late was not. `pm_compact_turns.js` excluded `final-walk` from its seeding loop outright and tracked initial walkthroughs only as a stacking COUNT (`walkAnchor`), never as hours against the day. So a Margarito day holding four 2-hour finals — a full 8-4 day — read as completely FREE, and the run right after the walkthrough block was placed pulled `rl16 #D22`'s paint onto 09-15/09-16 and its maintenance onto 09-17. Compaction now accumulates walkthrough HOURS (initial and final) and `free()` rejects any day at or above `WALK_BLOCK_HOURS` (4h) — the same threshold the region schedulers already used. **A rule enforced in the scheduler but not in compaction is not enforced.**",
       "details": [
         "⚠️ **`pm_final_walkthrough.js` used to hardcode EVERY final to 08:00.** Harmless while four techs",
-        "⚠️ Do not book a slot that has already passed — a tech placed at 08:00 when it is 09:13 looks"
+        "⚠️ Do not book a slot that has already passed — a tech placed at 08:00 when it is 09:13 looks",
+        "⛔ **TRI-CITIES GOT THE SAME FIX ON 2026-09-11 — it had been missed entirely.**",
+        "**The skip must compare the TIME, not just the date.** `curDate === finalDate` alone reported",
+        "**Seed the day-load from the tech's OTHER walkthroughs.** `finalLoad` counts only finals, so it",
+        "**Claim the slot index SYNCHRONOUSLY.** Turns are processed 6-at-a-time with `Promise.all`;",
+        "⛔ **COMPACTION MUST SEE WALKTHROUGHS, OR IT REFILLS THE DAY YOU JUST CLEARED (2026-09-11).**"
       ]
     },
     {
