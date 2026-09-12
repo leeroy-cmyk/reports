@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "fetched_at": "2026-09-11T21:59:40.460Z",
+  "fetched_at": "2026-09-12T00:07:50.902Z",
   "summary": {
     "as_of": "2026-09-11",
     "units": 242,
@@ -9,7 +9,7 @@
     "notice": 22,
     "at_risk": 31,
     "unscheduled": 10,
-    "accruing": 14455.41,
+    "accruing": 14700.7,
     "avg_days_open": 32,
     "revenue_at_risk": 3503.2
   },
@@ -565,11 +565,18 @@
       },
       "cost": {
         "code": "p705-17",
-        "labor": 2052.88,
+        "labor": 2074.25,
         "materials": 1262.01,
-        "total": 3314.89,
+        "total": 3336.26,
         "estimate": 0,
         "laborEntries": [
+          {
+            "d": "2026-09-11",
+            "emp": "Ronald D. Cramer",
+            "hrs": 0.83,
+            "cost": 21.37,
+            "cat": "Turn"
+          },
           {
             "d": "2026-09-10",
             "emp": "Ronald D. Cramer",
@@ -981,13 +988,6 @@
             "emp": "Ronald D. Cramer",
             "hrs": 2,
             "cost": 51.5,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-24",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.13,
-            "cost": 29.1,
             "cat": "Turn"
           }
         ],
@@ -5966,7 +5966,7 @@
       "city": "Spokane",
       "addr": "1010 W Boone Ave. - 8 Spokane, WA 99201",
       "unit_id": 171,
-      "unit_status": "Vacant-Unrented",
+      "unit_status": "Vacant-Rented",
       "rent_ready": "Yes",
       "vacant": true,
       "days_vacant": 77,
@@ -5974,7 +5974,7 @@
       "available_on": "2026-08-09",
       "ready_on": "2026-08-09",
       "target_date": "2026-07-16",
-      "next_move_in": null,
+      "next_move_in": "2026-09-30",
       "rent": "870.00",
       "bed_bath": "1/1.00",
       "sqft": 300,
@@ -14934,9 +14934,9 @@
       },
       "cost": {
         "code": "k104-509-4",
-        "labor": 652.5,
-        "materials": 106.66,
-        "total": 759.16,
+        "labor": 785.75,
+        "materials": 201.96,
+        "total": 987.71,
         "estimate": 0,
         "laborEntries": [
           {
@@ -14944,6 +14944,27 @@
             "emp": "Micheal N. Magoon",
             "hrs": 0.72,
             "cost": 18,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-11",
+            "emp": "Micheal N. Magoon",
+            "hrs": 1.9,
+            "cost": 47.5,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-11",
+            "emp": "Micheal N. Magoon",
+            "hrs": 0.9,
+            "cost": 22.5,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-11",
+            "emp": "Micheal N. Magoon",
+            "hrs": 2.53,
+            "cost": 63.25,
             "cat": "Turn"
           },
           {
@@ -15039,6 +15060,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-09-11",
+            "amt": 95.3,
+            "cat": "Turn",
+            "ln": "magoon",
+            "src": "ramp"
+          },
           {
             "d": "2026-09-08",
             "amt": 106.66,
@@ -15805,8 +15833,8 @@
       "cost": {
         "code": "kn47-k2-A104",
         "labor": 21.3,
-        "materials": 326.4,
-        "total": 347.7,
+        "materials": 531.75,
+        "total": 553.05,
         "estimate": 0,
         "laborEntries": [
           {
@@ -15818,6 +15846,20 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-09-11",
+            "amt": 73.94,
+            "cat": "Turn",
+            "ln": "williams",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-09-11",
+            "amt": 131.41,
+            "cat": "Turn",
+            "ln": "williams",
+            "src": "ramp"
+          },
           {
             "d": "2025-07-24",
             "amt": 163.2,
@@ -51009,7 +51051,7 @@
       "city": "Spokane",
       "addr": "1117 W 5th Ave - 10 Spokane, WA 9204",
       "unit_id": 453,
-      "unit_status": "Vacant-Rented",
+      "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
       "days_vacant": 73,
@@ -51017,7 +51059,7 @@
       "available_on": "2026-09-13",
       "ready_on": "2026-09-13",
       "target_date": "2026-07-20",
-      "next_move_in": "2026-09-30",
+      "next_move_in": null,
       "rent": "895.00",
       "bed_bath": "0/1.00",
       "sqft": 420,
@@ -52169,9 +52211,9 @@
       },
       "cost": {
         "code": "w226-7",
-        "labor": 338.57,
+        "labor": 333.94,
         "materials": 540.93,
-        "total": 879.5,
+        "total": 874.87,
         "estimate": 0,
         "laborEntries": [
           {
@@ -52191,22 +52233,22 @@
           {
             "d": "2026-09-11",
             "emp": "Ronald D. Cramer",
-            "hrs": 2.12,
-            "cost": 54.59,
+            "hrs": 1.5,
+            "cost": 38.63,
             "cat": "Turn"
           },
           {
             "d": "2026-09-11",
             "emp": "Ronald D. Cramer",
-            "hrs": 0.62,
-            "cost": 15.97,
+            "hrs": 1.58,
+            "cost": 40.69,
             "cat": "Turn"
           },
           {
             "d": "2026-09-11",
             "emp": "Ronald D. Cramer",
-            "hrs": 0.85,
-            "cost": 21.89,
+            "hrs": 0.33,
+            "cost": 8.5,
             "cat": "Turn"
           },
           {
