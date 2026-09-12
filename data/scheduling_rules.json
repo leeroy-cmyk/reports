@@ -1,9 +1,45 @@
 {
-  "generated_at": "2026-09-11T17:28:03.111Z",
-  "last_checked": "2026-09-11T17:28:03.111Z",
+  "generated_at": "2026-09-12T16:40:58.592Z",
+  "last_checked": "2026-09-12T16:40:58.592Z",
   "source": "leeroy-cmyk/pm-scheduling/CLAUDE.md",
-  "count": 77,
+  "count": 83,
   "rules": [
+    {
+      "group": "⛔ GOLDEN RULE",
+      "category": "Audit any time",
+      "text": "`node overlap_audit.js` (read-only, every tech, all regions; `FROM`/`TO` to window it). **Fix:** `node deoverlap.js` — re-times a day in place first (clock only, so no downstream QC/vendor/availability date moves) and only moves work to another day when the day genuinely cannot hold it.",
+      "details": []
+    },
+    {
+      "group": "⛔ GOLDEN RULE",
+      "category": "",
+      "text": "⚠️ **Measured 2026-09-11: 118 overlapping pairs across 78 tech-days and 8 people.** It had been accumulating unseen because no check ever looked for it — every scheduler avoided double-booking *within its own placements* and none looked at the whole calendar.",
+      "details": []
+    },
+    {
+      "group": "⛔ GOLDEN RULE",
+      "category": "",
+      "text": "🔑 **The usual cause is two scripts writing the same calendar with separate counters.** Spokane's turn scheduler seeded its walk count from existing FINALS, but `pm_final_walkthrough.js` ran after it and ignored the INITIALS — so it laid 2h finals exactly on top of them (Matt, 26 pairs over 15 days). Both directions of that seeding are now in place, in Spokane and Tri-Cities.",
+      "details": []
+    },
+    {
+      "group": "⛔ GOLDEN RULE",
+      "category": "",
+      "text": "🔑 **A slot ladder is only real when every writer shares it.** 2-hour appointments placed on an hourly grid overlap by construction: walk #1 takes 08-10, walk #2 takes 09-11. Initial walks, final walks, gap-fill and forward-compaction all write the same calendar and must agree on `[8,10,12,14]`.",
+      "details": []
+    },
+    {
+      "group": "⛔ GOLDEN RULE",
+      "category": "",
+      "text": "🔑 **Claim a slot index synchronously.** Turns are processed in parallel batches, so re-reading the day counter after an `await` returns what other concurrent tasks have since incremented — three Tri-Cities finals all computed the same 12:00-14:00 slot.",
+      "details": []
+    },
+    {
+      "group": "⛔ GOLDEN RULE",
+      "category": "",
+      "text": "⚠️ **This retires the \"turn work overlays walkthroughs\" allowance** wherever it produced a real overlap — see the Tacoma section. An overlay IS an overlap.",
+      "details": []
+    },
     {
       "group": "General",
       "category": "",
