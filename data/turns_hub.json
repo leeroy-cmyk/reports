@@ -1,17 +1,17 @@
 {
   "ok": true,
-  "fetched_at": "2026-09-14T20:38:38.243Z",
+  "fetched_at": "2026-09-14T23:31:47.823Z",
   "summary": {
     "as_of": "2026-09-14",
     "units": 242,
-    "active": 74,
+    "active": 73,
     "ready": 1,
     "notice": 22,
-    "at_risk": 32,
+    "at_risk": 31,
     "unscheduled": 9,
     "accruing": 16729.73,
-    "avg_days_open": 34,
-    "revenue_at_risk": 3525.2
+    "avg_days_open": 33,
+    "revenue_at_risk": 3466.03
   },
   "rows": [
     {
@@ -53,133 +53,6 @@
       "stage": null,
       "stage_ord": 0,
       "days_elapsed": 46,
-      "days_to_turn": null,
-      "status": "active"
-    },
-    {
-      "key": "tc68|d082",
-      "prop": "tc68",
-      "unit": "D082",
-      "at_risk": [
-        "Available date passed",
-        "Over 45 days vacant"
-      ],
-      "property_name": "tc68",
-      "city": "Tacoma",
-      "addr": "6830 Tacoma Mall Blvd Apt D082 Tacoma, WA 98409",
-      "unit_id": 1231,
-      "unit_status": "Vacant-Rented",
-      "rent_ready": "No",
-      "vacant": true,
-      "days_vacant": 88,
-      "move_out": "2026-06-18",
-      "available_on": "2026-09-13",
-      "ready_on": "2026-09-13",
-      "target_date": "2026-07-08",
-      "next_move_in": "2026-10-01",
-      "rent": "1775.00",
-      "bed_bath": "2/1.00",
-      "sqft": 980,
-      "region": "Tacoma",
-      "pm": {
-        "projId": 228916,
-        "name": "Standard Unit Turn",
-        "status": "ACTIVE",
-        "done": 2,
-        "total": 7,
-        "first_appt": "2026-08-04",
-        "final_walk": "2026-09-22",
-        "final_walk_done": null,
-        "completed_date": "2026-06-26",
-        "due": "2026-07-30",
-        "next_task": {
-          "date": "2026-09-14",
-          "task": "maintenance"
-        },
-        "tasks": [
-          {
-            "task": "A - Initial walkthrough",
-            "cat": "walkthrough",
-            "done": true,
-            "date": "2026-06-22",
-            "who": "Armani Mitchell",
-            "completed": "2026-06-24",
-            "vendor": false
-          },
-          {
-            "task": "Appfolio Estimate",
-            "cat": "estimate",
-            "done": false,
-            "date": null,
-            "who": "Dulce Salinas",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "C - Paint",
-            "cat": "paint",
-            "done": true,
-            "date": "2026-08-04",
-            "who": "Armani Mitchell",
-            "completed": "2026-06-26",
-            "vendor": false
-          },
-          {
-            "task": "D - Maintenance",
-            "cat": "maintenance",
-            "done": false,
-            "date": "2026-09-14",
-            "who": "Armani Mitchell",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "E - Carpet Cleaning",
-            "cat": "carpet",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "F - Cleaning",
-            "cat": "cleaning",
-            "done": false,
-            "date": "2026-09-14",
-            "who": "Armani Mitchell",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Final Walkthrough",
-            "cat": "final-walk",
-            "done": false,
-            "date": "2026-09-22",
-            "who": "Armani Mitchell",
-            "completed": null,
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": {
-        "date": "2026-09-14",
-        "cat": "maintenance",
-        "who": "Armani Mitchell",
-        "brief": "D - Maintenance"
-      },
-      "cost": {
-        "code": "tc68-D082",
-        "labor": 0,
-        "materials": 0,
-        "total": 0,
-        "estimate": 0,
-        "laborEntries": [],
-        "materialEntries": []
-      },
-      "stage": "Maintenance",
-      "stage_ord": 3,
-      "days_elapsed": 88,
       "days_to_turn": null,
       "status": "active"
     },
@@ -15764,8 +15637,8 @@
       "cost": {
         "code": "kn47-k2-A104",
         "labor": 21.3,
-        "materials": 531.75,
-        "total": 553.05,
+        "materials": 665.43,
+        "total": 686.73,
         "estimate": 0,
         "laborEntries": [
           {
@@ -15777,6 +15650,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-09-14",
+            "amt": 133.68,
+            "cat": "Turn",
+            "ln": "williams",
+            "src": "ramp"
+          },
           {
             "d": "2026-09-11",
             "amt": 73.94,
@@ -43707,8 +43587,8 @@
       "cost": {
         "code": "tc34-A103",
         "labor": 60.75,
-        "materials": 206.5,
-        "total": 267.25,
+        "materials": 226.32,
+        "total": 287.07,
         "estimate": 0,
         "laborEntries": [
           {
@@ -43727,6 +43607,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-09-09",
+            "amt": 19.82,
+            "cat": "Turn",
+            "ln": "mitchell",
+            "src": "ramp"
+          },
           {
             "d": "2025-11-25",
             "amt": 103.3,
@@ -48573,6 +48460,115 @@
       "days_elapsed": null,
       "days_to_turn": null,
       "status": "complete"
+    },
+    {
+      "key": "tc68|d082",
+      "prop": "tc68",
+      "unit": "D082",
+      "property_name": "tc68",
+      "at_risk": [],
+      "region": "Tacoma",
+      "pm": {
+        "projId": 228916,
+        "name": "Standard Unit Turn",
+        "status": "ACTIVE",
+        "done": 2,
+        "total": 7,
+        "first_appt": "2026-08-04",
+        "final_walk": "2026-09-22",
+        "final_walk_done": null,
+        "completed_date": "2026-06-26",
+        "due": "2026-07-30",
+        "next_task": {
+          "date": "2026-09-14",
+          "task": "maintenance"
+        },
+        "tasks": [
+          {
+            "task": "A - Initial walkthrough",
+            "cat": "walkthrough",
+            "done": true,
+            "date": "2026-06-22",
+            "who": "Armani Mitchell",
+            "completed": "2026-06-24",
+            "vendor": false
+          },
+          {
+            "task": "Appfolio Estimate",
+            "cat": "estimate",
+            "done": false,
+            "date": null,
+            "who": "Dulce Salinas",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "C - Paint",
+            "cat": "paint",
+            "done": true,
+            "date": "2026-08-04",
+            "who": "Armani Mitchell",
+            "completed": "2026-06-26",
+            "vendor": false
+          },
+          {
+            "task": "D - Maintenance",
+            "cat": "maintenance",
+            "done": false,
+            "date": "2026-09-14",
+            "who": "Armani Mitchell",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "E - Carpet Cleaning",
+            "cat": "carpet",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "F - Cleaning",
+            "cat": "cleaning",
+            "done": false,
+            "date": "2026-09-14",
+            "who": "Armani Mitchell",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Final Walkthrough",
+            "cat": "final-walk",
+            "done": false,
+            "date": "2026-09-22",
+            "who": "Armani Mitchell",
+            "completed": null,
+            "vendor": false
+          }
+        ]
+      },
+      "next_appt": {
+        "date": "2026-09-14",
+        "cat": "maintenance",
+        "who": "Armani Mitchell",
+        "brief": "D - Maintenance"
+      },
+      "cost": {
+        "code": "tc68-D082",
+        "labor": 0,
+        "materials": 0,
+        "total": 0,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": []
+      },
+      "stage": "Maintenance",
+      "stage_ord": 3,
+      "days_elapsed": null,
+      "days_to_turn": null,
+      "status": "other"
     },
     {
       "key": "tc68|d088",
