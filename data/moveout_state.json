@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-09-15T12:48:52.805Z",
+  "fetched_at": "2026-09-15T17:31:06.522Z",
   "units": {
     "2": {
       "moveOut": "2026-07-31",
@@ -16,7 +16,7 @@
       "city": "Spokane"
     },
     "7": {
-      "moveOut": "2026-09-18",
+      "moveOut": "2026-09-15",
       "status": "Notice-Unrented",
       "prop": "a916",
       "unit": "6",
@@ -62,6 +62,13 @@
       "status": "Vacant-Rented",
       "prop": "b101",
       "unit": "8",
+      "city": "Spokane"
+    },
+    "174": {
+      "moveOut": "2026-09-15",
+      "status": "Notice-Unrented",
+      "prop": "b101",
+      "unit": "11",
       "city": "Spokane"
     },
     "177": {
@@ -122,7 +129,7 @@
     },
     "265": {
       "moveOut": "2026-07-31",
-      "status": "Vacant-Unrented",
+      "status": "Vacant-Rented",
       "prop": "m405",
       "unit": "20",
       "city": "Spokane"
@@ -687,6 +694,13 @@
       "unit": "J101",
       "city": "Kennewick"
     },
+    "938": {
+      "moveOut": "2026-09-15",
+      "status": "Notice-Unrented",
+      "prop": "kn47 K1",
+      "unit": "J104",
+      "city": "Kennewick"
+    },
     "943": {
       "moveOut": "2026-08-27",
       "status": "Vacant-Unrented",
@@ -1112,6 +1126,13 @@
       "status": "Vacant-Unrented",
       "prop": "c702",
       "unit": "G205",
+      "city": "Spokane"
+    },
+    "1394": {
+      "moveOut": "2026-10-04",
+      "status": "Notice-Unrented",
+      "prop": "c702",
+      "unit": "G208",
       "city": "Spokane"
     },
     "1401": {
@@ -3912,6 +3933,43 @@
       "city": "Richland",
       "from": "2026-03-31",
       "was_status": "Vacant-Rented"
+    },
+    {
+      "date": "2026-09-15",
+      "type": "moveout_changed",
+      "unit_id": "7",
+      "prop": "a916",
+      "unit": "6",
+      "city": "Spokane",
+      "from": "2026-09-18",
+      "to": "2026-09-15"
+    },
+    {
+      "date": "2026-09-15",
+      "type": "moveout_new",
+      "unit_id": "174",
+      "prop": "b101",
+      "unit": "11",
+      "city": "Spokane",
+      "to": "2026-09-15"
+    },
+    {
+      "date": "2026-09-15",
+      "type": "moveout_new",
+      "unit_id": "938",
+      "prop": "kn47 K1",
+      "unit": "J104",
+      "city": "Kennewick",
+      "to": "2026-09-15"
+    },
+    {
+      "date": "2026-09-15",
+      "type": "moveout_new",
+      "unit_id": "1394",
+      "prop": "c702",
+      "unit": "G208",
+      "city": "Spokane",
+      "to": "2026-10-04"
     }
   ]
 }
