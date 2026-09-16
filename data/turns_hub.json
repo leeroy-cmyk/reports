@@ -1,17 +1,17 @@
 {
   "ok": true,
-  "fetched_at": "2026-09-16T12:07:51.294Z",
+  "fetched_at": "2026-09-16T16:59:29.585Z",
   "summary": {
     "as_of": "2026-09-16",
     "units": 241,
-    "active": 75,
+    "active": 74,
     "ready": 1,
     "notice": 25,
     "at_risk": 41,
     "unscheduled": 11,
-    "accruing": 20029.93,
+    "accruing": 21063.25,
     "avg_days_open": 34,
-    "revenue_at_risk": 3539.6
+    "revenue_at_risk": 3495.83
   },
   "rows": [
     {
@@ -676,8 +676,8 @@
       "cost": {
         "code": "b101-16",
         "labor": 160.42,
-        "materials": 105.12,
-        "total": 265.54,
+        "materials": 540.03,
+        "total": 700.45,
         "estimate": 0,
         "laborEntries": [
           {
@@ -717,6 +717,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-09-16",
+            "amt": 434.91,
+            "cat": "Turn",
+            "ln": "cramer",
+            "src": "ramp"
+          },
           {
             "d": "2026-07-28",
             "amt": 105.12,
@@ -3780,8 +3787,8 @@
       "cost": {
         "code": "p705-17",
         "labor": 2110.31,
-        "materials": 1262.01,
-        "total": 3372.32,
+        "materials": 1860.42,
+        "total": 3970.73,
         "estimate": 0,
         "laborEntries": [
           {
@@ -4206,6 +4213,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-09-16",
+            "amt": 598.41,
+            "cat": "Turn",
+            "ln": "cramer",
+            "src": "ramp"
+          },
           {
             "d": "2026-09-04",
             "amt": 246.25,
@@ -12658,7 +12672,7 @@
       "city": "Spokane",
       "addr": "7004 N Colton St E102 Spokane, WA 99208",
       "unit_id": 1348,
-      "unit_status": "Vacant-Unrented",
+      "unit_status": "Vacant-Rented",
       "rent_ready": "Yes",
       "vacant": true,
       "days_vacant": 0,
@@ -12666,7 +12680,7 @@
       "available_on": "2026-09-13",
       "ready_on": "2026-09-13",
       "target_date": null,
-      "next_move_in": null,
+      "next_move_in": "2026-09-17",
       "rent": "1395.00",
       "bed_bath": "2/2.00",
       "sqft": 1025,
@@ -13887,7 +13901,7 @@
       "city": "Spokane",
       "addr": "7014 N Colton St K303 Spokane, WA 99208",
       "unit_id": 1446,
-      "unit_status": "Vacant-Rented",
+      "unit_status": "Vacant-Unrented",
       "rent_ready": "Yes",
       "vacant": true,
       "days_vacant": 47,
@@ -13895,7 +13909,7 @@
       "available_on": "2026-08-20",
       "ready_on": "2026-08-20",
       "target_date": "2026-08-20",
-      "next_move_in": "2026-10-02",
+      "next_move_in": null,
       "rent": "1495.00",
       "bed_bath": "2/2.00",
       "sqft": 1140,
@@ -28185,23 +28199,8 @@
       "key": "m608|4",
       "prop": "m608",
       "unit": "4",
-      "at_risk": [],
       "property_name": "m608",
-      "city": "Spokane",
-      "addr": "1608 W. Main Avenue - 4 Spokane, WA 99201",
-      "unit_id": 96,
-      "unit_status": "Vacant-Rented",
-      "rent_ready": "No",
-      "vacant": true,
-      "days_vacant": 16,
-      "move_out": "2026-08-31",
-      "available_on": "2026-09-18",
-      "ready_on": "2026-09-18",
-      "target_date": "2026-09-20",
-      "next_move_in": "2026-09-28",
-      "rent": "1313.00",
-      "bed_bath": "2/1.00",
-      "sqft": 645,
+      "at_risk": [],
       "region": "Spokane",
       "pm": {
         "projId": 235865,
@@ -28310,9 +28309,9 @@
       },
       "stage": "Paint",
       "stage_ord": 2,
-      "days_elapsed": 16,
+      "days_elapsed": null,
       "days_to_turn": null,
-      "status": "active"
+      "status": "other"
     },
     {
       "key": "m608|6",

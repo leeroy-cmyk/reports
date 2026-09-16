@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-09-16T12:06:03.325Z",
+  "fetched_at": "2026-09-16T16:57:18.873Z",
   "units": {
     "2": {
       "moveOut": "2026-07-31",
@@ -42,13 +42,6 @@
       "prop": "s300",
       "unit": "3",
       "city": "Spokane Valley"
-    },
-    "96": {
-      "moveOut": "2026-08-31",
-      "status": "Vacant-Rented",
-      "prop": "m608",
-      "unit": "4",
-      "city": "Spokane"
     },
     "127": {
       "moveOut": "2026-09-06",
@@ -1095,7 +1088,7 @@
     },
     "1348": {
       "moveOut": null,
-      "status": "Vacant-Unrented",
+      "status": "Vacant-Rented",
       "prop": "c702",
       "unit": "E102",
       "city": "Spokane"
@@ -1165,7 +1158,7 @@
     },
     "1446": {
       "moveOut": "2026-07-31",
-      "status": "Vacant-Rented",
+      "status": "Vacant-Unrented",
       "prop": "c702",
       "unit": "K303",
       "city": "Spokane"
@@ -3865,6 +3858,16 @@
       "unit": "C67",
       "city": "Tacoma",
       "from": "2026-05-19",
+      "was_status": "Vacant-Rented"
+    },
+    {
+      "date": "2026-09-16",
+      "type": "moveout_removed",
+      "unit_id": "96",
+      "prop": "m608",
+      "unit": "4",
+      "city": "Spokane",
+      "from": "2026-08-31",
       "was_status": "Vacant-Rented"
     }
   ]
