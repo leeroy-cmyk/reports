@@ -1,17 +1,17 @@
 {
   "ok": true,
-  "fetched_at": "2026-09-16T19:59:19.908Z",
+  "fetched_at": "2026-09-16T22:52:27.978Z",
   "summary": {
     "as_of": "2026-09-16",
     "units": 242,
-    "active": 74,
+    "active": 73,
     "ready": 1,
     "notice": 25,
-    "at_risk": 41,
+    "at_risk": 40,
     "unscheduled": 11,
-    "accruing": 21476.26,
+    "accruing": 19111.94,
     "avg_days_open": 34,
-    "revenue_at_risk": 3495.83
+    "revenue_at_risk": 3450.33
   },
   "rows": [
     {
@@ -155,8 +155,8 @@
       "cost": {
         "code": "rl16-B01",
         "labor": 1247.63,
-        "materials": 0,
-        "total": 1247.63,
+        "materials": 29.56,
+        "total": 1277.19,
         "estimate": 0,
         "laborEntries": [
           {
@@ -447,7 +447,15 @@
             "cat": "CapEx"
           }
         ],
-        "materialEntries": []
+        "materialEntries": [
+          {
+            "d": "2026-09-16",
+            "amt": 29.56,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          }
+        ]
       },
       "stage": "Walkthrough",
       "stage_ord": 1,
@@ -485,7 +493,7 @@
         "status": "ACTIVE",
         "done": 3,
         "total": 7,
-        "first_appt": "2026-11-23",
+        "first_appt": null,
         "final_walk": "2026-12-02",
         "final_walk_done": null,
         "completed_date": "2026-07-14",
@@ -517,8 +525,8 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-11-23",
-            "who": "Micheal Magoon",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -526,8 +534,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-11-25",
-            "who": "Micheal Magoon",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -609,12 +617,12 @@
         "projId": 229355,
         "name": "Standard Unit Turn",
         "status": "ACTIVE",
-        "done": 1,
+        "done": 2,
         "total": 8,
-        "first_appt": "2026-12-14",
+        "first_appt": null,
         "final_walk": "2026-12-22",
         "final_walk_done": null,
-        "completed_date": "2026-09-15",
+        "completed_date": "2026-09-16",
         "due": "2026-09-11",
         "next_task": {
           "date": "2026-09-16",
@@ -643,8 +651,8 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-12-14",
-            "who": "Micheal Magoon",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -652,8 +660,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-12-15",
-            "who": "Micheal Magoon",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -678,10 +686,10 @@
           {
             "task": "Install fridge",
             "cat": "other",
-            "done": false,
+            "done": true,
             "date": "2026-09-16",
             "who": "Ron Cramer",
-            "completed": null,
+            "completed": "2026-09-16",
             "vendor": false
           },
           {
@@ -696,10 +704,10 @@
         ]
       },
       "next_appt": {
-        "date": "2026-09-16",
-        "cat": "other",
-        "who": "Ron Cramer",
-        "brief": "Install fridge"
+        "date": "2026-10-23",
+        "cat": "cleaning",
+        "who": "SPO Cleaning",
+        "brief": "F - Cleaning"
       },
       "cost": {
         "code": "b101-16",
@@ -837,12 +845,12 @@
         "projId": 223351,
         "name": "Standard Unit Turn",
         "status": "ACTIVE",
-        "done": 3,
+        "done": 4,
         "total": 7,
         "first_appt": "2026-08-06",
         "final_walk": "2026-10-08",
         "final_walk_done": null,
-        "completed_date": "2026-08-06",
+        "completed_date": "2026-10-06",
         "due": "2026-08-10",
         "next_task": {
           "date": "2026-09-30",
@@ -897,10 +905,10 @@
           {
             "task": "F - Cleaning",
             "cat": "cleaning",
-            "done": false,
+            "done": true,
             "date": "2026-10-06",
             "who": "SPO Cleaning",
-            "completed": null,
+            "completed": "2026-10-06",
             "vendor": true
           },
           {
@@ -915,10 +923,10 @@
         ]
       },
       "next_appt": {
-        "date": "2026-10-06",
-        "cat": "cleaning",
-        "who": "SPO Cleaning",
-        "brief": "F - Cleaning"
+        "date": "2026-10-07",
+        "cat": "suggested-carpet",
+        "who": "Allklean",
+        "brief": "Suggested carpet cleaning — business day after cleaning"
       },
       "cost": {
         "code": "c302-7",
@@ -1044,7 +1052,7 @@
         "status": "ACTIVE",
         "done": 1,
         "total": 8,
-        "first_appt": "2026-10-07",
+        "first_appt": null,
         "final_walk": "2026-10-19",
         "final_walk_done": null,
         "completed_date": "2026-08-05",
@@ -1076,8 +1084,8 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-10-07",
-            "who": "Micheal Magoon",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -1085,8 +1093,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-10-12",
-            "who": "Micheal Magoon",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -1201,7 +1209,7 @@
         "status": "ACTIVE",
         "done": 3,
         "total": 7,
-        "first_appt": "2026-12-17",
+        "first_appt": null,
         "final_walk": "2026-12-28",
         "final_walk_done": null,
         "completed_date": "2026-07-16",
@@ -1233,8 +1241,8 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-12-17",
-            "who": "Ron Cramer",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -1242,8 +1250,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-12-22",
-            "who": "Ron Cramer",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -1362,14 +1370,14 @@
         "status": "ACTIVE",
         "done": 1,
         "total": 7,
-        "first_appt": "2026-09-30",
+        "first_appt": null,
         "final_walk": "2026-10-13",
         "final_walk_done": null,
         "completed_date": "2026-07-01",
         "due": "2026-07-10",
         "next_task": {
-          "date": "2026-09-30",
-          "task": "paint"
+          "date": "2026-10-13",
+          "task": "final-walk"
         },
         "tasks": [
           {
@@ -1394,8 +1402,8 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-09-30",
-            "who": "Ron Cramer",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -1403,8 +1411,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-10-06",
-            "who": "Ron Cramer",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -1438,10 +1446,10 @@
         ]
       },
       "next_appt": {
-        "date": "2026-09-30",
-        "cat": "paint",
-        "who": "Ron Cramer",
-        "brief": "C - Paint Prep / Paint"
+        "date": "2026-10-13",
+        "cat": "final-walk",
+        "who": "Matt Romme",
+        "brief": "Final Walkthrough"
       },
       "cost": {
         "code": "c313-24",
@@ -2170,14 +2178,14 @@
         "status": "ACTIVE",
         "done": 1,
         "total": 7,
-        "first_appt": "2026-10-07",
+        "first_appt": null,
         "final_walk": "2026-10-19",
         "final_walk_done": null,
         "completed_date": "2026-06-04",
         "due": "2026-07-10",
         "next_task": {
-          "date": "2026-10-07",
-          "task": "paint"
+          "date": "2026-10-19",
+          "task": "final-walk"
         },
         "tasks": [
           {
@@ -2202,8 +2210,8 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-10-07",
-            "who": "Ron Cramer",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -2211,8 +2219,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-10-12",
-            "who": "Ron Cramer",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -2246,10 +2254,10 @@
         ]
       },
       "next_appt": {
-        "date": "2026-10-07",
-        "cat": "paint",
-        "who": "Ron Cramer",
-        "brief": "C - Paint Prep / Paint"
+        "date": "2026-10-19",
+        "cat": "final-walk",
+        "who": "Matt Romme",
+        "brief": "Final Walkthrough"
       },
       "cost": {
         "code": "k104-107-7",
@@ -2311,14 +2319,14 @@
         "status": "ACTIVE",
         "done": 1,
         "total": 8,
-        "first_appt": "2026-10-13",
+        "first_appt": null,
         "final_walk": "2026-10-22",
         "final_walk_done": null,
         "completed_date": "2026-08-17",
         "due": "2026-08-14",
         "next_task": {
-          "date": "2026-10-13",
-          "task": "paint"
+          "date": "2026-10-22",
+          "task": "final-walk"
         },
         "tasks": [
           {
@@ -2343,8 +2351,8 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-10-13",
-            "who": "Ron Cramer",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -2352,8 +2360,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-10-15",
-            "who": "Ron Cramer",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -2396,10 +2404,10 @@
         ]
       },
       "next_appt": {
-        "date": "2026-09-16",
-        "cat": "suggested-carpet",
-        "who": "Allklean",
-        "brief": "Suggested carpet cleaning — business day after cleaning"
+        "date": "2026-10-22",
+        "cat": "final-walk",
+        "who": "Matt Romme",
+        "brief": "Final Walkthrough"
       },
       "cost": {
         "code": "k104-509-4",
@@ -2658,7 +2666,7 @@
         "status": "ACTIVE",
         "done": 1,
         "total": 7,
-        "first_appt": "2026-11-26",
+        "first_appt": null,
         "final_walk": "2026-12-08",
         "final_walk_done": null,
         "completed_date": "2026-08-17",
@@ -2690,8 +2698,8 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-11-26",
-            "who": "Micheal Magoon",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -2699,8 +2707,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-12-01",
-            "who": "Micheal Magoon",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -2923,14 +2931,14 @@
         "status": "ACTIVE",
         "done": 2,
         "total": 7,
-        "first_appt": "2026-09-24",
+        "first_appt": null,
         "final_walk": "2026-11-05",
         "final_walk_done": null,
         "completed_date": "2026-09-09",
         "due": "2026-09-10",
         "next_task": {
-          "date": "2026-09-24",
-          "task": "paint"
+          "date": "2026-11-05",
+          "task": "final-walk"
         },
         "tasks": [
           {
@@ -2955,8 +2963,8 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-09-24",
-            "who": "Micheal Magoon",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -2964,8 +2972,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-10-29",
-            "who": "Ron Cramer",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -2999,10 +3007,10 @@
         ]
       },
       "next_appt": {
-        "date": "2026-09-24",
-        "cat": "paint",
-        "who": "Micheal Magoon",
-        "brief": "C - Paint Prep / Paint"
+        "date": "2026-11-05",
+        "cat": "final-walk",
+        "who": "Matt Romme",
+        "brief": "Final Walkthrough"
       },
       "cost": {
         "code": "m221-33",
@@ -3142,14 +3150,14 @@
         "status": "ACTIVE",
         "done": 4,
         "total": 7,
-        "first_appt": "2026-09-21",
+        "first_appt": null,
         "final_walk": "2026-09-30",
         "final_walk_done": null,
         "completed_date": "2026-08-31",
         "due": "2026-08-27",
         "next_task": {
-          "date": "2026-09-21",
-          "task": "paint"
+          "date": "2026-09-30",
+          "task": "final-walk"
         },
         "tasks": [
           {
@@ -3174,8 +3182,8 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-09-21",
-            "who": "Micheal Magoon",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -3183,8 +3191,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-09-23",
-            "who": "Micheal Magoon",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -3218,10 +3226,10 @@
         ]
       },
       "next_appt": {
-        "date": "2026-09-21",
-        "cat": "paint",
-        "who": "Micheal Magoon",
-        "brief": "C - Paint Prep / Paint"
+        "date": "2026-09-30",
+        "cat": "final-walk",
+        "who": "Matt Romme",
+        "brief": "Final Walkthrough"
       },
       "cost": {
         "code": "o155-A4",
@@ -3268,14 +3276,14 @@
         "status": "ACTIVE",
         "done": 1,
         "total": 8,
-        "first_appt": "2026-09-29",
+        "first_appt": null,
         "final_walk": "2026-10-08",
         "final_walk_done": null,
         "completed_date": "2026-09-10",
         "due": "2026-08-12",
         "next_task": {
-          "date": "2026-09-29",
-          "task": "paint"
+          "date": "2026-10-08",
+          "task": "final-walk"
         },
         "tasks": [
           {
@@ -3300,8 +3308,8 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-09-29",
-            "who": "Micheal Magoon",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -3309,8 +3317,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-10-01",
-            "who": "Micheal Magoon",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -3353,10 +3361,10 @@
         ]
       },
       "next_appt": {
-        "date": "2026-09-29",
-        "cat": "paint",
-        "who": "Micheal Magoon",
-        "brief": "C - Paint Prep / Paint"
+        "date": "2026-10-08",
+        "cat": "final-walk",
+        "who": "Matt Romme",
+        "brief": "Final Walkthrough"
       },
       "cost": {
         "code": "o155-B3",
@@ -3403,7 +3411,7 @@
         "status": "ACTIVE",
         "done": 1,
         "total": 7,
-        "first_appt": "2026-12-23",
+        "first_appt": null,
         "final_walk": "2027-01-04",
         "final_walk_done": null,
         "completed_date": "2026-08-17",
@@ -3435,8 +3443,8 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-12-23",
-            "who": "Ron Cramer",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -3444,8 +3452,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-12-28",
-            "who": "Ron Cramer",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -3638,7 +3646,7 @@
         "status": "ACTIVE",
         "done": 1,
         "total": 7,
-        "first_appt": "2026-10-05",
+        "first_appt": null,
         "final_walk": "2026-10-26",
         "final_walk_done": null,
         "completed_date": "2026-09-10",
@@ -3670,8 +3678,8 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-10-05",
-            "who": "Micheal Magoon",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -3679,8 +3687,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-10-19",
-            "who": "Ron Cramer",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -3750,8 +3758,8 @@
       "vacant": true,
       "days_vacant": 107,
       "move_out": "2026-06-01",
-      "available_on": "2026-09-26",
-      "ready_on": "2026-09-26",
+      "available_on": "2026-10-31",
+      "ready_on": "2026-10-30",
       "target_date": "2026-06-21",
       "next_move_in": null,
       "rent": "1295.00",
@@ -3762,12 +3770,12 @@
         "projId": 223542,
         "name": "Standard Unit Turn",
         "status": "ACTIVE",
-        "done": 4,
+        "done": 5,
         "total": 8,
         "first_appt": "2026-08-26",
         "final_walk": "2026-09-23",
         "final_walk_done": null,
-        "completed_date": "2026-09-11",
+        "completed_date": "2026-09-16",
         "due": "2026-07-13",
         "next_task": {
           "date": "2026-09-16",
@@ -3831,10 +3839,10 @@
           {
             "task": "Install fridge",
             "cat": "other",
-            "done": false,
+            "done": true,
             "date": "2026-09-16",
             "who": "Ron Cramer",
-            "completed": null,
+            "completed": "2026-09-16",
             "vendor": false
           },
           {
@@ -3849,10 +3857,10 @@
         ]
       },
       "next_appt": {
-        "date": "2026-09-16",
-        "cat": "other",
-        "who": "Ron Cramer",
-        "brief": "Install fridge"
+        "date": "2026-09-19",
+        "cat": "cleaning",
+        "who": "SPO Cleaning",
+        "brief": "F - Cleaning"
       },
       "cost": {
         "code": "p705-17",
@@ -5033,526 +5041,6 @@
       "status": "active"
     },
     {
-      "key": "s129|13",
-      "prop": "s129",
-      "unit": "13",
-      "at_risk": [
-        "Over 45 days vacant"
-      ],
-      "property_name": "s129",
-      "city": "Spokane Valley",
-      "addr": "12903 E Sprague Ave #13 Spokane Valley, WA 99216",
-      "unit_id": 664,
-      "unit_status": "Vacant-Rented",
-      "rent_ready": "No",
-      "vacant": true,
-      "days_vacant": 47,
-      "move_out": "2026-07-31",
-      "available_on": "2026-09-17",
-      "ready_on": "2026-09-17",
-      "target_date": "2026-08-20",
-      "next_move_in": "2026-09-17",
-      "rent": "1365.00",
-      "bed_bath": "2/1.00",
-      "sqft": 1035,
-      "region": "Spokane",
-      "pm": {
-        "projId": 229337,
-        "name": "Standard Unit Turn",
-        "status": "ACTIVE",
-        "done": 4,
-        "total": 7,
-        "first_appt": "2026-08-20",
-        "final_walk": "2026-09-18",
-        "final_walk_done": null,
-        "completed_date": "2026-08-28",
-        "due": "2026-09-10",
-        "next_task": {
-          "date": "2026-09-18",
-          "task": "final-walk"
-        },
-        "tasks": [
-          {
-            "task": "A - Initial walkthrough",
-            "cat": "walkthrough",
-            "done": true,
-            "date": "2026-08-19",
-            "who": "Ron Cramer",
-            "completed": "2026-08-21",
-            "vendor": false
-          },
-          {
-            "task": "Appfolio Estimate",
-            "cat": "estimate",
-            "done": false,
-            "date": null,
-            "who": "Dulce Salinas",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "C - Paint",
-            "cat": "paint",
-            "done": true,
-            "date": "2026-08-20",
-            "who": "Ron Cramer",
-            "completed": "2026-08-21",
-            "vendor": false
-          },
-          {
-            "task": "D - Maintenance",
-            "cat": "maintenance",
-            "done": true,
-            "date": "2026-08-25",
-            "who": "Ron Cramer",
-            "completed": "2026-08-21",
-            "vendor": false
-          },
-          {
-            "task": "E - Carpet Cleaning",
-            "cat": "carpet",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "F - Cleaning",
-            "cat": "cleaning",
-            "done": true,
-            "date": "2026-08-28",
-            "who": "SPO Cleaning",
-            "completed": "2026-08-28",
-            "vendor": true
-          },
-          {
-            "task": "Final Walkthrough",
-            "cat": "final-walk",
-            "done": false,
-            "date": "2026-09-18",
-            "who": "Matt Romme",
-            "completed": null,
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": {
-        "date": "2026-09-18",
-        "cat": "final-walk",
-        "who": "Matt Romme",
-        "brief": "Final Walkthrough"
-      },
-      "cost": {
-        "code": "s129-13",
-        "labor": 1692.33,
-        "materials": 1053.1,
-        "total": 2745.43,
-        "estimate": 0,
-        "laborEntries": [
-          {
-            "d": "2026-09-15",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.28,
-            "cost": 32.96,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-09-15",
-            "emp": "Ronald D. Cramer",
-            "hrs": 0.95,
-            "cost": 24.46,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-09-15",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.75,
-            "cost": 45.06,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-09-15",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.53,
-            "cost": 39.4,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-09-15",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.52,
-            "cost": 39.14,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-09-15",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.52,
-            "cost": 39.14,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-09-15",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.13,
-            "cost": 29.1,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-09-14",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.17,
-            "cost": 30.13,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-09-14",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.38,
-            "cost": 35.53,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-09-14",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.13,
-            "cost": 29.1,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-09-14",
-            "emp": "Ronald D. Cramer",
-            "hrs": 0.83,
-            "cost": 21.37,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-09-14",
-            "emp": "Ronald D. Cramer",
-            "hrs": 0.87,
-            "cost": 22.4,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-24",
-            "emp": "Ronald D. Cramer",
-            "hrs": 0.33,
-            "cost": 8.5,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-24",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.77,
-            "cost": 45.58,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-24",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.67,
-            "cost": 43,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-21",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.25,
-            "cost": 32.19,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-21",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.53,
-            "cost": 39.4,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-21",
-            "emp": "Ronald D. Cramer",
-            "hrs": 0.2,
-            "cost": 5.15,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-20",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.75,
-            "cost": 45.06,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-20",
-            "emp": "Ronald D. Cramer",
-            "hrs": 2,
-            "cost": 51.5,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-20",
-            "emp": "Ronald D. Cramer",
-            "hrs": 0.32,
-            "cost": 8.24,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-20",
-            "emp": "Ronald D. Cramer",
-            "hrs": 2,
-            "cost": 51.5,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-20",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.68,
-            "cost": 43.26,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-20",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.02,
-            "cost": 26.27,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-20",
-            "emp": "Ronald D. Cramer",
-            "hrs": 0.98,
-            "cost": 25.24,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-20",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.13,
-            "cost": 29.1,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-20",
-            "emp": "Ronald D. Cramer",
-            "hrs": 0.87,
-            "cost": 22.4,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-19",
-            "emp": "Ronald D. Cramer",
-            "hrs": 2,
-            "cost": 51.5,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-19",
-            "emp": "Ronald D. Cramer",
-            "hrs": 2.02,
-            "cost": 52.02,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-19",
-            "emp": "Ronald D. Cramer",
-            "hrs": 2,
-            "cost": 51.5,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-19",
-            "emp": "Ronald D. Cramer",
-            "hrs": 2,
-            "cost": 51.5,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-19",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.47,
-            "cost": 37.85,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-19",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1,
-            "cost": 25.75,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-19",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1,
-            "cost": 25.75,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-19",
-            "emp": "Ronald D. Cramer",
-            "hrs": 0.93,
-            "cost": 23.95,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-19",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.08,
-            "cost": 27.81,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-19",
-            "emp": "Ronald D. Cramer",
-            "hrs": 0.98,
-            "cost": 25.24,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-19",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.02,
-            "cost": 26.27,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-19",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.12,
-            "cost": 28.84,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-19",
-            "emp": "Ronald D. Cramer",
-            "hrs": 0.88,
-            "cost": 22.66,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-18",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.12,
-            "cost": 28.84,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-18",
-            "emp": "Ronald D. Cramer",
-            "hrs": 2,
-            "cost": 51.5,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-18",
-            "emp": "Ronald D. Cramer",
-            "hrs": 2,
-            "cost": 51.5,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-17",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.53,
-            "cost": 39.4,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-17",
-            "emp": "Ronald D. Cramer",
-            "hrs": 0.68,
-            "cost": 17.51,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-17",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.78,
-            "cost": 45.84,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-17",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.17,
-            "cost": 30.13,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-17",
-            "emp": "Ronald D. Cramer",
-            "hrs": 2,
-            "cost": 51.5,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-17",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.28,
-            "cost": 32.96,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-17",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.1,
-            "cost": 28.33,
-            "cat": "Turn"
-          }
-        ],
-        "materialEntries": [
-          {
-            "d": "2026-09-15",
-            "amt": 56.56,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-14",
-            "amt": 457.33,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-21",
-            "amt": 9.71,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-18",
-            "amt": 15.24,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-17",
-            "amt": 13.06,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-17",
-            "amt": 501.2,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          }
-        ]
-      },
-      "stage": "Maintenance",
-      "stage_ord": 3,
-      "days_elapsed": 47,
-      "days_to_turn": null,
-      "status": "active"
-    },
-    {
       "key": "tc68|a03",
       "prop": "tc68",
       "unit": "A03",
@@ -5563,7 +5051,7 @@
       "city": "Tacoma",
       "addr": "6830 Tacoma Mall Blvd Apt A03 Tacoma, WA 98409",
       "unit_id": 1152,
-      "unit_status": "Vacant-Unrented",
+      "unit_status": "Vacant-Rented",
       "rent_ready": "No",
       "vacant": true,
       "days_vacant": 66,
@@ -5571,7 +5059,7 @@
       "available_on": "2026-09-17",
       "ready_on": "2026-09-17",
       "target_date": "2026-08-01",
-      "next_move_in": null,
+      "next_move_in": "2026-09-18",
       "rent": "1775.00",
       "bed_bath": "2/1.00",
       "sqft": 980,
@@ -5580,86 +5068,77 @@
         "projId": 235868,
         "name": "Standard Unit Turn",
         "status": "ACTIVE",
-        "done": 0,
+        "done": 7,
         "total": 8,
         "first_appt": "2026-09-22",
-        "final_walk": "2026-11-26",
+        "final_walk": "2026-09-17",
         "final_walk_done": null,
-        "completed_date": null,
+        "completed_date": "2026-09-16",
         "due": "2026-07-27",
         "next_task": {
-          "date": "2026-09-21",
-          "task": "maintenance"
+          "date": "2026-09-17",
+          "task": "final-walk"
         },
         "tasks": [
           {
             "task": "A - Initial walkthrough",
             "cat": "walkthrough",
-            "done": false,
+            "done": true,
             "date": "2026-09-21",
             "who": "Armani Mitchell",
-            "completed": null,
+            "completed": "2026-09-16",
             "vendor": false
           },
           {
             "task": "Appfolio Estimate",
             "cat": "estimate",
-            "done": false,
+            "done": true,
             "date": null,
             "who": "Dulce Salinas",
-            "completed": null,
+            "completed": "2026-09-16",
             "vendor": false
           },
           {
             "task": "C - Paint",
             "cat": "paint",
-            "done": false,
+            "done": true,
             "date": "2026-11-18",
             "who": "Chris Phillips",
-            "completed": null,
+            "completed": "2026-09-16",
             "vendor": false
           },
           {
             "task": "D - Maintenance",
             "cat": "maintenance",
-            "done": false,
+            "done": true,
             "date": "2026-09-22",
             "who": "Armani Mitchell",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "E - Carpet Cleaning",
-            "cat": "carpet",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
+            "completed": "2026-09-16",
             "vendor": false
           },
           {
             "task": "F - Cleaning",
             "cat": "cleaning",
-            "done": false,
+            "done": true,
             "date": null,
             "who": null,
-            "completed": null,
+            "completed": "2026-09-16",
             "vendor": false
           },
           {
             "task": "G - Verify Mailbox Lockbox & Mailbox Keys",
             "cat": "other",
-            "done": false,
+            "done": true,
             "date": null,
             "who": null,
-            "completed": null,
+            "completed": "2026-09-16",
             "vendor": false
           },
           {
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": "2026-11-26",
+            "date": "2026-09-17",
             "who": "Armani Mitchell",
             "completed": null,
             "vendor": false
@@ -5667,10 +5146,10 @@
         ]
       },
       "next_appt": {
-        "date": "2026-09-21",
-        "cat": "maintenance",
+        "date": "2026-09-17",
+        "cat": "final-walk",
         "who": "Armani Mitchell",
-        "brief": "D - Maintenance"
+        "brief": "Final Walkthrough"
       },
       "cost": {
         "code": "tc68-A03",
@@ -5689,8 +5168,8 @@
         ],
         "materialEntries": []
       },
-      "stage": "Walkthrough",
-      "stage_ord": 1,
+      "stage": "Final Walk",
+      "stage_ord": 6,
       "days_elapsed": 66,
       "days_to_turn": null,
       "status": "active"
@@ -5992,12 +5471,12 @@
         "projId": 227430,
         "name": "Standard Unit Turn",
         "status": "ACTIVE",
-        "done": 2,
+        "done": 3,
         "total": 7,
         "first_appt": "2026-09-14",
         "final_walk": "2026-09-24",
         "final_walk_done": null,
-        "completed_date": "2026-07-07",
+        "completed_date": "2026-09-16",
         "due": "2026-08-10",
         "next_task": {
           "date": "2026-09-16",
@@ -6025,10 +5504,10 @@
           {
             "task": "C - Paint",
             "cat": "paint",
-            "done": false,
+            "done": true,
             "date": "2026-09-14",
             "who": "Chris Phillips",
-            "completed": null,
+            "completed": "2026-09-16",
             "vendor": false
           },
           {
@@ -6246,8 +5725,8 @@
         ],
         "materialEntries": []
       },
-      "stage": "Paint",
-      "stage_ord": 2,
+      "stage": "Maintenance",
+      "stage_ord": 3,
       "days_elapsed": 75,
       "days_to_turn": null,
       "status": "active"
@@ -7254,7 +6733,7 @@
         "status": "ACTIVE",
         "done": 0,
         "total": 8,
-        "first_appt": "2026-12-22",
+        "first_appt": null,
         "final_walk": "2026-12-31",
         "final_walk_done": null,
         "completed_date": null,
@@ -7286,8 +6765,8 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-12-22",
-            "who": "Micheal Magoon",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -7295,8 +6774,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-12-24",
-            "who": "Micheal Magoon",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -7395,7 +6874,7 @@
         "status": "ACTIVE",
         "done": 1,
         "total": 7,
-        "first_appt": "2026-12-14",
+        "first_appt": null,
         "final_walk": "2026-12-23",
         "final_walk_done": null,
         "completed_date": "2026-09-15",
@@ -7427,8 +6906,8 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-12-14",
-            "who": "Ron Cramer",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -7436,8 +6915,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-12-16",
-            "who": "Ron Cramer",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -7907,7 +7386,7 @@
         "status": "ACTIVE",
         "done": 0,
         "total": 8,
-        "first_appt": "2026-11-03",
+        "first_appt": null,
         "final_walk": "2026-11-12",
         "final_walk_done": null,
         "completed_date": null,
@@ -7939,8 +7418,8 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-11-03",
-            "who": "Micheal Magoon",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -7948,8 +7427,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-11-05",
-            "who": "Micheal Magoon",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -8071,7 +7550,7 @@
         "status": "ACTIVE",
         "done": 0,
         "total": 8,
-        "first_appt": "2027-01-12",
+        "first_appt": null,
         "final_walk": "2027-01-21",
         "final_walk_done": null,
         "completed_date": null,
@@ -8103,8 +7582,8 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2027-01-12",
-            "who": "Micheal Magoon",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -8112,8 +7591,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2027-01-14",
-            "who": "Micheal Magoon",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -8646,7 +8125,7 @@
         "status": "ACTIVE",
         "done": 1,
         "total": 7,
-        "first_appt": "2026-10-20",
+        "first_appt": null,
         "final_walk": "2026-10-29",
         "final_walk_done": null,
         "completed_date": "2026-08-17",
@@ -8678,8 +8157,8 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-10-20",
-            "who": "Ron Cramer",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -8687,8 +8166,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-10-22",
-            "who": "Ron Cramer",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -9451,12 +8930,12 @@
         "projId": 240627,
         "name": "Standard Unit Turn",
         "status": "ACTIVE",
-        "done": 0,
+        "done": 1,
         "total": 8,
-        "first_appt": "2026-11-17",
+        "first_appt": null,
         "final_walk": "2026-11-26",
         "final_walk_done": null,
-        "completed_date": null,
+        "completed_date": "2026-09-16",
         "due": "2026-09-05",
         "next_task": {
           "date": "2026-09-16",
@@ -9466,10 +8945,10 @@
           {
             "task": "A - Initial walkthrough",
             "cat": "walkthrough",
-            "done": false,
+            "done": true,
             "date": "2026-09-16",
             "who": "Matt Romme",
-            "completed": null,
+            "completed": "2026-09-16",
             "vendor": false
           },
           {
@@ -9485,8 +8964,8 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-11-17",
-            "who": "Ron Cramer",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -9494,8 +8973,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-11-19",
-            "who": "Ron Cramer",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -9538,10 +9017,10 @@
         ]
       },
       "next_appt": {
-        "date": "2026-09-16",
-        "cat": "walkthrough",
+        "date": "2026-11-26",
+        "cat": "final-walk",
         "who": "Matt Romme",
-        "brief": "A - Initial walkthrough"
+        "brief": "Final Walkthrough"
       },
       "cost": {
         "code": "c313-1",
@@ -9552,8 +9031,8 @@
         "laborEntries": [],
         "materialEntries": []
       },
-      "stage": "Walkthrough",
-      "stage_ord": 1,
+      "stage": "Maintenance",
+      "stage_ord": 3,
       "days_elapsed": 26,
       "days_to_turn": null,
       "status": "active"
@@ -9586,7 +9065,7 @@
         "status": "ACTIVE",
         "done": 0,
         "total": 8,
-        "first_appt": "2026-12-28",
+        "first_appt": null,
         "final_walk": "2027-01-06",
         "final_walk_done": null,
         "completed_date": null,
@@ -9618,8 +9097,8 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-12-28",
-            "who": "Micheal Magoon",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -9627,8 +9106,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-12-30",
-            "who": "Micheal Magoon",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -10258,12 +9737,12 @@
         "projId": 238504,
         "name": "Standard Unit Turn",
         "status": "ACTIVE",
-        "done": 0,
+        "done": 1,
         "total": 8,
-        "first_appt": "2026-12-08",
+        "first_appt": null,
         "final_walk": "2026-12-17",
         "final_walk_done": null,
-        "completed_date": null,
+        "completed_date": "2026-09-16",
         "due": "2026-09-08",
         "next_task": {
           "date": "2026-09-16",
@@ -10273,10 +9752,10 @@
           {
             "task": "A - Initial walkthrough",
             "cat": "walkthrough",
-            "done": false,
+            "done": true,
             "date": "2026-09-16",
             "who": "Matt Romme",
-            "completed": null,
+            "completed": "2026-09-16",
             "vendor": false
           },
           {
@@ -10292,8 +9771,8 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-12-08",
-            "who": "Micheal Magoon",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -10301,8 +9780,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-12-10",
-            "who": "Micheal Magoon",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -10345,10 +9824,10 @@
         ]
       },
       "next_appt": {
-        "date": "2026-09-16",
-        "cat": "walkthrough",
-        "who": "Matt Romme",
-        "brief": "A - Initial walkthrough"
+        "date": "2026-10-05",
+        "cat": "cleaning",
+        "who": "SPO Cleaning",
+        "brief": "F - Cleaning"
       },
       "cost": {
         "code": "c313-31",
@@ -10359,8 +9838,8 @@
         "laborEntries": [],
         "materialEntries": []
       },
-      "stage": "Walkthrough",
-      "stage_ord": 1,
+      "stage": "Maintenance",
+      "stage_ord": 3,
       "days_elapsed": 23,
       "days_to_turn": null,
       "status": "active"
@@ -12140,12 +11619,12 @@
         "projId": 239153,
         "name": "Standard Unit Turn",
         "status": "ACTIVE",
-        "done": 2,
+        "done": 3,
         "total": 8,
         "first_appt": "2026-09-11",
         "final_walk": "2026-09-22",
         "final_walk_done": null,
-        "completed_date": "2026-09-15",
+        "completed_date": "2026-09-16",
         "due": "2026-08-25",
         "next_task": {
           "date": "2026-09-22",
@@ -12182,10 +11661,10 @@
           {
             "task": "E - Carpet Cleaning",
             "cat": "carpet",
-            "done": false,
+            "done": true,
             "date": null,
             "who": null,
-            "completed": null,
+            "completed": "2026-09-16",
             "vendor": false
           },
           {
@@ -13852,11 +13331,19 @@
       "cost": {
         "code": "c702-K102",
         "labor": 0,
-        "materials": 0,
-        "total": 0,
+        "materials": 351.55,
+        "total": 351.55,
         "estimate": 0,
         "laborEntries": [],
-        "materialEntries": []
+        "materialEntries": [
+          {
+            "d": "2026-09-16",
+            "amt": 351.55,
+            "cat": "Turn",
+            "ln": "smith",
+            "src": "ramp"
+          }
+        ]
       },
       "stage": "Maintenance",
       "stage_ord": 3,
@@ -14398,7 +13885,7 @@
         "status": "ACTIVE",
         "done": 0,
         "total": 8,
-        "first_appt": "2026-10-22",
+        "first_appt": null,
         "final_walk": "2026-11-03",
         "final_walk_done": null,
         "completed_date": null,
@@ -14430,8 +13917,8 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-10-22",
-            "who": "Micheal Magoon",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -14439,8 +13926,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-10-27",
-            "who": "Micheal Magoon",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -14597,7 +14084,7 @@
         "status": "ACTIVE",
         "done": 1,
         "total": 8,
-        "first_appt": "2026-11-05",
+        "first_appt": null,
         "final_walk": "2026-11-17",
         "final_walk_done": null,
         "completed_date": "2026-08-06",
@@ -14629,8 +14116,8 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-11-05",
-            "who": "Ron Cramer",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -14638,8 +14125,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-11-10",
-            "who": "Ron Cramer",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -14730,7 +14217,7 @@
         "status": "ACTIVE",
         "done": 0,
         "total": 8,
-        "first_appt": "2026-12-31",
+        "first_appt": null,
         "final_walk": "2027-01-12",
         "final_walk_done": null,
         "completed_date": null,
@@ -14762,8 +14249,8 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-12-31",
-            "who": "Micheal Magoon",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -14771,8 +14258,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2027-01-05",
-            "who": "Micheal Magoon",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -15674,7 +15161,7 @@
         "status": "ACTIVE",
         "done": 0,
         "total": 7,
-        "first_appt": "2026-12-29",
+        "first_appt": null,
         "final_walk": "2027-01-07",
         "final_walk_done": null,
         "completed_date": null,
@@ -15706,8 +15193,8 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-12-29",
-            "who": "Ron Cramer",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -15715,8 +15202,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-12-31",
-            "who": "Ron Cramer",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -15948,7 +15435,7 @@
         "status": "ACTIVE",
         "done": 0,
         "total": 8,
-        "first_appt": "2026-10-26",
+        "first_appt": null,
         "final_walk": "2026-11-04",
         "final_walk_done": null,
         "completed_date": null,
@@ -15980,8 +15467,8 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-10-26",
-            "who": "Ron Cramer",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -15989,8 +15476,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-10-28",
-            "who": "Ron Cramer",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -16081,7 +15568,7 @@
         "status": "ACTIVE",
         "done": 0,
         "total": 8,
-        "first_appt": "2026-12-02",
+        "first_appt": null,
         "final_walk": "2026-12-14",
         "final_walk_done": null,
         "completed_date": null,
@@ -16113,8 +15600,8 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-12-02",
-            "who": "Micheal Magoon",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -16122,8 +15609,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-12-07",
-            "who": "Micheal Magoon",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -16447,7 +15934,7 @@
         "status": "ACTIVE",
         "done": 1,
         "total": 7,
-        "first_appt": "2026-11-02",
+        "first_appt": null,
         "final_walk": "2026-11-11",
         "final_walk_done": null,
         "completed_date": "2026-09-16",
@@ -16479,8 +15966,8 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-11-02",
-            "who": "Ron Cramer",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -16488,8 +15975,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-11-04",
-            "who": "Ron Cramer",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -16609,7 +16096,7 @@
         "status": "ACTIVE",
         "done": 1,
         "total": 7,
-        "first_appt": "2026-12-08",
+        "first_appt": null,
         "final_walk": "2026-12-17",
         "final_walk_done": null,
         "completed_date": "2026-09-15",
@@ -16641,8 +16128,8 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-12-08",
-            "who": "Ron Cramer",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -16650,8 +16137,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-12-10",
-            "who": "Ron Cramer",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -16827,7 +16314,7 @@
         "status": "ACTIVE",
         "done": 1,
         "total": 8,
-        "first_appt": "2026-11-11",
+        "first_appt": null,
         "final_walk": "2026-11-23",
         "final_walk_done": null,
         "completed_date": "2026-08-05",
@@ -16859,8 +16346,8 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-11-11",
-            "who": "Ron Cramer",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -16868,8 +16355,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-11-16",
-            "who": "Ron Cramer",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -17082,7 +16569,7 @@
         "status": "ACTIVE",
         "done": 1,
         "total": 7,
-        "first_appt": "2026-10-28",
+        "first_appt": null,
         "final_walk": "2026-11-09",
         "final_walk_done": null,
         "completed_date": "2026-08-17",
@@ -17114,8 +16601,8 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-10-28",
-            "who": "Micheal Magoon",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -17123,8 +16610,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-11-02",
-            "who": "Micheal Magoon",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -17279,7 +16766,7 @@
         "status": "ACTIVE",
         "done": 0,
         "total": 8,
-        "first_appt": "2026-12-16",
+        "first_appt": null,
         "final_walk": "2026-12-28",
         "final_walk_done": null,
         "completed_date": null,
@@ -17311,8 +16798,8 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-12-16",
-            "who": "Micheal Magoon",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -17320,8 +16807,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-12-21",
-            "who": "Micheal Magoon",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -17388,23 +16875,8 @@
       "key": "kn47|a103",
       "prop": "kn47",
       "unit": "A103",
-      "at_risk": [],
       "property_name": "kn47 K1",
-      "city": "Kennewick",
-      "addr": "4711 W Metaline Avenue A103 Kennewick, WA 99336",
-      "unit_id": 829,
-      "unit_status": "Notice-Unrented",
-      "rent_ready": null,
-      "vacant": false,
-      "days_vacant": null,
-      "move_out": "2026-09-30",
-      "available_on": "2026-12-03",
-      "ready_on": "2026-12-03",
-      "target_date": "2026-10-20",
-      "next_move_in": null,
-      "rent": "1358.00",
-      "bed_bath": "2/1.00",
-      "sqft": 775,
+      "at_risk": [],
       "region": "Tri-Cities",
       "pm": {
         "projId": 222903,
@@ -17533,10 +17005,11 @@
         ]
       },
       "turn_end": "2025-05-22",
+      "af_turn_end": "2025-05-27",
       "stage": "Walkthrough",
       "stage_ord": 1,
-      "days_elapsed": 0,
-      "days_to_turn": -496,
+      "days_elapsed": null,
+      "days_to_turn": null,
       "status": "complete"
     },
     {
@@ -17565,12 +17038,12 @@
         "projId": 229350,
         "name": "Standard Unit Turn",
         "status": "ACTIVE",
-        "done": 1,
+        "done": 2,
         "total": 7,
         "first_appt": "2026-09-14",
         "final_walk": "2026-10-29",
         "final_walk_done": null,
-        "completed_date": "2026-08-04",
+        "completed_date": "2026-09-16",
         "due": "2026-09-11",
         "next_task": {
           "date": "2026-10-20",
@@ -17607,10 +17080,10 @@
           {
             "task": "D - Maintenance",
             "cat": "maintenance",
-            "done": false,
+            "done": true,
             "date": "2026-09-14",
             "who": "Matthew Williams",
-            "completed": null,
+            "completed": "2026-09-16",
             "vendor": false
           },
           {
@@ -27518,7 +26991,7 @@
         "status": "ACTIVE",
         "done": 1,
         "total": 7,
-        "first_appt": "2027-01-06",
+        "first_appt": null,
         "final_walk": "2027-01-18",
         "final_walk_done": null,
         "completed_date": "2026-09-10",
@@ -27550,8 +27023,8 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2027-01-06",
-            "who": "Ron Cramer",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -27559,8 +27032,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2027-01-11",
-            "who": "Ron Cramer",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -27651,7 +27124,7 @@
         "status": "ACTIVE",
         "done": 0,
         "total": 8,
-        "first_appt": "2027-01-12",
+        "first_appt": null,
         "final_walk": "2027-01-21",
         "final_walk_done": null,
         "completed_date": null,
@@ -27683,8 +27156,8 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2027-01-12",
-            "who": "Ron Cramer",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -27692,8 +27165,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2027-01-14",
-            "who": "Ron Cramer",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -28209,7 +27682,7 @@
         "status": "ACTIVE",
         "done": 0,
         "total": 8,
-        "first_appt": "2026-11-23",
+        "first_appt": null,
         "final_walk": "2026-12-02",
         "final_walk_done": null,
         "completed_date": null,
@@ -28241,8 +27714,8 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-11-23",
-            "who": "Ron Cramer",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -28250,8 +27723,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-11-25",
-            "who": "Ron Cramer",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -28327,14 +27800,14 @@
         "status": "ACTIVE",
         "done": 2,
         "total": 8,
-        "first_appt": "2026-09-21",
+        "first_appt": null,
         "final_walk": "2026-09-30",
         "final_walk_done": null,
         "completed_date": "2026-09-15",
         "due": "2026-09-15",
         "next_task": {
-          "date": "2026-09-21",
-          "task": "paint"
+          "date": "2026-09-30",
+          "task": "final-walk"
         },
         "tasks": [
           {
@@ -28359,8 +27832,8 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-09-21",
-            "who": "Ron Cramer",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -28368,8 +27841,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-09-23",
-            "who": "Ron Cramer",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -28412,10 +27885,10 @@
         ]
       },
       "next_appt": {
-        "date": "2026-09-21",
-        "cat": "paint",
-        "who": "Ron Cramer",
-        "brief": "C - Paint Prep / Paint"
+        "date": "2026-09-30",
+        "cat": "final-walk",
+        "who": "Matt Romme",
+        "brief": "Final Walkthrough"
       },
       "cost": {
         "code": "m608-4",
@@ -28930,7 +28403,7 @@
         "status": "ACTIVE",
         "done": 0,
         "total": 8,
-        "first_appt": "2027-01-06",
+        "first_appt": null,
         "final_walk": "2027-01-18",
         "final_walk_done": null,
         "completed_date": null,
@@ -28962,8 +28435,8 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2027-01-06",
-            "who": "Micheal Magoon",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -28971,8 +28444,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2027-01-11",
-            "who": "Micheal Magoon",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -29142,7 +28615,7 @@
         "status": "ACTIVE",
         "done": 3,
         "total": 7,
-        "first_appt": "2027-01-04",
+        "first_appt": null,
         "final_walk": null,
         "final_walk_done": "2026-04-14",
         "completed_date": "2026-04-14",
@@ -29156,7 +28629,7 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2027-01-04",
+            "date": null,
             "who": "Ron Cramer",
             "completed": null,
             "vendor": false
@@ -29463,7 +28936,7 @@
         "status": "ACTIVE",
         "done": 1,
         "total": 8,
-        "first_appt": "2026-10-19",
+        "first_appt": null,
         "final_walk": "2026-10-28",
         "final_walk_done": null,
         "completed_date": "2026-09-15",
@@ -29495,8 +28968,8 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-10-19",
-            "who": "Micheal Magoon",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -29504,8 +28977,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-10-21",
-            "who": "Micheal Magoon",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -29596,7 +29069,7 @@
         "status": "ACTIVE",
         "done": 0,
         "total": 8,
-        "first_appt": "2026-12-02",
+        "first_appt": null,
         "final_walk": "2026-12-14",
         "final_walk_done": null,
         "completed_date": null,
@@ -29628,8 +29101,8 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-12-02",
-            "who": "Ron Cramer",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -29637,8 +29110,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-12-07",
-            "who": "Ron Cramer",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -29729,7 +29202,7 @@
         "status": "ACTIVE",
         "done": 1,
         "total": 8,
-        "first_appt": "2026-10-13",
+        "first_appt": null,
         "final_walk": "2026-10-22",
         "final_walk_done": null,
         "completed_date": "2026-09-14",
@@ -29761,8 +29234,8 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-10-13",
-            "who": "Micheal Magoon",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -29770,8 +29243,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-10-15",
-            "who": "Micheal Magoon",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -30995,8 +30468,8 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-11-18",
-            "who": "Micheal Magoon",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -33070,7 +32543,7 @@
       "vacant": true,
       "days_vacant": 78,
       "move_out": "2026-06-30",
-      "available_on": "2026-08-02",
+      "available_on": null,
       "ready_on": "2026-08-02",
       "target_date": "2026-07-20",
       "next_move_in": "2026-09-17",
@@ -42787,6 +42260,520 @@
       "status": "complete"
     },
     {
+      "key": "s129|13",
+      "prop": "s129",
+      "unit": "13",
+      "at_risk": [],
+      "property_name": "s129",
+      "city": "Spokane Valley",
+      "addr": "12903 E Sprague Ave #13 Spokane Valley, WA 99216",
+      "unit_id": 664,
+      "unit_status": "Vacant-Rented",
+      "rent_ready": "Yes",
+      "vacant": true,
+      "days_vacant": 47,
+      "move_out": "2026-07-31",
+      "available_on": "2026-09-17",
+      "ready_on": "2026-09-17",
+      "target_date": "2026-08-20",
+      "next_move_in": "2026-09-17",
+      "rent": "1365.00",
+      "bed_bath": "2/1.00",
+      "sqft": 1035,
+      "region": "Spokane",
+      "pm": {
+        "projId": 229337,
+        "name": "Standard Unit Turn",
+        "status": "ACTIVE",
+        "done": 5,
+        "total": 7,
+        "first_appt": "2026-08-20",
+        "final_walk": "2026-09-16",
+        "final_walk_done": "2026-09-16",
+        "completed_date": "2026-09-16",
+        "due": "2026-09-10",
+        "next_task": {
+          "date": "2026-09-16",
+          "task": "final-walk"
+        },
+        "tasks": [
+          {
+            "task": "A - Initial walkthrough",
+            "cat": "walkthrough",
+            "done": true,
+            "date": "2026-08-19",
+            "who": "Ron Cramer",
+            "completed": "2026-08-21",
+            "vendor": false
+          },
+          {
+            "task": "Appfolio Estimate",
+            "cat": "estimate",
+            "done": false,
+            "date": null,
+            "who": "Dulce Salinas",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "C - Paint",
+            "cat": "paint",
+            "done": true,
+            "date": "2026-08-20",
+            "who": "Ron Cramer",
+            "completed": "2026-08-21",
+            "vendor": false
+          },
+          {
+            "task": "D - Maintenance",
+            "cat": "maintenance",
+            "done": true,
+            "date": "2026-08-25",
+            "who": "Ron Cramer",
+            "completed": "2026-08-21",
+            "vendor": false
+          },
+          {
+            "task": "E - Carpet Cleaning",
+            "cat": "carpet",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "F - Cleaning",
+            "cat": "cleaning",
+            "done": true,
+            "date": "2026-08-28",
+            "who": "SPO Cleaning",
+            "completed": "2026-08-28",
+            "vendor": true
+          },
+          {
+            "task": "Final Walkthrough",
+            "cat": "final-walk",
+            "done": true,
+            "date": "2026-09-16",
+            "who": "Matt Romme",
+            "completed": "2026-09-16",
+            "vendor": false
+          }
+        ]
+      },
+      "next_appt": null,
+      "cost": {
+        "code": "s129-13",
+        "labor": 1692.33,
+        "materials": 1053.1,
+        "total": 2745.43,
+        "estimate": 0,
+        "laborEntries": [
+          {
+            "d": "2026-09-15",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.28,
+            "cost": 32.96,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-15",
+            "emp": "Ronald D. Cramer",
+            "hrs": 0.95,
+            "cost": 24.46,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-15",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.75,
+            "cost": 45.06,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-15",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.53,
+            "cost": 39.4,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-15",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.52,
+            "cost": 39.14,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-15",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.52,
+            "cost": 39.14,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-15",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.13,
+            "cost": 29.1,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-14",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.17,
+            "cost": 30.13,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-14",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.38,
+            "cost": 35.53,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-14",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.13,
+            "cost": 29.1,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-14",
+            "emp": "Ronald D. Cramer",
+            "hrs": 0.83,
+            "cost": 21.37,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-14",
+            "emp": "Ronald D. Cramer",
+            "hrs": 0.87,
+            "cost": 22.4,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-24",
+            "emp": "Ronald D. Cramer",
+            "hrs": 0.33,
+            "cost": 8.5,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-24",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.77,
+            "cost": 45.58,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-24",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.67,
+            "cost": 43,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-21",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.25,
+            "cost": 32.19,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-21",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.53,
+            "cost": 39.4,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-21",
+            "emp": "Ronald D. Cramer",
+            "hrs": 0.2,
+            "cost": 5.15,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-20",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.75,
+            "cost": 45.06,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-20",
+            "emp": "Ronald D. Cramer",
+            "hrs": 2,
+            "cost": 51.5,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-20",
+            "emp": "Ronald D. Cramer",
+            "hrs": 0.32,
+            "cost": 8.24,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-20",
+            "emp": "Ronald D. Cramer",
+            "hrs": 2,
+            "cost": 51.5,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-20",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.68,
+            "cost": 43.26,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-20",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.02,
+            "cost": 26.27,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-20",
+            "emp": "Ronald D. Cramer",
+            "hrs": 0.98,
+            "cost": 25.24,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-20",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.13,
+            "cost": 29.1,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-20",
+            "emp": "Ronald D. Cramer",
+            "hrs": 0.87,
+            "cost": 22.4,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-19",
+            "emp": "Ronald D. Cramer",
+            "hrs": 2,
+            "cost": 51.5,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-19",
+            "emp": "Ronald D. Cramer",
+            "hrs": 2.02,
+            "cost": 52.02,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-19",
+            "emp": "Ronald D. Cramer",
+            "hrs": 2,
+            "cost": 51.5,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-19",
+            "emp": "Ronald D. Cramer",
+            "hrs": 2,
+            "cost": 51.5,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-19",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.47,
+            "cost": 37.85,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-19",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1,
+            "cost": 25.75,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-19",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1,
+            "cost": 25.75,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-19",
+            "emp": "Ronald D. Cramer",
+            "hrs": 0.93,
+            "cost": 23.95,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-19",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.08,
+            "cost": 27.81,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-19",
+            "emp": "Ronald D. Cramer",
+            "hrs": 0.98,
+            "cost": 25.24,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-19",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.02,
+            "cost": 26.27,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-19",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.12,
+            "cost": 28.84,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-19",
+            "emp": "Ronald D. Cramer",
+            "hrs": 0.88,
+            "cost": 22.66,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-18",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.12,
+            "cost": 28.84,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-18",
+            "emp": "Ronald D. Cramer",
+            "hrs": 2,
+            "cost": 51.5,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-18",
+            "emp": "Ronald D. Cramer",
+            "hrs": 2,
+            "cost": 51.5,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-17",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.53,
+            "cost": 39.4,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-17",
+            "emp": "Ronald D. Cramer",
+            "hrs": 0.68,
+            "cost": 17.51,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-17",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.78,
+            "cost": 45.84,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-17",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.17,
+            "cost": 30.13,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-17",
+            "emp": "Ronald D. Cramer",
+            "hrs": 2,
+            "cost": 51.5,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-17",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.28,
+            "cost": 32.96,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-17",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.1,
+            "cost": 28.33,
+            "cat": "Turn"
+          }
+        ],
+        "materialEntries": [
+          {
+            "d": "2026-09-15",
+            "amt": 56.56,
+            "cat": "Turn",
+            "ln": "cramer",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-09-14",
+            "amt": 457.33,
+            "cat": "Turn",
+            "ln": "cramer",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-08-21",
+            "amt": 9.71,
+            "cat": "Turn",
+            "ln": "cramer",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-08-18",
+            "amt": 15.24,
+            "cat": "Turn",
+            "ln": "cramer",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-08-17",
+            "amt": 13.06,
+            "cat": "Turn",
+            "ln": "cramer",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-08-17",
+            "amt": 501.2,
+            "cat": "Turn",
+            "ln": "cramer",
+            "src": "ramp"
+          }
+        ]
+      },
+      "turn_end": "2026-09-16",
+      "stage": "Ready",
+      "stage_ord": 7,
+      "days_elapsed": 47,
+      "days_to_turn": 47,
+      "status": "complete"
+    },
+    {
       "key": "s129|19",
       "prop": "s129",
       "unit": "19",
@@ -43283,7 +43270,7 @@
         "status": "ACTIVE",
         "done": 0,
         "total": 8,
-        "first_appt": "2026-11-12",
+        "first_appt": null,
         "final_walk": "2026-11-24",
         "final_walk_done": null,
         "completed_date": null,
@@ -43315,8 +43302,8 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-11-12",
-            "who": "Micheal Magoon",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -43324,8 +43311,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-11-17",
-            "who": "Micheal Magoon",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -43495,8 +43482,8 @@
         "completed_date": "2026-08-27",
         "due": "2026-08-20",
         "next_task": {
-          "date": "2026-09-18",
-          "task": "final-walk"
+          "date": "2026-09-17",
+          "task": "other"
         },
         "tasks": [
           {
@@ -43548,7 +43535,7 @@
             "task": "Punch list",
             "cat": "other",
             "done": false,
-            "date": "2026-09-15",
+            "date": "2026-09-17",
             "who": "Micheal Magoon",
             "completed": null,
             "vendor": false
@@ -43574,16 +43561,16 @@
         ]
       },
       "next_appt": {
-        "date": "2026-09-18",
-        "cat": "final-walk",
-        "who": "Matt Romme",
-        "brief": "Final Walkthrough (clone)"
+        "date": "2026-09-17",
+        "cat": "other",
+        "who": "Micheal Magoon",
+        "brief": "Punch list"
       },
       "cost": {
         "code": "s129-9",
-        "labor": 1531.9,
+        "labor": 1572.4,
         "materials": 565.09,
-        "total": 2096.99,
+        "total": 2137.49,
         "estimate": 0,
         "laborEntries": [
           {
@@ -43591,6 +43578,13 @@
             "emp": "Micheal N. Magoon",
             "hrs": 0.53,
             "cost": 13.25,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-16",
+            "emp": "Micheal N. Magoon",
+            "hrs": 1.62,
+            "cost": 40.5,
             "cat": "Turn"
           },
           {
@@ -44230,7 +44224,7 @@
         "status": "ACTIVE",
         "done": 0,
         "total": 8,
-        "first_appt": "2026-11-26",
+        "first_appt": null,
         "final_walk": "2026-12-08",
         "final_walk_done": null,
         "completed_date": null,
@@ -44262,8 +44256,8 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-11-26",
-            "who": "Ron Cramer",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -44271,8 +44265,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-12-01",
-            "who": "Ron Cramer",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -44394,7 +44388,7 @@
         "status": "ACTIVE",
         "done": 1,
         "total": 8,
-        "first_appt": "2026-11-09",
+        "first_appt": null,
         "final_walk": "2026-11-04",
         "final_walk_done": "2026-08-25",
         "completed_date": "2026-08-25",
@@ -44426,8 +44420,8 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-11-09",
-            "who": "Micheal Magoon",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -44435,8 +44429,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-11-11",
-            "who": "Micheal Magoon",
+            "date": null,
+            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -44658,18 +44652,15 @@
       "pm": {
         "projId": 238495,
         "name": "Standard Unit Turn",
-        "status": "ACTIVE",
-        "done": 6,
+        "status": "COMPLETE",
+        "done": 8,
         "total": 8,
         "first_appt": "2026-09-24",
         "final_walk": "2026-10-13",
         "final_walk_done": "2026-09-11",
-        "completed_date": "2026-09-14",
+        "completed_date": "2026-09-16",
         "due": "2026-08-15",
-        "next_task": {
-          "date": "2026-09-23",
-          "task": "paint"
-        },
+        "next_task": null,
         "tasks": [
           {
             "task": "A - Initial walkthrough",
@@ -44683,19 +44674,19 @@
           {
             "task": "Appfolio Estimate",
             "cat": "estimate",
-            "done": false,
+            "done": true,
             "date": null,
             "who": "Dulce Salinas",
-            "completed": null,
+            "completed": "2026-09-16",
             "vendor": false
           },
           {
             "task": "C - Paint",
             "cat": "paint",
-            "done": false,
+            "done": true,
             "date": "2026-09-24",
             "who": "Chris Phillips",
-            "completed": null,
+            "completed": "2026-09-16",
             "vendor": false
           },
           {
@@ -44745,12 +44736,7 @@
           }
         ]
       },
-      "next_appt": {
-        "date": "2026-09-23",
-        "cat": "paint",
-        "who": "Chris Phillips",
-        "brief": "C - Paint Prep / Paint"
-      },
+      "next_appt": null,
       "cost": {
         "code": "tc34-A103",
         "labor": 60.75,
@@ -51619,11 +51605,25 @@
       },
       "cost": {
         "code": "w117-10",
-        "labor": 997.41,
+        "labor": 1071.57,
         "materials": 649.49,
-        "total": 1646.9,
+        "total": 1721.06,
         "estimate": 0,
         "laborEntries": [
+          {
+            "d": "2026-09-16",
+            "emp": "Ronald D. Cramer",
+            "hrs": 2,
+            "cost": 51.5,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-16",
+            "emp": "Ronald D. Cramer",
+            "hrs": 0.88,
+            "cost": 22.66,
+            "cat": "Turn"
+          },
           {
             "d": "2026-08-12",
             "emp": "Ronald D. Cramer",
@@ -52556,16 +52556,16 @@
         "projId": 240189,
         "name": "Standard Unit Turn",
         "status": "ACTIVE",
-        "done": 1,
+        "done": 2,
         "total": 8,
-        "first_appt": "2026-09-24",
+        "first_appt": "2026-09-17",
         "final_walk": "2026-10-06",
         "final_walk_done": null,
         "completed_date": "2026-09-09",
         "due": "2026-08-27",
         "next_task": {
-          "date": "2026-09-24",
-          "task": "paint"
+          "date": "2026-09-17",
+          "task": "maintenance"
         },
         "tasks": [
           {
@@ -52590,7 +52590,7 @@
             "task": "C - Paint",
             "cat": "paint",
             "done": false,
-            "date": "2026-09-24",
+            "date": "2026-09-17",
             "who": "Ron Cramer",
             "completed": null,
             "vendor": false
@@ -52599,17 +52599,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-09-29",
+            "date": "2026-09-17",
             "who": "Ron Cramer",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "E - Carpet Cleaning",
-            "cat": "carpet",
-            "done": false,
-            "date": null,
-            "who": null,
             "completed": null,
             "vendor": false
           },
@@ -52643,10 +52634,10 @@
         ]
       },
       "next_appt": {
-        "date": "2026-09-24",
-        "cat": "paint",
+        "date": "2026-09-17",
+        "cat": "maintenance",
         "who": "Ron Cramer",
-        "brief": "C - Paint Prep / Paint"
+        "brief": "D - Maintenance"
       },
       "cost": {
         "code": "w226-7",
