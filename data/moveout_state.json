@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-09-17T15:39:57.071Z",
+  "fetched_at": "2026-09-17T19:17:30.346Z",
   "units": {
     "2": {
       "moveOut": "2026-07-31",
@@ -792,6 +792,13 @@
       "unit": "T",
       "city": "Spokane"
     },
+    "1149": {
+      "moveOut": "2026-09-17",
+      "status": "Notice-Unrented",
+      "prop": "m221",
+      "unit": "G-D",
+      "city": "Spokane"
+    },
     "1150": {
       "moveOut": "2026-09-30",
       "status": "Notice-Unrented",
@@ -801,7 +808,7 @@
     },
     "1152": {
       "moveOut": "2026-07-12",
-      "status": "Vacant-Rented",
+      "status": "Vacant-Unrented",
       "prop": "tc68",
       "unit": "A03",
       "city": "Tacoma"
@@ -878,7 +885,7 @@
     },
     "1212": {
       "moveOut": "2026-07-27",
-      "status": "Vacant-Unrented",
+      "status": "Vacant-Rented",
       "prop": "tc68",
       "unit": "C63",
       "city": "Tacoma"
@@ -1087,7 +1094,7 @@
       "city": "Spokane"
     },
     "1394": {
-      "moveOut": "2026-10-04",
+      "moveOut": "2026-09-20",
       "status": "Notice-Unrented",
       "prop": "c702",
       "unit": "G208",
@@ -3870,6 +3877,25 @@
       "city": "Spokane",
       "from": null,
       "was_status": "Vacant-Rented"
+    },
+    {
+      "date": "2026-09-17",
+      "type": "moveout_new",
+      "unit_id": "1149",
+      "prop": "m221",
+      "unit": "G-D",
+      "city": "Spokane",
+      "to": "2026-09-17"
+    },
+    {
+      "date": "2026-09-17",
+      "type": "moveout_changed",
+      "unit_id": "1394",
+      "prop": "c702",
+      "unit": "G208",
+      "city": "Spokane",
+      "from": "2026-10-04",
+      "to": "2026-09-20"
     }
   ]
 }
