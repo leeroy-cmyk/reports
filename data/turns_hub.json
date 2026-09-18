@@ -1,12 +1,12 @@
 {
   "ok": true,
-  "fetched_at": "2026-09-18T17:43:45.586Z",
+  "fetched_at": "2026-09-18T20:00:41.659Z",
   "summary": {
     "as_of": "2026-09-18",
-    "units": 243,
+    "units": 244,
     "active": 74,
     "ready": 2,
-    "notice": 25,
+    "notice": 26,
     "at_risk": 38,
     "unscheduled": 10,
     "accruing": 22728.98,
@@ -1338,7 +1338,7 @@
       "city": "Spokane",
       "addr": "7020 N Colton St B106 Spokane, WA 99208",
       "unit_id": 1292,
-      "unit_status": "Vacant-Unrented",
+      "unit_status": "Vacant-Rented",
       "rent_ready": "No",
       "vacant": true,
       "days_vacant": 49,
@@ -1346,7 +1346,7 @@
       "available_on": "2026-09-22",
       "ready_on": "2026-09-22",
       "target_date": "2026-08-20",
-      "next_move_in": null,
+      "next_move_in": "2026-09-22",
       "rent": "1695.00",
       "bed_bath": "3/2.00",
       "sqft": 1250,
@@ -11452,6 +11452,44 @@
       "days_elapsed": null,
       "days_to_turn": null,
       "status": "active"
+    },
+    {
+      "key": "c702|c207",
+      "prop": "c702",
+      "unit": "C207",
+      "at_risk": [],
+      "property_name": "c702",
+      "city": "Spokane",
+      "addr": "7002 N Colton St C207 Spokane, WA 99208",
+      "unit_id": 1317,
+      "unit_status": "Notice-Unrented",
+      "rent_ready": null,
+      "vacant": false,
+      "days_vacant": null,
+      "move_out": "2026-09-27",
+      "available_on": "2026-10-17",
+      "ready_on": "2026-10-17",
+      "target_date": "2026-10-17",
+      "next_move_in": null,
+      "rent": "1395.00",
+      "bed_bath": "2/2.00",
+      "sqft": 1025,
+      "region": "Spokane",
+      "next_appt": null,
+      "cost": {
+        "code": "c702-C207",
+        "labor": 0,
+        "materials": 0,
+        "total": 0,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": []
+      },
+      "stage": "Move-out",
+      "stage_ord": 0,
+      "days_elapsed": 0,
+      "days_to_turn": null,
+      "status": "notice"
     },
     {
       "key": "c702|c304",
@@ -37528,8 +37566,8 @@
       "cost": {
         "code": "rl16-B01",
         "labor": 1247.63,
-        "materials": 236.97,
-        "total": 1484.6,
+        "materials": 275.5,
+        "total": 1523.13,
         "estimate": 0,
         "laborEntries": [
           {
@@ -37821,6 +37859,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-09-18",
+            "amt": 38.53,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          },
           {
             "d": "2026-09-17",
             "amt": 138.05,
