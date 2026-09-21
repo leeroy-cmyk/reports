@@ -1,17 +1,17 @@
 {
   "ok": true,
-  "fetched_at": "2026-09-21T18:57:05.960Z",
+  "fetched_at": "2026-09-21T22:31:31.299Z",
   "summary": {
     "as_of": "2026-09-21",
     "units": 243,
-    "active": 72,
-    "ready": 7,
+    "active": 73,
+    "ready": 6,
     "notice": 24,
-    "at_risk": 39,
+    "at_risk": 40,
     "unscheduled": 11,
-    "accruing": 20939.16,
-    "avg_days_open": 34,
-    "revenue_at_risk": 3333.53
+    "accruing": 21204.96,
+    "avg_days_open": 35,
+    "revenue_at_risk": 3392.7
   },
   "rows": [
     {
@@ -998,7 +998,7 @@
         "labor": 44.33,
         "materials": 423.5,
         "total": 467.83,
-        "estimate": 592.61,
+        "estimate": 765.9,
         "laborEntries": [
           {
             "d": "2026-07-14",
@@ -2978,7 +2978,7 @@
       "city": "Spokane",
       "addr": "155 S Oak St B3 Spokane, WA 99201",
       "unit_id": 1107,
-      "unit_status": "Vacant-Unrented",
+      "unit_status": "Vacant-Rented",
       "rent_ready": "No",
       "vacant": true,
       "days_vacant": 55,
@@ -2986,7 +2986,7 @@
       "available_on": "2026-10-11",
       "ready_on": "2026-10-11",
       "target_date": "2026-08-17",
-      "next_move_in": null,
+      "next_move_in": "2026-10-12",
       "rent": "1075.00",
       "bed_bath": "1/1.00",
       "sqft": 530,
@@ -3586,8 +3586,8 @@
       "cost": {
         "code": "p705-17",
         "labor": 2142.56,
-        "materials": 1860.42,
-        "total": 4002.98,
+        "materials": 1906.75,
+        "total": 4049.31,
         "estimate": 0,
         "laborEntries": [
           {
@@ -4012,6 +4012,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-09-21",
+            "amt": 46.33,
+            "cat": "Turn",
+            "ln": "cramer",
+            "src": "ramp"
+          },
           {
             "d": "2026-09-16",
             "amt": 598.41,
@@ -4892,6 +4899,140 @@
       "stage": "Final Walk",
       "stage_ord": 6,
       "days_elapsed": 71,
+      "days_to_turn": null,
+      "status": "active"
+    },
+    {
+      "key": "tc68|a19",
+      "prop": "tc68",
+      "unit": "A19",
+      "at_risk": [
+        "Over 45 days vacant"
+      ],
+      "property_name": "tc68",
+      "city": "Tacoma",
+      "addr": "6830 Tacoma Mall Blvd Apt A19 Tacoma, WA 98409",
+      "unit_id": 1168,
+      "unit_status": "Vacant-Rented",
+      "rent_ready": "No",
+      "vacant": true,
+      "days_vacant": 74,
+      "move_out": "2026-07-09",
+      "available_on": null,
+      "ready_on": "2026-10-02",
+      "target_date": "2026-07-29",
+      "next_move_in": "2026-10-02",
+      "rent": "1775.00",
+      "bed_bath": "2/1.00",
+      "sqft": 980,
+      "region": "Tacoma",
+      "pm": {
+        "projId": 232390,
+        "name": "Standard Unit Turn",
+        "status": "ACTIVE",
+        "done": 0,
+        "total": 7,
+        "first_appt": "2026-09-22",
+        "final_walk": "2026-09-30",
+        "final_walk_done": null,
+        "completed_date": null,
+        "due": "2026-08-17",
+        "next_task": {
+          "date": "2026-09-21",
+          "task": "paint"
+        },
+        "tasks": [
+          {
+            "task": "A - Initial walkthrough",
+            "cat": "walkthrough",
+            "done": false,
+            "date": "2026-09-21",
+            "who": "Armani Mitchell",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Appfolio Estimate",
+            "cat": "estimate",
+            "done": false,
+            "date": null,
+            "who": "Dulce Salinas",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "C - Paint",
+            "cat": "paint",
+            "done": false,
+            "date": "2026-09-22",
+            "who": "Chris Phillips",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "D - Maintenance",
+            "cat": "maintenance",
+            "done": false,
+            "date": "2026-09-24",
+            "who": "Armani Mitchell",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "E - Carpet Cleaning",
+            "cat": "carpet",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "F - Cleaning",
+            "cat": "cleaning",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Final Walkthrough",
+            "cat": "final-walk",
+            "done": false,
+            "date": "2026-09-30",
+            "who": "Armani Mitchell",
+            "completed": null,
+            "vendor": false
+          }
+        ]
+      },
+      "next_appt": {
+        "date": "2026-09-21",
+        "cat": "walkthrough",
+        "who": "Armani Mitchell",
+        "brief": "A - Initial walkthrough"
+      },
+      "cost": {
+        "code": "tc68-A19",
+        "labor": 35.91,
+        "materials": 0,
+        "total": 35.91,
+        "estimate": 0,
+        "laborEntries": [
+          {
+            "d": "2026-08-17",
+            "emp": "Armani Mitchell",
+            "hrs": 1.33,
+            "cost": 35.91,
+            "cat": "Turn"
+          }
+        ],
+        "materialEntries": []
+      },
+      "stage": "Walkthrough",
+      "stage_ord": 1,
+      "days_elapsed": 74,
       "days_to_turn": null,
       "status": "active"
     },
@@ -8493,7 +8634,7 @@
         "labor": 0,
         "materials": 0,
         "total": 0,
-        "estimate": 0,
+        "estimate": 1859.72,
         "laborEntries": [],
         "materialEntries": []
       },
@@ -9300,7 +9441,7 @@
         "labor": 0,
         "materials": 0,
         "total": 0,
-        "estimate": 0,
+        "estimate": 1706.93,
         "laborEntries": [],
         "materialEntries": []
       },
@@ -28051,9 +28192,9 @@
       },
       "cost": {
         "code": "p705-11",
-        "labor": 6008.03,
+        "labor": 6114.64,
         "materials": 3492.76,
-        "total": 9500.79,
+        "total": 9607.4,
         "estimate": 0,
         "laborEntries": [
           {
@@ -28061,6 +28202,34 @@
             "emp": "Ronald D. Cramer",
             "hrs": 2,
             "cost": 51.5,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-21",
+            "emp": "Ronald D. Cramer",
+            "hrs": 2,
+            "cost": 51.5,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-21",
+            "emp": "Ronald D. Cramer",
+            "hrs": 0.42,
+            "cost": 10.82,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-21",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.15,
+            "cost": 29.61,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-21",
+            "emp": "Ronald D. Cramer",
+            "hrs": 0.57,
+            "cost": 14.68,
             "cat": "Turn"
           },
           {
@@ -28447,34 +28616,6 @@
             "hrs": 4.82,
             "cost": 154.19,
             "cat": "CapEx"
-          },
-          {
-            "d": "2025-09-29",
-            "emp": "Micheal N. Magoon",
-            "hrs": 2.3,
-            "cost": 57.5,
-            "cat": "Turn"
-          },
-          {
-            "d": "2025-09-29",
-            "emp": "Micheal N. Magoon",
-            "hrs": 5.15,
-            "cost": 128.75,
-            "cat": "Turn"
-          },
-          {
-            "d": "2025-09-29",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.73,
-            "cost": 44.55,
-            "cat": "Turn"
-          },
-          {
-            "d": "2025-09-26",
-            "emp": "Micheal N. Magoon",
-            "hrs": 2.42,
-            "cost": 60.5,
-            "cat": "Turn"
           }
         ],
         "materialEntries": [
@@ -29276,11 +29417,32 @@
       },
       "cost": {
         "code": "p705-19",
-        "labor": 194.11,
+        "labor": 258.36,
         "materials": 277.96,
-        "total": 472.07,
+        "total": 536.32,
         "estimate": 0,
         "laborEntries": [
+          {
+            "d": "2026-09-21",
+            "emp": "Micheal N. Magoon",
+            "hrs": 1.58,
+            "cost": 39.5,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-21",
+            "emp": "Micheal N. Magoon",
+            "hrs": 0.47,
+            "cost": 11.75,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-21",
+            "emp": "Micheal N. Magoon",
+            "hrs": 0.52,
+            "cost": 13,
+            "cat": "Turn"
+          },
           {
             "d": "2025-08-13",
             "emp": "Scott Higley",
@@ -37380,11 +37542,18 @@
       "cost": {
         "code": "rl16-B12",
         "labor": 0,
-        "materials": 483.27,
-        "total": 483.27,
+        "materials": 666.83,
+        "total": 666.83,
         "estimate": 0,
         "laborEntries": [],
         "materialEntries": [
+          {
+            "d": "2026-09-21",
+            "amt": 183.56,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          },
           {
             "d": "2026-09-18",
             "amt": 436.55,
@@ -42145,11 +42314,18 @@
       "next_appt": null,
       "cost": {
         "code": "s129-9",
-        "labor": 2080.4,
+        "labor": 2159.15,
         "materials": 565.09,
-        "total": 2645.49,
+        "total": 2724.24,
         "estimate": 0,
         "laborEntries": [
+          {
+            "d": "2026-09-21",
+            "emp": "Micheal N. Magoon",
+            "hrs": 3.15,
+            "cost": 78.75,
+            "cat": "Turn"
+          },
           {
             "d": "2026-09-20",
             "emp": "Micheal N. Magoon",
@@ -43598,6 +43774,7 @@
         "materialEntries": []
       },
       "turn_end": "2026-09-15",
+      "af_turn_end": "2026-09-21",
       "stage": "Ready",
       "stage_ord": 7,
       "days_elapsed": 46,
@@ -43780,6 +43957,7 @@
         "materialEntries": []
       },
       "turn_end": "2026-09-16",
+      "af_turn_end": "2026-09-21",
       "stage": "Ready",
       "stage_ord": 7,
       "days_elapsed": 40,
@@ -45099,138 +45277,6 @@
       "status": "complete"
     },
     {
-      "key": "tc68|a19",
-      "prop": "tc68",
-      "unit": "A19",
-      "at_risk": [],
-      "property_name": "tc68",
-      "city": "Tacoma",
-      "addr": "6830 Tacoma Mall Blvd Apt A19 Tacoma, WA 98409",
-      "unit_id": 1168,
-      "unit_status": "Vacant-Rented",
-      "rent_ready": "Yes",
-      "vacant": true,
-      "days_vacant": 74,
-      "move_out": "2026-07-09",
-      "available_on": null,
-      "ready_on": "2026-10-02",
-      "target_date": "2026-07-29",
-      "next_move_in": "2026-10-02",
-      "rent": "1775.00",
-      "bed_bath": "2/1.00",
-      "sqft": 980,
-      "region": "Tacoma",
-      "pm": {
-        "projId": 232390,
-        "name": "Standard Unit Turn",
-        "status": "ACTIVE",
-        "done": 0,
-        "total": 7,
-        "first_appt": "2026-09-22",
-        "final_walk": "2026-09-30",
-        "final_walk_done": null,
-        "completed_date": null,
-        "due": "2026-08-17",
-        "next_task": {
-          "date": "2026-09-21",
-          "task": "paint"
-        },
-        "tasks": [
-          {
-            "task": "A - Initial walkthrough",
-            "cat": "walkthrough",
-            "done": false,
-            "date": "2026-09-21",
-            "who": "Armani Mitchell",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Appfolio Estimate",
-            "cat": "estimate",
-            "done": false,
-            "date": null,
-            "who": "Dulce Salinas",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "C - Paint",
-            "cat": "paint",
-            "done": false,
-            "date": "2026-09-22",
-            "who": "Chris Phillips",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "D - Maintenance",
-            "cat": "maintenance",
-            "done": false,
-            "date": "2026-09-24",
-            "who": "Armani Mitchell",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "E - Carpet Cleaning",
-            "cat": "carpet",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "F - Cleaning",
-            "cat": "cleaning",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Final Walkthrough",
-            "cat": "final-walk",
-            "done": false,
-            "date": "2026-09-30",
-            "who": "Armani Mitchell",
-            "completed": null,
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": {
-        "date": "2026-09-21",
-        "cat": "walkthrough",
-        "who": "Armani Mitchell",
-        "brief": "A - Initial walkthrough"
-      },
-      "cost": {
-        "code": "tc68-A19",
-        "labor": 35.91,
-        "materials": 0,
-        "total": 35.91,
-        "estimate": 0,
-        "laborEntries": [
-          {
-            "d": "2026-08-17",
-            "emp": "Armani Mitchell",
-            "hrs": 1.33,
-            "cost": 35.91,
-            "cat": "Turn"
-          }
-        ],
-        "materialEntries": []
-      },
-      "stage": "Ready",
-      "stage_ord": 7,
-      "days_elapsed": 74,
-      "days_to_turn": null,
-      "status": "ready"
-    },
-    {
       "key": "tc68|a24",
       "prop": "tc68",
       "unit": "A24",
@@ -45952,6 +45998,7 @@
         "materialEntries": []
       },
       "turn_end": "2026-09-19",
+      "af_turn_end": "2026-09-21",
       "stage": "Final Walk",
       "stage_ord": 6,
       "days_elapsed": null,
@@ -48245,6 +48292,7 @@
         ]
       },
       "turn_end": "2026-09-09",
+      "af_turn_end": "2026-09-21",
       "stage": "Maintenance",
       "stage_ord": 3,
       "days_elapsed": null,
