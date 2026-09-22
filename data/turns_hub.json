@@ -1,15 +1,15 @@
 {
   "ok": true,
-  "fetched_at": "2026-09-21T22:31:31.299Z",
+  "fetched_at": "2026-09-22T01:06:31.070Z",
   "summary": {
     "as_of": "2026-09-21",
-    "units": 243,
+    "units": 241,
     "active": 73,
     "ready": 6,
     "notice": 24,
     "at_risk": 40,
     "unscheduled": 11,
-    "accruing": 21204.96,
+    "accruing": 22441.03,
     "avg_days_open": 35,
     "revenue_at_risk": 3392.7
   },
@@ -857,8 +857,8 @@
       "cost": {
         "code": "c313-10",
         "labor": 78.76,
-        "materials": 0,
-        "total": 78.76,
+        "materials": 1236.07,
+        "total": 1314.83,
         "estimate": 0,
         "laborEntries": [
           {
@@ -883,7 +883,22 @@
             "cat": "Turn"
           }
         ],
-        "materialEntries": []
+        "materialEntries": [
+          {
+            "d": "2026-09-21",
+            "amt": 25.9,
+            "cat": "Turn",
+            "ln": "romme",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-09-21",
+            "amt": 1210.17,
+            "cat": "Turn",
+            "ln": "romme",
+            "src": "ramp"
+          }
+        ]
       },
       "stage": "Maintenance",
       "stage_ord": 3,
@@ -9088,230 +9103,6 @@
       },
       "turn_end": "2026-07-16",
       "af_turn_end": "2026-07-08",
-      "stage": "Final Walk",
-      "stage_ord": 6,
-      "days_elapsed": null,
-      "days_to_turn": null,
-      "status": "complete"
-    },
-    {
-      "key": "c313|27",
-      "prop": "c313",
-      "unit": "27",
-      "property_name": "c313",
-      "at_risk": [],
-      "region": "Spokane",
-      "pm": {
-        "projId": 219351,
-        "name": "Standard Unit Turn",
-        "status": "COMPLETE",
-        "done": 9,
-        "total": 9,
-        "first_appt": "2026-05-08",
-        "final_walk": "2026-06-23",
-        "final_walk_done": "2026-06-23",
-        "completed_date": "2026-06-23",
-        "due": "2026-06-03",
-        "next_task": null,
-        "tasks": [
-          {
-            "task": "A - Initial walkthrough",
-            "cat": "walkthrough",
-            "done": true,
-            "date": "2026-05-01",
-            "who": "Scott Higley",
-            "completed": "2026-05-01",
-            "vendor": false
-          },
-          {
-            "task": "C - Paint",
-            "cat": "paint",
-            "done": true,
-            "date": "2026-05-08",
-            "who": "Micheal Magoon",
-            "completed": "2026-05-08",
-            "vendor": false
-          },
-          {
-            "task": "D - Maintenance",
-            "cat": "maintenance",
-            "done": true,
-            "date": "2026-05-12",
-            "who": "Micheal Magoon",
-            "completed": "2026-05-12",
-            "vendor": false
-          },
-          {
-            "task": "E - Carpet Cleaning",
-            "cat": "carpet",
-            "done": true,
-            "date": "2026-05-27",
-            "who": "AllKlean",
-            "completed": "2026-05-27",
-            "vendor": true
-          },
-          {
-            "task": "F - Cleaning (clone)",
-            "cat": "cleaning",
-            "done": true,
-            "date": "2026-06-22",
-            "who": "SPO Cleaning",
-            "completed": "2026-06-22",
-            "vendor": true
-          },
-          {
-            "task": "Invoice",
-            "cat": "other",
-            "done": true,
-            "date": null,
-            "who": null,
-            "completed": "2026-05-21",
-            "vendor": false
-          },
-          {
-            "task": "Final Walkthrough (clone)",
-            "cat": "final-walk",
-            "done": true,
-            "date": "2026-06-23",
-            "who": "Scott Higley",
-            "completed": "2026-06-23",
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": null,
-      "cost": {
-        "code": "c313-27",
-        "labor": 220.03,
-        "materials": 964.3,
-        "total": 1184.33,
-        "estimate": 0,
-        "laborEntries": [
-          {
-            "d": "2026-07-29",
-            "emp": "Ronald D. Cramer",
-            "hrs": 2,
-            "cost": 51.5,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-23",
-            "emp": "Scott Higley",
-            "hrs": 1.15,
-            "cost": 36.79,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-05-21",
-            "emp": "Justin Gutierrez",
-            "hrs": 0.83,
-            "cost": 20.75,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-01",
-            "emp": "Scott Higley",
-            "hrs": 0.32,
-            "cost": 10.24,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-05-01",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.4,
-            "cost": 10,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-01",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.22,
-            "cost": 5.5,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-01",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.7,
-            "cost": 17.5,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-01",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.32,
-            "cost": 8,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-01",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.27,
-            "cost": 6.75,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-01",
-            "emp": "Micheal N. Magoon",
-            "hrs": 1.82,
-            "cost": 45.5,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-01",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.3,
-            "cost": 7.5,
-            "cat": "Turn"
-          }
-        ],
-        "materialEntries": [
-          {
-            "d": "2026-07-31",
-            "amt": 46.33,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-29",
-            "amt": 95.94,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-06-26",
-            "amt": 250,
-            "cat": "Turn",
-            "ln": "SPO Cleaning",
-            "src": "qbo"
-          },
-          {
-            "d": "2026-05-31",
-            "amt": 179,
-            "cat": "Turn",
-            "ln": "meng",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-05-01",
-            "amt": 142.78,
-            "cat": "Turn",
-            "ln": "magoon",
-            "src": "ramp"
-          },
-          {
-            "d": "2025-05-19",
-            "amt": 250.25,
-            "cat": "Turn",
-            "ln": "meng",
-            "src": "ramp"
-          }
-        ]
-      },
-      "turn_end": "2026-06-23",
-      "af_turn_end": "2026-06-23",
       "stage": "Final Walk",
       "stage_ord": 6,
       "days_elapsed": null,
@@ -28193,8 +27984,8 @@
       "cost": {
         "code": "p705-11",
         "labor": 6114.64,
-        "materials": 3492.76,
-        "total": 9607.4,
+        "materials": 4471.87,
+        "total": 10586.51,
         "estimate": 0,
         "laborEntries": [
           {
@@ -28619,6 +28410,20 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-09-21",
+            "amt": 310.75,
+            "cat": "Turn",
+            "ln": "cramer",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-09-21",
+            "amt": 668.36,
+            "cat": "Turn",
+            "ln": "cramer",
+            "src": "ramp"
+          },
           {
             "d": "2025-12-18",
             "amt": 20.8,
@@ -29418,8 +29223,8 @@
       "cost": {
         "code": "p705-19",
         "labor": 258.36,
-        "materials": 277.96,
-        "total": 536.32,
+        "materials": 576.5,
+        "total": 834.86,
         "estimate": 0,
         "laborEntries": [
           {
@@ -29487,6 +29292,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-09-21",
+            "amt": 298.54,
+            "cat": "Turn",
+            "ln": "magoon",
+            "src": "ramp"
+          },
           {
             "d": "2025-08-21",
             "amt": 154,
@@ -32633,285 +32445,6 @@
       "days_elapsed": 0,
       "days_to_turn": null,
       "status": "notice"
-    },
-    {
-      "key": "ps25|b14",
-      "prop": "ps25",
-      "unit": "B14",
-      "property_name": "ps25",
-      "at_risk": [],
-      "region": "Tri-Cities",
-      "pm": {
-        "projId": 221598,
-        "name": "Standard Unit Turn",
-        "status": "COMPLETE",
-        "done": 7,
-        "total": 7,
-        "first_appt": "2026-06-15",
-        "final_walk": "2026-06-22",
-        "final_walk_done": "2026-06-22",
-        "completed_date": "2026-06-23",
-        "due": "2026-06-23",
-        "next_task": null,
-        "tasks": [
-          {
-            "task": "A - Initial walkthrough",
-            "cat": "walkthrough",
-            "done": true,
-            "date": "2026-06-03",
-            "who": "Margarito Saldana",
-            "completed": "2026-06-03",
-            "vendor": false
-          },
-          {
-            "task": "Appfolio Estimate",
-            "cat": "estimate",
-            "done": true,
-            "date": null,
-            "who": "Dulce Salinas",
-            "completed": "2026-06-12",
-            "vendor": false
-          },
-          {
-            "task": "C - Paint",
-            "cat": "paint",
-            "done": true,
-            "date": "2026-06-15",
-            "who": "James Dunlap",
-            "completed": "2026-06-17",
-            "vendor": false
-          },
-          {
-            "task": "D - Maintenance",
-            "cat": "maintenance",
-            "done": true,
-            "date": "2026-06-16",
-            "who": "James Dunlap",
-            "completed": "2026-06-17",
-            "vendor": false
-          },
-          {
-            "task": "E - Carpet Cleaning",
-            "cat": "carpet",
-            "done": true,
-            "date": "2026-06-22",
-            "who": "SOS Carpet",
-            "completed": "2026-06-22",
-            "vendor": true
-          },
-          {
-            "task": "F - Cleaning",
-            "cat": "cleaning",
-            "done": true,
-            "date": "2026-06-18",
-            "who": "Duo Cleaning Company LLC",
-            "completed": "2026-06-23",
-            "vendor": true
-          },
-          {
-            "task": "Final Walkthrough",
-            "cat": "final-walk",
-            "done": true,
-            "date": "2026-06-22",
-            "who": "Margarito Saldana",
-            "completed": "2026-06-22",
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": null,
-      "cost": {
-        "code": "ps25-B14",
-        "labor": 484.81,
-        "materials": 1714.21,
-        "total": 2199.02,
-        "estimate": 1003.26,
-        "laborEntries": [
-          {
-            "d": "2026-06-22",
-            "emp": "Margarito Saldana",
-            "hrs": 1,
-            "cost": 28.4,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-17",
-            "emp": "James Dunlap",
-            "hrs": 1.2,
-            "cost": 27.6,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-17",
-            "emp": "James Dunlap",
-            "hrs": 1.7,
-            "cost": 39.1,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-17",
-            "emp": "James Dunlap",
-            "hrs": 1.42,
-            "cost": 32.66,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-16",
-            "emp": "James Dunlap",
-            "hrs": 1.08,
-            "cost": 24.84,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-16",
-            "emp": "James Dunlap",
-            "hrs": 1.3,
-            "cost": 29.9,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-16",
-            "emp": "James Dunlap",
-            "hrs": 1.22,
-            "cost": 28.06,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-16",
-            "emp": "James Dunlap",
-            "hrs": 1.72,
-            "cost": 39.56,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-16",
-            "emp": "James Dunlap",
-            "hrs": 1.75,
-            "cost": 40.25,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-16",
-            "emp": "James Dunlap",
-            "hrs": 0.93,
-            "cost": 21.39,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-15",
-            "emp": "James Dunlap",
-            "hrs": 1.13,
-            "cost": 25.99,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-15",
-            "emp": "James Dunlap",
-            "hrs": 0.92,
-            "cost": 21.16,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-15",
-            "emp": "James Dunlap",
-            "hrs": 1.97,
-            "cost": 45.31,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-15",
-            "emp": "James Dunlap",
-            "hrs": 1.38,
-            "cost": 31.74,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-08",
-            "emp": "Margarito Saldana",
-            "hrs": 0.53,
-            "cost": 15.05,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-04",
-            "emp": "Margarito Saldana",
-            "hrs": 0.2,
-            "cost": 5.68,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-03",
-            "emp": "Margarito Saldana",
-            "hrs": 0.87,
-            "cost": 24.71,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-01",
-            "emp": "Margarito Saldana",
-            "hrs": 0.12,
-            "cost": 3.41,
-            "cat": "Turn"
-          }
-        ],
-        "materialEntries": [
-          {
-            "d": "2026-08-01",
-            "amt": 200,
-            "cat": "CapEx",
-            "ln": "SOS Carpet & Upholstery",
-            "src": "qbo"
-          },
-          {
-            "d": "2026-07-11",
-            "amt": 250,
-            "cat": "Turn",
-            "ln": "meng",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-06-20",
-            "amt": 350,
-            "cat": "Turn",
-            "ln": "meng",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-06-20",
-            "amt": 350,
-            "cat": "Turn",
-            "ln": "meng",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-06-17",
-            "amt": 60.81,
-            "cat": "Turn",
-            "ln": "dunlap",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-06-16",
-            "amt": 105.49,
-            "cat": "Turn",
-            "ln": "dunlap",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-06-15",
-            "amt": 397.91,
-            "cat": "Turn",
-            "ln": "dunlap",
-            "src": "ramp"
-          }
-        ]
-      },
-      "turn_end": "2026-06-22",
-      "stage": "Final Walk",
-      "stage_ord": 6,
-      "days_elapsed": null,
-      "days_to_turn": null,
-      "status": "complete"
     },
     {
       "key": "ps25|b15",
