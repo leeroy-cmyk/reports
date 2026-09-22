@@ -1,15 +1,15 @@
 {
   "ok": true,
-  "fetched_at": "2026-09-22T19:55:59.981Z",
+  "fetched_at": "2026-09-22T22:49:15.486Z",
   "summary": {
     "as_of": "2026-09-22",
-    "units": 241,
+    "units": 242,
     "active": 77,
     "ready": 1,
-    "notice": 24,
+    "notice": 25,
     "at_risk": 43,
     "unscheduled": 14,
-    "accruing": 22441.03,
+    "accruing": 23283.65,
     "avg_days_open": 34,
     "revenue_at_risk": 3552.2
   },
@@ -12903,11 +12903,18 @@
       "cost": {
         "code": "c702-K102",
         "labor": 0,
-        "materials": 351.55,
-        "total": 351.55,
+        "materials": 1147.96,
+        "total": 1147.96,
         "estimate": 0,
         "laborEntries": [],
         "materialEntries": [
+          {
+            "d": "2026-09-22",
+            "amt": 796.41,
+            "cat": "Turn",
+            "ln": "smith",
+            "src": "ramp"
+          },
           {
             "d": "2026-09-16",
             "amt": 351.55,
@@ -12936,10 +12943,10 @@
       "rent_ready": null,
       "vacant": false,
       "days_vacant": null,
-      "move_out": "2026-09-26",
-      "available_on": "2026-11-19",
-      "ready_on": "2026-11-19",
-      "target_date": "2026-10-16",
+      "move_out": "2026-09-22",
+      "available_on": "2026-10-12",
+      "ready_on": "2026-10-12",
+      "target_date": "2026-10-12",
       "next_move_in": null,
       "rent": "1695.00",
       "bed_bath": "3/2.00",
@@ -29214,8 +29221,8 @@
       "cost": {
         "code": "p705-19",
         "labor": 373.86,
-        "materials": 576.5,
-        "total": 950.36,
+        "materials": 630.35,
+        "total": 1004.21,
         "estimate": 0,
         "laborEntries": [
           {
@@ -29332,6 +29339,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-09-22",
+            "amt": 53.85,
+            "cat": "Turn",
+            "ln": "magoon",
+            "src": "ramp"
+          },
           {
             "d": "2026-09-21",
             "amt": 298.54,
@@ -37115,11 +37129,18 @@
       "cost": {
         "code": "rl16-B12",
         "labor": 0,
-        "materials": 666.83,
-        "total": 666.83,
+        "materials": 713.04,
+        "total": 713.04,
         "estimate": 0,
         "laborEntries": [],
         "materialEntries": [
+          {
+            "d": "2026-09-22",
+            "amt": 46.21,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          },
           {
             "d": "2026-09-21",
             "amt": 183.56,
@@ -45349,6 +45370,44 @@
       },
       "stage": "Walkthrough",
       "stage_ord": 1,
+      "days_elapsed": 0,
+      "days_to_turn": null,
+      "status": "notice"
+    },
+    {
+      "key": "tc68|b43",
+      "prop": "tc68",
+      "unit": "B43",
+      "at_risk": [],
+      "property_name": "tc68",
+      "city": "Tacoma",
+      "addr": "6830 Tacoma Mall Blvd Apt B43 Tacoma, WA 98409",
+      "unit_id": 1192,
+      "unit_status": "Notice-Unrented",
+      "rent_ready": null,
+      "vacant": false,
+      "days_vacant": null,
+      "move_out": "2026-10-10",
+      "available_on": "2026-10-30",
+      "ready_on": "2026-10-30",
+      "target_date": "2026-10-30",
+      "next_move_in": null,
+      "rent": "1775.00",
+      "bed_bath": "2/1.00",
+      "sqft": 980,
+      "region": "Tacoma",
+      "next_appt": null,
+      "cost": {
+        "code": "tc68-B43",
+        "labor": 0,
+        "materials": 0,
+        "total": 0,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": []
+      },
+      "stage": "Move-out",
+      "stage_ord": 0,
       "days_elapsed": 0,
       "days_to_turn": null,
       "status": "notice"
