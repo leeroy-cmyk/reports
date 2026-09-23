@@ -1,15 +1,15 @@
 {
   "ok": true,
-  "fetched_at": "2026-09-22T22:49:15.486Z",
+  "fetched_at": "2026-09-23T01:20:27.043Z",
   "summary": {
     "as_of": "2026-09-22",
-    "units": 242,
+    "units": 243,
     "active": 77,
     "ready": 1,
     "notice": 25,
     "at_risk": 43,
     "unscheduled": 14,
-    "accruing": 23283.65,
+    "accruing": 24379.45,
     "avg_days_open": 34,
     "revenue_at_risk": 3552.2
   },
@@ -180,8 +180,8 @@
       "cost": {
         "code": "rl16-D22",
         "labor": 127.23,
-        "materials": 404.4,
-        "total": 531.63,
+        "materials": 450.61,
+        "total": 577.84,
         "estimate": 0,
         "laborEntries": [
           {
@@ -214,6 +214,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-09-22",
+            "amt": 46.21,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          },
           {
             "d": "2026-09-15",
             "amt": 35,
@@ -4831,8 +4838,8 @@
       "cost": {
         "code": "rl16-A17",
         "labor": 56.8,
-        "materials": 0,
-        "total": 56.8,
+        "materials": 497.86,
+        "total": 554.66,
         "estimate": 0,
         "laborEntries": [
           {
@@ -4850,7 +4857,22 @@
             "cat": "Turn"
           }
         ],
-        "materialEntries": []
+        "materialEntries": [
+          {
+            "d": "2026-09-21",
+            "amt": 51.11,
+            "cat": "Turn",
+            "ln": "williams",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-09-21",
+            "amt": 446.75,
+            "cat": "Turn",
+            "ln": "williams",
+            "src": "ramp"
+          }
+        ]
       },
       "stage": "Maintenance",
       "stage_ord": 3,
@@ -8836,11 +8858,19 @@
       "cost": {
         "code": "c313-1",
         "labor": 0,
-        "materials": 0,
-        "total": 0,
+        "materials": 401.65,
+        "total": 401.65,
         "estimate": 1859.72,
         "laborEntries": [],
-        "materialEntries": []
+        "materialEntries": [
+          {
+            "d": "2026-09-22",
+            "amt": 401.65,
+            "cat": "Turn",
+            "ln": "normandin",
+            "src": "ramp"
+          }
+        ]
       },
       "stage": "Maintenance",
       "stage_ord": 3,
@@ -8852,23 +8882,8 @@
       "key": "c313|11",
       "prop": "c313",
       "unit": "11",
-      "at_risk": [],
       "property_name": "c313",
-      "city": "Spokane",
-      "addr": "3131 So Cook St 11 Spokane, WA 99223",
-      "unit_id": 719,
-      "unit_status": "Notice-Unrented",
-      "rent_ready": null,
-      "vacant": false,
-      "days_vacant": null,
-      "move_out": "2026-09-30",
-      "available_on": "2026-11-01",
-      "ready_on": "2026-11-01",
-      "target_date": "2026-10-20",
-      "next_move_in": null,
-      "rent": "1645.00",
-      "bed_bath": "2/2.00",
-      "sqft": 1050,
+      "at_risk": [],
       "region": "Spokane",
       "pm": {
         "projId": 244398,
@@ -8977,9 +8992,9 @@
       },
       "stage": "Walkthrough",
       "stage_ord": 1,
-      "days_elapsed": 0,
+      "days_elapsed": null,
       "days_to_turn": null,
-      "status": "notice"
+      "status": "other"
     },
     {
       "key": "c313|26",
@@ -23331,6 +23346,44 @@
       "days_elapsed": null,
       "days_to_turn": null,
       "status": "complete"
+    },
+    {
+      "key": "kn47|k203",
+      "prop": "kn47",
+      "unit": "K203",
+      "at_risk": [],
+      "property_name": "kn47-k3",
+      "city": "Kennewick",
+      "addr": "4711 W Metaline Avenue K203 Kennewick, WA 99336",
+      "unit_id": 1078,
+      "unit_status": "Notice-Unrented",
+      "rent_ready": null,
+      "vacant": false,
+      "days_vacant": null,
+      "move_out": "2026-09-30",
+      "available_on": "2026-10-20",
+      "ready_on": "2026-10-20",
+      "target_date": "2026-10-20",
+      "next_move_in": null,
+      "rent": "1430.00",
+      "bed_bath": "2/1.00",
+      "sqft": 910,
+      "region": "Tri-Cities",
+      "next_appt": null,
+      "cost": {
+        "code": "kn47-K203",
+        "labor": 0,
+        "materials": 0,
+        "total": 0,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": []
+      },
+      "stage": "Move-out",
+      "stage_ord": 0,
+      "days_elapsed": 0,
+      "days_to_turn": null,
+      "status": "notice"
     },
     {
       "key": "kn47|kl100",
@@ -38581,8 +38634,8 @@
       "cost": {
         "code": "rl16-D04",
         "labor": 70.43,
-        "materials": 0,
-        "total": 70.43,
+        "materials": 75.04,
+        "total": 145.47,
         "estimate": 0,
         "laborEntries": [
           {
@@ -38600,7 +38653,15 @@
             "cat": "CapEx"
           }
         ],
-        "materialEntries": []
+        "materialEntries": [
+          {
+            "d": "2026-09-22",
+            "amt": 75.04,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          }
+        ]
       },
       "stage": "Maintenance",
       "stage_ord": 3,
@@ -39221,11 +39282,18 @@
       "cost": {
         "code": "rl16-D08",
         "labor": 0,
-        "materials": 188.63,
-        "total": 188.63,
+        "materials": 263.67,
+        "total": 263.67,
         "estimate": 0,
         "laborEntries": [],
         "materialEntries": [
+          {
+            "d": "2026-09-22",
+            "amt": 75.04,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          },
           {
             "d": "2026-04-21",
             "amt": 188.63,
@@ -39507,8 +39575,8 @@
       "cost": {
         "code": "rl16-D14",
         "labor": 142,
-        "materials": 1186.78,
-        "total": 1328.78,
+        "materials": 1243.3,
+        "total": 1385.3,
         "estimate": 0,
         "laborEntries": [
           {
@@ -39534,6 +39602,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-09-22",
+            "amt": 56.52,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          },
           {
             "d": "2026-09-07",
             "amt": 242.25,
