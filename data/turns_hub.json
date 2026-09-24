@@ -1,15 +1,15 @@
 {
   "ok": true,
-  "fetched_at": "2026-09-23T22:49:18.587Z",
+  "fetched_at": "2026-09-24T01:13:45.145Z",
   "summary": {
     "as_of": "2026-09-23",
-    "units": 243,
+    "units": 242,
     "active": 79,
     "ready": 1,
-    "notice": 25,
+    "notice": 23,
     "at_risk": 41,
     "unscheduled": 12,
-    "accruing": 24786.11,
+    "accruing": 25463.15,
     "avg_days_open": 34,
     "revenue_at_risk": 3571.03
   },
@@ -179,11 +179,18 @@
       },
       "cost": {
         "code": "rl16-D22",
-        "labor": 127.23,
+        "labor": 149.1,
         "materials": 450.61,
-        "total": 577.84,
+        "total": 599.71,
         "estimate": 0,
         "laborEntries": [
+          {
+            "d": "2026-09-23",
+            "emp": "Margarito Saldana",
+            "hrs": 0.77,
+            "cost": 21.87,
+            "cat": "Turn"
+          },
           {
             "d": "2026-09-14",
             "emp": "Margarito Saldana",
@@ -6553,7 +6560,7 @@
       "next_move_in": null,
       "rent": "1033.00",
       "bed_bath": "1/1.00",
-      "sqft": null,
+      "sqft": 512,
       "region": "Spokane",
       "pm": {
         "projId": 229357,
@@ -18091,23 +18098,8 @@
       "key": "kn47|c202",
       "prop": "kn47",
       "unit": "C202",
-      "at_risk": [],
       "property_name": "kn47 K2",
-      "city": "Kennewick",
-      "addr": "632 N Arthur Street C202 Kennewick, WA 99336",
-      "unit_id": 1033,
-      "unit_status": "Notice-Unrented",
-      "rent_ready": null,
-      "vacant": false,
-      "days_vacant": null,
-      "move_out": "2026-10-01",
-      "available_on": "2026-11-26",
-      "ready_on": "2026-11-26",
-      "target_date": "2026-10-21",
-      "next_move_in": null,
-      "rent": "1132.00",
-      "bed_bath": "1/1.00",
-      "sqft": 575,
+      "at_risk": [],
       "region": "Tri-Cities",
       "pm": {
         "projId": 241647,
@@ -18216,9 +18208,9 @@
       },
       "stage": "Walkthrough",
       "stage_ord": 1,
-      "days_elapsed": 0,
+      "days_elapsed": null,
       "days_to_turn": null,
-      "status": "notice"
+      "status": "other"
     },
     {
       "key": "kn47|c206",
@@ -28220,9 +28212,9 @@
       },
       "cost": {
         "code": "p705-11",
-        "labor": 6421.07,
+        "labor": 6560.64,
         "materials": 4500.14,
-        "total": 10921.21,
+        "total": 11060.78,
         "estimate": 0,
         "laborEntries": [
           {
@@ -28230,6 +28222,34 @@
             "emp": "Ronald D. Cramer",
             "hrs": 2,
             "cost": 51.5,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-23",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.22,
+            "cost": 31.42,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-23",
+            "emp": "Ronald D. Cramer",
+            "hrs": 0.78,
+            "cost": 20.09,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-23",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.07,
+            "cost": 27.55,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-23",
+            "emp": "Ronald D. Cramer",
+            "hrs": 2.35,
+            "cost": 60.51,
             "cat": "Turn"
           },
           {
@@ -28616,34 +28636,6 @@
             "hrs": 1.18,
             "cost": 30.39,
             "cat": "CapEx"
-          },
-          {
-            "d": "2025-10-23",
-            "emp": "Scott Higley",
-            "hrs": 2.78,
-            "cost": 88.93,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2025-10-23",
-            "emp": "Micheal N. Magoon",
-            "hrs": 2.25,
-            "cost": 56.25,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2025-10-23",
-            "emp": "Scott Higley",
-            "hrs": 3.3,
-            "cost": 105.57,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2025-10-22",
-            "emp": "Scott Higley",
-            "hrs": 6.18,
-            "cost": 197.7,
-            "cat": "CapEx"
           }
         ],
         "materialEntries": [
@@ -28812,7 +28804,7 @@
       "city": "Spokane Valley",
       "addr": "2705 N Pines Rd - 1 Spokane Valley, WA 99206",
       "unit_id": 228,
-      "unit_status": "Vacant-Unrented",
+      "unit_status": "Vacant-Rented",
       "rent_ready": "No",
       "vacant": true,
       "days_vacant": 7,
@@ -28820,7 +28812,7 @@
       "available_on": "2026-10-06",
       "ready_on": "2026-10-06",
       "target_date": "2026-10-06",
-      "next_move_in": null,
+      "next_move_in": "2026-10-09",
       "rent": "1295.00",
       "bed_bath": "2/1.00",
       "sqft": 840,
@@ -29466,9 +29458,9 @@
       },
       "cost": {
         "code": "p705-19",
-        "labor": 519.86,
+        "labor": 626.61,
         "materials": 630.35,
-        "total": 1150.21,
+        "total": 1256.96,
         "estimate": 0,
         "laborEntries": [
           {
@@ -29490,6 +29482,20 @@
             "emp": "Micheal N. Magoon",
             "hrs": 0.75,
             "cost": 18.75,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-23",
+            "emp": "Micheal N. Magoon",
+            "hrs": 2.02,
+            "cost": 50.5,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-23",
+            "emp": "Micheal N. Magoon",
+            "hrs": 2.25,
+            "cost": 56.25,
             "cat": "Turn"
           },
           {
@@ -32749,44 +32755,6 @@
       "days_elapsed": 0,
       "days_to_turn": -370,
       "status": "complete"
-    },
-    {
-      "key": "ps25|b11",
-      "prop": "ps25",
-      "unit": "B11",
-      "at_risk": [],
-      "property_name": "ps25",
-      "city": "Pasco",
-      "addr": "2524 W Sylvester St. - B11 Pasco, WA 99301",
-      "unit_id": 369,
-      "unit_status": "Notice-Unrented",
-      "rent_ready": null,
-      "vacant": false,
-      "days_vacant": null,
-      "move_out": "2026-10-08",
-      "available_on": "2026-10-28",
-      "ready_on": "2026-10-28",
-      "target_date": "2026-10-28",
-      "next_move_in": null,
-      "rent": "1162.00",
-      "bed_bath": "1/1.00",
-      "sqft": 655,
-      "region": "Tri-Cities",
-      "next_appt": null,
-      "cost": {
-        "code": "ps25-B11",
-        "labor": 0,
-        "materials": 0,
-        "total": 0,
-        "estimate": 0,
-        "laborEntries": [],
-        "materialEntries": []
-      },
-      "stage": "Move-out",
-      "stage_ord": 0,
-      "days_elapsed": 0,
-      "days_to_turn": null,
-      "status": "notice"
     },
     {
       "key": "ps25|b15",
@@ -36820,11 +36788,18 @@
       "next_appt": null,
       "cost": {
         "code": "rl16-B01",
-        "labor": 1247.63,
+        "labor": 1253.31,
         "materials": 275.5,
-        "total": 1523.13,
+        "total": 1528.81,
         "estimate": 0,
         "laborEntries": [
+          {
+            "d": "2026-09-23",
+            "emp": "Margarito Saldana",
+            "hrs": 0.2,
+            "cost": 5.68,
+            "cat": "CapEx"
+          },
           {
             "d": "2026-09-14",
             "emp": "Margarito Saldana",
@@ -38870,8 +38845,8 @@
       "cost": {
         "code": "rl16-D04",
         "labor": 70.43,
-        "materials": 75.04,
-        "total": 145.47,
+        "materials": 730.21,
+        "total": 800.64,
         "estimate": 0,
         "laborEntries": [
           {
@@ -38890,6 +38865,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-09-23",
+            "amt": 655.17,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          },
           {
             "d": "2026-09-22",
             "amt": 75.04,
@@ -39810,11 +39792,18 @@
       },
       "cost": {
         "code": "rl16-D14",
-        "labor": 142,
+        "labor": 157.05,
         "materials": 1243.3,
-        "total": 1385.3,
+        "total": 1400.35,
         "estimate": 0,
         "laborEntries": [
+          {
+            "d": "2026-09-23",
+            "emp": "Margarito Saldana",
+            "hrs": 0.53,
+            "cost": 15.05,
+            "cat": "Turn"
+          },
           {
             "d": "2026-08-04",
             "emp": "Margarito Saldana",
