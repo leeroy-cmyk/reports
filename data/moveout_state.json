@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-09-24T11:51:00.804Z",
+  "fetched_at": "2026-09-24T16:42:13.110Z",
   "units": {
     "2": {
       "moveOut": "2026-07-31",
@@ -20,13 +20,6 @@
       "status": "Vacant-Unrented",
       "prop": "a916",
       "unit": "6",
-      "city": "Spokane"
-    },
-    "40": {
-      "moveOut": "2026-05-31",
-      "status": "Vacant-Unrented",
-      "prop": "s300",
-      "unit": "12",
       "city": "Spokane"
     },
     "61": {
@@ -230,6 +223,13 @@
       "status": "Vacant-Unrented",
       "prop": "ps25",
       "unit": "C18",
+      "city": "Pasco"
+    },
+    "386": {
+      "moveOut": "2026-09-30",
+      "status": "Notice-Unrented",
+      "prop": "ps25",
+      "unit": "D28",
       "city": "Pasco"
     },
     "387": {
@@ -584,7 +584,7 @@
     },
     "808": {
       "moveOut": "2026-07-31",
-      "status": "Vacant-Unrented",
+      "status": "Vacant-Rented",
       "prop": "tc34",
       "unit": "A103",
       "city": "Tacoma"
@@ -692,6 +692,13 @@
       "status": "Vacant-Unrented",
       "prop": "kn47 K2",
       "unit": "A104",
+      "city": "Kennewick"
+    },
+    "996": {
+      "moveOut": "2026-09-30",
+      "status": "Notice-Unrented",
+      "prop": "kn47 K2",
+      "unit": "A105",
       "city": "Kennewick"
     },
     "1011": {
@@ -3754,6 +3761,34 @@
       "city": "Kennewick",
       "from": "2026-10-01",
       "was_status": "Notice-Unrented"
+    },
+    {
+      "date": "2026-09-24",
+      "type": "moveout_new",
+      "unit_id": "386",
+      "prop": "ps25",
+      "unit": "D28",
+      "city": "Pasco",
+      "to": "2026-09-30"
+    },
+    {
+      "date": "2026-09-24",
+      "type": "moveout_new",
+      "unit_id": "996",
+      "prop": "kn47 K2",
+      "unit": "A105",
+      "city": "Kennewick",
+      "to": "2026-09-30"
+    },
+    {
+      "date": "2026-09-24",
+      "type": "moveout_removed",
+      "unit_id": "40",
+      "prop": "s300",
+      "unit": "12",
+      "city": "Spokane",
+      "from": "2026-05-31",
+      "was_status": "Vacant-Unrented"
     }
   ]
 }

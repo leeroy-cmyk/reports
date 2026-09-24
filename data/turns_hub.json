@@ -1,12 +1,12 @@
 {
   "ok": true,
-  "fetched_at": "2026-09-24T11:52:59.414Z",
+  "fetched_at": "2026-09-24T16:44:58.674Z",
   "summary": {
     "as_of": "2026-09-24",
     "units": 240,
     "active": 79,
     "ready": 1,
-    "notice": 23,
+    "notice": 25,
     "at_risk": 38,
     "unscheduled": 9,
     "accruing": 25463.15,
@@ -8455,6 +8455,66 @@
       "bed_bath": "2/2.00",
       "sqft": 1050,
       "region": "Spokane",
+      "pm": {
+        "projId": 245836,
+        "name": "Standard Unit Turn",
+        "status": "ACTIVE",
+        "done": 0,
+        "total": 5,
+        "first_appt": null,
+        "final_walk": null,
+        "final_walk_done": null,
+        "completed_date": null,
+        "due": "2026-10-15",
+        "next_task": null,
+        "tasks": [
+          {
+            "task": "A - Initial walkthrough",
+            "cat": "walkthrough",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "D - Maintenance",
+            "cat": "maintenance",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "E - Carpet Cleaning",
+            "cat": "carpet",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "F - Cleaning",
+            "cat": "cleaning",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Final Walkthrough",
+            "cat": "final-walk",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          }
+        ]
+      },
       "next_appt": null,
       "cost": {
         "code": "c313-11",
@@ -8465,8 +8525,8 @@
         "laborEntries": [],
         "materialEntries": []
       },
-      "stage": "Move-out",
-      "stage_ord": 0,
+      "stage": "Walkthrough",
+      "stage_ord": 1,
       "days_elapsed": 0,
       "days_to_turn": null,
       "status": "notice"
@@ -16580,6 +16640,104 @@
       "status": "complete"
     },
     {
+      "key": "kn47|a105",
+      "prop": "kn47",
+      "unit": "A105",
+      "at_risk": [],
+      "property_name": "kn47 K2",
+      "city": "Kennewick",
+      "addr": "632 N Arthur Street A105 Kennewick, WA 99336",
+      "unit_id": 996,
+      "unit_status": "Notice-Unrented",
+      "rent_ready": null,
+      "vacant": false,
+      "days_vacant": null,
+      "move_out": "2026-09-30",
+      "available_on": null,
+      "ready_on": null,
+      "target_date": "2026-10-20",
+      "next_move_in": null,
+      "rent": "1132.00",
+      "bed_bath": "1/1.00",
+      "sqft": 575,
+      "region": "Tri-Cities",
+      "pm": {
+        "projId": 245837,
+        "name": "Standard Unit Turn",
+        "status": "ACTIVE",
+        "done": 0,
+        "total": 5,
+        "first_appt": null,
+        "final_walk": null,
+        "final_walk_done": null,
+        "completed_date": null,
+        "due": "2026-10-15",
+        "next_task": null,
+        "tasks": [
+          {
+            "task": "A - Initial walkthrough",
+            "cat": "walkthrough",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "D - Maintenance",
+            "cat": "maintenance",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "E - Carpet Cleaning",
+            "cat": "carpet",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "F - Cleaning",
+            "cat": "cleaning",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Final Walkthrough",
+            "cat": "final-walk",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          }
+        ]
+      },
+      "next_appt": null,
+      "cost": {
+        "code": "kn47-A105",
+        "labor": 0,
+        "materials": 0,
+        "total": 0,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": []
+      },
+      "stage": "Walkthrough",
+      "stage_ord": 1,
+      "days_elapsed": 0,
+      "days_to_turn": null,
+      "status": "notice"
+    },
+    {
       "key": "kn47|a205",
       "prop": "kn47",
       "unit": "A205",
@@ -17690,124 +17848,6 @@
       "days_elapsed": null,
       "days_to_turn": null,
       "status": "complete"
-    },
-    {
-      "key": "kn47|c202",
-      "prop": "kn47",
-      "unit": "C202",
-      "property_name": "kn47 K2",
-      "at_risk": [],
-      "region": "Tri-Cities",
-      "pm": {
-        "projId": 241647,
-        "name": "Standard Unit Turn",
-        "status": "ACTIVE",
-        "done": 0,
-        "total": 8,
-        "first_appt": null,
-        "final_walk": "2026-11-23",
-        "final_walk_done": null,
-        "completed_date": null,
-        "due": "2026-10-16",
-        "next_task": {
-          "date": "2026-10-19",
-          "task": "walkthrough"
-        },
-        "tasks": [
-          {
-            "task": "A - Initial walkthrough",
-            "cat": "walkthrough",
-            "done": false,
-            "date": "2026-10-19",
-            "who": "Margarito Saldana",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Appfolio Estimate",
-            "cat": "estimate",
-            "done": false,
-            "date": null,
-            "who": "Dulce Salinas",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "C - Paint",
-            "cat": "paint",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "D - Maintenance",
-            "cat": "maintenance",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "E - Carpet Cleaning",
-            "cat": "carpet",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "F - Cleaning",
-            "cat": "cleaning",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "G - Verify Mailbox Lockbox & Mailbox Keys",
-            "cat": "other",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Final Walkthrough",
-            "cat": "final-walk",
-            "done": false,
-            "date": "2026-11-23",
-            "who": "Margarito Saldana",
-            "completed": null,
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": {
-        "date": "2026-10-19",
-        "cat": "walkthrough",
-        "who": "Margarito Saldana",
-        "brief": "A - Initial walkthrough"
-      },
-      "cost": {
-        "code": "kn47-C202",
-        "labor": 0,
-        "materials": 0,
-        "total": 0,
-        "estimate": 0,
-        "laborEntries": [],
-        "materialEntries": []
-      },
-      "stage": "Walkthrough",
-      "stage_ord": 1,
-      "days_elapsed": null,
-      "days_to_turn": null,
-      "status": "other"
     },
     {
       "key": "kn47|c206",
@@ -28099,8 +28139,8 @@
       "cost": {
         "code": "p705-11",
         "labor": 6560.64,
-        "materials": 4500.14,
-        "total": 11060.78,
+        "materials": 4576.08,
+        "total": 11136.72,
         "estimate": 0,
         "laborEntries": [
           {
@@ -28525,6 +28565,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-09-23",
+            "amt": 75.94,
+            "cat": "Turn",
+            "ln": "cramer",
+            "src": "ramp"
+          },
           {
             "d": "2026-09-22",
             "amt": 28.27,
@@ -32692,97 +32739,6 @@
       "status": "complete"
     },
     {
-      "key": "ps25|b11",
-      "prop": "ps25",
-      "unit": "B11",
-      "property_name": "ps25",
-      "at_risk": [],
-      "region": "Tri-Cities",
-      "pm": {
-        "projId": 245704,
-        "name": "Standard Unit Turn",
-        "status": "ACTIVE",
-        "done": 0,
-        "total": 5,
-        "first_appt": null,
-        "final_walk": null,
-        "final_walk_done": null,
-        "completed_date": null,
-        "due": "2026-10-23",
-        "next_task": {
-          "date": "2026-10-09",
-          "task": "walkthrough"
-        },
-        "tasks": [
-          {
-            "task": "A - Initial walkthrough",
-            "cat": "walkthrough",
-            "done": false,
-            "date": "2026-10-09",
-            "who": "Margarito Saldana",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "D - Maintenance",
-            "cat": "maintenance",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "E - Carpet Cleaning",
-            "cat": "carpet",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "F - Cleaning",
-            "cat": "cleaning",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Final Walkthrough",
-            "cat": "final-walk",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": {
-        "date": "2026-10-09",
-        "cat": "walkthrough",
-        "who": "Margarito Saldana",
-        "brief": "A - Initial walkthrough"
-      },
-      "cost": {
-        "code": "ps25-B11",
-        "labor": 0,
-        "materials": 0,
-        "total": 0,
-        "estimate": 0,
-        "laborEntries": [],
-        "materialEntries": []
-      },
-      "stage": "Walkthrough",
-      "stage_ord": 1,
-      "days_elapsed": null,
-      "days_to_turn": null,
-      "status": "other"
-    },
-    {
       "key": "ps25|b15",
       "prop": "ps25",
       "unit": "B15",
@@ -34071,6 +34027,44 @@
       "days_elapsed": null,
       "days_to_turn": null,
       "status": "complete"
+    },
+    {
+      "key": "ps25|d28",
+      "prop": "ps25",
+      "unit": "D28",
+      "at_risk": [],
+      "property_name": "ps25",
+      "city": "Pasco",
+      "addr": "2524 W Sylvester St. - D28 Pasco, WA 99301",
+      "unit_id": 386,
+      "unit_status": "Notice-Unrented",
+      "rent_ready": null,
+      "vacant": false,
+      "days_vacant": null,
+      "move_out": "2026-09-30",
+      "available_on": "2026-10-20",
+      "ready_on": "2026-10-20",
+      "target_date": "2026-10-20",
+      "next_move_in": null,
+      "rent": "1162.00",
+      "bed_bath": "1/1.00",
+      "sqft": 655,
+      "region": "Tri-Cities",
+      "next_appt": null,
+      "cost": {
+        "code": "ps25-D28",
+        "labor": 0,
+        "materials": 0,
+        "total": 0,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": []
+      },
+      "stage": "Move-out",
+      "stage_ord": 0,
+      "days_elapsed": 0,
+      "days_to_turn": null,
+      "status": "notice"
     },
     {
       "key": "ps25|f41",
@@ -42722,23 +42716,8 @@
       "key": "s300|12",
       "prop": "s300",
       "unit": "12",
-      "at_risk": [],
       "property_name": "s300",
-      "city": "Spokane",
-      "addr": "9300 E Sprague Avenue - 12 Spokane, WA 99206",
-      "unit_id": 40,
-      "unit_status": "Vacant-Unrented",
-      "rent_ready": "Yes",
-      "vacant": true,
-      "days_vacant": 116,
-      "move_out": "2026-05-31",
-      "available_on": "2026-07-03",
-      "ready_on": "2026-07-03",
-      "target_date": "2026-06-20",
-      "next_move_in": null,
-      "rent": "966.00",
-      "bed_bath": "1/1.00",
-      "sqft": 310,
+      "at_risk": [],
       "region": "Spokane",
       "pm": {
         "projId": 222878,
@@ -42988,10 +42967,10 @@
       },
       "turn_end": "2026-06-30",
       "af_turn_end": "2026-06-30",
-      "stage": "Ready",
-      "stage_ord": 7,
-      "days_elapsed": 30,
-      "days_to_turn": 30,
+      "stage": "Final Walk",
+      "stage_ord": 6,
+      "days_elapsed": null,
+      "days_to_turn": null,
       "status": "complete"
     },
     {
@@ -43300,7 +43279,7 @@
       "city": "Tacoma",
       "addr": "3401 Pacific Ave A103 Tacoma, WA 98418",
       "unit_id": 808,
-      "unit_status": "Vacant-Unrented",
+      "unit_status": "Vacant-Rented",
       "rent_ready": "Yes",
       "vacant": true,
       "days_vacant": 55,
@@ -43308,7 +43287,7 @@
       "available_on": "2026-09-16",
       "ready_on": "2026-09-16",
       "target_date": "2026-08-20",
-      "next_move_in": null,
+      "next_move_in": "2026-10-26",
       "rent": "1295.00",
       "bed_bath": "1/1.00",
       "sqft": 650,
@@ -48833,18 +48812,15 @@
       "pm": {
         "projId": 222908,
         "name": "Standard Unit Turn",
-        "status": "ACTIVE",
-        "done": 7,
+        "status": "COMPLETE",
+        "done": 8,
         "total": 8,
         "first_appt": "2026-09-01",
         "final_walk": "2026-09-24",
-        "final_walk_done": null,
-        "completed_date": "2026-09-19",
+        "final_walk_done": "2026-09-24",
+        "completed_date": "2026-09-24",
         "due": "2026-07-16",
-        "next_task": {
-          "date": "2026-09-24",
-          "task": "final-walk"
-        },
+        "next_task": null,
         "tasks": [
           {
             "task": "A - Initial walkthrough",
@@ -48903,20 +48879,15 @@
           {
             "task": "Final Walkthrough",
             "cat": "final-walk",
-            "done": false,
+            "done": true,
             "date": "2026-09-24",
             "who": "Matt Romme",
-            "completed": null,
+            "completed": "2026-09-24",
             "vendor": false
           }
         ]
       },
-      "next_appt": {
-        "date": "2026-09-24",
-        "cat": "final-walk",
-        "who": "Matt Romme",
-        "brief": "Final Walkthrough"
-      },
+      "next_appt": null,
       "cost": {
         "code": "w117-10",
         "labor": 1252.59,
@@ -49187,11 +49158,11 @@
           }
         ]
       },
-      "turn_end": "2025-06-18",
+      "turn_end": "2026-09-24",
       "stage": "Ready",
       "stage_ord": 7,
-      "days_elapsed": 0,
-      "days_to_turn": -377,
+      "days_elapsed": 86,
+      "days_to_turn": 86,
       "status": "complete"
     },
     {
