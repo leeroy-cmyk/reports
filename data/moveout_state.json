@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-09-24T20:10:13.360Z",
+  "fetched_at": "2026-09-24T23:13:18.215Z",
   "units": {
     "2": {
       "moveOut": "2026-07-31",
@@ -87,7 +87,7 @@
     },
     "227": {
       "moveOut": "2026-08-31",
-      "status": "Vacant-Rented",
+      "status": "Vacant-Unrented",
       "prop": "p705",
       "unit": "11",
       "city": "Spokane Valley"
@@ -479,7 +479,7 @@
     },
     "660": {
       "moveOut": "2026-08-30",
-      "status": "Vacant-Unrented",
+      "status": "Vacant-Rented",
       "prop": "s129",
       "unit": "9",
       "city": "Spokane Valley"
@@ -692,13 +692,6 @@
       "status": "Vacant-Unrented",
       "prop": "kn47 K2",
       "unit": "A104",
-      "city": "Kennewick"
-    },
-    "996": {
-      "moveOut": "2026-09-30",
-      "status": "Notice-Unrented",
-      "prop": "kn47 K2",
-      "unit": "A105",
       "city": "Kennewick"
     },
     "1011": {
@@ -3789,6 +3782,16 @@
       "city": "Spokane",
       "from": "2026-05-31",
       "was_status": "Vacant-Unrented"
+    },
+    {
+      "date": "2026-09-24",
+      "type": "moveout_removed",
+      "unit_id": "996",
+      "prop": "kn47 K2",
+      "unit": "A105",
+      "city": "Kennewick",
+      "from": "2026-09-30",
+      "was_status": "Notice-Unrented"
     }
   ]
 }

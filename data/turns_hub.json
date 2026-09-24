@@ -1,14 +1,14 @@
 {
   "ok": true,
-  "fetched_at": "2026-09-24T20:11:42.694Z",
+  "fetched_at": "2026-09-24T23:15:16.035Z",
   "summary": {
     "as_of": "2026-09-24",
     "units": 240,
     "active": 79,
     "ready": 1,
-    "notice": 25,
+    "notice": 24,
     "at_risk": 38,
-    "unscheduled": 9,
+    "unscheduled": 10,
     "accruing": 25887.68,
     "avg_days_open": 35,
     "revenue_at_risk": 3571.03
@@ -1085,7 +1085,7 @@
         ]
       },
       "next_appt": {
-        "date": "2026-10-20",
+        "date": "2026-09-25",
         "cat": "cleaning",
         "who": "SPO Cleaning",
         "brief": "F - Cleaning"
@@ -1185,8 +1185,8 @@
         "completed_date": "2026-07-01",
         "due": "2026-07-10",
         "next_task": {
-          "date": "2026-10-02",
-          "task": "maintenance"
+          "date": "2026-09-25",
+          "task": "cleaning"
         },
         "tasks": [
           {
@@ -1237,10 +1237,10 @@
         ]
       },
       "next_appt": {
-        "date": "2026-10-02",
-        "cat": "maintenance",
-        "who": "Joshua Normandin",
-        "brief": "D - Maintenance"
+        "date": "2026-09-25",
+        "cat": "cleaning",
+        "who": "SPO Cleaning",
+        "brief": "F - Cleaning"
       },
       "cost": {
         "code": "c313-24",
@@ -5892,11 +5892,18 @@
       "next_appt": null,
       "cost": {
         "code": "a210-4",
-        "labor": 693.64,
+        "labor": 760.64,
         "materials": 1294.8,
-        "total": 1988.44,
+        "total": 2055.44,
         "estimate": 1561.01,
         "laborEntries": [
+          {
+            "d": "2026-09-24",
+            "emp": "Micheal N. Magoon",
+            "hrs": 2.68,
+            "cost": 67,
+            "cat": "Turn"
+          },
           {
             "d": "2026-08-26",
             "emp": "Armani Mitchell",
@@ -7210,12 +7217,12 @@
         "projId": 244687,
         "name": "Standard Unit Turn",
         "status": "ACTIVE",
-        "done": 2,
+        "done": 3,
         "total": 6,
         "first_appt": "2026-09-29",
         "final_walk": "2026-10-02",
         "final_walk_done": null,
-        "completed_date": null,
+        "completed_date": "2026-09-24",
         "due": "2026-09-30",
         "next_task": {
           "date": "2026-09-24",
@@ -7225,10 +7232,10 @@
           {
             "task": "A - Initial walkthrough",
             "cat": "walkthrough",
-            "done": false,
+            "done": true,
             "date": "2026-09-24",
             "who": "Matt Romme",
-            "completed": null,
+            "completed": "2026-09-24",
             "vendor": false
           },
           {
@@ -7261,10 +7268,10 @@
         ]
       },
       "next_appt": {
-        "date": "2026-09-24",
-        "cat": "walkthrough",
-        "who": "Matt Romme",
-        "brief": "A - Initial walkthrough"
+        "date": "2026-09-29",
+        "cat": "maintenance",
+        "who": "Micheal Magoon",
+        "brief": "D - Maintenance"
       },
       "cost": {
         "code": "b101-11",
@@ -7481,8 +7488,8 @@
         ]
       },
       "turn_end": "2025-07-31",
-      "stage": "Walkthrough",
-      "stage_ord": 1,
+      "stage": "Maintenance",
+      "stage_ord": 3,
       "days_elapsed": 0,
       "days_to_turn": -411,
       "status": "complete"
@@ -11967,12 +11974,12 @@
         "projId": 239142,
         "name": "Standard Unit Turn",
         "status": "ACTIVE",
-        "done": 7,
+        "done": 8,
         "total": 9,
         "first_appt": "2026-08-26",
         "final_walk": "2026-09-18",
         "final_walk_done": null,
-        "completed_date": "2026-09-17",
+        "completed_date": "2026-09-25",
         "due": "2026-08-25",
         "next_task": {
           "date": "2026-09-25",
@@ -12027,10 +12034,10 @@
           {
             "task": "F - Cleaning (clone)",
             "cat": "cleaning",
-            "done": false,
+            "done": true,
             "date": "2026-09-25",
             "who": "U&K Properties LLC",
-            "completed": null,
+            "completed": "2026-09-25",
             "vendor": true
           },
           {
@@ -12053,12 +12060,7 @@
           }
         ]
       },
-      "next_appt": {
-        "date": "2026-09-25",
-        "cat": "cleaning",
-        "who": "U&K Properties LLC",
-        "brief": "F - Cleaning (clone)"
-      },
+      "next_appt": null,
       "cost": {
         "code": "c702-F204",
         "labor": 0,
@@ -12068,8 +12070,8 @@
         "laborEntries": [],
         "materialEntries": []
       },
-      "stage": "Cleaning",
-      "stage_ord": 4,
+      "stage": "Final Walk",
+      "stage_ord": 6,
       "days_elapsed": null,
       "days_to_turn": null,
       "status": "active"
@@ -16643,23 +16645,8 @@
       "key": "kn47|a105",
       "prop": "kn47",
       "unit": "A105",
-      "at_risk": [],
       "property_name": "kn47 K2",
-      "city": "Kennewick",
-      "addr": "632 N Arthur Street A105 Kennewick, WA 99336",
-      "unit_id": 996,
-      "unit_status": "Notice-Unrented",
-      "rent_ready": null,
-      "vacant": false,
-      "days_vacant": null,
-      "move_out": "2026-09-30",
-      "available_on": null,
-      "ready_on": null,
-      "target_date": "2026-10-20",
-      "next_move_in": null,
-      "rent": "1132.00",
-      "bed_bath": "1/1.00",
-      "sqft": 575,
+      "at_risk": [],
       "region": "Tri-Cities",
       "pm": {
         "projId": 245837,
@@ -16733,9 +16720,9 @@
       },
       "stage": "Walkthrough",
       "stage_ord": 1,
-      "days_elapsed": 0,
+      "days_elapsed": null,
       "days_to_turn": null,
-      "status": "notice"
+      "status": "other"
     },
     {
       "key": "kn47|a205",
@@ -28054,7 +28041,7 @@
       "city": "Spokane Valley",
       "addr": "2705 N Pines Rd - 11 Spokane Valley, WA 99206",
       "unit_id": 227,
-      "unit_status": "Vacant-Rented",
+      "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
       "days_vacant": 24,
@@ -28062,7 +28049,7 @@
       "available_on": "2026-10-02",
       "ready_on": "2026-10-02",
       "target_date": "2026-09-20",
-      "next_move_in": "2026-10-02",
+      "next_move_in": null,
       "rent": "1295.00",
       "bed_bath": "2/1.00",
       "sqft": 840,
@@ -28138,11 +28125,53 @@
       },
       "cost": {
         "code": "p705-11",
-        "labor": 6560.64,
+        "labor": 6807.33,
         "materials": 4618.57,
-        "total": 11179.21,
+        "total": 11425.9,
         "estimate": 0,
         "laborEntries": [
+          {
+            "d": "2026-09-24",
+            "emp": "Ronald D. Cramer",
+            "hrs": 2.07,
+            "cost": 53.3,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-24",
+            "emp": "Ronald D. Cramer",
+            "hrs": 0.78,
+            "cost": 20.09,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-24",
+            "emp": "Ronald D. Cramer",
+            "hrs": 2,
+            "cost": 51.5,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-24",
+            "emp": "Ronald D. Cramer",
+            "hrs": 0.93,
+            "cost": 23.95,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-24",
+            "emp": "Ronald D. Cramer",
+            "hrs": 2,
+            "cost": 51.5,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-24",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.8,
+            "cost": 46.35,
+            "cat": "Turn"
+          },
           {
             "d": "2026-09-23",
             "emp": "Ronald D. Cramer",
@@ -28520,48 +28549,6 @@
             "hrs": 5,
             "cost": 128.75,
             "cat": "CapEx"
-          },
-          {
-            "d": "2025-10-27",
-            "emp": "Micheal N. Magoon",
-            "hrs": 1.25,
-            "cost": 31.25,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2025-10-27",
-            "emp": "Micheal N. Magoon",
-            "hrs": 1.72,
-            "cost": 43,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2025-10-24",
-            "emp": "Scott Higley",
-            "hrs": 2.72,
-            "cost": 87.01,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2025-10-24",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.97,
-            "cost": 24.25,
-            "cat": "Turn"
-          },
-          {
-            "d": "2025-10-24",
-            "emp": "Ronald D. Cramer",
-            "hrs": 2.63,
-            "cost": 67.72,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2025-10-24",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.18,
-            "cost": 30.39,
-            "cat": "CapEx"
           }
         ],
         "materialEntries": [
@@ -28804,10 +28791,10 @@
             "task": "F - Cleaning",
             "cat": "cleaning",
             "done": false,
-            "date": null,
-            "who": null,
+            "date": "2026-10-01",
+            "who": "SPO Cleaning",
             "completed": null,
-            "vendor": false
+            "vendor": true
           },
           {
             "task": "Final Walkthrough",
@@ -29452,11 +29439,18 @@
       },
       "cost": {
         "code": "p705-19",
-        "labor": 626.61,
+        "labor": 749.36,
         "materials": 630.35,
-        "total": 1256.96,
+        "total": 1379.71,
         "estimate": 0,
         "laborEntries": [
+          {
+            "d": "2026-09-24",
+            "emp": "Micheal N. Magoon",
+            "hrs": 3.88,
+            "cost": 97,
+            "cat": "Turn"
+          },
           {
             "d": "2026-09-23",
             "emp": "Micheal N. Magoon",
@@ -29490,6 +29484,13 @@
             "emp": "Micheal N. Magoon",
             "hrs": 2.25,
             "cost": 56.25,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-23",
+            "emp": "Micheal N. Magoon",
+            "hrs": 1.03,
+            "cost": 25.75,
             "cat": "Turn"
           },
           {
@@ -42180,7 +42181,7 @@
       "city": "Spokane Valley",
       "addr": "12903 E Sprague Ave #9 Spokane Valley, WA 99216",
       "unit_id": 660,
-      "unit_status": "Vacant-Unrented",
+      "unit_status": "Vacant-Rented",
       "rent_ready": "Yes",
       "vacant": true,
       "days_vacant": 25,
@@ -42188,7 +42189,7 @@
       "available_on": "2026-09-21",
       "ready_on": "2026-09-21",
       "target_date": "2026-09-19",
-      "next_move_in": null,
+      "next_move_in": "2026-10-01",
       "rent": "1365.00",
       "bed_bath": "2/1.00",
       "sqft": 1035,
