@@ -1,17 +1,17 @@
 {
   "ok": true,
-  "fetched_at": "2026-09-26T19:28:08.206Z",
+  "fetched_at": "2026-09-26T22:09:35.546Z",
   "summary": {
     "as_of": "2026-09-26",
     "units": 244,
-    "active": 78,
-    "ready": 1,
+    "active": 77,
+    "ready": 2,
     "notice": 25,
-    "at_risk": 41,
+    "at_risk": 40,
     "unscheduled": 12,
-    "accruing": 26533.35,
+    "accruing": 26105.59,
     "avg_days_open": 37,
-    "revenue_at_risk": 3511.87
+    "revenue_at_risk": 3473.13
   },
   "rows": [
     {
@@ -4370,246 +4370,6 @@
       "stage": "Carpet",
       "stage_ord": 5,
       "days_elapsed": 117,
-      "days_to_turn": null,
-      "status": "active"
-    },
-    {
-      "key": "ps25|d29",
-      "prop": "ps25",
-      "unit": "D29",
-      "at_risk": [
-        "Over 45 days vacant"
-      ],
-      "property_name": "ps25",
-      "city": "Pasco",
-      "addr": "2524 W Sylvester St. - D29 Pasco, WA 99301",
-      "unit_id": 387,
-      "unit_status": "Vacant-Rented",
-      "rent_ready": "No",
-      "vacant": true,
-      "days_vacant": 64,
-      "move_out": "2026-07-24",
-      "available_on": "2026-10-08",
-      "ready_on": "2026-10-08",
-      "target_date": "2026-08-13",
-      "next_move_in": "2026-10-10",
-      "rent": "1162.00",
-      "bed_bath": "1/1.00",
-      "sqft": 655,
-      "region": "Tri-Cities",
-      "pm": {
-        "projId": 234076,
-        "name": "Standard Unit Turn",
-        "status": "ACTIVE",
-        "done": 4,
-        "total": 7,
-        "first_appt": "2026-08-25",
-        "final_walk": "2026-10-05",
-        "final_walk_done": null,
-        "completed_date": "2026-09-22",
-        "due": "2026-09-23",
-        "next_task": {
-          "date": "2026-09-28",
-          "task": "maintenance"
-        },
-        "tasks": [
-          {
-            "task": "A - Initial walkthrough",
-            "cat": "walkthrough",
-            "done": true,
-            "date": "2026-07-27",
-            "who": "Margarito Saldana",
-            "completed": "2026-07-31",
-            "vendor": false
-          },
-          {
-            "task": "Appfolio Estimate",
-            "cat": "estimate",
-            "done": false,
-            "date": null,
-            "who": "Dulce Salinas",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "C - Paint",
-            "cat": "paint",
-            "done": true,
-            "date": "2026-08-25",
-            "who": "Margarito Saldana",
-            "completed": "2026-09-03",
-            "vendor": false
-          },
-          {
-            "task": "D - Maintenance",
-            "cat": "maintenance",
-            "done": true,
-            "date": "2026-09-28",
-            "who": "Margarito Saldana",
-            "completed": "2026-09-11",
-            "vendor": false
-          },
-          {
-            "task": "E - Carpet Cleaning",
-            "cat": "carpet",
-            "done": true,
-            "date": null,
-            "who": "SOS Carpet",
-            "completed": "2026-09-22",
-            "vendor": true
-          },
-          {
-            "task": "F - Cleaning",
-            "cat": "cleaning",
-            "done": false,
-            "date": null,
-            "who": "Duo Cleaning Company LLC",
-            "completed": null,
-            "vendor": true
-          },
-          {
-            "task": "Final Walkthrough",
-            "cat": "final-walk",
-            "done": false,
-            "date": "2026-10-05",
-            "who": "Margarito Saldana",
-            "completed": null,
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": {
-        "date": "2026-10-01",
-        "cat": "suggested-cleaning",
-        "who": "Duo Cleaning",
-        "brief": "Suggested cleaning — 3 business days after in-house done (2026-09-28)"
-      },
-      "cost": {
-        "code": "ps25-D29",
-        "labor": 325.18,
-        "materials": 102.58,
-        "total": 427.76,
-        "estimate": 0,
-        "laborEntries": [
-          {
-            "d": "2026-08-26",
-            "emp": "Margarito Saldana",
-            "hrs": 0.67,
-            "cost": 19.03,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-26",
-            "emp": "Margarito Saldana",
-            "hrs": 0.5,
-            "cost": 14.2,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-26",
-            "emp": "Margarito Saldana",
-            "hrs": 1.28,
-            "cost": 36.35,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-26",
-            "emp": "Margarito Saldana",
-            "hrs": 0.73,
-            "cost": 20.73,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-26",
-            "emp": "Margarito Saldana",
-            "hrs": 0.9,
-            "cost": 25.56,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-26",
-            "emp": "Margarito Saldana",
-            "hrs": 0.55,
-            "cost": 15.62,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-26",
-            "emp": "Margarito Saldana",
-            "hrs": 0.97,
-            "cost": 27.55,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-25",
-            "emp": "Margarito Saldana",
-            "hrs": 0.7,
-            "cost": 19.88,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-25",
-            "emp": "Margarito Saldana",
-            "hrs": 0.85,
-            "cost": 24.14,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-25",
-            "emp": "Margarito Saldana",
-            "hrs": 1.75,
-            "cost": 49.7,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-08-25",
-            "emp": "Margarito Saldana",
-            "hrs": 0.55,
-            "cost": 15.62,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-07-31",
-            "emp": "Margarito Saldana",
-            "hrs": 1.22,
-            "cost": 34.65,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-07-31",
-            "emp": "Margarito Saldana",
-            "hrs": 0.78,
-            "cost": 22.15,
-            "cat": "CapEx"
-          }
-        ],
-        "materialEntries": [
-          {
-            "d": "2026-08-31",
-            "amt": 63.13,
-            "cat": "Turn",
-            "ln": "saldana",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-31",
-            "amt": 17.39,
-            "cat": "Turn",
-            "ln": "saldana",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-31",
-            "amt": 22.06,
-            "cat": "Turn",
-            "ln": "saldana",
-            "src": "ramp"
-          }
-        ]
-      },
-      "stage": "Maintenance",
-      "stage_ord": 3,
-      "days_elapsed": 64,
       "days_to_turn": null,
       "status": "active"
     },
@@ -18162,7 +17922,7 @@
       "vacant": true,
       "days_vacant": 118,
       "move_out": "2026-05-31",
-      "available_on": "2026-07-13",
+      "available_on": null,
       "ready_on": "2026-07-13",
       "target_date": "2026-06-20",
       "next_move_in": "2026-09-27",
@@ -34261,6 +34021,244 @@
       "days_elapsed": 0,
       "days_to_turn": null,
       "status": "notice"
+    },
+    {
+      "key": "ps25|d29",
+      "prop": "ps25",
+      "unit": "D29",
+      "at_risk": [],
+      "property_name": "ps25",
+      "city": "Pasco",
+      "addr": "2524 W Sylvester St. - D29 Pasco, WA 99301",
+      "unit_id": 387,
+      "unit_status": "Vacant-Rented",
+      "rent_ready": "Yes",
+      "vacant": true,
+      "days_vacant": 64,
+      "move_out": "2026-07-24",
+      "available_on": null,
+      "ready_on": "2026-10-08",
+      "target_date": "2026-08-13",
+      "next_move_in": "2026-10-10",
+      "rent": "1162.00",
+      "bed_bath": "1/1.00",
+      "sqft": 655,
+      "region": "Tri-Cities",
+      "pm": {
+        "projId": 234076,
+        "name": "Standard Unit Turn",
+        "status": "ACTIVE",
+        "done": 4,
+        "total": 7,
+        "first_appt": "2026-08-25",
+        "final_walk": "2026-10-05",
+        "final_walk_done": null,
+        "completed_date": "2026-09-22",
+        "due": "2026-09-23",
+        "next_task": {
+          "date": "2026-09-28",
+          "task": "maintenance"
+        },
+        "tasks": [
+          {
+            "task": "A - Initial walkthrough",
+            "cat": "walkthrough",
+            "done": true,
+            "date": "2026-07-27",
+            "who": "Margarito Saldana",
+            "completed": "2026-07-31",
+            "vendor": false
+          },
+          {
+            "task": "Appfolio Estimate",
+            "cat": "estimate",
+            "done": false,
+            "date": null,
+            "who": "Dulce Salinas",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "C - Paint",
+            "cat": "paint",
+            "done": true,
+            "date": "2026-08-25",
+            "who": "Margarito Saldana",
+            "completed": "2026-09-03",
+            "vendor": false
+          },
+          {
+            "task": "D - Maintenance",
+            "cat": "maintenance",
+            "done": true,
+            "date": "2026-09-28",
+            "who": "Margarito Saldana",
+            "completed": "2026-09-11",
+            "vendor": false
+          },
+          {
+            "task": "E - Carpet Cleaning",
+            "cat": "carpet",
+            "done": true,
+            "date": null,
+            "who": "SOS Carpet",
+            "completed": "2026-09-22",
+            "vendor": true
+          },
+          {
+            "task": "F - Cleaning",
+            "cat": "cleaning",
+            "done": false,
+            "date": null,
+            "who": "Duo Cleaning Company LLC",
+            "completed": null,
+            "vendor": true
+          },
+          {
+            "task": "Final Walkthrough",
+            "cat": "final-walk",
+            "done": false,
+            "date": "2026-10-05",
+            "who": "Margarito Saldana",
+            "completed": null,
+            "vendor": false
+          }
+        ]
+      },
+      "next_appt": {
+        "date": "2026-10-01",
+        "cat": "suggested-cleaning",
+        "who": "Duo Cleaning",
+        "brief": "Suggested cleaning — 3 business days after in-house done (2026-09-28)"
+      },
+      "cost": {
+        "code": "ps25-D29",
+        "labor": 325.18,
+        "materials": 102.58,
+        "total": 427.76,
+        "estimate": 0,
+        "laborEntries": [
+          {
+            "d": "2026-08-26",
+            "emp": "Margarito Saldana",
+            "hrs": 0.67,
+            "cost": 19.03,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-26",
+            "emp": "Margarito Saldana",
+            "hrs": 0.5,
+            "cost": 14.2,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-26",
+            "emp": "Margarito Saldana",
+            "hrs": 1.28,
+            "cost": 36.35,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-26",
+            "emp": "Margarito Saldana",
+            "hrs": 0.73,
+            "cost": 20.73,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-26",
+            "emp": "Margarito Saldana",
+            "hrs": 0.9,
+            "cost": 25.56,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-26",
+            "emp": "Margarito Saldana",
+            "hrs": 0.55,
+            "cost": 15.62,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-26",
+            "emp": "Margarito Saldana",
+            "hrs": 0.97,
+            "cost": 27.55,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-25",
+            "emp": "Margarito Saldana",
+            "hrs": 0.7,
+            "cost": 19.88,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-25",
+            "emp": "Margarito Saldana",
+            "hrs": 0.85,
+            "cost": 24.14,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-25",
+            "emp": "Margarito Saldana",
+            "hrs": 1.75,
+            "cost": 49.7,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-08-25",
+            "emp": "Margarito Saldana",
+            "hrs": 0.55,
+            "cost": 15.62,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-07-31",
+            "emp": "Margarito Saldana",
+            "hrs": 1.22,
+            "cost": 34.65,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-07-31",
+            "emp": "Margarito Saldana",
+            "hrs": 0.78,
+            "cost": 22.15,
+            "cat": "CapEx"
+          }
+        ],
+        "materialEntries": [
+          {
+            "d": "2026-08-31",
+            "amt": 63.13,
+            "cat": "Turn",
+            "ln": "saldana",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-08-31",
+            "amt": 17.39,
+            "cat": "Turn",
+            "ln": "saldana",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-08-31",
+            "amt": 22.06,
+            "cat": "Turn",
+            "ln": "saldana",
+            "src": "ramp"
+          }
+        ]
+      },
+      "stage": "Ready",
+      "stage_ord": 7,
+      "days_elapsed": 64,
+      "days_to_turn": null,
+      "status": "ready"
     },
     {
       "key": "ps25|f41",
