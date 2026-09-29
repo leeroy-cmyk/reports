@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-09-29T19:10:39.626Z",
+  "fetched_at": "2026-09-29T22:58:16.184Z",
   "units": {
     "2": {
       "moveOut": "2026-07-31",
@@ -255,9 +255,16 @@
     },
     "401": {
       "moveOut": "2026-06-30",
-      "status": "Vacant-Unrented",
+      "status": "Vacant-Rented",
       "prop": "ps25",
       "unit": "F43",
+      "city": "Pasco"
+    },
+    "403": {
+      "moveOut": "2026-09-30",
+      "status": "Notice-Unrented",
+      "prop": "ps17",
+      "unit": "A1",
       "city": "Pasco"
     },
     "409": {
@@ -3852,6 +3859,15 @@
       "city": "Richland",
       "from": "2026-09-30",
       "was_status": "Notice-Unrented"
+    },
+    {
+      "date": "2026-09-29",
+      "type": "moveout_new",
+      "unit_id": "403",
+      "prop": "ps17",
+      "unit": "A1",
+      "city": "Pasco",
+      "to": "2026-09-30"
     }
   ]
 }
