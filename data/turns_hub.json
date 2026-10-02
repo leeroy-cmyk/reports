@@ -1,15 +1,15 @@
 {
   "ok": true,
-  "fetched_at": "2026-10-02T19:22:02.656Z",
+  "fetched_at": "2026-10-02T23:11:51.474Z",
   "summary": {
     "as_of": "2026-10-02",
-    "units": 237,
+    "units": 238,
     "active": 86,
-    "ready": 4,
+    "ready": 5,
     "notice": 9,
     "at_risk": 35,
     "unscheduled": 10,
-    "accruing": 23437.68,
+    "accruing": 24336.71,
     "avg_days_open": 33,
     "revenue_at_risk": 3888.6
   },
@@ -8606,11 +8606,19 @@
       "cost": {
         "code": "c313-11",
         "labor": 0,
-        "materials": 0,
-        "total": 0,
+        "materials": 472.46,
+        "total": 472.46,
         "estimate": 0,
         "laborEntries": [],
-        "materialEntries": []
+        "materialEntries": [
+          {
+            "d": "2026-10-02",
+            "amt": 472.46,
+            "cat": "Turn",
+            "ln": "normandin",
+            "src": "ramp"
+          }
+        ]
       },
       "stage": "Walkthrough",
       "stage_ord": 1,
@@ -11359,11 +11367,18 @@
       "cost": {
         "code": "c702-C202",
         "labor": 0,
-        "materials": 1520.4,
-        "total": 1520.4,
+        "materials": 1579.11,
+        "total": 1579.11,
         "estimate": 0,
         "laborEntries": [],
         "materialEntries": [
+          {
+            "d": "2026-10-02",
+            "amt": 58.71,
+            "cat": "Turn",
+            "ln": "smith",
+            "src": "ramp"
+          },
           {
             "d": "2026-09-15",
             "amt": 1179.12,
@@ -21053,7 +21068,7 @@
       "available_on": "2026-10-15",
       "ready_on": "2026-10-15",
       "target_date": "2026-08-22",
-      "next_move_in": "2026-10-27",
+      "next_move_in": "2026-10-15",
       "rent": "931.00",
       "bed_bath": "1/1.00",
       "sqft": 600,
@@ -26477,6 +26492,44 @@
       "status": "complete"
     },
     {
+      "key": "o155|b5",
+      "prop": "o155",
+      "unit": "B5",
+      "at_risk": [],
+      "property_name": "o155-Oak",
+      "city": "Spokane",
+      "addr": "155 S Oak St B5 Spokane, WA 99201",
+      "unit_id": 1109,
+      "unit_status": "Vacant-Unrented",
+      "rent_ready": "Yes",
+      "vacant": true,
+      "days_vacant": 2,
+      "move_out": "2026-09-30",
+      "available_on": "2026-10-20",
+      "ready_on": "2026-10-20",
+      "target_date": "2026-10-20",
+      "next_move_in": null,
+      "rent": "1225.00",
+      "bed_bath": "2/1.00",
+      "sqft": 900,
+      "region": "Spokane",
+      "next_appt": null,
+      "cost": {
+        "code": "o155-B5",
+        "labor": 0,
+        "materials": 0,
+        "total": 0,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": []
+      },
+      "stage": "Ready",
+      "stage_ord": 7,
+      "days_elapsed": 2,
+      "days_to_turn": null,
+      "status": "ready"
+    },
+    {
       "key": "o155|f",
       "prop": "o155",
       "unit": "F",
@@ -27209,8 +27262,8 @@
       "cost": {
         "code": "p705-11",
         "labor": 7259.2,
-        "materials": 4675.87,
-        "total": 11935.07,
+        "materials": 4684.23,
+        "total": 11943.43,
         "estimate": 0,
         "laborEntries": [
           {
@@ -27635,6 +27688,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-10-02",
+            "amt": 8.36,
+            "cat": "Turn",
+            "ln": "cramer",
+            "src": "ramp"
+          },
           {
             "d": "2026-10-01",
             "amt": 18.81,
@@ -38374,8 +38434,8 @@
       "cost": {
         "code": "rl16-D08",
         "labor": 28.4,
-        "materials": 808.47,
-        "total": 836.87,
+        "materials": 1176.33,
+        "total": 1204.73,
         "estimate": 0,
         "laborEntries": [
           {
@@ -38387,6 +38447,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-10-02",
+            "amt": 367.86,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          },
           {
             "d": "2026-09-28",
             "amt": 48.93,
