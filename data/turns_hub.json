@@ -1,17 +1,17 @@
 {
   "ok": true,
-  "fetched_at": "2026-10-01T21:59:29.168Z",
+  "fetched_at": "2026-10-02T01:33:13.511Z",
   "summary": {
     "as_of": "2026-10-01",
-    "units": 238,
-    "active": 82,
+    "units": 236,
+    "active": 83,
     "ready": 5,
-    "notice": 11,
+    "notice": 10,
     "at_risk": 35,
     "unscheduled": 10,
-    "accruing": 23409.28,
+    "accruing": 23437.68,
     "avg_days_open": 33,
-    "revenue_at_risk": 3716.97
+    "revenue_at_risk": 3764.63
   },
   "rows": [
     {
@@ -6871,11 +6871,18 @@
       },
       "cost": {
         "code": "b101-11",
-        "labor": 1257.25,
+        "labor": 1267.75,
         "materials": 1273.33,
-        "total": 2530.58,
+        "total": 2541.08,
         "estimate": 0,
         "laborEntries": [
+          {
+            "d": "2026-10-01",
+            "emp": "Micheal N. Magoon",
+            "hrs": 0.42,
+            "cost": 10.5,
+            "cat": "Turn"
+          },
           {
             "d": "2026-09-30",
             "emp": "Micheal N. Magoon",
@@ -16964,202 +16971,6 @@
       "status": "complete"
     },
     {
-      "key": "kn47|a205",
-      "prop": "kn47",
-      "unit": "A205",
-      "property_name": "kn47 K2",
-      "at_risk": [],
-      "region": "Tri-Cities",
-      "pm": {
-        "projId": 228486,
-        "name": "Standard Unit Turn",
-        "status": "COMPLETE",
-        "done": 8,
-        "total": 8,
-        "first_appt": "2026-06-30",
-        "final_walk": "2026-07-02",
-        "final_walk_done": "2026-07-03",
-        "completed_date": "2026-07-03",
-        "due": "2026-07-20",
-        "next_task": null,
-        "tasks": [
-          {
-            "task": "A - Initial walkthrough",
-            "cat": "walkthrough",
-            "done": true,
-            "date": "2026-06-24",
-            "who": "Margarito Saldana",
-            "completed": "2026-06-24",
-            "vendor": false
-          },
-          {
-            "task": "Appfolio Estimate",
-            "cat": "estimate",
-            "done": true,
-            "date": null,
-            "who": "Dulce Salinas",
-            "completed": "2026-06-25",
-            "vendor": false
-          },
-          {
-            "task": "C - Paint",
-            "cat": "paint",
-            "done": true,
-            "date": "2026-06-30",
-            "who": "Ryan Robson",
-            "completed": "2026-06-29",
-            "vendor": false
-          },
-          {
-            "task": "D - Maintenance",
-            "cat": "maintenance",
-            "done": true,
-            "date": "2026-06-30",
-            "who": "Ryan Robson",
-            "completed": "2026-06-29",
-            "vendor": false
-          },
-          {
-            "task": "F - Cleaning",
-            "cat": "cleaning",
-            "done": true,
-            "date": "2026-07-01",
-            "who": "Duo Cleaning Company LLC",
-            "completed": "2026-07-01",
-            "vendor": true
-          },
-          {
-            "task": "Move show room furniture.",
-            "cat": "other",
-            "done": true,
-            "date": "2026-06-30",
-            "who": "Ryan Robson",
-            "completed": "2026-06-29",
-            "vendor": false
-          },
-          {
-            "task": "Final Walkthrough",
-            "cat": "final-walk",
-            "done": true,
-            "date": "2026-07-02",
-            "who": "Margarito Saldana",
-            "completed": "2026-07-03",
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": null,
-      "cost": {
-        "code": "kn47-k2-A205",
-        "labor": 209.54,
-        "materials": 460.72,
-        "total": 670.26,
-        "estimate": 0,
-        "laborEntries": [
-          {
-            "d": "2026-07-02",
-            "emp": "Margarito Saldana",
-            "hrs": 1,
-            "cost": 28.4,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-01",
-            "emp": "Margarito Saldana",
-            "hrs": 0.5,
-            "cost": 14.2,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-29",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.82,
-            "cost": 41.86,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-29",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.37,
-            "cost": 8.51,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-29",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.55,
-            "cost": 12.65,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-29",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.32,
-            "cost": 7.36,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-29",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.12,
-            "cost": 25.76,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-24",
-            "emp": "Margarito Saldana",
-            "hrs": 1,
-            "cost": 28.4,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-22",
-            "emp": "Margarito Saldana",
-            "hrs": 0.5,
-            "cost": 14.2,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-27",
-            "emp": "Margarito Saldana",
-            "hrs": 0.75,
-            "cost": 21.3,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-02-12",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.3,
-            "cost": 6.9,
-            "cat": "Turn"
-          }
-        ],
-        "materialEntries": [
-          {
-            "d": "2026-08-01",
-            "amt": 250,
-            "cat": "Turn",
-            "ln": "Duo Cleaning Compa",
-            "src": "qbo"
-          },
-          {
-            "d": "2026-06-29",
-            "amt": 210.72,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          }
-        ]
-      },
-      "turn_end": "2026-07-03",
-      "af_turn_end": "2026-07-03",
-      "stage": "Final Walk",
-      "stage_ord": 6,
-      "days_elapsed": null,
-      "days_to_turn": null,
-      "status": "complete"
-    },
-    {
       "key": "kn47|b104",
       "prop": "kn47",
       "unit": "B104",
@@ -19004,286 +18815,6 @@
       "status": "complete"
     },
     {
-      "key": "kn47|d108",
-      "prop": "kn47",
-      "unit": "D108",
-      "property_name": "kn47 K2",
-      "at_risk": [],
-      "region": "Tri-Cities",
-      "pm": {
-        "projId": 222201,
-        "name": "Standard Unit Turn",
-        "status": "COMPLETE",
-        "done": 7,
-        "total": 7,
-        "first_appt": "2026-06-25",
-        "final_walk": "2026-07-01",
-        "final_walk_done": "2026-07-03",
-        "completed_date": "2026-07-03",
-        "due": "2026-07-01",
-        "next_task": null,
-        "tasks": [
-          {
-            "task": "A - Initial walkthrough",
-            "cat": "walkthrough",
-            "done": true,
-            "date": "2026-06-03",
-            "who": "Margarito Saldana",
-            "completed": "2026-06-03",
-            "vendor": false
-          },
-          {
-            "task": "Appfolio Estimate",
-            "cat": "estimate",
-            "done": true,
-            "date": null,
-            "who": "Dulce Salinas",
-            "completed": "2026-06-12",
-            "vendor": false
-          },
-          {
-            "task": "C - Paint",
-            "cat": "paint",
-            "done": true,
-            "date": "2026-06-25",
-            "who": "James Dunlap",
-            "completed": "2026-06-30",
-            "vendor": false
-          },
-          {
-            "task": "D - Maintenance",
-            "cat": "maintenance",
-            "done": true,
-            "date": "2026-06-26",
-            "who": "James Dunlap",
-            "completed": "2026-06-30",
-            "vendor": false
-          },
-          {
-            "task": "E - Carpet Cleaning",
-            "cat": "carpet",
-            "done": true,
-            "date": "2026-06-29",
-            "who": "SOS Carpet",
-            "completed": "2026-06-29",
-            "vendor": true
-          },
-          {
-            "task": "F - Cleaning",
-            "cat": "cleaning",
-            "done": true,
-            "date": "2026-06-30",
-            "who": "Duo Cleaning Company LLC",
-            "completed": "2026-06-30",
-            "vendor": true
-          },
-          {
-            "task": "Final Walkthrough",
-            "cat": "final-walk",
-            "done": true,
-            "date": "2026-07-01",
-            "who": "Margarito Saldana",
-            "completed": "2026-07-03",
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": null,
-      "cost": {
-        "code": "kn47-k2-D108",
-        "labor": 444.58,
-        "materials": 596.48,
-        "total": 1041.06,
-        "estimate": 0,
-        "laborEntries": [
-          {
-            "d": "2026-07-01",
-            "emp": "Margarito Saldana",
-            "hrs": 1,
-            "cost": 28.4,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-30",
-            "emp": "James Dunlap",
-            "hrs": 1.78,
-            "cost": 40.94,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-30",
-            "emp": "James Dunlap",
-            "hrs": 1.02,
-            "cost": 23.46,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-30",
-            "emp": "James Dunlap",
-            "hrs": 0.88,
-            "cost": 20.24,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-29",
-            "emp": "James Dunlap",
-            "hrs": 1.4,
-            "cost": 32.2,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-29",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.47,
-            "cost": 33.81,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-29",
-            "emp": "James Dunlap",
-            "hrs": 0.67,
-            "cost": 15.41,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-29",
-            "emp": "James Dunlap",
-            "hrs": 1.82,
-            "cost": 41.86,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-29",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.55,
-            "cost": 35.65,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-29",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.38,
-            "cost": 8.74,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-29",
-            "emp": "Margarito Saldana",
-            "hrs": 0.75,
-            "cost": 21.3,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-29",
-            "emp": "Margarito Saldana",
-            "hrs": 1.5,
-            "cost": 42.6,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-29",
-            "emp": "Margarito Saldana",
-            "hrs": 0.25,
-            "cost": 7.1,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-29",
-            "emp": "Margarito Saldana",
-            "hrs": 0.25,
-            "cost": 7.1,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-29",
-            "emp": "Margarito Saldana",
-            "hrs": 0.5,
-            "cost": 14.2,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-29",
-            "emp": "Margarito Saldana",
-            "hrs": 0.5,
-            "cost": 14.2,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-16",
-            "emp": "Margarito Saldana",
-            "hrs": 0.77,
-            "cost": 21.87,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-06-04",
-            "emp": "Margarito Saldana",
-            "hrs": 0.35,
-            "cost": 9.94,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-04",
-            "emp": "Margarito Saldana",
-            "hrs": 0.18,
-            "cost": 5.11,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-03",
-            "emp": "Margarito Saldana",
-            "hrs": 0.5,
-            "cost": 14.2,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-01",
-            "emp": "Margarito Saldana",
-            "hrs": 0.22,
-            "cost": 6.25,
-            "cat": "Turn"
-          }
-        ],
-        "materialEntries": [
-          {
-            "d": "2026-08-01",
-            "amt": 180,
-            "cat": "Turn",
-            "ln": "SOS Carpet & Upholstery",
-            "src": "qbo"
-          },
-          {
-            "d": "2026-06-30",
-            "amt": 51.41,
-            "cat": "Turn",
-            "ln": "dunlap",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-06-29",
-            "amt": 296.63,
-            "cat": "Turn",
-            "ln": "saldana",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-06-29",
-            "amt": 68.44,
-            "cat": "Turn",
-            "ln": "saldana",
-            "src": "ramp"
-          }
-        ]
-      },
-      "turn_end": "2026-07-03",
-      "af_turn_end": "2026-07-03",
-      "stage": "Final Walk",
-      "stage_ord": 6,
-      "days_elapsed": null,
-      "days_to_turn": null,
-      "status": "complete"
-    },
-    {
       "key": "kn47|d201",
       "prop": "kn47",
       "unit": "D201",
@@ -19671,18 +19202,11 @@
       },
       "cost": {
         "code": "kn47-k1-E101",
-        "labor": 961.69,
+        "labor": 631.68,
         "materials": 1488.09,
-        "total": 2449.78,
+        "total": 2119.77,
         "estimate": 0,
         "laborEntries": [
-          {
-            "d": "2026-09-21",
-            "emp": "Margarito Saldana",
-            "hrs": 11.62,
-            "cost": 330.01,
-            "cat": "Turn"
-          },
           {
             "d": "2026-09-15",
             "emp": "Margarito Saldana",
@@ -22378,14 +21902,14 @@
       "city": "Kennewick",
       "addr": "4711 W Metaline Avenue K203 Kennewick, WA 99336",
       "unit_id": 1078,
-      "unit_status": "Notice-Unrented",
-      "rent_ready": null,
-      "vacant": false,
-      "days_vacant": null,
-      "move_out": "2026-10-05",
-      "available_on": "2026-10-25",
-      "ready_on": "2026-10-25",
-      "target_date": "2026-10-25",
+      "unit_status": "Vacant-Unrented",
+      "rent_ready": "No",
+      "vacant": true,
+      "days_vacant": 1,
+      "move_out": "2026-09-30",
+      "available_on": "2026-10-20",
+      "ready_on": "2026-10-20",
+      "target_date": "2026-10-20",
       "next_move_in": null,
       "rent": "1430.00",
       "bed_bath": "2/1.00",
@@ -22480,9 +22004,9 @@
       },
       "stage": "Walkthrough",
       "stage_ord": 1,
-      "days_elapsed": 0,
+      "days_elapsed": 1,
       "days_to_turn": null,
-      "status": "notice"
+      "status": "active"
     },
     {
       "key": "kn47|kl100",
@@ -27409,11 +26933,81 @@
       },
       "cost": {
         "code": "p705-11",
-        "labor": 6970.32,
-        "materials": 4657.06,
-        "total": 11627.38,
+        "labor": 7259.2,
+        "materials": 4675.87,
+        "total": 11935.07,
         "estimate": 0,
         "laborEntries": [
+          {
+            "d": "2026-10-01",
+            "emp": "Ronald D. Cramer",
+            "hrs": 0.98,
+            "cost": 25.24,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-10-01",
+            "emp": "Micheal N. Magoon",
+            "hrs": 2.1,
+            "cost": 52.5,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-10-01",
+            "emp": "Ronald D. Cramer",
+            "hrs": 2,
+            "cost": 51.5,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-10-01",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.75,
+            "cost": 45.06,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-10-01",
+            "emp": "Ronald D. Cramer",
+            "hrs": 0.52,
+            "cost": 13.39,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-10-01",
+            "emp": "Ronald D. Cramer",
+            "hrs": 0.98,
+            "cost": 25.24,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-10-01",
+            "emp": "Ronald D. Cramer",
+            "hrs": 0.58,
+            "cost": 14.93,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-10-01",
+            "emp": "Ronald D. Cramer",
+            "hrs": 0.58,
+            "cost": 14.93,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-10-01",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.07,
+            "cost": 27.55,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-10-01",
+            "emp": "Ronald D. Cramer",
+            "hrs": 0.72,
+            "cost": 18.54,
+            "cat": "Turn"
+          },
           {
             "d": "2026-09-30",
             "emp": "Ronald D. Cramer",
@@ -27763,79 +27357,16 @@
             "hrs": 4.17,
             "cost": 104.25,
             "cat": "Turn"
-          },
-          {
-            "d": "2025-10-30",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.25,
-            "cost": 32.19,
-            "cat": "Turn"
-          },
-          {
-            "d": "2025-10-29",
-            "emp": "Ronald D. Cramer",
-            "hrs": 2.65,
-            "cost": 68.24,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2025-10-29",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.53,
-            "cost": 13.25,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2025-10-29",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.53,
-            "cost": 39.4,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2025-10-29",
-            "emp": "Ronald D. Cramer",
-            "hrs": 4.35,
-            "cost": 112.01,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2025-10-28",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.77,
-            "cost": 45.58,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2025-10-28",
-            "emp": "Micheal N. Magoon",
-            "hrs": 2.25,
-            "cost": 56.25,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2025-10-28",
-            "emp": "Scott Higley",
-            "hrs": 3.43,
-            "cost": 109.73,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2025-10-28",
-            "emp": "Ronald D. Cramer",
-            "hrs": 4.3,
-            "cost": 110.73,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2025-10-28",
-            "emp": "Micheal N. Magoon",
-            "hrs": 2.5,
-            "cost": 62.5,
-            "cat": "CapEx"
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-10-01",
+            "amt": 18.81,
+            "cat": "Turn",
+            "ln": "cramer",
+            "src": "ramp"
+          },
           {
             "d": "2026-09-28",
             "amt": 38.49,
@@ -28748,11 +28279,18 @@
       },
       "cost": {
         "code": "p705-19",
-        "labor": 816.36,
-        "materials": 630.35,
-        "total": 1446.71,
+        "labor": 826.36,
+        "materials": 651.05,
+        "total": 1477.41,
         "estimate": 0,
         "laborEntries": [
+          {
+            "d": "2026-10-01",
+            "emp": "Micheal N. Magoon",
+            "hrs": 0.4,
+            "cost": 10,
+            "cat": "Turn"
+          },
           {
             "d": "2026-09-24",
             "emp": "Micheal N. Magoon",
@@ -28944,6 +28482,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-10-01",
+            "amt": 20.7,
+            "cat": "Turn",
+            "ln": "magoon",
+            "src": "ramp"
+          },
           {
             "d": "2026-09-22",
             "amt": 53.85,
@@ -35968,9 +35513,9 @@
       "next_appt": null,
       "cost": {
         "code": "rl16-A17",
-        "labor": 116.44,
+        "labor": 249.35,
         "materials": 641.91,
-        "total": 758.35,
+        "total": 891.26,
         "estimate": 0,
         "laborEntries": [
           {
@@ -35985,6 +35530,20 @@
             "emp": "Margarito Saldana",
             "hrs": 1.47,
             "cost": 41.75,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-22",
+            "emp": "Margarito Saldana",
+            "hrs": 1.68,
+            "cost": 47.71,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-21",
+            "emp": "Margarito Saldana",
+            "hrs": 3,
+            "cost": 85.2,
             "cat": "Turn"
           },
           {
@@ -36126,9 +35685,9 @@
       "next_appt": null,
       "cost": {
         "code": "rl16-B01",
-        "labor": 1253.31,
+        "labor": 1331.41,
         "materials": 309.86,
-        "total": 1563.17,
+        "total": 1641.27,
         "estimate": 0,
         "laborEntries": [
           {
@@ -36136,6 +35695,27 @@
             "emp": "Margarito Saldana",
             "hrs": 0.2,
             "cost": 5.68,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-09-22",
+            "emp": "Margarito Saldana",
+            "hrs": 0.75,
+            "cost": 21.3,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-09-22",
+            "emp": "Margarito Saldana",
+            "hrs": 1,
+            "cost": 28.4,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-09-21",
+            "emp": "Margarito Saldana",
+            "hrs": 1,
+            "cost": 28.4,
             "cat": "CapEx"
           },
           {
@@ -36569,11 +36149,18 @@
       "next_appt": null,
       "cost": {
         "code": "rl16-B11",
-        "labor": 206.75,
+        "labor": 228.05,
         "materials": 10.87,
-        "total": 217.62,
+        "total": 238.92,
         "estimate": 0,
         "laborEntries": [
+          {
+            "d": "2026-09-22",
+            "emp": "Margarito Saldana",
+            "hrs": 0.75,
+            "cost": 21.3,
+            "cat": "CapEx"
+          },
           {
             "d": "2026-08-26",
             "emp": "Margarito Saldana",
@@ -38448,11 +38035,19 @@
       },
       "cost": {
         "code": "rl16-D08",
-        "labor": 0,
+        "labor": 28.4,
         "materials": 808.47,
-        "total": 808.47,
+        "total": 836.87,
         "estimate": 0,
-        "laborEntries": [],
+        "laborEntries": [
+          {
+            "d": "2026-09-21",
+            "emp": "Margarito Saldana",
+            "hrs": 1,
+            "cost": 28.4,
+            "cat": "CapEx"
+          }
+        ],
         "materialEntries": [
           {
             "d": "2026-09-28",
@@ -44213,11 +43808,25 @@
       "next_appt": null,
       "cost": {
         "code": "tc68-A19",
-        "labor": 521.64,
+        "labor": 745.47,
         "materials": 0,
-        "total": 521.64,
+        "total": 745.47,
         "estimate": 0,
         "laborEntries": [
+          {
+            "d": "2026-10-01",
+            "emp": "Armani Mitchell",
+            "hrs": 2.07,
+            "cost": 55.89,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-10-01",
+            "emp": "Armani Mitchell",
+            "hrs": 6.22,
+            "cost": 167.94,
+            "cat": "Turn"
+          },
           {
             "d": "2026-09-28",
             "emp": "Armani Mitchell",
