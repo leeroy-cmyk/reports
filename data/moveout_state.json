@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-10-02T01:31:10.658Z",
+  "fetched_at": "2026-10-02T14:09:09.230Z",
   "units": {
     "2": {
       "moveOut": "2026-07-31",
@@ -150,7 +150,7 @@
     },
     "309": {
       "moveOut": "2026-10-01",
-      "status": "Notice-Unrented",
+      "status": "Vacant-Unrented",
       "prop": "k104- LeFevre",
       "unit": "519-3",
       "city": "Medical Lake"
@@ -216,6 +216,13 @@
       "status": "Vacant-Unrented",
       "prop": "k104- LeFevre",
       "unit": "107-7",
+      "city": "Medical Lake"
+    },
+    "354": {
+      "moveOut": "2026-10-05",
+      "status": "Notice-Unrented",
+      "prop": "k104- LeFevre",
+      "unit": "314-10",
       "city": "Medical Lake"
     },
     "364": {
@@ -290,7 +297,7 @@
     },
     "413": {
       "moveOut": "2026-10-01",
-      "status": "Notice-Unrented",
+      "status": "Vacant-Unrented",
       "prop": "ps17",
       "unit": "A11",
       "city": "Pasco"
@@ -437,7 +444,7 @@
     },
     "585": {
       "moveOut": "2026-10-01",
-      "status": "Notice-Unrented",
+      "status": "Vacant-Unrented",
       "prop": "rl16",
       "unit": "C24",
       "city": "Richland"
@@ -472,7 +479,7 @@
     },
     "657": {
       "moveOut": "2026-10-01",
-      "status": "Notice-Unrented",
+      "status": "Vacant-Unrented",
       "prop": "s129",
       "unit": "6",
       "city": "Spokane Valley"
@@ -717,7 +724,7 @@
     },
     "1043": {
       "moveOut": "2026-10-01",
-      "status": "Notice-Unrented",
+      "status": "Vacant-Unrented",
       "prop": "kn47 K2",
       "unit": "D104",
       "city": "Kennewick"
@@ -818,13 +825,6 @@
       "status": "Vacant-Unrented",
       "prop": "tc68",
       "unit": "A06",
-      "city": "Tacoma"
-    },
-    "1168": {
-      "moveOut": "2026-07-09",
-      "status": "Vacant-Rented",
-      "prop": "tc68",
-      "unit": "A19",
       "city": "Tacoma"
     },
     "1169": {
@@ -3855,6 +3855,25 @@
       "city": "Kennewick",
       "from": "2026-10-05",
       "to": "2026-09-30"
+    },
+    {
+      "date": "2026-10-02",
+      "type": "moveout_new",
+      "unit_id": "354",
+      "prop": "k104- LeFevre",
+      "unit": "314-10",
+      "city": "Medical Lake",
+      "to": "2026-10-05"
+    },
+    {
+      "date": "2026-10-02",
+      "type": "moveout_removed",
+      "unit_id": "1168",
+      "prop": "tc68",
+      "unit": "A19",
+      "city": "Tacoma",
+      "from": "2026-07-09",
+      "was_status": "Vacant-Rented"
     }
   ]
 }
