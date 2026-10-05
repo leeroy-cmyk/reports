@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-10-05T14:55:33.817Z",
+  "fetched_at": "2026-10-05T21:52:47.855Z",
   "units": {
     "2": {
       "moveOut": "2026-07-31",
@@ -464,8 +464,8 @@
       "city": "Richland"
     },
     "659": {
-      "moveOut": "2026-10-04",
-      "status": "Vacant-Unrented",
+      "moveOut": "2026-10-05",
+      "status": "Notice-Unrented",
       "prop": "s129",
       "unit": "8",
       "city": "Spokane Valley"
@@ -773,7 +773,7 @@
     },
     "1133": {
       "moveOut": "2026-08-31",
-      "status": "Vacant-Unrented",
+      "status": "Vacant-Rented",
       "prop": "o155-Elm",
       "unit": "F",
       "city": "Spokane"
@@ -979,13 +979,6 @@
       "status": "Vacant-Unrented",
       "prop": "c702",
       "unit": "B301",
-      "city": "Spokane"
-    },
-    "1304": {
-      "moveOut": null,
-      "status": "Vacant-Unrented",
-      "prop": "c702",
-      "unit": "C102",
       "city": "Spokane"
     },
     "1312": {
@@ -3604,6 +3597,26 @@
       "city": "Spokane",
       "from": "2026-09-15",
       "was_status": "Vacant-Rented"
+    },
+    {
+      "date": "2026-10-05",
+      "type": "moveout_changed",
+      "unit_id": "659",
+      "prop": "s129",
+      "unit": "8",
+      "city": "Spokane Valley",
+      "from": "2026-10-04",
+      "to": "2026-10-05"
+    },
+    {
+      "date": "2026-10-05",
+      "type": "moveout_removed",
+      "unit_id": "1304",
+      "prop": "c702",
+      "unit": "C102",
+      "city": "Spokane",
+      "from": null,
+      "was_status": "Vacant-Unrented"
     }
   ]
 }
