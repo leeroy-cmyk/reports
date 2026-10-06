@@ -1,15 +1,15 @@
 {
   "ok": true,
-  "fetched_at": "2026-10-06T09:00:15.856Z",
+  "fetched_at": "2026-10-06T15:53:02.532Z",
   "summary": {
     "as_of": "2026-10-06",
     "units": 240,
     "active": 86,
     "ready": 6,
     "notice": 8,
-    "at_risk": 37,
+    "at_risk": 38,
     "unscheduled": 11,
-    "accruing": 26393.81,
+    "accruing": 26448.28,
     "avg_days_open": 36,
     "revenue_at_risk": 3885.27
   },
@@ -127,13 +127,13 @@
         "status": "ACTIVE",
         "done": 3,
         "total": 8,
-        "first_appt": "2026-11-09",
-        "final_walk": "2026-11-17",
+        "first_appt": "2026-11-05",
+        "final_walk": "2026-11-13",
         "final_walk_done": null,
         "completed_date": "2026-07-14",
         "due": "2026-08-06",
         "next_task": {
-          "date": "2026-11-09",
+          "date": "2026-11-05",
           "task": "maintenance"
         },
         "tasks": [
@@ -168,8 +168,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-11-09",
-            "who": "Micheal Magoon",
+            "date": "2026-11-05",
+            "who": "Ron Cramer",
             "completed": null,
             "vendor": false
           },
@@ -204,7 +204,7 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": "2026-11-17",
+            "date": "2026-11-13",
             "who": "Matt Romme",
             "completed": null,
             "vendor": false
@@ -212,9 +212,9 @@
         ]
       },
       "next_appt": {
-        "date": "2026-11-09",
+        "date": "2026-11-05",
         "cat": "maintenance",
-        "who": "Micheal Magoon",
+        "who": "Ron Cramer",
         "brief": "D - Maintenance"
       },
       "cost": {
@@ -262,8 +262,8 @@
         "status": "ACTIVE",
         "done": 2,
         "total": 9,
-        "first_appt": "2026-11-24",
-        "final_walk": "2026-12-01",
+        "first_appt": "2026-11-20",
+        "final_walk": "2026-12-02",
         "final_walk_done": null,
         "completed_date": "2026-09-16",
         "due": "2026-09-11",
@@ -303,7 +303,7 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-11-24",
+            "date": "2026-11-20",
             "who": "Ron Cramer",
             "completed": null,
             "vendor": false
@@ -348,7 +348,7 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": "2026-12-01",
+            "date": "2026-12-02",
             "who": "Matt Romme",
             "completed": null,
             "vendor": false
@@ -583,11 +583,25 @@
       "cost": {
         "code": "c313-1",
         "labor": 0,
-        "materials": 569.72,
-        "total": 569.72,
+        "materials": 624.19,
+        "total": 624.19,
         "estimate": 1859.72,
         "laborEntries": [],
         "materialEntries": [
+          {
+            "d": "2026-10-06",
+            "amt": 40.31,
+            "cat": "Turn",
+            "ln": "romme",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-10-06",
+            "amt": 14.16,
+            "cat": "Turn",
+            "ln": "normandin",
+            "src": "ramp"
+          },
           {
             "d": "2026-10-05",
             "amt": 6.52,
@@ -674,8 +688,8 @@
         "completed_date": "2026-09-30",
         "due": "2026-08-15",
         "next_task": {
-          "date": "2026-10-05",
-          "task": "carpet"
+          "date": "2026-10-06",
+          "task": "final-walk"
         },
         "tasks": [
           {
@@ -878,7 +892,7 @@
         "completed_date": "2026-09-29",
         "due": "2026-07-10",
         "next_task": {
-          "date": "2026-10-05",
+          "date": "2026-10-06",
           "task": "maintenance"
         },
         "tasks": [
@@ -1148,12 +1162,12 @@
         "done": 3,
         "total": 9,
         "first_appt": "2026-10-02",
-        "final_walk": "2026-10-16",
+        "final_walk": "2026-10-19",
         "final_walk_done": null,
         "completed_date": null,
         "due": "2026-08-15",
         "next_task": {
-          "date": "2026-10-05",
+          "date": "2026-10-06",
           "task": "maintenance"
         },
         "tasks": [
@@ -1206,7 +1220,7 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": "2026-10-16",
+            "date": "2026-10-19",
             "who": "Matt Romme",
             "completed": null,
             "vendor": false
@@ -1659,7 +1673,7 @@
         "done": 1,
         "total": 9,
         "first_appt": "2026-11-02",
-        "final_walk": "2026-11-12",
+        "final_walk": "2026-11-11",
         "final_walk_done": null,
         "completed_date": "2026-09-14",
         "due": "2026-08-29",
@@ -1744,7 +1758,7 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": "2026-11-12",
+            "date": "2026-11-11",
             "who": "Matt Romme",
             "completed": null,
             "vendor": false
@@ -1986,7 +2000,7 @@
         "status": "ACTIVE",
         "done": 1,
         "total": 8,
-        "first_appt": "2026-10-13",
+        "first_appt": "2026-10-15",
         "final_walk": "2026-10-21",
         "final_walk_done": null,
         "completed_date": "2026-06-04",
@@ -2027,8 +2041,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-10-13",
-            "who": "Joshua Normandin",
+            "date": "2026-10-15",
+            "who": "Micheal Magoon",
             "completed": null,
             "vendor": false
           },
@@ -2073,7 +2087,7 @@
       "next_appt": {
         "date": "2026-10-13",
         "cat": "maintenance",
-        "who": "Joshua Normandin",
+        "who": "Micheal Magoon",
         "brief": "D - Maintenance"
       },
       "cost": {
@@ -2129,13 +2143,13 @@
         "status": "ACTIVE",
         "done": 2,
         "total": 9,
-        "first_appt": "2026-10-15",
-        "final_walk": "2026-10-21",
+        "first_appt": "2026-10-16",
+        "final_walk": "2026-10-23",
         "final_walk_done": null,
         "completed_date": "2026-09-15",
         "due": "2026-08-14",
         "next_task": {
-          "date": "2026-10-14",
+          "date": "2026-10-15",
           "task": "maintenance"
         },
         "tasks": [
@@ -2170,8 +2184,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-10-15",
-            "who": "Micheal Magoon",
+            "date": "2026-10-16",
+            "who": "Joshua Normandin",
             "completed": null,
             "vendor": false
           },
@@ -2215,7 +2229,7 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": "2026-10-21",
+            "date": "2026-10-23",
             "who": "Matt Romme",
             "completed": null,
             "vendor": false
@@ -2223,9 +2237,9 @@
         ]
       },
       "next_appt": {
-        "date": "2026-10-14",
+        "date": "2026-10-15",
         "cat": "maintenance",
-        "who": "Micheal Magoon",
+        "who": "Joshua Normandin",
         "brief": "D - Maintenance"
       },
       "cost": {
@@ -2788,13 +2802,13 @@
         "status": "ACTIVE",
         "done": 2,
         "total": 8,
-        "first_appt": "2026-10-26",
+        "first_appt": "2026-10-27",
         "final_walk": "2026-11-02",
         "final_walk_done": null,
         "completed_date": "2026-09-09",
         "due": "2026-09-10",
         "next_task": {
-          "date": "2026-10-26",
+          "date": "2026-10-27",
           "task": "maintenance"
         },
         "tasks": [
@@ -2829,8 +2843,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-10-26",
-            "who": "Ron Cramer",
+            "date": "2026-10-27",
+            "who": "Joshua Normandin",
             "completed": null,
             "vendor": false
           },
@@ -2873,9 +2887,9 @@
         ]
       },
       "next_appt": {
-        "date": "2026-10-26",
+        "date": "2026-10-27",
         "cat": "maintenance",
-        "who": "Ron Cramer",
+        "who": "Joshua Normandin",
         "brief": "D - Maintenance"
       },
       "cost": {
@@ -3116,13 +3130,13 @@
         "status": "ACTIVE",
         "done": 4,
         "total": 8,
-        "first_appt": "2026-10-22",
-        "final_walk": "2026-10-27",
+        "first_appt": "2026-10-27",
+        "final_walk": "2026-10-30",
         "final_walk_done": null,
         "completed_date": "2026-08-31",
         "due": "2026-08-27",
         "next_task": {
-          "date": "2026-10-20",
+          "date": "2026-10-23",
           "task": "maintenance"
         },
         "tasks": [
@@ -3157,7 +3171,7 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-10-22",
+            "date": "2026-10-27",
             "who": "Micheal Magoon",
             "completed": null,
             "vendor": false
@@ -3193,7 +3207,7 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": "2026-10-27",
+            "date": "2026-10-30",
             "who": "Matt Romme",
             "completed": null,
             "vendor": false
@@ -3201,7 +3215,7 @@
         ]
       },
       "next_appt": {
-        "date": "2026-10-20",
+        "date": "2026-10-23",
         "cat": "maintenance",
         "who": "Micheal Magoon",
         "brief": "D - Maintenance"
@@ -3257,8 +3271,8 @@
         "completed_date": "2026-09-10",
         "due": "2026-08-12",
         "next_task": {
-          "date": "2026-10-05",
-          "task": "maintenance"
+          "date": "2026-10-08",
+          "task": "final-walk"
         },
         "tasks": [
           {
@@ -3554,7 +3568,7 @@
             "cat": "maintenance",
             "done": false,
             "date": "2026-10-19",
-            "who": "Joshua Normandin",
+            "who": "Micheal Magoon",
             "completed": null,
             "vendor": false
           },
@@ -3599,7 +3613,7 @@
       "next_appt": {
         "date": "2026-10-19",
         "cat": "maintenance",
-        "who": "Joshua Normandin",
+        "who": "Micheal Magoon",
         "brief": "D - Maintenance"
       },
       "cost": {
@@ -4251,6 +4265,115 @@
       "status": "active"
     },
     {
+      "key": "ps25|d28",
+      "prop": "ps25",
+      "unit": "D28",
+      "at_risk": [
+        "Nothing scheduled"
+      ],
+      "property_name": "ps25",
+      "city": "Pasco",
+      "addr": "2524 W Sylvester St. - D28 Pasco, WA 99301",
+      "unit_id": 386,
+      "unit_status": "Vacant-Unrented",
+      "rent_ready": "No",
+      "vacant": true,
+      "days_vacant": 6,
+      "move_out": "2026-09-30",
+      "available_on": "2026-10-20",
+      "ready_on": "2026-10-20",
+      "target_date": "2026-10-20",
+      "next_move_in": null,
+      "rent": "1162.00",
+      "bed_bath": "1/1.00",
+      "sqft": 655,
+      "region": "Tri-Cities",
+      "pm": {
+        "projId": 246178,
+        "name": "Standard Unit Turn",
+        "status": "ACTIVE",
+        "done": 0,
+        "total": 6,
+        "first_appt": null,
+        "final_walk": null,
+        "final_walk_done": null,
+        "completed_date": null,
+        "due": "2026-10-15",
+        "next_task": null,
+        "tasks": [
+          {
+            "task": "A - Initial walkthrough",
+            "cat": "walkthrough",
+            "done": false,
+            "date": "2026-10-05",
+            "who": "Margarito Saldana",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "D - Maintenance",
+            "cat": "maintenance",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "E - Carpet Cleaning",
+            "cat": "carpet",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "F - Cleaning",
+            "cat": "cleaning",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Schedule Vendors",
+            "cat": "other",
+            "done": false,
+            "date": null,
+            "who": "Margarito Saldana",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Final Walkthrough",
+            "cat": "final-walk",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          }
+        ]
+      },
+      "next_appt": null,
+      "cost": {
+        "code": "ps25-D28",
+        "labor": 0,
+        "materials": 0,
+        "total": 0,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": []
+      },
+      "stage": "Walkthrough",
+      "stage_ord": 1,
+      "days_elapsed": 6,
+      "days_to_turn": null,
+      "status": "active"
+    },
+    {
       "key": "rl21|11",
       "prop": "rl21",
       "unit": "11",
@@ -4864,7 +4987,7 @@
         "completed_date": null,
         "due": "2026-08-25",
         "next_task": {
-          "date": "2026-10-05",
+          "date": "2026-10-06",
           "task": "paint"
         },
         "tasks": [
@@ -5591,16 +5714,16 @@
         "projId": 240189,
         "name": "Standard Unit Turn",
         "status": "ACTIVE",
-        "done": 6,
+        "done": 7,
         "total": 9,
         "first_appt": "2026-09-17",
         "final_walk": "2026-10-06",
         "final_walk_done": null,
-        "completed_date": "2026-09-23",
+        "completed_date": "2026-10-05",
         "due": "2026-08-27",
         "next_task": {
-          "date": "2026-10-05",
-          "task": "cleaning"
+          "date": "2026-10-06",
+          "task": "final-walk"
         },
         "tasks": [
           {
@@ -5633,10 +5756,10 @@
           {
             "task": "F - Cleaning",
             "cat": "cleaning",
-            "done": false,
+            "done": true,
             "date": "2026-10-05",
             "who": "SPO Cleaning",
-            "completed": null,
+            "completed": "2026-10-05",
             "vendor": true
           },
           {
@@ -5902,8 +6025,8 @@
           }
         ]
       },
-      "stage": "Cleaning",
-      "stage_ord": 4,
+      "stage": "Maintenance",
+      "stage_ord": 3,
       "days_elapsed": 55,
       "days_to_turn": null,
       "status": "active"
@@ -6078,13 +6201,13 @@
         "status": "ACTIVE",
         "done": 1,
         "total": 8,
-        "first_appt": "2026-12-01",
-        "final_walk": "2026-12-11",
+        "first_appt": "2026-12-02",
+        "final_walk": "2026-12-14",
         "final_walk_done": null,
         "completed_date": "2026-09-15",
         "due": "2026-09-11",
         "next_task": {
-          "date": "2026-11-25",
+          "date": "2026-11-30",
           "task": "maintenance"
         },
         "tasks": [
@@ -6119,7 +6242,7 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-12-01",
+            "date": "2026-12-02",
             "who": "Ron Cramer",
             "completed": null,
             "vendor": false
@@ -6155,7 +6278,7 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": "2026-12-11",
+            "date": "2026-12-14",
             "who": "Matt Romme",
             "completed": null,
             "vendor": false
@@ -6163,7 +6286,7 @@
         ]
       },
       "next_appt": {
-        "date": "2026-11-25",
+        "date": "2026-11-30",
         "cat": "maintenance",
         "who": "Ron Cramer",
         "brief": "D - Maintenance"
@@ -6578,8 +6701,8 @@
         "status": "ACTIVE",
         "done": 0,
         "total": 6,
-        "first_appt": "2026-11-13",
-        "final_walk": "2026-11-23",
+        "first_appt": "2026-11-17",
+        "final_walk": "2026-11-24",
         "final_walk_done": null,
         "completed_date": null,
         "due": "2026-11-15",
@@ -6601,7 +6724,7 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-11-13",
+            "date": "2026-11-17",
             "who": "Ron Cramer",
             "completed": null,
             "vendor": false
@@ -6637,7 +6760,7 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": "2026-11-23",
+            "date": "2026-11-24",
             "who": "Matt Romme",
             "completed": null,
             "vendor": false
@@ -6745,13 +6868,13 @@
         "status": "ACTIVE",
         "done": 1,
         "total": 9,
-        "first_appt": "2026-11-02",
-        "final_walk": "2026-11-11",
+        "first_appt": "2026-11-05",
+        "final_walk": "2026-11-13",
         "final_walk_done": null,
         "completed_date": "2026-09-18",
         "due": "2026-09-03",
         "next_task": {
-          "date": "2026-10-30",
+          "date": "2026-11-03",
           "task": "maintenance"
         },
         "tasks": [
@@ -6786,7 +6909,7 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-11-02",
+            "date": "2026-11-05",
             "who": "Micheal Magoon",
             "completed": null,
             "vendor": false
@@ -6831,7 +6954,7 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": "2026-11-11",
+            "date": "2026-11-13",
             "who": "Matt Romme",
             "completed": null,
             "vendor": false
@@ -6839,7 +6962,7 @@
         ]
       },
       "next_appt": {
-        "date": "2026-10-30",
+        "date": "2026-11-03",
         "cat": "maintenance",
         "who": "Micheal Magoon",
         "brief": "D - Maintenance"
@@ -6911,7 +7034,7 @@
         "status": "ACTIVE",
         "done": 1,
         "total": 9,
-        "first_appt": "2026-12-11",
+        "first_appt": "2026-12-14",
         "final_walk": "2026-12-18",
         "final_walk_done": null,
         "completed_date": "2026-09-22",
@@ -6952,8 +7075,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-12-11",
-            "who": "Joshua Normandin",
+            "date": "2026-12-14",
+            "who": "Ron Cramer",
             "completed": null,
             "vendor": false
           },
@@ -7007,7 +7130,7 @@
       "next_appt": {
         "date": "2026-12-10",
         "cat": "maintenance",
-        "who": "Joshua Normandin",
+        "who": "Ron Cramer",
         "brief": "D - Maintenance"
       },
       "cost": {
@@ -7157,18 +7280,15 @@
       "pm": {
         "projId": 244687,
         "name": "Standard Unit Turn",
-        "status": "ACTIVE",
-        "done": 5,
+        "status": "COMPLETE",
+        "done": 7,
         "total": 7,
         "first_appt": "2026-10-05",
         "final_walk": "2026-10-05",
         "final_walk_done": "2026-10-05",
         "completed_date": "2026-10-05",
         "due": "2026-09-30",
-        "next_task": {
-          "date": "2026-10-05",
-          "task": "maintenance"
-        },
+        "next_task": null,
         "tasks": [
           {
             "task": "A - Initial walkthrough",
@@ -7182,19 +7302,19 @@
           {
             "task": "D - Maintenance",
             "cat": "maintenance",
-            "done": false,
+            "done": true,
             "date": "2026-10-05",
             "who": "Matt Romme",
-            "completed": null,
+            "completed": "2026-10-05",
             "vendor": false
           },
           {
             "task": "F - Cleaning",
             "cat": "cleaning",
-            "done": false,
+            "done": true,
             "date": null,
             "who": "SPO Cleaning",
-            "completed": null,
+            "completed": "2026-10-05",
             "vendor": true
           },
           {
@@ -7217,12 +7337,7 @@
           }
         ]
       },
-      "next_appt": {
-        "date": "2026-10-08",
-        "cat": "suggested-cleaning",
-        "who": "SPO Cleaning",
-        "brief": "Suggested cleaning — 3 business days after in-house done (2026-10-05)"
-      },
+      "next_appt": null,
       "cost": {
         "code": "b101-11",
         "labor": 1273.5,
@@ -7572,8 +7687,8 @@
       },
       "turn_end": "2026-10-05",
       "af_turn_end": "2026-10-05",
-      "stage": "Maintenance",
-      "stage_ord": 3,
+      "stage": "Final Walk",
+      "stage_ord": 6,
       "days_elapsed": null,
       "days_to_turn": null,
       "status": "complete"
@@ -7606,13 +7721,13 @@
         "status": "ACTIVE",
         "done": 1,
         "total": 8,
-        "first_appt": "2026-10-27",
-        "final_walk": "2026-11-02",
+        "first_appt": "2026-10-23",
+        "final_walk": "2026-10-29",
         "final_walk_done": null,
         "completed_date": "2026-08-17",
         "due": "2026-09-08",
         "next_task": {
-          "date": "2026-10-23",
+          "date": "2026-10-21",
           "task": "maintenance"
         },
         "tasks": [
@@ -7647,7 +7762,7 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-10-27",
+            "date": "2026-10-23",
             "who": "Joshua Normandin",
             "completed": null,
             "vendor": false
@@ -7683,7 +7798,7 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": "2026-11-02",
+            "date": "2026-10-29",
             "who": "Matt Romme",
             "completed": null,
             "vendor": false
@@ -7691,7 +7806,7 @@
         ]
       },
       "next_appt": {
-        "date": "2026-10-23",
+        "date": "2026-10-21",
         "cat": "maintenance",
         "who": "Joshua Normandin",
         "brief": "D - Maintenance"
@@ -8630,13 +8745,13 @@
         "status": "ACTIVE",
         "done": 0,
         "total": 6,
-        "first_appt": "2026-10-05",
-        "final_walk": "2026-10-15",
+        "first_appt": "2026-10-12",
+        "final_walk": "2026-10-19",
         "final_walk_done": null,
         "completed_date": null,
         "due": "2026-10-15",
         "next_task": {
-          "date": "2026-10-05",
+          "date": "2026-10-06",
           "task": "maintenance"
         },
         "tasks": [
@@ -8653,7 +8768,7 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-10-05",
+            "date": "2026-10-12",
             "who": "Joshua Normandin",
             "completed": null,
             "vendor": false
@@ -8689,7 +8804,7 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": "2026-10-15",
+            "date": "2026-10-19",
             "who": "Matt Romme",
             "completed": null,
             "vendor": false
@@ -9339,8 +9454,8 @@
         "completed_date": "2026-09-30",
         "due": "2026-09-08",
         "next_task": {
-          "date": "2026-10-05",
-          "task": "cleaning"
+          "date": "2026-10-06",
+          "task": "final-walk"
         },
         "tasks": [
           {
@@ -9374,7 +9489,7 @@
             "task": "E - Carpet Cleaning",
             "cat": "carpet",
             "done": false,
-            "date": null,
+            "date": "2026-10-13",
             "who": "AllKlean",
             "completed": null,
             "vendor": true
@@ -9419,9 +9534,9 @@
       },
       "next_appt": {
         "date": "2026-10-06",
-        "cat": "suggested-carpet",
-        "who": "Allklean",
-        "brief": "Suggested carpet cleaning — business day after cleaning"
+        "cat": "final-walk",
+        "who": "Matt Romme",
+        "brief": "Final Walkthrough"
       },
       "cost": {
         "code": "c313-31",
@@ -11239,7 +11354,7 @@
         "completed_date": "2026-09-18",
         "due": "2026-09-25",
         "next_task": {
-          "date": "2026-10-05",
+          "date": "2026-10-07",
           "task": "maintenance"
         },
         "tasks": [
@@ -14020,13 +14135,13 @@
         "status": "ACTIVE",
         "done": 0,
         "total": 9,
-        "first_appt": "2026-12-14",
-        "final_walk": "2026-12-22",
+        "first_appt": "2026-12-16",
+        "final_walk": "2026-12-23",
         "final_walk_done": null,
         "completed_date": null,
         "due": "2026-10-15",
         "next_task": {
-          "date": "2026-12-14",
+          "date": "2026-12-15",
           "task": "maintenance"
         },
         "tasks": [
@@ -14061,8 +14176,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-12-14",
-            "who": "Ron Cramer",
+            "date": "2026-12-16",
+            "who": "Joshua Normandin",
             "completed": null,
             "vendor": false
           },
@@ -14106,7 +14221,7 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": "2026-12-22",
+            "date": "2026-12-23",
             "who": "Matt Romme",
             "completed": null,
             "vendor": false
@@ -14114,9 +14229,9 @@
         ]
       },
       "next_appt": {
-        "date": "2026-12-14",
+        "date": "2026-12-15",
         "cat": "maintenance",
-        "who": "Ron Cramer",
+        "who": "Joshua Normandin",
         "brief": "D - Maintenance"
       },
       "cost": {
@@ -14940,7 +15055,7 @@
         "done": 2,
         "total": 8,
         "first_appt": "2026-12-11",
-        "final_walk": "2026-12-16",
+        "final_walk": "2026-12-17",
         "final_walk_done": null,
         "completed_date": "2026-09-18",
         "due": "2026-09-20",
@@ -14972,7 +15087,7 @@
             "cat": "maintenance",
             "done": false,
             "date": "2026-12-11",
-            "who": "Ron Cramer",
+            "who": "Joshua Normandin",
             "completed": null,
             "vendor": false
           },
@@ -15007,7 +15122,7 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": "2026-12-16",
+            "date": "2026-12-17",
             "who": "Matt Romme",
             "completed": null,
             "vendor": false
@@ -15199,13 +15314,13 @@
         "status": "ACTIVE",
         "done": 1,
         "total": 9,
-        "first_appt": "2026-10-27",
-        "final_walk": "2026-11-03",
+        "first_appt": "2026-11-03",
+        "final_walk": "2026-11-09",
         "final_walk_done": null,
         "completed_date": "2026-09-22",
         "due": "2026-09-30",
         "next_task": {
-          "date": "2026-10-23",
+          "date": "2026-10-26",
           "task": "maintenance"
         },
         "tasks": [
@@ -15240,8 +15355,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-10-27",
-            "who": "Micheal Magoon",
+            "date": "2026-11-03",
+            "who": "Ron Cramer",
             "completed": null,
             "vendor": false
           },
@@ -15285,7 +15400,7 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": "2026-11-03",
+            "date": "2026-11-09",
             "who": "Matt Romme",
             "completed": null,
             "vendor": false
@@ -15293,9 +15408,9 @@
         ]
       },
       "next_appt": {
-        "date": "2026-10-23",
+        "date": "2026-10-26",
         "cat": "maintenance",
-        "who": "Micheal Magoon",
+        "who": "Ron Cramer",
         "brief": "D - Maintenance"
       },
       "cost": {
@@ -15341,13 +15456,13 @@
         "status": "ACTIVE",
         "done": 1,
         "total": 9,
-        "first_appt": "2026-11-16",
-        "final_walk": "2026-11-19",
+        "first_appt": "2026-11-13",
+        "final_walk": "2026-11-18",
         "final_walk_done": null,
         "completed_date": "2026-09-17",
         "due": "2026-09-15",
         "next_task": {
-          "date": "2026-11-13",
+          "date": "2026-11-11",
           "task": "maintenance"
         },
         "tasks": [
@@ -15382,8 +15497,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-11-16",
-            "who": "Micheal Magoon",
+            "date": "2026-11-13",
+            "who": "Ron Cramer",
             "completed": null,
             "vendor": false
           },
@@ -15427,7 +15542,7 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": "2026-11-19",
+            "date": "2026-11-18",
             "who": "Matt Romme",
             "completed": null,
             "vendor": false
@@ -15435,9 +15550,9 @@
         ]
       },
       "next_appt": {
-        "date": "2026-11-13",
+        "date": "2026-11-11",
         "cat": "maintenance",
-        "who": "Micheal Magoon",
+        "who": "Ron Cramer",
         "brief": "D - Maintenance"
       },
       "cost": {
@@ -15483,14 +15598,14 @@
         "status": "ACTIVE",
         "done": 1,
         "total": 6,
-        "first_appt": "2026-12-28",
-        "final_walk": "2027-01-04",
+        "first_appt": "2026-12-29",
+        "final_walk": "2027-01-05",
         "final_walk_done": null,
         "completed_date": "2026-10-05",
         "due": "2026-10-15",
         "next_task": {
-          "date": "2026-10-05",
-          "task": "walkthrough"
+          "date": "2026-12-21",
+          "task": "maintenance"
         },
         "tasks": [
           {
@@ -15506,8 +15621,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-12-28",
-            "who": "Ron Cramer",
+            "date": "2026-12-29",
+            "who": "Joshua Normandin",
             "completed": null,
             "vendor": false
           },
@@ -15542,7 +15657,7 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": "2027-01-04",
+            "date": "2027-01-05",
             "who": "Matt Romme",
             "completed": null,
             "vendor": false
@@ -15550,9 +15665,9 @@
         ]
       },
       "next_appt": {
-        "date": "2026-12-18",
+        "date": "2026-12-21",
         "cat": "maintenance",
-        "who": "Ron Cramer",
+        "who": "Joshua Normandin",
         "brief": "D - Maintenance"
       },
       "cost": {
@@ -16102,7 +16217,7 @@
         "completed_date": "2026-09-15",
         "due": "2026-09-09",
         "next_task": {
-          "date": "2026-10-05",
+          "date": "2026-10-06",
           "task": "maintenance"
         },
         "tasks": [
@@ -16316,8 +16431,8 @@
         "status": "ACTIVE",
         "done": 1,
         "total": 9,
-        "first_appt": "2026-11-12",
-        "final_walk": "2026-11-18",
+        "first_appt": "2026-11-11",
+        "final_walk": "2026-11-19",
         "final_walk_done": null,
         "completed_date": "2026-08-05",
         "due": "2026-08-15",
@@ -16357,8 +16472,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-11-12",
-            "who": "Ron Cramer",
+            "date": "2026-11-11",
+            "who": "Micheal Magoon",
             "completed": null,
             "vendor": false
           },
@@ -16402,7 +16517,7 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": "2026-11-18",
+            "date": "2026-11-19",
             "who": "Matt Romme",
             "completed": null,
             "vendor": false
@@ -16566,8 +16681,8 @@
         "status": "ACTIVE",
         "done": 1,
         "total": 8,
-        "first_appt": "2026-11-03",
-        "final_walk": "2026-11-11",
+        "first_appt": "2026-11-02",
+        "final_walk": "2026-11-05",
         "final_walk_done": null,
         "completed_date": "2026-08-17",
         "due": "2026-09-09",
@@ -16607,8 +16722,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-11-03",
-            "who": "Ron Cramer",
+            "date": "2026-11-02",
+            "who": "Micheal Magoon",
             "completed": null,
             "vendor": false
           },
@@ -16643,7 +16758,7 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": "2026-11-11",
+            "date": "2026-11-05",
             "who": "Matt Romme",
             "completed": null,
             "vendor": false
@@ -19088,8 +19203,8 @@
         "completed_date": null,
         "due": "2026-10-15",
         "next_task": {
-          "date": "2026-10-05",
-          "task": "walkthrough"
+          "date": "2026-10-23",
+          "task": "maintenance"
         },
         "tasks": [
           {
@@ -25042,8 +25157,8 @@
         "status": "ACTIVE",
         "done": 1,
         "total": 6,
-        "first_appt": "2026-12-17",
-        "final_walk": "2026-12-23",
+        "first_appt": "2026-12-16",
+        "final_walk": "2026-12-28",
         "final_walk_done": null,
         "completed_date": "2026-10-02",
         "due": "2026-10-15",
@@ -25065,8 +25180,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-12-17",
-            "who": "Joshua Normandin",
+            "date": "2026-12-16",
+            "who": "Ron Cramer",
             "completed": null,
             "vendor": false
           },
@@ -25101,7 +25216,7 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": "2026-12-23",
+            "date": "2026-12-28",
             "who": "Matt Romme",
             "completed": null,
             "vendor": false
@@ -25111,7 +25226,7 @@
       "next_appt": {
         "date": "2026-12-16",
         "cat": "maintenance",
-        "who": "Joshua Normandin",
+        "who": "Ron Cramer",
         "brief": "D - Maintenance"
       },
       "cost": {
@@ -25209,7 +25324,7 @@
         "status": "ACTIVE",
         "done": 1,
         "total": 8,
-        "first_appt": "2026-10-12",
+        "first_appt": "2026-10-09",
         "final_walk": "2026-10-16",
         "final_walk_done": null,
         "completed_date": "2026-09-10",
@@ -25250,8 +25365,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-10-12",
-            "who": "Joshua Normandin",
+            "date": "2026-10-09",
+            "who": "Micheal Magoon",
             "completed": null,
             "vendor": false
           },
@@ -25296,7 +25411,7 @@
       "next_appt": {
         "date": "2026-10-09",
         "cat": "maintenance",
-        "who": "Joshua Normandin",
+        "who": "Micheal Magoon",
         "brief": "D - Maintenance"
       },
       "cost": {
@@ -25393,7 +25508,7 @@
             "cat": "maintenance",
             "done": false,
             "date": "2027-01-05",
-            "who": "Ron Cramer",
+            "who": "Micheal Magoon",
             "completed": null,
             "vendor": false
           },
@@ -26532,7 +26647,7 @@
         "status": "ACTIVE",
         "done": 0,
         "total": 6,
-        "first_appt": "2026-12-30",
+        "first_appt": "2027-01-05",
         "final_walk": "2027-01-08",
         "final_walk_done": null,
         "completed_date": null,
@@ -26555,8 +26670,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-12-30",
-            "who": "Joshua Normandin",
+            "date": "2027-01-05",
+            "who": "Ron Cramer",
             "completed": null,
             "vendor": false
           },
@@ -28018,13 +28133,13 @@
         "status": "ACTIVE",
         "done": 1,
         "total": 6,
-        "first_appt": "2026-10-12",
-        "final_walk": "2026-10-14",
+        "first_appt": "2026-10-07",
+        "final_walk": "2026-10-12",
         "final_walk_done": null,
         "completed_date": "2026-10-01",
         "due": "2026-10-01",
         "next_task": {
-          "date": "2026-10-09",
+          "date": "2026-10-07",
           "task": "maintenance"
         },
         "tasks": [
@@ -28041,8 +28156,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-10-12",
-            "who": "Micheal Magoon",
+            "date": "2026-10-07",
+            "who": "Joshua Normandin",
             "completed": null,
             "vendor": false
           },
@@ -28077,7 +28192,7 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": "2026-10-14",
+            "date": "2026-10-12",
             "who": "Matt Romme",
             "completed": null,
             "vendor": false
@@ -28085,9 +28200,9 @@
         ]
       },
       "next_appt": {
-        "date": "2026-10-09",
+        "date": "2026-10-07",
         "cat": "maintenance",
-        "who": "Micheal Magoon",
+        "who": "Joshua Normandin",
         "brief": "D - Maintenance"
       },
       "cost": {
@@ -29005,10 +29120,7 @@
         "final_walk_done": null,
         "completed_date": null,
         "due": "2026-10-15",
-        "next_task": {
-          "date": "2026-10-05",
-          "task": "walkthrough"
-        },
+        "next_task": null,
         "tasks": [
           {
             "task": "A - Initial walkthrough",
@@ -33302,116 +33414,6 @@
       "status": "complete"
     },
     {
-      "key": "ps25|d28",
-      "prop": "ps25",
-      "unit": "D28",
-      "at_risk": [],
-      "property_name": "ps25",
-      "city": "Pasco",
-      "addr": "2524 W Sylvester St. - D28 Pasco, WA 99301",
-      "unit_id": 386,
-      "unit_status": "Vacant-Unrented",
-      "rent_ready": "No",
-      "vacant": true,
-      "days_vacant": 6,
-      "move_out": "2026-09-30",
-      "available_on": "2026-10-20",
-      "ready_on": "2026-10-20",
-      "target_date": "2026-10-20",
-      "next_move_in": null,
-      "rent": "1162.00",
-      "bed_bath": "1/1.00",
-      "sqft": 655,
-      "region": "Tri-Cities",
-      "pm": {
-        "projId": 246178,
-        "name": "Standard Unit Turn",
-        "status": "ACTIVE",
-        "done": 0,
-        "total": 6,
-        "first_appt": null,
-        "final_walk": null,
-        "final_walk_done": null,
-        "completed_date": null,
-        "due": "2026-10-15",
-        "next_task": {
-          "date": "2026-10-05",
-          "task": "walkthrough"
-        },
-        "tasks": [
-          {
-            "task": "A - Initial walkthrough",
-            "cat": "walkthrough",
-            "done": false,
-            "date": "2026-10-05",
-            "who": "Margarito Saldana",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "D - Maintenance",
-            "cat": "maintenance",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "E - Carpet Cleaning",
-            "cat": "carpet",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "F - Cleaning",
-            "cat": "cleaning",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Schedule Vendors",
-            "cat": "other",
-            "done": false,
-            "date": null,
-            "who": "Margarito Saldana",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Final Walkthrough",
-            "cat": "final-walk",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": null,
-      "cost": {
-        "code": "ps25-D28",
-        "labor": 0,
-        "materials": 0,
-        "total": 0,
-        "estimate": 0,
-        "laborEntries": [],
-        "materialEntries": []
-      },
-      "stage": "Walkthrough",
-      "stage_ord": 1,
-      "days_elapsed": 6,
-      "days_to_turn": null,
-      "status": "active"
-    },
-    {
       "key": "ps25|d29",
       "prop": "ps25",
       "unit": "D29",
@@ -33444,10 +33446,7 @@
         "final_walk_done": "2026-09-30",
         "completed_date": "2026-09-30",
         "due": "2026-09-23",
-        "next_task": {
-          "date": "2026-10-05",
-          "task": "final-walk"
-        },
+        "next_task": null,
         "tasks": [
           {
             "task": "A - Initial walkthrough",
@@ -35902,10 +35901,7 @@
         "final_walk_done": "2026-09-30",
         "completed_date": "2026-09-30",
         "due": "2026-09-10",
-        "next_task": {
-          "date": "2026-10-05",
-          "task": "final-walk"
-        },
+        "next_task": null,
         "tasks": [
           {
             "task": "A - Initial walkthrough",
@@ -37411,8 +37407,8 @@
         "completed_date": null,
         "due": "2026-10-15",
         "next_task": {
-          "date": "2026-10-05",
-          "task": "walkthrough"
+          "date": "2026-10-14",
+          "task": "maintenance"
         },
         "tasks": [
           {
@@ -41334,8 +41330,8 @@
         "completed_date": "2026-10-05",
         "due": "2026-10-15",
         "next_task": {
-          "date": "2026-10-05",
-          "task": "walkthrough"
+          "date": "2026-10-07",
+          "task": "maintenance"
         },
         "tasks": [
           {
@@ -43481,8 +43477,8 @@
         "completed_date": null,
         "due": "2026-10-15",
         "next_task": {
-          "date": "2026-10-05",
-          "task": "walkthrough"
+          "date": "2026-10-28",
+          "task": "paint"
         },
         "tasks": [
           {
@@ -45347,8 +45343,8 @@
         "completed_date": "2026-06-30",
         "due": "2026-04-26",
         "next_task": {
-          "date": "2026-10-05",
-          "task": "walkthrough"
+          "date": "2026-10-26",
+          "task": "paint"
         },
         "tasks": [
           {
@@ -46011,10 +46007,7 @@
         "final_walk_done": null,
         "completed_date": null,
         "due": "2026-10-12",
-        "next_task": {
-          "date": "2026-10-05",
-          "task": "walkthrough"
-        },
+        "next_task": null,
         "tasks": [
           {
             "task": "A - Initial walkthrough",
@@ -48452,8 +48445,8 @@
         "status": "ACTIVE",
         "done": 0,
         "total": 6,
-        "first_appt": "2026-12-23",
-        "final_walk": "2026-12-31",
+        "first_appt": "2026-12-22",
+        "final_walk": "2027-01-04",
         "final_walk_done": null,
         "completed_date": null,
         "due": "2026-09-29",
@@ -48475,8 +48468,8 @@
             "task": "D - Maintenance",
             "cat": "maintenance",
             "done": false,
-            "date": "2026-12-23",
-            "who": "Joshua Normandin",
+            "date": "2026-12-22",
+            "who": "Ron Cramer",
             "completed": null,
             "vendor": false
           },
@@ -48511,7 +48504,7 @@
             "task": "Final Walkthrough",
             "cat": "final-walk",
             "done": false,
-            "date": "2026-12-31",
+            "date": "2027-01-04",
             "who": "Matt Romme",
             "completed": null,
             "vendor": false
