@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-10-06T20:49:52.651Z",
+  "fetched_at": "2026-10-07T00:26:03.412Z",
   "units": {
     "2": {
       "moveOut": "2026-07-31",
@@ -244,6 +244,13 @@
       "status": "Vacant-Rented",
       "prop": "ps25",
       "unit": "D29",
+      "city": "Pasco"
+    },
+    "398": {
+      "moveOut": "2026-10-31",
+      "status": "Notice-Unrented",
+      "prop": "ps25",
+      "unit": "F40",
       "city": "Pasco"
     },
     "399": {
@@ -827,6 +834,13 @@
       "unit": "A06",
       "city": "Tacoma"
     },
+    "1160": {
+      "moveOut": "2026-11-01",
+      "status": "Notice-Unrented",
+      "prop": "tc68",
+      "unit": "A11",
+      "city": "Tacoma"
+    },
     "1164": {
       "moveOut": "2026-10-04",
       "status": "Vacant-Unrented",
@@ -1030,53 +1044,11 @@
       "unit": "C306",
       "city": "Spokane"
     },
-    "1331": {
-      "moveOut": null,
-      "status": "Vacant-Unrented",
-      "prop": "c702",
-      "unit": "D107",
-      "city": "Spokane"
-    },
-    "1332": {
-      "moveOut": null,
-      "status": "Vacant-Unrented",
-      "prop": "c702",
-      "unit": "D108",
-      "city": "Spokane"
-    },
     "1335": {
       "moveOut": "2026-10-08",
       "status": "Notice-Unrented",
       "prop": "c702",
       "unit": "D203",
-      "city": "Spokane"
-    },
-    "1339": {
-      "moveOut": null,
-      "status": "Vacant-Unrented",
-      "prop": "c702",
-      "unit": "D207",
-      "city": "Spokane"
-    },
-    "1340": {
-      "moveOut": null,
-      "status": "Vacant-Unrented",
-      "prop": "c702",
-      "unit": "D208",
-      "city": "Spokane"
-    },
-    "1341": {
-      "moveOut": "2026-08-17",
-      "status": "Vacant-Unrented",
-      "prop": "c702",
-      "unit": "D301",
-      "city": "Spokane"
-    },
-    "1346": {
-      "moveOut": null,
-      "status": "Vacant-Unrented",
-      "prop": "c702",
-      "unit": "D308",
       "city": "Spokane"
     },
     "1347": {
@@ -1112,13 +1084,6 @@
       "status": "Vacant-Unrented",
       "prop": "c702",
       "unit": "G208",
-      "city": "Spokane"
-    },
-    "1401": {
-      "moveOut": null,
-      "status": "Vacant-Unrented",
-      "prop": "c702",
-      "unit": "H101",
       "city": "Spokane"
     },
     "1413": {
@@ -3624,6 +3589,94 @@
       "unit": "B203",
       "city": "Kennewick",
       "to": "2026-11-20"
+    },
+    {
+      "date": "2026-10-06",
+      "type": "moveout_new",
+      "unit_id": "398",
+      "prop": "ps25",
+      "unit": "F40",
+      "city": "Pasco",
+      "to": "2026-10-31"
+    },
+    {
+      "date": "2026-10-06",
+      "type": "moveout_new",
+      "unit_id": "1160",
+      "prop": "tc68",
+      "unit": "A11",
+      "city": "Tacoma",
+      "to": "2026-11-01"
+    },
+    {
+      "date": "2026-10-06",
+      "type": "moveout_removed",
+      "unit_id": "1331",
+      "prop": "c702",
+      "unit": "D107",
+      "city": "Spokane",
+      "from": null,
+      "was_status": "Vacant-Unrented"
+    },
+    {
+      "date": "2026-10-06",
+      "type": "moveout_removed",
+      "unit_id": "1332",
+      "prop": "c702",
+      "unit": "D108",
+      "city": "Spokane",
+      "from": null,
+      "was_status": "Vacant-Unrented"
+    },
+    {
+      "date": "2026-10-06",
+      "type": "moveout_removed",
+      "unit_id": "1339",
+      "prop": "c702",
+      "unit": "D207",
+      "city": "Spokane",
+      "from": null,
+      "was_status": "Vacant-Unrented"
+    },
+    {
+      "date": "2026-10-06",
+      "type": "moveout_removed",
+      "unit_id": "1340",
+      "prop": "c702",
+      "unit": "D208",
+      "city": "Spokane",
+      "from": null,
+      "was_status": "Vacant-Unrented"
+    },
+    {
+      "date": "2026-10-06",
+      "type": "moveout_removed",
+      "unit_id": "1341",
+      "prop": "c702",
+      "unit": "D301",
+      "city": "Spokane",
+      "from": "2026-08-17",
+      "was_status": "Vacant-Unrented"
+    },
+    {
+      "date": "2026-10-06",
+      "type": "moveout_removed",
+      "unit_id": "1346",
+      "prop": "c702",
+      "unit": "D308",
+      "city": "Spokane",
+      "from": null,
+      "was_status": "Vacant-Unrented"
+    },
+    {
+      "date": "2026-10-06",
+      "type": "moveout_removed",
+      "unit_id": "1401",
+      "prop": "c702",
+      "unit": "H101",
+      "city": "Spokane",
+      "from": null,
+      "was_status": "Vacant-Unrented"
     }
   ]
 }
