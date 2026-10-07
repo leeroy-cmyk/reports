@@ -1,17 +1,17 @@
 {
   "ok": true,
-  "fetched_at": "2026-10-07T00:28:05.222Z",
+  "fetched_at": "2026-10-07T06:20:33.749Z",
   "summary": {
     "as_of": "2026-10-06",
     "units": 235,
-    "active": 81,
+    "active": 80,
     "ready": 1,
     "notice": 10,
-    "at_risk": 29,
+    "at_risk": 28,
     "unscheduled": 6,
-    "accruing": 25231.68,
+    "accruing": 23845.54,
     "avg_days_open": 36,
-    "revenue_at_risk": 3618.9
+    "revenue_at_risk": 3582.4
   },
   "rows": [
     {
@@ -5010,351 +5010,6 @@
       "stage": "Maintenance",
       "stage_ord": 3,
       "days_elapsed": 68,
-      "days_to_turn": null,
-      "status": "active"
-    },
-    {
-      "key": "w226|7",
-      "prop": "w226",
-      "unit": "7",
-      "at_risk": [
-        "Over 45 days vacant"
-      ],
-      "property_name": "w226",
-      "city": "Spokane",
-      "addr": "1226 W. 5th Ave. - 7 Spokane, WA 99204",
-      "unit_id": 440,
-      "unit_status": "Vacant-Unrented",
-      "rent_ready": "No",
-      "vacant": true,
-      "days_vacant": 55,
-      "move_out": "2026-08-12",
-      "available_on": "2026-10-12",
-      "ready_on": "2026-10-12",
-      "target_date": "2026-09-01",
-      "next_move_in": null,
-      "rent": "1095.00",
-      "bed_bath": "1/1.00",
-      "sqft": 700,
-      "region": "Spokane",
-      "pm": {
-        "projId": 240189,
-        "name": "Standard Unit Turn",
-        "status": "ACTIVE",
-        "done": 7,
-        "total": 9,
-        "first_appt": "2026-09-17",
-        "final_walk": "2026-10-06",
-        "final_walk_done": null,
-        "completed_date": "2026-10-05",
-        "due": "2026-08-27",
-        "next_task": {
-          "date": "2026-10-06",
-          "task": "final-walk"
-        },
-        "tasks": [
-          {
-            "task": "A - Initial walkthrough",
-            "cat": "walkthrough",
-            "done": true,
-            "date": "2026-09-09",
-            "who": "Matt Romme",
-            "completed": "2026-09-09",
-            "vendor": false
-          },
-          {
-            "task": "C - Paint",
-            "cat": "paint",
-            "done": true,
-            "date": "2026-09-17",
-            "who": "Ron Cramer",
-            "completed": "2026-09-17",
-            "vendor": false
-          },
-          {
-            "task": "D - Maintenance",
-            "cat": "maintenance",
-            "done": true,
-            "date": "2026-09-17",
-            "who": "Ron Cramer",
-            "completed": "2026-09-17",
-            "vendor": false
-          },
-          {
-            "task": "F - Cleaning",
-            "cat": "cleaning",
-            "done": true,
-            "date": "2026-10-05",
-            "who": "SPO Cleaning",
-            "completed": "2026-10-05",
-            "vendor": true
-          },
-          {
-            "task": "G - Verify Mailbox Lockbox & Mailbox Keys",
-            "cat": "other",
-            "done": true,
-            "date": null,
-            "who": null,
-            "completed": "2026-09-23",
-            "vendor": false
-          },
-          {
-            "task": "Schedule Vendors",
-            "cat": "other",
-            "done": false,
-            "date": null,
-            "who": "Matt Romme",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Final Walkthrough",
-            "cat": "final-walk",
-            "done": false,
-            "date": "2026-10-06",
-            "who": "Matt Romme",
-            "completed": null,
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": {
-        "date": "2026-10-06",
-        "cat": "final-walk",
-        "who": "Matt Romme",
-        "brief": "Final Walkthrough"
-      },
-      "cost": {
-        "code": "w226-7",
-        "labor": 813.44,
-        "materials": 572.7,
-        "total": 1386.14,
-        "estimate": 1187.55,
-        "laborEntries": [
-          {
-            "d": "2026-09-21",
-            "emp": "Ronald D. Cramer",
-            "hrs": 2,
-            "cost": 51.5,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-09-20",
-            "emp": "Ronald D. Cramer",
-            "hrs": 5.5,
-            "cost": 141.63,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-09-18",
-            "emp": "Ronald D. Cramer",
-            "hrs": 2,
-            "cost": 51.5,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-09-18",
-            "emp": "Ronald D. Cramer",
-            "hrs": 0.98,
-            "cost": 25.24,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-09-18",
-            "emp": "Ronald D. Cramer",
-            "hrs": 0.5,
-            "cost": 12.88,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-09-17",
-            "emp": "Ronald D. Cramer",
-            "hrs": 0.95,
-            "cost": 24.46,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-09-17",
-            "emp": "Ronald D. Cramer",
-            "hrs": 0.6,
-            "cost": 15.45,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-09-17",
-            "emp": "Ronald D. Cramer",
-            "hrs": 0.68,
-            "cost": 17.51,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-09-17",
-            "emp": "Ronald D. Cramer",
-            "hrs": 0.37,
-            "cost": 9.53,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-09-17",
-            "emp": "Ronald D. Cramer",
-            "hrs": 0.67,
-            "cost": 17.25,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-09-14",
-            "emp": "Ronald D. Cramer",
-            "hrs": 0.95,
-            "cost": 24.46,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-09-14",
-            "emp": "Ronald D. Cramer",
-            "hrs": 0.82,
-            "cost": 21.12,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-09-14",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.7,
-            "cost": 43.78,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-09-14",
-            "emp": "Ronald D. Cramer",
-            "hrs": 0.4,
-            "cost": 10.3,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-09-11",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.25,
-            "cost": 32.19,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-09-11",
-            "emp": "Ronald D. Cramer",
-            "hrs": 0.65,
-            "cost": 16.74,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-09-11",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.5,
-            "cost": 38.63,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-09-11",
-            "emp": "Ronald D. Cramer",
-            "hrs": 0.5,
-            "cost": 12.88,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-09-11",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.58,
-            "cost": 40.69,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-09-11",
-            "emp": "Ronald D. Cramer",
-            "hrs": 0.33,
-            "cost": 8.5,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-09-10",
-            "emp": "Ronald D. Cramer",
-            "hrs": 0.48,
-            "cost": 12.36,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-09-10",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.1,
-            "cost": 28.33,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-09-10",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.42,
-            "cost": 36.57,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-09-10",
-            "emp": "Ronald D. Cramer",
-            "hrs": 0.9,
-            "cost": 23.18,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-09-02",
-            "emp": "Ronald D. Cramer",
-            "hrs": 0.68,
-            "cost": 17.51,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-24",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.28,
-            "cost": 7,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-24",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.32,
-            "cost": 8,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-24",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.82,
-            "cost": 20.5,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-24",
-            "emp": "Micheal N. Magoon",
-            "hrs": 1.75,
-            "cost": 43.75,
-            "cat": "Turn"
-          }
-        ],
-        "materialEntries": [
-          {
-            "d": "2026-09-14",
-            "amt": 31.77,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-10",
-            "amt": 540.93,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          }
-        ]
-      },
-      "stage": "Maintenance",
-      "stage_ord": 3,
-      "days_elapsed": 55,
       "days_to_turn": null,
       "status": "active"
     },
@@ -26223,9 +25878,9 @@
       "next_appt": null,
       "cost": {
         "code": "ms22-2258",
-        "labor": 191.25,
+        "labor": 285.25,
         "materials": 720.28,
-        "total": 911.53,
+        "total": 1005.53,
         "estimate": 1241.86,
         "laborEntries": [
           {
@@ -26247,6 +25902,20 @@
             "emp": "Micheal N. Magoon",
             "hrs": 0.67,
             "cost": 16.75,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-10-06",
+            "emp": "Micheal N. Magoon",
+            "hrs": 3.13,
+            "cost": 78.25,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-10-06",
+            "emp": "Micheal N. Magoon",
+            "hrs": 0.63,
+            "cost": 15.75,
             "cat": "Turn"
           },
           {
@@ -27101,12 +26770,12 @@
         "projId": 238508,
         "name": "Standard Unit Turn",
         "status": "ACTIVE",
-        "done": 4,
+        "done": 5,
         "total": 9,
         "first_appt": "2026-09-21",
         "final_walk": "2026-10-07",
         "final_walk_done": null,
-        "completed_date": "2026-09-14",
+        "completed_date": "2026-10-06",
         "due": "2026-09-15",
         "next_task": {
           "date": "2026-10-07",
@@ -27134,10 +26803,10 @@
           {
             "task": "D - Maintenance",
             "cat": "maintenance",
-            "done": false,
+            "done": true,
             "date": "2026-10-02",
             "who": "Ron Cramer",
-            "completed": null,
+            "completed": "2026-10-06",
             "vendor": false
           },
           {
@@ -48957,6 +48626,345 @@
       "status": "complete"
     },
     {
+      "key": "w226|7",
+      "prop": "w226",
+      "unit": "7",
+      "at_risk": [],
+      "property_name": "w226",
+      "city": "Spokane",
+      "addr": "1226 W. 5th Ave. - 7 Spokane, WA 99204",
+      "unit_id": 440,
+      "unit_status": "Vacant-Unrented",
+      "rent_ready": "No",
+      "vacant": true,
+      "days_vacant": 55,
+      "move_out": "2026-08-12",
+      "available_on": "2026-10-12",
+      "ready_on": "2026-10-12",
+      "target_date": "2026-09-01",
+      "next_move_in": null,
+      "rent": "1095.00",
+      "bed_bath": "1/1.00",
+      "sqft": 700,
+      "region": "Spokane",
+      "pm": {
+        "projId": 240189,
+        "name": "Standard Unit Turn",
+        "status": "ACTIVE",
+        "done": 8,
+        "total": 9,
+        "first_appt": "2026-09-17",
+        "final_walk": "2026-10-06",
+        "final_walk_done": "2026-10-06",
+        "completed_date": "2026-10-06",
+        "due": "2026-08-27",
+        "next_task": {
+          "date": "2026-10-06",
+          "task": "final-walk"
+        },
+        "tasks": [
+          {
+            "task": "A - Initial walkthrough",
+            "cat": "walkthrough",
+            "done": true,
+            "date": "2026-09-09",
+            "who": "Matt Romme",
+            "completed": "2026-09-09",
+            "vendor": false
+          },
+          {
+            "task": "C - Paint",
+            "cat": "paint",
+            "done": true,
+            "date": "2026-09-17",
+            "who": "Ron Cramer",
+            "completed": "2026-09-17",
+            "vendor": false
+          },
+          {
+            "task": "D - Maintenance",
+            "cat": "maintenance",
+            "done": true,
+            "date": "2026-09-17",
+            "who": "Ron Cramer",
+            "completed": "2026-09-17",
+            "vendor": false
+          },
+          {
+            "task": "F - Cleaning",
+            "cat": "cleaning",
+            "done": true,
+            "date": "2026-10-05",
+            "who": "SPO Cleaning",
+            "completed": "2026-10-05",
+            "vendor": true
+          },
+          {
+            "task": "G - Verify Mailbox Lockbox & Mailbox Keys",
+            "cat": "other",
+            "done": true,
+            "date": null,
+            "who": null,
+            "completed": "2026-09-23",
+            "vendor": false
+          },
+          {
+            "task": "Schedule Vendors",
+            "cat": "other",
+            "done": false,
+            "date": null,
+            "who": "Matt Romme",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Final Walkthrough",
+            "cat": "final-walk",
+            "done": true,
+            "date": "2026-10-06",
+            "who": "Matt Romme",
+            "completed": "2026-10-06",
+            "vendor": false
+          }
+        ]
+      },
+      "next_appt": null,
+      "cost": {
+        "code": "w226-7",
+        "labor": 813.44,
+        "materials": 572.7,
+        "total": 1386.14,
+        "estimate": 1187.55,
+        "laborEntries": [
+          {
+            "d": "2026-09-21",
+            "emp": "Ronald D. Cramer",
+            "hrs": 2,
+            "cost": 51.5,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-20",
+            "emp": "Ronald D. Cramer",
+            "hrs": 5.5,
+            "cost": 141.63,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-18",
+            "emp": "Ronald D. Cramer",
+            "hrs": 2,
+            "cost": 51.5,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-18",
+            "emp": "Ronald D. Cramer",
+            "hrs": 0.98,
+            "cost": 25.24,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-18",
+            "emp": "Ronald D. Cramer",
+            "hrs": 0.5,
+            "cost": 12.88,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-17",
+            "emp": "Ronald D. Cramer",
+            "hrs": 0.95,
+            "cost": 24.46,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-17",
+            "emp": "Ronald D. Cramer",
+            "hrs": 0.6,
+            "cost": 15.45,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-17",
+            "emp": "Ronald D. Cramer",
+            "hrs": 0.68,
+            "cost": 17.51,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-17",
+            "emp": "Ronald D. Cramer",
+            "hrs": 0.37,
+            "cost": 9.53,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-17",
+            "emp": "Ronald D. Cramer",
+            "hrs": 0.67,
+            "cost": 17.25,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-14",
+            "emp": "Ronald D. Cramer",
+            "hrs": 0.95,
+            "cost": 24.46,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-14",
+            "emp": "Ronald D. Cramer",
+            "hrs": 0.82,
+            "cost": 21.12,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-14",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.7,
+            "cost": 43.78,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-14",
+            "emp": "Ronald D. Cramer",
+            "hrs": 0.4,
+            "cost": 10.3,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-11",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.25,
+            "cost": 32.19,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-11",
+            "emp": "Ronald D. Cramer",
+            "hrs": 0.65,
+            "cost": 16.74,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-11",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.5,
+            "cost": 38.63,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-11",
+            "emp": "Ronald D. Cramer",
+            "hrs": 0.5,
+            "cost": 12.88,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-11",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.58,
+            "cost": 40.69,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-11",
+            "emp": "Ronald D. Cramer",
+            "hrs": 0.33,
+            "cost": 8.5,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-10",
+            "emp": "Ronald D. Cramer",
+            "hrs": 0.48,
+            "cost": 12.36,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-10",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.1,
+            "cost": 28.33,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-10",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.42,
+            "cost": 36.57,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-10",
+            "emp": "Ronald D. Cramer",
+            "hrs": 0.9,
+            "cost": 23.18,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-09-02",
+            "emp": "Ronald D. Cramer",
+            "hrs": 0.68,
+            "cost": 17.51,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-24",
+            "emp": "Micheal N. Magoon",
+            "hrs": 0.28,
+            "cost": 7,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-24",
+            "emp": "Micheal N. Magoon",
+            "hrs": 0.32,
+            "cost": 8,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-24",
+            "emp": "Micheal N. Magoon",
+            "hrs": 0.82,
+            "cost": 20.5,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-08-24",
+            "emp": "Micheal N. Magoon",
+            "hrs": 1.75,
+            "cost": 43.75,
+            "cat": "Turn"
+          }
+        ],
+        "materialEntries": [
+          {
+            "d": "2026-09-14",
+            "amt": 31.77,
+            "cat": "Turn",
+            "ln": "cramer",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-09-10",
+            "amt": 540.93,
+            "cat": "Turn",
+            "ln": "cramer",
+            "src": "ramp"
+          }
+        ]
+      },
+      "turn_end": "2026-10-06",
+      "stage": "Maintenance",
+      "stage_ord": 3,
+      "days_elapsed": 55,
+      "days_to_turn": 55,
+      "status": "complete"
+    },
+    {
       "key": "w226|8",
       "prop": "w226",
       "unit": "8",
@@ -48982,12 +48990,12 @@
         "projId": 246977,
         "name": "Standard Unit Turn",
         "status": "ACTIVE",
-        "done": 0,
+        "done": 1,
         "total": 6,
         "first_appt": "2026-12-17",
         "final_walk": "2026-12-28",
         "final_walk_done": null,
-        "completed_date": null,
+        "completed_date": "2026-10-06",
         "due": "2026-10-15",
         "next_task": {
           "date": "2026-10-06",
@@ -48997,10 +49005,10 @@
           {
             "task": "A - Initial walkthrough",
             "cat": "walkthrough",
-            "done": false,
+            "done": true,
             "date": "2026-10-06",
             "who": "Matt Romme",
-            "completed": null,
+            "completed": "2026-10-06",
             "vendor": false
           },
           {
@@ -49051,10 +49059,10 @@
         ]
       },
       "next_appt": {
-        "date": "2026-10-06",
-        "cat": "walkthrough",
-        "who": "Matt Romme",
-        "brief": "A - Initial walkthrough"
+        "date": "2026-12-16",
+        "cat": "maintenance",
+        "who": "Micheal Magoon",
+        "brief": "D - Maintenance"
       },
       "cost": {
         "code": "w226-8",
@@ -49159,8 +49167,8 @@
         ]
       },
       "turn_end": "2025-07-30",
-      "stage": "Walkthrough",
-      "stage_ord": 1,
+      "stage": "Maintenance",
+      "stage_ord": 3,
       "days_elapsed": 0,
       "days_to_turn": -427,
       "status": "complete"
