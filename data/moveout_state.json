@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-10-08T12:02:40.826Z",
+  "fetched_at": "2026-10-08T18:51:33.774Z",
   "units": {
     "2": {
       "moveOut": "2026-07-31",
@@ -335,13 +335,6 @@
       "status": "Vacant-Unrented",
       "prop": "w226",
       "unit": "8",
-      "city": "Spokane"
-    },
-    "453": {
-      "moveOut": "2026-06-30",
-      "status": "Vacant-Unrented",
-      "prop": "w117",
-      "unit": "10",
       "city": "Spokane"
     },
     "454": {
@@ -1066,7 +1059,7 @@
       "city": "Spokane"
     },
     "1383": {
-      "moveOut": "2026-10-16",
+      "moveOut": "2026-10-20",
       "status": "Notice-Unrented",
       "prop": "c702",
       "unit": "G105",
@@ -3653,6 +3646,26 @@
       "unit": "512-3",
       "city": "Medical Lake",
       "to": "2026-09-30"
+    },
+    {
+      "date": "2026-10-08",
+      "type": "moveout_changed",
+      "unit_id": "1383",
+      "prop": "c702",
+      "unit": "G105",
+      "city": "Spokane",
+      "from": "2026-10-16",
+      "to": "2026-10-20"
+    },
+    {
+      "date": "2026-10-08",
+      "type": "moveout_removed",
+      "unit_id": "453",
+      "prop": "w117",
+      "unit": "10",
+      "city": "Spokane",
+      "from": "2026-06-30",
+      "was_status": "Vacant-Unrented"
     }
   ]
 }
