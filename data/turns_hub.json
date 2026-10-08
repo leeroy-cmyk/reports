@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "fetched_at": "2026-10-07T23:51:15.961Z",
+  "fetched_at": "2026-10-08T05:04:46.184Z",
   "summary": {
     "as_of": "2026-10-07",
     "units": 236,
@@ -9744,11 +9744,18 @@
       "cost": {
         "code": "c702-A101",
         "labor": 0,
-        "materials": 362.72,
-        "total": 362.72,
+        "materials": 378.54,
+        "total": 378.54,
         "estimate": 0,
         "laborEntries": [],
         "materialEntries": [
+          {
+            "d": "2026-10-07",
+            "amt": 15.82,
+            "cat": "Turn",
+            "ln": "easley",
+            "src": "ramp"
+          },
           {
             "d": "2026-08-20",
             "amt": 362.72,
@@ -15455,8 +15462,8 @@
       "cost": {
         "code": "k104-509-1",
         "labor": 454,
-        "materials": 2841.11,
-        "total": 3295.11,
+        "materials": 3318.79,
+        "total": 3772.79,
         "estimate": 1814.53,
         "laborEntries": [
           {
@@ -15517,6 +15524,20 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-10-07",
+            "amt": 73.48,
+            "cat": "Turn",
+            "ln": "cramer",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-10-07",
+            "amt": 404.2,
+            "cat": "Turn",
+            "ln": "cramer",
+            "src": "ramp"
+          },
           {
             "d": "2026-06-25",
             "amt": 2183.86,
@@ -15802,6 +15823,146 @@
       "stage_ord": 3,
       "days_elapsed": 0,
       "days_to_turn": -408,
+      "status": "complete"
+    },
+    {
+      "key": "k104|5123",
+      "prop": "k104",
+      "unit": "512-3",
+      "at_risk": [],
+      "property_name": "k104- LeFevre",
+      "city": "Medical Lake",
+      "addr": "512 E. Percival #3 Medical Lake, WA 99022",
+      "unit_id": 301,
+      "unit_status": "Vacant-Unrented",
+      "rent_ready": "Yes",
+      "vacant": true,
+      "days_vacant": 7,
+      "move_out": "2026-09-30",
+      "available_on": "2026-10-20",
+      "ready_on": "2026-10-20",
+      "target_date": "2026-10-20",
+      "next_move_in": null,
+      "rent": "1334.00",
+      "bed_bath": "2/1.00",
+      "sqft": 1140,
+      "region": "Spokane",
+      "pm": {
+        "projId": 212176,
+        "name": "CapEx  Turn - 512 E. Percival UNIT 512-3",
+        "status": "COMPLETE",
+        "done": 7,
+        "total": 7,
+        "first_appt": "2026-03-13",
+        "final_walk": "2026-03-26",
+        "final_walk_done": "2026-03-27",
+        "completed_date": "2026-03-27",
+        "due": "2026-04-11",
+        "next_task": null,
+        "tasks": null
+      },
+      "next_appt": null,
+      "cost": {
+        "code": "k104-512-3",
+        "labor": 269.5,
+        "materials": 485.76,
+        "total": 755.26,
+        "estimate": 0,
+        "laborEntries": [
+          {
+            "d": "2026-03-16",
+            "emp": "Micheal N. Magoon",
+            "hrs": 0.67,
+            "cost": 16.75,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-03-16",
+            "emp": "Micheal N. Magoon",
+            "hrs": 1.6,
+            "cost": 40,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-03-16",
+            "emp": "Micheal N. Magoon",
+            "hrs": 1.18,
+            "cost": 29.5,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-03-16",
+            "emp": "Micheal N. Magoon",
+            "hrs": 0.72,
+            "cost": 18,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-03-13",
+            "emp": "Micheal N. Magoon",
+            "hrs": 1.33,
+            "cost": 33.25,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-03-13",
+            "emp": "Micheal N. Magoon",
+            "hrs": 0.95,
+            "cost": 23.75,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-03-13",
+            "emp": "Micheal N. Magoon",
+            "hrs": 1.3,
+            "cost": 32.5,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-03-13",
+            "emp": "Micheal N. Magoon",
+            "hrs": 1.18,
+            "cost": 29.5,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-03-13",
+            "emp": "Micheal N. Magoon",
+            "hrs": 1.85,
+            "cost": 46.25,
+            "cat": "CapEx"
+          }
+        ],
+        "materialEntries": [
+          {
+            "d": "2026-03-23",
+            "amt": 255,
+            "cat": "Turn",
+            "ln": "montiel",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-03-16",
+            "amt": 88.14,
+            "cat": "Turn",
+            "ln": "magoon",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-03-13",
+            "amt": 142.62,
+            "cat": "Turn",
+            "ln": "magoon",
+            "src": "ramp"
+          }
+        ]
+      },
+      "turn_end": "2026-03-27",
+      "af_turn_end": "2026-03-27",
+      "stage": "Ready",
+      "stage_ord": 7,
+      "days_elapsed": 0,
+      "days_to_turn": -187,
       "status": "complete"
     },
     {
@@ -27581,8 +27742,8 @@
       "cost": {
         "code": "p705-12",
         "labor": 4869.93,
-        "materials": 2088.93,
-        "total": 6958.86,
+        "materials": 2112.63,
+        "total": 6982.56,
         "estimate": 0,
         "laborEntries": [
           {
@@ -28007,6 +28168,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-10-07",
+            "amt": 23.7,
+            "cat": "Turn",
+            "ln": "normandin",
+            "src": "ramp"
+          },
           {
             "d": "2026-10-07",
             "amt": 37.5,
@@ -47203,321 +47371,6 @@
         ]
       },
       "turn_end": "2026-07-14",
-      "af_turn_end": "2026-09-14",
-      "stage": "Final Walk",
-      "stage_ord": 6,
-      "days_elapsed": null,
-      "days_to_turn": null,
-      "status": "complete"
-    },
-    {
-      "key": "v202|2",
-      "prop": "v202",
-      "unit": "2",
-      "property_name": "v202",
-      "at_risk": [],
-      "region": "Spokane",
-      "pm": {
-        "projId": 222446,
-        "name": "Standard Unit Turn",
-        "status": "COMPLETE",
-        "done": 7,
-        "total": 7,
-        "first_appt": "2026-06-11",
-        "final_walk": "2026-07-08",
-        "final_walk_done": "2026-07-09",
-        "completed_date": "2026-07-09",
-        "due": "2026-06-25",
-        "next_task": null,
-        "tasks": [
-          {
-            "task": "A - Initial walkthrough",
-            "cat": "walkthrough",
-            "done": true,
-            "date": "2026-06-05",
-            "who": "Micheal Magoon",
-            "completed": "2026-06-09",
-            "vendor": false
-          },
-          {
-            "task": "Appfolio Estimate",
-            "cat": "estimate",
-            "done": true,
-            "date": null,
-            "who": "Dulce Salinas",
-            "completed": "2026-06-09",
-            "vendor": false
-          },
-          {
-            "task": "C - Paint",
-            "cat": "paint",
-            "done": true,
-            "date": "2026-06-12",
-            "who": "Micheal Magoon",
-            "completed": "2026-06-12",
-            "vendor": false
-          },
-          {
-            "task": "D - Maintenance",
-            "cat": "maintenance",
-            "done": true,
-            "date": "2026-06-11",
-            "who": "Micheal Magoon",
-            "completed": "2026-06-11",
-            "vendor": false
-          },
-          {
-            "task": "E - Carpet Cleaning",
-            "cat": "carpet",
-            "done": true,
-            "date": "2026-06-30",
-            "who": "AllKlean",
-            "completed": "2026-07-01",
-            "vendor": true
-          },
-          {
-            "task": "F - Cleaning",
-            "cat": "cleaning",
-            "done": true,
-            "date": "2026-07-01",
-            "who": "SPO Cleaning",
-            "completed": "2026-07-01",
-            "vendor": true
-          },
-          {
-            "task": "Final Walkthrough",
-            "cat": "final-walk",
-            "done": true,
-            "date": "2026-07-08",
-            "who": "Micheal Magoon",
-            "completed": "2026-07-09",
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": null,
-      "cost": {
-        "code": "v202-2",
-        "labor": 568.5,
-        "materials": 535.84,
-        "total": 1104.34,
-        "estimate": 0,
-        "laborEntries": [
-          {
-            "d": "2026-07-15",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.63,
-            "cost": 15.75,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-14",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.57,
-            "cost": 14.25,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-09",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.68,
-            "cost": 17,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-15",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.63,
-            "cost": 15.75,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-06-12",
-            "emp": "Micheal N. Magoon",
-            "hrs": 2.02,
-            "cost": 50.5,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-06-12",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.82,
-            "cost": 20.5,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-06-12",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.3,
-            "cost": 7.5,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-06-12",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.77,
-            "cost": 19.25,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-06-12",
-            "emp": "Micheal N. Magoon",
-            "hrs": 2.23,
-            "cost": 55.75,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-06-11",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.32,
-            "cost": 8,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-06-11",
-            "emp": "Micheal N. Magoon",
-            "hrs": 1.32,
-            "cost": 33,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-06-11",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.8,
-            "cost": 20,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-06-11",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.95,
-            "cost": 23.75,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-06-11",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.93,
-            "cost": 23.25,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-06-11",
-            "emp": "Micheal N. Magoon",
-            "hrs": 2.08,
-            "cost": 52,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-06-11",
-            "emp": "Micheal N. Magoon",
-            "hrs": 1.18,
-            "cost": 29.5,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-06-10",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.15,
-            "cost": 3.75,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-06-10",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.32,
-            "cost": 8,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-06-10",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.4,
-            "cost": 10,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-06-10",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.75,
-            "cost": 18.75,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-06-10",
-            "emp": "Micheal N. Magoon",
-            "hrs": 1.75,
-            "cost": 43.75,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-06-10",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.78,
-            "cost": 19.5,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-06-10",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.38,
-            "cost": 9.5,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-06-10",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.6,
-            "cost": 15,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-06-10",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.52,
-            "cost": 13,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-06-04",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.38,
-            "cost": 9.5,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-06-04",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.48,
-            "cost": 12,
-            "cat": "CapEx"
-          }
-        ],
-        "materialEntries": [
-          {
-            "d": "2026-07-02",
-            "amt": 250,
-            "cat": "Turn",
-            "ln": "SPO Cleaning",
-            "src": "qbo"
-          },
-          {
-            "d": "2026-06-11",
-            "amt": 66.89,
-            "cat": "Turn",
-            "ln": "magoon",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-06-10",
-            "amt": 218.95,
-            "cat": "Turn",
-            "ln": "magoon",
-            "src": "ramp"
-          }
-        ]
-      },
-      "turn_end": "2026-07-09",
       "af_turn_end": "2026-09-14",
       "stage": "Final Walk",
       "stage_ord": 6,
