@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "fetched_at": "2026-10-08T18:52:15.044Z",
+  "fetched_at": "2026-10-08T23:41:28.276Z",
   "summary": {
     "as_of": "2026-10-08",
     "units": 236,
@@ -9,7 +9,7 @@
     "notice": 10,
     "at_risk": 29,
     "unscheduled": 9,
-    "accruing": 24435.26,
+    "accruing": 24861.51,
     "avg_days_open": 37,
     "revenue_at_risk": 3635.57
   },
@@ -1129,11 +1129,19 @@
       "cost": {
         "code": "c702-C205",
         "labor": 0,
-        "materials": 0,
-        "total": 0,
+        "materials": 111.75,
+        "total": 111.75,
         "estimate": 0,
         "laborEntries": [],
-        "materialEntries": []
+        "materialEntries": [
+          {
+            "d": "2026-10-08",
+            "amt": 111.75,
+            "cat": "Turn",
+            "ln": "smith",
+            "src": "ramp"
+          }
+        ]
       },
       "stage": "Maintenance",
       "stage_ord": 3,
@@ -11206,11 +11214,19 @@
       "cost": {
         "code": "c702-C304",
         "labor": 0,
-        "materials": 0,
-        "total": 0,
+        "materials": 314.5,
+        "total": 314.5,
         "estimate": 0,
         "laborEntries": [],
-        "materialEntries": []
+        "materialEntries": [
+          {
+            "d": "2026-10-08",
+            "amt": 314.5,
+            "cat": "Turn",
+            "ln": "easley",
+            "src": "ramp"
+          }
+        ]
       },
       "stage": "Maintenance",
       "stage_ord": 3,
@@ -24829,7 +24845,7 @@
       "available_on": "2026-10-20",
       "ready_on": "2026-10-20",
       "target_date": "2026-08-20",
-      "next_move_in": "2026-10-25",
+      "next_move_in": "2026-10-20",
       "rent": "950.00",
       "bed_bath": "1/1.00",
       "sqft": 500,
@@ -27746,8 +27762,8 @@
       "cost": {
         "code": "p705-12",
         "labor": 4869.93,
-        "materials": 2159.46,
-        "total": 7029.39,
+        "materials": 2242.52,
+        "total": 7112.45,
         "estimate": 0,
         "laborEntries": [
           {
@@ -28172,6 +28188,20 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-10-08",
+            "amt": 21.05,
+            "cat": "Turn",
+            "ln": "normandin",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-10-08",
+            "amt": 62.01,
+            "cat": "Turn",
+            "ln": "normandin",
+            "src": "ramp"
+          },
           {
             "d": "2026-10-08",
             "amt": 46.83,
