@@ -1,17 +1,17 @@
 {
   "ok": true,
-  "fetched_at": "2026-10-13T20:35:32.694Z",
+  "fetched_at": "2026-10-13T23:56:26.853Z",
   "summary": {
     "as_of": "2026-10-13",
-    "units": 231,
-    "active": 79,
-    "ready": 4,
+    "units": 232,
+    "active": 77,
+    "ready": 7,
     "notice": 9,
-    "at_risk": 31,
-    "unscheduled": 16,
-    "accruing": 27588.04,
-    "avg_days_open": 40,
-    "revenue_at_risk": 3555.23
+    "at_risk": 30,
+    "unscheduled": 14,
+    "accruing": 27531.11,
+    "avg_days_open": 41,
+    "revenue_at_risk": 3456.73
   },
   "rows": [
     {
@@ -885,8 +885,8 @@
       "vacant": true,
       "days_vacant": 74,
       "move_out": "2026-07-31",
-      "available_on": "2026-11-03",
-      "ready_on": "2026-11-03",
+      "available_on": "2026-10-16",
+      "ready_on": "2026-10-16",
       "target_date": "2026-08-20",
       "next_move_in": null,
       "rent": "1360.00",
@@ -1019,148 +1019,6 @@
       "stage": "Maintenance",
       "stage_ord": 3,
       "days_elapsed": 74,
-      "days_to_turn": null,
-      "status": "active"
-    },
-    {
-      "key": "c702|c205",
-      "prop": "c702",
-      "unit": "C205",
-      "at_risk": [
-        "Nothing scheduled"
-      ],
-      "property_name": "c702",
-      "city": "Spokane",
-      "addr": "7002 N Colton St C205 Spokane, WA 99208",
-      "unit_id": 1315,
-      "unit_status": "Vacant-Unrented",
-      "rent_ready": "No",
-      "vacant": true,
-      "days_vacant": 0,
-      "move_out": null,
-      "available_on": "2026-10-14",
-      "ready_on": "2026-10-14",
-      "target_date": null,
-      "next_move_in": null,
-      "rent": "1360.00",
-      "bed_bath": "2/2.00",
-      "sqft": 1140,
-      "region": "Spokane",
-      "pm": {
-        "projId": 239140,
-        "name": "Standard Unit Turn",
-        "status": "ACTIVE",
-        "done": 2,
-        "total": 9,
-        "first_appt": "2026-09-28",
-        "final_walk": "2026-10-06",
-        "final_walk_done": null,
-        "completed_date": "2026-08-20",
-        "due": "2026-08-25",
-        "next_task": null,
-        "tasks": [
-          {
-            "task": "Appfolio Estimate",
-            "cat": "estimate",
-            "done": false,
-            "date": null,
-            "who": "Dulce Salinas",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "C - Paint",
-            "cat": "paint",
-            "done": true,
-            "date": "2026-09-28",
-            "who": "Brady Smith",
-            "completed": "2026-08-20",
-            "vendor": false
-          },
-          {
-            "task": "D - Maintenance",
-            "cat": "maintenance",
-            "done": true,
-            "date": "2026-09-30",
-            "who": "Brady Smith",
-            "completed": "2026-08-20",
-            "vendor": false
-          },
-          {
-            "task": "E - Carpet Cleaning",
-            "cat": "carpet",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "F - Cleaning",
-            "cat": "cleaning",
-            "done": false,
-            "date": "2026-09-30",
-            "who": "U&K Properties LLC",
-            "completed": null,
-            "vendor": true
-          },
-          {
-            "task": "G - Verify Mailbox Lockbox & Mailbox Keys",
-            "cat": "other",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Schedule Vendors",
-            "cat": "other",
-            "done": false,
-            "date": null,
-            "who": "Matt Romme",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Final Walkthrough",
-            "cat": "final-walk",
-            "done": false,
-            "date": "2026-10-06",
-            "who": "Matt Romme",
-            "completed": null,
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": null,
-      "cost": {
-        "code": "c702-C205",
-        "labor": 0,
-        "materials": 133.32,
-        "total": 133.32,
-        "estimate": 0,
-        "laborEntries": [],
-        "materialEntries": [
-          {
-            "d": "2026-10-09",
-            "amt": 21.57,
-            "cat": "Turn",
-            "ln": "smith",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-08",
-            "amt": 111.75,
-            "cat": "Turn",
-            "ln": "smith",
-            "src": "ramp"
-          }
-        ]
-      },
-      "stage": "Maintenance",
-      "stage_ord": 3,
-      "days_elapsed": null,
       "days_to_turn": null,
       "status": "active"
     },
@@ -1615,8 +1473,8 @@
       "cost": {
         "code": "k104-107-7",
         "labor": 42.49,
-        "materials": 0,
-        "total": 42.49,
+        "materials": 440.08,
+        "total": 482.57,
         "estimate": 0,
         "laborEntries": [
           {
@@ -1627,7 +1485,15 @@
             "cat": "Turn"
           }
         ],
-        "materialEntries": []
+        "materialEntries": [
+          {
+            "d": "2026-10-13",
+            "amt": 440.08,
+            "cat": "Turn",
+            "ln": "magoon",
+            "src": "ramp"
+          }
+        ]
       },
       "stage": "Maintenance",
       "stage_ord": 3,
@@ -1767,8 +1633,8 @@
       "cost": {
         "code": "k104-509-4",
         "labor": 915.75,
-        "materials": 627.96,
-        "total": 1543.71,
+        "materials": 693.34,
+        "total": 1609.09,
         "estimate": 0,
         "laborEntries": [
           {
@@ -1969,6 +1835,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-10-13",
+            "amt": 65.38,
+            "cat": "Turn",
+            "ln": "normandin",
+            "src": "ramp"
+          },
           {
             "d": "2026-10-12",
             "amt": 426,
@@ -10599,7 +10472,7 @@
       "addr": "7020 N Colton St B201 Spokane, WA 99208",
       "unit_id": 1293,
       "unit_status": "Vacant-Unrented",
-      "rent_ready": "No",
+      "rent_ready": "Yes",
       "vacant": true,
       "days_vacant": 25,
       "move_out": "2026-09-18",
@@ -10724,11 +10597,11 @@
           }
         ]
       },
-      "stage": "Carpet",
-      "stage_ord": 5,
+      "stage": "Ready",
+      "stage_ord": 7,
       "days_elapsed": 25,
       "days_to_turn": null,
-      "status": "active"
+      "status": "ready"
     },
     {
       "key": "c702|b301",
@@ -11276,6 +11149,146 @@
       "days_elapsed": null,
       "days_to_turn": null,
       "status": "complete"
+    },
+    {
+      "key": "c702|c205",
+      "prop": "c702",
+      "unit": "C205",
+      "at_risk": [],
+      "property_name": "c702",
+      "city": "Spokane",
+      "addr": "7002 N Colton St C205 Spokane, WA 99208",
+      "unit_id": 1315,
+      "unit_status": "Vacant-Unrented",
+      "rent_ready": "Yes",
+      "vacant": true,
+      "days_vacant": 0,
+      "move_out": null,
+      "available_on": "2026-10-14",
+      "ready_on": "2026-10-14",
+      "target_date": null,
+      "next_move_in": null,
+      "rent": "1360.00",
+      "bed_bath": "2/2.00",
+      "sqft": 1140,
+      "region": "Spokane",
+      "pm": {
+        "projId": 239140,
+        "name": "Standard Unit Turn",
+        "status": "ACTIVE",
+        "done": 2,
+        "total": 9,
+        "first_appt": "2026-09-28",
+        "final_walk": "2026-10-06",
+        "final_walk_done": null,
+        "completed_date": "2026-08-20",
+        "due": "2026-08-25",
+        "next_task": null,
+        "tasks": [
+          {
+            "task": "Appfolio Estimate",
+            "cat": "estimate",
+            "done": false,
+            "date": null,
+            "who": "Dulce Salinas",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "C - Paint",
+            "cat": "paint",
+            "done": true,
+            "date": "2026-09-28",
+            "who": "Brady Smith",
+            "completed": "2026-08-20",
+            "vendor": false
+          },
+          {
+            "task": "D - Maintenance",
+            "cat": "maintenance",
+            "done": true,
+            "date": "2026-09-30",
+            "who": "Brady Smith",
+            "completed": "2026-08-20",
+            "vendor": false
+          },
+          {
+            "task": "E - Carpet Cleaning",
+            "cat": "carpet",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "F - Cleaning",
+            "cat": "cleaning",
+            "done": false,
+            "date": "2026-09-30",
+            "who": "U&K Properties LLC",
+            "completed": null,
+            "vendor": true
+          },
+          {
+            "task": "G - Verify Mailbox Lockbox & Mailbox Keys",
+            "cat": "other",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Schedule Vendors",
+            "cat": "other",
+            "done": false,
+            "date": null,
+            "who": "Matt Romme",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Final Walkthrough",
+            "cat": "final-walk",
+            "done": false,
+            "date": "2026-10-06",
+            "who": "Matt Romme",
+            "completed": null,
+            "vendor": false
+          }
+        ]
+      },
+      "next_appt": null,
+      "cost": {
+        "code": "c702-C205",
+        "labor": 0,
+        "materials": 133.32,
+        "total": 133.32,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": [
+          {
+            "d": "2026-10-09",
+            "amt": 21.57,
+            "cat": "Turn",
+            "ln": "smith",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-10-08",
+            "amt": 111.75,
+            "cat": "Turn",
+            "ln": "smith",
+            "src": "ramp"
+          }
+        ]
+      },
+      "stage": "Ready",
+      "stage_ord": 7,
+      "days_elapsed": null,
+      "days_to_turn": null,
+      "status": "ready"
     },
     {
       "key": "c702|c207",
@@ -12212,8 +12225,8 @@
       "vacant": true,
       "days_vacant": 23,
       "move_out": "2026-09-20",
-      "available_on": "2026-10-14",
-      "ready_on": "2026-10-14",
+      "available_on": "2026-10-16",
+      "ready_on": "2026-10-16",
       "target_date": "2026-10-10",
       "next_move_in": null,
       "rent": "1595.00",
@@ -12831,11 +12844,18 @@
       "cost": {
         "code": "c702-K106",
         "labor": 0,
-        "materials": 188.09,
-        "total": 188.09,
+        "materials": 231.22,
+        "total": 231.22,
         "estimate": 1712.34,
         "laborEntries": [],
         "materialEntries": [
+          {
+            "d": "2026-10-13",
+            "amt": 43.13,
+            "cat": "Turn",
+            "ln": "smith",
+            "src": "ramp"
+          },
           {
             "d": "2026-10-12",
             "amt": 188.09,
@@ -12860,7 +12880,7 @@
       "city": "Spokane",
       "addr": "7014 N Colton St K303 Spokane, WA 99208",
       "unit_id": 1446,
-      "unit_status": "Vacant-Unrented",
+      "unit_status": "Vacant-Rented",
       "rent_ready": "Yes",
       "vacant": true,
       "days_vacant": 74,
@@ -12868,7 +12888,7 @@
       "available_on": "2026-08-20",
       "ready_on": "2026-08-20",
       "target_date": "2026-08-20",
-      "next_move_in": null,
+      "next_move_in": "2026-11-14",
       "rent": "1360.00",
       "bed_bath": "2/2.00",
       "sqft": 1140,
@@ -19661,7 +19681,7 @@
         "labor": 0,
         "materials": 0,
         "total": 0,
-        "estimate": 0,
+        "estimate": 3868.64,
         "laborEntries": [],
         "materialEntries": []
       },
@@ -20321,6 +20341,7 @@
         ]
       },
       "turn_end": "2025-12-09",
+      "af_turn_end": "2026-10-13",
       "stage": "Ready",
       "stage_ord": 7,
       "days_elapsed": 0,
@@ -20441,7 +20462,7 @@
         "labor": 0,
         "materials": 0,
         "total": 0,
-        "estimate": 0,
+        "estimate": 7027.26,
         "laborEntries": [],
         "materialEntries": []
       },
@@ -21373,7 +21394,7 @@
         "labor": 0,
         "materials": 0,
         "total": 0,
-        "estimate": 0,
+        "estimate": 2438.62,
         "laborEntries": [],
         "materialEntries": []
       },
@@ -42002,7 +42023,7 @@
         "labor": 41.31,
         "materials": 0,
         "total": 41.31,
-        "estimate": 0,
+        "estimate": 5560.88,
         "laborEntries": [
           {
             "d": "2026-10-12",
@@ -42477,7 +42498,7 @@
         "labor": 13.5,
         "materials": 0,
         "total": 13.5,
-        "estimate": 0,
+        "estimate": 5205.28,
         "laborEntries": [
           {
             "d": "2026-10-12",
@@ -42595,7 +42616,7 @@
         "labor": 0,
         "materials": 0,
         "total": 0,
-        "estimate": 0,
+        "estimate": 5523.22,
         "laborEntries": [],
         "materialEntries": []
       },
@@ -44730,7 +44751,7 @@
         "labor": 0,
         "materials": 0,
         "total": 0,
-        "estimate": 0,
+        "estimate": 3887.76,
         "laborEntries": [],
         "materialEntries": []
       },
@@ -45306,6 +45327,44 @@
       "days_elapsed": null,
       "days_to_turn": null,
       "status": "complete"
+    },
+    {
+      "key": "v202|4",
+      "prop": "v202",
+      "unit": "4",
+      "at_risk": [],
+      "property_name": "v202",
+      "city": "Spokane Valley",
+      "addr": "12002 E Valleyway Avenue #4 Spokane Valley, WA 99206",
+      "unit_id": 790,
+      "unit_status": "Vacant-Unrented",
+      "rent_ready": "Yes",
+      "vacant": true,
+      "days_vacant": 28,
+      "move_out": "2026-09-15",
+      "available_on": "2026-10-05",
+      "ready_on": "2026-10-05",
+      "target_date": "2026-10-05",
+      "next_move_in": null,
+      "rent": "1475.00",
+      "bed_bath": "2/2.00",
+      "sqft": 950,
+      "region": "Spokane",
+      "next_appt": null,
+      "cost": {
+        "code": "v202-4",
+        "labor": 0,
+        "materials": 0,
+        "total": 0,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": []
+      },
+      "stage": "Ready",
+      "stage_ord": 7,
+      "days_elapsed": 28,
+      "days_to_turn": null,
+      "status": "ready"
     },
     {
       "key": "w117|10",
