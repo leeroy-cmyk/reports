@@ -1,15 +1,15 @@
 {
   "ok": true,
-  "fetched_at": "2026-10-14T18:56:42.933Z",
+  "fetched_at": "2026-10-14T22:08:27.097Z",
   "summary": {
     "as_of": "2026-10-14",
-    "units": 229,
+    "units": 230,
     "active": 74,
     "ready": 10,
     "notice": 9,
     "at_risk": 28,
     "unscheduled": 20,
-    "accruing": 26260.84,
+    "accruing": 26351.84,
     "avg_days_open": 41,
     "revenue_at_risk": 3340.5
   },
@@ -1314,11 +1314,25 @@
       },
       "cost": {
         "code": "k104-107-7",
-        "labor": 187.49,
+        "labor": 278.49,
         "materials": 440.08,
-        "total": 627.57,
+        "total": 718.57,
         "estimate": 0,
         "laborEntries": [
+          {
+            "d": "2026-10-14",
+            "emp": "Micheal N. Magoon",
+            "hrs": 0.57,
+            "cost": 14.25,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-10-14",
+            "emp": "Micheal N. Magoon",
+            "hrs": 0.85,
+            "cost": 21.25,
+            "cat": "Turn"
+          },
           {
             "d": "2026-10-13",
             "emp": "Micheal N. Magoon",
@@ -1352,6 +1366,13 @@
             "emp": "Micheal N. Magoon",
             "hrs": 1.15,
             "cost": 28.75,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-10-13",
+            "emp": "Micheal N. Magoon",
+            "hrs": 2.22,
+            "cost": 55.5,
             "cat": "Turn"
           },
           {
@@ -17241,8 +17262,8 @@
       "vacant": true,
       "days_vacant": 44,
       "move_out": "2026-08-31",
-      "available_on": "2026-10-14",
-      "ready_on": "2026-10-14",
+      "available_on": "2026-10-19",
+      "ready_on": "2026-10-19",
       "target_date": "2026-09-20",
       "next_move_in": null,
       "rent": "1132.00",
@@ -21212,8 +21233,8 @@
       "vacant": true,
       "days_vacant": 14,
       "move_out": "2026-09-30",
-      "available_on": "2026-10-19",
-      "ready_on": "2026-10-16",
+      "available_on": "2026-10-22",
+      "ready_on": "2026-10-22",
       "target_date": "2026-10-20",
       "next_move_in": null,
       "rent": "1430.00",
@@ -34131,8 +34152,8 @@
       "vacant": true,
       "days_vacant": 14,
       "move_out": "2026-09-30",
-      "available_on": "2026-10-16",
-      "ready_on": "2026-10-16",
+      "available_on": "2026-10-26",
+      "ready_on": "2026-10-26",
       "target_date": "2026-10-20",
       "next_move_in": null,
       "rent": "1627.00",
@@ -34415,8 +34436,8 @@
       "vacant": true,
       "days_vacant": 14,
       "move_out": "2026-09-30",
-      "available_on": "2026-10-20",
-      "ready_on": "2026-10-20",
+      "available_on": "2026-10-26",
+      "ready_on": "2026-10-26",
       "target_date": "2026-10-20",
       "next_move_in": null,
       "rent": "1195.00",
@@ -35964,6 +35985,67 @@
       "stage_ord": 7,
       "days_elapsed": 61,
       "days_to_turn": 61,
+      "status": "complete"
+    },
+    {
+      "key": "rl16|d16",
+      "prop": "rl16",
+      "unit": "D16",
+      "at_risk": [],
+      "property_name": "rl16",
+      "city": "Richland",
+      "addr": "1621 George Washington Way D16 Richland, WA 99354",
+      "unit_id": 601,
+      "unit_status": "Notice-Unrented",
+      "rent_ready": null,
+      "vacant": false,
+      "days_vacant": null,
+      "move_out": "2026-11-07",
+      "available_on": "2026-11-27",
+      "ready_on": "2026-11-27",
+      "target_date": "2026-11-27",
+      "next_move_in": null,
+      "rent": "1627.00",
+      "bed_bath": "3/2.00",
+      "sqft": 1115,
+      "region": "Tri-Cities",
+      "pm": {
+        "projId": 160663,
+        "name": "Turn - 1621 George Washington Way UNIT D16",
+        "status": "COMPLETE",
+        "done": 8,
+        "total": 8,
+        "first_appt": null,
+        "final_walk": null,
+        "final_walk_done": "2025-05-12",
+        "completed_date": "2025-05-12",
+        "due": "2026-04-02",
+        "next_task": null,
+        "tasks": null
+      },
+      "next_appt": null,
+      "cost": {
+        "code": "rl16-D16",
+        "labor": 0,
+        "materials": 27.15,
+        "total": 27.15,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": [
+          {
+            "d": "2025-05-08",
+            "amt": 27.15,
+            "cat": "Turn",
+            "ln": "saldana",
+            "src": "ramp"
+          }
+        ]
+      },
+      "turn_end": "2025-05-12",
+      "stage": "Move-out",
+      "stage_ord": 0,
+      "days_elapsed": 0,
+      "days_to_turn": -544,
       "status": "complete"
     },
     {
