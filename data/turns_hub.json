@@ -1,17 +1,17 @@
 {
   "ok": true,
-  "fetched_at": "2026-10-13T23:56:26.853Z",
+  "fetched_at": "2026-10-14T04:11:58.112Z",
   "summary": {
     "as_of": "2026-10-13",
-    "units": 232,
-    "active": 77,
-    "ready": 7,
+    "units": 229,
+    "active": 74,
+    "ready": 10,
     "notice": 9,
-    "at_risk": 30,
+    "at_risk": 28,
     "unscheduled": 14,
-    "accruing": 27531.11,
+    "accruing": 25956.27,
     "avg_days_open": 41,
-    "revenue_at_risk": 3456.73
+    "revenue_at_risk": 3340.5
   },
   "rows": [
     {
@@ -870,159 +870,6 @@
       "status": "active"
     },
     {
-      "key": "c702|a103",
-      "prop": "c702",
-      "unit": "A103",
-      "at_risk": [
-        "Over 45 days vacant"
-      ],
-      "property_name": "c702",
-      "city": "Spokane",
-      "addr": "7022 N Colton St A103 Spokane, WA 99208",
-      "unit_id": 1273,
-      "unit_status": "Vacant-Unrented",
-      "rent_ready": "No",
-      "vacant": true,
-      "days_vacant": 74,
-      "move_out": "2026-07-31",
-      "available_on": "2026-10-16",
-      "ready_on": "2026-10-16",
-      "target_date": "2026-08-20",
-      "next_move_in": null,
-      "rent": "1360.00",
-      "bed_bath": "2/2.00",
-      "sqft": 1140,
-      "region": "Spokane",
-      "pm": {
-        "projId": 239148,
-        "name": "Standard Unit Turn",
-        "status": "ACTIVE",
-        "done": 3,
-        "total": 9,
-        "first_appt": "2026-10-02",
-        "final_walk": "2026-10-15",
-        "final_walk_done": null,
-        "completed_date": null,
-        "due": "2026-08-15",
-        "next_task": {
-          "date": "2026-10-07",
-          "task": "maintenance"
-        },
-        "tasks": [
-          {
-            "task": "D - Maintenance",
-            "cat": "maintenance",
-            "done": false,
-            "date": "2026-10-02",
-            "who": "Aaron Easley",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "E - Carpet Cleaning",
-            "cat": "carpet",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "F - Cleaning",
-            "cat": "cleaning",
-            "done": false,
-            "date": "2026-10-06",
-            "who": "U&K Properties LLC",
-            "completed": null,
-            "vendor": true
-          },
-          {
-            "task": "G - Verify Mailbox Lockbox & Mailbox Keys",
-            "cat": "other",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Schedule Vendors",
-            "cat": "other",
-            "done": false,
-            "date": null,
-            "who": "Matt Romme",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Final Walkthrough",
-            "cat": "final-walk",
-            "done": false,
-            "date": "2026-10-15",
-            "who": "Matt Romme",
-            "completed": null,
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": {
-        "date": "2026-10-15",
-        "cat": "final-walk",
-        "who": "Matt Romme",
-        "brief": "Final Walkthrough"
-      },
-      "cost": {
-        "code": "c702-A103",
-        "labor": 0,
-        "materials": 1865.7,
-        "total": 1865.7,
-        "estimate": 0,
-        "laborEntries": [],
-        "materialEntries": [
-          {
-            "d": "2026-10-05",
-            "amt": 32.96,
-            "cat": "Turn",
-            "ln": "easley",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-02",
-            "amt": 58.31,
-            "cat": "Turn",
-            "ln": "easley",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-30",
-            "amt": 271.66,
-            "cat": "Turn",
-            "ln": "easley",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-30",
-            "amt": 1218.65,
-            "cat": "Turn",
-            "ln": "easley",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-29",
-            "amt": 284.12,
-            "cat": "Turn",
-            "ln": "easley",
-            "src": "ramp"
-          }
-        ]
-      },
-      "stage": "Maintenance",
-      "stage_ord": 3,
-      "days_elapsed": 74,
-      "days_to_turn": null,
-      "status": "active"
-    },
-    {
       "key": "c702|d203",
       "prop": "c702",
       "unit": "D203",
@@ -1633,8 +1480,8 @@
       "cost": {
         "code": "k104-509-4",
         "labor": 915.75,
-        "materials": 693.34,
-        "total": 1609.09,
+        "materials": 732.61,
+        "total": 1648.36,
         "estimate": 0,
         "laborEntries": [
           {
@@ -1835,6 +1682,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-10-13",
+            "amt": 39.27,
+            "cat": "Turn",
+            "ln": "normandin",
+            "src": "ramp"
+          },
           {
             "d": "2026-10-13",
             "amt": 65.38,
@@ -3403,150 +3257,6 @@
       "stage": "Maintenance",
       "stage_ord": 3,
       "days_elapsed": 74,
-      "days_to_turn": null,
-      "status": "active"
-    },
-    {
-      "key": "o155|t",
-      "prop": "o155",
-      "unit": "T",
-      "at_risk": [
-        "Available date passed"
-      ],
-      "property_name": "o155-Elm",
-      "city": "Spokane",
-      "addr": "1905 W 2nd Ave T Spokane, WA 99201",
-      "unit_id": 1146,
-      "unit_status": "Vacant-Unrented",
-      "rent_ready": "No",
-      "vacant": true,
-      "days_vacant": 43,
-      "move_out": "2026-08-31",
-      "available_on": "2026-10-12",
-      "ready_on": "2026-10-12",
-      "target_date": "2026-09-20",
-      "next_move_in": null,
-      "rent": "995.00",
-      "bed_bath": "0/1.00",
-      "sqft": 450,
-      "region": "Spokane",
-      "pm": {
-        "projId": 236840,
-        "name": "Standard Unit Turn",
-        "status": "ACTIVE",
-        "done": 1,
-        "total": 9,
-        "first_appt": "2026-10-02",
-        "final_walk": "2026-10-09",
-        "final_walk_done": null,
-        "completed_date": "2026-09-15",
-        "due": "2026-09-15",
-        "next_task": {
-          "date": "2026-10-09",
-          "task": "final-walk"
-        },
-        "tasks": [
-          {
-            "task": "A - Initial walkthrough",
-            "cat": "walkthrough",
-            "done": true,
-            "date": "2026-09-15",
-            "who": "Matt Romme",
-            "completed": "2026-09-15",
-            "vendor": false
-          },
-          {
-            "task": "Appfolio Estimate",
-            "cat": "estimate",
-            "done": false,
-            "date": null,
-            "who": "Dulce Salinas",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "C - Paint",
-            "cat": "paint",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "D - Maintenance",
-            "cat": "maintenance",
-            "done": false,
-            "date": "2026-10-02",
-            "who": "Micheal Magoon",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "E - Carpet Cleaning",
-            "cat": "carpet",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "F - Cleaning",
-            "cat": "cleaning",
-            "done": false,
-            "date": "2026-10-12",
-            "who": "SPO Cleaning",
-            "completed": null,
-            "vendor": true
-          },
-          {
-            "task": "G - Verify Mailbox Lockbox & Mailbox Keys",
-            "cat": "other",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Schedule Vendors",
-            "cat": "other",
-            "done": false,
-            "date": null,
-            "who": "Matt Romme",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Final Walkthrough",
-            "cat": "final-walk",
-            "done": false,
-            "date": "2026-10-09",
-            "who": "Matt Romme",
-            "completed": null,
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": {
-        "date": "2026-10-13",
-        "cat": "suggested-carpet",
-        "who": "Allklean",
-        "brief": "Suggested carpet cleaning — business day after cleaning"
-      },
-      "cost": {
-        "code": "o155-T",
-        "labor": 0,
-        "materials": 0,
-        "total": 0,
-        "estimate": 831.15,
-        "laborEntries": [],
-        "materialEntries": []
-      },
-      "stage": "Maintenance",
-      "stage_ord": 3,
-      "days_elapsed": 43,
       "days_to_turn": null,
       "status": "active"
     },
@@ -9937,6 +9647,157 @@
       "status": "complete"
     },
     {
+      "key": "c702|a103",
+      "prop": "c702",
+      "unit": "A103",
+      "at_risk": [],
+      "property_name": "c702",
+      "city": "Spokane",
+      "addr": "7022 N Colton St A103 Spokane, WA 99208",
+      "unit_id": 1273,
+      "unit_status": "Vacant-Unrented",
+      "rent_ready": "Yes",
+      "vacant": true,
+      "days_vacant": 74,
+      "move_out": "2026-07-31",
+      "available_on": "2026-10-15",
+      "ready_on": "2026-10-15",
+      "target_date": "2026-08-20",
+      "next_move_in": null,
+      "rent": "1360.00",
+      "bed_bath": "2/2.00",
+      "sqft": 1140,
+      "region": "Spokane",
+      "pm": {
+        "projId": 239148,
+        "name": "Standard Unit Turn",
+        "status": "ACTIVE",
+        "done": 3,
+        "total": 9,
+        "first_appt": "2026-10-02",
+        "final_walk": "2026-10-15",
+        "final_walk_done": null,
+        "completed_date": null,
+        "due": "2026-08-15",
+        "next_task": {
+          "date": "2026-10-07",
+          "task": "maintenance"
+        },
+        "tasks": [
+          {
+            "task": "D - Maintenance",
+            "cat": "maintenance",
+            "done": false,
+            "date": "2026-10-02",
+            "who": "Aaron Easley",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "E - Carpet Cleaning",
+            "cat": "carpet",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "F - Cleaning",
+            "cat": "cleaning",
+            "done": false,
+            "date": "2026-10-06",
+            "who": "U&K Properties LLC",
+            "completed": null,
+            "vendor": true
+          },
+          {
+            "task": "G - Verify Mailbox Lockbox & Mailbox Keys",
+            "cat": "other",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Schedule Vendors",
+            "cat": "other",
+            "done": false,
+            "date": null,
+            "who": "Matt Romme",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Final Walkthrough",
+            "cat": "final-walk",
+            "done": false,
+            "date": "2026-10-15",
+            "who": "Matt Romme",
+            "completed": null,
+            "vendor": false
+          }
+        ]
+      },
+      "next_appt": {
+        "date": "2026-10-15",
+        "cat": "final-walk",
+        "who": "Matt Romme",
+        "brief": "Final Walkthrough"
+      },
+      "cost": {
+        "code": "c702-A103",
+        "labor": 0,
+        "materials": 1865.7,
+        "total": 1865.7,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": [
+          {
+            "d": "2026-10-05",
+            "amt": 32.96,
+            "cat": "Turn",
+            "ln": "easley",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-10-02",
+            "amt": 58.31,
+            "cat": "Turn",
+            "ln": "easley",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-09-30",
+            "amt": 271.66,
+            "cat": "Turn",
+            "ln": "easley",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-09-30",
+            "amt": 1218.65,
+            "cat": "Turn",
+            "ln": "easley",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-09-29",
+            "amt": 284.12,
+            "cat": "Turn",
+            "ln": "easley",
+            "src": "ramp"
+          }
+        ]
+      },
+      "stage": "Ready",
+      "stage_ord": 7,
+      "days_elapsed": 74,
+      "days_to_turn": null,
+      "status": "ready"
+    },
+    {
       "key": "c702|a201",
       "prop": "c702",
       "unit": "A201",
@@ -10057,11 +9918,19 @@
       "cost": {
         "code": "c702-A201",
         "labor": 0,
-        "materials": 0,
-        "total": 0,
+        "materials": 318.78,
+        "total": 318.78,
         "estimate": 0,
         "laborEntries": [],
-        "materialEntries": []
+        "materialEntries": [
+          {
+            "d": "2026-10-13",
+            "amt": 318.78,
+            "cat": "Turn",
+            "ln": "smith",
+            "src": "ramp"
+          }
+        ]
       },
       "stage": "Maintenance",
       "stage_ord": 3,
@@ -11526,11 +11395,18 @@
       "cost": {
         "code": "c702-C304",
         "labor": 0,
-        "materials": 471.55,
-        "total": 471.55,
+        "materials": 518.53,
+        "total": 518.53,
         "estimate": 0,
         "laborEntries": [],
         "materialEntries": [
+          {
+            "d": "2026-10-13",
+            "amt": 46.98,
+            "cat": "Turn",
+            "ln": "easley",
+            "src": "ramp"
+          },
           {
             "d": "2026-10-09",
             "amt": 23.16,
@@ -17325,12 +17201,12 @@
       "addr": "4711 W Metaline Avenue C105 Kennewick, WA 99336",
       "unit_id": 847,
       "unit_status": "Vacant-Unrented",
-      "rent_ready": "No",
+      "rent_ready": "Yes",
       "vacant": true,
       "days_vacant": 43,
       "move_out": "2026-08-31",
-      "available_on": "2026-10-27",
-      "ready_on": "2026-10-27",
+      "available_on": "2026-10-14",
+      "ready_on": "2026-10-14",
       "target_date": "2026-09-20",
       "next_move_in": null,
       "rent": "1132.00",
@@ -17473,11 +17349,12 @@
         ],
         "materialEntries": []
       },
-      "stage": "Walkthrough",
-      "stage_ord": 1,
+      "af_turn_end": "2026-10-14",
+      "stage": "Ready",
+      "stage_ord": 7,
       "days_elapsed": 43,
       "days_to_turn": null,
-      "status": "active"
+      "status": "ready"
     },
     {
       "key": "kn47|c109",
@@ -18093,12 +17970,12 @@
       "addr": "4711 W Metaline Avenue C208 Kennewick, WA 99336",
       "unit_id": 860,
       "unit_status": "Vacant-Unrented",
-      "rent_ready": "No",
+      "rent_ready": "Yes",
       "vacant": true,
       "days_vacant": 43,
       "move_out": "2026-08-31",
-      "available_on": "2026-10-15",
-      "ready_on": "2026-10-15",
+      "available_on": "2026-10-13",
+      "ready_on": "2026-10-13",
       "target_date": "2026-09-20",
       "next_move_in": null,
       "rent": "1132.00",
@@ -18283,8 +18160,9 @@
         ]
       },
       "turn_end": "2025-06-09",
-      "stage": "Walkthrough",
-      "stage_ord": 1,
+      "af_turn_end": "2026-10-13",
+      "stage": "Ready",
+      "stage_ord": 7,
       "days_elapsed": 0,
       "days_to_turn": -448,
       "status": "complete"
@@ -21653,23 +21531,8 @@
       "key": "kn47|l105",
       "prop": "kn47",
       "unit": "L105",
-      "at_risk": [],
       "property_name": "kn47 K1",
-      "city": "Kennewick",
-      "addr": "4711 W Metaline Avenue L105 Kennewick, WA 99336",
-      "unit_id": 964,
-      "unit_status": "Vacant-Unrented",
-      "rent_ready": "No",
-      "vacant": true,
-      "days_vacant": 481,
-      "move_out": "2025-06-19",
-      "available_on": "2026-12-14",
-      "ready_on": "2026-12-14",
-      "target_date": "2025-06-29",
-      "next_move_in": null,
-      "rent": "931.00",
-      "bed_bath": "1/1.00",
-      "sqft": 600,
+      "at_risk": [],
       "region": "Tri-Cities",
       "pm": {
         "projId": 176746,
@@ -21932,8 +21795,8 @@
       "turn_end": "2026-04-13",
       "stage": "Paint",
       "stage_ord": 2,
-      "days_elapsed": 298,
-      "days_to_turn": 298,
+      "days_elapsed": null,
+      "days_to_turn": null,
       "status": "complete"
     },
     {
@@ -23188,223 +23051,6 @@
       "days_elapsed": null,
       "days_to_turn": null,
       "status": "other"
-    },
-    {
-      "key": "m221|31",
-      "prop": "m221",
-      "unit": "31",
-      "property_name": "m221",
-      "at_risk": [],
-      "region": "Spokane",
-      "pm": {
-        "projId": 222887,
-        "name": "Standard Unit Turn",
-        "status": "COMPLETE",
-        "done": 9,
-        "total": 9,
-        "first_appt": "2026-06-29",
-        "final_walk": "2026-07-14",
-        "final_walk_done": "2026-07-14",
-        "completed_date": "2026-07-15",
-        "due": "2026-07-10",
-        "next_task": null,
-        "tasks": [
-          {
-            "task": "A - Initial walkthrough",
-            "cat": "walkthrough",
-            "done": true,
-            "date": "2026-06-05",
-            "who": "Ron Cramer",
-            "completed": "2026-06-04",
-            "vendor": false
-          },
-          {
-            "task": "Appfolio Estimate",
-            "cat": "estimate",
-            "done": true,
-            "date": null,
-            "who": "Dulce Salinas",
-            "completed": "2026-06-19",
-            "vendor": false
-          },
-          {
-            "task": "C - Paint",
-            "cat": "paint",
-            "done": true,
-            "date": "2026-06-29",
-            "who": "Ron Cramer",
-            "completed": "2026-07-07",
-            "vendor": false
-          },
-          {
-            "task": "D - Maintenance",
-            "cat": "maintenance",
-            "done": true,
-            "date": "2026-07-03",
-            "who": "Ron Cramer",
-            "completed": "2026-07-07",
-            "vendor": false
-          },
-          {
-            "task": "F - Cleaning",
-            "cat": "cleaning",
-            "done": true,
-            "date": "2026-07-08",
-            "who": "SPO Cleaning",
-            "completed": "2026-07-07",
-            "vendor": true
-          },
-          {
-            "task": "Replace lock for kwikset, set up to code 0517",
-            "cat": "other",
-            "done": true,
-            "date": null,
-            "who": "Micheal Magoon",
-            "completed": "2026-07-15",
-            "vendor": false
-          },
-          {
-            "task": "Final Walkthrough",
-            "cat": "final-walk",
-            "done": true,
-            "date": "2026-07-14",
-            "who": "David Sanchez",
-            "completed": "2026-07-14",
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": null,
-      "cost": {
-        "code": "m221-31",
-        "labor": 384.24,
-        "materials": 287.17,
-        "total": 671.41,
-        "estimate": 0,
-        "laborEntries": [
-          {
-            "d": "2026-07-14",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.63,
-            "cost": 15.75,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-14",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.35,
-            "cost": 8.75,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-07",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.68,
-            "cost": 43.26,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-07",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.45,
-            "cost": 37.34,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-07",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.85,
-            "cost": 47.64,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-30",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1,
-            "cost": 25.75,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-29",
-            "emp": "Ronald D. Cramer",
-            "hrs": 0.63,
-            "cost": 16.22,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-29",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.48,
-            "cost": 38.11,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-29",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.18,
-            "cost": 30.39,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-29",
-            "emp": "Ronald D. Cramer",
-            "hrs": 0.55,
-            "cost": 14.16,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-29",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.4,
-            "cost": 36.05,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-29",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.33,
-            "cost": 34.25,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-04",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.42,
-            "cost": 36.57,
-            "cat": "Turn"
-          }
-        ],
-        "materialEntries": [
-          {
-            "d": "2026-07-14",
-            "amt": 82.24,
-            "cat": "Turn",
-            "ln": "magoon",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-06-30",
-            "amt": 78.98,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-06-29",
-            "amt": 125.95,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          }
-        ]
-      },
-      "turn_end": "2026-07-14",
-      "af_turn_end": "2026-07-15",
-      "stage": "Final Walk",
-      "stage_ord": 6,
-      "days_elapsed": null,
-      "days_to_turn": null,
-      "status": "complete"
     },
     {
       "key": "m221|4",
@@ -25292,6 +24938,149 @@
       "status": "complete"
     },
     {
+      "key": "o155|t",
+      "prop": "o155",
+      "unit": "T",
+      "at_risk": [],
+      "property_name": "o155-Elm",
+      "city": "Spokane",
+      "addr": "1905 W 2nd Ave T Spokane, WA 99201",
+      "unit_id": 1146,
+      "unit_status": "Vacant-Unrented",
+      "rent_ready": "Yes",
+      "vacant": true,
+      "days_vacant": 43,
+      "move_out": "2026-08-31",
+      "available_on": "2026-10-12",
+      "ready_on": "2026-10-12",
+      "target_date": "2026-09-20",
+      "next_move_in": null,
+      "rent": "995.00",
+      "bed_bath": "0/1.00",
+      "sqft": 450,
+      "region": "Spokane",
+      "pm": {
+        "projId": 236840,
+        "name": "Standard Unit Turn",
+        "status": "ACTIVE",
+        "done": 1,
+        "total": 9,
+        "first_appt": "2026-10-02",
+        "final_walk": "2026-10-09",
+        "final_walk_done": null,
+        "completed_date": "2026-09-15",
+        "due": "2026-09-15",
+        "next_task": {
+          "date": "2026-10-09",
+          "task": "final-walk"
+        },
+        "tasks": [
+          {
+            "task": "A - Initial walkthrough",
+            "cat": "walkthrough",
+            "done": true,
+            "date": "2026-09-15",
+            "who": "Matt Romme",
+            "completed": "2026-09-15",
+            "vendor": false
+          },
+          {
+            "task": "Appfolio Estimate",
+            "cat": "estimate",
+            "done": false,
+            "date": null,
+            "who": "Dulce Salinas",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "C - Paint",
+            "cat": "paint",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "D - Maintenance",
+            "cat": "maintenance",
+            "done": false,
+            "date": "2026-10-02",
+            "who": "Micheal Magoon",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "E - Carpet Cleaning",
+            "cat": "carpet",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "F - Cleaning",
+            "cat": "cleaning",
+            "done": false,
+            "date": "2026-10-12",
+            "who": "SPO Cleaning",
+            "completed": null,
+            "vendor": true
+          },
+          {
+            "task": "G - Verify Mailbox Lockbox & Mailbox Keys",
+            "cat": "other",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Schedule Vendors",
+            "cat": "other",
+            "done": false,
+            "date": null,
+            "who": "Matt Romme",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Final Walkthrough",
+            "cat": "final-walk",
+            "done": false,
+            "date": "2026-10-09",
+            "who": "Matt Romme",
+            "completed": null,
+            "vendor": false
+          }
+        ]
+      },
+      "next_appt": {
+        "date": "2026-10-13",
+        "cat": "suggested-carpet",
+        "who": "Allklean",
+        "brief": "Suggested carpet cleaning — business day after cleaning"
+      },
+      "cost": {
+        "code": "o155-T",
+        "labor": 0,
+        "materials": 0,
+        "total": 0,
+        "estimate": 831.15,
+        "laborEntries": [],
+        "materialEntries": []
+      },
+      "af_turn_end": "2026-10-14",
+      "stage": "Ready",
+      "stage_ord": 7,
+      "days_elapsed": 43,
+      "days_to_turn": null,
+      "status": "ready"
+    },
+    {
       "key": "p705|02",
       "prop": "p705",
       "unit": "02",
@@ -25496,7 +25285,7 @@
       "addr": "2705 N Pines Rd - 11 Spokane Valley, WA 99206",
       "unit_id": 227,
       "unit_status": "Vacant-Unrented",
-      "rent_ready": "No",
+      "rent_ready": "Yes",
       "vacant": true,
       "days_vacant": 43,
       "move_out": "2026-08-31",
@@ -26216,8 +26005,9 @@
         ]
       },
       "turn_end": "2025-11-18",
-      "stage": "Paint",
-      "stage_ord": 2,
+      "af_turn_end": "2026-10-14",
+      "stage": "Ready",
+      "stage_ord": 7,
       "days_elapsed": 0,
       "days_to_turn": -286,
       "status": "complete"
@@ -26305,8 +26095,8 @@
       "cost": {
         "code": "p705-12",
         "labor": 4869.93,
-        "materials": 2242.52,
-        "total": 7112.45,
+        "materials": 2788.01,
+        "total": 7657.94,
         "estimate": 0,
         "laborEntries": [
           {
@@ -26732,6 +26522,13 @@
         ],
         "materialEntries": [
           {
+            "d": "2026-10-13",
+            "amt": 545.49,
+            "cat": "Turn",
+            "ln": "normandin",
+            "src": "ramp"
+          },
+          {
             "d": "2026-10-08",
             "amt": 21.05,
             "cat": "Turn",
@@ -26853,6 +26650,7 @@
         ]
       },
       "turn_end": "2026-01-29",
+      "af_turn_end": "2026-10-14",
       "stage": "Walkthrough",
       "stage_ord": 1,
       "days_elapsed": null,
@@ -26869,7 +26667,7 @@
       "addr": "2705 N Pines Rd - 19 Spokane Valley, WA 99206",
       "unit_id": 235,
       "unit_status": "Vacant-Unrented",
-      "rent_ready": "No",
+      "rent_ready": "Yes",
       "vacant": true,
       "days_vacant": 74,
       "move_out": "2026-07-31",
@@ -27220,8 +27018,9 @@
         ]
       },
       "turn_end": "2025-08-13",
-      "stage": "Maintenance",
-      "stage_ord": 3,
+      "af_turn_end": "2026-10-14",
+      "stage": "Ready",
+      "stage_ord": 7,
       "days_elapsed": 0,
       "days_to_turn": -352,
       "status": "complete"
@@ -33040,437 +32839,6 @@
       },
       "turn_end": "2026-07-22",
       "af_turn_end": "2026-07-22",
-      "stage": "Final Walk",
-      "stage_ord": 6,
-      "days_elapsed": null,
-      "days_to_turn": null,
-      "status": "complete"
-    },
-    {
-      "key": "rl16|a11",
-      "prop": "rl16",
-      "unit": "A11",
-      "property_name": "rl16",
-      "at_risk": [],
-      "region": "Tri-Cities",
-      "pm": {
-        "projId": 219001,
-        "name": "Standard Unit Turn",
-        "status": "COMPLETE",
-        "done": 9,
-        "total": 9,
-        "first_appt": "2026-05-04",
-        "final_walk": "2026-05-15",
-        "final_walk_done": "2026-05-13",
-        "completed_date": "2026-07-15",
-        "due": "2026-05-15",
-        "next_task": null,
-        "tasks": [
-          {
-            "task": "C - Paint",
-            "cat": "paint",
-            "done": true,
-            "date": "2026-05-04",
-            "who": "Ryan Robson",
-            "completed": "2026-05-08",
-            "vendor": false
-          },
-          {
-            "task": "D - Maintenance",
-            "cat": "maintenance",
-            "done": true,
-            "date": "2026-05-08",
-            "who": "Ryan Robson",
-            "completed": "2026-05-11",
-            "vendor": false
-          },
-          {
-            "task": "E - Carpet Cleaning",
-            "cat": "carpet",
-            "done": true,
-            "date": "2026-05-14",
-            "who": "SOS Carpet",
-            "completed": "2026-05-14",
-            "vendor": true
-          },
-          {
-            "task": "F - Cleaning",
-            "cat": "cleaning",
-            "done": true,
-            "date": "2026-05-08",
-            "who": "Duo Cleaning Company LLC",
-            "completed": "2026-05-08",
-            "vendor": true
-          },
-          {
-            "task": "Initial Walkthrough (clone)",
-            "cat": "walkthrough",
-            "done": true,
-            "date": "2026-05-01",
-            "who": "Margarito Saldana",
-            "completed": "2026-05-05",
-            "vendor": false
-          },
-          {
-            "task": "Initial Walkthrough",
-            "cat": "walkthrough",
-            "done": true,
-            "date": "2026-05-05",
-            "who": "Margarito Saldana",
-            "completed": "2026-04-30",
-            "vendor": false
-          },
-          {
-            "task": "Carpet Repair",
-            "cat": "carpet",
-            "done": true,
-            "date": null,
-            "who": "Virtel flooring services 8",
-            "completed": "2026-05-09",
-            "vendor": true
-          },
-          {
-            "task": "Invoice",
-            "cat": "other",
-            "done": true,
-            "date": null,
-            "who": null,
-            "completed": "2026-07-15",
-            "vendor": false
-          },
-          {
-            "task": "Final Walkthrough",
-            "cat": "final-walk",
-            "done": true,
-            "date": "2026-05-15",
-            "who": "Margarito Saldana",
-            "completed": "2026-05-13",
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": null,
-      "cost": {
-        "code": "rl16-A11",
-        "labor": 936.46,
-        "materials": 1234.42,
-        "total": 2170.88,
-        "estimate": 0,
-        "laborEntries": [
-          {
-            "d": "2026-05-27",
-            "emp": "James Dunlap",
-            "hrs": 0.58,
-            "cost": 13.34,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-25",
-            "emp": "Margarito Saldana",
-            "hrs": 0.5,
-            "cost": 14.2,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-12",
-            "emp": "Margarito Saldana",
-            "hrs": 1,
-            "cost": 28.4,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-11",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.68,
-            "cost": 38.64,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-11",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.2,
-            "cost": 27.6,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-11",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.75,
-            "cost": 17.25,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-11",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.28,
-            "cost": 6.44,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-11",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.48,
-            "cost": 11.04,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-11",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.52,
-            "cost": 11.96,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-11",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.62,
-            "cost": 14.26,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-08",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.53,
-            "cost": 35.19,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-08",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.4,
-            "cost": 32.2,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-08",
-            "emp": "Ryan G. Robson",
-            "hrs": 2.02,
-            "cost": 46.46,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-08",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.15,
-            "cost": 26.45,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-08",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.72,
-            "cost": 39.56,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-08",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.67,
-            "cost": 38.41,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-07",
-            "emp": "Margarito Saldana",
-            "hrs": 1.25,
-            "cost": 35.5,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-06",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.23,
-            "cost": 28.29,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-06",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.07,
-            "cost": 24.61,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-06",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.23,
-            "cost": 28.29,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-06",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.92,
-            "cost": 21.16,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-06",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.05,
-            "cost": 24.15,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-06",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.97,
-            "cost": 22.31,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-05",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.63,
-            "cost": 37.49,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-05",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.57,
-            "cost": 36.11,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-05",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.85,
-            "cost": 42.55,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-05",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.33,
-            "cost": 7.59,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-05",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.92,
-            "cost": 44.16,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-05",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.37,
-            "cost": 31.51,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-05",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.68,
-            "cost": 15.64,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-05",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.03,
-            "cost": 23.69,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-04",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.77,
-            "cost": 40.71,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-04",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.3,
-            "cost": 29.9,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-04",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.38,
-            "cost": 8.74,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-04",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.38,
-            "cost": 8.74,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-04",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.17,
-            "cost": 3.91,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-05-04",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.87,
-            "cost": 20.01,
-            "cat": "Turn"
-          }
-        ],
-        "materialEntries": [
-          {
-            "d": "2026-08-01",
-            "amt": 250,
-            "cat": "CapEx",
-            "ln": "SOS Carpet & Upholstery",
-            "src": "qbo"
-          },
-          {
-            "d": "2026-05-31",
-            "amt": 350,
-            "cat": "Turn",
-            "ln": "meng",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-05-11",
-            "amt": 147.91,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-05-11",
-            "amt": 47.64,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-05-08",
-            "amt": 16.52,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-05-05",
-            "amt": 390.83,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-05-05",
-            "amt": 31.52,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          }
-        ]
-      },
-      "turn_end": "2026-05-13",
-      "af_turn_end": "2026-05-22",
       "stage": "Final Walk",
       "stage_ord": 6,
       "days_elapsed": null,
@@ -44195,6 +43563,7 @@
         "laborEntries": [],
         "materialEntries": []
       },
+      "af_turn_end": "2026-10-14",
       "stage": "Ready",
       "stage_ord": 7,
       "days_elapsed": 94,
@@ -46158,302 +45527,6 @@
       "turn_end": "2026-01-28",
       "stage": "Maintenance",
       "stage_ord": 3,
-      "days_elapsed": null,
-      "days_to_turn": null,
-      "status": "complete"
-    },
-    {
-      "key": "w226|4",
-      "prop": "w226",
-      "unit": "4",
-      "property_name": "w226",
-      "at_risk": [],
-      "region": "Spokane",
-      "pm": {
-        "projId": 222444,
-        "name": "Standard Unit Turn",
-        "status": "COMPLETE",
-        "done": 8,
-        "total": 8,
-        "first_appt": "2026-06-24",
-        "final_walk": "2026-06-30",
-        "final_walk_done": "2026-07-15",
-        "completed_date": "2026-07-15",
-        "due": "2026-07-03",
-        "next_task": null,
-        "tasks": [
-          {
-            "task": "A - Initial walkthrough",
-            "cat": "walkthrough",
-            "done": true,
-            "date": "2026-06-05",
-            "who": "Ron Cramer",
-            "completed": "2026-06-04",
-            "vendor": false
-          },
-          {
-            "task": "Appfolio Estimate",
-            "cat": "estimate",
-            "done": true,
-            "date": null,
-            "who": "Dulce Salinas",
-            "completed": "2026-06-10",
-            "vendor": false
-          },
-          {
-            "task": "C - Paint",
-            "cat": "paint",
-            "done": true,
-            "date": "2026-06-24",
-            "who": "Ron Cramer",
-            "completed": "2026-06-29",
-            "vendor": false
-          },
-          {
-            "task": "D - Maintenance",
-            "cat": "maintenance",
-            "done": true,
-            "date": "2026-06-25",
-            "who": "Ron Cramer",
-            "completed": "2026-06-26",
-            "vendor": false
-          },
-          {
-            "task": "E - Carpet Cleaning",
-            "cat": "carpet",
-            "done": true,
-            "date": null,
-            "who": null,
-            "completed": "2026-06-29",
-            "vendor": false
-          },
-          {
-            "task": "F - Cleaning",
-            "cat": "cleaning",
-            "done": true,
-            "date": "2026-06-29",
-            "who": "SPO Cleaning",
-            "completed": "2026-06-29",
-            "vendor": true
-          },
-          {
-            "task": "Refrigerator haul off",
-            "cat": "other",
-            "done": true,
-            "date": "2026-06-29",
-            "who": "Micheal Magoon",
-            "completed": "2026-06-29",
-            "vendor": false
-          },
-          {
-            "task": "Final Walkthrough",
-            "cat": "final-walk",
-            "done": true,
-            "date": "2026-06-30",
-            "who": "David Sanchez",
-            "completed": "2026-07-15",
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": null,
-      "cost": {
-        "code": "w226-4",
-        "labor": 727.75,
-        "materials": 451.33,
-        "total": 1179.08,
-        "estimate": 0,
-        "laborEntries": [
-          {
-            "d": "2026-06-29",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.12,
-            "cost": 28.84,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-29",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.57,
-            "cost": 14.25,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-29",
-            "emp": "Micheal N. Magoon",
-            "hrs": 1.6,
-            "cost": 40,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-26",
-            "emp": "Ronald D. Cramer",
-            "hrs": 2,
-            "cost": 51.5,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-26",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.23,
-            "cost": 31.67,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-26",
-            "emp": "Ronald D. Cramer",
-            "hrs": 0.18,
-            "cost": 4.64,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-25",
-            "emp": "Ronald D. Cramer",
-            "hrs": 2,
-            "cost": 51.5,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-25",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.73,
-            "cost": 18.25,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-25",
-            "emp": "Micheal N. Magoon",
-            "hrs": 1.28,
-            "cost": 32,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-25",
-            "emp": "Ronald D. Cramer",
-            "hrs": 2,
-            "cost": 51.5,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-25",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.18,
-            "cost": 4.5,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-25",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.6,
-            "cost": 15,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-25",
-            "emp": "Ronald D. Cramer",
-            "hrs": 2,
-            "cost": 51.5,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-25",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.98,
-            "cost": 50.99,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-24",
-            "emp": "Ronald D. Cramer",
-            "hrs": 2,
-            "cost": 51.5,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-24",
-            "emp": "Ronald D. Cramer",
-            "hrs": 0.98,
-            "cost": 25.24,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-24",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.35,
-            "cost": 34.76,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-24",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.33,
-            "cost": 34.25,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-24",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.67,
-            "cost": 43,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-05",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.95,
-            "cost": 23.75,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-04",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.47,
-            "cost": 11.75,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-04",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.77,
-            "cost": 19.25,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-03",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.48,
-            "cost": 38.11,
-            "cat": "Turn"
-          }
-        ],
-        "materialEntries": [
-          {
-            "d": "2026-06-29",
-            "amt": 250,
-            "cat": "Turn",
-            "ln": "SPO Cleaning",
-            "src": "qbo"
-          },
-          {
-            "d": "2026-06-26",
-            "amt": 12.52,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-06-24",
-            "amt": 188.81,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          }
-        ]
-      },
-      "turn_end": "2026-07-15",
-      "af_turn_end": "2026-07-16",
-      "stage": "Final Walk",
-      "stage_ord": 6,
       "days_elapsed": null,
       "days_to_turn": null,
       "status": "complete"
