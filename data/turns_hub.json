@@ -1,17 +1,17 @@
 {
   "ok": true,
-  "fetched_at": "2026-10-15T19:09:31.300Z",
+  "fetched_at": "2026-10-15T22:20:30.702Z",
   "summary": {
     "as_of": "2026-10-15",
-    "units": 228,
-    "active": 73,
-    "ready": 10,
-    "notice": 10,
-    "at_risk": 28,
-    "unscheduled": 23,
-    "accruing": 26778.92,
+    "units": 232,
+    "active": 75,
+    "ready": 9,
+    "notice": 12,
+    "at_risk": 29,
+    "unscheduled": 24,
+    "accruing": 28135.78,
     "avg_days_open": 42,
-    "revenue_at_risk": 3302.63
+    "revenue_at_risk": 3389.53
   },
   "rows": [
     {
@@ -53,6 +53,47 @@
       "stage": null,
       "stage_ord": 0,
       "days_elapsed": 77,
+      "days_to_turn": null,
+      "status": "active"
+    },
+    {
+      "key": "v202|4",
+      "prop": "v202",
+      "unit": "4",
+      "at_risk": [
+        "Available date passed",
+        "Nothing scheduled"
+      ],
+      "property_name": "v202",
+      "city": "Spokane Valley",
+      "addr": "12002 E Valleyway Avenue #4 Spokane Valley, WA 99206",
+      "unit_id": 790,
+      "unit_status": "Vacant-Unrented",
+      "rent_ready": "No",
+      "vacant": true,
+      "days_vacant": 30,
+      "move_out": "2026-09-15",
+      "available_on": "2026-10-05",
+      "ready_on": "2026-10-05",
+      "target_date": "2026-10-05",
+      "next_move_in": null,
+      "rent": "1475.00",
+      "bed_bath": "2/2.00",
+      "sqft": 950,
+      "region": "Spokane",
+      "next_appt": null,
+      "cost": {
+        "code": "v202-4",
+        "labor": 0,
+        "materials": 0,
+        "total": 0,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": []
+      },
+      "stage": null,
+      "stage_ord": 0,
+      "days_elapsed": 30,
       "days_to_turn": null,
       "status": "active"
     },
@@ -9484,7 +9525,7 @@
         "labor": 0,
         "materials": 1865.7,
         "total": 1865.7,
-        "estimate": 0,
+        "estimate": 8312.44,
         "laborEntries": [],
         "materialEntries": [
           {
@@ -9524,6 +9565,7 @@
           }
         ]
       },
+      "af_turn_end": "2026-10-15",
       "stage": "Ready",
       "stage_ord": 7,
       "days_elapsed": 76,
@@ -10199,6 +10241,7 @@
           }
         ]
       },
+      "af_turn_end": "2026-10-15",
       "stage": "Ready",
       "stage_ord": 7,
       "days_elapsed": 27,
@@ -11373,6 +11416,82 @@
       "status": "complete"
     },
     {
+      "key": "c702|e103",
+      "prop": "c702",
+      "unit": "E103",
+      "at_risk": [],
+      "property_name": "c702",
+      "city": "Spokane",
+      "addr": "7004 N Colton St E103 Spokane, WA 99208",
+      "unit_id": 1349,
+      "unit_status": "Notice-Unrented",
+      "rent_ready": null,
+      "vacant": false,
+      "days_vacant": null,
+      "move_out": "2026-10-15",
+      "available_on": "2026-11-04",
+      "ready_on": "2026-11-04",
+      "target_date": "2026-11-04",
+      "next_move_in": null,
+      "rent": "1395.00",
+      "bed_bath": "2/2.00",
+      "sqft": 1140,
+      "region": "Spokane",
+      "next_appt": null,
+      "cost": {
+        "code": "c702-E103",
+        "labor": 0,
+        "materials": 0,
+        "total": 0,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": []
+      },
+      "stage": "Move-out",
+      "stage_ord": 0,
+      "days_elapsed": 0,
+      "days_to_turn": null,
+      "status": "notice"
+    },
+    {
+      "key": "c702|e203",
+      "prop": "c702",
+      "unit": "E203",
+      "at_risk": [],
+      "property_name": "c702",
+      "city": "Spokane",
+      "addr": "7004 N Colton St E203 Spokane, WA 99208",
+      "unit_id": 1355,
+      "unit_status": "Notice-Unrented",
+      "rent_ready": null,
+      "vacant": false,
+      "days_vacant": null,
+      "move_out": "2026-10-15",
+      "available_on": "2026-11-04",
+      "ready_on": "2026-11-04",
+      "target_date": "2026-11-04",
+      "next_move_in": null,
+      "rent": "1395.00",
+      "bed_bath": "2/2.00",
+      "sqft": 1140,
+      "region": "Spokane",
+      "next_appt": null,
+      "cost": {
+        "code": "c702-E203",
+        "labor": 0,
+        "materials": 0,
+        "total": 0,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": []
+      },
+      "stage": "Move-out",
+      "stage_ord": 0,
+      "days_elapsed": 0,
+      "days_to_turn": null,
+      "status": "notice"
+    },
+    {
       "key": "c702|f204",
       "prop": "c702",
       "unit": "F204",
@@ -11899,6 +12018,44 @@
       "status": "complete"
     },
     {
+      "key": "c702|j106",
+      "prop": "c702",
+      "unit": "J106",
+      "at_risk": [],
+      "property_name": "c702",
+      "city": "Spokane",
+      "addr": "7010 N Colton St J106 Spokane, WA 99208",
+      "unit_id": 1422,
+      "unit_status": "Vacant-Unrented",
+      "rent_ready": "Yes",
+      "vacant": true,
+      "days_vacant": 1,
+      "move_out": "2026-10-14",
+      "available_on": "2026-11-03",
+      "ready_on": "2026-11-03",
+      "target_date": "2026-11-03",
+      "next_move_in": null,
+      "rent": "1595.00",
+      "bed_bath": "3/2.00",
+      "sqft": 1250,
+      "region": "Spokane",
+      "next_appt": null,
+      "cost": {
+        "code": "c702-J106",
+        "labor": 0,
+        "materials": 0,
+        "total": 0,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": []
+      },
+      "stage": "Ready",
+      "stage_ord": 7,
+      "days_elapsed": 1,
+      "days_to_turn": null,
+      "status": "ready"
+    },
+    {
       "key": "c702|j301",
       "prop": "c702",
       "unit": "J301",
@@ -12147,11 +12304,18 @@
       "cost": {
         "code": "c702-K102",
         "labor": 0,
-        "materials": 2390.65,
-        "total": 2390.65,
+        "materials": 3633.34,
+        "total": 3633.34,
         "estimate": 0,
         "laborEntries": [],
         "materialEntries": [
+          {
+            "d": "2026-10-15",
+            "amt": 1242.69,
+            "cat": "Turn",
+            "ln": "romme",
+            "src": "ramp"
+          },
           {
             "d": "2026-10-13",
             "amt": 1242.69,
@@ -15555,7 +15719,7 @@
       "addr": "512 E. Percival #3 Medical Lake, WA 99022",
       "unit_id": 301,
       "unit_status": "Vacant-Unrented",
-      "rent_ready": "Yes",
+      "rent_ready": "No",
       "vacant": true,
       "days_vacant": 15,
       "move_out": "2026-09-30",
@@ -15679,8 +15843,8 @@
       },
       "turn_end": "2026-03-27",
       "af_turn_end": "2026-03-27",
-      "stage": "Ready",
-      "stage_ord": 7,
+      "stage": null,
+      "stage_ord": 0,
       "days_elapsed": 0,
       "days_to_turn": -187,
       "status": "complete"
@@ -16191,6 +16355,7 @@
         ]
       },
       "turn_end": "2025-05-13",
+      "af_turn_end": "2026-10-15",
       "stage": "Ready",
       "stage_ord": 7,
       "days_elapsed": 0,
@@ -16589,7 +16754,7 @@
       "addr": "4711 W Metaline Avenue C105 Kennewick, WA 99336",
       "unit_id": 847,
       "unit_status": "Vacant-Unrented",
-      "rent_ready": "Yes",
+      "rent_ready": "No",
       "vacant": true,
       "days_vacant": 45,
       "move_out": "2026-08-31",
@@ -16738,11 +16903,11 @@
         "materialEntries": []
       },
       "af_turn_end": "2026-10-14",
-      "stage": "Ready",
-      "stage_ord": 7,
+      "stage": "Walkthrough",
+      "stage_ord": 1,
       "days_elapsed": 45,
       "days_to_turn": null,
-      "status": "ready"
+      "status": "active"
     },
     {
       "key": "kn47|c109",
@@ -18811,6 +18976,145 @@
       "status": "complete"
     },
     {
+      "key": "kn47|g102",
+      "prop": "kn47",
+      "unit": "G102",
+      "at_risk": [],
+      "property_name": "kn47 K1",
+      "city": "Kennewick",
+      "addr": "4711 W Metaline Avenue G102 Kennewick, WA 99336",
+      "unit_id": 912,
+      "unit_status": "Notice-Unrented",
+      "rent_ready": null,
+      "vacant": false,
+      "days_vacant": null,
+      "move_out": "2026-10-31",
+      "available_on": "2026-11-20",
+      "ready_on": "2026-11-20",
+      "target_date": "2026-11-20",
+      "next_move_in": null,
+      "rent": "1358.00",
+      "bed_bath": "2/1.00",
+      "sqft": 775,
+      "region": "Tri-Cities",
+      "pm": {
+        "projId": 176741,
+        "name": "Turn - 4711 W Metaline Avenue UNIT G102",
+        "status": "COMPLETE",
+        "done": 8,
+        "total": 8,
+        "first_appt": null,
+        "final_walk": null,
+        "final_walk_done": "2025-08-08",
+        "completed_date": "2025-08-08",
+        "due": "2025-08-07",
+        "next_task": null,
+        "tasks": null
+      },
+      "next_appt": null,
+      "cost": {
+        "code": "kn47-k1-G102",
+        "labor": 114.34,
+        "materials": 812.98,
+        "total": 927.32,
+        "estimate": 0,
+        "laborEntries": [
+          {
+            "d": "2025-10-16",
+            "emp": "Margarito Saldana",
+            "hrs": 1.83,
+            "cost": 51.97,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-08-08",
+            "emp": "Isaac R. Chavez",
+            "hrs": 0.42,
+            "cost": 11.34,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-08-08",
+            "emp": "Isaac R. Chavez",
+            "hrs": 0.5,
+            "cost": 13.5,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-08-08",
+            "emp": "Isaac R. Chavez",
+            "hrs": 0.35,
+            "cost": 9.45,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-07-29",
+            "emp": "Isaac R. Chavez",
+            "hrs": 0.92,
+            "cost": 24.84,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-07-29",
+            "emp": "Isaac R. Chavez",
+            "hrs": 0.12,
+            "cost": 3.24,
+            "cat": "Turn"
+          }
+        ],
+        "materialEntries": [
+          {
+            "d": "2025-10-16",
+            "amt": 21.67,
+            "cat": "Turn",
+            "ln": "saldana",
+            "src": "ramp"
+          },
+          {
+            "d": "2025-10-16",
+            "amt": 29.97,
+            "cat": "Turn",
+            "ln": "robson",
+            "src": "ramp"
+          },
+          {
+            "d": "2025-10-13",
+            "amt": 300,
+            "cat": "Turn",
+            "ln": "montiel",
+            "src": "ramp"
+          },
+          {
+            "d": "2025-08-08",
+            "amt": 58.5,
+            "cat": "Turn",
+            "ln": "chavez",
+            "src": "ramp"
+          },
+          {
+            "d": "2025-08-06",
+            "amt": 350,
+            "cat": "Turn",
+            "ln": "saldana",
+            "src": "ramp"
+          },
+          {
+            "d": "2025-07-29",
+            "amt": 52.84,
+            "cat": "Turn",
+            "ln": "chavez",
+            "src": "ramp"
+          }
+        ]
+      },
+      "turn_end": "2025-08-08",
+      "stage": "Move-out",
+      "stage_ord": 0,
+      "days_elapsed": 0,
+      "days_to_turn": -449,
+      "status": "complete"
+    },
+    {
       "key": "kn47|g201",
       "prop": "kn47",
       "unit": "G201",
@@ -19403,6 +19707,7 @@
         ]
       },
       "turn_end": "2026-09-30",
+      "af_turn_end": "2026-10-15",
       "stage": "Ready",
       "stage_ord": 7,
       "days_elapsed": 36,
@@ -22106,6 +22411,7 @@
         "laborEntries": [],
         "materialEntries": []
       },
+      "af_turn_end": "2026-10-15",
       "stage": "Paint",
       "stage_ord": 2,
       "days_elapsed": null,
@@ -23971,7 +24277,7 @@
         "labor": 0,
         "materials": 0,
         "total": 0,
-        "estimate": 0,
+        "estimate": 4587.98,
         "laborEntries": [],
         "materialEntries": []
       },
@@ -32206,7 +32512,7 @@
         "labor": 0,
         "materials": 861.41,
         "total": 861.41,
-        "estimate": 0,
+        "estimate": 3429.75,
         "laborEntries": [],
         "materialEntries": [
           {
@@ -32579,6 +32885,7 @@
         ]
       },
       "turn_end": "2026-09-30",
+      "af_turn_end": "2026-10-15",
       "stage": "Ready",
       "stage_ord": 7,
       "days_elapsed": 61,
@@ -37730,7 +38037,7 @@
         "labor": 0,
         "materials": 0,
         "total": 0,
-        "estimate": 0,
+        "estimate": 2696.8,
         "laborEntries": [],
         "materialEntries": []
       },
@@ -44029,44 +44336,6 @@
       "days_elapsed": null,
       "days_to_turn": null,
       "status": "complete"
-    },
-    {
-      "key": "v202|4",
-      "prop": "v202",
-      "unit": "4",
-      "at_risk": [],
-      "property_name": "v202",
-      "city": "Spokane Valley",
-      "addr": "12002 E Valleyway Avenue #4 Spokane Valley, WA 99206",
-      "unit_id": 790,
-      "unit_status": "Vacant-Unrented",
-      "rent_ready": "Yes",
-      "vacant": true,
-      "days_vacant": 30,
-      "move_out": "2026-09-15",
-      "available_on": "2026-10-05",
-      "ready_on": "2026-10-05",
-      "target_date": "2026-10-05",
-      "next_move_in": null,
-      "rent": "1475.00",
-      "bed_bath": "2/2.00",
-      "sqft": 950,
-      "region": "Spokane",
-      "next_appt": null,
-      "cost": {
-        "code": "v202-4",
-        "labor": 0,
-        "materials": 0,
-        "total": 0,
-        "estimate": 0,
-        "laborEntries": [],
-        "materialEntries": []
-      },
-      "stage": "Ready",
-      "stage_ord": 7,
-      "days_elapsed": 30,
-      "days_to_turn": null,
-      "status": "ready"
     },
     {
       "key": "w117|10",
