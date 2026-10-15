@@ -1,17 +1,17 @@
 {
   "ok": true,
-  "fetched_at": "2026-10-15T15:05:17.702Z",
+  "fetched_at": "2026-10-15T19:09:31.300Z",
   "summary": {
     "as_of": "2026-10-15",
-    "units": 227,
+    "units": 228,
     "active": 73,
     "ready": 10,
-    "notice": 9,
-    "at_risk": 27,
+    "notice": 10,
+    "at_risk": 28,
     "unscheduled": 23,
-    "accruing": 26061.22,
+    "accruing": 26778.92,
     "avg_days_open": 42,
-    "revenue_at_risk": 3308.07
+    "revenue_at_risk": 3302.63
   },
   "rows": [
     {
@@ -861,6 +861,164 @@
       "stage": "Maintenance",
       "stage_ord": 3,
       "days_elapsed": 52,
+      "days_to_turn": null,
+      "status": "active"
+    },
+    {
+      "key": "c702|c202",
+      "prop": "c702",
+      "unit": "C202",
+      "at_risk": [
+        "Nothing scheduled"
+      ],
+      "property_name": "c702",
+      "city": "Spokane",
+      "addr": "7002 N Colton St C202 Spokane, WA 99208",
+      "unit_id": 1312,
+      "unit_status": "Vacant-Rented",
+      "rent_ready": "No",
+      "vacant": true,
+      "days_vacant": 0,
+      "move_out": null,
+      "available_on": "2026-11-01",
+      "ready_on": "2026-11-01",
+      "target_date": null,
+      "next_move_in": "2026-11-01",
+      "rent": "1280.00",
+      "bed_bath": "2/2.00",
+      "sqft": 1025,
+      "region": "Spokane",
+      "pm": {
+        "projId": 239153,
+        "name": "Standard Unit Turn",
+        "status": "ACTIVE",
+        "done": 7,
+        "total": 10,
+        "first_appt": "2026-09-11",
+        "final_walk": "2026-09-24",
+        "final_walk_done": null,
+        "completed_date": "2026-10-02",
+        "due": "2026-08-25",
+        "next_task": null,
+        "tasks": [
+          {
+            "task": "Appfolio Estimate",
+            "cat": "estimate",
+            "done": true,
+            "date": null,
+            "who": "Dulce Salinas",
+            "completed": "2026-09-17",
+            "vendor": false
+          },
+          {
+            "task": "C - Paint",
+            "cat": "paint",
+            "done": true,
+            "date": "2026-09-11",
+            "who": "Brady Smith",
+            "completed": "2026-09-15",
+            "vendor": false
+          },
+          {
+            "task": "D - Maintenance",
+            "cat": "maintenance",
+            "done": true,
+            "date": "2026-09-15",
+            "who": "Brady Smith",
+            "completed": "2026-09-15",
+            "vendor": false
+          },
+          {
+            "task": "E - Carpet Cleaning",
+            "cat": "carpet",
+            "done": true,
+            "date": null,
+            "who": null,
+            "completed": "2026-09-16",
+            "vendor": false
+          },
+          {
+            "task": "F - Cleaning",
+            "cat": "cleaning",
+            "done": false,
+            "date": "2026-09-24",
+            "who": "U&K Properties LLC",
+            "completed": null,
+            "vendor": true
+          },
+          {
+            "task": "G - Verify Mailbox Lockbox & Mailbox Keys",
+            "cat": "other",
+            "done": true,
+            "date": null,
+            "who": null,
+            "completed": "2026-09-17",
+            "vendor": false
+          },
+          {
+            "task": "Punch List",
+            "cat": "other",
+            "done": true,
+            "date": "2026-10-02",
+            "who": "Brady Smith",
+            "completed": "2026-10-02",
+            "vendor": false
+          },
+          {
+            "task": "Schedule Vendors",
+            "cat": "other",
+            "done": false,
+            "date": null,
+            "who": "Matt Romme",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Final Walkthrough",
+            "cat": "final-walk",
+            "done": false,
+            "date": "2026-09-24",
+            "who": "Matt Romme",
+            "completed": null,
+            "vendor": false
+          }
+        ]
+      },
+      "next_appt": null,
+      "cost": {
+        "code": "c702-C202",
+        "labor": 0,
+        "materials": 1579.11,
+        "total": 1579.11,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": [
+          {
+            "d": "2026-10-02",
+            "amt": 58.71,
+            "cat": "Turn",
+            "ln": "smith",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-09-15",
+            "amt": 1179.12,
+            "cat": "Turn",
+            "ln": "smith",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-09-10",
+            "amt": 341.28,
+            "cat": "Turn",
+            "ln": "smith",
+            "src": "ramp"
+          }
+        ]
+      },
+      "stage": "Cleaning",
+      "stage_ord": 4,
+      "days_elapsed": null,
       "days_to_turn": null,
       "status": "active"
     },
@@ -10309,162 +10467,6 @@
       "status": "complete"
     },
     {
-      "key": "c702|c202",
-      "prop": "c702",
-      "unit": "C202",
-      "at_risk": [],
-      "property_name": "c702",
-      "city": "Spokane",
-      "addr": "7002 N Colton St C202 Spokane, WA 99208",
-      "unit_id": 1312,
-      "unit_status": "Vacant-Rented",
-      "rent_ready": "Yes",
-      "vacant": true,
-      "days_vacant": 0,
-      "move_out": null,
-      "available_on": null,
-      "ready_on": "2026-11-01",
-      "target_date": null,
-      "next_move_in": "2026-11-01",
-      "rent": "1280.00",
-      "bed_bath": "2/2.00",
-      "sqft": 1025,
-      "region": "Spokane",
-      "pm": {
-        "projId": 239153,
-        "name": "Standard Unit Turn",
-        "status": "ACTIVE",
-        "done": 7,
-        "total": 10,
-        "first_appt": "2026-09-11",
-        "final_walk": "2026-09-24",
-        "final_walk_done": null,
-        "completed_date": "2026-10-02",
-        "due": "2026-08-25",
-        "next_task": null,
-        "tasks": [
-          {
-            "task": "Appfolio Estimate",
-            "cat": "estimate",
-            "done": true,
-            "date": null,
-            "who": "Dulce Salinas",
-            "completed": "2026-09-17",
-            "vendor": false
-          },
-          {
-            "task": "C - Paint",
-            "cat": "paint",
-            "done": true,
-            "date": "2026-09-11",
-            "who": "Brady Smith",
-            "completed": "2026-09-15",
-            "vendor": false
-          },
-          {
-            "task": "D - Maintenance",
-            "cat": "maintenance",
-            "done": true,
-            "date": "2026-09-15",
-            "who": "Brady Smith",
-            "completed": "2026-09-15",
-            "vendor": false
-          },
-          {
-            "task": "E - Carpet Cleaning",
-            "cat": "carpet",
-            "done": true,
-            "date": null,
-            "who": null,
-            "completed": "2026-09-16",
-            "vendor": false
-          },
-          {
-            "task": "F - Cleaning",
-            "cat": "cleaning",
-            "done": false,
-            "date": "2026-09-24",
-            "who": "U&K Properties LLC",
-            "completed": null,
-            "vendor": true
-          },
-          {
-            "task": "G - Verify Mailbox Lockbox & Mailbox Keys",
-            "cat": "other",
-            "done": true,
-            "date": null,
-            "who": null,
-            "completed": "2026-09-17",
-            "vendor": false
-          },
-          {
-            "task": "Punch List",
-            "cat": "other",
-            "done": true,
-            "date": "2026-10-02",
-            "who": "Brady Smith",
-            "completed": "2026-10-02",
-            "vendor": false
-          },
-          {
-            "task": "Schedule Vendors",
-            "cat": "other",
-            "done": false,
-            "date": null,
-            "who": "Matt Romme",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Final Walkthrough",
-            "cat": "final-walk",
-            "done": false,
-            "date": "2026-09-24",
-            "who": "Matt Romme",
-            "completed": null,
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": null,
-      "cost": {
-        "code": "c702-C202",
-        "labor": 0,
-        "materials": 1579.11,
-        "total": 1579.11,
-        "estimate": 0,
-        "laborEntries": [],
-        "materialEntries": [
-          {
-            "d": "2026-10-02",
-            "amt": 58.71,
-            "cat": "Turn",
-            "ln": "smith",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-15",
-            "amt": 1179.12,
-            "cat": "Turn",
-            "ln": "smith",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-10",
-            "amt": 341.28,
-            "cat": "Turn",
-            "ln": "smith",
-            "src": "ramp"
-          }
-        ]
-      },
-      "stage": "Ready",
-      "stage_ord": 7,
-      "days_elapsed": null,
-      "days_to_turn": null,
-      "status": "ready"
-    },
-    {
       "key": "c702|c203",
       "prop": "c702",
       "unit": "C203",
@@ -11690,8 +11692,8 @@
       "vacant": true,
       "days_vacant": 25,
       "move_out": "2026-09-20",
-      "available_on": "2026-10-16",
-      "ready_on": "2026-10-16",
+      "available_on": "2026-10-31",
+      "ready_on": "2026-10-31",
       "target_date": "2026-10-10",
       "next_move_in": null,
       "rent": "1595.00",
@@ -16028,7 +16030,7 @@
       "addr": "632 N Arthur Street A104 Kennewick, WA 99336",
       "unit_id": 995,
       "unit_status": "Vacant-Unrented",
-      "rent_ready": "No",
+      "rent_ready": "Yes",
       "vacant": true,
       "days_vacant": 76,
       "move_out": "2026-07-31",
@@ -16189,8 +16191,8 @@
         ]
       },
       "turn_end": "2025-05-13",
-      "stage": "Maintenance",
-      "stage_ord": 3,
+      "stage": "Ready",
+      "stage_ord": 7,
       "days_elapsed": 0,
       "days_to_turn": -444,
       "status": "complete"
@@ -18111,7 +18113,7 @@
         "labor": 0,
         "materials": 0,
         "total": 0,
-        "estimate": 1419.18,
+        "estimate": 6900.64,
         "laborEntries": [],
         "materialEntries": []
       },
@@ -18130,7 +18132,7 @@
       "city": "Kennewick",
       "addr": "4711 W Metaline Avenue E101 Kennewick, WA 99336",
       "unit_id": 879,
-      "unit_status": "Vacant-Unrented",
+      "unit_status": "Vacant-Rented",
       "rent_ready": "No",
       "vacant": true,
       "days_vacant": 55,
@@ -18138,7 +18140,7 @@
       "available_on": "2026-11-02",
       "ready_on": "2026-11-02",
       "target_date": "2026-09-10",
-      "next_move_in": null,
+      "next_move_in": "2026-11-02",
       "rent": "931.00",
       "bed_bath": "1/1.00",
       "sqft": 600,
@@ -32087,12 +32089,12 @@
       "addr": "1621 George Washington Way A13 Richland, WA 99354",
       "unit_id": 526,
       "unit_status": "Vacant-Unrented",
-      "rent_ready": "No",
+      "rent_ready": "Yes",
       "vacant": true,
       "days_vacant": 15,
       "move_out": "2026-09-30",
-      "available_on": "2026-10-16",
-      "ready_on": "2026-10-16",
+      "available_on": "2026-10-15",
+      "ready_on": "2026-10-15",
       "target_date": "2026-10-20",
       "next_move_in": null,
       "rent": "1443.00",
@@ -32230,11 +32232,11 @@
           }
         ]
       },
-      "stage": "Walkthrough",
-      "stage_ord": 1,
+      "stage": "Ready",
+      "stage_ord": 7,
       "days_elapsed": 15,
       "days_to_turn": null,
-      "status": "active"
+      "status": "ready"
     },
     {
       "key": "rl16|a14",
@@ -33206,7 +33208,7 @@
       "vacant": true,
       "days_vacant": 37,
       "move_out": "2026-09-08",
-      "available_on": "2026-09-29",
+      "available_on": null,
       "ready_on": "2026-09-29",
       "target_date": "2026-09-28",
       "next_move_in": "2026-10-16",
@@ -34654,8 +34656,8 @@
       "vacant": true,
       "days_vacant": 45,
       "move_out": "2026-08-31",
-      "available_on": "2026-10-16",
-      "ready_on": "2026-10-16",
+      "available_on": "2026-10-30",
+      "ready_on": "2026-10-30",
       "target_date": "2026-09-20",
       "next_move_in": null,
       "rent": "1627.00",
@@ -40216,7 +40218,7 @@
         "labor": 0,
         "materials": 0,
         "total": 0,
-        "estimate": 0,
+        "estimate": 3730.26,
         "laborEntries": [],
         "materialEntries": []
       },
@@ -41876,6 +41878,44 @@
       "days_elapsed": null,
       "days_to_turn": null,
       "status": "active"
+    },
+    {
+      "key": "tc68|b56",
+      "prop": "tc68",
+      "unit": "B56",
+      "at_risk": [],
+      "property_name": "tc68",
+      "city": "Tacoma",
+      "addr": "6830 Tacoma Mall Blvd Apt B56 Tacoma, WA 98409",
+      "unit_id": 1205,
+      "unit_status": "Notice-Unrented",
+      "rent_ready": null,
+      "vacant": false,
+      "days_vacant": null,
+      "move_out": "2026-10-31",
+      "available_on": null,
+      "ready_on": null,
+      "target_date": "2026-11-20",
+      "next_move_in": null,
+      "rent": "1775.00",
+      "bed_bath": "2/1.00",
+      "sqft": 980,
+      "region": "Tacoma",
+      "next_appt": null,
+      "cost": {
+        "code": "tc68-B56",
+        "labor": 0,
+        "materials": 0,
+        "total": 0,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": []
+      },
+      "stage": "Move-out",
+      "stage_ord": 0,
+      "days_elapsed": 0,
+      "days_to_turn": null,
+      "status": "notice"
     },
     {
       "key": "tc68|b60",
