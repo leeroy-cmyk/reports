@@ -1,15 +1,15 @@
 {
   "ok": true,
-  "fetched_at": "2026-10-14T22:08:27.097Z",
+  "fetched_at": "2026-10-15T00:32:58.190Z",
   "summary": {
     "as_of": "2026-10-14",
-    "units": 230,
+    "units": 227,
     "active": 74,
     "ready": 10,
     "notice": 9,
     "at_risk": 28,
     "unscheduled": 20,
-    "accruing": 26351.84,
+    "accruing": 26678.08,
     "avg_days_open": 41,
     "revenue_at_risk": 3340.5
   },
@@ -6841,8 +6841,8 @@
       "cost": {
         "code": "b101-14",
         "labor": 545.08,
-        "materials": 833.26,
-        "total": 1378.34,
+        "materials": 1159.28,
+        "total": 1704.36,
         "estimate": 0,
         "laborEntries": [
           {
@@ -6903,6 +6903,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-10-14",
+            "amt": 326.02,
+            "cat": "Turn",
+            "ln": "normandin",
+            "src": "ramp"
+          },
           {
             "d": "2025-07-25",
             "amt": 269.5,
@@ -8541,302 +8548,6 @@
       "days_elapsed": 0,
       "days_to_turn": null,
       "status": "notice"
-    },
-    {
-      "key": "c313|26",
-      "prop": "c313",
-      "unit": "26",
-      "property_name": "c313",
-      "at_risk": [],
-      "region": "Spokane",
-      "pm": {
-        "projId": 226284,
-        "name": "Standard Unit Turn",
-        "status": "COMPLETE",
-        "done": 14,
-        "total": 14,
-        "first_appt": "2026-06-05",
-        "final_walk": "2026-07-09",
-        "final_walk_done": "2026-07-16",
-        "completed_date": "2026-07-16",
-        "due": "2026-07-07",
-        "next_task": null,
-        "tasks": [
-          {
-            "task": "A - Initial walkthrough",
-            "cat": "walkthrough",
-            "done": true,
-            "date": "2026-06-05",
-            "who": "Micheal Magoon",
-            "completed": "2026-06-05",
-            "vendor": false
-          },
-          {
-            "task": "A - Initial walkthrough (clone)",
-            "cat": "walkthrough",
-            "done": true,
-            "date": "2026-07-01",
-            "who": "Scott Higley",
-            "completed": "2026-07-01",
-            "vendor": false
-          },
-          {
-            "task": "Appfolio Estimate",
-            "cat": "estimate",
-            "done": true,
-            "date": null,
-            "who": "Dulce Salinas",
-            "completed": "2026-06-08",
-            "vendor": false
-          },
-          {
-            "task": "C - Paint (clone)",
-            "cat": "paint",
-            "done": true,
-            "date": "2026-07-02",
-            "who": "Ron Cramer",
-            "completed": "2026-07-08",
-            "vendor": false
-          },
-          {
-            "task": "D - Maintenance (clone)",
-            "cat": "maintenance",
-            "done": true,
-            "date": "2026-07-07",
-            "who": "Ron Cramer",
-            "completed": "2026-07-08",
-            "vendor": false
-          },
-          {
-            "task": "F - Cleaning (clone)",
-            "cat": "cleaning",
-            "done": true,
-            "date": "2026-07-09",
-            "who": "SPO Cleaning",
-            "completed": "2026-07-09",
-            "vendor": true
-          },
-          {
-            "task": "Final Walkthrough (clone)",
-            "cat": "final-walk",
-            "done": true,
-            "date": "2026-07-08",
-            "who": "Ron Cramer",
-            "completed": "2026-07-08",
-            "vendor": false
-          },
-          {
-            "task": "Final Walkthrough (clone) (clone)",
-            "cat": "final-walk",
-            "done": true,
-            "date": "2026-07-09",
-            "who": "David Sanchez",
-            "completed": "2026-07-16",
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": null,
-      "cost": {
-        "code": "c313-26",
-        "labor": 601.99,
-        "materials": 1262.52,
-        "total": 1864.51,
-        "estimate": 0,
-        "laborEntries": [
-          {
-            "d": "2026-07-08",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.77,
-            "cost": 45.58,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-08",
-            "emp": "Ronald D. Cramer",
-            "hrs": 2,
-            "cost": 51.5,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-08",
-            "emp": "Ronald D. Cramer",
-            "hrs": 2,
-            "cost": 51.5,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-08",
-            "emp": "Ronald D. Cramer",
-            "hrs": 0.73,
-            "cost": 18.8,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-06",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.42,
-            "cost": 10.5,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-09",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.4,
-            "cost": 10,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-05",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.32,
-            "cost": 8,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-05",
-            "emp": "Micheal N. Magoon",
-            "hrs": 1.08,
-            "cost": 27,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-05",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.5,
-            "cost": 12.5,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-04",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.42,
-            "cost": 10.5,
-            "cat": "Turn"
-          },
-          {
-            "d": "2025-07-14",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.08,
-            "cost": 27.81,
-            "cat": "Turn"
-          },
-          {
-            "d": "2025-07-03",
-            "emp": "Ronald D. Cramer",
-            "hrs": 2.52,
-            "cost": 64.89,
-            "cat": "Turn"
-          },
-          {
-            "d": "2025-07-03",
-            "emp": "Micheal N. Magoon",
-            "hrs": 1.05,
-            "cost": 26.25,
-            "cat": "Turn"
-          },
-          {
-            "d": "2025-07-03",
-            "emp": "Ronald D. Cramer",
-            "hrs": 4.02,
-            "cost": 103.51,
-            "cat": "Turn"
-          },
-          {
-            "d": "2025-07-02",
-            "emp": "Ronald D. Cramer",
-            "hrs": 0.77,
-            "cost": 19.83,
-            "cat": "Turn"
-          },
-          {
-            "d": "2025-07-02",
-            "emp": "Ronald D. Cramer",
-            "hrs": 2.6,
-            "cost": 66.95,
-            "cat": "Turn"
-          },
-          {
-            "d": "2025-07-01",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.82,
-            "cost": 46.87,
-            "cat": "Turn"
-          }
-        ],
-        "materialEntries": [
-          {
-            "d": "2026-07-10",
-            "amt": 250,
-            "cat": "Turn",
-            "ln": "SPO Cleaning",
-            "src": "qbo"
-          },
-          {
-            "d": "2026-07-08",
-            "amt": 11.42,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-08",
-            "amt": 156.42,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-06-05",
-            "amt": 198.17,
-            "cat": "Turn",
-            "ln": "magoon",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-06-04",
-            "amt": 15.75,
-            "cat": "Turn",
-            "ln": "magoon",
-            "src": "ramp"
-          },
-          {
-            "d": "2025-07-25",
-            "amt": 211.75,
-            "cat": "Turn",
-            "ln": "meng",
-            "src": "ramp"
-          },
-          {
-            "d": "2025-07-15",
-            "amt": 213,
-            "cat": "Turn",
-            "ln": "meng",
-            "src": "ramp"
-          },
-          {
-            "d": "2025-07-03",
-            "amt": 35.44,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          },
-          {
-            "d": "2025-07-02",
-            "amt": 170.57,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          }
-        ]
-      },
-      "turn_end": "2026-07-16",
-      "af_turn_end": "2026-07-08",
-      "stage": "Final Walk",
-      "stage_ord": 6,
-      "days_elapsed": null,
-      "days_to_turn": null,
-      "status": "complete"
     },
     {
       "key": "c313|33",
@@ -11436,11 +11147,25 @@
       "cost": {
         "code": "c702-C304",
         "labor": 0,
-        "materials": 518.53,
-        "total": 518.53,
+        "materials": 581.15,
+        "total": 581.15,
         "estimate": 0,
         "laborEntries": [],
         "materialEntries": [
+          {
+            "d": "2026-10-14",
+            "amt": 46.32,
+            "cat": "Turn",
+            "ln": "easley",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-10-14",
+            "amt": 16.3,
+            "cat": "Turn",
+            "ln": "easley",
+            "src": "ramp"
+          },
           {
             "d": "2026-10-13",
             "amt": 46.98,
@@ -15204,225 +14929,6 @@
       "days_elapsed": 9,
       "days_to_turn": null,
       "status": "active"
-    },
-    {
-      "key": "k104|5053",
-      "prop": "k104",
-      "unit": "505-3",
-      "property_name": "k104- LeFevre",
-      "at_risk": [],
-      "region": "Spokane",
-      "pm": {
-        "projId": 224798,
-        "name": "Standard Unit Turn",
-        "status": "COMPLETE",
-        "done": 15,
-        "total": 15,
-        "first_appt": "2026-06-25",
-        "final_walk": "2026-07-17",
-        "final_walk_done": "2026-07-16",
-        "completed_date": "2026-07-16",
-        "due": "2026-07-10",
-        "next_task": null,
-        "tasks": [
-          {
-            "task": "A - Initial walkthrough (clone)",
-            "cat": "walkthrough",
-            "done": true,
-            "date": "2026-06-19",
-            "who": "Scott Higley",
-            "completed": "2026-06-19",
-            "vendor": false
-          },
-          {
-            "task": "A - Initial walkthrough (clone) (clone)",
-            "cat": "walkthrough",
-            "done": true,
-            "date": "2026-06-24",
-            "who": "Scott Higley",
-            "completed": "2026-06-24",
-            "vendor": false
-          },
-          {
-            "task": "Appfolio Estimate (clone)",
-            "cat": "estimate",
-            "done": true,
-            "date": null,
-            "who": null,
-            "completed": "2026-06-24",
-            "vendor": false
-          },
-          {
-            "task": "C - Paint (clone)",
-            "cat": "paint",
-            "done": true,
-            "date": "2026-06-25",
-            "who": "Micheal Magoon",
-            "completed": "2026-06-25",
-            "vendor": false
-          },
-          {
-            "task": "D - Maintenance (clone)",
-            "cat": "maintenance",
-            "done": true,
-            "date": "2026-06-25",
-            "who": "Micheal Magoon",
-            "completed": "2026-06-25",
-            "vendor": false
-          },
-          {
-            "task": "E - Carpet Cleaning (clone)",
-            "cat": "carpet",
-            "done": true,
-            "date": null,
-            "who": null,
-            "completed": "2026-06-24",
-            "vendor": false
-          },
-          {
-            "task": "F - Cleaning (clone)",
-            "cat": "cleaning",
-            "done": true,
-            "date": "2026-06-30",
-            "who": "SPO Cleaning",
-            "completed": "2026-06-29",
-            "vendor": true
-          },
-          {
-            "task": "Final Walkthrough (clone)",
-            "cat": "final-walk",
-            "done": true,
-            "date": "2026-07-17",
-            "who": "David Sanchez",
-            "completed": "2026-07-16",
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": null,
-      "cost": {
-        "code": "k104-505-3",
-        "labor": 246.83,
-        "materials": 464.43,
-        "total": 711.26,
-        "estimate": 0,
-        "laborEntries": [
-          {
-            "d": "2026-06-26",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.98,
-            "cost": 24.5,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-26",
-            "emp": "Ronald D. Cramer",
-            "hrs": 0.77,
-            "cost": 19.83,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-26",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.83,
-            "cost": 47.12,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-26",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.92,
-            "cost": 49.44,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-25",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.65,
-            "cost": 16.25,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-25",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.08,
-            "cost": 2,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-25",
-            "emp": "Micheal N. Magoon",
-            "hrs": 1.13,
-            "cost": 28.25,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-25",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.7,
-            "cost": 17.5,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-25",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.45,
-            "cost": 11.25,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-25",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.07,
-            "cost": 1.75,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-25",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.9,
-            "cost": 22.5,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-03",
-            "emp": "Ronald D. Cramer",
-            "hrs": 0.25,
-            "cost": 6.44,
-            "cat": "Turn"
-          }
-        ],
-        "materialEntries": [
-          {
-            "d": "2026-07-02",
-            "amt": 250,
-            "cat": "Turn",
-            "ln": "SPO Cleaning",
-            "src": "qbo"
-          },
-          {
-            "d": "2026-06-26",
-            "amt": 35.84,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-06-25",
-            "amt": 178.59,
-            "cat": "Turn",
-            "ln": "magoon",
-            "src": "ramp"
-          }
-        ]
-      },
-      "turn_end": "2026-07-16",
-      "af_turn_end": "2026-07-16",
-      "stage": "Final Walk",
-      "stage_ord": 6,
-      "days_elapsed": null,
-      "days_to_turn": null,
-      "status": "complete"
     },
     {
       "key": "k104|5074",
@@ -22426,314 +21932,6 @@
       },
       "turn_end": "2026-07-20",
       "af_turn_end": "2026-07-21",
-      "stage": "Final Walk",
-      "stage_ord": 6,
-      "days_elapsed": null,
-      "days_to_turn": null,
-      "status": "complete"
-    },
-    {
-      "key": "kn47|m201",
-      "prop": "kn47",
-      "unit": "M201",
-      "property_name": "kn47 K1",
-      "at_risk": [],
-      "region": "Tri-Cities",
-      "pm": {
-        "projId": 225695,
-        "name": "Standard Unit Turn",
-        "status": "COMPLETE",
-        "done": 7,
-        "total": 7,
-        "first_appt": "2026-06-29",
-        "final_walk": "2026-07-07",
-        "final_walk_done": "2026-07-10",
-        "completed_date": "2026-07-16",
-        "due": "2026-07-11",
-        "next_task": null,
-        "tasks": [
-          {
-            "task": "A - Initial walkthrough",
-            "cat": "walkthrough",
-            "done": true,
-            "date": "2026-06-04",
-            "who": "Margarito Saldana",
-            "completed": "2026-06-08",
-            "vendor": false
-          },
-          {
-            "task": "Appfolio Estimate",
-            "cat": "estimate",
-            "done": true,
-            "date": null,
-            "who": "Dulce Salinas",
-            "completed": "2026-07-16",
-            "vendor": false
-          },
-          {
-            "task": "C - Paint",
-            "cat": "paint",
-            "done": true,
-            "date": "2026-06-29",
-            "who": "James Dunlap",
-            "completed": "2026-07-03",
-            "vendor": false
-          },
-          {
-            "task": "D - Maintenance",
-            "cat": "maintenance",
-            "done": true,
-            "date": "2026-07-01",
-            "who": "James Dunlap",
-            "completed": "2026-07-03",
-            "vendor": false
-          },
-          {
-            "task": "E - Carpet Cleaning",
-            "cat": "carpet",
-            "done": true,
-            "date": "2026-07-03",
-            "who": "SOS Carpet",
-            "completed": "2026-07-03",
-            "vendor": true
-          },
-          {
-            "task": "F - Cleaning",
-            "cat": "cleaning",
-            "done": true,
-            "date": "2026-07-06",
-            "who": "Duo Cleaning Company LLC",
-            "completed": "2026-07-06",
-            "vendor": true
-          },
-          {
-            "task": "Final Walkthrough",
-            "cat": "final-walk",
-            "done": true,
-            "date": "2026-07-07",
-            "who": "Margarito Saldana",
-            "completed": "2026-07-10",
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": null,
-      "cost": {
-        "code": "kn47-k1-M201",
-        "labor": 745.53,
-        "materials": 1512.07,
-        "total": 2257.6,
-        "estimate": 0,
-        "laborEntries": [
-          {
-            "d": "2026-07-07",
-            "emp": "Margarito Saldana",
-            "hrs": 1,
-            "cost": 28.4,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-07-03",
-            "emp": "James Dunlap",
-            "hrs": 0.95,
-            "cost": 21.85,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-03",
-            "emp": "James Dunlap",
-            "hrs": 1.13,
-            "cost": 25.99,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-03",
-            "emp": "James Dunlap",
-            "hrs": 1.75,
-            "cost": 40.25,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-03",
-            "emp": "James Dunlap",
-            "hrs": 1.53,
-            "cost": 35.19,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-02",
-            "emp": "James Dunlap",
-            "hrs": 1.82,
-            "cost": 41.86,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-02",
-            "emp": "James Dunlap",
-            "hrs": 1.98,
-            "cost": 45.54,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-02",
-            "emp": "James Dunlap",
-            "hrs": 1.8,
-            "cost": 41.4,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-02",
-            "emp": "James Dunlap",
-            "hrs": 1.93,
-            "cost": 44.39,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-02",
-            "emp": "James Dunlap",
-            "hrs": 0.52,
-            "cost": 11.96,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-01",
-            "emp": "James Dunlap",
-            "hrs": 1.58,
-            "cost": 36.34,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-01",
-            "emp": "James Dunlap",
-            "hrs": 0.98,
-            "cost": 22.54,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-01",
-            "emp": "James Dunlap",
-            "hrs": 1.75,
-            "cost": 40.25,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-01",
-            "emp": "James Dunlap",
-            "hrs": 2,
-            "cost": 46,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-01",
-            "emp": "James Dunlap",
-            "hrs": 1.68,
-            "cost": 38.64,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-01",
-            "emp": "Margarito Saldana",
-            "hrs": 0.75,
-            "cost": 21.3,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-01",
-            "emp": "Margarito Saldana",
-            "hrs": 1,
-            "cost": 28.4,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-30",
-            "emp": "James Dunlap",
-            "hrs": 1.55,
-            "cost": 35.65,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-30",
-            "emp": "James Dunlap",
-            "hrs": 1.55,
-            "cost": 35.65,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-30",
-            "emp": "James Dunlap",
-            "hrs": 1.37,
-            "cost": 31.51,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-12",
-            "emp": "Margarito Saldana",
-            "hrs": 1.3,
-            "cost": 36.92,
-            "cat": "CapEx"
-          },
-          {
-            "d": "2026-06-05",
-            "emp": "Margarito Saldana",
-            "hrs": 0.9,
-            "cost": 25.56,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-06-03",
-            "emp": "Margarito Saldana",
-            "hrs": 0.35,
-            "cost": 9.94,
-            "cat": "Turn"
-          }
-        ],
-        "materialEntries": [
-          {
-            "d": "2026-08-01",
-            "amt": 200,
-            "cat": "Turn",
-            "ln": "SOS Carpet & Upholstery",
-            "src": "qbo"
-          },
-          {
-            "d": "2026-07-07",
-            "amt": 350,
-            "cat": "CapEx",
-            "ln": "Duo Cleaning Compa",
-            "src": "qbo"
-          },
-          {
-            "d": "2026-07-03",
-            "amt": 7.38,
-            "cat": "Turn",
-            "ln": "dunlap",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-03",
-            "amt": 20.87,
-            "cat": "Turn",
-            "ln": "dunlap",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-01",
-            "amt": 364.11,
-            "cat": "Turn",
-            "ln": "dunlap",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-06-30",
-            "amt": 569.71,
-            "cat": "Turn",
-            "ln": "dunlap",
-            "src": "ramp"
-          }
-        ]
-      },
-      "turn_end": "2026-07-10",
-      "af_turn_end": "2026-07-16",
       "stage": "Final Walk",
       "stage_ord": 6,
       "days_elapsed": null,
@@ -33991,7 +33189,7 @@
       "city": "Richland",
       "addr": "1621 George Washington Way B12 Richland, WA 99354",
       "unit_id": 549,
-      "unit_status": "Vacant-Unrented",
+      "unit_status": "Vacant-Rented",
       "rent_ready": "Yes",
       "vacant": true,
       "days_vacant": 36,
@@ -33999,7 +33197,7 @@
       "available_on": "2026-09-29",
       "ready_on": "2026-09-29",
       "target_date": "2026-09-28",
-      "next_move_in": null,
+      "next_move_in": "2026-10-16",
       "rent": "1195.00",
       "bed_bath": "1/1.00",
       "sqft": 700,
@@ -34268,11 +33466,18 @@
       "cost": {
         "code": "rl16-B15",
         "labor": 0,
-        "materials": 1413.04,
-        "total": 1413.04,
+        "materials": 1676.66,
+        "total": 1676.66,
         "estimate": 0,
         "laborEntries": [],
         "materialEntries": [
+          {
+            "d": "2026-10-14",
+            "amt": 263.62,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          },
           {
             "d": "2026-10-12",
             "amt": 738.18,
