@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-10-16T05:04:14.145Z",
+  "fetched_at": "2026-10-16T09:50:46.439Z",
   "units": {
     "2": {
       "moveOut": "2026-07-31",
@@ -391,13 +391,6 @@
       "status": "Vacant-Unrented",
       "prop": "rl16",
       "unit": "A17",
-      "city": "Richland"
-    },
-    "549": {
-      "moveOut": "2026-09-08",
-      "status": "Vacant-Rented",
-      "prop": "rl16",
-      "unit": "B12",
       "city": "Richland"
     },
     "552": {
@@ -1053,14 +1046,14 @@
     },
     "1349": {
       "moveOut": "2026-10-15",
-      "status": "Notice-Unrented",
+      "status": "Vacant-Unrented",
       "prop": "c702",
       "unit": "E103",
       "city": "Spokane"
     },
     "1355": {
       "moveOut": "2026-10-15",
-      "status": "Notice-Unrented",
+      "status": "Vacant-Unrented",
       "prop": "c702",
       "unit": "E203",
       "city": "Spokane"
@@ -1121,13 +1114,6 @@
       "unit": "J301",
       "city": "Spokane"
     },
-    "1434": {
-      "moveOut": null,
-      "status": "Vacant-Rented",
-      "prop": "c702",
-      "unit": "K102",
-      "city": "Spokane"
-    },
     "1438": {
       "moveOut": "2026-09-22",
       "status": "Vacant-Unrented",
@@ -1144,25 +1130,6 @@
     }
   },
   "changes": [
-    {
-      "date": "2026-08-16",
-      "type": "moveout_removed",
-      "unit_id": "1299",
-      "prop": "c702",
-      "unit": "B301",
-      "city": "Spokane",
-      "from": "2026-08-13",
-      "was_status": "Vacant-Unrented"
-    },
-    {
-      "date": "2026-08-16",
-      "type": "moveout_new",
-      "unit_id": "6",
-      "prop": "a916",
-      "unit": "5",
-      "city": "Spokane",
-      "to": "2026-08-16"
-    },
     {
       "date": "2026-08-17",
       "type": "moveout_new",
@@ -3635,6 +3602,26 @@
       "unit": "J106",
       "city": "Spokane",
       "to": "2026-10-14"
+    },
+    {
+      "date": "2026-10-16",
+      "type": "moveout_removed",
+      "unit_id": "549",
+      "prop": "rl16",
+      "unit": "B12",
+      "city": "Richland",
+      "from": "2026-09-08",
+      "was_status": "Vacant-Rented"
+    },
+    {
+      "date": "2026-10-16",
+      "type": "moveout_removed",
+      "unit_id": "1434",
+      "prop": "c702",
+      "unit": "K102",
+      "city": "Spokane",
+      "from": null,
+      "was_status": "Vacant-Rented"
     }
   ]
 }
