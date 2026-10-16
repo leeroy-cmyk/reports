@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-10-16T14:37:35.215Z",
+  "fetched_at": "2026-10-16T18:23:50.734Z",
   "units": {
     "2": {
       "moveOut": "2026-07-31",
@@ -213,7 +213,7 @@
     },
     "364": {
       "moveOut": "2026-08-31",
-      "status": "Vacant-Rented",
+      "status": "Vacant-Unrented",
       "prop": "ps25",
       "unit": "A6",
       "city": "Pasco"
@@ -548,7 +548,7 @@
       "city": "Spokane"
     },
     "790": {
-      "moveOut": "2026-09-15",
+      "moveOut": "2026-10-13",
       "status": "Vacant-Unrented",
       "prop": "v202",
       "unit": "4",
@@ -3622,6 +3622,16 @@
       "city": "Spokane",
       "from": null,
       "was_status": "Vacant-Rented"
+    },
+    {
+      "date": "2026-10-16",
+      "type": "moveout_changed",
+      "unit_id": "790",
+      "prop": "v202",
+      "unit": "4",
+      "city": "Spokane Valley",
+      "from": "2026-09-15",
+      "to": "2026-10-13"
     }
   ]
 }
