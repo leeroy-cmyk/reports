@@ -1,15 +1,15 @@
 {
   "ok": true,
-  "fetched_at": "2026-10-16T21:33:56.564Z",
+  "fetched_at": "2026-10-16T23:54:58.521Z",
   "summary": {
     "as_of": "2026-10-16",
-    "units": 233,
+    "units": 236,
     "active": 74,
-    "ready": 11,
+    "ready": 12,
     "notice": 10,
     "at_risk": 35,
     "unscheduled": 25,
-    "accruing": 25000.51,
+    "accruing": 25566.99,
     "avg_days_open": 43,
     "revenue_at_risk": 3346.87
   },
@@ -154,11 +154,19 @@
       "cost": {
         "code": "ps25-D28",
         "labor": 0,
-        "materials": 0,
-        "total": 0,
+        "materials": 82.09,
+        "total": 82.09,
         "estimate": 0,
         "laborEntries": [],
-        "materialEntries": []
+        "materialEntries": [
+          {
+            "d": "2026-10-15",
+            "amt": 82.09,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          }
+        ]
       },
       "stage": "Walkthrough",
       "stage_ord": 1,
@@ -1448,11 +1456,19 @@
       "cost": {
         "code": "c702-H301",
         "labor": 0,
-        "materials": 0,
-        "total": 0,
+        "materials": 130.35,
+        "total": 130.35,
         "estimate": 4564.72,
         "laborEntries": [],
-        "materialEntries": []
+        "materialEntries": [
+          {
+            "d": "2026-10-16",
+            "amt": 130.35,
+            "cat": "Turn",
+            "ln": "easley",
+            "src": "ramp"
+          }
+        ]
       },
       "stage": "Maintenance",
       "stage_ord": 3,
@@ -1727,8 +1743,8 @@
       "cost": {
         "code": "k104-107-7",
         "labor": 653.49,
-        "materials": 440.08,
-        "total": 1093.57,
+        "materials": 510.89,
+        "total": 1164.38,
         "estimate": 0,
         "laborEntries": [
           {
@@ -1887,6 +1903,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-10-16",
+            "amt": 70.81,
+            "cat": "Turn",
+            "ln": "magoon",
+            "src": "ramp"
+          },
           {
             "d": "2026-10-13",
             "amt": 440.08,
@@ -3024,8 +3047,8 @@
       "cost": {
         "code": "m221-33",
         "labor": 354.25,
-        "materials": 41.6,
-        "total": 395.85,
+        "materials": 160.65,
+        "total": 514.9,
         "estimate": 746.88,
         "laborEntries": [
           {
@@ -3107,6 +3130,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-10-16",
+            "amt": 119.05,
+            "cat": "Turn",
+            "ln": "normandin",
+            "src": "ramp"
+          },
           {
             "d": "2026-08-28",
             "amt": 7.61,
@@ -4532,8 +4562,8 @@
       "cost": {
         "code": "ps25-C18",
         "labor": 107.35,
-        "materials": 0,
-        "total": 107.35,
+        "materials": 82.09,
+        "total": 189.44,
         "estimate": 0,
         "laborEntries": [
           {
@@ -4544,7 +4574,15 @@
             "cat": "Turn"
           }
         ],
-        "materialEntries": []
+        "materialEntries": [
+          {
+            "d": "2026-10-15",
+            "amt": 82.09,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          }
+        ]
       },
       "stage": "Walkthrough",
       "stage_ord": 1,
@@ -7891,8 +7929,8 @@
       "cost": {
         "code": "b101-14",
         "labor": 545.08,
-        "materials": 1312.17,
-        "total": 1857.25,
+        "materials": 1327.59,
+        "total": 1872.67,
         "estimate": 0,
         "laborEntries": [
           {
@@ -7953,6 +7991,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-10-16",
+            "amt": 15.42,
+            "cat": "Turn",
+            "ln": "normandin",
+            "src": "ramp"
+          },
           {
             "d": "2026-10-14",
             "amt": 152.89,
@@ -13089,6 +13134,44 @@
       "stage": "Ready",
       "stage_ord": 7,
       "days_elapsed": 2,
+      "days_to_turn": null,
+      "status": "ready"
+    },
+    {
+      "key": "c702|j205",
+      "prop": "c702",
+      "unit": "J205",
+      "at_risk": [],
+      "property_name": "c702",
+      "city": "Spokane",
+      "addr": "7010 N Colton St J205 Spokane, WA 99208",
+      "unit_id": 1427,
+      "unit_status": "Vacant-Unrented",
+      "rent_ready": "Yes",
+      "vacant": true,
+      "days_vacant": 14,
+      "move_out": "2026-10-02",
+      "available_on": "2026-10-22",
+      "ready_on": "2026-10-22",
+      "target_date": "2026-10-22",
+      "next_move_in": null,
+      "rent": "1280.00",
+      "bed_bath": "2/2.00",
+      "sqft": 1025,
+      "region": "Spokane",
+      "next_appt": null,
+      "cost": {
+        "code": "c702-J205",
+        "labor": 0,
+        "materials": 0,
+        "total": 0,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": []
+      },
+      "stage": "Ready",
+      "stage_ord": 7,
+      "days_elapsed": 14,
       "days_to_turn": null,
       "status": "ready"
     },
@@ -29084,8 +29167,8 @@
       "cost": {
         "code": "ps17-A7",
         "labor": 1339.06,
-        "materials": 1208.12,
-        "total": 2547.18,
+        "materials": 1290.21,
+        "total": 2629.27,
         "estimate": 0,
         "laborEntries": [
           {
@@ -29223,6 +29306,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-10-15",
+            "amt": 82.09,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          },
           {
             "d": "2025-12-24",
             "amt": 66.25,
@@ -31720,11 +31810,19 @@
       "cost": {
         "code": "ps25-F41",
         "labor": 0,
-        "materials": 0,
-        "total": 0,
+        "materials": 82.09,
+        "total": 82.09,
         "estimate": 0,
         "laborEntries": [],
-        "materialEntries": []
+        "materialEntries": [
+          {
+            "d": "2026-10-15",
+            "amt": 82.09,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          }
+        ]
       },
       "stage": "Walkthrough",
       "stage_ord": 1,
@@ -33602,6 +33700,215 @@
       "stage_ord": 7,
       "days_elapsed": 61,
       "days_to_turn": 61,
+      "status": "complete"
+    },
+    {
+      "key": "rl16|a22",
+      "prop": "rl16",
+      "unit": "A22",
+      "at_risk": [],
+      "property_name": "rl16",
+      "city": "Richland",
+      "addr": "1621 George Washington Way A22 Richland, WA 99354",
+      "unit_id": 535,
+      "unit_status": "Notice-Unrented",
+      "rent_ready": null,
+      "vacant": false,
+      "days_vacant": null,
+      "move_out": "2026-12-31",
+      "available_on": "2027-01-20",
+      "ready_on": "2027-01-20",
+      "target_date": "2027-01-20",
+      "next_move_in": null,
+      "rent": "1443.00",
+      "bed_bath": "2/1.50",
+      "sqft": 975,
+      "region": "Tri-Cities",
+      "pm": {
+        "projId": 194788,
+        "name": "Turn - 1621 George Washington Way UNIT A22",
+        "status": "COMPLETE",
+        "done": 8,
+        "total": 8,
+        "first_appt": "2025-11-26",
+        "final_walk": "2025-12-05",
+        "final_walk_done": "2025-12-09",
+        "completed_date": "2025-12-09",
+        "due": "2025-12-06",
+        "next_task": null,
+        "tasks": null
+      },
+      "next_appt": null,
+      "cost": {
+        "code": "rl16-A22",
+        "labor": 1268.19,
+        "materials": 2211.02,
+        "total": 3479.21,
+        "estimate": 0,
+        "laborEntries": [
+          {
+            "d": "2025-12-04",
+            "emp": "Ryan G. Robson",
+            "hrs": 3.43,
+            "cost": 78.89,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-12-04",
+            "emp": "James Dunlap",
+            "hrs": 0.88,
+            "cost": 20.24,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-12-04",
+            "emp": "James Dunlap",
+            "hrs": 5.62,
+            "cost": 129.26,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-12-04",
+            "emp": "Ryan G. Robson",
+            "hrs": 2.75,
+            "cost": 63.25,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-12-04",
+            "emp": "Ryan G. Robson",
+            "hrs": 3.33,
+            "cost": 76.59,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-12-03",
+            "emp": "Ryan G. Robson",
+            "hrs": 2.5,
+            "cost": 57.5,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-12-03",
+            "emp": "James Dunlap",
+            "hrs": 8,
+            "cost": 184,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-12-03",
+            "emp": "Ryan G. Robson",
+            "hrs": 4,
+            "cost": 92,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-12-03",
+            "emp": "Ryan G. Robson",
+            "hrs": 3,
+            "cost": 69,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-12-02",
+            "emp": "Ryan G. Robson",
+            "hrs": 4.22,
+            "cost": 97.06,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-12-02",
+            "emp": "James Dunlap",
+            "hrs": 8.03,
+            "cost": 184.69,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-12-02",
+            "emp": "Ryan G. Robson",
+            "hrs": 4.92,
+            "cost": 113.16,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-12-01",
+            "emp": "Margarito Saldana",
+            "hrs": 0.25,
+            "cost": 7.1,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-11-28",
+            "emp": "Ryan G. Robson",
+            "hrs": 4.15,
+            "cost": 95.45,
+            "cat": "Turn"
+          }
+        ],
+        "materialEntries": [
+          {
+            "d": "2025-12-16",
+            "amt": 250,
+            "cat": "Turn",
+            "ln": "montiel",
+            "src": "ramp"
+          },
+          {
+            "d": "2025-12-06",
+            "amt": 350,
+            "cat": "Turn",
+            "ln": "montiel",
+            "src": "ramp"
+          },
+          {
+            "d": "2025-12-04",
+            "amt": 31.73,
+            "cat": "Turn",
+            "ln": "dunlap",
+            "src": "ramp"
+          },
+          {
+            "d": "2025-12-04",
+            "amt": 22.06,
+            "cat": "Turn",
+            "ln": "robson",
+            "src": "ramp"
+          },
+          {
+            "d": "2025-12-03",
+            "amt": 450.43,
+            "cat": "Turn",
+            "ln": "dunlap",
+            "src": "ramp"
+          },
+          {
+            "d": "2025-12-02",
+            "amt": 306.94,
+            "cat": "Turn",
+            "ln": "robson",
+            "src": "ramp"
+          },
+          {
+            "d": "2025-12-02",
+            "amt": 745.48,
+            "cat": "Turn",
+            "ln": "dunlap",
+            "src": "ramp"
+          },
+          {
+            "d": "2025-12-02",
+            "amt": 54.38,
+            "cat": "Turn",
+            "ln": "robson",
+            "src": "ramp"
+          }
+        ]
+      },
+      "turn_end": "2025-12-09",
+      "stage": "Move-out",
+      "stage_ord": 0,
+      "days_elapsed": 0,
+      "days_to_turn": -387,
       "status": "complete"
     },
     {
@@ -39258,6 +39565,131 @@
       "stage_ord": 3,
       "days_elapsed": 0,
       "days_to_turn": -389,
+      "status": "complete"
+    },
+    {
+      "key": "s300|7",
+      "prop": "s300",
+      "unit": "7",
+      "at_risk": [],
+      "property_name": "s300",
+      "city": "Spokane",
+      "addr": "9300 E Sprague Avenue - 7 Spokane, WA 99206",
+      "unit_id": 36,
+      "unit_status": "Notice-Unrented",
+      "rent_ready": null,
+      "vacant": false,
+      "days_vacant": null,
+      "move_out": "2026-12-31",
+      "available_on": "2027-01-20",
+      "ready_on": "2027-01-20",
+      "target_date": "2027-01-20",
+      "next_move_in": null,
+      "rent": "966.00",
+      "bed_bath": "1/1.00",
+      "sqft": 310,
+      "region": "Spokane",
+      "pm": {
+        "projId": 193340,
+        "name": "Turn - 9300 E Sprague Avenue - 7 UNIT 7",
+        "status": "COMPLETE",
+        "done": 11,
+        "total": 11,
+        "first_appt": "2025-10-23",
+        "final_walk": "2026-01-12",
+        "final_walk_done": "2026-01-12",
+        "completed_date": "2026-01-12",
+        "due": "2025-10-26",
+        "next_task": null,
+        "tasks": null
+      },
+      "next_appt": null,
+      "cost": {
+        "code": "s300-7",
+        "labor": 395.63,
+        "materials": 1721.79,
+        "total": 2117.42,
+        "estimate": 0,
+        "laborEntries": [
+          {
+            "d": "2026-01-12",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.17,
+            "cost": 30.13,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-10-30",
+            "emp": "Micheal N. Magoon",
+            "hrs": 2.25,
+            "cost": 56.25,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-10-30",
+            "emp": "Micheal N. Magoon",
+            "hrs": 1.47,
+            "cost": 36.75,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-10-29",
+            "emp": "Micheal N. Magoon",
+            "hrs": 1.65,
+            "cost": 41.25,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-10-29",
+            "emp": "Micheal N. Magoon",
+            "hrs": 5.82,
+            "cost": 145.5,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-10-22",
+            "emp": "Micheal N. Magoon",
+            "hrs": 3.43,
+            "cost": 85.75,
+            "cat": "Turn"
+          }
+        ],
+        "materialEntries": [
+          {
+            "d": "2026-06-25",
+            "amt": 1154.01,
+            "cat": "CapEx",
+            "ln": "Inland Pacific Flooring",
+            "src": "qbo"
+          },
+          {
+            "d": "2025-10-29",
+            "amt": 91.85,
+            "cat": "Turn",
+            "ln": "magoon",
+            "src": "ramp"
+          },
+          {
+            "d": "2025-10-25",
+            "amt": 179,
+            "cat": "Turn",
+            "ln": "meng",
+            "src": "ramp"
+          },
+          {
+            "d": "2025-10-22",
+            "amt": 296.93,
+            "cat": "Turn",
+            "ln": "magoon",
+            "src": "ramp"
+          }
+        ]
+      },
+      "turn_end": "2026-01-12",
+      "stage": "Move-out",
+      "stage_ord": 0,
+      "days_elapsed": 0,
+      "days_to_turn": -353,
       "status": "complete"
     },
     {
