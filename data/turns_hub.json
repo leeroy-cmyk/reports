@@ -1,17 +1,17 @@
 {
   "ok": true,
-  "fetched_at": "2026-10-16T23:54:58.521Z",
+  "fetched_at": "2026-10-17T03:28:11.301Z",
   "summary": {
     "as_of": "2026-10-16",
     "units": 236,
-    "active": 74,
-    "ready": 12,
+    "active": 77,
+    "ready": 9,
     "notice": 10,
-    "at_risk": 35,
-    "unscheduled": 25,
-    "accruing": 25566.99,
-    "avg_days_open": 43,
-    "revenue_at_risk": 3346.87
+    "at_risk": 38,
+    "unscheduled": 28,
+    "accruing": 25484.9,
+    "avg_days_open": 41,
+    "revenue_at_risk": 3496.97
   },
   "rows": [
     {
@@ -53,124 +53,6 @@
       "stage": null,
       "stage_ord": 0,
       "days_elapsed": 78,
-      "days_to_turn": null,
-      "status": "active"
-    },
-    {
-      "key": "ps25|d28",
-      "prop": "ps25",
-      "unit": "D28",
-      "at_risk": [
-        "Nothing scheduled",
-        "Move-in before ready"
-      ],
-      "property_name": "ps25",
-      "city": "Pasco",
-      "addr": "2524 W Sylvester St. - D28 Pasco, WA 99301",
-      "unit_id": 386,
-      "unit_status": "Vacant-Rented",
-      "rent_ready": "No",
-      "vacant": true,
-      "days_vacant": 16,
-      "move_out": "2026-09-30",
-      "available_on": "2026-11-01",
-      "ready_on": "2026-11-01",
-      "target_date": "2026-10-20",
-      "next_move_in": "2026-10-20",
-      "rent": "1162.00",
-      "bed_bath": "1/1.00",
-      "sqft": 655,
-      "region": "Tri-Cities",
-      "pm": {
-        "projId": 246178,
-        "name": "Standard Unit Turn",
-        "status": "ACTIVE",
-        "done": 0,
-        "total": 6,
-        "first_appt": null,
-        "final_walk": null,
-        "final_walk_done": null,
-        "completed_date": null,
-        "due": "2026-10-15",
-        "next_task": null,
-        "tasks": [
-          {
-            "task": "A - Initial walkthrough",
-            "cat": "walkthrough",
-            "done": false,
-            "date": "2026-10-05",
-            "who": "Margarito Saldana",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "D - Maintenance",
-            "cat": "maintenance",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "E - Carpet Cleaning",
-            "cat": "carpet",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "F - Cleaning",
-            "cat": "cleaning",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Schedule Vendors",
-            "cat": "other",
-            "done": false,
-            "date": null,
-            "who": "Margarito Saldana",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Final Walkthrough",
-            "cat": "final-walk",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": null,
-      "cost": {
-        "code": "ps25-D28",
-        "labor": 0,
-        "materials": 82.09,
-        "total": 82.09,
-        "estimate": 0,
-        "laborEntries": [],
-        "materialEntries": [
-          {
-            "d": "2026-10-15",
-            "amt": 82.09,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          }
-        ]
-      },
-      "stage": "Walkthrough",
-      "stage_ord": 1,
-      "days_elapsed": 16,
       "days_to_turn": null,
       "status": "active"
     },
@@ -1181,6 +1063,86 @@
       "status": "active"
     },
     {
+      "key": "c702|e103",
+      "prop": "c702",
+      "unit": "E103",
+      "at_risk": [
+        "Nothing scheduled"
+      ],
+      "property_name": "c702",
+      "city": "Spokane",
+      "addr": "7004 N Colton St E103 Spokane, WA 99208",
+      "unit_id": 1349,
+      "unit_status": "Vacant-Unrented",
+      "rent_ready": "No",
+      "vacant": true,
+      "days_vacant": 1,
+      "move_out": "2026-10-15",
+      "available_on": "2026-11-04",
+      "ready_on": "2026-11-04",
+      "target_date": "2026-11-04",
+      "next_move_in": null,
+      "rent": "1395.00",
+      "bed_bath": "2/2.00",
+      "sqft": 1140,
+      "region": "Spokane",
+      "next_appt": null,
+      "cost": {
+        "code": "c702-E103",
+        "labor": 0,
+        "materials": 0,
+        "total": 0,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": []
+      },
+      "stage": null,
+      "stage_ord": 0,
+      "days_elapsed": 1,
+      "days_to_turn": null,
+      "status": "active"
+    },
+    {
+      "key": "c702|e203",
+      "prop": "c702",
+      "unit": "E203",
+      "at_risk": [
+        "Nothing scheduled"
+      ],
+      "property_name": "c702",
+      "city": "Spokane",
+      "addr": "7004 N Colton St E203 Spokane, WA 99208",
+      "unit_id": 1355,
+      "unit_status": "Vacant-Unrented",
+      "rent_ready": "No",
+      "vacant": true,
+      "days_vacant": 1,
+      "move_out": "2026-10-15",
+      "available_on": "2026-11-04",
+      "ready_on": "2026-11-04",
+      "target_date": "2026-11-04",
+      "next_move_in": null,
+      "rent": "1395.00",
+      "bed_bath": "2/2.00",
+      "sqft": 1140,
+      "region": "Spokane",
+      "next_appt": null,
+      "cost": {
+        "code": "c702-E203",
+        "labor": 0,
+        "materials": 0,
+        "total": 0,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": []
+      },
+      "stage": null,
+      "stage_ord": 0,
+      "days_elapsed": 1,
+      "days_to_turn": null,
+      "status": "active"
+    },
+    {
       "key": "c702|g205",
       "prop": "c702",
       "unit": "G205",
@@ -1473,6 +1435,86 @@
       "stage": "Maintenance",
       "stage_ord": 3,
       "days_elapsed": 57,
+      "days_to_turn": null,
+      "status": "active"
+    },
+    {
+      "key": "c702|j106",
+      "prop": "c702",
+      "unit": "J106",
+      "at_risk": [
+        "Nothing scheduled"
+      ],
+      "property_name": "c702",
+      "city": "Spokane",
+      "addr": "7010 N Colton St J106 Spokane, WA 99208",
+      "unit_id": 1422,
+      "unit_status": "Vacant-Unrented",
+      "rent_ready": "No",
+      "vacant": true,
+      "days_vacant": 2,
+      "move_out": "2026-10-14",
+      "available_on": "2026-12-01",
+      "ready_on": "2026-12-01",
+      "target_date": "2026-11-03",
+      "next_move_in": null,
+      "rent": "1595.00",
+      "bed_bath": "3/2.00",
+      "sqft": 1250,
+      "region": "Spokane",
+      "next_appt": null,
+      "cost": {
+        "code": "c702-J106",
+        "labor": 0,
+        "materials": 0,
+        "total": 0,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": []
+      },
+      "stage": null,
+      "stage_ord": 0,
+      "days_elapsed": 2,
+      "days_to_turn": null,
+      "status": "active"
+    },
+    {
+      "key": "c702|j205",
+      "prop": "c702",
+      "unit": "J205",
+      "at_risk": [
+        "Nothing scheduled"
+      ],
+      "property_name": "c702",
+      "city": "Spokane",
+      "addr": "7010 N Colton St J205 Spokane, WA 99208",
+      "unit_id": 1427,
+      "unit_status": "Vacant-Unrented",
+      "rent_ready": "No",
+      "vacant": true,
+      "days_vacant": 14,
+      "move_out": "2026-10-02",
+      "available_on": "2026-12-01",
+      "ready_on": "2026-12-01",
+      "target_date": "2026-10-22",
+      "next_move_in": null,
+      "rent": "1280.00",
+      "bed_bath": "2/2.00",
+      "sqft": 1025,
+      "region": "Spokane",
+      "next_appt": null,
+      "cost": {
+        "code": "c702-J205",
+        "labor": 0,
+        "materials": 0,
+        "total": 0,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": []
+      },
+      "stage": null,
+      "stage_ord": 0,
+      "days_elapsed": 14,
       "days_to_turn": null,
       "status": "active"
     },
@@ -12498,82 +12540,6 @@
       "status": "complete"
     },
     {
-      "key": "c702|e103",
-      "prop": "c702",
-      "unit": "E103",
-      "at_risk": [],
-      "property_name": "c702",
-      "city": "Spokane",
-      "addr": "7004 N Colton St E103 Spokane, WA 99208",
-      "unit_id": 1349,
-      "unit_status": "Vacant-Unrented",
-      "rent_ready": "Yes",
-      "vacant": true,
-      "days_vacant": 1,
-      "move_out": "2026-10-15",
-      "available_on": "2026-11-04",
-      "ready_on": "2026-11-04",
-      "target_date": "2026-11-04",
-      "next_move_in": null,
-      "rent": "1395.00",
-      "bed_bath": "2/2.00",
-      "sqft": 1140,
-      "region": "Spokane",
-      "next_appt": null,
-      "cost": {
-        "code": "c702-E103",
-        "labor": 0,
-        "materials": 0,
-        "total": 0,
-        "estimate": 0,
-        "laborEntries": [],
-        "materialEntries": []
-      },
-      "stage": "Ready",
-      "stage_ord": 7,
-      "days_elapsed": 1,
-      "days_to_turn": null,
-      "status": "ready"
-    },
-    {
-      "key": "c702|e203",
-      "prop": "c702",
-      "unit": "E203",
-      "at_risk": [],
-      "property_name": "c702",
-      "city": "Spokane",
-      "addr": "7004 N Colton St E203 Spokane, WA 99208",
-      "unit_id": 1355,
-      "unit_status": "Vacant-Unrented",
-      "rent_ready": "Yes",
-      "vacant": true,
-      "days_vacant": 1,
-      "move_out": "2026-10-15",
-      "available_on": "2026-11-04",
-      "ready_on": "2026-11-04",
-      "target_date": "2026-11-04",
-      "next_move_in": null,
-      "rent": "1395.00",
-      "bed_bath": "2/2.00",
-      "sqft": 1140,
-      "region": "Spokane",
-      "next_appt": null,
-      "cost": {
-        "code": "c702-E203",
-        "labor": 0,
-        "materials": 0,
-        "total": 0,
-        "estimate": 0,
-        "laborEntries": [],
-        "materialEntries": []
-      },
-      "stage": "Ready",
-      "stage_ord": 7,
-      "days_elapsed": 1,
-      "days_to_turn": null,
-      "status": "ready"
-    },
-    {
       "key": "c702|f204",
       "prop": "c702",
       "unit": "F204",
@@ -13098,82 +13064,6 @@
       "days_elapsed": null,
       "days_to_turn": null,
       "status": "complete"
-    },
-    {
-      "key": "c702|j106",
-      "prop": "c702",
-      "unit": "J106",
-      "at_risk": [],
-      "property_name": "c702",
-      "city": "Spokane",
-      "addr": "7010 N Colton St J106 Spokane, WA 99208",
-      "unit_id": 1422,
-      "unit_status": "Vacant-Unrented",
-      "rent_ready": "Yes",
-      "vacant": true,
-      "days_vacant": 2,
-      "move_out": "2026-10-14",
-      "available_on": "2026-11-03",
-      "ready_on": "2026-11-03",
-      "target_date": "2026-11-03",
-      "next_move_in": null,
-      "rent": "1595.00",
-      "bed_bath": "3/2.00",
-      "sqft": 1250,
-      "region": "Spokane",
-      "next_appt": null,
-      "cost": {
-        "code": "c702-J106",
-        "labor": 0,
-        "materials": 0,
-        "total": 0,
-        "estimate": 0,
-        "laborEntries": [],
-        "materialEntries": []
-      },
-      "stage": "Ready",
-      "stage_ord": 7,
-      "days_elapsed": 2,
-      "days_to_turn": null,
-      "status": "ready"
-    },
-    {
-      "key": "c702|j205",
-      "prop": "c702",
-      "unit": "J205",
-      "at_risk": [],
-      "property_name": "c702",
-      "city": "Spokane",
-      "addr": "7010 N Colton St J205 Spokane, WA 99208",
-      "unit_id": 1427,
-      "unit_status": "Vacant-Unrented",
-      "rent_ready": "Yes",
-      "vacant": true,
-      "days_vacant": 14,
-      "move_out": "2026-10-02",
-      "available_on": "2026-10-22",
-      "ready_on": "2026-10-22",
-      "target_date": "2026-10-22",
-      "next_move_in": null,
-      "rent": "1280.00",
-      "bed_bath": "2/2.00",
-      "sqft": 1025,
-      "region": "Spokane",
-      "next_appt": null,
-      "cost": {
-        "code": "c702-J205",
-        "labor": 0,
-        "materials": 0,
-        "total": 0,
-        "estimate": 0,
-        "laborEntries": [],
-        "materialEntries": []
-      },
-      "stage": "Ready",
-      "stage_ord": 7,
-      "days_elapsed": 14,
-      "days_to_turn": null,
-      "status": "ready"
     },
     {
       "key": "c702|j301",
@@ -17310,8 +17200,8 @@
       "cost": {
         "code": "kn47-k2-A104",
         "labor": 21.3,
-        "materials": 675.86,
-        "total": 697.16,
+        "materials": 762.41,
+        "total": 783.71,
         "estimate": 0,
         "laborEntries": [
           {
@@ -17323,6 +17213,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-10-16",
+            "amt": 86.55,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          },
           {
             "d": "2026-09-15",
             "amt": 10.43,
@@ -27620,8 +27517,8 @@
       "cost": {
         "code": "ps17-A1",
         "labor": 1030.75,
-        "materials": 1265.7,
-        "total": 2296.45,
+        "materials": 1352.25,
+        "total": 2383,
         "estimate": 1627.64,
         "laborEntries": [
           {
@@ -27815,6 +27712,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-10-16",
+            "amt": 86.55,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          },
           {
             "d": "2026-08-01",
             "amt": 300,
@@ -28232,8 +28136,8 @@
       "cost": {
         "code": "ps17-A11",
         "labor": 417.31,
-        "materials": 546.96,
-        "total": 964.27,
+        "materials": 633.51,
+        "total": 1050.82,
         "estimate": 0,
         "laborEntries": [
           {
@@ -28266,6 +28170,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-10-16",
+            "amt": 86.55,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          },
           {
             "d": "2025-09-30",
             "amt": 20.67,
@@ -30491,8 +30402,8 @@
       "cost": {
         "code": "ps17-B2",
         "labor": 149.96,
-        "materials": 682.52,
-        "total": 832.48,
+        "materials": 769.07,
+        "total": 919.03,
         "estimate": 0,
         "laborEntries": [
           {
@@ -30504,6 +30415,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-10-16",
+            "amt": 86.55,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          },
           {
             "d": "2025-09-08",
             "amt": 320,
@@ -31416,6 +31334,121 @@
       "days_elapsed": null,
       "days_to_turn": null,
       "status": "complete"
+    },
+    {
+      "key": "ps25|d28",
+      "prop": "ps25",
+      "unit": "D28",
+      "at_risk": [],
+      "property_name": "ps25",
+      "city": "Pasco",
+      "addr": "2524 W Sylvester St. - D28 Pasco, WA 99301",
+      "unit_id": 386,
+      "unit_status": "Vacant-Rented",
+      "rent_ready": "Yes",
+      "vacant": true,
+      "days_vacant": 16,
+      "move_out": "2026-09-30",
+      "available_on": null,
+      "ready_on": "2026-11-01",
+      "target_date": "2026-10-20",
+      "next_move_in": "2026-10-20",
+      "rent": "1162.00",
+      "bed_bath": "1/1.00",
+      "sqft": 655,
+      "region": "Tri-Cities",
+      "pm": {
+        "projId": 246178,
+        "name": "Standard Unit Turn",
+        "status": "ACTIVE",
+        "done": 0,
+        "total": 6,
+        "first_appt": null,
+        "final_walk": null,
+        "final_walk_done": null,
+        "completed_date": null,
+        "due": "2026-10-15",
+        "next_task": null,
+        "tasks": [
+          {
+            "task": "A - Initial walkthrough",
+            "cat": "walkthrough",
+            "done": false,
+            "date": "2026-10-05",
+            "who": "Margarito Saldana",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "D - Maintenance",
+            "cat": "maintenance",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "E - Carpet Cleaning",
+            "cat": "carpet",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "F - Cleaning",
+            "cat": "cleaning",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Schedule Vendors",
+            "cat": "other",
+            "done": false,
+            "date": null,
+            "who": "Margarito Saldana",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Final Walkthrough",
+            "cat": "final-walk",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          }
+        ]
+      },
+      "next_appt": null,
+      "cost": {
+        "code": "ps25-D28",
+        "labor": 0,
+        "materials": 82.09,
+        "total": 82.09,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": [
+          {
+            "d": "2026-10-15",
+            "amt": 82.09,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          }
+        ]
+      },
+      "stage": "Ready",
+      "stage_ord": 7,
+      "days_elapsed": 16,
+      "days_to_turn": null,
+      "status": "ready"
     },
     {
       "key": "ps25|d29",
