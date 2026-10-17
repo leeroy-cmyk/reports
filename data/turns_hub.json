@@ -1,15 +1,15 @@
 {
   "ok": true,
-  "fetched_at": "2026-10-17T17:56:56.938Z",
+  "fetched_at": "2026-10-17T22:32:55.646Z",
   "summary": {
     "as_of": "2026-10-17",
-    "units": 237,
+    "units": 238,
     "active": 77,
     "ready": 9,
-    "notice": 11,
+    "notice": 12,
     "at_risk": 39,
     "unscheduled": 30,
-    "accruing": 25711.77,
+    "accruing": 26004.94,
     "avg_days_open": 42,
     "revenue_at_risk": 3496.97
   },
@@ -984,11 +984,18 @@
       "cost": {
         "code": "c702-C202",
         "labor": 0,
-        "materials": 1579.11,
-        "total": 1579.11,
+        "materials": 1872.28,
+        "total": 1872.28,
         "estimate": 0,
         "laborEntries": [],
         "materialEntries": [
+          {
+            "d": "2026-10-17",
+            "amt": 293.17,
+            "cat": "Turn",
+            "ln": "phillips",
+            "src": "ramp"
+          },
           {
             "d": "2026-10-02",
             "amt": 58.71,
@@ -8514,6 +8521,44 @@
       "days_elapsed": null,
       "days_to_turn": null,
       "status": "complete"
+    },
+    {
+      "key": "c302|4",
+      "prop": "c302",
+      "unit": "4",
+      "at_risk": [],
+      "property_name": "c302",
+      "city": "Spokane",
+      "addr": "3025 S Cook St - 4 Spokane, WA 99223",
+      "unit_id": 458,
+      "unit_status": "Notice-Unrented",
+      "rent_ready": null,
+      "vacant": false,
+      "days_vacant": null,
+      "move_out": "2026-11-05",
+      "available_on": "2026-11-25",
+      "ready_on": "2026-11-25",
+      "target_date": "2026-11-25",
+      "next_move_in": null,
+      "rent": "1450.00",
+      "bed_bath": "2/1.00",
+      "sqft": 975,
+      "region": "Spokane",
+      "next_appt": null,
+      "cost": {
+        "code": "c302-4",
+        "labor": 0,
+        "materials": 0,
+        "total": 0,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": []
+      },
+      "stage": "Move-out",
+      "stage_ord": 0,
+      "days_elapsed": 0,
+      "days_to_turn": null,
+      "status": "notice"
     },
     {
       "key": "c302|5",
