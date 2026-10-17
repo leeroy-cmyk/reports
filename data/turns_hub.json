@@ -1,15 +1,15 @@
 {
   "ok": true,
-  "fetched_at": "2026-10-17T12:08:27.944Z",
+  "fetched_at": "2026-10-17T15:37:14.511Z",
   "summary": {
     "as_of": "2026-10-17",
-    "units": 236,
+    "units": 237,
     "active": 77,
     "ready": 9,
-    "notice": 10,
+    "notice": 11,
     "at_risk": 39,
     "unscheduled": 30,
-    "accruing": 25484.9,
+    "accruing": 25711.77,
     "avg_days_open": 42,
     "revenue_at_risk": 3496.97
   },
@@ -1780,11 +1780,18 @@
       },
       "cost": {
         "code": "k104-107-7",
-        "labor": 653.49,
+        "labor": 784.24,
         "materials": 510.89,
-        "total": 1164.38,
+        "total": 1295.13,
         "estimate": 0,
         "laborEntries": [
+          {
+            "d": "2026-10-16",
+            "emp": "Micheal N. Magoon",
+            "hrs": 5.23,
+            "cost": 130.75,
+            "cat": "Turn"
+          },
           {
             "d": "2026-10-15",
             "emp": "Micheal N. Magoon",
@@ -5500,30 +5507,79 @@
       "next_appt": null,
       "cost": {
         "code": "tc68-B57",
-        "labor": 429.03,
+        "labor": 429.57,
         "materials": 0,
-        "total": 429.03,
+        "total": 429.57,
         "estimate": 0,
         "laborEntries": [
           {
             "d": "2026-10-15",
             "emp": "Armani Mitchell",
-            "hrs": 3.03,
-            "cost": 81.81,
+            "hrs": 1.75,
+            "cost": 47.25,
             "cat": "Turn"
           },
           {
             "d": "2026-10-15",
             "emp": "Armani Mitchell",
-            "hrs": 5.08,
-            "cost": 137.16,
+            "hrs": 1.37,
+            "cost": 36.99,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-10-15",
+            "emp": "Armani Mitchell",
+            "hrs": 1.28,
+            "cost": 34.56,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-10-15",
+            "emp": "Armani Mitchell",
+            "hrs": 0.93,
+            "cost": 25.11,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-10-15",
+            "emp": "Armani Mitchell",
+            "hrs": 1.47,
+            "cost": 39.69,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-10-15",
+            "emp": "Armani Mitchell",
+            "hrs": 1.32,
+            "cost": 35.64,
             "cat": "Turn"
           },
           {
             "d": "2026-10-14",
             "emp": "Armani Mitchell",
-            "hrs": 5.53,
-            "cost": 149.31,
+            "hrs": 1.12,
+            "cost": 30.24,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-10-14",
+            "emp": "Armani Mitchell",
+            "hrs": 1.92,
+            "cost": 51.84,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-10-14",
+            "emp": "Armani Mitchell",
+            "hrs": 1.08,
+            "cost": 29.16,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-10-14",
+            "emp": "Armani Mitchell",
+            "hrs": 1.42,
+            "cost": 38.34,
             "cat": "Turn"
           },
           {
@@ -5796,11 +5852,32 @@
       "next_appt": null,
       "cost": {
         "code": "tc68-C62",
-        "labor": 1446.12,
+        "labor": 1541.7,
         "materials": 0,
-        "total": 1446.12,
+        "total": 1541.7,
         "estimate": 3484.9,
         "laborEntries": [
+          {
+            "d": "2026-10-14",
+            "emp": "Armani Mitchell",
+            "hrs": 0.82,
+            "cost": 22.14,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-10-14",
+            "emp": "Armani Mitchell",
+            "hrs": 1.35,
+            "cost": 36.45,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-10-14",
+            "emp": "Armani Mitchell",
+            "hrs": 1.37,
+            "cost": 36.99,
+            "cat": "Turn"
+          },
           {
             "d": "2026-07-15",
             "emp": "Armani Mitchell",
@@ -18368,6 +18445,44 @@
       "days_elapsed": null,
       "days_to_turn": null,
       "status": "complete"
+    },
+    {
+      "key": "kn47|c202",
+      "prop": "kn47",
+      "unit": "C202",
+      "at_risk": [],
+      "property_name": "kn47 K2",
+      "city": "Kennewick",
+      "addr": "632 N Arthur Street C202 Kennewick, WA 99336",
+      "unit_id": 1033,
+      "unit_status": "Notice-Unrented",
+      "rent_ready": null,
+      "vacant": false,
+      "days_vacant": null,
+      "move_out": "2026-10-19",
+      "available_on": null,
+      "ready_on": null,
+      "target_date": "2026-11-08",
+      "next_move_in": null,
+      "rent": "1132.00",
+      "bed_bath": "1/1.00",
+      "sqft": 575,
+      "region": "Tri-Cities",
+      "next_appt": null,
+      "cost": {
+        "code": "kn47-C202",
+        "labor": 0,
+        "materials": 0,
+        "total": 0,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": []
+      },
+      "stage": "Move-out",
+      "stage_ord": 0,
+      "days_elapsed": 0,
+      "days_to_turn": null,
+      "status": "notice"
     },
     {
       "key": "kn47|c208",
@@ -42626,8 +42741,15 @@
           {
             "d": "2026-10-13",
             "emp": "Armani Mitchell",
-            "hrs": 2.43,
-            "cost": 65.61,
+            "hrs": 1.48,
+            "cost": 39.96,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-10-13",
+            "emp": "Armani Mitchell",
+            "hrs": 0.95,
+            "cost": 25.65,
             "cat": "Turn"
           }
         ],
