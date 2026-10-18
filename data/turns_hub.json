@@ -1,17 +1,17 @@
 {
   "ok": true,
-  "fetched_at": "2026-10-18T00:23:32.617Z",
+  "fetched_at": "2026-10-18T04:58:00.673Z",
   "summary": {
     "as_of": "2026-10-17",
-    "units": 238,
-    "active": 77,
-    "ready": 9,
-    "notice": 12,
-    "at_risk": 39,
-    "unscheduled": 30,
-    "accruing": 26125.09,
+    "units": 239,
+    "active": 78,
+    "ready": 8,
+    "notice": 13,
+    "at_risk": 40,
+    "unscheduled": 31,
+    "accruing": 11109.18,
     "avg_days_open": 42,
-    "revenue_at_risk": 3496.97
+    "revenue_at_risk": 3550.13
   },
   "rows": [
     {
@@ -184,33 +184,11 @@
       "cost": {
         "code": "c313-31",
         "labor": 0,
-        "materials": 667.06,
-        "total": 667.06,
+        "materials": 0,
+        "total": 0,
         "estimate": 1706.93,
         "laborEntries": [],
-        "materialEntries": [
-          {
-            "d": "2026-09-23",
-            "amt": 15.89,
-            "cat": "Turn",
-            "ln": "easley",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-23",
-            "amt": 65.35,
-            "cat": "Turn",
-            "ln": "easley",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-23",
-            "amt": 585.82,
-            "cat": "Turn",
-            "ln": "easley",
-            "src": "ramp"
-          }
-        ]
+        "materialEntries": []
       },
       "stage": "Maintenance",
       "stage_ord": 3,
@@ -485,8 +463,8 @@
       "cost": {
         "code": "b101-16",
         "labor": 336.91,
-        "materials": 540.03,
-        "total": 876.94,
+        "materials": 0,
+        "total": 336.91,
         "estimate": 1439.19,
         "laborEntries": [
           {
@@ -567,22 +545,7 @@
             "cat": "Turn"
           }
         ],
-        "materialEntries": [
-          {
-            "d": "2026-09-16",
-            "amt": 434.91,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-28",
-            "amt": 105.12,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          }
-        ]
+        "materialEntries": []
       },
       "stage": "Maintenance",
       "stage_ord": 3,
@@ -699,8 +662,8 @@
       "cost": {
         "code": "c313-24",
         "labor": 527.14,
-        "materials": 874.31,
-        "total": 1401.45,
+        "materials": 0,
+        "total": 527.14,
         "estimate": 0,
         "laborEntries": [
           {
@@ -816,47 +779,132 @@
             "cat": "Turn"
           }
         ],
-        "materialEntries": [
-          {
-            "d": "2026-09-28",
-            "amt": 19.62,
-            "cat": "Turn",
-            "ln": "normandin",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-28",
-            "amt": 412.33,
-            "cat": "Turn",
-            "ln": "normandin",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-27",
-            "amt": 160.92,
-            "cat": "Turn",
-            "ln": "gutierrez",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-27",
-            "amt": 196.37,
-            "cat": "Turn",
-            "ln": "gutierrez",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-27",
-            "amt": 85.07,
-            "cat": "Turn",
-            "ln": "gutierrez",
-            "src": "ramp"
-          }
-        ]
+        "materialEntries": []
       },
       "stage": "Carpet",
       "stage_ord": 5,
       "days_elapsed": 139,
+      "days_to_turn": null,
+      "status": "active"
+    },
+    {
+      "key": "c702|b201",
+      "prop": "c702",
+      "unit": "B201",
+      "at_risk": [
+        "Available date passed"
+      ],
+      "property_name": "c702",
+      "city": "Spokane",
+      "addr": "7020 N Colton St B201 Spokane, WA 99208",
+      "unit_id": 1293,
+      "unit_status": "Vacant-Unrented",
+      "rent_ready": "No",
+      "vacant": true,
+      "days_vacant": 29,
+      "move_out": "2026-09-18",
+      "available_on": "2026-10-14",
+      "ready_on": "2026-10-14",
+      "target_date": "2026-10-08",
+      "next_move_in": null,
+      "rent": "1595.00",
+      "bed_bath": "3/2.00",
+      "sqft": 1250,
+      "region": "Spokane",
+      "pm": {
+        "projId": 245580,
+        "name": "Standard Unit Turn",
+        "status": "ACTIVE",
+        "done": 2,
+        "total": 7,
+        "first_appt": "2026-09-25",
+        "final_walk": "2026-10-02",
+        "final_walk_done": null,
+        "completed_date": "2026-09-30",
+        "due": "2026-10-07",
+        "next_task": {
+          "date": "2026-10-07",
+          "task": "final-walk"
+        },
+        "tasks": [
+          {
+            "task": "A - Initial walkthrough",
+            "cat": "walkthrough",
+            "done": true,
+            "date": "2026-09-25",
+            "who": "Matt Romme",
+            "completed": "2026-09-25",
+            "vendor": false
+          },
+          {
+            "task": "D - Maintenance",
+            "cat": "maintenance",
+            "done": true,
+            "date": "2026-09-25",
+            "who": "Brady Smith",
+            "completed": "2026-09-30",
+            "vendor": false
+          },
+          {
+            "task": "E - Carpet Cleaning",
+            "cat": "carpet",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "F - Cleaning",
+            "cat": "cleaning",
+            "done": false,
+            "date": "2026-10-01",
+            "who": "U&K Properties LLC",
+            "completed": null,
+            "vendor": true
+          },
+          {
+            "task": "Punch List",
+            "cat": "other",
+            "done": false,
+            "date": "2026-10-06",
+            "who": "Brady Smith",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Schedule Vendors",
+            "cat": "other",
+            "done": false,
+            "date": null,
+            "who": "Matt Romme",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Final Walkthrough",
+            "cat": "final-walk",
+            "done": false,
+            "date": "2026-10-02",
+            "who": "Matt Romme",
+            "completed": null,
+            "vendor": false
+          }
+        ]
+      },
+      "next_appt": null,
+      "cost": {
+        "code": "c702-B201",
+        "labor": 0,
+        "materials": 0,
+        "total": 0,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": []
+      },
+      "stage": "Carpet",
+      "stage_ord": 5,
+      "days_elapsed": 29,
       "days_to_turn": null,
       "status": "active"
     },
@@ -984,40 +1032,11 @@
       "cost": {
         "code": "c702-C202",
         "labor": 0,
-        "materials": 1872.28,
-        "total": 1872.28,
+        "materials": 0,
+        "total": 0,
         "estimate": 0,
         "laborEntries": [],
-        "materialEntries": [
-          {
-            "d": "2026-10-17",
-            "amt": 293.17,
-            "cat": "Turn",
-            "ln": "phillips",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-02",
-            "amt": 58.71,
-            "cat": "Turn",
-            "ln": "smith",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-15",
-            "amt": 1179.12,
-            "cat": "Turn",
-            "ln": "smith",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-10",
-            "amt": 341.28,
-            "cat": "Turn",
-            "ln": "smith",
-            "src": "ramp"
-          }
-        ]
+        "materialEntries": []
       },
       "stage": "Cleaning",
       "stage_ord": 4,
@@ -1421,19 +1440,11 @@
       "cost": {
         "code": "c702-H301",
         "labor": 0,
-        "materials": 130.35,
-        "total": 130.35,
+        "materials": 0,
+        "total": 0,
         "estimate": 4564.72,
         "laborEntries": [],
-        "materialEntries": [
-          {
-            "d": "2026-10-16",
-            "amt": 130.35,
-            "cat": "Turn",
-            "ln": "easley",
-            "src": "ramp"
-          }
-        ]
+        "materialEntries": []
       },
       "stage": "Maintenance",
       "stage_ord": 3,
@@ -1788,8 +1799,8 @@
       "cost": {
         "code": "k104-107-7",
         "labor": 784.24,
-        "materials": 510.89,
-        "total": 1295.13,
+        "materials": 0,
+        "total": 784.24,
         "estimate": 0,
         "laborEntries": [
           {
@@ -1954,22 +1965,7 @@
             "cat": "Turn"
           }
         ],
-        "materialEntries": [
-          {
-            "d": "2026-10-16",
-            "amt": 70.81,
-            "cat": "Turn",
-            "ln": "magoon",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-13",
-            "amt": 440.08,
-            "cat": "Turn",
-            "ln": "magoon",
-            "src": "ramp"
-          }
-        ]
+        "materialEntries": []
       },
       "stage": "Maintenance",
       "stage_ord": 3,
@@ -2109,8 +2105,8 @@
       "cost": {
         "code": "k104-509-4",
         "labor": 915.75,
-        "materials": 732.61,
-        "total": 1648.36,
+        "materials": 0,
+        "total": 915.75,
         "estimate": 0,
         "laborEntries": [
           {
@@ -2310,43 +2306,7 @@
             "cat": "Turn"
           }
         ],
-        "materialEntries": [
-          {
-            "d": "2026-10-13",
-            "amt": 39.27,
-            "cat": "Turn",
-            "ln": "normandin",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-13",
-            "amt": 65.38,
-            "cat": "Turn",
-            "ln": "normandin",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-12",
-            "amt": 426,
-            "cat": "Turn",
-            "ln": "normandin",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-11",
-            "amt": 95.3,
-            "cat": "Turn",
-            "ln": "magoon",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-08",
-            "amt": 106.66,
-            "cat": "Turn",
-            "ln": "magoon",
-            "src": "ramp"
-          }
-        ]
+        "materialEntries": []
       },
       "stage": "Maintenance",
       "stage_ord": 3,
@@ -3099,8 +3059,8 @@
       "cost": {
         "code": "m221-33",
         "labor": 354.25,
-        "materials": 160.65,
-        "total": 514.9,
+        "materials": 0,
+        "total": 354.25,
         "estimate": 746.88,
         "laborEntries": [
           {
@@ -3181,29 +3141,7 @@
             "cat": "Turn"
           }
         ],
-        "materialEntries": [
-          {
-            "d": "2026-10-16",
-            "amt": 119.05,
-            "cat": "Turn",
-            "ln": "normandin",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-28",
-            "amt": 7.61,
-            "cat": "Turn",
-            "ln": "magoon",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-27",
-            "amt": 33.99,
-            "cat": "Turn",
-            "ln": "magoon",
-            "src": "ramp"
-          }
-        ]
+        "materialEntries": []
       },
       "stage": "Maintenance",
       "stage_ord": 3,
@@ -3999,8 +3937,8 @@
       "cost": {
         "code": "p705-17",
         "labor": 2142.56,
-        "materials": 1906.75,
-        "total": 4049.31,
+        "materials": 0,
+        "total": 2142.56,
         "estimate": 0,
         "laborEntries": [
           {
@@ -4424,57 +4362,7 @@
             "cat": "Turn"
           }
         ],
-        "materialEntries": [
-          {
-            "d": "2026-09-21",
-            "amt": 46.33,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-16",
-            "amt": 598.41,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-04",
-            "amt": 246.25,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-04",
-            "amt": 235.94,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-28",
-            "amt": 173.08,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-27",
-            "amt": 527.22,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-25",
-            "amt": 79.52,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          }
-        ]
+        "materialEntries": []
       },
       "stage": "Maintenance",
       "stage_ord": 3,
@@ -4614,8 +4502,8 @@
       "cost": {
         "code": "ps25-C18",
         "labor": 107.35,
-        "materials": 82.09,
-        "total": 189.44,
+        "materials": 0,
+        "total": 107.35,
         "estimate": 0,
         "laborEntries": [
           {
@@ -4626,15 +4514,7 @@
             "cat": "Turn"
           }
         ],
-        "materialEntries": [
-          {
-            "d": "2026-10-15",
-            "amt": 82.09,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          }
-        ]
+        "materialEntries": []
       },
       "stage": "Walkthrough",
       "stage_ord": 1,
@@ -4769,8 +4649,8 @@
       "cost": {
         "code": "rl16-D08",
         "labor": 28.4,
-        "materials": 1176.33,
-        "total": 1204.73,
+        "materials": 188.63,
+        "total": 217.03,
         "estimate": 0,
         "laborEntries": [
           {
@@ -4782,48 +4662,6 @@
           }
         ],
         "materialEntries": [
-          {
-            "d": "2026-10-02",
-            "amt": 367.86,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-28",
-            "amt": 48.93,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-28",
-            "amt": 41.46,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-26",
-            "amt": -75.04,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-24",
-            "amt": 529.45,
-            "cat": "Turn",
-            "ln": "williams",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-22",
-            "amt": 75.04,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          },
           {
             "d": "2026-04-21",
             "amt": 188.63,
@@ -7701,8 +7539,8 @@
       "cost": {
         "code": "b101-11",
         "labor": 1273.5,
-        "materials": 1308.11,
-        "total": 2581.61,
+        "materials": 888.59,
+        "total": 2162.09,
         "estimate": 1362.32,
         "laborEntries": [
           {
@@ -7988,27 +7826,6 @@
         ],
         "materialEntries": [
           {
-            "d": "2026-10-05",
-            "amt": 34.78,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-29",
-            "amt": 133.2,
-            "cat": "Turn",
-            "ln": "magoon",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-25",
-            "amt": 251.54,
-            "cat": "Turn",
-            "ln": "magoon",
-            "src": "ramp"
-          },
-          {
             "d": "2026-02-04",
             "amt": 231,
             "cat": "Turn",
@@ -8188,8 +8005,8 @@
       "cost": {
         "code": "b101-14",
         "labor": 545.08,
-        "materials": 1327.59,
-        "total": 1872.67,
+        "materials": 833.26,
+        "total": 1378.34,
         "estimate": 0,
         "laborEntries": [
           {
@@ -8250,27 +8067,6 @@
           }
         ],
         "materialEntries": [
-          {
-            "d": "2026-10-16",
-            "amt": 15.42,
-            "cat": "Turn",
-            "ln": "normandin",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-14",
-            "amt": 152.89,
-            "cat": "Turn",
-            "ln": "normandin",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-14",
-            "amt": 326.02,
-            "cat": "Turn",
-            "ln": "normandin",
-            "src": "ramp"
-          },
           {
             "d": "2025-07-25",
             "amt": 269.5,
@@ -8422,8 +8218,8 @@
       "cost": {
         "code": "b101-8",
         "labor": 257.74,
-        "materials": 394.6,
-        "total": 652.34,
+        "materials": 250,
+        "total": 507.74,
         "estimate": 778.5,
         "laborEntries": [
           {
@@ -8497,27 +8293,6 @@
             "cat": "Turn",
             "ln": "SPO Cleaning",
             "src": "qbo"
-          },
-          {
-            "d": "2026-07-27",
-            "amt": 21.96,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-27",
-            "amt": 14.15,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-27",
-            "amt": 108.49,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
           }
         ]
       },
@@ -8656,8 +8431,8 @@
       "cost": {
         "code": "c302-5",
         "labor": 833.14,
-        "materials": 736.16,
-        "total": 1569.3,
+        "materials": 128.37,
+        "total": 961.51,
         "estimate": 1643.95,
         "laborEntries": [
           {
@@ -8866,34 +8641,6 @@
         ],
         "materialEntries": [
           {
-            "d": "2026-08-13",
-            "amt": 69.74,
-            "cat": "Turn",
-            "ln": "magoon",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-03",
-            "amt": 264.63,
-            "cat": "Turn",
-            "ln": "magoon",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-30",
-            "amt": 59.03,
-            "cat": "Turn",
-            "ln": "magoon",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-28",
-            "amt": 214.39,
-            "cat": "Turn",
-            "ln": "magoon",
-            "src": "ramp"
-          },
-          {
             "d": "2025-07-02",
             "amt": 52.21,
             "cat": "Turn",
@@ -9030,8 +8777,8 @@
       "cost": {
         "code": "c302-7",
         "labor": 353.04,
-        "materials": 482.96,
-        "total": 836,
+        "materials": 0,
+        "total": 353.04,
         "estimate": 0,
         "laborEntries": [
           {
@@ -9098,43 +8845,7 @@
             "cat": "Turn"
           }
         ],
-        "materialEntries": [
-          {
-            "d": "2026-09-30",
-            "amt": 58.87,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-30",
-            "amt": 145.72,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-26",
-            "amt": 5.43,
-            "cat": "Turn",
-            "ln": "wright",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-26",
-            "amt": 131.81,
-            "cat": "Turn",
-            "ln": "wright",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-04",
-            "amt": 141.13,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          }
-        ]
+        "materialEntries": []
       },
       "stage": "Ready",
       "stage_ord": 7,
@@ -9246,68 +8957,11 @@
       "cost": {
         "code": "c313-1",
         "labor": 0,
-        "materials": 624.19,
-        "total": 624.19,
+        "materials": 0,
+        "total": 0,
         "estimate": 1859.72,
         "laborEntries": [],
-        "materialEntries": [
-          {
-            "d": "2026-10-06",
-            "amt": 40.31,
-            "cat": "Turn",
-            "ln": "romme",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-06",
-            "amt": 14.16,
-            "cat": "Turn",
-            "ln": "normandin",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-05",
-            "amt": 6.52,
-            "cat": "Turn",
-            "ln": "normandin",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-05",
-            "amt": 4.34,
-            "cat": "Turn",
-            "ln": "normandin",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-25",
-            "amt": 25.59,
-            "cat": "Turn",
-            "ln": "normandin",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-24",
-            "amt": 32.49,
-            "cat": "Turn",
-            "ln": "normandin",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-23",
-            "amt": 99.13,
-            "cat": "Turn",
-            "ln": "normandin",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-22",
-            "amt": 401.65,
-            "cat": "Turn",
-            "ln": "normandin",
-            "src": "ramp"
-          }
-        ]
+        "materialEntries": []
       },
       "turn_end": "2026-10-06",
       "af_turn_end": "2026-10-11",
@@ -9448,8 +9102,8 @@
       "cost": {
         "code": "c313-10",
         "labor": 78.76,
-        "materials": 1318.17,
-        "total": 1396.93,
+        "materials": 0,
+        "total": 78.76,
         "estimate": 2588,
         "laborEntries": [
           {
@@ -9474,43 +9128,7 @@
             "cat": "Turn"
           }
         ],
-        "materialEntries": [
-          {
-            "d": "2026-10-06",
-            "amt": 29.44,
-            "cat": "Turn",
-            "ln": "romme",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-24",
-            "amt": 42.48,
-            "cat": "Turn",
-            "ln": "easley",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-24",
-            "amt": 10.18,
-            "cat": "Turn",
-            "ln": "easley",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-21",
-            "amt": 25.9,
-            "cat": "Turn",
-            "ln": "romme",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-21",
-            "amt": 1210.17,
-            "cat": "Turn",
-            "ln": "romme",
-            "src": "ramp"
-          }
-        ]
+        "materialEntries": []
       },
       "turn_end": "2026-10-06",
       "af_turn_end": "2026-10-08",
@@ -9623,47 +9241,11 @@
       "cost": {
         "code": "c313-11",
         "labor": 0,
-        "materials": 639.24,
-        "total": 639.24,
+        "materials": 0,
+        "total": 0,
         "estimate": 0,
         "laborEntries": [],
-        "materialEntries": [
-          {
-            "d": "2026-10-09",
-            "amt": 4.89,
-            "cat": "Turn",
-            "ln": "normandin",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-09",
-            "amt": 64.37,
-            "cat": "Turn",
-            "ln": "normandin",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-09",
-            "amt": 13.57,
-            "cat": "Turn",
-            "ln": "normandin",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-02",
-            "amt": 83.95,
-            "cat": "Turn",
-            "ln": "normandin",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-02",
-            "amt": 472.46,
-            "cat": "Turn",
-            "ln": "normandin",
-            "src": "ramp"
-          }
-        ]
+        "materialEntries": []
       },
       "stage": "Walkthrough",
       "stage_ord": 1,
@@ -9775,8 +9357,8 @@
       "cost": {
         "code": "c313-12",
         "labor": 23,
-        "materials": 622.12,
-        "total": 645.12,
+        "materials": 423.5,
+        "total": 446.5,
         "estimate": 765.9,
         "laborEntries": [
           {
@@ -9802,13 +9384,6 @@
           }
         ],
         "materialEntries": [
-          {
-            "d": "2026-09-21",
-            "amt": 198.62,
-            "cat": "Turn",
-            "ln": "normandin",
-            "src": "ramp"
-          },
           {
             "d": "2025-07-25",
             "amt": 115.5,
@@ -10037,8 +9612,8 @@
       "cost": {
         "code": "c313-33",
         "labor": 813.68,
-        "materials": 1225.09,
-        "total": 2038.77,
+        "materials": 1015.15,
+        "total": 1828.83,
         "estimate": 970.95,
         "laborEntries": [
           {
@@ -10161,13 +9736,6 @@
             "cat": "Turn",
             "ln": "SPO Cleaning",
             "src": "qbo"
-          },
-          {
-            "d": "2026-07-24",
-            "amt": 209.94,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
           },
           {
             "d": "2025-08-31",
@@ -10333,8 +9901,8 @@
       "cost": {
         "code": "c313-37",
         "labor": 816.01,
-        "materials": 296.35,
-        "total": 1112.36,
+        "materials": 0,
+        "total": 816.01,
         "estimate": 0,
         "laborEntries": [
           {
@@ -10506,22 +10074,7 @@
             "cat": "Turn"
           }
         ],
-        "materialEntries": [
-          {
-            "d": "2026-08-04",
-            "amt": 34.89,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-29",
-            "amt": 261.46,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          }
-        ]
+        "materialEntries": []
       },
       "turn_end": "2026-08-17",
       "af_turn_end": "2026-08-17",
@@ -10611,26 +10164,11 @@
       "cost": {
         "code": "c702-A101",
         "labor": 0,
-        "materials": 378.54,
-        "total": 378.54,
+        "materials": 0,
+        "total": 0,
         "estimate": 0,
         "laborEntries": [],
-        "materialEntries": [
-          {
-            "d": "2026-10-07",
-            "amt": 15.82,
-            "cat": "Turn",
-            "ln": "easley",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-20",
-            "amt": 362.72,
-            "cat": "Turn",
-            "ln": "smith",
-            "src": "ramp"
-          }
-        ]
+        "materialEntries": []
       },
       "turn_end": "2026-09-01",
       "stage": "Final Walk",
@@ -10719,61 +10257,11 @@
       "cost": {
         "code": "c702-A102",
         "labor": 0,
-        "materials": 1379.61,
-        "total": 1379.61,
+        "materials": 0,
+        "total": 0,
         "estimate": 0,
         "laborEntries": [],
-        "materialEntries": [
-          {
-            "d": "2026-08-26",
-            "amt": 492.66,
-            "cat": "Turn",
-            "ln": "romme",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-25",
-            "amt": 60.4,
-            "cat": "Turn",
-            "ln": "romme",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-21",
-            "amt": 91.59,
-            "cat": "Turn",
-            "ln": "romme",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-19",
-            "amt": 212.61,
-            "cat": "Turn",
-            "ln": "romme",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-19",
-            "amt": 82.85,
-            "cat": "Turn",
-            "ln": "romme",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-18",
-            "amt": 225.77,
-            "cat": "Turn",
-            "ln": "romme",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-13",
-            "amt": 213.73,
-            "cat": "Turn",
-            "ln": "phillips",
-            "src": "ramp"
-          }
-        ]
+        "materialEntries": []
       },
       "turn_end": "2026-09-08",
       "stage": "Maintenance",
@@ -10880,54 +10368,11 @@
       "cost": {
         "code": "c702-A103",
         "labor": 0,
-        "materials": 5005.45,
-        "total": 5005.45,
+        "materials": 0,
+        "total": 0,
         "estimate": 8312.44,
         "laborEntries": [],
-        "materialEntries": [
-          {
-            "d": "2026-10-15",
-            "amt": 3139.75,
-            "cat": "Turn",
-            "ln": "romme",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-05",
-            "amt": 32.96,
-            "cat": "Turn",
-            "ln": "easley",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-02",
-            "amt": 58.31,
-            "cat": "Turn",
-            "ln": "easley",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-30",
-            "amt": 271.66,
-            "cat": "Turn",
-            "ln": "easley",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-30",
-            "amt": 1218.65,
-            "cat": "Turn",
-            "ln": "easley",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-29",
-            "amt": 284.12,
-            "cat": "Turn",
-            "ln": "easley",
-            "src": "ramp"
-          }
-        ]
+        "materialEntries": []
       },
       "af_turn_end": "2026-10-15",
       "stage": "Ready",
@@ -11057,19 +10502,11 @@
       "cost": {
         "code": "c702-A201",
         "labor": 0,
-        "materials": 318.78,
-        "total": 318.78,
+        "materials": 0,
+        "total": 0,
         "estimate": 0,
         "laborEntries": [],
-        "materialEntries": [
-          {
-            "d": "2026-10-13",
-            "amt": 318.78,
-            "cat": "Turn",
-            "ln": "smith",
-            "src": "ramp"
-          }
-        ]
+        "materialEntries": []
       },
       "stage": "Maintenance",
       "stage_ord": 3,
@@ -11450,167 +10887,17 @@
       "cost": {
         "code": "c702-B106",
         "labor": 0,
-        "materials": 275.76,
-        "total": 275.76,
+        "materials": 0,
+        "total": 0,
         "estimate": 0,
         "laborEntries": [],
-        "materialEntries": [
-          {
-            "d": "2026-09-07",
-            "amt": 275.76,
-            "cat": "Turn",
-            "ln": "smith",
-            "src": "ramp"
-          }
-        ]
+        "materialEntries": []
       },
       "stage": "Maintenance",
       "stage_ord": 3,
       "days_elapsed": null,
       "days_to_turn": null,
       "status": "other"
-    },
-    {
-      "key": "c702|b201",
-      "prop": "c702",
-      "unit": "B201",
-      "at_risk": [],
-      "property_name": "c702",
-      "city": "Spokane",
-      "addr": "7020 N Colton St B201 Spokane, WA 99208",
-      "unit_id": 1293,
-      "unit_status": "Vacant-Unrented",
-      "rent_ready": "Yes",
-      "vacant": true,
-      "days_vacant": 29,
-      "move_out": "2026-09-18",
-      "available_on": "2026-10-14",
-      "ready_on": "2026-10-14",
-      "target_date": "2026-10-08",
-      "next_move_in": null,
-      "rent": "1595.00",
-      "bed_bath": "3/2.00",
-      "sqft": 1250,
-      "region": "Spokane",
-      "pm": {
-        "projId": 245580,
-        "name": "Standard Unit Turn",
-        "status": "ACTIVE",
-        "done": 2,
-        "total": 7,
-        "first_appt": "2026-09-25",
-        "final_walk": "2026-10-02",
-        "final_walk_done": null,
-        "completed_date": "2026-09-30",
-        "due": "2026-10-07",
-        "next_task": {
-          "date": "2026-10-07",
-          "task": "final-walk"
-        },
-        "tasks": [
-          {
-            "task": "A - Initial walkthrough",
-            "cat": "walkthrough",
-            "done": true,
-            "date": "2026-09-25",
-            "who": "Matt Romme",
-            "completed": "2026-09-25",
-            "vendor": false
-          },
-          {
-            "task": "D - Maintenance",
-            "cat": "maintenance",
-            "done": true,
-            "date": "2026-09-25",
-            "who": "Brady Smith",
-            "completed": "2026-09-30",
-            "vendor": false
-          },
-          {
-            "task": "E - Carpet Cleaning",
-            "cat": "carpet",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "F - Cleaning",
-            "cat": "cleaning",
-            "done": false,
-            "date": "2026-10-01",
-            "who": "U&K Properties LLC",
-            "completed": null,
-            "vendor": true
-          },
-          {
-            "task": "Punch List",
-            "cat": "other",
-            "done": false,
-            "date": "2026-10-06",
-            "who": "Brady Smith",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Schedule Vendors",
-            "cat": "other",
-            "done": false,
-            "date": null,
-            "who": "Matt Romme",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Final Walkthrough",
-            "cat": "final-walk",
-            "done": false,
-            "date": "2026-10-02",
-            "who": "Matt Romme",
-            "completed": null,
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": null,
-      "cost": {
-        "code": "c702-B201",
-        "labor": 0,
-        "materials": 472.2,
-        "total": 472.2,
-        "estimate": 0,
-        "laborEntries": [],
-        "materialEntries": [
-          {
-            "d": "2026-10-12",
-            "amt": 201.73,
-            "cat": "Turn",
-            "ln": "smith",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-09",
-            "amt": 46.33,
-            "cat": "Turn",
-            "ln": "smith",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-23",
-            "amt": 224.14,
-            "cat": "Turn",
-            "ln": "smith",
-            "src": "ramp"
-          }
-        ]
-      },
-      "af_turn_end": "2026-10-15",
-      "stage": "Ready",
-      "stage_ord": 7,
-      "days_elapsed": 29,
-      "days_to_turn": null,
-      "status": "ready"
     },
     {
       "key": "c702|b301",
@@ -11742,19 +11029,11 @@
       "cost": {
         "code": "c702-B301",
         "labor": 0,
-        "materials": 492.77,
-        "total": 492.77,
+        "materials": 0,
+        "total": 0,
         "estimate": 0,
         "laborEntries": [],
-        "materialEntries": [
-          {
-            "d": "2026-09-30",
-            "amt": 492.77,
-            "cat": "Turn",
-            "ln": "smith",
-            "src": "ramp"
-          }
-        ]
+        "materialEntries": []
       },
       "stage": "Maintenance",
       "stage_ord": 3,
@@ -11968,33 +11247,11 @@
       "cost": {
         "code": "c702-C203",
         "labor": 0,
-        "materials": 509.59,
-        "total": 509.59,
+        "materials": 0,
+        "total": 0,
         "estimate": 0,
         "laborEntries": [],
-        "materialEntries": [
-          {
-            "d": "2026-09-04",
-            "amt": 155.5,
-            "cat": "Turn",
-            "ln": "smith",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-03",
-            "amt": 59.68,
-            "cat": "Turn",
-            "ln": "smith",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-02",
-            "amt": 294.41,
-            "cat": "Turn",
-            "ln": "smith",
-            "src": "ramp"
-          }
-        ]
+        "materialEntries": []
       },
       "turn_end": "2026-09-09",
       "stage": "Ready",
@@ -12116,26 +11373,11 @@
       "cost": {
         "code": "c702-C205",
         "labor": 0,
-        "materials": 133.32,
-        "total": 133.32,
+        "materials": 0,
+        "total": 0,
         "estimate": 0,
         "laborEntries": [],
-        "materialEntries": [
-          {
-            "d": "2026-10-09",
-            "amt": 21.57,
-            "cat": "Turn",
-            "ln": "smith",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-08",
-            "amt": 111.75,
-            "cat": "Turn",
-            "ln": "smith",
-            "src": "ramp"
-          }
-        ]
+        "materialEntries": []
       },
       "stage": "Ready",
       "stage_ord": 7,
@@ -12379,54 +11621,11 @@
       "cost": {
         "code": "c702-C304",
         "labor": 0,
-        "materials": 581.15,
-        "total": 581.15,
+        "materials": 0,
+        "total": 0,
         "estimate": 0,
         "laborEntries": [],
-        "materialEntries": [
-          {
-            "d": "2026-10-14",
-            "amt": 46.32,
-            "cat": "Turn",
-            "ln": "easley",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-14",
-            "amt": 16.3,
-            "cat": "Turn",
-            "ln": "easley",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-13",
-            "amt": 46.98,
-            "cat": "Turn",
-            "ln": "easley",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-09",
-            "amt": 23.16,
-            "cat": "Turn",
-            "ln": "easley",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-09",
-            "amt": 133.89,
-            "cat": "Turn",
-            "ln": "easley",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-08",
-            "amt": 314.5,
-            "cat": "Turn",
-            "ln": "easley",
-            "src": "ramp"
-          }
-        ]
+        "materialEntries": []
       },
       "stage": "Maintenance",
       "stage_ord": 3,
@@ -12529,40 +11728,11 @@
       "cost": {
         "code": "c702-C306",
         "labor": 0,
-        "materials": 844.9,
-        "total": 844.9,
+        "materials": 0,
+        "total": 0,
         "estimate": 0,
         "laborEntries": [],
-        "materialEntries": [
-          {
-            "d": "2026-08-28",
-            "amt": 198.62,
-            "cat": "Turn",
-            "ln": "romme",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-27",
-            "amt": 125.33,
-            "cat": "Turn",
-            "ln": "romme",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-26",
-            "amt": 113.95,
-            "cat": "Turn",
-            "ln": "romme",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-25",
-            "amt": 407,
-            "cat": "Turn",
-            "ln": "romme",
-            "src": "ramp"
-          }
-        ]
+        "materialEntries": []
       },
       "turn_end": "2026-09-08",
       "stage": "Ready",
@@ -13284,19 +12454,11 @@
       "cost": {
         "code": "c702-J103",
         "labor": 0,
-        "materials": 255,
-        "total": 255,
+        "materials": 0,
+        "total": 0,
         "estimate": 0,
         "laborEntries": [],
-        "materialEntries": [
-          {
-            "d": "2026-08-23",
-            "amt": 255,
-            "cat": "Turn",
-            "ln": "meng",
-            "src": "ramp"
-          }
-        ]
+        "materialEntries": []
       },
       "turn_end": "2026-08-23",
       "stage": "Final Walk",
@@ -13439,6 +12601,44 @@
       "status": "active"
     },
     {
+      "key": "c702|j303",
+      "prop": "c702",
+      "unit": "J303",
+      "at_risk": [],
+      "property_name": "c702",
+      "city": "Spokane",
+      "addr": "7010 N Colton St J303 Spokane, WA 99208",
+      "unit_id": 1430,
+      "unit_status": "Notice-Unrented",
+      "rent_ready": null,
+      "vacant": false,
+      "days_vacant": null,
+      "move_out": "2026-10-17",
+      "available_on": "2026-11-06",
+      "ready_on": "2026-11-06",
+      "target_date": "2026-11-06",
+      "next_move_in": null,
+      "rent": "1360.00",
+      "bed_bath": "2/2.00",
+      "sqft": 1140,
+      "region": "Spokane",
+      "next_appt": null,
+      "cost": {
+        "code": "c702-J303",
+        "labor": 0,
+        "materials": 0,
+        "total": 0,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": []
+      },
+      "stage": "Move-out",
+      "stage_ord": 0,
+      "days_elapsed": 0,
+      "days_to_turn": null,
+      "status": "notice"
+    },
+    {
       "key": "c702|k102",
       "prop": "c702",
       "unit": "K102",
@@ -13539,40 +12739,11 @@
       "cost": {
         "code": "c702-K102",
         "labor": 0,
-        "materials": 3633.34,
-        "total": 3633.34,
+        "materials": 0,
+        "total": 0,
         "estimate": 0,
         "laborEntries": [],
-        "materialEntries": [
-          {
-            "d": "2026-10-15",
-            "amt": 1242.69,
-            "cat": "Turn",
-            "ln": "romme",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-13",
-            "amt": 1242.69,
-            "cat": "Turn",
-            "ln": "romme",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-22",
-            "amt": 796.41,
-            "cat": "Turn",
-            "ln": "smith",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-16",
-            "amt": 351.55,
-            "cat": "Turn",
-            "ln": "smith",
-            "src": "ramp"
-          }
-        ]
+        "materialEntries": []
       },
       "stage": "Carpet",
       "stage_ord": 5,
@@ -13710,26 +12881,11 @@
       "cost": {
         "code": "c702-K106",
         "labor": 0,
-        "materials": 231.22,
-        "total": 231.22,
+        "materials": 0,
+        "total": 0,
         "estimate": 1712.34,
         "laborEntries": [],
-        "materialEntries": [
-          {
-            "d": "2026-10-13",
-            "amt": 43.13,
-            "cat": "Turn",
-            "ln": "smith",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-12",
-            "amt": 188.09,
-            "cat": "Turn",
-            "ln": "smith",
-            "src": "ramp"
-          }
-        ]
+        "materialEntries": []
       },
       "stage": "Maintenance",
       "stage_ord": 3,
@@ -13832,33 +12988,11 @@
       "cost": {
         "code": "c702-K303",
         "labor": 0,
-        "materials": 721.05,
-        "total": 721.05,
+        "materials": 0,
+        "total": 0,
         "estimate": 0,
         "laborEntries": [],
-        "materialEntries": [
-          {
-            "d": "2026-08-17",
-            "amt": 241.63,
-            "cat": "Turn",
-            "ln": "phillips",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-15",
-            "amt": 454.37,
-            "cat": "Turn",
-            "ln": "phillips",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-13",
-            "amt": 25.05,
-            "cat": "Turn",
-            "ln": "phillips",
-            "src": "ramp"
-          }
-        ]
+        "materialEntries": []
       },
       "turn_end": "2026-08-23",
       "stage": "Ready",
@@ -13947,8 +13081,8 @@
       "cost": {
         "code": "e328-4",
         "labor": 485.59,
-        "materials": 353.98,
-        "total": 839.57,
+        "materials": 0,
+        "total": 485.59,
         "estimate": 1308.2,
         "laborEntries": [
           {
@@ -14092,15 +13226,7 @@
             "cat": "Turn"
           }
         ],
-        "materialEntries": [
-          {
-            "d": "2026-08-05",
-            "amt": 353.98,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          }
-        ]
+        "materialEntries": []
       },
       "turn_end": "2026-09-08",
       "af_turn_end": "2026-09-14",
@@ -14777,8 +13903,8 @@
       "cost": {
         "code": "hl65-9",
         "labor": 326.5,
-        "materials": 223.21,
-        "total": 549.71,
+        "materials": 0,
+        "total": 326.5,
         "estimate": 0,
         "laborEntries": [
           {
@@ -14859,22 +13985,7 @@
             "cat": "Turn"
           }
         ],
-        "materialEntries": [
-          {
-            "d": "2026-09-01",
-            "amt": 74.81,
-            "cat": "Turn",
-            "ln": "magoon",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-31",
-            "amt": 148.4,
-            "cat": "Turn",
-            "ln": "magoon",
-            "src": "ramp"
-          }
-        ]
+        "materialEntries": []
       },
       "af_turn_end": "2026-09-05",
       "stage": "Walkthrough",
@@ -14972,8 +14083,8 @@
       "cost": {
         "code": "hl73-4",
         "labor": 491.25,
-        "materials": 169.89,
-        "total": 661.14,
+        "materials": 0,
+        "total": 491.25,
         "estimate": 0,
         "laborEntries": [
           {
@@ -15096,15 +14207,7 @@
             "cat": "Turn"
           }
         ],
-        "materialEntries": [
-          {
-            "d": "2026-09-02",
-            "amt": 169.89,
-            "cat": "Turn",
-            "ln": "magoon",
-            "src": "ramp"
-          }
-        ]
+        "materialEntries": []
       },
       "af_turn_end": "2026-09-12",
       "stage": "Walkthrough",
@@ -15202,8 +14305,8 @@
       "cost": {
         "code": "j312-3104",
         "labor": 512.45,
-        "materials": 1637.47,
-        "total": 2149.92,
+        "materials": 1079.62,
+        "total": 1592.07,
         "estimate": 3450.83,
         "laborEntries": [
           {
@@ -15312,13 +14415,6 @@
             "cat": "CapEx",
             "ln": "SPO Cleaning",
             "src": "qbo"
-          },
-          {
-            "d": "2026-07-08",
-            "amt": 557.85,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
           },
           {
             "d": "2025-07-25",
@@ -15992,19 +15088,11 @@
       "cost": {
         "code": "k104-314-10",
         "labor": 0,
-        "materials": 84.47,
-        "total": 84.47,
+        "materials": 0,
+        "total": 0,
         "estimate": 1247.62,
         "laborEntries": [],
-        "materialEntries": [
-          {
-            "d": "2026-10-08",
-            "amt": 84.47,
-            "cat": "Turn",
-            "ln": "romme",
-            "src": "ramp"
-          }
-        ]
+        "materialEntries": []
       },
       "stage": "Walkthrough",
       "stage_ord": 1,
@@ -16292,8 +15380,8 @@
       "cost": {
         "code": "k104-509-1",
         "labor": 1160.08,
-        "materials": 3371.04,
-        "total": 4531.12,
+        "materials": 2841.11,
+        "total": 4001.19,
         "estimate": 1814.53,
         "laborEntries": [
           {
@@ -16543,27 +15631,6 @@
           }
         ],
         "materialEntries": [
-          {
-            "d": "2026-10-08",
-            "amt": 52.25,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-07",
-            "amt": 73.48,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-07",
-            "amt": 404.2,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          },
           {
             "d": "2026-06-25",
             "amt": 2183.86,
@@ -17440,8 +16507,8 @@
       "cost": {
         "code": "kn47-k2-A104",
         "labor": 21.3,
-        "materials": 762.41,
-        "total": 783.71,
+        "materials": 326.4,
+        "total": 347.7,
         "estimate": 0,
         "laborEntries": [
           {
@@ -17453,41 +16520,6 @@
           }
         ],
         "materialEntries": [
-          {
-            "d": "2026-10-16",
-            "amt": 86.55,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-15",
-            "amt": 10.43,
-            "cat": "Turn",
-            "ln": "williams",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-14",
-            "amt": 133.68,
-            "cat": "Turn",
-            "ln": "williams",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-11",
-            "amt": 73.94,
-            "cat": "Turn",
-            "ln": "williams",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-11",
-            "amt": 131.41,
-            "cat": "Turn",
-            "ln": "williams",
-            "src": "ramp"
-          },
           {
             "d": "2025-07-24",
             "amt": 163.2,
@@ -17992,8 +17024,8 @@
       "cost": {
         "code": "kn47-k1-C109",
         "labor": 1581.47,
-        "materials": 3406.46,
-        "total": 4987.93,
+        "materials": 1998.94,
+        "total": 3580.41,
         "estimate": 0,
         "laborEntries": [
           {
@@ -18419,55 +17451,6 @@
         ],
         "materialEntries": [
           {
-            "d": "2026-08-18",
-            "amt": 222.88,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-18",
-            "amt": 146.99,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-17",
-            "amt": 33.23,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-14",
-            "amt": 52.3,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-13",
-            "amt": 135.88,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-12",
-            "amt": 758.34,
-            "cat": "Turn",
-            "ln": "saldana",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-12",
-            "amt": 35.1,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          },
-          {
             "d": "2026-08-07",
             "amt": 350,
             "cat": "Turn",
@@ -18480,13 +17463,6 @@
             "cat": "CapEx",
             "ln": "Virtel Flooring Se",
             "src": "qbo"
-          },
-          {
-            "d": "2026-07-28",
-            "amt": 22.8,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
           }
         ]
       },
@@ -19730,8 +18706,8 @@
       "cost": {
         "code": "kn47-k2-E205",
         "labor": 644.37,
-        "materials": 1169.02,
-        "total": 1813.39,
+        "materials": 350,
+        "total": 994.37,
         "estimate": 0,
         "laborEntries": [
           {
@@ -19952,41 +18928,6 @@
             "cat": "Turn",
             "ln": "Duo Cleaning Compa",
             "src": "qbo"
-          },
-          {
-            "d": "2026-07-15",
-            "amt": 16.91,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-14",
-            "amt": 195.24,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-13",
-            "amt": 172.94,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-13",
-            "amt": 342.89,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-09",
-            "amt": 91.04,
-            "cat": "Turn",
-            "ln": "saldana",
-            "src": "ramp"
           }
         ]
       },
@@ -20377,8 +19318,8 @@
       "cost": {
         "code": "kn47-k1-H101",
         "labor": 281.46,
-        "materials": 1138.87,
-        "total": 1420.33,
+        "materials": 850,
+        "total": 1131.46,
         "estimate": 0,
         "laborEntries": [
           {
@@ -20466,20 +19407,6 @@
             "cat": "CapEx",
             "ln": "Duo Cleaning Compa",
             "src": "qbo"
-          },
-          {
-            "d": "2026-08-03",
-            "amt": 220.37,
-            "cat": "Turn",
-            "ln": "dunlap",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-07",
-            "amt": 68.5,
-            "cat": "Turn",
-            "ln": "saldana",
-            "src": "ramp"
           },
           {
             "d": "2025-06-25",
@@ -21429,8 +20356,8 @@
       "cost": {
         "code": "kn47-k3-k202",
         "labor": 1071.58,
-        "materials": 2097.42,
-        "total": 3169,
+        "materials": 0,
+        "total": 1071.58,
         "estimate": 0,
         "laborEntries": [
           {
@@ -21791,64 +20718,7 @@
             "cat": "CapEx"
           }
         ],
-        "materialEntries": [
-          {
-            "d": "2026-08-05",
-            "amt": 32.61,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-04",
-            "amt": 204.94,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-04",
-            "amt": 279.58,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-03",
-            "amt": 815.93,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-31",
-            "amt": 104.17,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-30",
-            "amt": 269.78,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-29",
-            "amt": 321.91,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-07",
-            "amt": 68.5,
-            "cat": "Turn",
-            "ln": "saldana",
-            "src": "ramp"
-          }
-        ]
+        "materialEntries": []
       },
       "turn_end": "2026-08-07",
       "af_turn_end": "2026-08-25",
@@ -22062,8 +20932,8 @@
       "cost": {
         "code": "kn47-k3-KL100",
         "labor": 540.83,
-        "materials": 1095.64,
-        "total": 1636.47,
+        "materials": 380,
+        "total": 920.83,
         "estimate": 0,
         "laborEntries": [
           {
@@ -22179,34 +21049,6 @@
             "cat": "CapEx",
             "ln": "SOS Carpet & Upholstery",
             "src": "qbo"
-          },
-          {
-            "d": "2026-07-16",
-            "amt": 30.16,
-            "cat": "Turn",
-            "ln": "dunlap",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-15",
-            "amt": 42.04,
-            "cat": "Turn",
-            "ln": "dunlap",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-14",
-            "amt": 548.85,
-            "cat": "Turn",
-            "ln": "dunlap",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-06-29",
-            "amt": 94.59,
-            "cat": "Turn",
-            "ln": "saldana",
-            "src": "ramp"
           }
         ]
       },
@@ -22579,8 +21421,8 @@
       "cost": {
         "code": "kn47-k1-L205",
         "labor": 996.57,
-        "materials": 795.98,
-        "total": 1792.55,
+        "materials": 0,
+        "total": 996.57,
         "estimate": 0,
         "laborEntries": [
           {
@@ -22829,36 +21671,7 @@
             "cat": "CapEx"
           }
         ],
-        "materialEntries": [
-          {
-            "d": "2026-09-03",
-            "amt": 148.87,
-            "cat": "Turn",
-            "ln": "williams",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-02",
-            "amt": 278.52,
-            "cat": "Turn",
-            "ln": "williams",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-01",
-            "amt": 288.03,
-            "cat": "Turn",
-            "ln": "williams",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-27",
-            "amt": 80.56,
-            "cat": "Turn",
-            "ln": "williams",
-            "src": "ramp"
-          }
-        ]
+        "materialEntries": []
       },
       "turn_end": "2026-09-14",
       "af_turn_end": "2026-09-03",
@@ -22957,8 +21770,8 @@
       "cost": {
         "code": "kn47-k1-M103",
         "labor": 404.51,
-        "materials": 279.52,
-        "total": 684.03,
+        "materials": 0,
+        "total": 404.51,
         "estimate": 0,
         "laborEntries": [
           {
@@ -23046,22 +21859,7 @@
             "cat": "Turn"
           }
         ],
-        "materialEntries": [
-          {
-            "d": "2026-07-13",
-            "amt": 199.01,
-            "cat": "Turn",
-            "ln": "dunlap",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-09",
-            "amt": 80.51,
-            "cat": "Turn",
-            "ln": "saldana",
-            "src": "ramp"
-          }
-        ]
+        "materialEntries": []
       },
       "turn_end": "2026-07-20",
       "af_turn_end": "2026-07-21",
@@ -23955,8 +22753,8 @@
       "cost": {
         "code": "m405-20",
         "labor": 211.5,
-        "materials": 729.24,
-        "total": 940.74,
+        "materials": 346.5,
+        "total": 558,
         "estimate": 1445.34,
         "laborEntries": [
           {
@@ -24024,20 +22822,6 @@
           }
         ],
         "materialEntries": [
-          {
-            "d": "2026-10-12",
-            "amt": 22.3,
-            "cat": "Turn",
-            "ln": "magoon",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-09",
-            "amt": 360.44,
-            "cat": "Turn",
-            "ln": "magoon",
-            "src": "ramp"
-          },
           {
             "d": "2025-05-19",
             "amt": 346.5,
@@ -24479,8 +23263,8 @@
       "cost": {
         "code": "m608-6",
         "labor": 1308.69,
-        "materials": 647.61,
-        "total": 1956.3,
+        "materials": 250,
+        "total": 1558.69,
         "estimate": 1749.06,
         "laborEntries": [
           {
@@ -24708,27 +23492,6 @@
             "cat": "Turn",
             "ln": "SPO Cleaning",
             "src": "qbo"
-          },
-          {
-            "d": "2026-07-17",
-            "amt": 22.76,
-            "cat": "Turn",
-            "ln": "magoon",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-16",
-            "amt": 45.41,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-15",
-            "amt": 329.44,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
           }
         ]
       },
@@ -24811,8 +23574,8 @@
       "cost": {
         "code": "ms22-2256",
         "labor": 471.75,
-        "materials": 418.92,
-        "total": 890.67,
+        "materials": 0,
+        "total": 471.75,
         "estimate": 0,
         "laborEntries": [
           {
@@ -24921,22 +23684,7 @@
             "cat": "Turn"
           }
         ],
-        "materialEntries": [
-          {
-            "d": "2026-10-08",
-            "amt": 143.05,
-            "cat": "Turn",
-            "ln": "magoon",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-08",
-            "amt": 275.87,
-            "cat": "Turn",
-            "ln": "magoon",
-            "src": "ramp"
-          }
-        ]
+        "materialEntries": []
       },
       "stage": "Walkthrough",
       "stage_ord": 1,
@@ -25015,8 +23763,8 @@
       "cost": {
         "code": "ms22-2258",
         "labor": 326.75,
-        "materials": 720.28,
-        "total": 1047.03,
+        "materials": 394.42,
+        "total": 721.17,
         "estimate": 1241.86,
         "laborEntries": [
           {
@@ -25112,20 +23860,6 @@
           }
         ],
         "materialEntries": [
-          {
-            "d": "2026-10-06",
-            "amt": 107.09,
-            "cat": "Turn",
-            "ln": "magoon",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-05",
-            "amt": 218.77,
-            "cat": "Turn",
-            "ln": "magoon",
-            "src": "ramp"
-          },
           {
             "d": "2025-08-28",
             "amt": 330,
@@ -26036,8 +24770,8 @@
       "cost": {
         "code": "p705-11",
         "labor": 5185.92,
-        "materials": 4774.04,
-        "total": 9959.96,
+        "materials": 3492.76,
+        "total": 8678.68,
         "estimate": 0,
         "laborEntries": [
           {
@@ -26463,83 +25197,6 @@
         ],
         "materialEntries": [
           {
-            "d": "2026-10-05",
-            "amt": 32.43,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-03",
-            "amt": 45.97,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-03",
-            "amt": 11.41,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-02",
-            "amt": 8.36,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-01",
-            "amt": 18.81,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-28",
-            "amt": 38.49,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-24",
-            "amt": 42.49,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-23",
-            "amt": 75.94,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-22",
-            "amt": 28.27,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-21",
-            "amt": 310.75,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-21",
-            "amt": 668.36,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          },
-          {
             "d": "2025-12-18",
             "amt": 20.8,
             "cat": "Turn",
@@ -26758,8 +25415,8 @@
       "cost": {
         "code": "p705-12",
         "labor": 4869.93,
-        "materials": 2242.52,
-        "total": 7112.45,
+        "materials": 1804.04,
+        "total": 6673.97,
         "estimate": 0,
         "laborEntries": [
           {
@@ -27185,62 +25842,6 @@
         ],
         "materialEntries": [
           {
-            "d": "2026-10-15",
-            "amt": -545.49,
-            "cat": "Turn",
-            "ln": "normandin",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-13",
-            "amt": 545.49,
-            "cat": "Turn",
-            "ln": "normandin",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-08",
-            "amt": 21.05,
-            "cat": "Turn",
-            "ln": "normandin",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-08",
-            "amt": 62.01,
-            "cat": "Turn",
-            "ln": "normandin",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-08",
-            "amt": 46.83,
-            "cat": "Turn",
-            "ln": "normandin",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-07",
-            "amt": 23.7,
-            "cat": "Turn",
-            "ln": "normandin",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-07",
-            "amt": 37.5,
-            "cat": "Turn",
-            "ln": "normandin",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-06",
-            "amt": 247.39,
-            "cat": "Turn",
-            "ln": "normandin",
-            "src": "ramp"
-          },
-          {
             "d": "2026-01-28",
             "amt": 308,
             "cat": "Turn",
@@ -27443,8 +26044,8 @@
       "cost": {
         "code": "p705-19",
         "labor": 803,
-        "materials": 651.05,
-        "total": 1454.05,
+        "materials": 277.96,
+        "total": 1080.96,
         "estimate": 0,
         "laborEntries": [
           {
@@ -27632,27 +26233,6 @@
         ],
         "materialEntries": [
           {
-            "d": "2026-10-01",
-            "amt": 20.7,
-            "cat": "Turn",
-            "ln": "magoon",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-22",
-            "amt": 53.85,
-            "cat": "Turn",
-            "ln": "magoon",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-21",
-            "amt": 298.54,
-            "cat": "Turn",
-            "ln": "magoon",
-            "src": "ramp"
-          },
-          {
             "d": "2025-08-21",
             "amt": 154,
             "cat": "Turn",
@@ -27785,8 +26365,8 @@
       "cost": {
         "code": "ps17-A1",
         "labor": 1030.75,
-        "materials": 1352.25,
-        "total": 2383,
+        "materials": 915.7,
+        "total": 1946.45,
         "estimate": 1627.64,
         "laborEntries": [
           {
@@ -27981,25 +26561,11 @@
         ],
         "materialEntries": [
           {
-            "d": "2026-10-16",
-            "amt": 86.55,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          },
-          {
             "d": "2026-08-01",
             "amt": 300,
             "cat": "Turn",
             "ln": "SOS Carpet & Upholstery",
             "src": "qbo"
-          },
-          {
-            "d": "2026-05-04",
-            "amt": 350,
-            "cat": "Turn",
-            "ln": "meng",
-            "src": "ramp"
           },
           {
             "d": "2026-04-16",
@@ -28118,8 +26684,8 @@
       "cost": {
         "code": "ps17-A10",
         "labor": 532.5,
-        "materials": 943.1,
-        "total": 1475.6,
+        "materials": 700,
+        "total": 1232.5,
         "estimate": 933.94,
         "laborEntries": [
           {
@@ -28229,27 +26795,6 @@
           }
         ],
         "materialEntries": [
-          {
-            "d": "2026-08-13",
-            "amt": 8.47,
-            "cat": "Turn",
-            "ln": "saldana",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-10",
-            "amt": 228.1,
-            "cat": "Turn",
-            "ln": "saldana",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-10",
-            "amt": 6.53,
-            "cat": "Turn",
-            "ln": "saldana",
-            "src": "ramp"
-          },
           {
             "d": "2026-08-06",
             "amt": 350,
@@ -28404,8 +26949,8 @@
       "cost": {
         "code": "ps17-A11",
         "labor": 417.31,
-        "materials": 633.51,
-        "total": 1050.82,
+        "materials": 546.96,
+        "total": 964.27,
         "estimate": 0,
         "laborEntries": [
           {
@@ -28438,13 +26983,6 @@
           }
         ],
         "materialEntries": [
-          {
-            "d": "2026-10-16",
-            "amt": 86.55,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          },
           {
             "d": "2025-09-30",
             "amt": 20.67,
@@ -28603,8 +27141,8 @@
       "cost": {
         "code": "ps17-A12",
         "labor": 284,
-        "materials": 847.8,
-        "total": 1131.8,
+        "materials": 252.15,
+        "total": 536.15,
         "estimate": 0,
         "laborEntries": [
           {
@@ -28623,20 +27161,6 @@
           }
         ],
         "materialEntries": [
-          {
-            "d": "2026-10-01",
-            "amt": 169.84,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-30",
-            "amt": 425.81,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          },
           {
             "d": "2025-08-18",
             "amt": 47.85,
@@ -28740,8 +27264,8 @@
       "cost": {
         "code": "ps17-A3",
         "labor": 1549.34,
-        "materials": 1072.74,
-        "total": 2622.08,
+        "materials": 984,
+        "total": 2533.34,
         "estimate": 1197.06,
         "laborEntries": [
           {
@@ -29181,27 +27705,6 @@
             "src": "qbo"
           },
           {
-            "d": "2026-07-23",
-            "amt": 5,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-21",
-            "amt": 15.24,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-07",
-            "amt": 68.5,
-            "cat": "Turn",
-            "ln": "saldana",
-            "src": "ramp"
-          },
-          {
             "d": "2025-07-10",
             "amt": 53,
             "cat": "Turn",
@@ -29346,8 +27849,8 @@
       "cost": {
         "code": "ps17-A7",
         "labor": 1339.06,
-        "materials": 1290.21,
-        "total": 2629.27,
+        "materials": 1208.12,
+        "total": 2547.18,
         "estimate": 0,
         "laborEntries": [
           {
@@ -29485,13 +27988,6 @@
           }
         ],
         "materialEntries": [
-          {
-            "d": "2026-10-15",
-            "amt": 82.09,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          },
           {
             "d": "2025-12-24",
             "amt": 66.25,
@@ -29659,8 +28155,8 @@
       "cost": {
         "code": "ps17-A8",
         "labor": 1098.97,
-        "materials": 1355.26,
-        "total": 2454.23,
+        "materials": 350,
+        "total": 1448.97,
         "estimate": 0,
         "laborEntries": [
           {
@@ -29932,62 +28428,6 @@
         ],
         "materialEntries": [
           {
-            "d": "2026-06-16",
-            "amt": 350,
-            "cat": "Turn",
-            "ln": "meng",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-06-12",
-            "amt": 70.77,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-06-12",
-            "amt": 97.93,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-06-12",
-            "amt": 48.73,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-06-11",
-            "amt": 301.42,
-            "cat": "Turn",
-            "ln": "saldana",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-06-11",
-            "amt": 5.43,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-06-10",
-            "amt": 111.07,
-            "cat": "Turn",
-            "ln": "saldana",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-06-10",
-            "amt": 19.91,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          },
-          {
             "d": "2025-05-07",
             "amt": 350,
             "cat": "Turn",
@@ -30160,8 +28600,8 @@
       "cost": {
         "code": "ps17-B1",
         "labor": 1603.92,
-        "materials": 1018.62,
-        "total": 2622.54,
+        "materials": 0,
+        "total": 1603.92,
         "estimate": 1112.81,
         "laborEntries": [
           {
@@ -30494,43 +28934,7 @@
             "cat": "CapEx"
           }
         ],
-        "materialEntries": [
-          {
-            "d": "2026-07-28",
-            "amt": 81.49,
-            "cat": "Turn",
-            "ln": "saldana",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-27",
-            "amt": 65.32,
-            "cat": "Turn",
-            "ln": "dunlap",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-22",
-            "amt": 392.39,
-            "cat": "Turn",
-            "ln": "saldana",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-20",
-            "amt": 410.92,
-            "cat": "Turn",
-            "ln": "dunlap",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-07",
-            "amt": 68.5,
-            "cat": "Turn",
-            "ln": "saldana",
-            "src": "ramp"
-          }
-        ]
+        "materialEntries": []
       },
       "turn_end": "2026-07-30",
       "af_turn_end": "2026-07-28",
@@ -30670,8 +29074,8 @@
       "cost": {
         "code": "ps17-B2",
         "labor": 149.96,
-        "materials": 769.07,
-        "total": 919.03,
+        "materials": 682.52,
+        "total": 832.48,
         "estimate": 0,
         "laborEntries": [
           {
@@ -30683,13 +29087,6 @@
           }
         ],
         "materialEntries": [
-          {
-            "d": "2026-10-16",
-            "amt": 86.55,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          },
           {
             "d": "2025-09-08",
             "amt": 320,
@@ -30793,8 +29190,8 @@
       "cost": {
         "code": "ps17-B5",
         "labor": 1702.95,
-        "materials": 1691.73,
-        "total": 3394.68,
+        "materials": 1388.55,
+        "total": 3091.5,
         "estimate": 0,
         "laborEntries": [
           {
@@ -30995,27 +29392,6 @@
           }
         ],
         "materialEntries": [
-          {
-            "d": "2026-08-10",
-            "amt": 23.38,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-10",
-            "amt": 246.52,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-10",
-            "amt": 33.28,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          },
           {
             "d": "2025-08-09",
             "amt": 437.5,
@@ -31323,8 +29699,8 @@
       "cost": {
         "code": "ps25-D27",
         "labor": 795.69,
-        "materials": 2185.62,
-        "total": 2981.31,
+        "materials": 1769.98,
+        "total": 2565.67,
         "estimate": 0,
         "laborEntries": [
           {
@@ -31566,27 +29942,6 @@
             "cat": "CapEx",
             "ln": "Duo Cleaning Compa",
             "src": "qbo"
-          },
-          {
-            "d": "2026-07-28",
-            "amt": 384.08,
-            "cat": "Turn",
-            "ln": "dunlap",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-27",
-            "amt": 21.77,
-            "cat": "Turn",
-            "ln": "dunlap",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-27",
-            "amt": 9.79,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
           }
         ]
       },
@@ -31693,19 +30048,11 @@
       "cost": {
         "code": "ps25-D28",
         "labor": 0,
-        "materials": 82.09,
-        "total": 82.09,
+        "materials": 0,
+        "total": 0,
         "estimate": 0,
         "laborEntries": [],
-        "materialEntries": [
-          {
-            "d": "2026-10-15",
-            "amt": 82.09,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          }
-        ]
+        "materialEntries": []
       },
       "stage": "Ready",
       "stage_ord": 7,
@@ -31811,8 +30158,8 @@
       "cost": {
         "code": "ps25-D29",
         "labor": 325.18,
-        "materials": 102.58,
-        "total": 427.76,
+        "materials": 0,
+        "total": 325.18,
         "estimate": 0,
         "laborEntries": [
           {
@@ -31907,29 +30254,7 @@
             "cat": "CapEx"
           }
         ],
-        "materialEntries": [
-          {
-            "d": "2026-08-31",
-            "amt": 63.13,
-            "cat": "Turn",
-            "ln": "saldana",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-31",
-            "amt": 17.39,
-            "cat": "Turn",
-            "ln": "saldana",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-31",
-            "amt": 22.06,
-            "cat": "Turn",
-            "ln": "saldana",
-            "src": "ramp"
-          }
-        ]
+        "materialEntries": []
       },
       "turn_end": "2026-09-30",
       "stage": "Maintenance",
@@ -32106,19 +30431,11 @@
       "cost": {
         "code": "ps25-F41",
         "labor": 0,
-        "materials": 82.09,
-        "total": 82.09,
+        "materials": 0,
+        "total": 0,
         "estimate": 0,
         "laborEntries": [],
-        "materialEntries": [
-          {
-            "d": "2026-10-15",
-            "amt": 82.09,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          }
-        ]
+        "materialEntries": []
       },
       "stage": "Walkthrough",
       "stage_ord": 1,
@@ -32215,8 +30532,8 @@
       "cost": {
         "code": "ps25-F43",
         "labor": 557.13,
-        "materials": 835.89,
-        "total": 1393.02,
+        "materials": 0,
+        "total": 557.13,
         "estimate": 1166.4,
         "laborEntries": [
           {
@@ -32430,43 +30747,7 @@
             "cat": "CapEx"
           }
         ],
-        "materialEntries": [
-          {
-            "d": "2026-07-16",
-            "amt": 47.88,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-16",
-            "amt": 360.76,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-15",
-            "amt": 13.06,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-15",
-            "amt": 345.69,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-07",
-            "amt": 68.5,
-            "cat": "Turn",
-            "ln": "saldana",
-            "src": "ramp"
-          }
-        ]
+        "materialEntries": []
       },
       "turn_end": "2026-07-21",
       "af_turn_end": "2026-07-22",
@@ -33230,8 +31511,8 @@
       "cost": {
         "code": "rl16-A04",
         "labor": 599.39,
-        "materials": 921.4,
-        "total": 1520.79,
+        "materials": 350,
+        "total": 949.39,
         "estimate": 1150.67,
         "laborEntries": [
           {
@@ -33424,62 +31705,6 @@
             "cat": "CapEx",
             "ln": "Duo Cleaning Compa",
             "src": "qbo"
-          },
-          {
-            "d": "2026-07-21",
-            "amt": 54.38,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-20",
-            "amt": 34.34,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-17",
-            "amt": 19.56,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-17",
-            "amt": 280.34,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-17",
-            "amt": 40.25,
-            "cat": "Turn",
-            "ln": "dunlap",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-17",
-            "amt": 41.32,
-            "cat": "Turn",
-            "ln": "dunlap",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-17",
-            "amt": 14.13,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-07",
-            "amt": 87.08,
-            "cat": "Turn",
-            "ln": "saldana",
-            "src": "ramp"
           }
         ]
       },
@@ -33616,33 +31841,11 @@
       "cost": {
         "code": "rl16-A13",
         "labor": 0,
-        "materials": 861.41,
-        "total": 861.41,
+        "materials": 0,
+        "total": 0,
         "estimate": 3429.75,
         "laborEntries": [],
-        "materialEntries": [
-          {
-            "d": "2026-10-08",
-            "amt": 86.33,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-06",
-            "amt": 39.79,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-06",
-            "amt": 735.29,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          }
-        ]
+        "materialEntries": []
       },
       "stage": "Ready",
       "stage_ord": 7,
@@ -33905,8 +32108,8 @@
       "cost": {
         "code": "rl16-A17",
         "labor": 249.35,
-        "materials": 641.91,
-        "total": 891.26,
+        "materials": 0,
+        "total": 249.35,
         "estimate": 0,
         "laborEntries": [
           {
@@ -33952,43 +32155,7 @@
             "cat": "Turn"
           }
         ],
-        "materialEntries": [
-          {
-            "d": "2026-09-25",
-            "amt": 56.41,
-            "cat": "Turn",
-            "ln": "williams",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-25",
-            "amt": 76.77,
-            "cat": "Turn",
-            "ln": "williams",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-22",
-            "amt": 10.87,
-            "cat": "Turn",
-            "ln": "williams",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-21",
-            "amt": 51.11,
-            "cat": "Turn",
-            "ln": "williams",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-21",
-            "amt": 446.75,
-            "cat": "Turn",
-            "ln": "williams",
-            "src": "ramp"
-          }
-        ]
+        "materialEntries": []
       },
       "turn_end": "2026-09-30",
       "af_turn_end": "2026-10-15",
@@ -34287,8 +32454,8 @@
       "cost": {
         "code": "rl16-B01",
         "labor": 1331.41,
-        "materials": 309.86,
-        "total": 1641.27,
+        "materials": 0,
+        "total": 1331.41,
         "estimate": 0,
         "laborEntries": [
           {
@@ -34607,43 +32774,7 @@
             "cat": "CapEx"
           }
         ],
-        "materialEntries": [
-          {
-            "d": "2026-09-18",
-            "amt": 38.53,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-17",
-            "amt": 138.05,
-            "cat": "Turn",
-            "ln": "williams",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-17",
-            "amt": 69.36,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-16",
-            "amt": 29.56,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-09",
-            "amt": 34.36,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          }
-        ]
+        "materialEntries": []
       },
       "turn_end": "2026-09-22",
       "af_turn_end": "2026-09-23",
@@ -34751,8 +32882,8 @@
       "cost": {
         "code": "rl16-B11",
         "labor": 228.05,
-        "materials": 10.87,
-        "total": 238.92,
+        "materials": 0,
+        "total": 228.05,
         "estimate": 0,
         "laborEntries": [
           {
@@ -34798,15 +32929,7 @@
             "cat": "Turn"
           }
         ],
-        "materialEntries": [
-          {
-            "d": "2026-08-27",
-            "amt": 10.87,
-            "cat": "Turn",
-            "ln": "williams",
-            "src": "ramp"
-          }
-        ]
+        "materialEntries": []
       },
       "turn_end": "2026-09-21",
       "af_turn_end": "2026-09-04",
@@ -34914,32 +33037,11 @@
       "cost": {
         "code": "rl16-B12",
         "labor": 0,
-        "materials": 713.04,
-        "total": 713.04,
+        "materials": 46.72,
+        "total": 46.72,
         "estimate": 1736.27,
         "laborEntries": [],
         "materialEntries": [
-          {
-            "d": "2026-09-22",
-            "amt": 46.21,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-21",
-            "amt": 183.56,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-18",
-            "amt": 436.55,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          },
           {
             "d": "2025-12-31",
             "amt": 46.72,
@@ -35082,33 +33184,11 @@
       "cost": {
         "code": "rl16-B15",
         "labor": 0,
-        "materials": 1676.66,
-        "total": 1676.66,
+        "materials": 0,
+        "total": 0,
         "estimate": 0,
         "laborEntries": [],
-        "materialEntries": [
-          {
-            "d": "2026-10-14",
-            "amt": 263.62,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-12",
-            "amt": 738.18,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-12",
-            "amt": 674.86,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          }
-        ]
+        "materialEntries": []
       },
       "stage": "Walkthrough",
       "stage_ord": 1,
@@ -35702,8 +33782,8 @@
       "cost": {
         "code": "rl16-D04",
         "labor": 70.43,
-        "materials": 1154.74,
-        "total": 1225.17,
+        "materials": 0,
+        "total": 70.43,
         "estimate": 0,
         "laborEntries": [
           {
@@ -35721,29 +33801,7 @@
             "cat": "CapEx"
           }
         ],
-        "materialEntries": [
-          {
-            "d": "2026-09-24",
-            "amt": 424.53,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-23",
-            "amt": 655.17,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-22",
-            "amt": 75.04,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          }
-        ]
+        "materialEntries": []
       },
       "turn_end": "2026-09-30",
       "stage": "Ready",
@@ -35850,8 +33908,8 @@
       "cost": {
         "code": "rl16-D07",
         "labor": 1135.87,
-        "materials": 1387.98,
-        "total": 2523.85,
+        "materials": 475,
+        "total": 1610.87,
         "estimate": 0,
         "laborEntries": [
           {
@@ -36184,55 +34242,6 @@
             "cat": "CapEx",
             "ln": "SOS Carpet & Upholstery",
             "src": "qbo"
-          },
-          {
-            "d": "2026-07-10",
-            "amt": 114.22,
-            "cat": "Turn",
-            "ln": "dunlap",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-10",
-            "amt": 53.19,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-09",
-            "amt": 60.13,
-            "cat": "Turn",
-            "ln": "dunlap",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-09",
-            "amt": 195.44,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-09",
-            "amt": 18.49,
-            "cat": "Turn",
-            "ln": "dunlap",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-08",
-            "amt": 8.25,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-07",
-            "amt": 463.26,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
           }
         ]
       },
@@ -36515,8 +34524,8 @@
       "cost": {
         "code": "rl16-D14",
         "labor": 157.05,
-        "materials": 1243.3,
-        "total": 1400.35,
+        "materials": 674.52,
+        "total": 831.57,
         "estimate": 0,
         "laborEntries": [
           {
@@ -36549,27 +34558,6 @@
           }
         ],
         "materialEntries": [
-          {
-            "d": "2026-09-22",
-            "amt": 56.52,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-07",
-            "amt": 242.25,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-07",
-            "amt": 270.01,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          },
           {
             "d": "2026-05-04",
             "amt": 225,
@@ -36781,8 +34769,8 @@
       "cost": {
         "code": "rl16-D22",
         "labor": 149.1,
-        "materials": 450.61,
-        "total": 599.71,
+        "materials": 0,
+        "total": 149.1,
         "estimate": 1138.61,
         "laborEntries": [
           {
@@ -36821,36 +34809,7 @@
             "cat": "Turn"
           }
         ],
-        "materialEntries": [
-          {
-            "d": "2026-09-22",
-            "amt": 46.21,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-15",
-            "amt": 35,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-14",
-            "amt": 255.95,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-14",
-            "amt": 113.45,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          }
-        ]
+        "materialEntries": []
       },
       "turn_end": "2026-09-30",
       "af_turn_end": "2026-10-01",
@@ -36949,8 +34908,8 @@
       "cost": {
         "code": "rl21-16",
         "labor": 1048.48,
-        "materials": 1864.35,
-        "total": 2912.83,
+        "materials": 1282.63,
+        "total": 2331.11,
         "estimate": 0,
         "laborEntries": [
           {
@@ -37125,31 +35084,10 @@
         "materialEntries": [
           {
             "d": "2026-07-22",
-            "amt": 96.13,
-            "cat": "Turn",
-            "ln": "dunlap",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-22",
             "amt": 400,
             "cat": "CapEx",
             "ln": "Duo Cleaning Compa",
             "src": "qbo"
-          },
-          {
-            "d": "2026-07-20",
-            "amt": 7.17,
-            "cat": "Turn",
-            "ln": "dunlap",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-16",
-            "amt": 478.42,
-            "cat": "Turn",
-            "ln": "dunlap",
-            "src": "ramp"
           },
           {
             "d": "2026-02-02",
@@ -37577,8 +35515,8 @@
       "cost": {
         "code": "rl21-9",
         "labor": 3094.69,
-        "materials": 1715.34,
-        "total": 4810.03,
+        "materials": 0,
+        "total": 3094.69,
         "estimate": 0,
         "laborEntries": [
           {
@@ -38002,64 +35940,7 @@
             "cat": "Turn"
           }
         ],
-        "materialEntries": [
-          {
-            "d": "2026-08-12",
-            "amt": 569.24,
-            "cat": "Turn",
-            "ln": "dunlap",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-07",
-            "amt": 4.34,
-            "cat": "Turn",
-            "ln": "dunlap",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-07",
-            "amt": 12.6,
-            "cat": "Turn",
-            "ln": "dunlap",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-07",
-            "amt": 153.2,
-            "cat": "Turn",
-            "ln": "dunlap",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-06",
-            "amt": 7.61,
-            "cat": "Turn",
-            "ln": "dunlap",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-06",
-            "amt": 173.46,
-            "cat": "Turn",
-            "ln": "dunlap",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-06",
-            "amt": 675.33,
-            "cat": "Turn",
-            "ln": "dunlap",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-04",
-            "amt": 119.56,
-            "cat": "Turn",
-            "ln": "dunlap",
-            "src": "ramp"
-          }
-        ]
+        "materialEntries": []
       },
       "stage": "Walkthrough",
       "stage_ord": 1,
@@ -38165,8 +36046,8 @@
       "cost": {
         "code": "s129-13",
         "labor": 1692.33,
-        "materials": 1053.1,
-        "total": 2745.43,
+        "materials": 0,
+        "total": 1692.33,
         "estimate": 0,
         "laborEntries": [
           {
@@ -38520,50 +36401,7 @@
             "cat": "Turn"
           }
         ],
-        "materialEntries": [
-          {
-            "d": "2026-09-15",
-            "amt": 56.56,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-14",
-            "amt": 457.33,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-21",
-            "amt": 9.71,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-18",
-            "amt": 15.24,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-17",
-            "amt": 13.06,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-17",
-            "amt": 501.2,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          }
-        ]
+        "materialEntries": []
       },
       "turn_end": "2026-09-16",
       "af_turn_end": "2026-09-16",
@@ -38662,8 +36500,8 @@
       "cost": {
         "code": "s129-19",
         "labor": 880.77,
-        "materials": 885.41,
-        "total": 1766.18,
+        "materials": 250,
+        "total": 1130.77,
         "estimate": 2179.32,
         "laborEntries": [
           {
@@ -38814,20 +36652,6 @@
             "cat": "CapEx",
             "ln": "SPO Cleaning",
             "src": "qbo"
-          },
-          {
-            "d": "2026-07-23",
-            "amt": 85.52,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-20",
-            "amt": 549.89,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
           }
         ]
       },
@@ -39235,8 +37059,8 @@
       "cost": {
         "code": "s129-9",
         "labor": 2159.15,
-        "materials": 808.52,
-        "total": 2967.67,
+        "materials": 0,
+        "total": 2159.15,
         "estimate": 0,
         "laborEntries": [
           {
@@ -39653,36 +37477,7 @@
             "cat": "Turn"
           }
         ],
-        "materialEntries": [
-          {
-            "d": "2026-09-21",
-            "amt": 37.16,
-            "cat": "Turn",
-            "ln": "magoon",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-18",
-            "amt": 206.27,
-            "cat": "Turn",
-            "ln": "magoon",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-20",
-            "amt": 322.89,
-            "cat": "Turn",
-            "ln": "magoon",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-18",
-            "amt": 242.2,
-            "cat": "Turn",
-            "ln": "magoon",
-            "src": "ramp"
-          }
-        ]
+        "materialEntries": []
       },
       "turn_end": "2026-08-27",
       "af_turn_end": "2026-09-30",
@@ -40096,8 +37891,8 @@
       "cost": {
         "code": "tc34-A103",
         "labor": 60.75,
-        "materials": 226.32,
-        "total": 287.07,
+        "materials": 206.5,
+        "total": 267.25,
         "estimate": 643.78,
         "laborEntries": [
           {
@@ -40116,13 +37911,6 @@
           }
         ],
         "materialEntries": [
-          {
-            "d": "2026-09-09",
-            "amt": 19.82,
-            "cat": "Turn",
-            "ln": "mitchell",
-            "src": "ramp"
-          },
           {
             "d": "2025-11-25",
             "amt": 103.3,
@@ -40729,8 +38517,8 @@
       "cost": {
         "code": "tc34-B112",
         "labor": 3226.21,
-        "materials": 1812.62,
-        "total": 5038.83,
+        "materials": 491.47,
+        "total": 3717.68,
         "estimate": 0,
         "laborEntries": [
           {
@@ -41086,53 +38874,11 @@
         ],
         "materialEntries": [
           {
-            "d": "2026-07-09",
-            "amt": 70.72,
-            "cat": "Turn",
-            "ln": "hoard",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-08",
-            "amt": 734.1,
-            "cat": "Turn",
-            "ln": "hoard",
-            "src": "ramp"
-          },
-          {
             "d": "2026-06-17",
             "amt": 250,
             "cat": "CapEx",
             "ln": "Quality Commercial and Residential Cleaning",
             "src": "qbo"
-          },
-          {
-            "d": "2026-06-16",
-            "amt": 105.87,
-            "cat": "Turn",
-            "ln": "mitchell",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-06-11",
-            "amt": 104.96,
-            "cat": "Turn",
-            "ln": "mitchell",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-05-06",
-            "amt": 4.36,
-            "cat": "Turn",
-            "ln": "hoard",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-05-06",
-            "amt": 301.14,
-            "cat": "Turn",
-            "ln": "hoard",
-            "src": "ramp"
           },
           {
             "d": "2026-03-24",
@@ -41385,8 +39131,8 @@
       "cost": {
         "code": "tc68-A02",
         "labor": 417.42,
-        "materials": 1837.79,
-        "total": 2255.21,
+        "materials": 0,
+        "total": 417.42,
         "estimate": 0,
         "laborEntries": [
           {
@@ -41467,22 +39213,7 @@
             "cat": "Turn"
           }
         ],
-        "materialEntries": [
-          {
-            "d": "2026-08-13",
-            "amt": 118.67,
-            "cat": "Turn",
-            "ln": "mitchell",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-04",
-            "amt": 1719.12,
-            "cat": "Turn",
-            "ln": "mitchell",
-            "src": "ramp"
-          }
-        ]
+        "materialEntries": []
       },
       "turn_end": "2026-08-12",
       "af_turn_end": "2026-08-12",
@@ -41735,8 +39466,8 @@
       "cost": {
         "code": "tc68-A07",
         "labor": 216.81,
-        "materials": 970.33,
-        "total": 1187.14,
+        "materials": 0,
+        "total": 216.81,
         "estimate": 0,
         "laborEntries": [
           {
@@ -41754,43 +39485,7 @@
             "cat": "Turn"
           }
         ],
-        "materialEntries": [
-          {
-            "d": "2026-07-16",
-            "amt": 61.98,
-            "cat": "Turn",
-            "ln": "hoard",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-16",
-            "amt": 83.87,
-            "cat": "Turn",
-            "ln": "hoard",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-13",
-            "amt": 43.02,
-            "cat": "Turn",
-            "ln": "hoard",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-13",
-            "amt": 695.25,
-            "cat": "Turn",
-            "ln": "hoard",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-09",
-            "amt": 86.21,
-            "cat": "Turn",
-            "ln": "hoard",
-            "src": "ramp"
-          }
-        ]
+        "materialEntries": []
       },
       "turn_end": "2026-07-24",
       "af_turn_end": "2026-08-12",
@@ -41927,8 +39622,8 @@
       "cost": {
         "code": "tc68-A12",
         "labor": 247.59,
-        "materials": 198.02,
-        "total": 445.61,
+        "materials": 0,
+        "total": 247.59,
         "estimate": 0,
         "laborEntries": [
           {
@@ -41960,15 +39655,7 @@
             "cat": "Turn"
           }
         ],
-        "materialEntries": [
-          {
-            "d": "2026-08-25",
-            "amt": 198.02,
-            "cat": "Turn",
-            "ln": "mitchell",
-            "src": "ramp"
-          }
-        ]
+        "materialEntries": []
       },
       "turn_end": "2026-08-26",
       "af_turn_end": "2026-08-26",
@@ -42918,8 +40605,8 @@
       "cost": {
         "code": "tc68-B44",
         "labor": 897.48,
-        "materials": 559.18,
-        "total": 1456.66,
+        "materials": 0,
+        "total": 897.48,
         "estimate": 2758,
         "laborEntries": [
           {
@@ -43070,22 +40757,7 @@
             "cat": "Turn"
           }
         ],
-        "materialEntries": [
-          {
-            "d": "2026-09-04",
-            "amt": -23.98,
-            "cat": "Turn",
-            "ln": "mitchell",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-03",
-            "amt": 583.16,
-            "cat": "Turn",
-            "ln": "mitchell",
-            "src": "ramp"
-          }
-        ]
+        "materialEntries": []
       },
       "turn_end": "2026-09-19",
       "af_turn_end": "2026-09-21",
@@ -43267,26 +40939,11 @@
       "cost": {
         "code": "tc68-B54",
         "labor": 0,
-        "materials": 729.47,
-        "total": 729.47,
+        "materials": 0,
+        "total": 0,
         "estimate": 0,
         "laborEntries": [],
-        "materialEntries": [
-          {
-            "d": "2026-08-06",
-            "amt": 390.92,
-            "cat": "Turn",
-            "ln": "hoard",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-05",
-            "amt": 338.55,
-            "cat": "Turn",
-            "ln": "hoard",
-            "src": "ramp"
-          }
-        ]
+        "materialEntries": []
       },
       "stage": "Paint",
       "stage_ord": 2,
@@ -43564,8 +41221,8 @@
       "cost": {
         "code": "tc68-C67",
         "labor": 731.97,
-        "materials": 1085,
-        "total": 1816.97,
+        "materials": 225,
+        "total": 956.97,
         "estimate": 0,
         "laborEntries": [
           {
@@ -43695,13 +41352,6 @@
             "cat": "CapEx",
             "ln": "Quality Commercial and Residential Cleaning",
             "src": "qbo"
-          },
-          {
-            "d": "2026-07-01",
-            "amt": 860,
-            "cat": "Turn",
-            "ln": "mitchell",
-            "src": "ramp"
           }
         ]
       },
@@ -43793,8 +41443,8 @@
       "cost": {
         "code": "tc68-C75",
         "labor": 1205.55,
-        "materials": 1127.01,
-        "total": 2332.56,
+        "materials": 0,
+        "total": 1205.55,
         "estimate": 0,
         "laborEntries": [
           {
@@ -44015,29 +41665,7 @@
             "cat": "Turn"
           }
         ],
-        "materialEntries": [
-          {
-            "d": "2026-08-10",
-            "amt": 179.26,
-            "cat": "Turn",
-            "ln": "mitchell",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-06",
-            "amt": 198.02,
-            "cat": "Turn",
-            "ln": "mitchell",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-04",
-            "amt": 749.73,
-            "cat": "Turn",
-            "ln": "mitchell",
-            "src": "ramp"
-          }
-        ]
+        "materialEntries": []
       },
       "turn_end": "2026-08-11",
       "af_turn_end": "2026-09-30",
@@ -45072,8 +42700,8 @@
       "cost": {
         "code": "tc68-D106",
         "labor": 295.38,
-        "materials": 796.32,
-        "total": 1091.7,
+        "materials": 0,
+        "total": 295.38,
         "estimate": 0,
         "laborEntries": [
           {
@@ -45140,22 +42768,7 @@
             "cat": "Turn"
           }
         ],
-        "materialEntries": [
-          {
-            "d": "2026-09-02",
-            "amt": 691.82,
-            "cat": "Turn",
-            "ln": "mitchell",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-25",
-            "amt": 104.5,
-            "cat": "Turn",
-            "ln": "mitchell",
-            "src": "ramp"
-          }
-        ]
+        "materialEntries": []
       },
       "turn_end": "2026-09-09",
       "af_turn_end": "2026-09-21",
@@ -45254,8 +42867,8 @@
       "cost": {
         "code": "w117-10",
         "labor": 1220.6,
-        "materials": 713.21,
-        "total": 1933.81,
+        "materials": 371.11,
+        "total": 1591.71,
         "estimate": 0,
         "laborEntries": [
           {
@@ -45470,27 +43083,6 @@
           }
         ],
         "materialEntries": [
-          {
-            "d": "2026-09-16",
-            "amt": 63.72,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-10",
-            "amt": 46.33,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-10",
-            "amt": 232.05,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          },
           {
             "d": "2025-06-10",
             "amt": 76.23,
@@ -45760,8 +43352,8 @@
       "cost": {
         "code": "w117-3",
         "labor": 211.17,
-        "materials": 226.2,
-        "total": 437.37,
+        "materials": 0,
+        "total": 211.17,
         "estimate": 4235.33,
         "laborEntries": [
           {
@@ -45807,15 +43399,7 @@
             "cat": "Turn"
           }
         ],
-        "materialEntries": [
-          {
-            "d": "2026-07-24",
-            "amt": 226.2,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          }
-        ]
+        "materialEntries": []
       },
       "turn_end": "2026-08-13",
       "stage": "Maintenance",
@@ -46065,8 +43649,8 @@
       "cost": {
         "code": "w226-7",
         "labor": 813.44,
-        "materials": 572.7,
-        "total": 1386.14,
+        "materials": 0,
+        "total": 813.44,
         "estimate": 1187.55,
         "laborEntries": [
           {
@@ -46273,22 +43857,7 @@
             "cat": "Turn"
           }
         ],
-        "materialEntries": [
-          {
-            "d": "2026-09-14",
-            "amt": 31.77,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-10",
-            "amt": 540.93,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          }
-        ]
+        "materialEntries": []
       },
       "turn_end": "2026-10-06",
       "af_turn_end": "2026-10-11",
