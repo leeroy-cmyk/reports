@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-10-19T14:53:27.646Z",
+  "fetched_at": "2026-10-19T20:25:04.248Z",
   "units": {
     "2": {
       "moveOut": "2026-07-31",
@@ -227,7 +227,7 @@
     },
     "364": {
       "moveOut": "2026-08-31",
-      "status": "Vacant-Unrented",
+      "status": "Vacant-Rented",
       "prop": "ps25",
       "unit": "A6",
       "city": "Pasco"
@@ -241,7 +241,7 @@
     },
     "386": {
       "moveOut": "2026-09-30",
-      "status": "Vacant-Rented",
+      "status": "Vacant-Unrented",
       "prop": "ps25",
       "unit": "D28",
       "city": "Pasco"
@@ -428,6 +428,13 @@
       "unit": "B15",
       "city": "Richland"
     },
+    "554": {
+      "moveOut": "2026-12-31",
+      "status": "Notice-Unrented",
+      "prop": "rl16",
+      "unit": "B17",
+      "city": "Richland"
+    },
     "581": {
       "moveOut": "2026-09-30",
       "status": "Vacant-Unrented",
@@ -468,6 +475,13 @@
       "status": "Notice-Unrented",
       "prop": "rl16",
       "unit": "D16",
+      "city": "Richland"
+    },
+    "606": {
+      "moveOut": "2026-10-31",
+      "status": "Notice-Unrented",
+      "prop": "rl16",
+      "unit": "D21",
       "city": "Richland"
     },
     "607": {
@@ -925,13 +939,6 @@
       "unit": "B57",
       "city": "Tacoma"
     },
-    "1209": {
-      "moveOut": "2026-09-01",
-      "status": "Vacant-Unrented",
-      "prop": "tc68",
-      "unit": "B60",
-      "city": "Tacoma"
-    },
     "1211": {
       "moveOut": "2026-07-15",
       "status": "Vacant-Unrented",
@@ -1119,6 +1126,13 @@
       "status": "Vacant-Unrented",
       "prop": "c702",
       "unit": "G208",
+      "city": "Spokane"
+    },
+    "1409": {
+      "moveOut": "2026-10-14",
+      "status": "Vacant-Unrented",
+      "prop": "c702",
+      "unit": "H203",
       "city": "Spokane"
     },
     "1413": {
@@ -3642,6 +3656,43 @@
       "unit": "J303",
       "city": "Spokane",
       "to": "2026-10-17"
+    },
+    {
+      "date": "2026-10-19",
+      "type": "moveout_new",
+      "unit_id": "554",
+      "prop": "rl16",
+      "unit": "B17",
+      "city": "Richland",
+      "to": "2026-12-31"
+    },
+    {
+      "date": "2026-10-19",
+      "type": "moveout_new",
+      "unit_id": "606",
+      "prop": "rl16",
+      "unit": "D21",
+      "city": "Richland",
+      "to": "2026-10-31"
+    },
+    {
+      "date": "2026-10-19",
+      "type": "moveout_new",
+      "unit_id": "1409",
+      "prop": "c702",
+      "unit": "H203",
+      "city": "Spokane",
+      "to": "2026-10-14"
+    },
+    {
+      "date": "2026-10-19",
+      "type": "moveout_removed",
+      "unit_id": "1209",
+      "prop": "tc68",
+      "unit": "B60",
+      "city": "Tacoma",
+      "from": "2026-09-01",
+      "was_status": "Vacant-Unrented"
     }
   ]
 }

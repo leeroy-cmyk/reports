@@ -1,17 +1,17 @@
 {
   "ok": true,
-  "fetched_at": "2026-10-19T14:54:12.926Z",
+  "fetched_at": "2026-10-19T20:25:45.251Z",
   "summary": {
     "as_of": "2026-10-19",
-    "units": 234,
-    "active": 79,
-    "ready": 8,
+    "units": 237,
+    "active": 78,
+    "ready": 9,
     "notice": 12,
     "at_risk": 43,
     "unscheduled": 32,
-    "accruing": 27541.49,
-    "avg_days_open": 44,
-    "revenue_at_risk": 3595.47
+    "accruing": 29426.44,
+    "avg_days_open": 43,
+    "revenue_at_risk": 3538.13
   },
   "rows": [
     {
@@ -186,7 +186,7 @@
         "labor": 0,
         "materials": 667.06,
         "total": 667.06,
-        "estimate": 1706.93,
+        "estimate": 0,
         "laborEntries": [],
         "materialEntries": [
           {
@@ -487,7 +487,7 @@
         "labor": 336.91,
         "materials": 540.03,
         "total": 876.94,
-        "estimate": 1439.19,
+        "estimate": 0,
         "laborEntries": [
           {
             "d": "2026-09-16",
@@ -1430,7 +1430,7 @@
         "labor": 0,
         "materials": 0,
         "total": 0,
-        "estimate": 1683.36,
+        "estimate": 0,
         "laborEntries": [],
         "materialEntries": []
       },
@@ -1572,11 +1572,25 @@
       "cost": {
         "code": "c702-H301",
         "labor": 0,
-        "materials": 130.35,
-        "total": 130.35,
+        "materials": 272.08,
+        "total": 272.08,
         "estimate": 4564.72,
         "laborEntries": [],
         "materialEntries": [
+          {
+            "d": "2026-10-19",
+            "amt": 23.16,
+            "cat": "Turn",
+            "ln": "easley",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-10-19",
+            "amt": 118.57,
+            "cat": "Turn",
+            "ln": "easley",
+            "src": "ramp"
+          },
           {
             "d": "2026-10-16",
             "amt": 130.35,
@@ -1846,7 +1860,7 @@
         "labor": 0,
         "materials": 0,
         "total": 0,
-        "estimate": 1295.3,
+        "estimate": 0,
         "laborEntries": [],
         "materialEntries": []
       },
@@ -2300,8 +2314,8 @@
       "cost": {
         "code": "k104-509-4",
         "labor": 915.75,
-        "materials": 732.61,
-        "total": 1648.36,
+        "materials": 739.13,
+        "total": 1654.88,
         "estimate": 0,
         "laborEntries": [
           {
@@ -2502,6 +2516,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-10-19",
+            "amt": 6.52,
+            "cat": "Turn",
+            "ln": "normandin",
+            "src": "ramp"
+          },
           {
             "d": "2026-10-13",
             "amt": 39.27,
@@ -3003,8 +3024,8 @@
       "cost": {
         "code": "kn47-k2-C203",
         "labor": 28.4,
-        "materials": 0,
-        "total": 28.4,
+        "materials": 755.95,
+        "total": 784.35,
         "estimate": 0,
         "laborEntries": [
           {
@@ -3015,7 +3036,22 @@
             "cat": "CapEx"
           }
         ],
-        "materialEntries": []
+        "materialEntries": [
+          {
+            "d": "2026-10-19",
+            "amt": 102.27,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-10-19",
+            "amt": 653.68,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          }
+        ]
       },
       "stage": "Maintenance",
       "stage_ord": 3,
@@ -3157,7 +3193,7 @@
         "labor": 0,
         "materials": 0,
         "total": 0,
-        "estimate": 5039.64,
+        "estimate": 0,
         "laborEntries": [],
         "materialEntries": []
       },
@@ -4182,7 +4218,7 @@
         "labor": 0,
         "materials": 0,
         "total": 0,
-        "estimate": 1667.72,
+        "estimate": 0,
         "laborEntries": [],
         "materialEntries": []
       },
@@ -4982,6 +5018,124 @@
       "stage": "Walkthrough",
       "stage_ord": 1,
       "days_elapsed": 49,
+      "days_to_turn": null,
+      "status": "active"
+    },
+    {
+      "key": "ps25|d28",
+      "prop": "ps25",
+      "unit": "D28",
+      "at_risk": [
+        "Nothing scheduled"
+      ],
+      "property_name": "ps25",
+      "city": "Pasco",
+      "addr": "2524 W Sylvester St. - D28 Pasco, WA 99301",
+      "unit_id": 386,
+      "unit_status": "Vacant-Unrented",
+      "rent_ready": "No",
+      "vacant": true,
+      "days_vacant": 19,
+      "move_out": "2026-09-30",
+      "available_on": "2026-11-01",
+      "ready_on": "2026-11-01",
+      "target_date": "2026-10-20",
+      "next_move_in": null,
+      "rent": "1162.00",
+      "bed_bath": "1/1.00",
+      "sqft": 655,
+      "region": "Tri-Cities",
+      "pm": {
+        "projId": 246178,
+        "name": "Standard Unit Turn",
+        "status": "ACTIVE",
+        "done": 0,
+        "total": 6,
+        "first_appt": null,
+        "final_walk": null,
+        "final_walk_done": null,
+        "completed_date": null,
+        "due": "2026-10-15",
+        "next_task": null,
+        "tasks": [
+          {
+            "task": "A - Initial walkthrough",
+            "cat": "walkthrough",
+            "done": false,
+            "date": "2026-10-05",
+            "who": "Margarito Saldana",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "D - Maintenance",
+            "cat": "maintenance",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "E - Carpet Cleaning",
+            "cat": "carpet",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "F - Cleaning",
+            "cat": "cleaning",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Schedule Vendors",
+            "cat": "other",
+            "done": false,
+            "date": null,
+            "who": "Margarito Saldana",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Final Walkthrough",
+            "cat": "final-walk",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          }
+        ]
+      },
+      "next_appt": null,
+      "cost": {
+        "code": "ps25-D28",
+        "labor": 0,
+        "materials": 82.09,
+        "total": 82.09,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": [
+          {
+            "d": "2026-10-15",
+            "amt": 82.09,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          }
+        ]
+      },
+      "af_turn_end": "2026-10-19",
+      "stage": "Walkthrough",
+      "stage_ord": 1,
+      "days_elapsed": 19,
       "days_to_turn": null,
       "status": "active"
     },
@@ -6094,136 +6248,6 @@
       "status": "active"
     },
     {
-      "key": "tc68|b60",
-      "prop": "tc68",
-      "unit": "B60",
-      "at_risk": [
-        "Over 45 days vacant"
-      ],
-      "property_name": "tc68",
-      "city": "Tacoma",
-      "addr": "6830 Tacoma Mall Blvd Apt B60 Tacoma, WA 98409",
-      "unit_id": 1209,
-      "unit_status": "Vacant-Unrented",
-      "rent_ready": "No",
-      "vacant": true,
-      "days_vacant": 48,
-      "move_out": "2026-09-01",
-      "available_on": "2026-11-07",
-      "ready_on": "2026-11-07",
-      "target_date": "2026-09-21",
-      "next_move_in": null,
-      "rent": "1795.00",
-      "bed_bath": "2/1.00",
-      "sqft": 980,
-      "region": "Tacoma",
-      "pm": {
-        "projId": 230080,
-        "name": "Standard Unit Turn",
-        "status": "ACTIVE",
-        "done": 0,
-        "total": 8,
-        "first_appt": null,
-        "final_walk": null,
-        "final_walk_done": null,
-        "completed_date": null,
-        "due": "2026-10-14",
-        "next_task": {
-          "date": "2026-10-13",
-          "task": "walkthrough"
-        },
-        "tasks": [
-          {
-            "task": "A - Initial walkthrough",
-            "cat": "walkthrough",
-            "done": false,
-            "date": "2026-09-22",
-            "who": "Armani Mitchell",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Appfolio Estimate",
-            "cat": "estimate",
-            "done": false,
-            "date": null,
-            "who": "Dulce Salinas",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "C - Paint",
-            "cat": "paint",
-            "done": false,
-            "date": null,
-            "who": "Chris Phillips",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "D - Maintenance",
-            "cat": "maintenance",
-            "done": false,
-            "date": null,
-            "who": "Armani Mitchell",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "E - Carpet Cleaning",
-            "cat": "carpet",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "F - Cleaning",
-            "cat": "cleaning",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Schedule Vendors",
-            "cat": "other",
-            "done": false,
-            "date": null,
-            "who": "Armani Mitchell",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Final Walkthrough",
-            "cat": "final-walk",
-            "done": false,
-            "date": null,
-            "who": "Armani Mitchell",
-            "completed": null,
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": null,
-      "cost": {
-        "code": "tc68-B60",
-        "labor": 0,
-        "materials": 0,
-        "total": 0,
-        "estimate": 0,
-        "laborEntries": [],
-        "materialEntries": []
-      },
-      "stage": "Walkthrough",
-      "stage_ord": 1,
-      "days_elapsed": 48,
-      "days_to_turn": null,
-      "status": "active"
-    },
-    {
       "key": "tc68|c62",
       "prop": "tc68",
       "unit": "C62",
@@ -6343,7 +6367,7 @@
         "labor": 1595.7,
         "materials": 0,
         "total": 1595.7,
-        "estimate": 3484.9,
+        "estimate": 0,
         "laborEntries": [
           {
             "d": "2026-10-16",
@@ -6830,7 +6854,7 @@
         "labor": 0,
         "materials": 0,
         "total": 0,
-        "estimate": 3887.76,
+        "estimate": 0,
         "laborEntries": [],
         "materialEntries": []
       },
@@ -6890,11 +6914,11 @@
       "addr": "4210 N Avalon Rd  #8 Spokane Valley, WA 99216",
       "unit_id": 127,
       "unit_status": "Vacant-Rented",
-      "rent_ready": "No",
+      "rent_ready": "Yes",
       "vacant": true,
       "days_vacant": 43,
       "move_out": "2026-09-06",
-      "available_on": "2026-10-29",
+      "available_on": null,
       "ready_on": "2026-10-29",
       "target_date": "2026-09-26",
       "next_move_in": "2027-01-01",
@@ -7016,11 +7040,11 @@
         "laborEntries": [],
         "materialEntries": []
       },
-      "stage": "Maintenance",
-      "stage_ord": 3,
+      "stage": "Ready",
+      "stage_ord": 7,
       "days_elapsed": 43,
       "days_to_turn": null,
-      "status": "active"
+      "status": "ready"
     },
     {
       "key": "a916|1",
@@ -9625,6 +9649,7 @@
           }
         ]
       },
+      "af_turn_end": "2026-10-19",
       "stage": "Ready",
       "stage_ord": 7,
       "days_elapsed": 111,
@@ -13422,7 +13447,7 @@
         "labor": 0,
         "materials": 0,
         "total": 0,
-        "estimate": 1260.86,
+        "estimate": 0,
         "laborEntries": [],
         "materialEntries": []
       },
@@ -13541,6 +13566,44 @@
       "days_elapsed": 29,
       "days_to_turn": null,
       "status": "active"
+    },
+    {
+      "key": "c702|h203",
+      "prop": "c702",
+      "unit": "H203",
+      "at_risk": [],
+      "property_name": "c702",
+      "city": "Spokane",
+      "addr": "7008 N Colton St H203 Spokane, WA 99208",
+      "unit_id": 1409,
+      "unit_status": "Vacant-Unrented",
+      "rent_ready": "Yes",
+      "vacant": true,
+      "days_vacant": 5,
+      "move_out": "2026-10-14",
+      "available_on": "2026-11-03",
+      "ready_on": "2026-11-03",
+      "target_date": "2026-11-03",
+      "next_move_in": null,
+      "rent": "1360.00",
+      "bed_bath": "2/2.00",
+      "sqft": 1140,
+      "region": "Spokane",
+      "next_appt": null,
+      "cost": {
+        "code": "c702-H203",
+        "labor": 0,
+        "materials": 0,
+        "total": 0,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": []
+      },
+      "stage": "Ready",
+      "stage_ord": 7,
+      "days_elapsed": 5,
+      "days_to_turn": null,
+      "status": "ready"
     },
     {
       "key": "c702|j103",
@@ -16089,7 +16152,7 @@
         "labor": 0,
         "materials": 84.47,
         "total": 84.47,
-        "estimate": 1247.62,
+        "estimate": 0,
         "laborEntries": [],
         "materialEntries": [
           {
@@ -17208,8 +17271,8 @@
       "cost": {
         "code": "k104-512-4",
         "labor": 376.93,
-        "materials": 556,
-        "total": 932.93,
+        "materials": 643.73,
+        "total": 1020.66,
         "estimate": 0,
         "laborEntries": [
           {
@@ -17256,6 +17319,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-10-19",
+            "amt": 87.73,
+            "cat": "Turn",
+            "ln": "romme",
+            "src": "ramp"
+          },
           {
             "d": "2025-08-21",
             "amt": 308,
@@ -19421,13 +19491,28 @@
         "brief": "D - Maintenance"
       },
       "cost": {
-        "code": "kn47-D205",
+        "code": "kn47-k1-D205",
         "labor": 0,
-        "materials": 0,
-        "total": 0,
-        "estimate": 7240.64,
+        "materials": 898.66,
+        "total": 898.66,
+        "estimate": 0,
         "laborEntries": [],
-        "materialEntries": []
+        "materialEntries": [
+          {
+            "d": "2026-10-19",
+            "amt": 168.38,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-10-19",
+            "amt": 730.28,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          }
+        ]
       },
       "stage": "Walkthrough",
       "stage_ord": 1,
@@ -20684,7 +20769,7 @@
         "labor": 0,
         "materials": 0,
         "total": 0,
-        "estimate": 7707.26,
+        "estimate": 0,
         "laborEntries": [],
         "materialEntries": []
       },
@@ -22529,7 +22614,7 @@
         "labor": 0,
         "materials": 0,
         "total": 0,
-        "estimate": 3119.71,
+        "estimate": 0,
         "laborEntries": [],
         "materialEntries": []
       },
@@ -22982,7 +23067,7 @@
         "labor": 249.26,
         "materials": 66.4,
         "total": 315.66,
-        "estimate": 1344.72,
+        "estimate": 0,
         "laborEntries": [
           {
             "d": "2025-10-08",
@@ -23160,9 +23245,9 @@
       "cost": {
         "code": "m405-20",
         "labor": 211.5,
-        "materials": 729.24,
-        "total": 940.74,
-        "estimate": 1445.34,
+        "materials": 756.45,
+        "total": 967.95,
+        "estimate": 0,
         "laborEntries": [
           {
             "d": "2026-10-14",
@@ -23229,6 +23314,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-10-19",
+            "amt": 27.21,
+            "cat": "Turn",
+            "ln": "magoon",
+            "src": "ramp"
+          },
           {
             "d": "2026-10-12",
             "amt": 22.3,
@@ -24150,6 +24242,7 @@
           }
         ]
       },
+      "af_turn_end": "2026-10-15",
       "stage": "Walkthrough",
       "stage_ord": 1,
       "days_elapsed": null,
@@ -24229,7 +24322,7 @@
         "labor": 326.75,
         "materials": 720.28,
         "total": 1047.03,
-        "estimate": 1241.86,
+        "estimate": 0,
         "laborEntries": [
           {
             "d": "2026-10-07",
@@ -24355,6 +24448,7 @@
         ]
       },
       "turn_end": "2025-08-25",
+      "af_turn_end": "2026-10-07",
       "stage": "Walkthrough",
       "stage_ord": 1,
       "days_elapsed": null,
@@ -24599,7 +24693,7 @@
         "labor": 0,
         "materials": 0,
         "total": 0,
-        "estimate": 4587.98,
+        "estimate": 0,
         "laborEntries": [],
         "materialEntries": []
       },
@@ -27006,7 +27100,7 @@
         "labor": 1030.75,
         "materials": 1352.25,
         "total": 2383,
-        "estimate": 1627.64,
+        "estimate": 0,
         "laborEntries": [
           {
             "d": "2026-05-25",
@@ -30289,15 +30383,15 @@
       "city": "Pasco",
       "addr": "2524 W Sylvester St. - A6 Pasco, WA 99301",
       "unit_id": 364,
-      "unit_status": "Vacant-Unrented",
+      "unit_status": "Vacant-Rented",
       "rent_ready": "No",
       "vacant": true,
       "days_vacant": 49,
       "move_out": "2026-08-31",
-      "available_on": "2026-10-30",
-      "ready_on": "2026-10-30",
+      "available_on": "2026-10-22",
+      "ready_on": "2026-10-22",
       "target_date": "2026-09-20",
-      "next_move_in": null,
+      "next_move_in": "2026-10-23",
       "rent": "1162.00",
       "bed_bath": "1/1.00",
       "sqft": 655,
@@ -30398,7 +30492,7 @@
         "labor": 284,
         "materials": 2040.44,
         "total": 2324.44,
-        "estimate": 1607.9,
+        "estimate": 0,
         "laborEntries": [
           {
             "d": "2025-08-06",
@@ -30825,121 +30919,6 @@
       "status": "complete"
     },
     {
-      "key": "ps25|d28",
-      "prop": "ps25",
-      "unit": "D28",
-      "at_risk": [],
-      "property_name": "ps25",
-      "city": "Pasco",
-      "addr": "2524 W Sylvester St. - D28 Pasco, WA 99301",
-      "unit_id": 386,
-      "unit_status": "Vacant-Rented",
-      "rent_ready": "Yes",
-      "vacant": true,
-      "days_vacant": 19,
-      "move_out": "2026-09-30",
-      "available_on": null,
-      "ready_on": "2026-11-01",
-      "target_date": "2026-10-20",
-      "next_move_in": "2026-10-20",
-      "rent": "1162.00",
-      "bed_bath": "1/1.00",
-      "sqft": 655,
-      "region": "Tri-Cities",
-      "pm": {
-        "projId": 246178,
-        "name": "Standard Unit Turn",
-        "status": "ACTIVE",
-        "done": 0,
-        "total": 6,
-        "first_appt": null,
-        "final_walk": null,
-        "final_walk_done": null,
-        "completed_date": null,
-        "due": "2026-10-15",
-        "next_task": null,
-        "tasks": [
-          {
-            "task": "A - Initial walkthrough",
-            "cat": "walkthrough",
-            "done": false,
-            "date": "2026-10-05",
-            "who": "Margarito Saldana",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "D - Maintenance",
-            "cat": "maintenance",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "E - Carpet Cleaning",
-            "cat": "carpet",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "F - Cleaning",
-            "cat": "cleaning",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Schedule Vendors",
-            "cat": "other",
-            "done": false,
-            "date": null,
-            "who": "Margarito Saldana",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Final Walkthrough",
-            "cat": "final-walk",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": null,
-      "cost": {
-        "code": "ps25-D28",
-        "labor": 0,
-        "materials": 82.09,
-        "total": 82.09,
-        "estimate": 0,
-        "laborEntries": [],
-        "materialEntries": [
-          {
-            "d": "2026-10-15",
-            "amt": 82.09,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          }
-        ]
-      },
-      "stage": "Ready",
-      "stage_ord": 7,
-      "days_elapsed": 19,
-      "days_to_turn": null,
-      "status": "ready"
-    },
-    {
       "key": "ps25|d29",
       "prop": "ps25",
       "unit": "D29",
@@ -31158,6 +31137,7 @@
         ]
       },
       "turn_end": "2026-09-30",
+      "af_turn_end": "2026-10-10",
       "stage": "Maintenance",
       "stage_ord": 3,
       "days_elapsed": null,
@@ -32851,7 +32831,7 @@
         "labor": 0,
         "materials": 861.41,
         "total": 861.41,
-        "estimate": 3429.75,
+        "estimate": 0,
         "laborEntries": [],
         "materialEntries": [
           {
@@ -32877,6 +32857,7 @@
           }
         ]
       },
+      "af_turn_end": "2026-10-19",
       "stage": "Ready",
       "stage_ord": 7,
       "days_elapsed": 19,
@@ -34477,6 +34458,145 @@
       "status": "other"
     },
     {
+      "key": "rl16|b17",
+      "prop": "rl16",
+      "unit": "B17",
+      "at_risk": [],
+      "property_name": "rl16",
+      "city": "Richland",
+      "addr": "1621 George Washington Way B17 Richland, WA 99354",
+      "unit_id": 554,
+      "unit_status": "Notice-Unrented",
+      "rent_ready": null,
+      "vacant": false,
+      "days_vacant": null,
+      "move_out": "2026-12-31",
+      "available_on": "2027-01-20",
+      "ready_on": "2027-01-20",
+      "target_date": "2027-01-20",
+      "next_move_in": null,
+      "rent": "1627.00",
+      "bed_bath": "3/2.00",
+      "sqft": 1115,
+      "region": "Tri-Cities",
+      "pm": {
+        "projId": 185871,
+        "name": "Turn - 1621 George Washington Way UNIT B17",
+        "status": "COMPLETE",
+        "done": 8,
+        "total": 8,
+        "first_appt": "2025-10-10",
+        "final_walk": "2025-10-22",
+        "final_walk_done": "2025-10-28",
+        "completed_date": "2025-10-28",
+        "due": "2025-10-15",
+        "next_task": null,
+        "tasks": null
+      },
+      "next_appt": null,
+      "cost": {
+        "code": "rl16-B17",
+        "labor": 511.78,
+        "materials": 1177.98,
+        "total": 1689.76,
+        "estimate": 0,
+        "laborEntries": [
+          {
+            "d": "2025-10-13",
+            "emp": "Ryan G. Robson",
+            "hrs": 8.67,
+            "cost": 199.41,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-10-10",
+            "emp": "Ryan G. Robson",
+            "hrs": 8,
+            "cost": 184,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-10-03",
+            "emp": "Margarito Saldana",
+            "hrs": 0.52,
+            "cost": 14.77,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-09-15",
+            "emp": "Margarito Saldana",
+            "hrs": 1,
+            "cost": 28.4,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-09-15",
+            "emp": "Margarito Saldana",
+            "hrs": 3,
+            "cost": 85.2,
+            "cat": "Turn"
+          }
+        ],
+        "materialEntries": [
+          {
+            "d": "2025-10-21",
+            "amt": 240,
+            "cat": "Turn",
+            "ln": "montiel",
+            "src": "ramp"
+          },
+          {
+            "d": "2025-10-17",
+            "amt": 475,
+            "cat": "Turn",
+            "ln": "montiel",
+            "src": "ramp"
+          },
+          {
+            "d": "2025-10-13",
+            "amt": 86.94,
+            "cat": "Turn",
+            "ln": "robson",
+            "src": "ramp"
+          },
+          {
+            "d": "2025-10-13",
+            "amt": 8.69,
+            "cat": "Turn",
+            "ln": "robson",
+            "src": "ramp"
+          },
+          {
+            "d": "2025-10-13",
+            "amt": 156.47,
+            "cat": "Turn",
+            "ln": "robson",
+            "src": "ramp"
+          },
+          {
+            "d": "2025-10-13",
+            "amt": 58.57,
+            "cat": "Turn",
+            "ln": "robson",
+            "src": "ramp"
+          },
+          {
+            "d": "2025-10-13",
+            "amt": 152.31,
+            "cat": "Turn",
+            "ln": "robson",
+            "src": "ramp"
+          }
+        ]
+      },
+      "turn_end": "2025-10-28",
+      "stage": "Move-out",
+      "stage_ord": 0,
+      "days_elapsed": 0,
+      "days_to_turn": -429,
+      "status": "complete"
+    },
+    {
       "key": "rl16|c20",
       "prop": "rl16",
       "unit": "C20",
@@ -34608,7 +34728,7 @@
         "labor": 774.03,
         "materials": 1009.34,
         "total": 1783.37,
-        "estimate": 1548.58,
+        "estimate": 0,
         "laborEntries": [
           {
             "d": "2025-09-19",
@@ -34979,6 +35099,7 @@
         ]
       },
       "turn_end": "2026-09-30",
+      "af_turn_end": "2026-10-19",
       "stage": "Ready",
       "stage_ord": 7,
       "days_elapsed": 30,
@@ -35834,6 +35955,7 @@
         ]
       },
       "turn_end": "2026-09-30",
+      "af_turn_end": "2026-10-19",
       "stage": "Ready",
       "stage_ord": 7,
       "days_elapsed": 61,
@@ -35899,6 +36021,159 @@
       "stage_ord": 0,
       "days_elapsed": 0,
       "days_to_turn": -544,
+      "status": "complete"
+    },
+    {
+      "key": "rl16|d21",
+      "prop": "rl16",
+      "unit": "D21",
+      "at_risk": [],
+      "property_name": "rl16",
+      "city": "Richland",
+      "addr": "1621 George Washington Way D21 Richland, WA 99354",
+      "unit_id": 606,
+      "unit_status": "Notice-Unrented",
+      "rent_ready": null,
+      "vacant": false,
+      "days_vacant": null,
+      "move_out": "2026-10-31",
+      "available_on": "2026-11-20",
+      "ready_on": "2026-11-20",
+      "target_date": "2026-11-20",
+      "next_move_in": null,
+      "rent": "1443.00",
+      "bed_bath": "2/1.50",
+      "sqft": 975,
+      "region": "Tri-Cities",
+      "pm": {
+        "projId": 169501,
+        "name": "Turn - 1621 George Washington Way UNIT D21",
+        "status": "COMPLETE",
+        "done": 8,
+        "total": 8,
+        "first_appt": null,
+        "final_walk": null,
+        "final_walk_done": "2025-07-01",
+        "completed_date": "2025-08-14",
+        "due": "2026-05-21",
+        "next_task": null,
+        "tasks": null
+      },
+      "next_appt": null,
+      "cost": {
+        "code": "rl16-D21",
+        "labor": 539.56,
+        "materials": 881.69,
+        "total": 1421.25,
+        "estimate": 0,
+        "laborEntries": [
+          {
+            "d": "2025-06-26",
+            "emp": "Micheal N. Magoon",
+            "hrs": 2.02,
+            "cost": 50.5,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-06-25",
+            "emp": "Micheal N. Magoon",
+            "hrs": 1,
+            "cost": 25,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-06-25",
+            "emp": "Margarito Saldana",
+            "hrs": 0.85,
+            "cost": 24.14,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-06-24",
+            "emp": "Margarito Saldana",
+            "hrs": 1.88,
+            "cost": 53.39,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-06-24",
+            "emp": "Margarito Saldana",
+            "hrs": 1.22,
+            "cost": 34.65,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-06-20",
+            "emp": "Margarito Saldana",
+            "hrs": 4.57,
+            "cost": 129.79,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-06-18",
+            "emp": "Margarito Saldana",
+            "hrs": 2.92,
+            "cost": 82.93,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-06-18",
+            "emp": "Margarito Saldana",
+            "hrs": 3.2,
+            "cost": 90.88,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-05-30",
+            "emp": "Margarito Saldana",
+            "hrs": 1.7,
+            "cost": 48.28,
+            "cat": "Turn"
+          }
+        ],
+        "materialEntries": [
+          {
+            "d": "2025-07-03",
+            "amt": 250,
+            "cat": "Turn",
+            "ln": "miller",
+            "src": "ramp"
+          },
+          {
+            "d": "2025-06-24",
+            "amt": 182,
+            "cat": "Turn",
+            "ln": "saldana",
+            "src": "ramp"
+          },
+          {
+            "d": "2025-06-23",
+            "amt": 331.69,
+            "cat": "Turn",
+            "ln": "saldana",
+            "src": "ramp"
+          },
+          {
+            "d": "2025-06-20",
+            "amt": 48,
+            "cat": "Turn",
+            "ln": "saldana",
+            "src": "ramp"
+          },
+          {
+            "d": "2025-06-20",
+            "amt": 70,
+            "cat": "Turn",
+            "ln": "saldana",
+            "src": "ramp"
+          }
+        ]
+      },
+      "turn_end": "2025-07-01",
+      "stage": "Move-out",
+      "stage_ord": 0,
+      "days_elapsed": 0,
+      "days_to_turn": -487,
       "status": "complete"
     },
     {
@@ -38359,7 +38634,7 @@
         "labor": 0,
         "materials": 0,
         "total": 0,
-        "estimate": 2696.8,
+        "estimate": 0,
         "laborEntries": [],
         "materialEntries": []
       },
@@ -40511,7 +40786,7 @@
         "labor": 28.35,
         "materials": 0,
         "total": 28.35,
-        "estimate": 3727.88,
+        "estimate": 0,
         "laborEntries": [
           {
             "d": "2026-10-15",
@@ -41175,7 +41450,7 @@
         "labor": 41.31,
         "materials": 0,
         "total": 41.31,
-        "estimate": 5560.88,
+        "estimate": 0,
         "laborEntries": [
           {
             "d": "2026-10-12",
@@ -41658,7 +41933,7 @@
         "labor": 13.5,
         "materials": 0,
         "total": 13.5,
-        "estimate": 5205.28,
+        "estimate": 0,
         "laborEntries": [
           {
             "d": "2026-10-12",
@@ -41776,7 +42051,7 @@
         "labor": 44.01,
         "materials": 0,
         "total": 44.01,
-        "estimate": 5523.22,
+        "estimate": 0,
         "laborEntries": [
           {
             "d": "2026-10-12",
@@ -42428,6 +42703,119 @@
       "days_elapsed": 0,
       "days_to_turn": null,
       "status": "notice"
+    },
+    {
+      "key": "tc68|b60",
+      "prop": "tc68",
+      "unit": "B60",
+      "property_name": "tc68",
+      "at_risk": [],
+      "region": "Tacoma",
+      "pm": {
+        "projId": 230080,
+        "name": "Standard Unit Turn",
+        "status": "ACTIVE",
+        "done": 0,
+        "total": 8,
+        "first_appt": null,
+        "final_walk": null,
+        "final_walk_done": null,
+        "completed_date": null,
+        "due": "2026-10-14",
+        "next_task": {
+          "date": "2026-10-13",
+          "task": "walkthrough"
+        },
+        "tasks": [
+          {
+            "task": "A - Initial walkthrough",
+            "cat": "walkthrough",
+            "done": false,
+            "date": "2026-09-22",
+            "who": "Armani Mitchell",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Appfolio Estimate",
+            "cat": "estimate",
+            "done": false,
+            "date": null,
+            "who": "Dulce Salinas",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "C - Paint",
+            "cat": "paint",
+            "done": false,
+            "date": null,
+            "who": "Chris Phillips",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "D - Maintenance",
+            "cat": "maintenance",
+            "done": false,
+            "date": null,
+            "who": "Armani Mitchell",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "E - Carpet Cleaning",
+            "cat": "carpet",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "F - Cleaning",
+            "cat": "cleaning",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Schedule Vendors",
+            "cat": "other",
+            "done": false,
+            "date": null,
+            "who": "Armani Mitchell",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Final Walkthrough",
+            "cat": "final-walk",
+            "done": false,
+            "date": null,
+            "who": "Armani Mitchell",
+            "completed": null,
+            "vendor": false
+          }
+        ]
+      },
+      "next_appt": null,
+      "cost": {
+        "code": "tc68-B60",
+        "labor": 0,
+        "materials": 0,
+        "total": 0,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": []
+      },
+      "stage": "Walkthrough",
+      "stage_ord": 1,
+      "days_elapsed": null,
+      "days_to_turn": null,
+      "status": "other"
     },
     {
       "key": "tc68|c63",
@@ -44891,7 +45279,7 @@
         "labor": 231.98,
         "materials": 354.82,
         "total": 586.8,
-        "estimate": 1236.42,
+        "estimate": 0,
         "laborEntries": [
           {
             "d": "2026-01-16",
@@ -45388,7 +45776,7 @@
         "labor": 409.37,
         "materials": 342.66,
         "total": 752.03,
-        "estimate": 1255.84,
+        "estimate": 0,
         "laborEntries": [
           {
             "d": "2025-10-06",
