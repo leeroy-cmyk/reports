@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-10-20T03:55:57.362Z",
+  "fetched_at": "2026-10-20T09:16:50.976Z",
   "units": {
     "2": {
       "moveOut": "2026-07-31",
@@ -111,13 +111,6 @@
       "status": "Vacant-Unrented",
       "prop": "m405",
       "unit": "15",
-      "city": "Spokane"
-    },
-    "265": {
-      "moveOut": "2026-07-31",
-      "status": "Vacant-Rented",
-      "prop": "m405",
-      "unit": "20",
       "city": "Spokane"
     },
     "266": {
@@ -752,7 +745,7 @@
     },
     "1033": {
       "moveOut": "2026-10-19",
-      "status": "Notice-Unrented",
+      "status": "Vacant-Unrented",
       "prop": "kn47 K2",
       "unit": "C202",
       "city": "Kennewick"
@@ -1207,34 +1200,6 @@
     }
   },
   "changes": [
-    {
-      "date": "2026-08-20",
-      "type": "moveout_removed",
-      "unit_id": "913",
-      "prop": "kn47 K1",
-      "unit": "G103",
-      "city": "Kennewick",
-      "from": "2026-06-14",
-      "was_status": "Vacant-Rented"
-    },
-    {
-      "date": "2026-08-20",
-      "type": "moveout_new",
-      "unit_id": "527",
-      "prop": "rl16",
-      "unit": "A14",
-      "city": "Richland",
-      "to": "2026-09-30"
-    },
-    {
-      "date": "2026-08-20",
-      "type": "moveout_new",
-      "unit_id": "709",
-      "prop": "c313",
-      "unit": "1",
-      "city": "Spokane",
-      "to": "2026-08-21"
-    },
     {
       "date": "2026-08-21",
       "type": "moveout_removed",
@@ -3741,6 +3706,16 @@
       "unit": "C101",
       "city": "Spokane",
       "to": "2026-12-18"
+    },
+    {
+      "date": "2026-10-20",
+      "type": "moveout_removed",
+      "unit_id": "265",
+      "prop": "m405",
+      "unit": "20",
+      "city": "Spokane",
+      "from": "2026-07-31",
+      "was_status": "Vacant-Rented"
     }
   ]
 }
