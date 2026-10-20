@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-10-20T18:37:23.252Z",
+  "fetched_at": "2026-10-20T21:53:48.132Z",
   "units": {
     "2": {
       "moveOut": "2026-07-31",
@@ -1016,13 +1016,6 @@
       "unit": "B101",
       "city": "Spokane"
     },
-    "1293": {
-      "moveOut": "2026-09-18",
-      "status": "Vacant-Unrented",
-      "prop": "c702",
-      "unit": "B201",
-      "city": "Spokane"
-    },
     "1299": {
       "moveOut": "2026-09-10",
       "status": "Vacant-Unrented",
@@ -1105,6 +1098,13 @@
       "status": "Vacant-Unrented",
       "prop": "c702",
       "unit": "E203",
+      "city": "Spokane"
+    },
+    "1368": {
+      "moveOut": "2026-10-13",
+      "status": "Vacant-Unrented",
+      "prop": "c702",
+      "unit": "F106",
       "city": "Spokane"
     },
     "1372": {
@@ -3716,6 +3716,25 @@
       "city": "Spokane",
       "from": "2026-07-31",
       "was_status": "Vacant-Rented"
+    },
+    {
+      "date": "2026-10-20",
+      "type": "moveout_new",
+      "unit_id": "1368",
+      "prop": "c702",
+      "unit": "F106",
+      "city": "Spokane",
+      "to": "2026-10-13"
+    },
+    {
+      "date": "2026-10-20",
+      "type": "moveout_removed",
+      "unit_id": "1293",
+      "prop": "c702",
+      "unit": "B201",
+      "city": "Spokane",
+      "from": "2026-09-18",
+      "was_status": "Vacant-Unrented"
     }
   ]
 }

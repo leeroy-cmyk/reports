@@ -1,17 +1,17 @@
 {
   "ok": true,
-  "fetched_at": "2026-10-20T18:38:14.426Z",
+  "fetched_at": "2026-10-20T21:54:37.480Z",
   "summary": {
     "as_of": "2026-10-20",
-    "units": 238,
-    "active": 71,
-    "ready": 17,
+    "units": 239,
+    "active": 72,
+    "ready": 16,
     "notice": 12,
-    "at_risk": 38,
-    "unscheduled": 28,
-    "accruing": 26380.84,
-    "avg_days_open": 43,
-    "revenue_at_risk": 3184.47
+    "at_risk": 39,
+    "unscheduled": 29,
+    "accruing": 26551.54,
+    "avg_days_open": 42,
+    "revenue_at_risk": 3237.63
   },
   "rows": [
     {
@@ -980,6 +980,46 @@
       "stage": null,
       "stage_ord": 0,
       "days_elapsed": 5,
+      "days_to_turn": null,
+      "status": "active"
+    },
+    {
+      "key": "c702|f106",
+      "prop": "c702",
+      "unit": "F106",
+      "at_risk": [
+        "Nothing scheduled"
+      ],
+      "property_name": "c702",
+      "city": "Spokane",
+      "addr": "7006 N Colton St F106 Spokane, WA 99208",
+      "unit_id": 1368,
+      "unit_status": "Vacant-Unrented",
+      "rent_ready": "No",
+      "vacant": true,
+      "days_vacant": 7,
+      "move_out": "2026-10-13",
+      "available_on": "2026-11-06",
+      "ready_on": "2026-11-06",
+      "target_date": "2026-11-02",
+      "next_move_in": null,
+      "rent": "1595.00",
+      "bed_bath": "3/2.00",
+      "sqft": 1250,
+      "region": "Spokane",
+      "next_appt": null,
+      "cost": {
+        "code": "c702-F106",
+        "labor": 0,
+        "materials": 0,
+        "total": 0,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": []
+      },
+      "stage": null,
+      "stage_ord": 0,
+      "days_elapsed": 7,
       "days_to_turn": null,
       "status": "active"
     },
@@ -2769,13 +2809,21 @@
         "brief": "D - Maintenance"
       },
       "cost": {
-        "code": "kn47-G201",
+        "code": "kn47-k1-G201",
         "labor": 0,
-        "materials": 0,
-        "total": 0,
+        "materials": 80.51,
+        "total": 80.51,
         "estimate": 0,
         "laborEntries": [],
-        "materialEntries": []
+        "materialEntries": [
+          {
+            "d": "2026-10-20",
+            "amt": 80.51,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          }
+        ]
       },
       "stage": "Walkthrough",
       "stage_ord": 1,
@@ -3066,8 +3114,8 @@
       "cost": {
         "code": "m221-33",
         "labor": 354.25,
-        "materials": 275.01,
-        "total": 629.26,
+        "materials": 307.69,
+        "total": 661.94,
         "estimate": 746.88,
         "laborEntries": [
           {
@@ -3149,6 +3197,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-10-20",
+            "amt": 32.68,
+            "cat": "Turn",
+            "ln": "normandin",
+            "src": "ramp"
+          },
           {
             "d": "2026-10-19",
             "amt": 114.36,
@@ -5700,11 +5755,18 @@
       "next_appt": null,
       "cost": {
         "code": "tc68-C78",
-        "labor": 35.91,
+        "labor": 93.42,
         "materials": 76.71,
-        "total": 112.62,
+        "total": 170.13,
         "estimate": 3746.82,
         "laborEntries": [
+          {
+            "d": "2026-10-20",
+            "emp": "Armani Mitchell",
+            "hrs": 2.13,
+            "cost": 57.51,
+            "cat": "Turn"
+          },
           {
             "d": "2026-08-17",
             "emp": "Armani Mitchell",
@@ -6042,11 +6104,39 @@
       },
       "cost": {
         "code": "a210-8",
-        "labor": 32.5,
-        "materials": 0,
-        "total": 32.5,
+        "labor": 97.25,
+        "materials": 446.61,
+        "total": 543.86,
         "estimate": 0,
         "laborEntries": [
+          {
+            "d": "2026-10-20",
+            "emp": "Micheal N. Magoon",
+            "hrs": 0.85,
+            "cost": 21.25,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-10-20",
+            "emp": "Micheal N. Magoon",
+            "hrs": 0.55,
+            "cost": 13.75,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-10-20",
+            "emp": "Micheal N. Magoon",
+            "hrs": 0.22,
+            "cost": 5.5,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-10-20",
+            "emp": "Micheal N. Magoon",
+            "hrs": 0.97,
+            "cost": 24.25,
+            "cat": "Turn"
+          },
           {
             "d": "2026-10-19",
             "emp": "Micheal N. Magoon",
@@ -6055,7 +6145,15 @@
             "cat": "Turn"
           }
         ],
-        "materialEntries": []
+        "materialEntries": [
+          {
+            "d": "2026-10-20",
+            "amt": 446.61,
+            "cat": "Turn",
+            "ln": "magoon",
+            "src": "ramp"
+          }
+        ]
       },
       "af_turn_end": "2026-10-19",
       "stage": "Ready",
@@ -6187,7 +6285,7 @@
         "labor": 1612.79,
         "materials": 1137.27,
         "total": 2750.06,
-        "estimate": 0,
+        "estimate": 5151.99,
         "laborEntries": [
           {
             "d": "2025-07-25",
@@ -9600,12 +9698,48 @@
       "next_appt": null,
       "cost": {
         "code": "c313-31",
-        "labor": 0,
-        "materials": 667.06,
-        "total": 667.06,
+        "labor": 64.25,
+        "materials": 722.44,
+        "total": 786.69,
         "estimate": 0,
-        "laborEntries": [],
+        "laborEntries": [
+          {
+            "d": "2026-10-20",
+            "emp": "Micheal N. Magoon",
+            "hrs": 0.5,
+            "cost": 12.5,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-10-20",
+            "emp": "Micheal N. Magoon",
+            "hrs": 0.45,
+            "cost": 11.25,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-10-20",
+            "emp": "Micheal N. Magoon",
+            "hrs": 0.9,
+            "cost": 22.5,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-10-20",
+            "emp": "Micheal N. Magoon",
+            "hrs": 0.72,
+            "cost": 18,
+            "cat": "Turn"
+          }
+        ],
         "materialEntries": [
+          {
+            "d": "2026-10-20",
+            "amt": 55.38,
+            "cat": "Turn",
+            "ln": "magoon",
+            "src": "ramp"
+          },
           {
             "d": "2026-09-23",
             "amt": 15.89,
@@ -10568,11 +10702,18 @@
       "cost": {
         "code": "c702-A103",
         "labor": 0,
-        "materials": 5005.45,
-        "total": 5005.45,
+        "materials": 5028.61,
+        "total": 5028.61,
         "estimate": 8312.44,
         "laborEntries": [],
         "materialEntries": [
+          {
+            "d": "2026-10-20",
+            "amt": 23.16,
+            "cat": "Turn",
+            "ln": "easley",
+            "src": "ramp"
+          },
           {
             "d": "2026-10-15",
             "amt": 3139.75,
@@ -11162,23 +11303,8 @@
       "key": "c702|b201",
       "prop": "c702",
       "unit": "B201",
-      "at_risk": [],
       "property_name": "c702",
-      "city": "Spokane",
-      "addr": "7020 N Colton St B201 Spokane, WA 99208",
-      "unit_id": 1293,
-      "unit_status": "Vacant-Unrented",
-      "rent_ready": "Yes",
-      "vacant": true,
-      "days_vacant": 32,
-      "move_out": "2026-09-18",
-      "available_on": "2026-10-14",
-      "ready_on": "2026-10-14",
-      "target_date": "2026-10-08",
-      "next_move_in": null,
-      "rent": "1595.00",
-      "bed_bath": "3/2.00",
-      "sqft": 1250,
+      "at_risk": [],
       "region": "Spokane",
       "pm": {
         "projId": 245580,
@@ -11301,11 +11427,11 @@
         ]
       },
       "af_turn_end": "2026-10-15",
-      "stage": "Ready",
-      "stage_ord": 7,
-      "days_elapsed": 32,
+      "stage": "Carpet",
+      "stage_ord": 5,
+      "days_elapsed": null,
       "days_to_turn": null,
-      "status": "ready"
+      "status": "other"
     },
     {
       "key": "c702|b301",
@@ -11439,7 +11565,7 @@
         "labor": 0,
         "materials": 492.77,
         "total": 492.77,
-        "estimate": 0,
+        "estimate": 4774.56,
         "laborEntries": [],
         "materialEntries": [
           {
@@ -12918,7 +13044,7 @@
         "labor": 0,
         "materials": 0,
         "total": 0,
-        "estimate": 0,
+        "estimate": 5045.34,
         "laborEntries": [],
         "materialEntries": []
       },
@@ -15291,7 +15417,7 @@
         "labor": 0,
         "materials": 0,
         "total": 0,
-        "estimate": 0,
+        "estimate": 4048.1,
         "laborEntries": [],
         "materialEntries": []
       },
@@ -15521,7 +15647,7 @@
         "labor": 0,
         "materials": 84.47,
         "total": 84.47,
-        "estimate": 0,
+        "estimate": 1292.98,
         "laborEntries": [],
         "materialEntries": [
           {
@@ -18579,11 +18705,18 @@
       "cost": {
         "code": "kn47-k2-D104",
         "labor": 0,
-        "materials": 140,
-        "total": 140,
+        "materials": 220.51,
+        "total": 220.51,
         "estimate": 0,
         "laborEntries": [],
         "materialEntries": [
+          {
+            "d": "2026-10-20",
+            "amt": 80.51,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          },
           {
             "d": "2025-07-03",
             "amt": 140,
@@ -21222,8 +21355,8 @@
       "vacant": true,
       "days_vacant": 20,
       "move_out": "2026-09-30",
-      "available_on": "2026-10-20",
-      "ready_on": "2026-10-20",
+      "available_on": "2026-10-23",
+      "ready_on": "2026-10-23",
       "target_date": "2026-10-20",
       "next_move_in": null,
       "rent": "1430.00",
@@ -22227,7 +22360,7 @@
         "labor": 0,
         "materials": 0,
         "total": 0,
-        "estimate": 0,
+        "estimate": 3119.71,
         "laborEntries": [],
         "materialEntries": []
       },
@@ -22680,7 +22813,7 @@
         "labor": 249.26,
         "materials": 66.4,
         "total": 315.66,
-        "estimate": 0,
+        "estimate": 1394.69,
         "laborEntries": [
           {
             "d": "2025-10-08",
@@ -24305,7 +24438,7 @@
         "labor": 0,
         "materials": 0,
         "total": 0,
-        "estimate": 0,
+        "estimate": 4092.93,
         "laborEntries": [],
         "materialEntries": []
       },
@@ -30143,7 +30276,7 @@
         "labor": 284,
         "materials": 2040.44,
         "total": 2324.44,
-        "estimate": 0,
+        "estimate": 3494.28,
         "laborEntries": [
           {
             "d": "2025-08-06",
@@ -37849,8 +37982,8 @@
       "vacant": true,
       "days_vacant": 15,
       "move_out": "2026-10-05",
-      "available_on": "2026-10-25",
-      "ready_on": "2026-10-25",
+      "available_on": "2026-11-13",
+      "ready_on": "2026-11-13",
       "target_date": "2026-10-25",
       "next_move_in": null,
       "rent": "1365.00",
@@ -40416,11 +40549,18 @@
       "next_appt": null,
       "cost": {
         "code": "tc68-A06",
-        "labor": 232.2,
-        "materials": 0,
-        "total": 232.2,
+        "labor": 291.06,
+        "materials": 198.02,
+        "total": 489.08,
         "estimate": 4170.26,
         "laborEntries": [
+          {
+            "d": "2026-10-20",
+            "emp": "Armani Mitchell",
+            "hrs": 2.18,
+            "cost": 58.86,
+            "cat": "Turn"
+          },
           {
             "d": "2026-10-19",
             "emp": "Armani Mitchell",
@@ -40436,7 +40576,15 @@
             "cat": "Turn"
           }
         ],
-        "materialEntries": []
+        "materialEntries": [
+          {
+            "d": "2026-10-15",
+            "amt": 198.02,
+            "cat": "Turn",
+            "ln": "mitchell",
+            "src": "ramp"
+          }
+        ]
       },
       "af_turn_end": "2026-10-20",
       "stage": "Ready",
@@ -41614,7 +41762,7 @@
         "labor": 115.56,
         "materials": 0,
         "total": 115.56,
-        "estimate": 0,
+        "estimate": 3551.84,
         "laborEntries": [
           {
             "d": "2026-10-13",
@@ -42378,8 +42526,8 @@
       "cost": {
         "code": "tc68-C62",
         "labor": 1595.7,
-        "materials": 0,
-        "total": 1595.7,
+        "materials": 914.21,
+        "total": 2509.91,
         "estimate": 0,
         "laborEntries": [
           {
@@ -42579,7 +42727,15 @@
             "cat": "Turn"
           }
         ],
-        "materialEntries": []
+        "materialEntries": [
+          {
+            "d": "2026-10-16",
+            "amt": 914.21,
+            "cat": "Turn",
+            "ln": "mitchell",
+            "src": "ramp"
+          }
+        ]
       },
       "af_turn_end": "2026-10-20",
       "stage": "Ready",
@@ -44826,7 +44982,7 @@
       "at_risk": [],
       "property_name": "w117",
       "city": "Spokane",
-      "addr": "1117 W 5th Ave - 11 Spokane, WA 9204",
+      "addr": "1117 W 5th Ave - 11 Spokane, WA 98204",
       "unit_id": 454,
       "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
@@ -45210,7 +45366,7 @@
         "labor": 231.98,
         "materials": 354.82,
         "total": 586.8,
-        "estimate": 0,
+        "estimate": 1750.91,
         "laborEntries": [
           {
             "d": "2026-01-16",
@@ -45804,7 +45960,7 @@
         "labor": 409.37,
         "materials": 342.66,
         "total": 752.03,
-        "estimate": 0,
+        "estimate": 1316.42,
         "laborEntries": [
           {
             "d": "2025-10-06",
