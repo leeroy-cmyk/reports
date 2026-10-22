@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "fetched_at": "2026-10-22T00:55:43.481Z",
+  "fetched_at": "2026-10-22T05:50:29.339Z",
   "summary": {
     "as_of": "2026-10-21",
     "units": 241,
@@ -9,7 +9,7 @@
     "notice": 11,
     "at_risk": 40,
     "unscheduled": 32,
-    "accruing": 27355.88,
+    "accruing": 27751.92,
     "avg_days_open": 43,
     "revenue_at_risk": 3282.97
   },
@@ -5316,8 +5316,8 @@
       "cost": {
         "code": "tc68-A03",
         "labor": 35.91,
-        "materials": 0,
-        "total": 35.91,
+        "materials": 198.02,
+        "total": 233.93,
         "estimate": 0,
         "laborEntries": [
           {
@@ -5328,7 +5328,15 @@
             "cat": "Turn"
           }
         ],
-        "materialEntries": []
+        "materialEntries": [
+          {
+            "d": "2026-10-22",
+            "amt": 198.02,
+            "cat": "Turn",
+            "ln": "mitchell",
+            "src": "ramp"
+          }
+        ]
       },
       "stage": "Final Walk",
       "stage_ord": 6,
@@ -10819,18 +10827,11 @@
       "cost": {
         "code": "c702-A103",
         "labor": 0,
-        "materials": 2748.57,
-        "total": 2748.57,
+        "materials": 1888.86,
+        "total": 1888.86,
         "estimate": 8312.44,
         "laborEntries": [],
         "materialEntries": [
-          {
-            "d": "2026-10-21",
-            "amt": 859.71,
-            "cat": "Turn",
-            "ln": "easley",
-            "src": "ramp"
-          },
           {
             "d": "2026-10-20",
             "amt": 23.16,
@@ -28894,7 +28895,7 @@
       "vacant": true,
       "days_vacant": 143,
       "move_out": "2026-05-31",
-      "available_on": "2026-06-20",
+      "available_on": null,
       "ready_on": "2026-06-20",
       "target_date": "2026-06-20",
       "next_move_in": "2026-10-23",
@@ -40425,8 +40426,8 @@
       "cost": {
         "code": "tc68-A01",
         "labor": 28.35,
-        "materials": 0,
-        "total": 28.35,
+        "materials": 198.02,
+        "total": 226.37,
         "estimate": 0,
         "laborEntries": [
           {
@@ -40437,7 +40438,15 @@
             "cat": "Turn"
           }
         ],
-        "materialEntries": []
+        "materialEntries": [
+          {
+            "d": "2026-10-22",
+            "amt": 198.02,
+            "cat": "Turn",
+            "ln": "mitchell",
+            "src": "ramp"
+          }
+        ]
       },
       "stage": "Walkthrough",
       "stage_ord": 1,
@@ -40655,7 +40664,7 @@
       "vacant": true,
       "days_vacant": 34,
       "move_out": "2026-09-17",
-      "available_on": "2026-10-17",
+      "available_on": null,
       "ready_on": "2026-10-17",
       "target_date": "2026-10-07",
       "next_move_in": "2026-10-23",
