@@ -1,15 +1,15 @@
 {
   "ok": true,
-  "fetched_at": "2026-10-23T12:10:18.114Z",
+  "fetched_at": "2026-10-23T17:08:58.889Z",
   "summary": {
     "as_of": "2026-10-23",
-    "units": 238,
+    "units": 239,
     "active": 73,
     "ready": 15,
     "notice": 11,
     "at_risk": 41,
     "unscheduled": 33,
-    "accruing": 28950.11,
+    "accruing": 29010.37,
     "avg_days_open": 44,
     "revenue_at_risk": 3267.53
   },
@@ -322,11 +322,25 @@
       },
       "cost": {
         "code": "b101-16",
-        "labor": 610.39,
+        "labor": 670.65,
         "materials": 736,
-        "total": 1346.39,
+        "total": 1406.65,
         "estimate": 0,
         "laborEntries": [
+          {
+            "d": "2026-10-23",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.97,
+            "cost": 50.73,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-10-23",
+            "emp": "Ronald D. Cramer",
+            "hrs": 0.37,
+            "cost": 9.53,
+            "cat": "Turn"
+          },
           {
             "d": "2026-10-22",
             "emp": "Ronald D. Cramer",
@@ -16014,7 +16028,7 @@
       "city": "Medical Lake",
       "addr": "509 N. Brower 1 Medical Lake, WA 99022",
       "unit_id": 329,
-      "unit_status": "Vacant-Unrented",
+      "unit_status": "Vacant-Rented",
       "rent_ready": "Yes",
       "vacant": true,
       "days_vacant": 84,
@@ -16022,7 +16036,7 @@
       "available_on": "2026-10-15",
       "ready_on": "2026-10-15",
       "target_date": "2026-08-20",
-      "next_move_in": null,
+      "next_move_in": "2026-10-28",
       "rent": "1267.00",
       "bed_bath": "2/1.00",
       "sqft": 630,
@@ -17346,6 +17360,152 @@
       "stage_ord": 7,
       "days_elapsed": 0,
       "days_to_turn": -444,
+      "status": "complete"
+    },
+    {
+      "key": "kn47|a206",
+      "prop": "kn47",
+      "unit": "A206",
+      "at_risk": [],
+      "property_name": "kn47 K2",
+      "city": "Kennewick",
+      "addr": "632 N Arthur Street A206 Kennewick, WA 99336",
+      "unit_id": 1005,
+      "unit_status": "Notice-Unrented",
+      "rent_ready": null,
+      "vacant": false,
+      "days_vacant": null,
+      "move_out": "2026-12-31",
+      "available_on": "2027-01-20",
+      "ready_on": "2027-01-20",
+      "target_date": "2027-01-20",
+      "next_move_in": null,
+      "rent": "1132.00",
+      "bed_bath": "1/1.00",
+      "sqft": 575,
+      "region": "Tri-Cities",
+      "pm": {
+        "projId": 161789,
+        "name": "Turn - 632 N Arthur Street UNIT A206",
+        "status": "COMPLETE",
+        "done": 8,
+        "total": 8,
+        "first_appt": null,
+        "final_walk": null,
+        "final_walk_done": "2025-06-09",
+        "completed_date": "2025-06-09",
+        "due": "2025-06-13",
+        "next_task": null,
+        "tasks": null
+      },
+      "next_appt": null,
+      "cost": {
+        "code": "kn47-k2-A206",
+        "labor": 309.38,
+        "materials": 772.43,
+        "total": 1081.81,
+        "estimate": 0,
+        "laborEntries": [
+          {
+            "d": "2026-01-23",
+            "emp": "Margarito Saldana",
+            "hrs": 1.02,
+            "cost": 28.97,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-01-05",
+            "emp": "Ryan G. Robson",
+            "hrs": 2.73,
+            "cost": 62.79,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-06-09",
+            "emp": "Isaac R. Chavez",
+            "hrs": 1.7,
+            "cost": 45.9,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-06-09",
+            "emp": "Isaac R. Chavez",
+            "hrs": 1.13,
+            "cost": 30.51,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-06-09",
+            "emp": "Isaac R. Chavez",
+            "hrs": 0.9,
+            "cost": 24.3,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-06-02",
+            "emp": "Isaac R. Chavez",
+            "hrs": 0.5,
+            "cost": 13.5,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-05-23",
+            "emp": "Isaac R. Chavez",
+            "hrs": 0.85,
+            "cost": 22.95,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-05-23",
+            "emp": "Isaac R. Chavez",
+            "hrs": 2.98,
+            "cost": 80.46,
+            "cat": "Turn"
+          }
+        ],
+        "materialEntries": [
+          {
+            "d": "2026-01-05",
+            "amt": 156.13,
+            "cat": "Turn",
+            "ln": "robson",
+            "src": "ramp"
+          },
+          {
+            "d": "2025-07-24",
+            "amt": 174.08,
+            "cat": "Turn",
+            "ln": "chavez",
+            "src": "ramp"
+          },
+          {
+            "d": "2025-07-03",
+            "amt": 350,
+            "cat": "Turn",
+            "ln": "saldana",
+            "src": "ramp"
+          },
+          {
+            "d": "2025-06-02",
+            "amt": 78.34,
+            "cat": "Turn",
+            "ln": "chavez",
+            "src": "ramp"
+          },
+          {
+            "d": "2025-05-27",
+            "amt": 13.88,
+            "cat": "Turn",
+            "ln": "chavez",
+            "src": "ramp"
+          }
+        ]
+      },
+      "turn_end": "2025-06-09",
+      "stage": "Move-out",
+      "stage_ord": 0,
+      "days_elapsed": 0,
+      "days_to_turn": -570,
       "status": "complete"
     },
     {
