@@ -1,17 +1,17 @@
 {
   "ok": true,
-  "fetched_at": "2026-10-23T17:08:58.889Z",
+  "fetched_at": "2026-10-23T20:27:28.294Z",
   "summary": {
     "as_of": "2026-10-23",
     "units": 239,
-    "active": 73,
-    "ready": 15,
+    "active": 70,
+    "ready": 18,
     "notice": 11,
-    "at_risk": 41,
-    "unscheduled": 33,
-    "accruing": 29010.37,
-    "avg_days_open": 44,
-    "revenue_at_risk": 3267.53
+    "at_risk": 39,
+    "unscheduled": 31,
+    "accruing": 28556.59,
+    "avg_days_open": 43,
+    "revenue_at_risk": 3089.37
   },
   "rows": [
     {
@@ -607,8 +607,8 @@
       "cost": {
         "code": "c313-24",
         "labor": 527.14,
-        "materials": 1028.55,
-        "total": 1555.69,
+        "materials": 1035.07,
+        "total": 1562.21,
         "estimate": 0,
         "laborEntries": [
           {
@@ -725,6 +725,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-10-23",
+            "amt": 6.52,
+            "cat": "Turn",
+            "ln": "normandin",
+            "src": "ramp"
+          },
           {
             "d": "2026-10-22",
             "amt": 27.61,
@@ -5583,143 +5590,6 @@
       "status": "active"
     },
     {
-      "key": "tc68|a03",
-      "prop": "tc68",
-      "unit": "A03",
-      "at_risk": [
-        "Over 45 days vacant"
-      ],
-      "property_name": "tc68",
-      "city": "Tacoma",
-      "addr": "6830 Tacoma Mall Blvd Apt A03 Tacoma, WA 98409",
-      "unit_id": 1152,
-      "unit_status": "Vacant-Unrented",
-      "rent_ready": "No",
-      "vacant": true,
-      "days_vacant": 103,
-      "move_out": "2026-07-12",
-      "available_on": "2026-10-24",
-      "ready_on": "2026-10-24",
-      "target_date": "2026-08-01",
-      "next_move_in": null,
-      "rent": "1775.00",
-      "bed_bath": "2/1.00",
-      "sqft": 980,
-      "region": "Tacoma",
-      "pm": {
-        "projId": 235868,
-        "name": "Standard Unit Turn",
-        "status": "ACTIVE",
-        "done": 7,
-        "total": 8,
-        "first_appt": "2026-09-22",
-        "final_walk": "2026-09-17",
-        "final_walk_done": null,
-        "completed_date": "2026-09-16",
-        "due": "2026-07-27",
-        "next_task": {
-          "date": "2026-11-18",
-          "task": "paint"
-        },
-        "tasks": [
-          {
-            "task": "A - Initial walkthrough",
-            "cat": "walkthrough",
-            "done": true,
-            "date": "2026-09-21",
-            "who": "Armani Mitchell",
-            "completed": "2026-09-16",
-            "vendor": false
-          },
-          {
-            "task": "Appfolio Estimate",
-            "cat": "estimate",
-            "done": true,
-            "date": null,
-            "who": "Dulce Salinas",
-            "completed": "2026-09-16",
-            "vendor": false
-          },
-          {
-            "task": "C - Paint",
-            "cat": "paint",
-            "done": true,
-            "date": "2026-11-18",
-            "who": "Chris Phillips",
-            "completed": "2026-09-16",
-            "vendor": false
-          },
-          {
-            "task": "D - Maintenance",
-            "cat": "maintenance",
-            "done": true,
-            "date": "2026-09-22",
-            "who": "Armani Mitchell",
-            "completed": "2026-09-16",
-            "vendor": false
-          },
-          {
-            "task": "F - Cleaning",
-            "cat": "cleaning",
-            "done": true,
-            "date": null,
-            "who": null,
-            "completed": "2026-09-16",
-            "vendor": false
-          },
-          {
-            "task": "G - Verify Mailbox Lockbox & Mailbox Keys",
-            "cat": "other",
-            "done": true,
-            "date": null,
-            "who": null,
-            "completed": "2026-09-16",
-            "vendor": false
-          },
-          {
-            "task": "Final Walkthrough",
-            "cat": "final-walk",
-            "done": false,
-            "date": "2026-09-17",
-            "who": "Armani Mitchell",
-            "completed": null,
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": null,
-      "cost": {
-        "code": "tc68-A03",
-        "labor": 35.91,
-        "materials": 198.02,
-        "total": 233.93,
-        "estimate": 0,
-        "laborEntries": [
-          {
-            "d": "2026-08-17",
-            "emp": "Armani Mitchell",
-            "hrs": 1.33,
-            "cost": 35.91,
-            "cat": "Turn"
-          }
-        ],
-        "materialEntries": [
-          {
-            "d": "2026-10-22",
-            "amt": 198.02,
-            "cat": "Turn",
-            "ln": "mitchell",
-            "src": "ramp"
-          }
-        ]
-      },
-      "stage": "Final Walk",
-      "stage_ord": 6,
-      "days_elapsed": 103,
-      "days_to_turn": null,
-      "status": "active"
-    },
-    {
       "key": "tc68|a20",
       "prop": "tc68",
       "unit": "A20",
@@ -5735,8 +5605,8 @@
       "vacant": true,
       "days_vacant": 84,
       "move_out": "2026-07-31",
-      "available_on": "2026-11-15",
-      "ready_on": "2026-11-15",
+      "available_on": "2026-11-01",
+      "ready_on": "2026-11-01",
       "target_date": "2026-08-20",
       "next_move_in": null,
       "rent": "1775.00",
@@ -6083,150 +5953,6 @@
       "status": "active"
     },
     {
-      "key": "tc68|d093",
-      "prop": "tc68",
-      "unit": "D093",
-      "at_risk": [
-        "Over 45 days vacant"
-      ],
-      "property_name": "tc68",
-      "city": "Tacoma",
-      "addr": "6830 Tacoma Mall Blvd Apt D093 Tacoma, WA 98409",
-      "unit_id": 1242,
-      "unit_status": "Vacant-Unrented",
-      "rent_ready": "No",
-      "vacant": true,
-      "days_vacant": 53,
-      "move_out": "2026-08-31",
-      "available_on": "2026-10-23",
-      "ready_on": "2026-10-14",
-      "target_date": "2026-09-20",
-      "next_move_in": null,
-      "rent": "1775.00",
-      "bed_bath": "2/1.00",
-      "sqft": 980,
-      "region": "Tacoma",
-      "pm": {
-        "projId": 240188,
-        "name": "Standard Unit Turn",
-        "status": "ACTIVE",
-        "done": 0,
-        "total": 9,
-        "first_appt": "2026-10-12",
-        "final_walk": "2026-10-28",
-        "final_walk_done": null,
-        "completed_date": null,
-        "due": "2026-09-15",
-        "next_task": {
-          "date": "2026-10-12",
-          "task": "paint"
-        },
-        "tasks": [
-          {
-            "task": "A - Initial walkthrough",
-            "cat": "walkthrough",
-            "done": false,
-            "date": "2026-09-25",
-            "who": "Armani Mitchell",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Appfolio Estimate",
-            "cat": "estimate",
-            "done": false,
-            "date": null,
-            "who": "Dulce Salinas",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "C - Paint",
-            "cat": "paint",
-            "done": false,
-            "date": "2026-10-12",
-            "who": "Chris Phillips",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "D - Maintenance",
-            "cat": "maintenance",
-            "done": false,
-            "date": "2026-10-20",
-            "who": "Armani Mitchell",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "E - Carpet Cleaning",
-            "cat": "carpet",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "F - Cleaning",
-            "cat": "cleaning",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "G - Verify Mailbox Lockbox & Mailbox Keys",
-            "cat": "other",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Schedule Vendors",
-            "cat": "other",
-            "done": false,
-            "date": null,
-            "who": "Armani Mitchell",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Final Walkthrough",
-            "cat": "final-walk",
-            "done": false,
-            "date": "2026-10-28",
-            "who": "Armani Mitchell",
-            "completed": null,
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": {
-        "date": "2026-10-23",
-        "cat": "suggested-cleaning",
-        "who": "Dana's Quality Cleaning",
-        "brief": "Suggested cleaning — 3 business days after in-house done (2026-10-20)"
-      },
-      "cost": {
-        "code": "tc68-D093",
-        "labor": 0,
-        "materials": 0,
-        "total": 0,
-        "estimate": 0,
-        "laborEntries": [],
-        "materialEntries": []
-      },
-      "stage": "Walkthrough",
-      "stage_ord": 1,
-      "days_elapsed": 53,
-      "days_to_turn": null,
-      "status": "active"
-    },
-    {
       "key": "v202|4",
       "prop": "v202",
       "unit": "4",
@@ -6395,11 +6121,25 @@
       },
       "cost": {
         "code": "a210-8",
-        "labor": 410.75,
+        "labor": 504.25,
         "materials": 724.2,
-        "total": 1134.95,
+        "total": 1228.45,
         "estimate": 0,
         "laborEntries": [
+          {
+            "d": "2026-10-23",
+            "emp": "Micheal N. Magoon",
+            "hrs": 2.07,
+            "cost": 51.75,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-10-23",
+            "emp": "Micheal N. Magoon",
+            "hrs": 1.67,
+            "cost": 41.75,
+            "cat": "Turn"
+          },
           {
             "d": "2026-10-22",
             "emp": "Micheal N. Magoon",
@@ -15484,15 +15224,15 @@
       "city": "Medical Lake",
       "addr": "101 E. Spence 3 Medical Lake, WA 99022",
       "unit_id": 347,
-      "unit_status": "Vacant-Unrented",
+      "unit_status": "Vacant-Rented",
       "rent_ready": "No",
       "vacant": true,
       "days_vacant": 34,
       "move_out": "2026-09-19",
-      "available_on": "2026-11-11",
-      "ready_on": "2026-11-11",
+      "available_on": "2026-10-31",
+      "ready_on": "2026-10-31",
       "target_date": "2026-10-09",
-      "next_move_in": null,
+      "next_move_in": "2026-10-31",
       "rent": "1334.00",
       "bed_bath": "2/1.00",
       "sqft": 1140,
@@ -39904,7 +39644,7 @@
       "addr": "6830 Tacoma Mall Blvd Apt A01 Tacoma, WA 98409",
       "unit_id": 1150,
       "unit_status": "Vacant-Unrented",
-      "rent_ready": "No",
+      "rent_ready": "Yes",
       "vacant": true,
       "days_vacant": 23,
       "move_out": "2026-09-30",
@@ -40041,11 +39781,12 @@
           }
         ]
       },
-      "stage": "Walkthrough",
-      "stage_ord": 1,
+      "af_turn_end": "2026-10-23",
+      "stage": "Ready",
+      "stage_ord": 7,
       "days_elapsed": 23,
       "days_to_turn": null,
-      "status": "active"
+      "status": "ready"
     },
     {
       "key": "tc68|a02",
@@ -40242,6 +39983,142 @@
       "days_elapsed": null,
       "days_to_turn": null,
       "status": "complete"
+    },
+    {
+      "key": "tc68|a03",
+      "prop": "tc68",
+      "unit": "A03",
+      "at_risk": [],
+      "property_name": "tc68",
+      "city": "Tacoma",
+      "addr": "6830 Tacoma Mall Blvd Apt A03 Tacoma, WA 98409",
+      "unit_id": 1152,
+      "unit_status": "Vacant-Unrented",
+      "rent_ready": "Yes",
+      "vacant": true,
+      "days_vacant": 103,
+      "move_out": "2026-07-12",
+      "available_on": "2026-10-24",
+      "ready_on": "2026-10-24",
+      "target_date": "2026-08-01",
+      "next_move_in": null,
+      "rent": "1775.00",
+      "bed_bath": "2/1.00",
+      "sqft": 980,
+      "region": "Tacoma",
+      "pm": {
+        "projId": 235868,
+        "name": "Standard Unit Turn",
+        "status": "ACTIVE",
+        "done": 7,
+        "total": 8,
+        "first_appt": "2026-09-22",
+        "final_walk": "2026-09-17",
+        "final_walk_done": null,
+        "completed_date": "2026-09-16",
+        "due": "2026-07-27",
+        "next_task": {
+          "date": "2026-11-18",
+          "task": "paint"
+        },
+        "tasks": [
+          {
+            "task": "A - Initial walkthrough",
+            "cat": "walkthrough",
+            "done": true,
+            "date": "2026-09-21",
+            "who": "Armani Mitchell",
+            "completed": "2026-09-16",
+            "vendor": false
+          },
+          {
+            "task": "Appfolio Estimate",
+            "cat": "estimate",
+            "done": true,
+            "date": null,
+            "who": "Dulce Salinas",
+            "completed": "2026-09-16",
+            "vendor": false
+          },
+          {
+            "task": "C - Paint",
+            "cat": "paint",
+            "done": true,
+            "date": "2026-11-18",
+            "who": "Chris Phillips",
+            "completed": "2026-09-16",
+            "vendor": false
+          },
+          {
+            "task": "D - Maintenance",
+            "cat": "maintenance",
+            "done": true,
+            "date": "2026-09-22",
+            "who": "Armani Mitchell",
+            "completed": "2026-09-16",
+            "vendor": false
+          },
+          {
+            "task": "F - Cleaning",
+            "cat": "cleaning",
+            "done": true,
+            "date": null,
+            "who": null,
+            "completed": "2026-09-16",
+            "vendor": false
+          },
+          {
+            "task": "G - Verify Mailbox Lockbox & Mailbox Keys",
+            "cat": "other",
+            "done": true,
+            "date": null,
+            "who": null,
+            "completed": "2026-09-16",
+            "vendor": false
+          },
+          {
+            "task": "Final Walkthrough",
+            "cat": "final-walk",
+            "done": false,
+            "date": "2026-09-17",
+            "who": "Armani Mitchell",
+            "completed": null,
+            "vendor": false
+          }
+        ]
+      },
+      "next_appt": null,
+      "cost": {
+        "code": "tc68-A03",
+        "labor": 35.91,
+        "materials": 198.02,
+        "total": 233.93,
+        "estimate": 0,
+        "laborEntries": [
+          {
+            "d": "2026-08-17",
+            "emp": "Armani Mitchell",
+            "hrs": 1.33,
+            "cost": 35.91,
+            "cat": "Turn"
+          }
+        ],
+        "materialEntries": [
+          {
+            "d": "2026-10-22",
+            "amt": 198.02,
+            "cat": "Turn",
+            "ln": "mitchell",
+            "src": "ramp"
+          }
+        ]
+      },
+      "af_turn_end": "2026-10-23",
+      "stage": "Ready",
+      "stage_ord": 7,
+      "days_elapsed": 103,
+      "days_to_turn": null,
+      "status": "ready"
     },
     {
       "key": "tc68|a06",
@@ -41221,8 +41098,8 @@
       "vacant": true,
       "days_vacant": 23,
       "move_out": "2026-09-30",
-      "available_on": "2026-11-01",
-      "ready_on": "2026-11-01",
+      "available_on": "2026-11-07",
+      "ready_on": "2026-11-07",
       "target_date": "2026-10-20",
       "next_move_in": null,
       "rent": "1775.00",
@@ -41366,8 +41243,8 @@
       "vacant": true,
       "days_vacant": 16,
       "move_out": "2026-10-07",
-      "available_on": "2026-11-01",
-      "ready_on": "2026-11-01",
+      "available_on": "2026-11-11",
+      "ready_on": "2026-11-11",
       "target_date": "2026-10-27",
       "next_move_in": null,
       "rent": "1595.00",
@@ -41484,7 +41361,7 @@
       "vacant": true,
       "days_vacant": 13,
       "move_out": "2026-10-10",
-      "available_on": "2026-11-07",
+      "available_on": "2026-11-01",
       "ready_on": "2026-10-08",
       "target_date": "2026-10-30",
       "next_move_in": null,
@@ -43126,6 +43003,7 @@
           }
         ]
       },
+      "af_turn_end": "2026-10-23",
       "stage": "Maintenance",
       "stage_ord": 3,
       "days_elapsed": null,
@@ -43689,6 +43567,148 @@
       "status": "complete"
     },
     {
+      "key": "tc68|d093",
+      "prop": "tc68",
+      "unit": "D093",
+      "at_risk": [],
+      "property_name": "tc68",
+      "city": "Tacoma",
+      "addr": "6830 Tacoma Mall Blvd Apt D093 Tacoma, WA 98409",
+      "unit_id": 1242,
+      "unit_status": "Vacant-Unrented",
+      "rent_ready": "Yes",
+      "vacant": true,
+      "days_vacant": 53,
+      "move_out": "2026-08-31",
+      "available_on": "2026-10-23",
+      "ready_on": "2026-10-14",
+      "target_date": "2026-09-20",
+      "next_move_in": null,
+      "rent": "1775.00",
+      "bed_bath": "2/1.00",
+      "sqft": 980,
+      "region": "Tacoma",
+      "pm": {
+        "projId": 240188,
+        "name": "Standard Unit Turn",
+        "status": "ACTIVE",
+        "done": 0,
+        "total": 9,
+        "first_appt": "2026-10-12",
+        "final_walk": "2026-10-28",
+        "final_walk_done": null,
+        "completed_date": null,
+        "due": "2026-09-15",
+        "next_task": {
+          "date": "2026-10-12",
+          "task": "paint"
+        },
+        "tasks": [
+          {
+            "task": "A - Initial walkthrough",
+            "cat": "walkthrough",
+            "done": false,
+            "date": "2026-09-25",
+            "who": "Armani Mitchell",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Appfolio Estimate",
+            "cat": "estimate",
+            "done": false,
+            "date": null,
+            "who": "Dulce Salinas",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "C - Paint",
+            "cat": "paint",
+            "done": false,
+            "date": "2026-10-12",
+            "who": "Chris Phillips",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "D - Maintenance",
+            "cat": "maintenance",
+            "done": false,
+            "date": "2026-10-20",
+            "who": "Armani Mitchell",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "E - Carpet Cleaning",
+            "cat": "carpet",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "F - Cleaning",
+            "cat": "cleaning",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "G - Verify Mailbox Lockbox & Mailbox Keys",
+            "cat": "other",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Schedule Vendors",
+            "cat": "other",
+            "done": false,
+            "date": null,
+            "who": "Armani Mitchell",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Final Walkthrough",
+            "cat": "final-walk",
+            "done": false,
+            "date": "2026-10-28",
+            "who": "Armani Mitchell",
+            "completed": null,
+            "vendor": false
+          }
+        ]
+      },
+      "next_appt": {
+        "date": "2026-10-23",
+        "cat": "suggested-cleaning",
+        "who": "Dana's Quality Cleaning",
+        "brief": "Suggested cleaning — 3 business days after in-house done (2026-10-20)"
+      },
+      "cost": {
+        "code": "tc68-D093",
+        "labor": 0,
+        "materials": 0,
+        "total": 0,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": []
+      },
+      "stage": "Ready",
+      "stage_ord": 7,
+      "days_elapsed": 53,
+      "days_to_turn": null,
+      "status": "ready"
+    },
+    {
       "key": "tc68|d096",
       "prop": "tc68",
       "unit": "D096",
@@ -43824,8 +43844,8 @@
       "vacant": true,
       "days_vacant": 23,
       "move_out": "2026-09-30",
-      "available_on": "2026-11-15",
-      "ready_on": "2026-11-15",
+      "available_on": "2026-11-01",
+      "ready_on": "2026-11-01",
       "target_date": "2026-10-20",
       "next_move_in": null,
       "rent": "1775.00",
