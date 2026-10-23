@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-10-23T01:32:10.675Z",
+  "fetched_at": "2026-10-23T12:08:47.520Z",
   "units": {
     "2": {
       "moveOut": "2026-07-31",
@@ -225,13 +225,6 @@
       "unit": "314-10",
       "city": "Medical Lake"
     },
-    "364": {
-      "moveOut": "2026-08-31",
-      "status": "Vacant-Rented",
-      "prop": "ps25",
-      "unit": "A6",
-      "city": "Pasco"
-    },
     "376": {
       "moveOut": "2026-08-31",
       "status": "Vacant-Unrented",
@@ -272,13 +265,6 @@
       "status": "Vacant-Unrented",
       "prop": "ps17",
       "unit": "A7",
-      "city": "Pasco"
-    },
-    "410": {
-      "moveOut": "2026-05-31",
-      "status": "Vacant-Rented",
-      "prop": "ps17",
-      "unit": "A8",
       "city": "Pasco"
     },
     "411": {
@@ -771,13 +757,6 @@
       "unit": "D104",
       "city": "Kennewick"
     },
-    "1045": {
-      "moveOut": "2026-08-06",
-      "status": "Vacant-Rented",
-      "prop": "kn47 K2",
-      "unit": "D106",
-      "city": "Kennewick"
-    },
     "1048": {
       "moveOut": "2026-08-02",
       "status": "Vacant-Unrented",
@@ -827,13 +806,6 @@
       "unit": "C9",
       "city": "Spokane"
     },
-    "1133": {
-      "moveOut": "2026-08-31",
-      "status": "Vacant-Rented",
-      "prop": "o155-Elm",
-      "unit": "F",
-      "city": "Spokane"
-    },
     "1136": {
       "moveOut": "2026-07-31",
       "status": "Vacant-Unrented",
@@ -867,13 +839,6 @@
       "status": "Vacant-Unrented",
       "prop": "tc68",
       "unit": "A03",
-      "city": "Tacoma"
-    },
-    "1155": {
-      "moveOut": "2026-09-17",
-      "status": "Vacant-Rented",
-      "prop": "tc68",
-      "unit": "A06",
       "city": "Tacoma"
     },
     "1160": {
@@ -951,13 +916,6 @@
       "status": "Vacant-Unrented",
       "prop": "tc68",
       "unit": "C62",
-      "city": "Tacoma"
-    },
-    "1227": {
-      "moveOut": "2026-08-05",
-      "status": "Vacant-Rented",
-      "prop": "tc68",
-      "unit": "C78",
       "city": "Tacoma"
     },
     "1228": {
@@ -1214,16 +1172,6 @@
     }
   },
   "changes": [
-    {
-      "date": "2026-08-23",
-      "type": "moveout_removed",
-      "unit_id": "524",
-      "prop": "rl16",
-      "unit": "A11",
-      "city": "Richland",
-      "from": "2026-04-30",
-      "was_status": "Vacant-Rented"
-    },
     {
       "date": "2026-08-24",
       "type": "moveout_new",
@@ -3739,6 +3687,66 @@
       "unit": "H102",
       "city": "Spokane",
       "to": "2026-10-14"
+    },
+    {
+      "date": "2026-10-23",
+      "type": "moveout_removed",
+      "unit_id": "364",
+      "prop": "ps25",
+      "unit": "A6",
+      "city": "Pasco",
+      "from": "2026-08-31",
+      "was_status": "Vacant-Rented"
+    },
+    {
+      "date": "2026-10-23",
+      "type": "moveout_removed",
+      "unit_id": "410",
+      "prop": "ps17",
+      "unit": "A8",
+      "city": "Pasco",
+      "from": "2026-05-31",
+      "was_status": "Vacant-Rented"
+    },
+    {
+      "date": "2026-10-23",
+      "type": "moveout_removed",
+      "unit_id": "1045",
+      "prop": "kn47 K2",
+      "unit": "D106",
+      "city": "Kennewick",
+      "from": "2026-08-06",
+      "was_status": "Vacant-Rented"
+    },
+    {
+      "date": "2026-10-23",
+      "type": "moveout_removed",
+      "unit_id": "1133",
+      "prop": "o155-Elm",
+      "unit": "F",
+      "city": "Spokane",
+      "from": "2026-08-31",
+      "was_status": "Vacant-Rented"
+    },
+    {
+      "date": "2026-10-23",
+      "type": "moveout_removed",
+      "unit_id": "1155",
+      "prop": "tc68",
+      "unit": "A06",
+      "city": "Tacoma",
+      "from": "2026-09-17",
+      "was_status": "Vacant-Rented"
+    },
+    {
+      "date": "2026-10-23",
+      "type": "moveout_removed",
+      "unit_id": "1227",
+      "prop": "tc68",
+      "unit": "C78",
+      "city": "Tacoma",
+      "from": "2026-08-05",
+      "was_status": "Vacant-Rented"
     }
   ]
 }
