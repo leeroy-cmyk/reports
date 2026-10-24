@@ -1,17 +1,17 @@
 {
   "ok": true,
-  "fetched_at": "2026-10-23T20:27:28.294Z",
+  "fetched_at": "2026-10-24T01:50:50.261Z",
   "summary": {
     "as_of": "2026-10-23",
-    "units": 239,
-    "active": 70,
+    "units": 240,
+    "active": 69,
     "ready": 18,
     "notice": 11,
-    "at_risk": 39,
+    "at_risk": 38,
     "unscheduled": 31,
-    "accruing": 28556.59,
+    "accruing": 28206.55,
     "avg_days_open": 43,
-    "revenue_at_risk": 3089.37
+    "revenue_at_risk": 3058.33
   },
   "rows": [
     {
@@ -607,8 +607,8 @@
       "cost": {
         "code": "c313-24",
         "labor": 527.14,
-        "materials": 1035.07,
-        "total": 1562.21,
+        "materials": 1063.69,
+        "total": 1590.83,
         "estimate": 0,
         "laborEntries": [
           {
@@ -725,6 +725,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-10-23",
+            "amt": 28.62,
+            "cat": "Turn",
+            "ln": "normandin",
+            "src": "ramp"
+          },
           {
             "d": "2026-10-23",
             "amt": 6.52,
@@ -2784,194 +2791,6 @@
       "status": "active"
     },
     {
-      "key": "kn47|c203",
-      "prop": "kn47",
-      "unit": "C203",
-      "at_risk": [
-        "Over 45 days vacant"
-      ],
-      "property_name": "kn47 K2",
-      "city": "Kennewick",
-      "addr": "632 N Arthur Street C203 Kennewick, WA 99336",
-      "unit_id": 1034,
-      "unit_status": "Vacant-Unrented",
-      "rent_ready": "No",
-      "vacant": true,
-      "days_vacant": 80,
-      "move_out": "2026-08-04",
-      "available_on": "2026-10-28",
-      "ready_on": "2026-10-28",
-      "target_date": "2026-08-24",
-      "next_move_in": null,
-      "rent": "931.00",
-      "bed_bath": "1/1.00",
-      "sqft": 600,
-      "region": "Tri-Cities",
-      "pm": {
-        "projId": 238506,
-        "name": "Standard Unit Turn",
-        "status": "ACTIVE",
-        "done": 1,
-        "total": 9,
-        "first_appt": "2026-10-26",
-        "final_walk": "2026-10-29",
-        "final_walk_done": null,
-        "completed_date": "2026-08-12",
-        "due": "2026-10-31",
-        "next_task": {
-          "date": "2026-10-23",
-          "task": "maintenance"
-        },
-        "tasks": [
-          {
-            "task": "A - Initial walkthrough",
-            "cat": "walkthrough",
-            "done": true,
-            "date": "2026-08-11",
-            "who": "Margarito Saldana",
-            "completed": "2026-08-12",
-            "vendor": false
-          },
-          {
-            "task": "Appfolio Estimate",
-            "cat": "estimate",
-            "done": false,
-            "date": null,
-            "who": "Dulce Salinas",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "C - Paint",
-            "cat": "paint",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "D - Maintenance",
-            "cat": "maintenance",
-            "done": false,
-            "date": "2026-10-26",
-            "who": "Lauriano Ruiz",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "E - Carpet Cleaning",
-            "cat": "carpet",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "F - Cleaning",
-            "cat": "cleaning",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "G - Verify Mailbox Lockbox & Mailbox Keys",
-            "cat": "other",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Schedule Vendors",
-            "cat": "other",
-            "done": false,
-            "date": null,
-            "who": "Margarito Saldana",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Final Walkthrough",
-            "cat": "final-walk",
-            "done": false,
-            "date": "2026-10-29",
-            "who": "Margarito Saldana",
-            "completed": null,
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": {
-        "date": "2026-10-23",
-        "cat": "maintenance",
-        "who": "Lauriano Ruiz",
-        "brief": "D - Maintenance"
-      },
-      "cost": {
-        "code": "kn47-k2-C203",
-        "labor": 28.4,
-        "materials": 947.14,
-        "total": 975.54,
-        "estimate": 0,
-        "laborEntries": [
-          {
-            "d": "2026-08-06",
-            "emp": "Margarito Saldana",
-            "hrs": 1,
-            "cost": 28.4,
-            "cat": "CapEx"
-          }
-        ],
-        "materialEntries": [
-          {
-            "d": "2026-10-19",
-            "amt": 49.43,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-19",
-            "amt": 92.33,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-19",
-            "amt": 49.43,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-19",
-            "amt": 102.27,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-19",
-            "amt": 653.68,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          }
-        ]
-      },
-      "stage": "Maintenance",
-      "stage_ord": 3,
-      "days_elapsed": 80,
-      "days_to_turn": null,
-      "status": "active"
-    },
-    {
       "key": "kn47|g201",
       "prop": "kn47",
       "unit": "G201",
@@ -3103,11 +2922,18 @@
       "cost": {
         "code": "kn47-k1-G201",
         "labor": 0,
-        "materials": 80.51,
-        "total": 80.51,
+        "materials": 677.39,
+        "total": 677.39,
         "estimate": 0,
         "laborEntries": [],
         "materialEntries": [
+          {
+            "d": "2026-10-23",
+            "amt": 596.88,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          },
           {
             "d": "2026-10-20",
             "amt": 80.51,
@@ -4849,8 +4675,8 @@
       "vacant": true,
       "days_vacant": 53,
       "move_out": "2026-08-31",
-      "available_on": "2026-12-11",
-      "ready_on": "2026-12-11",
+      "available_on": "2026-11-12",
+      "ready_on": "2026-11-12",
       "target_date": "2026-09-20",
       "next_move_in": null,
       "rent": "1635.00",
@@ -8619,7 +8445,7 @@
       "vacant": true,
       "days_vacant": 115,
       "move_out": "2026-06-30",
-      "available_on": "2026-10-02",
+      "available_on": null,
       "ready_on": "2026-10-02",
       "target_date": "2026-07-20",
       "next_move_in": "2026-10-25",
@@ -10761,11 +10587,18 @@
       "cost": {
         "code": "c702-A103",
         "labor": 0,
-        "materials": 2019.3,
-        "total": 2019.3,
+        "materials": 2065.62,
+        "total": 2065.62,
         "estimate": 8312.44,
         "laborEntries": [],
         "materialEntries": [
+          {
+            "d": "2026-10-23",
+            "amt": 46.32,
+            "cat": "Turn",
+            "ln": "easley",
+            "src": "ramp"
+          },
           {
             "d": "2026-10-22",
             "amt": 130.44,
@@ -12667,6 +12500,44 @@
       "days_elapsed": null,
       "days_to_turn": null,
       "status": "complete"
+    },
+    {
+      "key": "c702|g102",
+      "prop": "c702",
+      "unit": "G102",
+      "at_risk": [],
+      "property_name": "c702",
+      "city": "Spokane",
+      "addr": "7012 N Colton St G102 Spokane, WA 99208",
+      "unit_id": 1380,
+      "unit_status": "Notice-Unrented",
+      "rent_ready": null,
+      "vacant": false,
+      "days_vacant": null,
+      "move_out": "2026-11-23",
+      "available_on": "2026-12-13",
+      "ready_on": "2026-12-13",
+      "target_date": "2026-12-13",
+      "next_move_in": null,
+      "rent": "1280.00",
+      "bed_bath": "2/2.00",
+      "sqft": 1025,
+      "region": "Spokane",
+      "next_appt": null,
+      "cost": {
+        "code": "c702-G102",
+        "labor": 0,
+        "materials": 0,
+        "total": 0,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": []
+      },
+      "stage": "Move-out",
+      "stage_ord": 0,
+      "days_elapsed": 0,
+      "days_to_turn": null,
+      "status": "notice"
     },
     {
       "key": "c702|g202",
@@ -18443,6 +18314,184 @@
       "status": "complete"
     },
     {
+      "key": "kn47|c203",
+      "prop": "kn47",
+      "unit": "C203",
+      "property_name": "kn47 K2",
+      "at_risk": [],
+      "region": "Tri-Cities",
+      "pm": {
+        "projId": 238506,
+        "name": "Standard Unit Turn",
+        "status": "ACTIVE",
+        "done": 1,
+        "total": 9,
+        "first_appt": "2026-10-26",
+        "final_walk": "2026-10-29",
+        "final_walk_done": null,
+        "completed_date": "2026-08-12",
+        "due": "2026-10-31",
+        "next_task": {
+          "date": "2026-10-23",
+          "task": "maintenance"
+        },
+        "tasks": [
+          {
+            "task": "A - Initial walkthrough",
+            "cat": "walkthrough",
+            "done": true,
+            "date": "2026-08-11",
+            "who": "Margarito Saldana",
+            "completed": "2026-08-12",
+            "vendor": false
+          },
+          {
+            "task": "Appfolio Estimate",
+            "cat": "estimate",
+            "done": false,
+            "date": null,
+            "who": "Dulce Salinas",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "C - Paint",
+            "cat": "paint",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "D - Maintenance",
+            "cat": "maintenance",
+            "done": false,
+            "date": "2026-10-26",
+            "who": "Lauriano Ruiz",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "E - Carpet Cleaning",
+            "cat": "carpet",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "F - Cleaning",
+            "cat": "cleaning",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "G - Verify Mailbox Lockbox & Mailbox Keys",
+            "cat": "other",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Schedule Vendors",
+            "cat": "other",
+            "done": false,
+            "date": null,
+            "who": "Margarito Saldana",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Final Walkthrough",
+            "cat": "final-walk",
+            "done": false,
+            "date": "2026-10-29",
+            "who": "Margarito Saldana",
+            "completed": null,
+            "vendor": false
+          }
+        ]
+      },
+      "next_appt": {
+        "date": "2026-10-23",
+        "cat": "maintenance",
+        "who": "Lauriano Ruiz",
+        "brief": "D - Maintenance"
+      },
+      "cost": {
+        "code": "kn47-k2-C203",
+        "labor": 28.4,
+        "materials": 981.78,
+        "total": 1010.18,
+        "estimate": 0,
+        "laborEntries": [
+          {
+            "d": "2026-08-06",
+            "emp": "Margarito Saldana",
+            "hrs": 1,
+            "cost": 28.4,
+            "cat": "CapEx"
+          }
+        ],
+        "materialEntries": [
+          {
+            "d": "2026-10-23",
+            "amt": 34.64,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-10-19",
+            "amt": 49.43,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-10-19",
+            "amt": 92.33,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-10-19",
+            "amt": 49.43,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-10-19",
+            "amt": 102.27,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-10-19",
+            "amt": 653.68,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          }
+        ]
+      },
+      "stage": "Maintenance",
+      "stage_ord": 3,
+      "days_elapsed": null,
+      "days_to_turn": null,
+      "status": "other"
+    },
+    {
       "key": "kn47|c208",
       "prop": "kn47",
       "unit": "C208",
@@ -18795,11 +18844,25 @@
       "cost": {
         "code": "kn47-k2-D104",
         "labor": 0,
-        "materials": 220.51,
-        "total": 220.51,
+        "materials": 702.69,
+        "total": 702.69,
         "estimate": 0,
         "laborEntries": [],
         "materialEntries": [
+          {
+            "d": "2026-10-23",
+            "amt": 42.69,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-10-23",
+            "amt": 439.49,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          },
           {
             "d": "2026-10-20",
             "amt": 80.51,
@@ -19453,8 +19516,8 @@
       "cost": {
         "code": "kn47-k1-E101",
         "labor": 631.68,
-        "materials": 2492.74,
-        "total": 3124.42,
+        "materials": 3081.11,
+        "total": 3712.79,
         "estimate": 0,
         "laborEntries": [
           {
@@ -19494,6 +19557,20 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-10-23",
+            "amt": 276.35,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-10-23",
+            "amt": 312.02,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          },
           {
             "d": "2026-10-21",
             "amt": 31.14,
@@ -23219,6 +23296,7 @@
         ]
       },
       "turn_end": "2025-06-06",
+      "af_turn_end": "2026-10-23",
       "stage": "Maintenance",
       "stage_ord": 3,
       "days_elapsed": null,
@@ -27391,8 +27469,8 @@
       "vacant": true,
       "days_vacant": 22,
       "move_out": "2026-10-01",
-      "available_on": "2027-01-01",
-      "ready_on": "2027-01-01",
+      "available_on": "2026-11-20",
+      "ready_on": "2026-11-20",
       "target_date": "2026-10-21",
       "next_move_in": null,
       "rent": "956.00",
@@ -28688,8 +28766,8 @@
       "vacant": true,
       "days_vacant": 16,
       "move_out": "2026-10-07",
-      "available_on": "2026-10-27",
-      "ready_on": "2026-10-27",
+      "available_on": "2026-12-15",
+      "ready_on": "2026-12-15",
       "target_date": "2026-10-27",
       "next_move_in": null,
       "rent": "956.00",
@@ -29224,8 +29302,8 @@
       "vacant": true,
       "days_vacant": 23,
       "move_out": "2026-09-30",
-      "available_on": "2026-12-20",
-      "ready_on": "2026-12-20",
+      "available_on": "2026-11-25",
+      "ready_on": "2026-11-25",
       "target_date": "2026-10-20",
       "next_move_in": null,
       "rent": "956.00",
@@ -30493,8 +30571,8 @@
       "vacant": false,
       "days_vacant": null,
       "move_out": "2026-10-31",
-      "available_on": "2026-11-20",
-      "ready_on": "2026-11-20",
+      "available_on": "2026-12-01",
+      "ready_on": "2026-12-01",
       "target_date": "2026-11-20",
       "next_move_in": null,
       "rent": "1395.00",
@@ -30531,8 +30609,8 @@
       "vacant": true,
       "days_vacant": 23,
       "move_out": "2026-09-30",
-      "available_on": "2026-12-17",
-      "ready_on": "2026-12-17",
+      "available_on": "2026-11-04",
+      "ready_on": "2026-11-04",
       "target_date": "2026-10-20",
       "next_move_in": null,
       "rent": "1395.00",
@@ -35931,6 +36009,229 @@
       "stage_ord": 3,
       "days_elapsed": 0,
       "days_to_turn": -290,
+      "status": "complete"
+    },
+    {
+      "key": "rl21|20",
+      "prop": "rl21",
+      "unit": "20",
+      "at_risk": [],
+      "property_name": "rl21",
+      "city": "Richland",
+      "addr": "2153 Stevens Drive #20 Richland, WA 99354",
+      "unit_id": 774,
+      "unit_status": "Notice-Unrented",
+      "rent_ready": null,
+      "vacant": false,
+      "days_vacant": null,
+      "move_out": "2027-01-31",
+      "available_on": "2027-02-20",
+      "ready_on": "2027-02-20",
+      "target_date": "2027-02-20",
+      "next_move_in": null,
+      "rent": "850.00",
+      "bed_bath": "0/1.00",
+      "sqft": 260,
+      "region": "Tri-Cities",
+      "pm": {
+        "projId": 191399,
+        "name": "Turn - 2153 Stevens Drive #20 UNIT 20",
+        "status": "COMPLETE",
+        "done": 7,
+        "total": 7,
+        "first_appt": null,
+        "final_walk": null,
+        "final_walk_done": "2026-02-04",
+        "completed_date": "2026-03-04",
+        "due": "2026-07-23",
+        "next_task": null,
+        "tasks": null
+      },
+      "next_appt": null,
+      "cost": {
+        "code": "rl21-20",
+        "labor": 875.49,
+        "materials": 425,
+        "total": 1300.49,
+        "estimate": 0,
+        "laborEntries": [
+          {
+            "d": "2026-02-03",
+            "emp": "Ryan G. Robson",
+            "hrs": 2.05,
+            "cost": 47.15,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-02-02",
+            "emp": "Ryan G. Robson",
+            "hrs": 3.42,
+            "cost": 78.66,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-02-02",
+            "emp": "James Dunlap",
+            "hrs": 3.33,
+            "cost": 76.59,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-02-02",
+            "emp": "Ryan G. Robson",
+            "hrs": 1.05,
+            "cost": 24.15,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-02-02",
+            "emp": "James Dunlap",
+            "hrs": 0.83,
+            "cost": 19.09,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-02-02",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.2,
+            "cost": 4.6,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-02-02",
+            "emp": "James Dunlap",
+            "hrs": 5.12,
+            "cost": 117.76,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-02-02",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.1,
+            "cost": 2.3,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-02-02",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.02,
+            "cost": 0.46,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-02-02",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.63,
+            "cost": 14.49,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-02-02",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.73,
+            "cost": 16.79,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-02-02",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.77,
+            "cost": 17.71,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-02-02",
+            "emp": "Ryan G. Robson",
+            "hrs": 2.65,
+            "cost": 60.95,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-01-30",
+            "emp": "Ryan G. Robson",
+            "hrs": 0.43,
+            "cost": 9.89,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-01-30",
+            "emp": "Ryan G. Robson",
+            "hrs": 1.3,
+            "cost": 29.9,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-01-30",
+            "emp": "Margarito Saldana",
+            "hrs": 1,
+            "cost": 28.4,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-01-30",
+            "emp": "Margarito Saldana",
+            "hrs": 0.5,
+            "cost": 14.2,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-01-29",
+            "emp": "Margarito Saldana",
+            "hrs": 0.5,
+            "cost": 14.2,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-01-02",
+            "emp": "Margarito Saldana",
+            "hrs": 1.5,
+            "cost": 42.6,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-01-01",
+            "emp": "Margarito Saldana",
+            "hrs": 2,
+            "cost": 56.8,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-01-01",
+            "emp": "Margarito Saldana",
+            "hrs": 2,
+            "cost": 56.8,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-01-01",
+            "emp": "Margarito Saldana",
+            "hrs": 3,
+            "cost": 85.2,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-07-09",
+            "emp": "Margarito Saldana",
+            "hrs": 2,
+            "cost": 56.8,
+            "cat": "Turn"
+          }
+        ],
+        "materialEntries": [
+          {
+            "d": "2026-02-06",
+            "amt": 425,
+            "cat": "Turn",
+            "ln": "montiel",
+            "src": "ramp"
+          }
+        ]
+      },
+      "turn_end": "2026-02-04",
+      "stage": "Move-out",
+      "stage_ord": 0,
+      "days_elapsed": 0,
+      "days_to_turn": -361,
       "status": "complete"
     },
     {
@@ -41905,44 +42206,6 @@
       "days_elapsed": null,
       "days_to_turn": null,
       "status": "active"
-    },
-    {
-      "key": "tc68|b56",
-      "prop": "tc68",
-      "unit": "B56",
-      "at_risk": [],
-      "property_name": "tc68",
-      "city": "Tacoma",
-      "addr": "6830 Tacoma Mall Blvd Apt B56 Tacoma, WA 98409",
-      "unit_id": 1205,
-      "unit_status": "Notice-Unrented",
-      "rent_ready": null,
-      "vacant": false,
-      "days_vacant": null,
-      "move_out": "2026-10-31",
-      "available_on": null,
-      "ready_on": null,
-      "target_date": "2026-11-20",
-      "next_move_in": null,
-      "rent": "1775.00",
-      "bed_bath": "2/1.00",
-      "sqft": 980,
-      "region": "Tacoma",
-      "next_appt": null,
-      "cost": {
-        "code": "tc68-B56",
-        "labor": 0,
-        "materials": 0,
-        "total": 0,
-        "estimate": 0,
-        "laborEntries": [],
-        "materialEntries": []
-      },
-      "stage": "Move-out",
-      "stage_ord": 0,
-      "days_elapsed": 0,
-      "days_to_turn": null,
-      "status": "notice"
     },
     {
       "key": "tc68|b60",
