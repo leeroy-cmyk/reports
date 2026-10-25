@@ -1,17 +1,17 @@
 {
   "ok": true,
-  "fetched_at": "2026-10-25T19:11:32.556Z",
+  "fetched_at": "2026-10-25T21:49:00.184Z",
   "summary": {
     "as_of": "2026-10-25",
     "units": 240,
-    "active": 65,
+    "active": 66,
     "ready": 19,
     "notice": 11,
-    "at_risk": 35,
+    "at_risk": 36,
     "unscheduled": 30,
-    "accruing": 26058.9,
+    "accruing": 27069.08,
     "avg_days_open": 44,
-    "revenue_at_risk": 2877.77
+    "revenue_at_risk": 2908.8
   },
   "rows": [
     {
@@ -2256,6 +2256,201 @@
       "stage": null,
       "stage_ord": 0,
       "days_elapsed": 6,
+      "days_to_turn": null,
+      "status": "active"
+    },
+    {
+      "key": "kn47|c203",
+      "prop": "kn47",
+      "unit": "C203",
+      "at_risk": [
+        "Over 45 days vacant"
+      ],
+      "property_name": "kn47 K2",
+      "city": "Kennewick",
+      "addr": "632 N Arthur Street C203 Kennewick, WA 99336",
+      "unit_id": 1034,
+      "unit_status": "Vacant-Rented",
+      "rent_ready": "No",
+      "vacant": true,
+      "days_vacant": 82,
+      "move_out": "2026-08-04",
+      "available_on": "2026-10-28",
+      "ready_on": "2026-10-28",
+      "target_date": "2026-08-24",
+      "next_move_in": "2026-10-30",
+      "rent": "931.00",
+      "bed_bath": "1/1.00",
+      "sqft": 600,
+      "region": "Tri-Cities",
+      "pm": {
+        "projId": 238506,
+        "name": "Standard Unit Turn",
+        "status": "ACTIVE",
+        "done": 1,
+        "total": 9,
+        "first_appt": "2026-10-26",
+        "final_walk": "2026-10-29",
+        "final_walk_done": null,
+        "completed_date": "2026-08-12",
+        "due": "2026-10-31",
+        "next_task": {
+          "date": "2026-10-23",
+          "task": "maintenance"
+        },
+        "tasks": [
+          {
+            "task": "A - Initial walkthrough",
+            "cat": "walkthrough",
+            "done": true,
+            "date": "2026-08-11",
+            "who": "Margarito Saldana",
+            "completed": "2026-08-12",
+            "vendor": false
+          },
+          {
+            "task": "Appfolio Estimate",
+            "cat": "estimate",
+            "done": false,
+            "date": null,
+            "who": "Dulce Salinas",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "C - Paint",
+            "cat": "paint",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "D - Maintenance",
+            "cat": "maintenance",
+            "done": false,
+            "date": "2026-10-26",
+            "who": "Lauriano Ruiz",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "E - Carpet Cleaning",
+            "cat": "carpet",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "F - Cleaning",
+            "cat": "cleaning",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "G - Verify Mailbox Lockbox & Mailbox Keys",
+            "cat": "other",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Schedule Vendors",
+            "cat": "other",
+            "done": false,
+            "date": null,
+            "who": "Margarito Saldana",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Final Walkthrough",
+            "cat": "final-walk",
+            "done": false,
+            "date": "2026-10-29",
+            "who": "Margarito Saldana",
+            "completed": null,
+            "vendor": false
+          }
+        ]
+      },
+      "next_appt": {
+        "date": "2026-10-26",
+        "cat": "maintenance",
+        "who": "Lauriano Ruiz",
+        "brief": "D - Maintenance"
+      },
+      "cost": {
+        "code": "kn47-k2-C203",
+        "labor": 28.4,
+        "materials": 981.78,
+        "total": 1010.18,
+        "estimate": 0,
+        "laborEntries": [
+          {
+            "d": "2026-08-06",
+            "emp": "Margarito Saldana",
+            "hrs": 1,
+            "cost": 28.4,
+            "cat": "CapEx"
+          }
+        ],
+        "materialEntries": [
+          {
+            "d": "2026-10-23",
+            "amt": 34.64,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-10-19",
+            "amt": 49.43,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-10-19",
+            "amt": 92.33,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-10-19",
+            "amt": 49.43,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-10-19",
+            "amt": 102.27,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-10-19",
+            "amt": 653.68,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          }
+        ]
+      },
+      "stage": "Maintenance",
+      "stage_ord": 3,
+      "days_elapsed": 82,
       "days_to_turn": null,
       "status": "active"
     },
@@ -18162,184 +18357,6 @@
       "days_elapsed": null,
       "days_to_turn": null,
       "status": "complete"
-    },
-    {
-      "key": "kn47|c203",
-      "prop": "kn47",
-      "unit": "C203",
-      "property_name": "kn47 K2",
-      "at_risk": [],
-      "region": "Tri-Cities",
-      "pm": {
-        "projId": 238506,
-        "name": "Standard Unit Turn",
-        "status": "ACTIVE",
-        "done": 1,
-        "total": 9,
-        "first_appt": "2026-10-26",
-        "final_walk": "2026-10-29",
-        "final_walk_done": null,
-        "completed_date": "2026-08-12",
-        "due": "2026-10-31",
-        "next_task": {
-          "date": "2026-10-23",
-          "task": "maintenance"
-        },
-        "tasks": [
-          {
-            "task": "A - Initial walkthrough",
-            "cat": "walkthrough",
-            "done": true,
-            "date": "2026-08-11",
-            "who": "Margarito Saldana",
-            "completed": "2026-08-12",
-            "vendor": false
-          },
-          {
-            "task": "Appfolio Estimate",
-            "cat": "estimate",
-            "done": false,
-            "date": null,
-            "who": "Dulce Salinas",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "C - Paint",
-            "cat": "paint",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "D - Maintenance",
-            "cat": "maintenance",
-            "done": false,
-            "date": "2026-10-26",
-            "who": "Lauriano Ruiz",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "E - Carpet Cleaning",
-            "cat": "carpet",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "F - Cleaning",
-            "cat": "cleaning",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "G - Verify Mailbox Lockbox & Mailbox Keys",
-            "cat": "other",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Schedule Vendors",
-            "cat": "other",
-            "done": false,
-            "date": null,
-            "who": "Margarito Saldana",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Final Walkthrough",
-            "cat": "final-walk",
-            "done": false,
-            "date": "2026-10-29",
-            "who": "Margarito Saldana",
-            "completed": null,
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": {
-        "date": "2026-10-26",
-        "cat": "maintenance",
-        "who": "Lauriano Ruiz",
-        "brief": "D - Maintenance"
-      },
-      "cost": {
-        "code": "kn47-k2-C203",
-        "labor": 28.4,
-        "materials": 981.78,
-        "total": 1010.18,
-        "estimate": 0,
-        "laborEntries": [
-          {
-            "d": "2026-08-06",
-            "emp": "Margarito Saldana",
-            "hrs": 1,
-            "cost": 28.4,
-            "cat": "CapEx"
-          }
-        ],
-        "materialEntries": [
-          {
-            "d": "2026-10-23",
-            "amt": 34.64,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-19",
-            "amt": 49.43,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-19",
-            "amt": 92.33,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-19",
-            "amt": 49.43,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-19",
-            "amt": 102.27,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-19",
-            "amt": 653.68,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          }
-        ]
-      },
-      "stage": "Maintenance",
-      "stage_ord": 3,
-      "days_elapsed": null,
-      "days_to_turn": null,
-      "status": "other"
     },
     {
       "key": "kn47|c208",
