@@ -1,17 +1,17 @@
 {
   "ok": true,
-  "fetched_at": "2026-10-25T16:22:27.760Z",
+  "fetched_at": "2026-10-25T19:11:32.556Z",
   "summary": {
     "as_of": "2026-10-25",
     "units": 240,
-    "active": 68,
-    "ready": 18,
+    "active": 65,
+    "ready": 19,
     "notice": 11,
-    "at_risk": 37,
-    "unscheduled": 32,
-    "accruing": 26551.67,
+    "at_risk": 35,
+    "unscheduled": 30,
+    "accruing": 26058.9,
     "avg_days_open": 44,
-    "revenue_at_risk": 3016.1
+    "revenue_at_risk": 2877.77
   },
   "rows": [
     {
@@ -181,7 +181,7 @@
         "labor": 0,
         "materials": 0,
         "total": 0,
-        "estimate": 0,
+        "estimate": 2030.82,
         "laborEntries": [],
         "materialEntries": []
       },
@@ -811,153 +811,6 @@
       "status": "active"
     },
     {
-      "key": "c702|b301",
-      "prop": "c702",
-      "unit": "B301",
-      "at_risk": [
-        "Available date passed"
-      ],
-      "property_name": "c702",
-      "city": "Spokane",
-      "addr": "7020 N Colton St B301 Spokane, WA 99208",
-      "unit_id": 1299,
-      "unit_status": "Vacant-Unrented",
-      "rent_ready": "No",
-      "vacant": true,
-      "days_vacant": 45,
-      "move_out": "2026-09-10",
-      "available_on": "2026-10-22",
-      "ready_on": "2026-10-22",
-      "target_date": "2026-09-30",
-      "next_move_in": null,
-      "rent": "1595.00",
-      "bed_bath": "3/2.00",
-      "sqft": 1250,
-      "region": "Spokane",
-      "pm": {
-        "projId": 242068,
-        "name": "Standard Unit Turn",
-        "status": "ACTIVE",
-        "done": 1,
-        "total": 9,
-        "first_appt": "2026-10-01",
-        "final_walk": "2026-10-20",
-        "final_walk_done": null,
-        "completed_date": "2026-09-18",
-        "due": "2026-09-25",
-        "next_task": {
-          "date": "2026-10-07",
-          "task": "maintenance"
-        },
-        "tasks": [
-          {
-            "task": "A - Initial walkthrough",
-            "cat": "walkthrough",
-            "done": true,
-            "date": "2026-09-17",
-            "who": "Matt Romme",
-            "completed": "2026-09-18",
-            "vendor": false
-          },
-          {
-            "task": "Appfolio Estimate",
-            "cat": "estimate",
-            "done": false,
-            "date": null,
-            "who": "Dulce Salinas",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "C - Paint",
-            "cat": "paint",
-            "done": false,
-            "date": "2026-10-01",
-            "who": "Brady Smith",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "D - Maintenance",
-            "cat": "maintenance",
-            "done": false,
-            "date": "2026-10-05",
-            "who": "Brady Smith",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "E - Carpet Cleaning",
-            "cat": "carpet",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "F - Cleaning",
-            "cat": "cleaning",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "G - Verify Mailbox Lockbox & Mailbox Keys",
-            "cat": "other",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Schedule Vendors",
-            "cat": "other",
-            "done": false,
-            "date": null,
-            "who": "Matt Romme",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Final Walkthrough",
-            "cat": "final-walk",
-            "done": false,
-            "date": "2026-10-20",
-            "who": "Matt Romme",
-            "completed": null,
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": null,
-      "cost": {
-        "code": "c702-B301",
-        "labor": 0,
-        "materials": 492.77,
-        "total": 492.77,
-        "estimate": 4774.56,
-        "laborEntries": [],
-        "materialEntries": [
-          {
-            "d": "2026-09-30",
-            "amt": 492.77,
-            "cat": "Turn",
-            "ln": "smith",
-            "src": "ramp"
-          }
-        ]
-      },
-      "stage": "Maintenance",
-      "stage_ord": 3,
-      "days_elapsed": 45,
-      "days_to_turn": null,
-      "status": "active"
-    },
-    {
       "key": "c702|c202",
       "prop": "c702",
       "unit": "C202",
@@ -1152,7 +1005,7 @@
         "labor": 0,
         "materials": 0,
         "total": 0,
-        "estimate": 0,
+        "estimate": 3517.66,
         "laborEntries": [],
         "materialEntries": []
       },
@@ -1456,7 +1309,7 @@
         "labor": 0,
         "materials": 0,
         "total": 0,
-        "estimate": 0,
+        "estimate": 1726.95,
         "laborEntries": [],
         "materialEntries": []
       },
@@ -2340,7 +2193,7 @@
         "labor": 10,
         "materials": 42.32,
         "total": 52.32,
-        "estimate": 0,
+        "estimate": 1756.68,
         "laborEntries": [
           {
             "d": "2026-08-17",
@@ -2382,8 +2235,8 @@
       "vacant": true,
       "days_vacant": 6,
       "move_out": "2026-10-19",
-      "available_on": null,
-      "ready_on": null,
+      "available_on": "2026-11-26",
+      "ready_on": "2026-11-26",
       "target_date": "2026-11-08",
       "next_move_in": null,
       "rent": "1132.00",
@@ -2422,8 +2275,8 @@
       "vacant": true,
       "days_vacant": 52,
       "move_out": "2026-09-03",
-      "available_on": "2026-12-08",
-      "ready_on": "2026-12-08",
+      "available_on": "2026-11-20",
+      "ready_on": "2026-11-20",
       "target_date": "2026-09-23",
       "next_move_in": null,
       "rent": "1358.00",
@@ -3227,7 +3080,7 @@
         "labor": 0,
         "materials": 0,
         "total": 0,
-        "estimate": 0,
+        "estimate": 3132.23,
         "laborEntries": [],
         "materialEntries": []
       },
@@ -3632,7 +3485,7 @@
         "labor": 0,
         "materials": 0,
         "total": 0,
-        "estimate": 0,
+        "estimate": 1711.04,
         "laborEntries": [],
         "materialEntries": []
       },
@@ -4534,7 +4387,7 @@
         "labor": 0,
         "materials": 82.09,
         "total": 82.09,
-        "estimate": 0,
+        "estimate": 4122.64,
         "laborEntries": [],
         "materialEntries": [
           {
@@ -4889,145 +4742,6 @@
       "stage": "Walkthrough",
       "stage_ord": 1,
       "days_elapsed": 137,
-      "days_to_turn": null,
-      "status": "active"
-    },
-    {
-      "key": "tc34|a101",
-      "prop": "tc34",
-      "unit": "A101",
-      "at_risk": [
-        "Over 45 days vacant"
-      ],
-      "property_name": "tc34",
-      "city": "Tacoma",
-      "addr": "3401 Pacific Ave A101 Tacoma, WA 98418",
-      "unit_id": 806,
-      "unit_status": "Vacant-Unrented",
-      "rent_ready": "No",
-      "vacant": true,
-      "days_vacant": 55,
-      "move_out": "2026-08-31",
-      "available_on": "2026-11-22",
-      "ready_on": "2026-11-22",
-      "target_date": "2026-09-20",
-      "next_move_in": null,
-      "rent": "1265.00",
-      "bed_bath": "0/1.00",
-      "sqft": 800,
-      "region": "Tacoma",
-      "pm": {
-        "projId": 240332,
-        "name": "Standard Unit Turn",
-        "status": "ACTIVE",
-        "done": 1,
-        "total": 9,
-        "first_appt": null,
-        "final_walk": null,
-        "final_walk_done": null,
-        "completed_date": "2026-09-15",
-        "due": "2026-09-15",
-        "next_task": {
-          "date": "2026-10-28",
-          "task": "walkthrough"
-        },
-        "tasks": [
-          {
-            "task": "A - Initial walkthrough",
-            "cat": "walkthrough",
-            "done": true,
-            "date": "2026-10-28",
-            "who": "Armani Mitchell",
-            "completed": "2026-09-15",
-            "vendor": false
-          },
-          {
-            "task": "Appfolio Estimate",
-            "cat": "estimate",
-            "done": false,
-            "date": null,
-            "who": "Dulce Salinas",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "C - Paint",
-            "cat": "paint",
-            "done": false,
-            "date": null,
-            "who": "Chris Phillips",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "D - Maintenance",
-            "cat": "maintenance",
-            "done": false,
-            "date": null,
-            "who": "Armani Mitchell",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "E - Carpet Cleaning",
-            "cat": "carpet",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "F - Cleaning",
-            "cat": "cleaning",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "G - Verify Mailbox Lockbox & Mailbox Keys",
-            "cat": "other",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Schedule Vendors",
-            "cat": "other",
-            "done": false,
-            "date": null,
-            "who": "Armani Mitchell",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Final Walkthrough",
-            "cat": "final-walk",
-            "done": false,
-            "date": null,
-            "who": "Armani Mitchell",
-            "completed": null,
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": null,
-      "cost": {
-        "code": "tc34-A101",
-        "labor": 0,
-        "materials": 0,
-        "total": 0,
-        "estimate": 0,
-        "laborEntries": [],
-        "materialEntries": []
-      },
-      "stage": "Maintenance",
-      "stage_ord": 3,
-      "days_elapsed": 55,
       "days_to_turn": null,
       "status": "active"
     },
@@ -5566,7 +5280,7 @@
         "labor": 590.5,
         "materials": 724.2,
         "total": 1314.7,
-        "estimate": 0,
+        "estimate": 3182.63,
         "laborEntries": [
           {
             "d": "2026-10-23",
@@ -6525,7 +6239,7 @@
         "labor": 54.75,
         "materials": 60.91,
         "total": 115.66,
-        "estimate": 0,
+        "estimate": 2977.19,
         "laborEntries": [
           {
             "d": "2025-09-23",
@@ -6691,7 +6405,7 @@
         "labor": 308.25,
         "materials": 255.35,
         "total": 563.6,
-        "estimate": 0,
+        "estimate": 1431.78,
         "laborEntries": [
           {
             "d": "2026-02-02",
@@ -9201,7 +8915,7 @@
         "labor": 64.25,
         "materials": 722.44,
         "total": 786.69,
-        "estimate": 0,
+        "estimate": 1706.93,
         "laborEntries": [
           {
             "d": "2026-10-20",
@@ -10931,6 +10645,152 @@
       "status": "other"
     },
     {
+      "key": "c702|b301",
+      "prop": "c702",
+      "unit": "B301",
+      "at_risk": [],
+      "property_name": "c702",
+      "city": "Spokane",
+      "addr": "7020 N Colton St B301 Spokane, WA 99208",
+      "unit_id": 1299,
+      "unit_status": "Vacant-Unrented",
+      "rent_ready": "Yes",
+      "vacant": true,
+      "days_vacant": 45,
+      "move_out": "2026-09-10",
+      "available_on": "2026-10-22",
+      "ready_on": "2026-10-22",
+      "target_date": "2026-09-30",
+      "next_move_in": null,
+      "rent": "1595.00",
+      "bed_bath": "3/2.00",
+      "sqft": 1250,
+      "region": "Spokane",
+      "pm": {
+        "projId": 242068,
+        "name": "Standard Unit Turn",
+        "status": "ACTIVE",
+        "done": 1,
+        "total": 9,
+        "first_appt": "2026-10-01",
+        "final_walk": "2026-10-20",
+        "final_walk_done": null,
+        "completed_date": "2026-09-18",
+        "due": "2026-09-25",
+        "next_task": {
+          "date": "2026-10-07",
+          "task": "maintenance"
+        },
+        "tasks": [
+          {
+            "task": "A - Initial walkthrough",
+            "cat": "walkthrough",
+            "done": true,
+            "date": "2026-09-17",
+            "who": "Matt Romme",
+            "completed": "2026-09-18",
+            "vendor": false
+          },
+          {
+            "task": "Appfolio Estimate",
+            "cat": "estimate",
+            "done": false,
+            "date": null,
+            "who": "Dulce Salinas",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "C - Paint",
+            "cat": "paint",
+            "done": false,
+            "date": "2026-10-01",
+            "who": "Brady Smith",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "D - Maintenance",
+            "cat": "maintenance",
+            "done": false,
+            "date": "2026-10-05",
+            "who": "Brady Smith",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "E - Carpet Cleaning",
+            "cat": "carpet",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "F - Cleaning",
+            "cat": "cleaning",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "G - Verify Mailbox Lockbox & Mailbox Keys",
+            "cat": "other",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Schedule Vendors",
+            "cat": "other",
+            "done": false,
+            "date": null,
+            "who": "Matt Romme",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Final Walkthrough",
+            "cat": "final-walk",
+            "done": false,
+            "date": "2026-10-20",
+            "who": "Matt Romme",
+            "completed": null,
+            "vendor": false
+          }
+        ]
+      },
+      "next_appt": null,
+      "cost": {
+        "code": "c702-B301",
+        "labor": 0,
+        "materials": 492.77,
+        "total": 492.77,
+        "estimate": 4774.56,
+        "laborEntries": [],
+        "materialEntries": [
+          {
+            "d": "2026-09-30",
+            "amt": 492.77,
+            "cat": "Turn",
+            "ln": "smith",
+            "src": "ramp"
+          }
+        ]
+      },
+      "af_turn_end": "2026-10-25",
+      "stage": "Ready",
+      "stage_ord": 7,
+      "days_elapsed": 45,
+      "days_to_turn": null,
+      "status": "ready"
+    },
+    {
       "key": "c702|c101",
       "prop": "c702",
       "unit": "C101",
@@ -11454,7 +11314,7 @@
         "labor": 0,
         "materials": 0,
         "total": 0,
-        "estimate": 0,
+        "estimate": 5093.74,
         "laborEntries": [],
         "materialEntries": []
       },
@@ -12281,7 +12141,7 @@
         "labor": 0,
         "materials": 0,
         "total": 0,
-        "estimate": 0,
+        "estimate": 1300.45,
         "laborEntries": [],
         "materialEntries": []
       },
@@ -13565,7 +13425,7 @@
         "labor": 207.81,
         "materials": 444.15,
         "total": 651.96,
-        "estimate": 0,
+        "estimate": 2269.8,
         "laborEntries": [
           {
             "d": "2025-08-25",
@@ -13766,7 +13626,7 @@
         "labor": 0,
         "materials": 0,
         "total": 0,
-        "estimate": 0,
+        "estimate": 2329.91,
         "laborEntries": [],
         "materialEntries": []
       },
@@ -13908,15 +13768,16 @@
         "labor": 0,
         "materials": 0,
         "total": 0,
-        "estimate": 0,
+        "estimate": 2049.64,
         "laborEntries": [],
         "materialEntries": []
       },
+      "turn_end": "2025-07-31",
       "stage": "Walkthrough",
       "stage_ord": 1,
-      "days_elapsed": 25,
-      "days_to_turn": null,
-      "status": "active"
+      "days_elapsed": 0,
+      "days_to_turn": -426,
+      "status": "complete"
     },
     {
       "key": "h731|737b",
@@ -14550,7 +14411,7 @@
         "labor": 437.25,
         "materials": 874.31,
         "total": 1311.56,
-        "estimate": 0,
+        "estimate": 2288.89,
         "laborEntries": [
           {
             "d": "2025-08-15",
@@ -15199,7 +15060,7 @@
         "labor": 135.19,
         "materials": 311.56,
         "total": 446.75,
-        "estimate": 0,
+        "estimate": 2196.37,
         "laborEntries": [
           {
             "d": "2025-08-14",
@@ -15798,7 +15659,7 @@
         "labor": 306.84,
         "materials": 329.2,
         "total": 636.04,
-        "estimate": 0,
+        "estimate": 1199.84,
         "laborEntries": [
           {
             "d": "2026-08-05",
@@ -16044,7 +15905,7 @@
         "labor": 915.75,
         "materials": 739.13,
         "total": 1654.88,
-        "estimate": 0,
+        "estimate": 1132.86,
         "laborEntries": [
           {
             "d": "2026-09-14",
@@ -16558,7 +16419,7 @@
         "labor": 376.93,
         "materials": 643.73,
         "total": 1020.66,
-        "estimate": 0,
+        "estimate": 1687.39,
         "laborEntries": [
           {
             "d": "2026-08-17",
@@ -18889,8 +18750,8 @@
       "vacant": true,
       "days_vacant": 25,
       "move_out": "2026-09-30",
-      "available_on": "2026-11-24",
-      "ready_on": "2026-11-24",
+      "available_on": "2026-11-20",
+      "ready_on": "2026-11-20",
       "target_date": "2026-10-20",
       "next_move_in": null,
       "rent": "1132.00",
@@ -19053,8 +18914,8 @@
       "vacant": true,
       "days_vacant": 84,
       "move_out": "2026-08-02",
-      "available_on": "2026-11-03",
-      "ready_on": "2026-11-03",
+      "available_on": "2026-10-30",
+      "ready_on": "2026-10-30",
       "target_date": "2026-08-22",
       "next_move_in": null,
       "rent": "1132.00",
@@ -19231,8 +19092,8 @@
       "vacant": true,
       "days_vacant": 25,
       "move_out": "2026-09-30",
-      "available_on": "2026-10-28",
-      "ready_on": "2026-10-28",
+      "available_on": "2026-10-31",
+      "ready_on": "2026-10-31",
       "target_date": "2026-10-20",
       "next_move_in": null,
       "rent": "1132.00",
@@ -19385,7 +19246,7 @@
       "addr": "4711 W Metaline Avenue E101 Kennewick, WA 99336",
       "unit_id": 879,
       "unit_status": "Vacant-Rented",
-      "rent_ready": "Yes",
+      "rent_ready": "No",
       "vacant": true,
       "days_vacant": 65,
       "move_out": "2026-08-21",
@@ -19633,8 +19494,8 @@
         ]
       },
       "turn_end": "2025-10-28",
-      "stage": "Ready",
-      "stage_ord": 7,
+      "stage": "Maintenance",
+      "stage_ord": 3,
       "days_elapsed": 0,
       "days_to_turn": -297,
       "status": "complete"
@@ -20566,8 +20427,8 @@
       "vacant": true,
       "days_vacant": 40,
       "move_out": "2026-09-15",
-      "available_on": "2026-10-29",
-      "ready_on": "2026-10-29",
+      "available_on": "2026-10-31",
+      "ready_on": "2026-10-31",
       "target_date": "2026-10-05",
       "next_move_in": null,
       "rent": "1132.00",
@@ -20705,8 +20566,8 @@
       "vacant": true,
       "days_vacant": 59,
       "move_out": "2026-08-27",
-      "available_on": "2026-12-03",
-      "ready_on": "2026-12-03",
+      "available_on": "2026-11-20",
+      "ready_on": "2026-11-20",
       "target_date": "2026-09-16",
       "next_move_in": null,
       "rent": "1132.00",
@@ -23159,7 +23020,7 @@
         "labor": 321.75,
         "materials": 756.45,
         "total": 1078.2,
-        "estimate": 0,
+        "estimate": 1517.07,
         "laborEntries": [
           {
             "d": "2026-10-19",
@@ -24121,7 +23982,7 @@
         "labor": 326.75,
         "materials": 720.28,
         "total": 1047.03,
-        "estimate": 0,
+        "estimate": 1241.86,
         "laborEntries": [
           {
             "d": "2026-10-07",
@@ -24363,10 +24224,11 @@
         "labor": 0,
         "materials": 0,
         "total": 0,
-        "estimate": 0,
+        "estimate": 2167.8,
         "laborEntries": [],
         "materialEntries": []
       },
+      "af_turn_end": "2026-10-20",
       "stage": "Ready",
       "stage_ord": 7,
       "days_elapsed": 89,
@@ -24591,10 +24453,11 @@
         "labor": 0,
         "materials": 0,
         "total": 0,
-        "estimate": 0,
+        "estimate": 4682.78,
         "laborEntries": [],
         "materialEntries": []
       },
+      "af_turn_end": "2026-10-19",
       "stage": "Paint",
       "stage_ord": 2,
       "days_elapsed": null,
@@ -25201,7 +25064,7 @@
         "labor": 5185.92,
         "materials": 6075.48,
         "total": 11261.4,
-        "estimate": 0,
+        "estimate": 3110.32,
         "laborEntries": [
           {
             "d": "2026-10-06",
@@ -25930,7 +25793,7 @@
         "labor": 4869.93,
         "materials": 2242.52,
         "total": 7112.45,
-        "estimate": 0,
+        "estimate": 3737.82,
         "laborEntries": [
           {
             "d": "2026-01-30",
@@ -26615,7 +26478,7 @@
         "labor": 803,
         "materials": 651.05,
         "total": 1454.05,
-        "estimate": 0,
+        "estimate": 2091.17,
         "laborEntries": [
           {
             "d": "2026-10-01",
@@ -26957,7 +26820,7 @@
         "labor": 1030.75,
         "materials": 1352.25,
         "total": 2383,
-        "estimate": 0,
+        "estimate": 1627.64,
         "laborEntries": [
           {
             "d": "2026-05-25",
@@ -27576,7 +27439,7 @@
         "labor": 417.31,
         "materials": 633.51,
         "total": 1050.82,
-        "estimate": 0,
+        "estimate": 2699.27,
         "laborEntries": [
           {
             "d": "2025-10-01",
@@ -27775,7 +27638,7 @@
         "labor": 284,
         "materials": 946.66,
         "total": 1230.66,
-        "estimate": 0,
+        "estimate": 1923.23,
         "laborEntries": [
           {
             "d": "2025-08-20",
@@ -28525,7 +28388,7 @@
         "labor": 1339.06,
         "materials": 1290.21,
         "total": 2629.27,
-        "estimate": 0,
+        "estimate": 2815.95,
         "laborEntries": [
           {
             "d": "2026-08-05",
@@ -29409,7 +29272,7 @@
         "labor": 149.96,
         "materials": 769.07,
         "total": 919.03,
-        "estimate": 0,
+        "estimate": 2494.89,
         "laborEntries": [
           {
             "d": "2025-08-21",
@@ -30716,7 +30579,7 @@
         "labor": 0,
         "materials": 164.18,
         "total": 164.18,
-        "estimate": 0,
+        "estimate": 2000.38,
         "laborEntries": [],
         "materialEntries": [
           {
@@ -31883,7 +31746,7 @@
         "labor": 0,
         "materials": 861.41,
         "total": 861.41,
-        "estimate": 0,
+        "estimate": 3429.75,
         "laborEntries": [],
         "materialEntries": [
           {
@@ -32048,7 +31911,7 @@
         "labor": 0,
         "materials": 0,
         "total": 0,
-        "estimate": 0,
+        "estimate": 2147.71,
         "laborEntries": [],
         "materialEntries": []
       },
@@ -32173,7 +32036,7 @@
         "labor": 249.35,
         "materials": 641.91,
         "total": 891.26,
-        "estimate": 0,
+        "estimate": 1990.13,
         "laborEntries": [
           {
             "d": "2026-09-23",
@@ -33775,7 +33638,7 @@
         "labor": 774.03,
         "materials": 1009.34,
         "total": 1783.37,
-        "estimate": 0,
+        "estimate": 1548.58,
         "laborEntries": [
           {
             "d": "2025-09-19",
@@ -33971,7 +33834,7 @@
         "labor": 0,
         "materials": 0,
         "total": 0,
-        "estimate": 0,
+        "estimate": 2427.17,
         "laborEntries": [],
         "materialEntries": []
       },
@@ -34099,7 +33962,7 @@
         "labor": 70.43,
         "materials": 1154.74,
         "total": 1225.17,
-        "estimate": 0,
+        "estimate": 3040.18,
         "laborEntries": [
           {
             "d": "2026-09-15",
@@ -37899,7 +37762,7 @@
         "labor": 0,
         "materials": 0,
         "total": 0,
-        "estimate": 0,
+        "estimate": 2942.78,
         "laborEntries": [],
         "materialEntries": []
       },
@@ -38754,6 +38617,144 @@
       "stage_ord": 0,
       "days_elapsed": 0,
       "days_to_turn": -353,
+      "status": "complete"
+    },
+    {
+      "key": "tc34|a101",
+      "prop": "tc34",
+      "unit": "A101",
+      "at_risk": [],
+      "property_name": "tc34",
+      "city": "Tacoma",
+      "addr": "3401 Pacific Ave A101 Tacoma, WA 98418",
+      "unit_id": 806,
+      "unit_status": "Vacant-Unrented",
+      "rent_ready": "No",
+      "vacant": true,
+      "days_vacant": 55,
+      "move_out": "2026-08-31",
+      "available_on": "2026-11-22",
+      "ready_on": "2026-11-22",
+      "target_date": "2026-09-20",
+      "next_move_in": null,
+      "rent": "1265.00",
+      "bed_bath": "0/1.00",
+      "sqft": 800,
+      "region": "Tacoma",
+      "pm": {
+        "projId": 240332,
+        "name": "Standard Unit Turn",
+        "status": "ACTIVE",
+        "done": 1,
+        "total": 9,
+        "first_appt": null,
+        "final_walk": null,
+        "final_walk_done": null,
+        "completed_date": "2026-09-15",
+        "due": "2026-09-15",
+        "next_task": {
+          "date": "2026-10-28",
+          "task": "walkthrough"
+        },
+        "tasks": [
+          {
+            "task": "A - Initial walkthrough",
+            "cat": "walkthrough",
+            "done": true,
+            "date": "2026-10-28",
+            "who": "Armani Mitchell",
+            "completed": "2026-09-15",
+            "vendor": false
+          },
+          {
+            "task": "Appfolio Estimate",
+            "cat": "estimate",
+            "done": false,
+            "date": null,
+            "who": "Dulce Salinas",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "C - Paint",
+            "cat": "paint",
+            "done": false,
+            "date": null,
+            "who": "Chris Phillips",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "D - Maintenance",
+            "cat": "maintenance",
+            "done": false,
+            "date": null,
+            "who": "Armani Mitchell",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "E - Carpet Cleaning",
+            "cat": "carpet",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "F - Cleaning",
+            "cat": "cleaning",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "G - Verify Mailbox Lockbox & Mailbox Keys",
+            "cat": "other",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Schedule Vendors",
+            "cat": "other",
+            "done": false,
+            "date": null,
+            "who": "Armani Mitchell",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Final Walkthrough",
+            "cat": "final-walk",
+            "done": false,
+            "date": null,
+            "who": "Armani Mitchell",
+            "completed": null,
+            "vendor": false
+          }
+        ]
+      },
+      "next_appt": null,
+      "cost": {
+        "code": "tc34-A101",
+        "labor": 0,
+        "materials": 0,
+        "total": 0,
+        "estimate": 2218.28,
+        "laborEntries": [],
+        "materialEntries": []
+      },
+      "turn_end": "2025-03-27",
+      "stage": "Maintenance",
+      "stage_ord": 3,
+      "days_elapsed": 0,
+      "days_to_turn": -522,
       "status": "complete"
     },
     {
@@ -41018,7 +41019,7 @@
         "labor": 41.31,
         "materials": 0,
         "total": 41.31,
-        "estimate": 0,
+        "estimate": 5928.88,
         "laborEntries": [
           {
             "d": "2026-10-12",
@@ -41501,7 +41502,7 @@
         "labor": 13.5,
         "materials": 0,
         "total": 13.5,
-        "estimate": 0,
+        "estimate": 5573.28,
         "laborEntries": [
           {
             "d": "2026-10-12",
@@ -41619,7 +41620,7 @@
         "labor": 44.01,
         "materials": 0,
         "total": 44.01,
-        "estimate": 0,
+        "estimate": 5523.22,
         "laborEntries": [
           {
             "d": "2026-10-12",
@@ -41646,7 +41647,7 @@
       "city": "Tacoma",
       "addr": "6830 Tacoma Mall Blvd Apt B43 Tacoma, WA 98409",
       "unit_id": 1192,
-      "unit_status": "Vacant-Unrented",
+      "unit_status": "Vacant-Rented",
       "rent_ready": "No",
       "vacant": true,
       "days_vacant": 15,
@@ -41654,7 +41655,7 @@
       "available_on": "2026-11-01",
       "ready_on": "2026-10-08",
       "target_date": "2026-10-30",
-      "next_move_in": null,
+      "next_move_in": "2026-12-15",
       "rent": "1775.00",
       "bed_bath": "2/1.00",
       "sqft": 980,
@@ -42427,7 +42428,7 @@
         "labor": 1595.7,
         "materials": 914.21,
         "total": 2509.91,
-        "estimate": 0,
+        "estimate": 3484.9,
         "laborEntries": [
           {
             "d": "2026-10-16",
@@ -43950,10 +43951,11 @@
         "labor": 0,
         "materials": 0,
         "total": 0,
-        "estimate": 0,
+        "estimate": 3887.76,
         "laborEntries": [],
         "materialEntries": []
       },
+      "af_turn_end": "2026-10-23",
       "stage": "Ready",
       "stage_ord": 7,
       "days_elapsed": 55,
@@ -45025,7 +45027,7 @@
         "labor": 158.51,
         "materials": 684.67,
         "total": 843.18,
-        "estimate": 0,
+        "estimate": 2905.64,
         "laborEntries": [
           {
             "d": "2025-08-27",
