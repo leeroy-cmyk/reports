@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "fetched_at": "2026-10-26T16:37:19.606Z",
+  "fetched_at": "2026-10-26T21:12:30.223Z",
   "summary": {
     "as_of": "2026-10-26",
     "units": 240,
@@ -9,7 +9,7 @@
     "notice": 11,
     "at_risk": 36,
     "unscheduled": 30,
-    "accruing": 27069.08,
+    "accruing": 27831.96,
     "avg_days_open": 45,
     "revenue_at_risk": 2908.8
   },
@@ -2391,8 +2391,8 @@
       "cost": {
         "code": "kn47-k2-C203",
         "labor": 28.4,
-        "materials": 981.78,
-        "total": 1010.18,
+        "materials": 998.27,
+        "total": 1026.67,
         "estimate": 0,
         "laborEntries": [
           {
@@ -2404,6 +2404,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-10-26",
+            "amt": 16.49,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          },
           {
             "d": "2026-10-23",
             "amt": 34.64,
@@ -5067,11 +5074,19 @@
       "cost": {
         "code": "tc68-A20",
         "labor": 0,
-        "materials": 0,
-        "total": 0,
+        "materials": 75.24,
+        "total": 75.24,
         "estimate": 0,
         "laborEntries": [],
-        "materialEntries": []
+        "materialEntries": [
+          {
+            "d": "2026-10-26",
+            "amt": 75.24,
+            "cat": "Turn",
+            "ln": "mitchell",
+            "src": "ramp"
+          }
+        ]
       },
       "stage": "Walkthrough",
       "stage_ord": 1,
@@ -5473,8 +5488,8 @@
       "cost": {
         "code": "a210-8",
         "labor": 590.5,
-        "materials": 724.2,
-        "total": 1314.7,
+        "materials": 801.01,
+        "total": 1391.51,
         "estimate": 3182.63,
         "laborEntries": [
           {
@@ -5613,6 +5628,13 @@
         ],
         "materialEntries": [
           {
+            "d": "2026-10-26",
+            "amt": 76.81,
+            "cat": "Turn",
+            "ln": "magoon",
+            "src": "ramp"
+          },
+          {
             "d": "2026-10-22",
             "amt": 277.59,
             "cat": "Turn",
@@ -5649,8 +5671,8 @@
       "vacant": true,
       "days_vacant": 87,
       "move_out": "2026-07-31",
-      "available_on": "2026-11-06",
-      "ready_on": "2026-11-06",
+      "available_on": "2026-11-09",
+      "ready_on": "2026-11-09",
       "target_date": "2026-08-20",
       "next_move_in": null,
       "rent": "1033.00",
@@ -10111,11 +10133,18 @@
       "cost": {
         "code": "c702-A103",
         "labor": 0,
-        "materials": 2065.62,
-        "total": 2065.62,
+        "materials": 2122.02,
+        "total": 2122.02,
         "estimate": 8312.44,
         "laborEntries": [],
         "materialEntries": [
+          {
+            "d": "2026-10-26",
+            "amt": 56.4,
+            "cat": "Turn",
+            "ln": "easley",
+            "src": "ramp"
+          },
           {
             "d": "2026-10-23",
             "amt": 46.32,
@@ -20542,11 +20571,25 @@
       "cost": {
         "code": "kn47-k1-J104",
         "labor": 0,
-        "materials": 492.46,
-        "total": 492.46,
+        "materials": 1163.61,
+        "total": 1163.61,
         "estimate": 0,
         "laborEntries": [],
         "materialEntries": [
+          {
+            "d": "2026-10-26",
+            "amt": 200.83,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-10-26",
+            "amt": 470.32,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          },
           {
             "d": "2026-10-21",
             "amt": 416.33,
@@ -33538,11 +33581,11 @@
       "addr": "1621 George Washington Way C20 Richland, WA 99354",
       "unit_id": 581,
       "unit_status": "Vacant-Rented",
-      "rent_ready": "No",
+      "rent_ready": "Yes",
       "vacant": true,
       "days_vacant": 26,
       "move_out": "2026-09-30",
-      "available_on": "2026-10-28",
+      "available_on": null,
       "ready_on": "2026-10-28",
       "target_date": "2026-10-20",
       "next_move_in": "2026-10-28",
@@ -33718,8 +33761,8 @@
         ]
       },
       "turn_end": "2025-09-22",
-      "stage": "Walkthrough",
-      "stage_ord": 1,
+      "stage": "Ready",
+      "stage_ord": 7,
       "days_elapsed": 0,
       "days_to_turn": -373,
       "status": "complete"
