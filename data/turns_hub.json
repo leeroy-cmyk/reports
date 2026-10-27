@@ -1,12 +1,12 @@
 {
   "ok": true,
-  "fetched_at": "2026-10-26T21:12:30.223Z",
+  "fetched_at": "2026-10-27T00:29:17.839Z",
   "summary": {
     "as_of": "2026-10-26",
-    "units": 240,
+    "units": 241,
     "active": 66,
-    "ready": 19,
-    "notice": 11,
+    "ready": 20,
+    "notice": 12,
     "at_risk": 36,
     "unscheduled": 30,
     "accruing": 27831.96,
@@ -13158,7 +13158,7 @@
       "vacant": true,
       "days_vacant": 87,
       "move_out": "2026-07-31",
-      "available_on": "2026-08-20",
+      "available_on": null,
       "ready_on": "2026-08-20",
       "target_date": "2026-08-20",
       "next_move_in": "2026-11-12",
@@ -15339,7 +15339,7 @@
       "vacant": true,
       "days_vacant": 87,
       "move_out": "2026-07-31",
-      "available_on": "2026-10-15",
+      "available_on": null,
       "ready_on": "2026-10-15",
       "target_date": "2026-08-20",
       "next_move_in": "2026-10-28",
@@ -19660,6 +19660,44 @@
       "days_elapsed": 0,
       "days_to_turn": null,
       "status": "notice"
+    },
+    {
+      "key": "kn47|f208",
+      "prop": "kn47",
+      "unit": "F208",
+      "at_risk": [],
+      "property_name": "kn47 K1",
+      "city": "Kennewick",
+      "addr": "4711 W Metaline Avenue F208 Kennewick, WA 99336",
+      "unit_id": 910,
+      "unit_status": "Vacant-Unrented",
+      "rent_ready": "Yes",
+      "vacant": true,
+      "days_vacant": 26,
+      "move_out": "2026-09-30",
+      "available_on": "2026-10-20",
+      "ready_on": "2026-10-20",
+      "target_date": "2026-10-20",
+      "next_move_in": null,
+      "rent": "1132.00",
+      "bed_bath": "1/1.00",
+      "sqft": 575,
+      "region": "Tri-Cities",
+      "next_appt": null,
+      "cost": {
+        "code": "kn47-F208",
+        "labor": 0,
+        "materials": 0,
+        "total": 0,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": []
+      },
+      "stage": "Ready",
+      "stage_ord": 7,
+      "days_elapsed": 26,
+      "days_to_turn": null,
+      "status": "ready"
     },
     {
       "key": "kn47|g102",
@@ -37270,272 +37308,6 @@
       "status": "complete"
     },
     {
-      "key": "s129|19",
-      "prop": "s129",
-      "unit": "19",
-      "property_name": "s129",
-      "at_risk": [],
-      "region": "Spokane",
-      "pm": {
-        "projId": 226765,
-        "name": "Standard Unit Turn",
-        "status": "COMPLETE",
-        "done": 7,
-        "total": 7,
-        "first_appt": "2026-07-20",
-        "final_walk": "2026-07-28",
-        "final_walk_done": "2026-07-28",
-        "completed_date": "2026-07-28",
-        "due": "2026-08-10",
-        "next_task": null,
-        "tasks": [
-          {
-            "task": "A - Initial walkthrough",
-            "cat": "walkthrough",
-            "done": true,
-            "date": "2026-07-16",
-            "who": "Ron Cramer",
-            "completed": "2026-07-17",
-            "vendor": false
-          },
-          {
-            "task": "Appfolio Estimate - PENDING APPROVAL",
-            "cat": "estimate",
-            "done": true,
-            "date": null,
-            "who": "Dulce Salinas",
-            "completed": "2026-07-17",
-            "vendor": false
-          },
-          {
-            "task": "C - Paint",
-            "cat": "paint",
-            "done": true,
-            "date": "2026-07-20",
-            "who": "Ron Cramer",
-            "completed": "2026-07-22",
-            "vendor": false
-          },
-          {
-            "task": "D - Maintenance",
-            "cat": "maintenance",
-            "done": true,
-            "date": "2026-07-22",
-            "who": "Ron Cramer",
-            "completed": "2026-07-23",
-            "vendor": false
-          },
-          {
-            "task": "E - Carpet Cleaning",
-            "cat": "carpet",
-            "done": true,
-            "date": "2026-07-24",
-            "who": "SPO Cleaning",
-            "completed": "2026-07-24",
-            "vendor": true
-          },
-          {
-            "task": "F - Cleaning",
-            "cat": "cleaning",
-            "done": true,
-            "date": "2026-07-26",
-            "who": "AllKlean",
-            "completed": "2026-07-26",
-            "vendor": true
-          },
-          {
-            "task": "Final Walkthrough",
-            "cat": "final-walk",
-            "done": true,
-            "date": "2026-07-28",
-            "who": "David Sanchez",
-            "completed": "2026-07-28",
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": null,
-      "cost": {
-        "code": "s129-19",
-        "labor": 880.77,
-        "materials": 885.41,
-        "total": 1766.18,
-        "estimate": 2179.32,
-        "laborEntries": [
-          {
-            "d": "2026-07-23",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.22,
-            "cost": 31.42,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-23",
-            "emp": "Ronald D. Cramer",
-            "hrs": 2,
-            "cost": 51.5,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-22",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.78,
-            "cost": 45.84,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-22",
-            "emp": "Ronald D. Cramer",
-            "hrs": 2,
-            "cost": 51.5,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-22",
-            "emp": "Ronald D. Cramer",
-            "hrs": 2,
-            "cost": 51.5,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-22",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.98,
-            "cost": 50.99,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-22",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.25,
-            "cost": 32.19,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-21",
-            "emp": "Ronald D. Cramer",
-            "hrs": 2,
-            "cost": 51.5,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-21",
-            "emp": "Ronald D. Cramer",
-            "hrs": 2,
-            "cost": 51.5,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-21",
-            "emp": "Ronald D. Cramer",
-            "hrs": 2,
-            "cost": 51.5,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-21",
-            "emp": "Ronald D. Cramer",
-            "hrs": 2,
-            "cost": 51.5,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-21",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.65,
-            "cost": 42.49,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-20",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.47,
-            "cost": 37.85,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-20",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.78,
-            "cost": 45.84,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-20",
-            "emp": "Ronald D. Cramer",
-            "hrs": 2,
-            "cost": 51.5,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-20",
-            "emp": "Ronald D. Cramer",
-            "hrs": 2,
-            "cost": 51.5,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-20",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.53,
-            "cost": 39.4,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-17",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.67,
-            "cost": 43,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-14",
-            "emp": "Micheal N. Magoon",
-            "hrs": 1.33,
-            "cost": 33.25,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-14",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.6,
-            "cost": 15,
-            "cat": "Turn"
-          }
-        ],
-        "materialEntries": [
-          {
-            "d": "2026-07-27",
-            "amt": 250,
-            "cat": "CapEx",
-            "ln": "SPO Cleaning",
-            "src": "qbo"
-          },
-          {
-            "d": "2026-07-23",
-            "amt": 85.52,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-20",
-            "amt": 549.89,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          }
-        ]
-      },
-      "turn_end": "2026-07-28",
-      "af_turn_end": "2026-07-29",
-      "stage": "Final Walk",
-      "stage_ord": 6,
-      "days_elapsed": null,
-      "days_to_turn": null,
-      "status": "complete"
-    },
-    {
       "key": "s129|6",
       "prop": "s129",
       "unit": "6",
@@ -37721,6 +37493,44 @@
       "days_elapsed": null,
       "days_to_turn": null,
       "status": "complete"
+    },
+    {
+      "key": "s129|7",
+      "prop": "s129",
+      "unit": "7",
+      "at_risk": [],
+      "property_name": "s129",
+      "city": "Spokane Valley",
+      "addr": "12903 E Sprague Ave #7 Spokane Valley, WA 99216",
+      "unit_id": 658,
+      "unit_status": "Notice-Unrented",
+      "rent_ready": null,
+      "vacant": false,
+      "days_vacant": null,
+      "move_out": "2026-10-31",
+      "available_on": "2026-11-20",
+      "ready_on": "2026-11-20",
+      "target_date": "2026-11-20",
+      "next_move_in": null,
+      "rent": "1365.00",
+      "bed_bath": "2/1.00",
+      "sqft": 1035,
+      "region": "Spokane",
+      "next_appt": null,
+      "cost": {
+        "code": "s129-7",
+        "labor": 0,
+        "materials": 0,
+        "total": 0,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": []
+      },
+      "stage": "Move-out",
+      "stage_ord": 0,
+      "days_elapsed": 0,
+      "days_to_turn": null,
+      "status": "notice"
     },
     {
       "key": "s129|8",
@@ -43329,7 +43139,7 @@
       "vacant": true,
       "days_vacant": 107,
       "move_out": "2026-07-11",
-      "available_on": "2026-10-08",
+      "available_on": null,
       "ready_on": "2026-10-01",
       "target_date": "2026-07-31",
       "next_move_in": "2026-10-30",
