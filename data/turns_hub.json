@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "fetched_at": "2026-10-28T00:18:03.081Z",
+  "fetched_at": "2026-10-28T06:03:59.642Z",
   "summary": {
     "as_of": "2026-10-27",
     "units": 242,
@@ -9,7 +9,7 @@
     "notice": 11,
     "at_risk": 38,
     "unscheduled": 33,
-    "accruing": 27612.61,
+    "accruing": 27838.7,
     "avg_days_open": 45,
     "revenue_at_risk": 2960.2
   },
@@ -3232,11 +3232,26 @@
       "cost": {
         "code": "m405-DB",
         "labor": 0,
-        "materials": 0,
-        "total": 0,
+        "materials": 226.09,
+        "total": 226.09,
         "estimate": 3132.23,
         "laborEntries": [],
-        "materialEntries": []
+        "materialEntries": [
+          {
+            "d": "2026-10-22",
+            "amt": 124.17,
+            "cat": "Turn",
+            "ln": "romme",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-10-22",
+            "amt": 101.92,
+            "cat": "Turn",
+            "ln": "romme",
+            "src": "ramp"
+          }
+        ]
       },
       "stage": "Maintenance",
       "stage_ord": 3,
