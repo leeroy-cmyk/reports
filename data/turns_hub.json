@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "fetched_at": "2026-10-27T20:46:40.277Z",
+  "fetched_at": "2026-10-28T00:18:03.081Z",
   "summary": {
     "as_of": "2026-10-27",
     "units": 242,
@@ -53,47 +53,6 @@
       "stage": null,
       "stage_ord": 0,
       "days_elapsed": 89,
-      "days_to_turn": null,
-      "status": "active"
-    },
-    {
-      "key": "kn47|f208",
-      "prop": "kn47",
-      "unit": "F208",
-      "at_risk": [
-        "Available date passed",
-        "Nothing scheduled"
-      ],
-      "property_name": "kn47 K1",
-      "city": "Kennewick",
-      "addr": "4711 W Metaline Avenue F208 Kennewick, WA 99336",
-      "unit_id": 910,
-      "unit_status": "Vacant-Unrented",
-      "rent_ready": "No",
-      "vacant": true,
-      "days_vacant": 27,
-      "move_out": "2026-09-30",
-      "available_on": "2026-10-20",
-      "ready_on": "2026-10-20",
-      "target_date": "2026-10-20",
-      "next_move_in": null,
-      "rent": "1132.00",
-      "bed_bath": "1/1.00",
-      "sqft": 575,
-      "region": "Tri-Cities",
-      "next_appt": null,
-      "cost": {
-        "code": "kn47-F208",
-        "labor": 0,
-        "materials": 0,
-        "total": 0,
-        "estimate": 0,
-        "laborEntries": [],
-        "materialEntries": []
-      },
-      "stage": null,
-      "stage_ord": 0,
-      "days_elapsed": 27,
       "days_to_turn": null,
       "status": "active"
     },
@@ -2376,6 +2335,46 @@
       "stage": "Maintenance",
       "stage_ord": 3,
       "days_elapsed": 84,
+      "days_to_turn": null,
+      "status": "active"
+    },
+    {
+      "key": "kn47|f208",
+      "prop": "kn47",
+      "unit": "F208",
+      "at_risk": [
+        "Nothing scheduled"
+      ],
+      "property_name": "kn47 K1",
+      "city": "Kennewick",
+      "addr": "4711 W Metaline Avenue F208 Kennewick, WA 99336",
+      "unit_id": 910,
+      "unit_status": "Vacant-Unrented",
+      "rent_ready": "No",
+      "vacant": true,
+      "days_vacant": 27,
+      "move_out": "2026-09-30",
+      "available_on": "2026-11-20",
+      "ready_on": "2026-11-20",
+      "target_date": "2026-10-20",
+      "next_move_in": null,
+      "rent": "1132.00",
+      "bed_bath": "1/1.00",
+      "sqft": 575,
+      "region": "Tri-Cities",
+      "next_appt": null,
+      "cost": {
+        "code": "kn47-F208",
+        "labor": 0,
+        "materials": 0,
+        "total": 0,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": []
+      },
+      "stage": null,
+      "stage_ord": 0,
+      "days_elapsed": 27,
       "days_to_turn": null,
       "status": "active"
     },
@@ -14742,8 +14741,8 @@
       "cost": {
         "code": "j312-3134",
         "labor": 437.25,
-        "materials": 874.31,
-        "total": 1311.56,
+        "materials": 899.39,
+        "total": 1336.64,
         "estimate": 2288.89,
         "laborEntries": [
           {
@@ -14839,6 +14838,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-10-27",
+            "amt": 25.08,
+            "cat": "Turn",
+            "ln": "cramer",
+            "src": "ramp"
+          },
           {
             "d": "2025-09-02",
             "amt": 96.25,
@@ -39197,7 +39203,7 @@
       "city": "Tacoma",
       "addr": "3401 Pacific Ave A3 Tacoma, WA 98418",
       "unit_id": 805,
-      "unit_status": "Vacant-Unrented",
+      "unit_status": "Vacant-Rented",
       "rent_ready": "Yes",
       "vacant": true,
       "days_vacant": 81,
@@ -39205,7 +39211,7 @@
       "available_on": "2026-09-16",
       "ready_on": "2026-09-16",
       "target_date": "2026-08-27",
-      "next_move_in": null,
+      "next_move_in": "2026-10-30",
       "rent": "1235.00",
       "bed_bath": "0/1.00",
       "sqft": 500,
@@ -45320,6 +45326,7 @@
         ]
       },
       "turn_end": "2026-08-13",
+      "af_turn_end": "2026-10-27",
       "stage": "Maintenance",
       "stage_ord": 3,
       "days_elapsed": null,
@@ -45457,6 +45464,7 @@
         ]
       },
       "turn_end": "2026-01-28",
+      "af_turn_end": "2026-10-27",
       "stage": "Maintenance",
       "stage_ord": 3,
       "days_elapsed": null,
