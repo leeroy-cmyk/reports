@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-10-29T15:34:37.416Z",
+  "fetched_at": "2026-10-29T20:38:18.158Z",
   "units": {
     "2": {
       "moveOut": "2026-07-31",
@@ -414,6 +414,13 @@
       "unit": "B17",
       "city": "Richland"
     },
+    "584": {
+      "moveOut": "2026-11-14",
+      "status": "Notice-Unrented",
+      "prop": "rl16",
+      "unit": "C23",
+      "city": "Richland"
+    },
     "585": {
       "moveOut": "2026-10-01",
       "status": "Vacant-Unrented",
@@ -430,7 +437,7 @@
     },
     "593": {
       "moveOut": "2026-08-31",
-      "status": "Vacant-Unrented",
+      "status": "Vacant-Rented",
       "prop": "rl16",
       "unit": "D08",
       "city": "Richland"
@@ -818,13 +825,6 @@
       "status": "Vacant-Unrented",
       "prop": "o155-Elm",
       "unit": "T",
-      "city": "Spokane"
-    },
-    "1149": {
-      "moveOut": "2026-09-17",
-      "status": "Vacant-Unrented",
-      "prop": "m221",
-      "unit": "G-D",
       "city": "Spokane"
     },
     "1150": {
@@ -3408,6 +3408,25 @@
       "city": "Richland",
       "from": "2026-09-30",
       "was_status": "Vacant-Rented"
+    },
+    {
+      "date": "2026-10-29",
+      "type": "moveout_new",
+      "unit_id": "584",
+      "prop": "rl16",
+      "unit": "C23",
+      "city": "Richland",
+      "to": "2026-11-14"
+    },
+    {
+      "date": "2026-10-29",
+      "type": "moveout_removed",
+      "unit_id": "1149",
+      "prop": "m221",
+      "unit": "G-D",
+      "city": "Spokane",
+      "from": "2026-09-17",
+      "was_status": "Vacant-Unrented"
     }
   ]
 }
