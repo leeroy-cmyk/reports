@@ -1,17 +1,17 @@
 {
   "ok": true,
-  "fetched_at": "2026-10-30T22:50:28.888Z",
+  "fetched_at": "2026-10-31T02:05:58.354Z",
   "summary": {
     "as_of": "2026-10-30",
     "units": 238,
-    "active": 63,
-    "ready": 20,
+    "active": 62,
+    "ready": 21,
     "notice": 12,
-    "at_risk": 39,
-    "unscheduled": 34,
-    "accruing": 27822.62,
+    "at_risk": 38,
+    "unscheduled": 33,
+    "accruing": 27159.23,
     "avg_days_open": 47,
-    "revenue_at_risk": 2813.47
+    "revenue_at_risk": 2765.37
   },
   "rows": [
     {
@@ -4463,168 +4463,6 @@
           {
             "d": "2026-10-15",
             "amt": 82.09,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          }
-        ]
-      },
-      "af_turn_end": "2026-10-19",
-      "stage": "Walkthrough",
-      "stage_ord": 1,
-      "days_elapsed": 30,
-      "days_to_turn": null,
-      "status": "active"
-    },
-    {
-      "key": "rl16|a13",
-      "prop": "rl16",
-      "unit": "A13",
-      "at_risk": [
-        "Available date passed"
-      ],
-      "property_name": "rl16",
-      "city": "Richland",
-      "addr": "1621 George Washington Way A13 Richland, WA 99354",
-      "unit_id": 526,
-      "unit_status": "Vacant-Unrented",
-      "rent_ready": "No",
-      "vacant": true,
-      "days_vacant": 30,
-      "move_out": "2026-09-30",
-      "available_on": "2026-10-15",
-      "ready_on": "2026-10-15",
-      "target_date": "2026-10-20",
-      "next_move_in": null,
-      "rent": "1443.00",
-      "bed_bath": "2/1.50",
-      "sqft": 975,
-      "region": "Tri-Cities",
-      "pm": {
-        "projId": 242071,
-        "name": "Standard Unit Turn",
-        "status": "ACTIVE",
-        "done": 0,
-        "total": 9,
-        "first_appt": "2026-10-06",
-        "final_walk": "2026-10-13",
-        "final_walk_done": null,
-        "completed_date": null,
-        "due": "2026-10-15",
-        "next_task": {
-          "date": "2026-10-07",
-          "task": "maintenance"
-        },
-        "tasks": [
-          {
-            "task": "A - Initial walkthrough",
-            "cat": "walkthrough",
-            "done": false,
-            "date": "2026-10-01",
-            "who": "Margarito Saldana",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Appfolio Estimate",
-            "cat": "estimate",
-            "done": false,
-            "date": null,
-            "who": "Dulce Salinas",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "C - Paint",
-            "cat": "paint",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "D - Maintenance",
-            "cat": "maintenance",
-            "done": false,
-            "date": "2026-10-06",
-            "who": "Danny Halfacre",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "E - Carpet Cleaning",
-            "cat": "carpet",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "F - Cleaning",
-            "cat": "cleaning",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "G - Verify Mailbox Lockbox & Mailbox Keys",
-            "cat": "other",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Schedule Vendors",
-            "cat": "other",
-            "done": false,
-            "date": null,
-            "who": "Margarito Saldana",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Final Walkthrough",
-            "cat": "final-walk",
-            "done": false,
-            "date": "2026-10-13",
-            "who": "Margarito Saldana",
-            "completed": null,
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": null,
-      "cost": {
-        "code": "rl16-A13",
-        "labor": 0,
-        "materials": 861.41,
-        "total": 861.41,
-        "estimate": 3429.75,
-        "laborEntries": [],
-        "materialEntries": [
-          {
-            "d": "2026-10-08",
-            "amt": 86.33,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-06",
-            "amt": 39.79,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-06",
-            "amt": 735.29,
             "cat": "Turn",
             "ln": "halfacre",
             "src": "ramp"
@@ -29952,6 +29790,166 @@
       "status": "complete"
     },
     {
+      "key": "rl16|a13",
+      "prop": "rl16",
+      "unit": "A13",
+      "at_risk": [],
+      "property_name": "rl16",
+      "city": "Richland",
+      "addr": "1621 George Washington Way A13 Richland, WA 99354",
+      "unit_id": 526,
+      "unit_status": "Vacant-Unrented",
+      "rent_ready": "Yes",
+      "vacant": true,
+      "days_vacant": 30,
+      "move_out": "2026-09-30",
+      "available_on": "2026-10-15",
+      "ready_on": "2026-10-15",
+      "target_date": "2026-10-20",
+      "next_move_in": null,
+      "rent": "1443.00",
+      "bed_bath": "2/1.50",
+      "sqft": 975,
+      "region": "Tri-Cities",
+      "pm": {
+        "projId": 242071,
+        "name": "Standard Unit Turn",
+        "status": "ACTIVE",
+        "done": 0,
+        "total": 9,
+        "first_appt": "2026-10-06",
+        "final_walk": "2026-10-13",
+        "final_walk_done": null,
+        "completed_date": null,
+        "due": "2026-10-15",
+        "next_task": {
+          "date": "2026-10-07",
+          "task": "maintenance"
+        },
+        "tasks": [
+          {
+            "task": "A - Initial walkthrough",
+            "cat": "walkthrough",
+            "done": false,
+            "date": "2026-10-01",
+            "who": "Margarito Saldana",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Appfolio Estimate",
+            "cat": "estimate",
+            "done": false,
+            "date": null,
+            "who": "Dulce Salinas",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "C - Paint",
+            "cat": "paint",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "D - Maintenance",
+            "cat": "maintenance",
+            "done": false,
+            "date": "2026-10-06",
+            "who": "Danny Halfacre",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "E - Carpet Cleaning",
+            "cat": "carpet",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "F - Cleaning",
+            "cat": "cleaning",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "G - Verify Mailbox Lockbox & Mailbox Keys",
+            "cat": "other",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Schedule Vendors",
+            "cat": "other",
+            "done": false,
+            "date": null,
+            "who": "Margarito Saldana",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Final Walkthrough",
+            "cat": "final-walk",
+            "done": false,
+            "date": "2026-10-13",
+            "who": "Margarito Saldana",
+            "completed": null,
+            "vendor": false
+          }
+        ]
+      },
+      "next_appt": null,
+      "cost": {
+        "code": "rl16-A13",
+        "labor": 0,
+        "materials": 861.41,
+        "total": 861.41,
+        "estimate": 3429.75,
+        "laborEntries": [],
+        "materialEntries": [
+          {
+            "d": "2026-10-08",
+            "amt": 86.33,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-10-06",
+            "amt": 39.79,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-10-06",
+            "amt": 735.29,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          }
+        ]
+      },
+      "af_turn_end": "2026-10-19",
+      "stage": "Ready",
+      "stage_ord": 7,
+      "days_elapsed": 30,
+      "days_to_turn": null,
+      "status": "ready"
+    },
+    {
       "key": "rl16|a14",
       "prop": "rl16",
       "unit": "A14",
@@ -37251,8 +37249,8 @@
       "cost": {
         "code": "tc68-A20",
         "labor": 71.55,
-        "materials": 958.77,
-        "total": 1030.32,
+        "materials": 981.94,
+        "total": 1053.49,
         "estimate": 0,
         "laborEntries": [
           {
@@ -37264,6 +37262,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-10-29",
+            "amt": 23.17,
+            "cat": "Turn",
+            "ln": "mitchell",
+            "src": "ramp"
+          },
           {
             "d": "2026-10-26",
             "amt": 16.33,
@@ -40388,8 +40393,8 @@
       "cost": {
         "code": "tc68-D100",
         "labor": 90.45,
-        "materials": 379.04,
-        "total": 469.49,
+        "materials": 577.06,
+        "total": 667.51,
         "estimate": 0,
         "laborEntries": [
           {
@@ -40408,6 +40413,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-10-30",
+            "amt": 198.02,
+            "cat": "Turn",
+            "ln": "mitchell",
+            "src": "ramp"
+          },
           {
             "d": "2026-10-26",
             "amt": 71.56,
