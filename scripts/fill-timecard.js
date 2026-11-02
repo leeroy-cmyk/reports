@@ -68,40 +68,31 @@ function randSize(remaining) {
   return Math.min(s, MAX_PIECE_MIN, remaining);
 }
 
-const NOTES = {
-  6:  ['Morning review and property meld', 'Early email triage and WO review'],
-  7:  ['Morning review; urgent items', 'Property meld updates; EA report'],
-  8:  ['LR:FS morning meeting', 'MGR meeting; team planning'],
-  9:  ['Tacoma turn meeting', 'LR/LU projects check-in'],
-  10: ['WO prioritization and vendor follow-up', 'Tri-Cities turn meeting'],
-  11: ['Accounting daily; invoice review', 'Turn ops oversight'],
-  12: ['Turn planning and documentation', 'Budget and cost review'],
-  13: ['W225 focus time — project docs', 'Contractor coordination'],
-  14: ['CapEx planning and cost review', 'Property inspection follow-up'],
-  15: ['Grounds and maintenance coordination', 'Focus time — ops planning'],
-  16: ['Invoice approval; vendor follow-up', 'End of day WO status review'],
-  17: ['EOD reporting and notes', 'Admin closeout'],
-};
-function noteFor(startMin) {
-  const h = Math.floor(startMin / 60);
-  const pool = NOTES[Math.min(17, Math.max(6, h))];
-  return pool[Math.floor(Math.random() * pool.length)];
-}
+// ⛔ NO MEETING NAMES HERE (Lee Roy 2026-11-02: "fix this so my timecard is done only using my current calndar and
+// slack"). This cron cannot read his calendar or Slack, and the old pool ("LR:FS morning meeting", "MGR meeting",
+// "LR/LU projects check-in", …) read as real meetings he never had. Every filled entry gets one neutral placeholder;
+// timecard/build.js re-notes it from his Google Calendar + Slack at timecard time.
+const PLACEHOLDER_NOTE = 'Turn admin - notes pending calendar/Slack review';
+function noteFor() { return PLACEHOLDER_NOTE; }
 
 const tMin = t => { const [h, m] = t.split(':').map(Number); return h * 60 + m; };
 const minT = m => String(Math.floor(m / 60)).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0');
 const iso  = (d, hm) => d + 'T' + hm + ':00' + TZ;
 
-function makeEntry(date, s, e, note) {
-  return { user_id: USER_ID, jobcode_id: JOBCODE_ID, type: 'regular', date, start: iso(date, s), end: iso(date, e), notes: note, customfields: CF };
+function makeEntry(date, s, e, note, cf) {
+  return { user_id: USER_ID, jobcode_id: JOBCODE_ID, type: 'regular', date, start: iso(date, s), end: iso(date, e), notes: note, customfields: cf || CF };
 }
 
-function splitRange(date, startStr, endStr) {
+// an oversized entry being split keeps its own note and custom fields on every piece (it may already be re-noted
+// and re-coded from the calendar/Slack); only brand-new gap fills get the placeholder + r203. Mileage is a quantity,
+// never copied onto split pieces.
+function splitRange(date, startStr, endStr, note, cf) {
   let cur = tMin(startStr), end = tMin(endStr);
   const out = [];
+  const pieceCf = cf ? { ...cf, '25250': '' } : null;
   while (cur < end) {
     const sz = randSize(end - cur);
-    out.push(makeEntry(date, minT(cur), minT(cur + sz), noteFor(cur)));
+    out.push(makeEntry(date, minT(cur), minT(cur + sz), note || noteFor(), pieceCf));
     cur += sz;
   }
   return out;
@@ -155,7 +146,7 @@ async function processDay(date, label, fillGaps, capMin) {
   let deleted = 0, created = 0;
   if (over.length) {
     await deleteEntries(over.map(t => t.id)); deleted = over.length;
-    const reps = over.flatMap(t => splitRange(date, t.start.slice(11, 16), t.end.slice(11, 16)));
+    const reps = over.flatMap(t => splitRange(date, t.start.slice(11, 16), t.end.slice(11, 16), t.notes, t.customfields));
     created += await createEntries(reps); await sleep(200);
     console.log(label + ': fixed ' + over.length + ' oversized → ' + created + ' replacements');
   }
