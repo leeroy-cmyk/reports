@@ -16,6 +16,12 @@ const USER_ID = 5249464, JOBCODE_ID = 29656266;
 const ADMIN_CLASS = 'r203:Turn - Admin';
 const NO_PROPERTY = 'r203';
 const CF = { '25056': ADMIN_CLASS, '25068': NO_PROPERTY };
+// ⛔ WORK WEEK (Lee Roy 2026-11-02): "from now on i am capped at 40 hrs per week, mon to thursday, sunday meetings
+// if they are on my calendar". Fill Mon–Thu only, never past 10h in a day or 40h in a Sun–Sat week (time already on
+// the card counts, Sunday meetings included). Sunday meetings come from his calendar at timecard time — this cron
+// cannot read the calendar, so it never fills Sunday, Friday or Saturday.
+const WORK_DOW = [1, 2, 3, 4];
+const DAY_CAP_MIN = 600, WEEK_CAP_MIN = 2400;
 const month = new Date().getUTCMonth();
 const TZ = (month >= 3 && month <= 9) ? '-07:00' : '-08:00'; // PDT Apr-Oct, PST Nov-Mar
 const sleep = ms => new Promise(r => setTimeout(r, ms));
@@ -141,7 +147,7 @@ async function createEntries(entries) {
   return vals.filter(t => !t._status_code || t._status_code === 200).length;
 }
 
-async function processDay(date, label, fillGaps) {
+async function processDay(date, label, fillGaps, capMin) {
   const all = await fetchEntries(date); await sleep(200);
 
   // Fix oversized entries (>2hr)
@@ -166,8 +172,12 @@ async function processDay(date, label, fillGaps) {
   const lunchS   = 720 + Math.floor(Math.random() * 21); // 12:00–12:20
   const lunchE   = lunchS + 25 + Math.floor(Math.random() * 20); // 25–45 min lunch
 
-  const gapList = computeGaps(current, dayStart, dayEnd, lunchS, lunchE);
-  console.log(label + ': ' + current.length + ' existing, ' + gapList.length + ' gaps (window ' + minT(dayStart) + '–' + minT(dayEnd) + ', lunch ' + minT(lunchS) + '–' + minT(lunchE) + ')');
+  // the gaps are filled in clock order until the day/week cap is used up
+  let left = capMin;
+  const gapList = computeGaps(current, dayStart, dayEnd, lunchS, lunchE)
+    .map(g => { const e = Math.min(g.e, g.s + Math.max(0, left)); left -= e - g.s; return { s: g.s, e }; })
+    .filter(g => g.e - g.s >= 15);
+  console.log(label + ': ' + current.length + ' existing, ' + gapList.length + ' gaps (window ' + minT(dayStart) + '–' + minT(dayEnd) + ', lunch ' + minT(lunchS) + '–' + minT(lunchE) + ', cap ' + capMin + ' min)');
 
   const newEntries = gapList.flatMap(g => splitRange(date, minT(g.s), minT(g.e)));
   if (newEntries.length) {
@@ -187,26 +197,27 @@ async function processDay(date, label, fillGaps) {
   const today = localToday();
   console.log('QBT fill | today=' + today + ' tz=' + TZ);
 
-  // Build list of past 5 weekdays + today
+  // Build list of the past work days (Mon–Thu) + today if it is one; the window still reaches back ~a week
   const days = [];
   const dt = new Date(today + 'T12:00:00Z');
-  while (days.length < 6) {
-    const dow = dt.getUTCDay();
-    if (dow !== 0 && dow !== 6) days.unshift(dt.toISOString().slice(0, 10));
+  while (days.length < 5) {
+    if (WORK_DOW.includes(dt.getUTCDay())) days.unshift(dt.toISOString().slice(0, 10));
     dt.setUTCDate(dt.getUTCDate() - 1);
   }
+  const weekOf = d => { const x = new Date(d + 'T12:00:00Z'); x.setUTCDate(x.getUTCDate() - x.getUTCDay()); return x.toISOString().slice(0, 10); };
 
-  // Fetch all entries for the window with pagination
+  // Fetch all entries from the Sunday of the first day's week, with pagination
   let page = 1, allSheets = {};
   while (true) {
-    const r = await api('GET', '/api/v1/timesheets?start_date=' + days[0] + '&end_date=' + today + '&user_ids=' + USER_ID + '&on_the_clock=no&per_page=200&page=' + page);
+    const r = await api('GET', '/api/v1/timesheets?start_date=' + weekOf(days[0]) + '&end_date=' + today + '&user_ids=' + USER_ID + '&on_the_clock=no&per_page=200&page=' + page);
     Object.assign(allSheets, r.results?.timesheets || {});
     if (!r.more) break;
     page++; await sleep(150);
   }
-  const hoursByDate = {};
+  const hoursByDate = {}, minByWeek = {};
   for (const t of Object.values(allSheets)) {
     hoursByDate[t.date] = (hoursByDate[t.date] || 0) + t.duration / 3600;
+    minByWeek[weekOf(t.date)] = (minByWeek[weekOf(t.date)] || 0) + Math.round(t.duration / 60);
   }
 
   for (const d of days) {
@@ -214,7 +225,11 @@ async function processDay(date, label, fillGaps) {
     const isToday = d === today;
     const label = (isToday ? 'Today' : d) + ' (' + h.toFixed(1) + 'h)';
     if (h >= 7 && !isToday) { console.log(label + ': OK — skip'); continue; }
-    await processDay(d, label, true);
+    const cap = Math.max(0, Math.min(DAY_CAP_MIN - Math.round(h * 60), WEEK_CAP_MIN - (minByWeek[weekOf(d)] || 0)));
+    const before = Math.round(h * 60);
+    await processDay(d, label, true, cap);
+    const now = (await fetchEntries(d)).reduce((s, t) => s + Math.round(t.duration / 60), 0);
+    minByWeek[weekOf(d)] = (minByWeek[weekOf(d)] || 0) + (now - before);
     await sleep(300);
   }
 })().catch(e => { console.error('Fatal:', e.message); process.exit(1); });
