@@ -1,15 +1,15 @@
 {
   "ok": true,
-  "fetched_at": "2026-11-02T20:01:45.472Z",
+  "fetched_at": "2026-11-03T02:19:29.136Z",
   "summary": {
     "as_of": "2026-11-02",
-    "units": 238,
+    "units": 237,
     "active": 61,
     "ready": 25,
     "notice": 6,
     "at_risk": 40,
     "unscheduled": 33,
-    "accruing": 22921.09,
+    "accruing": 25110.61,
     "avg_days_open": 48,
     "revenue_at_risk": 2706.93
   },
@@ -1551,11 +1551,19 @@
       "cost": {
         "code": "k104-107-5",
         "labor": 0,
-        "materials": 0,
-        "total": 0,
+        "materials": 495.41,
+        "total": 495.41,
         "estimate": 0,
         "laborEntries": [],
-        "materialEntries": []
+        "materialEntries": [
+          {
+            "d": "2026-10-30",
+            "amt": 495.41,
+            "cat": "Turn",
+            "ln": "phillips",
+            "src": "ramp"
+          }
+        ]
       },
       "stage": "Maintenance",
       "stage_ord": 3,
@@ -1686,8 +1694,8 @@
       "cost": {
         "code": "k104-107-7",
         "labor": 817.49,
-        "materials": 510.89,
-        "total": 1328.38,
+        "materials": 1671.45,
+        "total": 2488.94,
         "estimate": 0,
         "laborEntries": [
           {
@@ -1860,6 +1868,20 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-10-30",
+            "amt": 529.28,
+            "cat": "Turn",
+            "ln": "phillips",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-10-26",
+            "amt": 631.28,
+            "cat": "Turn",
+            "ln": "phillips",
+            "src": "ramp"
+          },
           {
             "d": "2026-10-16",
             "amt": 70.81,
@@ -15695,11 +15717,19 @@
       "cost": {
         "code": "k104-107-6",
         "labor": 0,
-        "materials": 0,
-        "total": 0,
+        "materials": 225.43,
+        "total": 225.43,
         "estimate": 0,
         "laborEntries": [],
-        "materialEntries": []
+        "materialEntries": [
+          {
+            "d": "2026-10-30",
+            "amt": 225.43,
+            "cat": "Turn",
+            "ln": "phillips",
+            "src": "ramp"
+          }
+        ]
       },
       "stage": "Maintenance",
       "stage_ord": 3,
@@ -15810,11 +15840,18 @@
       "cost": {
         "code": "k104-314-10",
         "labor": 0,
-        "materials": 84.47,
-        "total": 84.47,
+        "materials": 292.65,
+        "total": 292.65,
         "estimate": 1292.98,
         "laborEntries": [],
         "materialEntries": [
+          {
+            "d": "2026-10-31",
+            "amt": 208.18,
+            "cat": "Turn",
+            "ln": "phillips",
+            "src": "ramp"
+          },
           {
             "d": "2026-10-08",
             "amt": 84.47,
@@ -18257,7 +18294,7 @@
       "city": "Kennewick",
       "addr": "4711 W Metaline Avenue C105 Kennewick, WA 99336",
       "unit_id": 847,
-      "unit_status": "Vacant-Unrented",
+      "unit_status": "Vacant-Rented",
       "rent_ready": "Yes",
       "vacant": true,
       "days_vacant": 63,
@@ -18265,7 +18302,7 @@
       "available_on": "2026-10-19",
       "ready_on": "2026-10-19",
       "target_date": "2026-09-20",
-      "next_move_in": null,
+      "next_move_in": "2026-11-13",
       "rent": "1132.00",
       "bed_bath": "1/1.00",
       "sqft": 575,
@@ -29005,286 +29042,6 @@
       "status": "complete"
     },
     {
-      "key": "ps25|d27",
-      "prop": "ps25",
-      "unit": "D27",
-      "property_name": "ps25",
-      "at_risk": [],
-      "region": "Tri-Cities",
-      "pm": {
-        "projId": 224796,
-        "name": "Standard Unit Turn",
-        "status": "COMPLETE",
-        "done": 8,
-        "total": 8,
-        "first_appt": "2026-07-23",
-        "final_walk": "2026-08-07",
-        "final_walk_done": "2026-08-04",
-        "completed_date": "2026-08-04",
-        "due": "2026-07-10",
-        "next_task": null,
-        "tasks": [
-          {
-            "task": "A - Initial walkthrough",
-            "cat": "walkthrough",
-            "done": true,
-            "date": "2026-06-04",
-            "who": "Margarito Saldana",
-            "completed": "2026-06-04",
-            "vendor": false
-          },
-          {
-            "task": "Appfolio Estimate",
-            "cat": "estimate",
-            "done": true,
-            "date": null,
-            "who": "Dulce Salinas",
-            "completed": "2026-06-14",
-            "vendor": false
-          },
-          {
-            "task": "C - Paint",
-            "cat": "paint",
-            "done": true,
-            "date": "2026-07-23",
-            "who": "Ryan Robson",
-            "completed": "2026-07-28",
-            "vendor": false
-          },
-          {
-            "task": "D - Maintenance",
-            "cat": "maintenance",
-            "done": true,
-            "date": "2026-07-23",
-            "who": "James Dunlap",
-            "completed": "2026-07-28",
-            "vendor": false
-          },
-          {
-            "task": "F - Cleaning",
-            "cat": "cleaning",
-            "done": true,
-            "date": "2026-07-29",
-            "who": "Duo Cleaning Company LLC",
-            "completed": "2026-08-04",
-            "vendor": true
-          },
-          {
-            "task": "Carpet Replacement (clone)",
-            "cat": "carpet",
-            "done": true,
-            "date": "2026-08-02",
-            "who": "Virtel flooring services 8",
-            "completed": "2026-08-02",
-            "vendor": true
-          },
-          {
-            "task": "Final Walkthrough",
-            "cat": "final-walk",
-            "done": true,
-            "date": "2026-08-07",
-            "who": "Margarito Saldana",
-            "completed": "2026-08-04",
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": null,
-      "cost": {
-        "code": "ps25-D27",
-        "labor": 567.64,
-        "materials": 2185.62,
-        "total": 2753.26,
-        "estimate": 0,
-        "laborEntries": [
-          {
-            "d": "2026-07-28",
-            "emp": "Ryan G. Robson",
-            "hrs": 2.03,
-            "cost": 46.69,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-28",
-            "emp": "James Dunlap",
-            "hrs": 1.2,
-            "cost": 27.6,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-28",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.93,
-            "cost": 21.39,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-28",
-            "emp": "James Dunlap",
-            "hrs": 1.12,
-            "cost": 25.76,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-28",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.45,
-            "cost": 33.35,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-28",
-            "emp": "James Dunlap",
-            "hrs": 1.5,
-            "cost": 34.5,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-28",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.47,
-            "cost": 10.81,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-28",
-            "emp": "Ryan G. Robson",
-            "hrs": 1,
-            "cost": 23,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-28",
-            "emp": "James Dunlap",
-            "hrs": 1.97,
-            "cost": 45.31,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-28",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.9,
-            "cost": 43.7,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-28",
-            "emp": "James Dunlap",
-            "hrs": 0.95,
-            "cost": 21.85,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-27",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.73,
-            "cost": 39.79,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-27",
-            "emp": "James Dunlap",
-            "hrs": 1.75,
-            "cost": 40.25,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-27",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.67,
-            "cost": 38.41,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-27",
-            "emp": "James Dunlap",
-            "hrs": 1.03,
-            "cost": 23.69,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-27",
-            "emp": "James Dunlap",
-            "hrs": 0.65,
-            "cost": 14.95,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-27",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.77,
-            "cost": 17.71,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-27",
-            "emp": "James Dunlap",
-            "hrs": 1.48,
-            "cost": 34.04,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-27",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.2,
-            "cost": 4.6,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-27",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.88,
-            "cost": 20.24,
-            "cat": "Turn"
-          }
-        ],
-        "materialEntries": [
-          {
-            "d": "2026-08-02",
-            "amt": 1419.98,
-            "cat": "CapEx",
-            "ln": "Virtel Flooring Se",
-            "src": "qbo"
-          },
-          {
-            "d": "2026-08-01",
-            "amt": 350,
-            "cat": "CapEx",
-            "ln": "Duo Cleaning Compa",
-            "src": "qbo"
-          },
-          {
-            "d": "2026-07-28",
-            "amt": 384.08,
-            "cat": "Turn",
-            "ln": "dunlap",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-27",
-            "amt": 21.77,
-            "cat": "Turn",
-            "ln": "dunlap",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-27",
-            "amt": 9.79,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          }
-        ]
-      },
-      "turn_end": "2026-08-04",
-      "af_turn_end": "2026-08-04",
-      "stage": "Final Walk",
-      "stage_ord": 6,
-      "days_elapsed": null,
-      "days_to_turn": null,
-      "status": "complete"
-    },
-    {
       "key": "ps25|d28",
       "prop": "ps25",
       "unit": "D28",
@@ -29664,11 +29421,18 @@
       "cost": {
         "code": "ps25-F41",
         "labor": 0,
-        "materials": 164.18,
-        "total": 164.18,
+        "materials": 264.12,
+        "total": 264.12,
         "estimate": 2000.38,
         "laborEntries": [],
         "materialEntries": [
+          {
+            "d": "2026-10-29",
+            "amt": 99.94,
+            "cat": "Turn",
+            "ln": "phillips",
+            "src": "ramp"
+          },
           {
             "d": "2026-10-15",
             "amt": 82.09,
@@ -41302,8 +41066,8 @@
       "cost": {
         "code": "w117-11",
         "labor": 305.8,
-        "materials": 1051.63,
-        "total": 1357.43,
+        "materials": 1194.38,
+        "total": 1500.18,
         "estimate": 2905.64,
         "laborEntries": [
           {
@@ -41350,6 +41114,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-11-02",
+            "amt": 142.75,
+            "cat": "Turn",
+            "ln": "cramer",
+            "src": "ramp"
+          },
           {
             "d": "2026-10-30",
             "amt": 366.96,
