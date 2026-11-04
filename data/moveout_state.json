@@ -1,13 +1,6 @@
 {
-  "fetched_at": "2026-11-04T02:43:48.280Z",
+  "fetched_at": "2026-11-04T17:52:27.061Z",
   "units": {
-    "2": {
-      "moveOut": "2026-07-31",
-      "status": "Vacant-Unrented",
-      "prop": "a916",
-      "unit": "1",
-      "city": "Spokane"
-    },
     "6": {
       "moveOut": "2026-08-19",
       "status": "Vacant-Unrented",
@@ -230,6 +223,13 @@
       "status": "Vacant-Unrented",
       "prop": "ps25",
       "unit": "D28",
+      "city": "Pasco"
+    },
+    "390": {
+      "moveOut": "2026-10-31",
+      "status": "Vacant-Unrented",
+      "prop": "ps25",
+      "unit": "E32",
       "city": "Pasco"
     },
     "398": {
@@ -490,6 +490,13 @@
       "prop": "s129",
       "unit": "8",
       "city": "Spokane Valley"
+    },
+    "673": {
+      "moveOut": "2026-10-31",
+      "status": "Vacant-Unrented",
+      "prop": "e328",
+      "unit": "2",
+      "city": "Spokane"
     },
     "676": {
       "moveOut": "2026-09-30",
@@ -962,7 +969,7 @@
     },
     "1312": {
       "moveOut": "2026-11-03",
-      "status": "Notice-Unrented",
+      "status": "Vacant-Unrented",
       "prop": "c702",
       "unit": "C202",
       "city": "Spokane"
@@ -1004,7 +1011,7 @@
     },
     "1347": {
       "moveOut": "2026-11-03",
-      "status": "Notice-Unrented",
+      "status": "Vacant-Unrented",
       "prop": "c702",
       "unit": "E101",
       "city": "Spokane"
@@ -1137,26 +1144,6 @@
     }
   },
   "changes": [
-    {
-      "date": "2026-09-04",
-      "type": "moveout_removed",
-      "unit_id": "548",
-      "prop": "rl16",
-      "unit": "B11",
-      "city": "Richland",
-      "from": "2026-07-24",
-      "was_status": "Vacant-Rented"
-    },
-    {
-      "date": "2026-09-04",
-      "type": "moveout_removed",
-      "unit_id": "1238",
-      "prop": "tc68",
-      "unit": "D089",
-      "city": "Tacoma",
-      "from": "2026-07-01",
-      "was_status": "Vacant-Rented"
-    },
     {
       "date": "2026-09-05",
       "type": "moveout_removed",
@@ -3180,6 +3167,34 @@
       "unit": "101-3",
       "city": "Medical Lake",
       "to": "2026-09-19"
+    },
+    {
+      "date": "2026-11-04",
+      "type": "moveout_new",
+      "unit_id": "390",
+      "prop": "ps25",
+      "unit": "E32",
+      "city": "Pasco",
+      "to": "2026-10-31"
+    },
+    {
+      "date": "2026-11-04",
+      "type": "moveout_new",
+      "unit_id": "673",
+      "prop": "e328",
+      "unit": "2",
+      "city": "Spokane",
+      "to": "2026-10-31"
+    },
+    {
+      "date": "2026-11-04",
+      "type": "moveout_removed",
+      "unit_id": "2",
+      "prop": "a916",
+      "unit": "1",
+      "city": "Spokane",
+      "from": "2026-07-31",
+      "was_status": "Vacant-Unrented"
     }
   ]
 }
