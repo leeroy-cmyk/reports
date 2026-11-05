@@ -1,17 +1,17 @@
 {
   "ok": true,
-  "fetched_at": "2026-11-04T23:20:45.517Z",
+  "fetched_at": "2026-11-05T03:38:57.028Z",
   "summary": {
     "as_of": "2026-11-04",
     "units": 239,
-    "active": 60,
-    "ready": 28,
+    "active": 59,
+    "ready": 29,
     "notice": 7,
     "at_risk": 41,
     "unscheduled": 34,
-    "accruing": 27789.66,
+    "accruing": 27579.48,
     "avg_days_open": 48,
-    "revenue_at_risk": 2654.93
+    "revenue_at_risk": 2610.47
   },
   "rows": [
     {
@@ -6776,8 +6776,8 @@
       "cost": {
         "code": "a916-11",
         "labor": 154.77,
-        "materials": 285.79,
-        "total": 440.56,
+        "materials": 603.87,
+        "total": 758.64,
         "estimate": 0,
         "laborEntries": [
           {
@@ -6810,6 +6810,20 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-11-04",
+            "amt": 290.31,
+            "cat": "Turn",
+            "ln": "cramer",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-11-04",
+            "amt": 27.77,
+            "cat": "Turn",
+            "ln": "cramer",
+            "src": "ramp"
+          },
           {
             "d": "2025-10-13",
             "amt": 77,
@@ -15588,12 +15602,12 @@
       "addr": "314 N. LeFerve 10 Medical Lake, WA 99022",
       "unit_id": 354,
       "unit_status": "Vacant-Unrented",
-      "rent_ready": "No",
+      "rent_ready": "Yes",
       "vacant": true,
       "days_vacant": 30,
       "move_out": "2026-10-05",
-      "available_on": "2026-11-07",
-      "ready_on": "2026-11-07",
+      "available_on": "2026-11-04",
+      "ready_on": "2026-11-04",
       "target_date": "2026-10-25",
       "next_move_in": null,
       "rent": "1334.00",
@@ -15702,11 +15716,12 @@
           }
         ]
       },
-      "stage": "Walkthrough",
-      "stage_ord": 1,
+      "af_turn_end": "2026-11-04",
+      "stage": "Ready",
+      "stage_ord": 7,
       "days_elapsed": 30,
       "days_to_turn": null,
-      "status": "active"
+      "status": "ready"
     },
     {
       "key": "k104|5074",
@@ -30792,11 +30807,18 @@
       "cost": {
         "code": "rl16-A14",
         "labor": 0,
-        "materials": 414.61,
-        "total": 414.61,
+        "materials": 497.08,
+        "total": 497.08,
         "estimate": 2147.71,
         "laborEntries": [],
         "materialEntries": [
+          {
+            "d": "2026-11-04",
+            "amt": 82.47,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          },
           {
             "d": "2026-11-04",
             "amt": 262.35,
