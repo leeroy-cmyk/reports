@@ -1,17 +1,17 @@
 {
   "ok": true,
-  "fetched_at": "2026-11-05T11:33:23.016Z",
+  "fetched_at": "2026-11-05T19:01:20.751Z",
   "summary": {
     "as_of": "2026-11-05",
     "units": 239,
-    "active": 59,
-    "ready": 29,
+    "active": 60,
+    "ready": 28,
     "notice": 7,
-    "at_risk": 42,
+    "at_risk": 43,
     "unscheduled": 37,
-    "accruing": 29859.85,
+    "accruing": 30370.43,
     "avg_days_open": 49,
-    "revenue_at_risk": 2610.47
+    "revenue_at_risk": 2654.93
   },
   "rows": [
     {
@@ -2331,6 +2331,139 @@
       "stage": "Maintenance",
       "stage_ord": 3,
       "days_elapsed": 158,
+      "days_to_turn": null,
+      "status": "active"
+    },
+    {
+      "key": "k104|31410",
+      "prop": "k104",
+      "unit": "314-10",
+      "at_risk": [
+        "Available date passed"
+      ],
+      "property_name": "k104- LeFevre",
+      "city": "Medical Lake",
+      "addr": "314 N. LeFerve 10 Medical Lake, WA 99022",
+      "unit_id": 354,
+      "unit_status": "Vacant-Unrented",
+      "rent_ready": "No",
+      "vacant": true,
+      "days_vacant": 31,
+      "move_out": "2026-10-05",
+      "available_on": "2026-11-04",
+      "ready_on": "2026-11-04",
+      "target_date": "2026-10-25",
+      "next_move_in": null,
+      "rent": "1334.00",
+      "bed_bath": "2/1.00",
+      "sqft": 1140,
+      "region": "Spokane",
+      "pm": {
+        "projId": 247272,
+        "name": "Standard Unit Turn",
+        "status": "ACTIVE",
+        "done": 0,
+        "total": 6,
+        "first_appt": "2026-12-28",
+        "final_walk": "2027-01-04",
+        "final_walk_done": null,
+        "completed_date": null,
+        "due": "2026-10-20",
+        "next_task": {
+          "date": "2026-10-08",
+          "task": "walkthrough"
+        },
+        "tasks": [
+          {
+            "task": "A - Initial walkthrough",
+            "cat": "walkthrough",
+            "done": false,
+            "date": "2026-10-08",
+            "who": "Matt Romme",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "D - Maintenance",
+            "cat": "maintenance",
+            "done": false,
+            "date": "2026-12-28",
+            "who": "Micheal Magoon",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "E - Carpet Cleaning",
+            "cat": "carpet",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "F - Cleaning",
+            "cat": "cleaning",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Schedule Vendors",
+            "cat": "other",
+            "done": false,
+            "date": null,
+            "who": "Matt Romme",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Final Walkthrough",
+            "cat": "final-walk",
+            "done": false,
+            "date": "2027-01-04",
+            "who": "Matt Romme",
+            "completed": null,
+            "vendor": false
+          }
+        ]
+      },
+      "next_appt": {
+        "date": "2026-12-22",
+        "cat": "maintenance",
+        "who": "Micheal Magoon",
+        "brief": "D - Maintenance"
+      },
+      "cost": {
+        "code": "k104-314-10",
+        "labor": 0,
+        "materials": 292.65,
+        "total": 292.65,
+        "estimate": 1292.98,
+        "laborEntries": [],
+        "materialEntries": [
+          {
+            "d": "2026-10-31",
+            "amt": 208.18,
+            "cat": "Turn",
+            "ln": "phillips",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-10-08",
+            "amt": 84.47,
+            "cat": "Turn",
+            "ln": "romme",
+            "src": "ramp"
+          }
+        ]
+      },
+      "af_turn_end": "2026-11-04",
+      "stage": "Walkthrough",
+      "stage_ord": 1,
+      "days_elapsed": 31,
       "days_to_turn": null,
       "status": "active"
     },
@@ -5459,11 +5592,26 @@
       "next_appt": null,
       "cost": {
         "code": "tc68-A11",
-        "labor": 0,
+        "labor": 102.6,
         "materials": 0,
-        "total": 0,
+        "total": 102.6,
         "estimate": 0,
-        "laborEntries": [],
+        "laborEntries": [
+          {
+            "d": "2026-11-04",
+            "emp": "Armani Mitchell",
+            "hrs": 1.48,
+            "cost": 39.96,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-11-04",
+            "emp": "Armani Mitchell",
+            "hrs": 2.32,
+            "cost": 62.64,
+            "cat": "Turn"
+          }
+        ],
         "materialEntries": []
       },
       "stage": null,
@@ -6274,11 +6422,53 @@
       },
       "cost": {
         "code": "a916-1",
-        "labor": 2395.79,
+        "labor": 2576.54,
         "materials": 1903.07,
-        "total": 4298.86,
+        "total": 4479.61,
         "estimate": 5151.99,
         "laborEntries": [
+          {
+            "d": "2026-11-04",
+            "emp": "Micheal N. Magoon",
+            "hrs": 1.02,
+            "cost": 25.5,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-11-04",
+            "emp": "Micheal N. Magoon",
+            "hrs": 1.1,
+            "cost": 27.5,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-11-04",
+            "emp": "Micheal N. Magoon",
+            "hrs": 0.77,
+            "cost": 19.25,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-11-04",
+            "emp": "Micheal N. Magoon",
+            "hrs": 1.98,
+            "cost": 49.5,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-11-04",
+            "emp": "Micheal N. Magoon",
+            "hrs": 1.23,
+            "cost": 30.75,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-11-04",
+            "emp": "Micheal N. Magoon",
+            "hrs": 1.13,
+            "cost": 28.25,
+            "cat": "Turn"
+          },
           {
             "d": "2026-11-02",
             "emp": "Micheal N. Magoon",
@@ -6656,48 +6846,6 @@
             "hrs": 1.5,
             "cost": 38.63,
             "cat": "Turn"
-          },
-          {
-            "d": "2025-07-11",
-            "emp": "Ronald D. Cramer",
-            "hrs": 0.95,
-            "cost": 24.46,
-            "cat": "Turn"
-          },
-          {
-            "d": "2025-07-11",
-            "emp": "Ronald D. Cramer",
-            "hrs": 0.52,
-            "cost": 13.39,
-            "cat": "Turn"
-          },
-          {
-            "d": "2025-07-11",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.05,
-            "cost": 27.04,
-            "cat": "Turn"
-          },
-          {
-            "d": "2025-07-11",
-            "emp": "Ronald D. Cramer",
-            "hrs": 3.9,
-            "cost": 100.43,
-            "cat": "Turn"
-          },
-          {
-            "d": "2025-07-10",
-            "emp": "Ronald D. Cramer",
-            "hrs": 0.5,
-            "cost": 12.88,
-            "cat": "Turn"
-          },
-          {
-            "d": "2025-07-10",
-            "emp": "Ronald D. Cramer",
-            "hrs": 0.97,
-            "cost": 24.98,
-            "cat": "Turn"
           }
         ],
         "materialEntries": [
@@ -6896,11 +7044,32 @@
       },
       "cost": {
         "code": "a916-11",
-        "labor": 154.77,
+        "labor": 296.4,
         "materials": 603.87,
-        "total": 758.64,
+        "total": 900.27,
         "estimate": 0,
         "laborEntries": [
+          {
+            "d": "2026-11-05",
+            "emp": "Ronald D. Cramer",
+            "hrs": 2,
+            "cost": 51.5,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-11-04",
+            "emp": "Ronald D. Cramer",
+            "hrs": 2,
+            "cost": 51.5,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-11-04",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.5,
+            "cost": 38.63,
+            "cat": "Turn"
+          },
           {
             "d": "2025-10-03",
             "emp": "Ronald D. Cramer",
@@ -15597,137 +15766,6 @@
       "days_elapsed": 36,
       "days_to_turn": null,
       "status": "active"
-    },
-    {
-      "key": "k104|31410",
-      "prop": "k104",
-      "unit": "314-10",
-      "at_risk": [],
-      "property_name": "k104- LeFevre",
-      "city": "Medical Lake",
-      "addr": "314 N. LeFerve 10 Medical Lake, WA 99022",
-      "unit_id": 354,
-      "unit_status": "Vacant-Unrented",
-      "rent_ready": "Yes",
-      "vacant": true,
-      "days_vacant": 31,
-      "move_out": "2026-10-05",
-      "available_on": "2026-11-04",
-      "ready_on": "2026-11-04",
-      "target_date": "2026-10-25",
-      "next_move_in": null,
-      "rent": "1334.00",
-      "bed_bath": "2/1.00",
-      "sqft": 1140,
-      "region": "Spokane",
-      "pm": {
-        "projId": 247272,
-        "name": "Standard Unit Turn",
-        "status": "ACTIVE",
-        "done": 0,
-        "total": 6,
-        "first_appt": "2026-12-28",
-        "final_walk": "2027-01-04",
-        "final_walk_done": null,
-        "completed_date": null,
-        "due": "2026-10-20",
-        "next_task": {
-          "date": "2026-10-08",
-          "task": "walkthrough"
-        },
-        "tasks": [
-          {
-            "task": "A - Initial walkthrough",
-            "cat": "walkthrough",
-            "done": false,
-            "date": "2026-10-08",
-            "who": "Matt Romme",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "D - Maintenance",
-            "cat": "maintenance",
-            "done": false,
-            "date": "2026-12-28",
-            "who": "Micheal Magoon",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "E - Carpet Cleaning",
-            "cat": "carpet",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "F - Cleaning",
-            "cat": "cleaning",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Schedule Vendors",
-            "cat": "other",
-            "done": false,
-            "date": null,
-            "who": "Matt Romme",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Final Walkthrough",
-            "cat": "final-walk",
-            "done": false,
-            "date": "2027-01-04",
-            "who": "Matt Romme",
-            "completed": null,
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": {
-        "date": "2026-12-22",
-        "cat": "maintenance",
-        "who": "Micheal Magoon",
-        "brief": "D - Maintenance"
-      },
-      "cost": {
-        "code": "k104-314-10",
-        "labor": 0,
-        "materials": 292.65,
-        "total": 292.65,
-        "estimate": 1292.98,
-        "laborEntries": [],
-        "materialEntries": [
-          {
-            "d": "2026-10-31",
-            "amt": 208.18,
-            "cat": "Turn",
-            "ln": "phillips",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-08",
-            "amt": 84.47,
-            "cat": "Turn",
-            "ln": "romme",
-            "src": "ramp"
-          }
-        ]
-      },
-      "af_turn_end": "2026-11-04",
-      "stage": "Ready",
-      "stage_ord": 7,
-      "days_elapsed": 31,
-      "days_to_turn": null,
-      "status": "ready"
     },
     {
       "key": "k104|5074",
@@ -30406,11 +30444,18 @@
       "cost": {
         "code": "ps91-6",
         "labor": 0,
-        "materials": 76.13,
-        "total": 76.13,
+        "materials": 127.2,
+        "total": 127.2,
         "estimate": 0,
         "laborEntries": [],
         "materialEntries": [
+          {
+            "d": "2026-11-05",
+            "amt": 51.07,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          },
           {
             "d": "2026-11-03",
             "amt": 76.13,
@@ -36266,11 +36311,19 @@
       "next_appt": null,
       "cost": {
         "code": "tc34-B110",
-        "labor": 0,
+        "labor": 54.54,
         "materials": 0,
-        "total": 0,
+        "total": 54.54,
         "estimate": 0,
-        "laborEntries": [],
+        "laborEntries": [
+          {
+            "d": "2026-11-04",
+            "emp": "Armani Mitchell",
+            "hrs": 2.02,
+            "cost": 54.54,
+            "cat": "Turn"
+          }
+        ],
         "materialEntries": []
       },
       "stage": "Walkthrough",
@@ -38999,11 +39052,18 @@
       "next_appt": null,
       "cost": {
         "code": "tc68-B54",
-        "labor": 52.11,
+        "labor": 116.37,
         "materials": 729.47,
-        "total": 781.58,
+        "total": 845.84,
         "estimate": 0,
         "laborEntries": [
+          {
+            "d": "2026-11-04",
+            "emp": "Armani Mitchell",
+            "hrs": 2.38,
+            "cost": 64.26,
+            "cat": "Turn"
+          },
           {
             "d": "2026-10-27",
             "emp": "Armani Mitchell",
@@ -42082,11 +42142,39 @@
       },
       "cost": {
         "code": "w117-11",
-        "labor": 662.71,
+        "labor": 804.6,
         "materials": 1194.38,
-        "total": 1857.09,
+        "total": 1998.98,
         "estimate": 2905.64,
         "laborEntries": [
+          {
+            "d": "2026-11-04",
+            "emp": "Ronald D. Cramer",
+            "hrs": 2,
+            "cost": 51.5,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-11-04",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.58,
+            "cost": 40.69,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-11-04",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1,
+            "cost": 25.75,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-11-04",
+            "emp": "Ronald D. Cramer",
+            "hrs": 0.93,
+            "cost": 23.95,
+            "cat": "Turn"
+          },
           {
             "d": "2026-11-03",
             "emp": "Ronald D. Cramer",
