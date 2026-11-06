@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "fetched_at": "2026-11-06T00:05:13.023Z",
+  "fetched_at": "2026-11-06T06:48:40.910Z",
   "summary": {
     "as_of": "2026-11-05",
     "units": 237,
@@ -9,7 +9,7 @@
     "notice": 7,
     "at_risk": 44,
     "unscheduled": 38,
-    "accruing": 31393.23,
+    "accruing": 33080.81,
     "avg_days_open": 49,
     "revenue_at_risk": 2693.67
   },
@@ -3202,11 +3202,18 @@
       "cost": {
         "code": "kn47-k1-M202",
         "labor": 0,
-        "materials": 828.02,
-        "total": 828.02,
+        "materials": 850.68,
+        "total": 850.68,
         "estimate": 0,
         "laborEntries": [],
         "materialEntries": [
+          {
+            "d": "2026-11-05",
+            "amt": 22.66,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          },
           {
             "d": "2026-10-29",
             "amt": 27.18,
@@ -5718,8 +5725,8 @@
       "cost": {
         "code": "tc68-A11",
         "labor": 102.6,
-        "materials": 0,
-        "total": 102.6,
+        "materials": 47.69,
+        "total": 150.29,
         "estimate": 0,
         "laborEntries": [
           {
@@ -5737,7 +5744,15 @@
             "cat": "Turn"
           }
         ],
-        "materialEntries": []
+        "materialEntries": [
+          {
+            "d": "2026-11-05",
+            "amt": 47.69,
+            "cat": "Turn",
+            "ln": "mitchell",
+            "src": "ramp"
+          }
+        ]
       },
       "stage": null,
       "stage_ord": 0,
@@ -5872,8 +5887,8 @@
       "cost": {
         "code": "tc68-B57",
         "labor": 429.57,
-        "materials": 130.32,
-        "total": 559.89,
+        "materials": 1044.53,
+        "total": 1474.1,
         "estimate": 4543.92,
         "laborEntries": [
           {
@@ -5962,6 +5977,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-11-04",
+            "amt": 914.21,
+            "cat": "Turn",
+            "ln": "mitchell",
+            "src": "ramp"
+          },
           {
             "d": "2026-10-29",
             "amt": 107.69,
@@ -6547,11 +6569,46 @@
       },
       "cost": {
         "code": "a916-1",
-        "labor": 2576.54,
+        "labor": 2729.54,
         "materials": 2022.77,
-        "total": 4599.31,
+        "total": 4752.31,
         "estimate": 5151.99,
         "laborEntries": [
+          {
+            "d": "2026-11-05",
+            "emp": "Micheal N. Magoon",
+            "hrs": 0.87,
+            "cost": 21.75,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-11-05",
+            "emp": "Micheal N. Magoon",
+            "hrs": 0.9,
+            "cost": 22.5,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-11-05",
+            "emp": "Micheal N. Magoon",
+            "hrs": 0.92,
+            "cost": 23,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-11-05",
+            "emp": "Micheal N. Magoon",
+            "hrs": 2.2,
+            "cost": 55,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-11-05",
+            "emp": "Micheal N. Magoon",
+            "hrs": 1.23,
+            "cost": 30.75,
+            "cat": "Turn"
+          },
           {
             "d": "2026-11-04",
             "emp": "Micheal N. Magoon",
@@ -6936,41 +6993,6 @@
             "hrs": 1.07,
             "cost": 27.55,
             "cat": "Turn"
-          },
-          {
-            "d": "2025-07-14",
-            "emp": "Ronald D. Cramer",
-            "hrs": 0.87,
-            "cost": 22.4,
-            "cat": "Turn"
-          },
-          {
-            "d": "2025-07-14",
-            "emp": "Ronald D. Cramer",
-            "hrs": 3.03,
-            "cost": 78.02,
-            "cat": "Turn"
-          },
-          {
-            "d": "2025-07-14",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.67,
-            "cost": 16.75,
-            "cat": "Turn"
-          },
-          {
-            "d": "2025-07-14",
-            "emp": "Micheal N. Magoon",
-            "hrs": 2.32,
-            "cost": 58,
-            "cat": "Turn"
-          },
-          {
-            "d": "2025-07-14",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.5,
-            "cost": 38.63,
-            "cat": "Turn"
           }
         ],
         "materialEntries": [
@@ -7176,11 +7198,32 @@
       },
       "cost": {
         "code": "a916-11",
-        "labor": 296.4,
+        "labor": 436.74,
         "materials": 603.87,
-        "total": 900.27,
+        "total": 1040.61,
         "estimate": 0,
         "laborEntries": [
+          {
+            "d": "2026-11-05",
+            "emp": "Ronald D. Cramer",
+            "hrs": 2,
+            "cost": 51.5,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-11-05",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.45,
+            "cost": 37.34,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-11-05",
+            "emp": "Ronald D. Cramer",
+            "hrs": 2,
+            "cost": 51.5,
+            "cat": "Turn"
+          },
           {
             "d": "2026-11-05",
             "emp": "Ronald D. Cramer",
@@ -11717,11 +11760,18 @@
       "cost": {
         "code": "c702-A203",
         "labor": 0,
-        "materials": 816.01,
-        "total": 816.01,
+        "materials": 855.97,
+        "total": 855.97,
         "estimate": 0,
         "laborEntries": [],
         "materialEntries": [
+          {
+            "d": "2026-11-05",
+            "amt": 39.96,
+            "cat": "Turn",
+            "ln": "smith",
+            "src": "ramp"
+          },
           {
             "d": "2026-11-04",
             "amt": 184.38,
@@ -18031,11 +18081,18 @@
       "cost": {
         "code": "kn47-k2-B104",
         "labor": 0,
-        "materials": 1595.22,
-        "total": 1595.22,
+        "materials": 1643.58,
+        "total": 1643.58,
         "estimate": 0,
         "laborEntries": [],
         "materialEntries": [
+          {
+            "d": "2026-11-05",
+            "amt": 48.36,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          },
           {
             "d": "2026-10-29",
             "amt": 29.35,
@@ -23101,11 +23158,25 @@
       },
       "cost": {
         "code": "m405-15",
-        "labor": 249.26,
+        "labor": 283.76,
         "materials": 66.4,
-        "total": 315.66,
+        "total": 350.16,
         "estimate": 1394.69,
         "laborEntries": [
+          {
+            "d": "2026-11-05",
+            "emp": "Micheal N. Magoon",
+            "hrs": 0.93,
+            "cost": 23.25,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-11-05",
+            "emp": "Micheal N. Magoon",
+            "hrs": 0.45,
+            "cost": 11.25,
+            "cat": "Turn"
+          },
           {
             "d": "2025-10-08",
             "emp": "Ronald D. Cramer",
@@ -35777,8 +35848,8 @@
       "cost": {
         "code": "tc68-A01",
         "labor": 828.09,
-        "materials": 1017.37,
-        "total": 1845.46,
+        "materials": 1104.62,
+        "total": 1932.71,
         "estimate": 0,
         "laborEntries": [
           {
@@ -35923,6 +35994,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-11-05",
+            "amt": 87.25,
+            "cat": "Turn",
+            "ln": "mitchell",
+            "src": "ramp"
+          },
           {
             "d": "2026-10-28",
             "amt": 74.37,
@@ -36923,8 +37001,8 @@
       "cost": {
         "code": "tc68-A15",
         "labor": 41.31,
-        "materials": 127.63,
-        "total": 168.94,
+        "materials": 598.18,
+        "total": 639.49,
         "estimate": 5928.88,
         "laborEntries": [
           {
@@ -36936,6 +37014,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-11-05",
+            "amt": 470.55,
+            "cat": "Turn",
+            "ln": "mitchell",
+            "src": "ramp"
+          },
           {
             "d": "2026-10-21",
             "amt": 127.63,
@@ -38387,11 +38472,18 @@
       "next_appt": null,
       "cost": {
         "code": "tc68-B54",
-        "labor": 116.37,
+        "labor": 308.88,
         "materials": 729.47,
-        "total": 845.84,
+        "total": 1038.35,
         "estimate": 0,
         "laborEntries": [
+          {
+            "d": "2026-11-05",
+            "emp": "Armani Mitchell",
+            "hrs": 7.13,
+            "cost": 192.51,
+            "cat": "Turn"
+          },
           {
             "d": "2026-11-04",
             "emp": "Armani Mitchell",
