@@ -1,17 +1,17 @@
 {
   "ok": true,
-  "fetched_at": "2026-11-05T19:01:20.751Z",
+  "fetched_at": "2026-11-06T00:05:13.023Z",
   "summary": {
     "as_of": "2026-11-05",
-    "units": 239,
-    "active": 60,
-    "ready": 28,
+    "units": 237,
+    "active": 61,
+    "ready": 27,
     "notice": 7,
-    "at_risk": 43,
-    "unscheduled": 37,
-    "accruing": 30370.43,
+    "at_risk": 44,
+    "unscheduled": 38,
+    "accruing": 31393.23,
     "avg_days_open": 49,
-    "revenue_at_risk": 2654.93
+    "revenue_at_risk": 2693.67
   },
   "rows": [
     {
@@ -4599,6 +4599,131 @@
       "status": "active"
     },
     {
+      "key": "ps25|d28",
+      "prop": "ps25",
+      "unit": "D28",
+      "at_risk": [
+        "Nothing scheduled"
+      ],
+      "property_name": "ps25",
+      "city": "Pasco",
+      "addr": "2524 W Sylvester St. - D28 Pasco, WA 99301",
+      "unit_id": 386,
+      "unit_status": "Vacant-Unrented",
+      "rent_ready": "No",
+      "vacant": true,
+      "days_vacant": 36,
+      "move_out": "2026-09-30",
+      "available_on": "2026-11-11",
+      "ready_on": "2026-10-30",
+      "target_date": "2026-10-20",
+      "next_move_in": null,
+      "rent": "1162.00",
+      "bed_bath": "1/1.00",
+      "sqft": 655,
+      "region": "Tri-Cities",
+      "pm": {
+        "projId": 246178,
+        "name": "Standard Unit Turn",
+        "status": "ACTIVE",
+        "done": 0,
+        "total": 6,
+        "first_appt": null,
+        "final_walk": null,
+        "final_walk_done": null,
+        "completed_date": null,
+        "due": "2026-10-15",
+        "next_task": null,
+        "tasks": [
+          {
+            "task": "A - Initial walkthrough",
+            "cat": "walkthrough",
+            "done": false,
+            "date": "2026-10-05",
+            "who": "Margarito Saldana",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "D - Maintenance",
+            "cat": "maintenance",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "E - Carpet Cleaning",
+            "cat": "carpet",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "F - Cleaning",
+            "cat": "cleaning",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Schedule Vendors",
+            "cat": "other",
+            "done": false,
+            "date": null,
+            "who": "Margarito Saldana",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Final Walkthrough",
+            "cat": "final-walk",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          }
+        ]
+      },
+      "next_appt": null,
+      "cost": {
+        "code": "ps25-D28",
+        "labor": 0,
+        "materials": 1022.8,
+        "total": 1022.8,
+        "estimate": 4122.64,
+        "laborEntries": [],
+        "materialEntries": [
+          {
+            "d": "2026-10-25",
+            "amt": 940.71,
+            "cat": "Turn",
+            "ln": "phillips",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-10-15",
+            "amt": 82.09,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          }
+        ]
+      },
+      "af_turn_end": "2026-10-19",
+      "stage": "Walkthrough",
+      "stage_ord": 1,
+      "days_elapsed": 36,
+      "days_to_turn": null,
+      "status": "active"
+    },
+    {
       "key": "ps25|f40",
       "prop": "ps25",
       "unit": "F40",
@@ -6423,8 +6548,8 @@
       "cost": {
         "code": "a916-1",
         "labor": 2576.54,
-        "materials": 1903.07,
-        "total": 4479.61,
+        "materials": 2022.77,
+        "total": 4599.31,
         "estimate": 5151.99,
         "laborEntries": [
           {
@@ -6849,6 +6974,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-11-05",
+            "amt": 119.7,
+            "cat": "Turn",
+            "ln": "magoon",
+            "src": "ramp"
+          },
           {
             "d": "2026-11-04",
             "amt": 269.72,
@@ -19721,8 +19853,8 @@
       "vacant": true,
       "days_vacant": 95,
       "move_out": "2026-08-02",
-      "available_on": "2026-11-07",
-      "ready_on": "2026-11-07",
+      "available_on": "2026-11-09",
+      "ready_on": "2026-11-09",
       "target_date": "2026-08-22",
       "next_move_in": null,
       "rent": "1132.00",
@@ -20641,197 +20773,6 @@
       "status": "complete"
     },
     {
-      "key": "kn47|h101",
-      "prop": "kn47",
-      "unit": "H101",
-      "property_name": "kn47 K1",
-      "at_risk": [],
-      "region": "Tri-Cities",
-      "pm": {
-        "projId": 222926,
-        "name": "Standard Unit Turn",
-        "status": "COMPLETE",
-        "done": 8,
-        "total": 8,
-        "first_appt": "2026-07-30",
-        "final_walk": "2026-08-10",
-        "final_walk_done": "2026-08-07",
-        "completed_date": "2026-08-07",
-        "due": "2026-10-22",
-        "next_task": null,
-        "tasks": [
-          {
-            "task": "A - Initial walkthrough",
-            "cat": "walkthrough",
-            "done": true,
-            "date": "2026-07-06",
-            "who": "Margarito Saldana",
-            "completed": "2026-07-14",
-            "vendor": false
-          },
-          {
-            "task": "Appfolio Estimate - APPROVED",
-            "cat": "estimate",
-            "done": true,
-            "date": null,
-            "who": "Dulce Salinas",
-            "completed": "2026-07-16",
-            "vendor": false
-          },
-          {
-            "task": "C - Paint",
-            "cat": "paint",
-            "done": true,
-            "date": "2026-07-30",
-            "who": "James Dunlap",
-            "completed": "2026-08-04",
-            "vendor": false
-          },
-          {
-            "task": "D - Maintenance",
-            "cat": "maintenance",
-            "done": true,
-            "date": "2026-07-30",
-            "who": "James Dunlap",
-            "completed": "2026-08-04",
-            "vendor": false
-          },
-          {
-            "task": "E - Carpet Cleaning",
-            "cat": "carpet",
-            "done": true,
-            "date": "2026-08-03",
-            "who": "SOS Carpet",
-            "completed": "2026-08-06",
-            "vendor": true
-          },
-          {
-            "task": "F - Cleaning",
-            "cat": "cleaning",
-            "done": true,
-            "date": "2026-08-03",
-            "who": "Duo Cleaning Company LLC",
-            "completed": "2026-08-06",
-            "vendor": true
-          },
-          {
-            "task": "P-TAC unit replacement",
-            "cat": "other",
-            "done": true,
-            "date": "2026-07-30",
-            "who": "James Dunlap",
-            "completed": "2026-08-04",
-            "vendor": false
-          },
-          {
-            "task": "Final Walkthrough",
-            "cat": "final-walk",
-            "done": true,
-            "date": "2026-08-10",
-            "who": "Margarito Saldana",
-            "completed": "2026-08-07",
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": null,
-      "cost": {
-        "code": "kn47-k1-H101",
-        "labor": 169.28,
-        "materials": 1138.87,
-        "total": 1308.15,
-        "estimate": 0,
-        "laborEntries": [
-          {
-            "d": "2026-08-04",
-            "emp": "James Dunlap",
-            "hrs": 1.42,
-            "cost": 32.66,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-04",
-            "emp": "James Dunlap",
-            "hrs": 0.63,
-            "cost": 14.49,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-04",
-            "emp": "James Dunlap",
-            "hrs": 0.58,
-            "cost": 13.34,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-03",
-            "emp": "James Dunlap",
-            "hrs": 1.67,
-            "cost": 38.41,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-03",
-            "emp": "James Dunlap",
-            "hrs": 1.13,
-            "cost": 25.99,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-03",
-            "emp": "James Dunlap",
-            "hrs": 1.93,
-            "cost": 44.39,
-            "cat": "Turn"
-          }
-        ],
-        "materialEntries": [
-          {
-            "d": "2026-08-05",
-            "amt": 350,
-            "cat": "CapEx",
-            "ln": "Duo Cleaning Compa",
-            "src": "qbo"
-          },
-          {
-            "d": "2026-08-03",
-            "amt": 220.37,
-            "cat": "Turn",
-            "ln": "dunlap",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-07",
-            "amt": 68.5,
-            "cat": "Turn",
-            "ln": "saldana",
-            "src": "ramp"
-          },
-          {
-            "d": "2025-06-25",
-            "amt": 150,
-            "cat": "Turn",
-            "ln": "miller",
-            "src": "ramp"
-          },
-          {
-            "d": "2025-05-21",
-            "amt": 350,
-            "cat": "Turn",
-            "ln": "saldana",
-            "src": "ramp"
-          }
-        ]
-      },
-      "turn_end": "2026-08-07",
-      "af_turn_end": "2026-08-25",
-      "stage": "Final Walk",
-      "stage_ord": 6,
-      "days_elapsed": null,
-      "days_to_turn": null,
-      "status": "complete"
-    },
-    {
       "key": "kn47|h204",
       "prop": "kn47",
       "unit": "H204",
@@ -21518,489 +21459,6 @@
       "stage_ord": 1,
       "days_elapsed": 0,
       "days_to_turn": -188,
-      "status": "complete"
-    },
-    {
-      "key": "kn47|k202",
-      "prop": "kn47",
-      "unit": "K202",
-      "property_name": "kn47-k3",
-      "at_risk": [],
-      "region": "Tri-Cities",
-      "pm": {
-        "projId": 225511,
-        "name": "Standard Unit Turn",
-        "status": "COMPLETE",
-        "done": 7,
-        "total": 7,
-        "first_appt": "2026-07-29",
-        "final_walk": "2026-08-10",
-        "final_walk_done": "2026-08-07",
-        "completed_date": "2026-08-07",
-        "due": "2026-08-06",
-        "next_task": null,
-        "tasks": [
-          {
-            "task": "A - Initial walkthrough",
-            "cat": "walkthrough",
-            "done": true,
-            "date": "2026-07-03",
-            "who": "Margarito Saldana",
-            "completed": "2026-07-07",
-            "vendor": false
-          },
-          {
-            "task": "Appfolio Estimate",
-            "cat": "estimate",
-            "done": true,
-            "date": null,
-            "who": "Dulce Salinas",
-            "completed": "2026-07-07",
-            "vendor": false
-          },
-          {
-            "task": "C - Paint",
-            "cat": "paint",
-            "done": true,
-            "date": "2026-07-29",
-            "who": "Ryan Robson",
-            "completed": "2026-07-30",
-            "vendor": false
-          },
-          {
-            "task": "D - Maintenance",
-            "cat": "maintenance",
-            "done": true,
-            "date": "2026-07-29",
-            "who": "Ryan Robson",
-            "completed": "2026-08-05",
-            "vendor": false
-          },
-          {
-            "task": "E - Carpet Cleaning",
-            "cat": "carpet",
-            "done": true,
-            "date": "2026-07-29",
-            "who": "SOS Carpet",
-            "completed": "2026-08-06",
-            "vendor": true
-          },
-          {
-            "task": "F - Cleaning",
-            "cat": "cleaning",
-            "done": true,
-            "date": "2026-07-30",
-            "who": "Duo Cleaning Company LLC",
-            "completed": "2026-08-06",
-            "vendor": true
-          },
-          {
-            "task": "Final Walkthrough",
-            "cat": "final-walk",
-            "done": true,
-            "date": "2026-08-10",
-            "who": "Margarito Saldana",
-            "completed": "2026-08-07",
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": null,
-      "cost": {
-        "code": "kn47-k3-k202",
-        "labor": 904.59,
-        "materials": 2097.42,
-        "total": 3002.01,
-        "estimate": 0,
-        "laborEntries": [
-          {
-            "d": "2026-08-05",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.13,
-            "cost": 25.99,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-04",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.3,
-            "cost": 29.9,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-04",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.68,
-            "cost": 15.64,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-04",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.4,
-            "cost": 32.2,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-04",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.62,
-            "cost": 37.26,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-04",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.48,
-            "cost": 34.04,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-04",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.33,
-            "cost": 7.59,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-04",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.73,
-            "cost": 16.79,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-04",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.87,
-            "cost": 20.01,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-04",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.22,
-            "cost": 5.06,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-04",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.97,
-            "cost": 22.31,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-03",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.08,
-            "cost": 24.84,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-03",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.28,
-            "cost": 6.44,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-03",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.23,
-            "cost": 5.29,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-03",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.83,
-            "cost": 19.09,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-03",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.5,
-            "cost": 34.5,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-03",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.1,
-            "cost": 2.3,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-03",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.5,
-            "cost": 11.5,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-03",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.62,
-            "cost": 37.26,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-03",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.88,
-            "cost": 43.24,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-03",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.62,
-            "cost": 14.26,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-08-03",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.75,
-            "cost": 17.25,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-31",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.17,
-            "cost": 26.91,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-31",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.23,
-            "cost": 5.29,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-30",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.45,
-            "cost": 33.35,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-30",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.52,
-            "cost": 34.96,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-30",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.1,
-            "cost": 25.3,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-30",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.85,
-            "cost": 19.55,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-30",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.25,
-            "cost": 5.75,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-30",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.75,
-            "cost": 17.25,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-30",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.37,
-            "cost": 8.51,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-30",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.18,
-            "cost": 4.14,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-30",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.07,
-            "cost": 1.61,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-30",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.13,
-            "cost": 2.99,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-30",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.05,
-            "cost": 1.15,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-30",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.12,
-            "cost": 2.76,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-30",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.92,
-            "cost": 44.16,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-30",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.35,
-            "cost": 8.05,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-29",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.7,
-            "cost": 39.1,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-29",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.67,
-            "cost": 38.41,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-29",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.62,
-            "cost": 14.26,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-29",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.25,
-            "cost": 5.75,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-29",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.47,
-            "cost": 33.81,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-29",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.37,
-            "cost": 31.51,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-29",
-            "emp": "Ryan G. Robson",
-            "hrs": 0.35,
-            "cost": 8.05,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-27",
-            "emp": "Ryan G. Robson",
-            "hrs": 1.27,
-            "cost": 29.21,
-            "cat": "Turn"
-          }
-        ],
-        "materialEntries": [
-          {
-            "d": "2026-08-05",
-            "amt": 32.61,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-04",
-            "amt": 204.94,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-04",
-            "amt": 279.58,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-08-03",
-            "amt": 815.93,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-31",
-            "amt": 104.17,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-30",
-            "amt": 269.78,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-29",
-            "amt": 321.91,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-07",
-            "amt": 68.5,
-            "cat": "Turn",
-            "ln": "saldana",
-            "src": "ramp"
-          }
-        ]
-      },
-      "turn_end": "2026-08-07",
-      "af_turn_end": "2026-08-25",
-      "stage": "Final Walk",
-      "stage_ord": 6,
-      "days_elapsed": null,
-      "days_to_turn": null,
       "status": "complete"
     },
     {
@@ -29297,129 +28755,6 @@
       "days_elapsed": null,
       "days_to_turn": null,
       "status": "complete"
-    },
-    {
-      "key": "ps25|d28",
-      "prop": "ps25",
-      "unit": "D28",
-      "at_risk": [],
-      "property_name": "ps25",
-      "city": "Pasco",
-      "addr": "2524 W Sylvester St. - D28 Pasco, WA 99301",
-      "unit_id": 386,
-      "unit_status": "Vacant-Unrented",
-      "rent_ready": "Yes",
-      "vacant": true,
-      "days_vacant": 36,
-      "move_out": "2026-09-30",
-      "available_on": "2026-11-01",
-      "ready_on": "2026-10-30",
-      "target_date": "2026-10-20",
-      "next_move_in": null,
-      "rent": "1162.00",
-      "bed_bath": "1/1.00",
-      "sqft": 655,
-      "region": "Tri-Cities",
-      "pm": {
-        "projId": 246178,
-        "name": "Standard Unit Turn",
-        "status": "ACTIVE",
-        "done": 0,
-        "total": 6,
-        "first_appt": null,
-        "final_walk": null,
-        "final_walk_done": null,
-        "completed_date": null,
-        "due": "2026-10-15",
-        "next_task": null,
-        "tasks": [
-          {
-            "task": "A - Initial walkthrough",
-            "cat": "walkthrough",
-            "done": false,
-            "date": "2026-10-05",
-            "who": "Margarito Saldana",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "D - Maintenance",
-            "cat": "maintenance",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "E - Carpet Cleaning",
-            "cat": "carpet",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "F - Cleaning",
-            "cat": "cleaning",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Schedule Vendors",
-            "cat": "other",
-            "done": false,
-            "date": null,
-            "who": "Margarito Saldana",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Final Walkthrough",
-            "cat": "final-walk",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": null,
-      "cost": {
-        "code": "ps25-D28",
-        "labor": 0,
-        "materials": 1022.8,
-        "total": 1022.8,
-        "estimate": 4122.64,
-        "laborEntries": [],
-        "materialEntries": [
-          {
-            "d": "2026-10-25",
-            "amt": 940.71,
-            "cat": "Turn",
-            "ln": "phillips",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-15",
-            "amt": 82.09,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          }
-        ]
-      },
-      "af_turn_end": "2026-10-19",
-      "stage": "Ready",
-      "stage_ord": 7,
-      "days_elapsed": 36,
-      "days_to_turn": null,
-      "status": "ready"
     },
     {
       "key": "ps25|d29",
