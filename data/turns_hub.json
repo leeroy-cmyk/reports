@@ -1,17 +1,17 @@
 {
   "ok": true,
-  "fetched_at": "2026-11-06T14:50:29.200Z",
+  "fetched_at": "2026-11-07T00:24:16.187Z",
   "summary": {
     "as_of": "2026-11-06",
-    "units": 237,
-    "active": 62,
-    "ready": 27,
-    "notice": 6,
-    "at_risk": 45,
-    "unscheduled": 39,
-    "accruing": 33080.81,
-    "avg_days_open": 49,
-    "revenue_at_risk": 2742
+    "units": 238,
+    "active": 63,
+    "ready": 26,
+    "notice": 7,
+    "at_risk": 46,
+    "unscheduled": 40,
+    "accruing": 34486.18,
+    "avg_days_open": 50,
+    "revenue_at_risk": 2801.17
   },
   "rows": [
     {
@@ -53,6 +53,261 @@
       "stage": null,
       "stage_ord": 0,
       "days_elapsed": 99,
+      "days_to_turn": null,
+      "status": "active"
+    },
+    {
+      "key": "tc68|a20",
+      "prop": "tc68",
+      "unit": "A20",
+      "at_risk": [
+        "Available date passed",
+        "Over 45 days vacant"
+      ],
+      "property_name": "tc68",
+      "city": "Tacoma",
+      "addr": "6830 Tacoma Mall Blvd Apt A20 Tacoma, WA 98409",
+      "unit_id": 1169,
+      "unit_status": "Vacant-Unrented",
+      "rent_ready": "No",
+      "vacant": true,
+      "days_vacant": 98,
+      "move_out": "2026-07-31",
+      "available_on": "2026-10-30",
+      "ready_on": "2026-10-30",
+      "target_date": "2026-08-20",
+      "next_move_in": null,
+      "rent": "1775.00",
+      "bed_bath": "2/1.00",
+      "sqft": 980,
+      "region": "Tacoma",
+      "pm": {
+        "projId": 243780,
+        "name": "Standard Unit Turn",
+        "status": "ACTIVE",
+        "done": 0,
+        "total": 9,
+        "first_appt": null,
+        "final_walk": null,
+        "final_walk_done": null,
+        "completed_date": null,
+        "due": "2026-08-15",
+        "next_task": {
+          "date": "2026-10-14",
+          "task": "walkthrough"
+        },
+        "tasks": [
+          {
+            "task": "A - Initial walkthrough",
+            "cat": "walkthrough",
+            "done": false,
+            "date": "2026-09-15",
+            "who": "Armani Mitchell",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Appfolio Estimate",
+            "cat": "estimate",
+            "done": false,
+            "date": null,
+            "who": "Dulce Salinas",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "C - Paint",
+            "cat": "paint",
+            "done": false,
+            "date": null,
+            "who": "Chris Phillips",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "D - Maintenance",
+            "cat": "maintenance",
+            "done": false,
+            "date": null,
+            "who": "Armani Mitchell",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "E - Carpet Cleaning",
+            "cat": "carpet",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "F - Cleaning",
+            "cat": "cleaning",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "G - Verify Mailbox Lockbox & Mailbox Keys",
+            "cat": "other",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Schedule Vendors",
+            "cat": "other",
+            "done": false,
+            "date": null,
+            "who": "Armani Mitchell",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Final Walkthrough",
+            "cat": "final-walk",
+            "done": false,
+            "date": null,
+            "who": "Armani Mitchell",
+            "completed": null,
+            "vendor": false
+          }
+        ]
+      },
+      "next_appt": null,
+      "cost": {
+        "code": "tc68-A20",
+        "labor": 245.7,
+        "materials": 981.94,
+        "total": 1227.64,
+        "estimate": 0,
+        "laborEntries": [
+          {
+            "d": "2026-10-29",
+            "emp": "Armani Mitchell",
+            "hrs": 1.4,
+            "cost": 37.8,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-10-29",
+            "emp": "Armani Mitchell",
+            "hrs": 1.08,
+            "cost": 29.16,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-10-26",
+            "emp": "Armani Mitchell",
+            "hrs": 1.42,
+            "cost": 38.34,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-10-26",
+            "emp": "Armani Mitchell",
+            "hrs": 1.87,
+            "cost": 50.49,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-10-26",
+            "emp": "Armani Mitchell",
+            "hrs": 0.9,
+            "cost": 24.3,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-10-26",
+            "emp": "Armani Mitchell",
+            "hrs": 1.23,
+            "cost": 33.21,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-10-26",
+            "emp": "Armani Mitchell",
+            "hrs": 1.2,
+            "cost": 32.4,
+            "cat": "Turn"
+          }
+        ],
+        "materialEntries": [
+          {
+            "d": "2026-10-29",
+            "amt": 23.17,
+            "cat": "Turn",
+            "ln": "mitchell",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-10-26",
+            "amt": 16.33,
+            "cat": "Turn",
+            "ln": "mitchell",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-10-26",
+            "amt": 76.93,
+            "cat": "Turn",
+            "ln": "mitchell",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-10-26",
+            "amt": 77.32,
+            "cat": "Turn",
+            "ln": "mitchell",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-10-26",
+            "amt": 75.24,
+            "cat": "Turn",
+            "ln": "mitchell",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-10-26",
+            "amt": 27.63,
+            "cat": "Turn",
+            "ln": "mitchell",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-10-23",
+            "amt": 245.91,
+            "cat": "Turn",
+            "ln": "mitchell",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-10-21",
+            "amt": 392.6,
+            "cat": "Turn",
+            "ln": "mitchell",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-10-21",
+            "amt": 46.81,
+            "cat": "Turn",
+            "ln": "mitchell",
+            "src": "ramp"
+          }
+        ]
+      },
+      "af_turn_end": "2026-10-29",
+      "stage": "Walkthrough",
+      "stage_ord": 1,
+      "days_elapsed": 98,
       "days_to_turn": null,
       "status": "active"
     },
@@ -1679,11 +1934,19 @@
       "cost": {
         "code": "c702-J303",
         "labor": 0,
-        "materials": 0,
-        "total": 0,
+        "materials": 177.73,
+        "total": 177.73,
         "estimate": 0,
         "laborEntries": [],
-        "materialEntries": []
+        "materialEntries": [
+          {
+            "d": "2026-11-06",
+            "amt": 177.73,
+            "cat": "Turn",
+            "ln": "easley",
+            "src": "ramp"
+          }
+        ]
       },
       "stage": null,
       "stage_ord": 0,
@@ -7239,8 +7502,8 @@
       "cost": {
         "code": "a916-11",
         "labor": 436.74,
-        "materials": 603.87,
-        "total": 1040.61,
+        "materials": 666.53,
+        "total": 1103.27,
         "estimate": 0,
         "laborEntries": [
           {
@@ -7315,6 +7578,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-11-06",
+            "amt": 62.66,
+            "cat": "Turn",
+            "ln": "cramer",
+            "src": "ramp"
+          },
           {
             "d": "2026-11-04",
             "amt": 290.31,
@@ -7489,8 +7759,8 @@
       "cost": {
         "code": "a916-5",
         "labor": 54.75,
-        "materials": 60.91,
-        "total": 115.66,
+        "materials": 140.33,
+        "total": 195.08,
         "estimate": 2977.19,
         "laborEntries": [
           {
@@ -7509,6 +7779,20 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-11-06",
+            "amt": 27.61,
+            "cat": "Turn",
+            "ln": "normandin",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-11-06",
+            "amt": 51.81,
+            "cat": "Turn",
+            "ln": "normandin",
+            "src": "ramp"
+          },
           {
             "d": "2025-09-23",
             "amt": 60.91,
@@ -13371,6 +13655,44 @@
       "status": "complete"
     },
     {
+      "key": "c702|f202",
+      "prop": "c702",
+      "unit": "F202",
+      "at_risk": [],
+      "property_name": "c702",
+      "city": "Spokane",
+      "addr": "7006 N Colton St F202 Spokane, WA 99208",
+      "unit_id": 1370,
+      "unit_status": "Notice-Unrented",
+      "rent_ready": null,
+      "vacant": false,
+      "days_vacant": null,
+      "move_out": "2026-11-18",
+      "available_on": null,
+      "ready_on": null,
+      "target_date": "2026-12-08",
+      "next_move_in": null,
+      "rent": "1280.00",
+      "bed_bath": "2/2.00",
+      "sqft": 1025,
+      "region": "Spokane",
+      "next_appt": null,
+      "cost": {
+        "code": "c702-F202",
+        "labor": 0,
+        "materials": 0,
+        "total": 0,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": []
+      },
+      "stage": "Move-out",
+      "stage_ord": 0,
+      "days_elapsed": 0,
+      "days_to_turn": null,
+      "status": "notice"
+    },
+    {
       "key": "c702|f204",
       "prop": "c702",
       "unit": "F204",
@@ -17164,7 +17486,7 @@
       "city": "Medical Lake",
       "addr": "512 E. Percival #3 Medical Lake, WA 99022",
       "unit_id": 301,
-      "unit_status": "Vacant-Unrented",
+      "unit_status": "Vacant-Rented",
       "rent_ready": "No",
       "vacant": true,
       "days_vacant": 37,
@@ -17172,7 +17494,7 @@
       "available_on": "2027-01-13",
       "ready_on": "2027-01-13",
       "target_date": "2026-10-20",
-      "next_move_in": null,
+      "next_move_in": "2027-01-15",
       "rent": "1334.00",
       "bed_bath": "2/1.00",
       "sqft": 1140,
@@ -20231,6 +20553,187 @@
       "status": "active"
     },
     {
+      "key": "kn47|d208",
+      "prop": "kn47",
+      "unit": "D208",
+      "at_risk": [],
+      "property_name": "kn47 K1",
+      "city": "Kennewick",
+      "addr": "4711 W Metaline Avenue D208 Kennewick, WA 99336",
+      "unit_id": 878,
+      "unit_status": "Notice-Unrented",
+      "rent_ready": null,
+      "vacant": false,
+      "days_vacant": null,
+      "move_out": "2026-11-30",
+      "available_on": "2026-12-20",
+      "ready_on": "2026-12-20",
+      "target_date": "2026-12-20",
+      "next_move_in": null,
+      "rent": "931.00",
+      "bed_bath": "1/1.00",
+      "sqft": 600,
+      "region": "Tri-Cities",
+      "pm": {
+        "projId": 176742,
+        "name": "Turn - 4711 W Metaline Avenue UNIT D208",
+        "status": "COMPLETE",
+        "done": 8,
+        "total": 8,
+        "first_appt": null,
+        "final_walk": null,
+        "final_walk_done": "2025-08-20",
+        "completed_date": "2025-08-20",
+        "due": "2025-08-19",
+        "next_task": null,
+        "tasks": null
+      },
+      "next_appt": null,
+      "cost": {
+        "code": "kn47-k1-D208",
+        "labor": 326.07,
+        "materials": 468.26,
+        "total": 794.33,
+        "estimate": 0,
+        "laborEntries": [
+          {
+            "d": "2026-02-12",
+            "emp": "Ryan G. Robson",
+            "hrs": 2.82,
+            "cost": 64.86,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-08-20",
+            "emp": "Isaac R. Chavez",
+            "hrs": 0.47,
+            "cost": 12.69,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-08-20",
+            "emp": "Isaac R. Chavez",
+            "hrs": 0.48,
+            "cost": 12.96,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-08-20",
+            "emp": "Isaac R. Chavez",
+            "hrs": 0.75,
+            "cost": 20.25,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-08-20",
+            "emp": "Isaac R. Chavez",
+            "hrs": 0.97,
+            "cost": 26.19,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-08-14",
+            "emp": "Isaac R. Chavez",
+            "hrs": 0.6,
+            "cost": 16.2,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-08-14",
+            "emp": "Isaac R. Chavez",
+            "hrs": 0.48,
+            "cost": 12.96,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-08-07",
+            "emp": "Isaac R. Chavez",
+            "hrs": 1.02,
+            "cost": 27.54,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-08-07",
+            "emp": "Isaac R. Chavez",
+            "hrs": 0.58,
+            "cost": 15.66,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-06-25",
+            "emp": "Isaac R. Chavez",
+            "hrs": 0.9,
+            "cost": 24.3,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-06-25",
+            "emp": "jaxson j. lakins",
+            "hrs": 0.77,
+            "cost": 18.48,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-06-25",
+            "emp": "Isaac R. Chavez",
+            "hrs": 0.65,
+            "cost": 17.55,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-06-25",
+            "emp": "jaxson j. lakins",
+            "hrs": 0.72,
+            "cost": 17.28,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-06-25",
+            "emp": "Isaac R. Chavez",
+            "hrs": 0.55,
+            "cost": 14.85,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-06-25",
+            "emp": "Isaac R. Chavez",
+            "hrs": 0.9,
+            "cost": 24.3,
+            "cat": "Turn"
+          }
+        ],
+        "materialEntries": [
+          {
+            "d": "2025-08-20",
+            "amt": 107.42,
+            "cat": "Turn",
+            "ln": "chavez",
+            "src": "ramp"
+          },
+          {
+            "d": "2025-08-19",
+            "amt": 350,
+            "cat": "Turn",
+            "ln": "saldana",
+            "src": "ramp"
+          },
+          {
+            "d": "2025-08-14",
+            "amt": 10.84,
+            "cat": "Turn",
+            "ln": "chavez",
+            "src": "ramp"
+          }
+        ]
+      },
+      "turn_end": "2025-08-20",
+      "stage": "Move-out",
+      "stage_ord": 0,
+      "days_elapsed": 0,
+      "days_to_turn": -467,
+      "status": "complete"
+    },
+    {
       "key": "kn47|e101",
       "prop": "kn47",
       "unit": "E101",
@@ -20692,138 +21195,6 @@
       "stage_ord": 0,
       "days_elapsed": 0,
       "days_to_turn": -288,
-      "status": "complete"
-    },
-    {
-      "key": "kn47|g102",
-      "prop": "kn47",
-      "unit": "G102",
-      "at_risk": [],
-      "property_name": "kn47 K1",
-      "city": "Kennewick",
-      "addr": "4711 W Metaline Avenue G102 Kennewick, WA 99336",
-      "unit_id": 912,
-      "unit_status": "Vacant-Unrented",
-      "rent_ready": "No",
-      "vacant": true,
-      "days_vacant": 6,
-      "move_out": "2026-10-31",
-      "available_on": "2026-11-20",
-      "ready_on": "2026-11-20",
-      "target_date": "2026-11-20",
-      "next_move_in": null,
-      "rent": "1358.00",
-      "bed_bath": "2/1.00",
-      "sqft": 775,
-      "region": "Tri-Cities",
-      "pm": {
-        "projId": 176741,
-        "name": "Turn - 4711 W Metaline Avenue UNIT G102",
-        "status": "COMPLETE",
-        "done": 8,
-        "total": 8,
-        "first_appt": null,
-        "final_walk": null,
-        "final_walk_done": "2025-08-08",
-        "completed_date": "2025-08-08",
-        "due": "2025-08-07",
-        "next_task": null,
-        "tasks": null
-      },
-      "next_appt": null,
-      "cost": {
-        "code": "kn47-k1-G102",
-        "labor": 62.37,
-        "materials": 812.98,
-        "total": 875.35,
-        "estimate": 0,
-        "laborEntries": [
-          {
-            "d": "2025-08-08",
-            "emp": "Isaac R. Chavez",
-            "hrs": 0.42,
-            "cost": 11.34,
-            "cat": "Turn"
-          },
-          {
-            "d": "2025-08-08",
-            "emp": "Isaac R. Chavez",
-            "hrs": 0.5,
-            "cost": 13.5,
-            "cat": "Turn"
-          },
-          {
-            "d": "2025-08-08",
-            "emp": "Isaac R. Chavez",
-            "hrs": 0.35,
-            "cost": 9.45,
-            "cat": "Turn"
-          },
-          {
-            "d": "2025-07-29",
-            "emp": "Isaac R. Chavez",
-            "hrs": 0.92,
-            "cost": 24.84,
-            "cat": "Turn"
-          },
-          {
-            "d": "2025-07-29",
-            "emp": "Isaac R. Chavez",
-            "hrs": 0.12,
-            "cost": 3.24,
-            "cat": "Turn"
-          }
-        ],
-        "materialEntries": [
-          {
-            "d": "2025-10-16",
-            "amt": 21.67,
-            "cat": "Turn",
-            "ln": "saldana",
-            "src": "ramp"
-          },
-          {
-            "d": "2025-10-16",
-            "amt": 29.97,
-            "cat": "Turn",
-            "ln": "robson",
-            "src": "ramp"
-          },
-          {
-            "d": "2025-10-13",
-            "amt": 300,
-            "cat": "Turn",
-            "ln": "montiel",
-            "src": "ramp"
-          },
-          {
-            "d": "2025-08-08",
-            "amt": 58.5,
-            "cat": "Turn",
-            "ln": "chavez",
-            "src": "ramp"
-          },
-          {
-            "d": "2025-08-06",
-            "amt": 350,
-            "cat": "Turn",
-            "ln": "saldana",
-            "src": "ramp"
-          },
-          {
-            "d": "2025-07-29",
-            "amt": 52.84,
-            "cat": "Turn",
-            "ln": "chavez",
-            "src": "ramp"
-          }
-        ]
-      },
-      "turn_end": "2025-08-08",
-      "stage": null,
-      "stage_ord": 0,
-      "days_elapsed": 0,
-      "days_to_turn": -449,
       "status": "complete"
     },
     {
@@ -23151,8 +23522,8 @@
       "cost": {
         "code": "m405-15",
         "labor": 283.76,
-        "materials": 66.4,
-        "total": 350.16,
+        "materials": 439.28,
+        "total": 723.04,
         "estimate": 1394.69,
         "laborEntries": [
           {
@@ -23213,6 +23584,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-11-06",
+            "amt": 372.88,
+            "cat": "Turn",
+            "ln": "magoon",
+            "src": "ramp"
+          },
           {
             "d": "2025-10-01",
             "amt": 66.4,
@@ -24955,7 +25333,7 @@
       "target_date": "2026-09-20",
       "next_move_in": null,
       "rent": "995.00",
-      "bed_bath": "0/1.00",
+      "bed_bath": "0/0.00",
       "sqft": 450,
       "region": "Spokane",
       "pm": {
@@ -37215,258 +37593,6 @@
       "days_elapsed": null,
       "days_to_turn": null,
       "status": "complete"
-    },
-    {
-      "key": "tc68|a20",
-      "prop": "tc68",
-      "unit": "A20",
-      "at_risk": [],
-      "property_name": "tc68",
-      "city": "Tacoma",
-      "addr": "6830 Tacoma Mall Blvd Apt A20 Tacoma, WA 98409",
-      "unit_id": 1169,
-      "unit_status": "Vacant-Unrented",
-      "rent_ready": "Yes",
-      "vacant": true,
-      "days_vacant": 98,
-      "move_out": "2026-07-31",
-      "available_on": "2026-10-30",
-      "ready_on": "2026-10-30",
-      "target_date": "2026-08-20",
-      "next_move_in": null,
-      "rent": "1775.00",
-      "bed_bath": "2/1.00",
-      "sqft": 980,
-      "region": "Tacoma",
-      "pm": {
-        "projId": 243780,
-        "name": "Standard Unit Turn",
-        "status": "ACTIVE",
-        "done": 0,
-        "total": 9,
-        "first_appt": null,
-        "final_walk": null,
-        "final_walk_done": null,
-        "completed_date": null,
-        "due": "2026-08-15",
-        "next_task": {
-          "date": "2026-10-14",
-          "task": "walkthrough"
-        },
-        "tasks": [
-          {
-            "task": "A - Initial walkthrough",
-            "cat": "walkthrough",
-            "done": false,
-            "date": "2026-09-15",
-            "who": "Armani Mitchell",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Appfolio Estimate",
-            "cat": "estimate",
-            "done": false,
-            "date": null,
-            "who": "Dulce Salinas",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "C - Paint",
-            "cat": "paint",
-            "done": false,
-            "date": null,
-            "who": "Chris Phillips",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "D - Maintenance",
-            "cat": "maintenance",
-            "done": false,
-            "date": null,
-            "who": "Armani Mitchell",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "E - Carpet Cleaning",
-            "cat": "carpet",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "F - Cleaning",
-            "cat": "cleaning",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "G - Verify Mailbox Lockbox & Mailbox Keys",
-            "cat": "other",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Schedule Vendors",
-            "cat": "other",
-            "done": false,
-            "date": null,
-            "who": "Armani Mitchell",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Final Walkthrough",
-            "cat": "final-walk",
-            "done": false,
-            "date": null,
-            "who": "Armani Mitchell",
-            "completed": null,
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": null,
-      "cost": {
-        "code": "tc68-A20",
-        "labor": 245.7,
-        "materials": 981.94,
-        "total": 1227.64,
-        "estimate": 0,
-        "laborEntries": [
-          {
-            "d": "2026-10-29",
-            "emp": "Armani Mitchell",
-            "hrs": 1.4,
-            "cost": 37.8,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-10-29",
-            "emp": "Armani Mitchell",
-            "hrs": 1.08,
-            "cost": 29.16,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-10-26",
-            "emp": "Armani Mitchell",
-            "hrs": 1.42,
-            "cost": 38.34,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-10-26",
-            "emp": "Armani Mitchell",
-            "hrs": 1.87,
-            "cost": 50.49,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-10-26",
-            "emp": "Armani Mitchell",
-            "hrs": 0.9,
-            "cost": 24.3,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-10-26",
-            "emp": "Armani Mitchell",
-            "hrs": 1.23,
-            "cost": 33.21,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-10-26",
-            "emp": "Armani Mitchell",
-            "hrs": 1.2,
-            "cost": 32.4,
-            "cat": "Turn"
-          }
-        ],
-        "materialEntries": [
-          {
-            "d": "2026-10-29",
-            "amt": 23.17,
-            "cat": "Turn",
-            "ln": "mitchell",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-26",
-            "amt": 16.33,
-            "cat": "Turn",
-            "ln": "mitchell",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-26",
-            "amt": 76.93,
-            "cat": "Turn",
-            "ln": "mitchell",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-26",
-            "amt": 77.32,
-            "cat": "Turn",
-            "ln": "mitchell",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-26",
-            "amt": 75.24,
-            "cat": "Turn",
-            "ln": "mitchell",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-26",
-            "amt": 27.63,
-            "cat": "Turn",
-            "ln": "mitchell",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-23",
-            "amt": 245.91,
-            "cat": "Turn",
-            "ln": "mitchell",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-21",
-            "amt": 392.6,
-            "cat": "Turn",
-            "ln": "mitchell",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-21",
-            "amt": 46.81,
-            "cat": "Turn",
-            "ln": "mitchell",
-            "src": "ramp"
-          }
-        ]
-      },
-      "af_turn_end": "2026-10-29",
-      "stage": "Ready",
-      "stage_ord": 7,
-      "days_elapsed": 98,
-      "days_to_turn": null,
-      "status": "ready"
     },
     {
       "key": "tc68|b33",

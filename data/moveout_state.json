@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-11-06T14:49:39.103Z",
+  "fetched_at": "2026-11-07T00:23:45.837Z",
   "units": {
     "6": {
       "moveOut": "2026-08-19",
@@ -129,7 +129,7 @@
     },
     "301": {
       "moveOut": "2026-09-30",
-      "status": "Vacant-Unrented",
+      "status": "Vacant-Rented",
       "prop": "k104- LeFevre",
       "unit": "512-3",
       "city": "Medical Lake"
@@ -652,18 +652,18 @@
       "unit": "D205",
       "city": "Kennewick"
     },
+    "878": {
+      "moveOut": "2026-11-30",
+      "status": "Notice-Unrented",
+      "prop": "kn47 K1",
+      "unit": "D208",
+      "city": "Kennewick"
+    },
     "910": {
       "moveOut": "2026-09-30",
       "status": "Vacant-Unrented",
       "prop": "kn47 K1",
       "unit": "F208",
-      "city": "Kennewick"
-    },
-    "912": {
-      "moveOut": "2026-10-31",
-      "status": "Vacant-Unrented",
-      "prop": "kn47 K1",
-      "unit": "G102",
       "city": "Kennewick"
     },
     "915": {
@@ -1035,6 +1035,13 @@
       "status": "Vacant-Unrented",
       "prop": "c702",
       "unit": "F106",
+      "city": "Spokane"
+    },
+    "1370": {
+      "moveOut": "2026-11-18",
+      "status": "Notice-Unrented",
+      "prop": "c702",
+      "unit": "F202",
       "city": "Spokane"
     },
     "1372": {
@@ -3159,6 +3166,34 @@
       "city": "Spokane",
       "from": "2026-11-03",
       "to": "2026-11-06"
+    },
+    {
+      "date": "2026-11-06",
+      "type": "moveout_new",
+      "unit_id": "878",
+      "prop": "kn47 K1",
+      "unit": "D208",
+      "city": "Kennewick",
+      "to": "2026-11-30"
+    },
+    {
+      "date": "2026-11-06",
+      "type": "moveout_new",
+      "unit_id": "1370",
+      "prop": "c702",
+      "unit": "F202",
+      "city": "Spokane",
+      "to": "2026-11-18"
+    },
+    {
+      "date": "2026-11-06",
+      "type": "moveout_removed",
+      "unit_id": "912",
+      "prop": "kn47 K1",
+      "unit": "G102",
+      "city": "Kennewick",
+      "from": "2026-10-31",
+      "was_status": "Vacant-Unrented"
     }
   ]
 }
