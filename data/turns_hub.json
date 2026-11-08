@@ -1,17 +1,17 @@
 {
   "ok": true,
-  "fetched_at": "2026-11-08T18:59:41.862Z",
+  "fetched_at": "2026-11-08T22:46:42.806Z",
   "summary": {
     "as_of": "2026-11-08",
     "units": 238,
-    "active": 59,
-    "ready": 32,
+    "active": 58,
+    "ready": 33,
     "notice": 5,
-    "at_risk": 45,
-    "unscheduled": 36,
-    "accruing": 29059.47,
+    "at_risk": 44,
+    "unscheduled": 35,
+    "accruing": 28036.67,
     "avg_days_open": 47,
-    "revenue_at_risk": 2644.1
+    "revenue_at_risk": 2605.37
   },
   "rows": [
     {
@@ -4438,131 +4438,6 @@
       "stage": "Walkthrough",
       "stage_ord": 1,
       "days_elapsed": 69,
-      "days_to_turn": null,
-      "status": "active"
-    },
-    {
-      "key": "ps25|d28",
-      "prop": "ps25",
-      "unit": "D28",
-      "at_risk": [
-        "Nothing scheduled"
-      ],
-      "property_name": "ps25",
-      "city": "Pasco",
-      "addr": "2524 W Sylvester St. - D28 Pasco, WA 99301",
-      "unit_id": 386,
-      "unit_status": "Vacant-Unrented",
-      "rent_ready": "No",
-      "vacant": true,
-      "days_vacant": 39,
-      "move_out": "2026-09-30",
-      "available_on": "2026-11-11",
-      "ready_on": "2026-10-30",
-      "target_date": "2026-10-20",
-      "next_move_in": null,
-      "rent": "1162.00",
-      "bed_bath": "1/1.00",
-      "sqft": 655,
-      "region": "Tri-Cities",
-      "pm": {
-        "projId": 246178,
-        "name": "Standard Unit Turn",
-        "status": "ACTIVE",
-        "done": 0,
-        "total": 6,
-        "first_appt": null,
-        "final_walk": null,
-        "final_walk_done": null,
-        "completed_date": null,
-        "due": "2026-10-15",
-        "next_task": null,
-        "tasks": [
-          {
-            "task": "A - Initial walkthrough",
-            "cat": "walkthrough",
-            "done": false,
-            "date": "2026-10-05",
-            "who": "Margarito Saldana",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "D - Maintenance",
-            "cat": "maintenance",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "E - Carpet Cleaning",
-            "cat": "carpet",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "F - Cleaning",
-            "cat": "cleaning",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Schedule Vendors",
-            "cat": "other",
-            "done": false,
-            "date": null,
-            "who": "Margarito Saldana",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Final Walkthrough",
-            "cat": "final-walk",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": null,
-      "cost": {
-        "code": "ps25-D28",
-        "labor": 0,
-        "materials": 1022.8,
-        "total": 1022.8,
-        "estimate": 4122.64,
-        "laborEntries": [],
-        "materialEntries": [
-          {
-            "d": "2026-10-25",
-            "amt": 940.71,
-            "cat": "Turn",
-            "ln": "phillips",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-15",
-            "amt": 82.09,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          }
-        ]
-      },
-      "af_turn_end": "2026-10-19",
-      "stage": "Walkthrough",
-      "stage_ord": 1,
-      "days_elapsed": 39,
       "days_to_turn": null,
       "status": "active"
     },
@@ -29582,7 +29457,7 @@
         "labor": 0,
         "materials": 2040.44,
         "total": 2040.44,
-        "estimate": 3494.28,
+        "estimate": 0,
         "laborEntries": [],
         "materialEntries": [
           {
@@ -29616,11 +29491,135 @@
         ]
       },
       "turn_end": "2025-08-26",
+      "af_turn_end": "2026-11-08",
       "stage": "Maintenance",
       "stage_ord": 3,
       "days_elapsed": null,
       "days_to_turn": null,
       "status": "complete"
+    },
+    {
+      "key": "ps25|d28",
+      "prop": "ps25",
+      "unit": "D28",
+      "at_risk": [],
+      "property_name": "ps25",
+      "city": "Pasco",
+      "addr": "2524 W Sylvester St. - D28 Pasco, WA 99301",
+      "unit_id": 386,
+      "unit_status": "Vacant-Unrented",
+      "rent_ready": "Yes",
+      "vacant": true,
+      "days_vacant": 39,
+      "move_out": "2026-09-30",
+      "available_on": "2026-11-08",
+      "ready_on": "2026-11-08",
+      "target_date": "2026-10-20",
+      "next_move_in": null,
+      "rent": "1162.00",
+      "bed_bath": "1/1.00",
+      "sqft": 655,
+      "region": "Tri-Cities",
+      "pm": {
+        "projId": 246178,
+        "name": "Standard Unit Turn",
+        "status": "ACTIVE",
+        "done": 0,
+        "total": 6,
+        "first_appt": null,
+        "final_walk": null,
+        "final_walk_done": null,
+        "completed_date": null,
+        "due": "2026-10-15",
+        "next_task": null,
+        "tasks": [
+          {
+            "task": "A - Initial walkthrough",
+            "cat": "walkthrough",
+            "done": false,
+            "date": "2026-10-05",
+            "who": "Margarito Saldana",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "D - Maintenance",
+            "cat": "maintenance",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "E - Carpet Cleaning",
+            "cat": "carpet",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "F - Cleaning",
+            "cat": "cleaning",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Schedule Vendors",
+            "cat": "other",
+            "done": false,
+            "date": null,
+            "who": "Margarito Saldana",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Final Walkthrough",
+            "cat": "final-walk",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          }
+        ]
+      },
+      "next_appt": null,
+      "cost": {
+        "code": "ps25-D28",
+        "labor": 0,
+        "materials": 1022.8,
+        "total": 1022.8,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": [
+          {
+            "d": "2026-10-25",
+            "amt": 940.71,
+            "cat": "Turn",
+            "ln": "phillips",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-10-15",
+            "amt": 82.09,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          }
+        ]
+      },
+      "af_turn_end": "2026-10-19",
+      "stage": "Ready",
+      "stage_ord": 7,
+      "days_elapsed": 39,
+      "days_to_turn": null,
+      "status": "ready"
     },
     {
       "key": "ps25|d29",
@@ -32756,7 +32755,7 @@
         "labor": 0,
         "materials": 1301.57,
         "total": 1301.57,
-        "estimate": 2427.17,
+        "estimate": 0,
         "laborEntries": [],
         "materialEntries": [
           {
