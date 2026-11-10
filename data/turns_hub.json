@@ -1,15 +1,15 @@
 {
   "ok": true,
-  "fetched_at": "2026-11-09T20:46:00.828Z",
+  "fetched_at": "2026-11-10T02:58:41.773Z",
   "summary": {
     "as_of": "2026-11-09",
-    "units": 238,
+    "units": 240,
     "active": 59,
     "ready": 32,
-    "notice": 5,
+    "notice": 6,
     "at_risk": 45,
     "unscheduled": 36,
-    "accruing": 28490.23,
+    "accruing": 29545.38,
     "avg_days_open": 47,
     "revenue_at_risk": 2664.53
   },
@@ -7455,8 +7455,8 @@
       "cost": {
         "code": "a916-5",
         "labor": 54.75,
-        "materials": 596.92,
-        "total": 651.67,
+        "materials": 603.11,
+        "total": 657.86,
         "estimate": 2977.19,
         "laborEntries": [
           {
@@ -7475,6 +7475,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-11-09",
+            "amt": 6.19,
+            "cat": "Turn",
+            "ln": "normandin",
+            "src": "ramp"
+          },
           {
             "d": "2026-11-09",
             "amt": 428.98,
@@ -10285,9 +10292,9 @@
       },
       "cost": {
         "code": "c313-22",
-        "labor": 95.79,
-        "materials": 0,
-        "total": 95.79,
+        "labor": 266,
+        "materials": 547.98,
+        "total": 813.98,
         "estimate": 0,
         "laborEntries": [
           {
@@ -10298,6 +10305,34 @@
             "cat": "Turn"
           },
           {
+            "d": "2026-11-09",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.97,
+            "cost": 50.73,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-11-09",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.35,
+            "cost": 34.76,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-11-09",
+            "emp": "Ronald D. Cramer",
+            "hrs": 2.42,
+            "cost": 62.32,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-11-09",
+            "emp": "Ronald D. Cramer",
+            "hrs": 0.87,
+            "cost": 22.4,
+            "cat": "Turn"
+          },
+          {
             "d": "2026-11-06",
             "emp": "Ronald D. Cramer",
             "hrs": 1.07,
@@ -10305,7 +10340,22 @@
             "cat": "Turn"
           }
         ],
-        "materialEntries": []
+        "materialEntries": [
+          {
+            "d": "2026-11-09",
+            "amt": 256.51,
+            "cat": "Turn",
+            "ln": "cramer",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-11-09",
+            "amt": 291.47,
+            "cat": "Turn",
+            "ln": "cramer",
+            "src": "ramp"
+          }
+        ]
       },
       "stage": "Walkthrough",
       "stage_ord": 1,
@@ -12260,11 +12310,19 @@
       "cost": {
         "code": "c702-B101",
         "labor": 0,
-        "materials": 0,
-        "total": 0,
+        "materials": 250.3,
+        "total": 250.3,
         "estimate": 1704.72,
         "laborEntries": [],
-        "materialEntries": []
+        "materialEntries": [
+          {
+            "d": "2026-11-09",
+            "amt": 250.3,
+            "cat": "Turn",
+            "ln": "smith",
+            "src": "ramp"
+          }
+        ]
       },
       "af_turn_end": "2026-11-02",
       "stage": "Ready",
@@ -13201,6 +13259,44 @@
       "days_elapsed": 43,
       "days_to_turn": null,
       "status": "active"
+    },
+    {
+      "key": "c702|c301",
+      "prop": "c702",
+      "unit": "C301",
+      "at_risk": [],
+      "property_name": "c702",
+      "city": "Spokane",
+      "addr": "7002 N Colton St C301 Spokane, WA 99208",
+      "unit_id": 1319,
+      "unit_status": "Notice-Unrented",
+      "rent_ready": null,
+      "vacant": false,
+      "days_vacant": null,
+      "move_out": "2026-12-02",
+      "available_on": "2026-12-22",
+      "ready_on": "2026-12-22",
+      "target_date": "2026-12-22",
+      "next_move_in": null,
+      "rent": "1565.00",
+      "bed_bath": "3/2.00",
+      "sqft": 1250,
+      "region": "Spokane",
+      "next_appt": null,
+      "cost": {
+        "code": "c702-C301",
+        "labor": 0,
+        "materials": 0,
+        "total": 0,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": []
+      },
+      "stage": "Move-out",
+      "stage_ord": 0,
+      "days_elapsed": 0,
+      "days_to_turn": null,
+      "status": "notice"
     },
     {
       "key": "c702|c304",
@@ -15286,6 +15382,59 @@
       "stage_ord": 3,
       "days_elapsed": null,
       "days_to_turn": null,
+      "status": "complete"
+    },
+    {
+      "key": "h731|737c",
+      "prop": "h731",
+      "unit": "737 C",
+      "at_risk": [],
+      "property_name": "h731",
+      "city": "Spokane",
+      "addr": "737 S Hatch St - C Spokane, WA 99202",
+      "unit_id": 510,
+      "unit_status": "Notice-Unrented",
+      "rent_ready": null,
+      "vacant": false,
+      "days_vacant": null,
+      "move_out": "2026-11-30",
+      "available_on": "2026-12-20",
+      "ready_on": "2026-12-20",
+      "target_date": "2026-12-20",
+      "next_move_in": null,
+      "rent": "1290.00",
+      "bed_bath": "2/1.00",
+      "sqft": 760,
+      "region": "Spokane",
+      "pm": {
+        "projId": 162484,
+        "name": "Turn - 737 S Hatch St - C UNIT 737 C",
+        "status": "COMPLETE",
+        "done": 7,
+        "total": 7,
+        "first_appt": null,
+        "final_walk": null,
+        "final_walk_done": "2025-04-10",
+        "completed_date": "2025-04-10",
+        "due": "2025-04-11",
+        "next_task": null,
+        "tasks": null
+      },
+      "next_appt": null,
+      "cost": {
+        "code": "h731-737 C",
+        "labor": 0,
+        "materials": 0,
+        "total": 0,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": []
+      },
+      "turn_end": "2025-04-10",
+      "stage": "Move-out",
+      "stage_ord": 0,
+      "days_elapsed": 0,
+      "days_to_turn": -599,
       "status": "complete"
     },
     {
@@ -17552,11 +17701,11 @@
       "addr": "512 E. Percival #3 Medical Lake, WA 99022",
       "unit_id": 301,
       "unit_status": "Vacant-Rented",
-      "rent_ready": "No",
+      "rent_ready": "Yes",
       "vacant": true,
       "days_vacant": 40,
       "move_out": "2026-09-30",
-      "available_on": "2027-01-13",
+      "available_on": null,
       "ready_on": "2027-01-13",
       "target_date": "2026-10-20",
       "next_move_in": "2027-01-15",
@@ -17676,8 +17825,8 @@
       },
       "turn_end": "2026-03-27",
       "af_turn_end": "2026-03-27",
-      "stage": null,
-      "stage_ord": 0,
+      "stage": "Ready",
+      "stage_ord": 7,
       "days_elapsed": 0,
       "days_to_turn": -187,
       "status": "complete"
@@ -24325,356 +24474,6 @@
       "stage_ord": 1,
       "days_elapsed": 0,
       "days_to_turn": -518,
-      "status": "complete"
-    },
-    {
-      "key": "m608|6",
-      "prop": "m608",
-      "unit": "6",
-      "property_name": "m608",
-      "at_risk": [],
-      "region": "Spokane",
-      "pm": {
-        "projId": 226414,
-        "name": "Standard Unit Turn",
-        "status": "COMPLETE",
-        "done": 7,
-        "total": 7,
-        "first_appt": "2026-07-22",
-        "final_walk": "2026-08-14",
-        "final_walk_done": "2026-08-11",
-        "completed_date": "2026-08-11",
-        "due": "2026-08-10",
-        "next_task": null,
-        "tasks": [
-          {
-            "task": "A - Initial walkthrough",
-            "cat": "walkthrough",
-            "done": true,
-            "date": "2026-07-14",
-            "who": "Micheal Magoon",
-            "completed": "2026-07-14",
-            "vendor": false
-          },
-          {
-            "task": "Appfolio Estimate",
-            "cat": "estimate",
-            "done": true,
-            "date": null,
-            "who": "Dulce Salinas",
-            "completed": "2026-07-14",
-            "vendor": false
-          },
-          {
-            "task": "C - Paint",
-            "cat": "paint",
-            "done": true,
-            "date": "2026-07-22",
-            "who": "Micheal Magoon",
-            "completed": "2026-07-22",
-            "vendor": false
-          },
-          {
-            "task": "D - Maintenance",
-            "cat": "maintenance",
-            "done": true,
-            "date": "2026-07-27",
-            "who": "Micheal Magoon",
-            "completed": "2026-07-27",
-            "vendor": false
-          },
-          {
-            "task": "E - Carpet Cleaning",
-            "cat": "carpet",
-            "done": true,
-            "date": "2026-07-20",
-            "who": "AllKlean",
-            "completed": "2026-07-20",
-            "vendor": true
-          },
-          {
-            "task": "F - Cleaning",
-            "cat": "cleaning",
-            "done": true,
-            "date": "2026-07-22",
-            "who": "SPO Cleaning",
-            "completed": "2026-07-22",
-            "vendor": true
-          },
-          {
-            "task": "Final Walkthrough",
-            "cat": "final-walk",
-            "done": true,
-            "date": "2026-08-14",
-            "who": "David Sanchez",
-            "completed": "2026-08-11",
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": null,
-      "cost": {
-        "code": "m608-6",
-        "labor": 1308.69,
-        "materials": 647.61,
-        "total": 1956.3,
-        "estimate": 0,
-        "laborEntries": [
-          {
-            "d": "2026-07-27",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.55,
-            "cost": 13.75,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-24",
-            "emp": "Micheal N. Magoon",
-            "hrs": 2,
-            "cost": 50,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-24",
-            "emp": "Micheal N. Magoon",
-            "hrs": 1.75,
-            "cost": 43.75,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-24",
-            "emp": "Micheal N. Magoon",
-            "hrs": 2,
-            "cost": 50,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-24",
-            "emp": "Micheal N. Magoon",
-            "hrs": 2.25,
-            "cost": 56.25,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-23",
-            "emp": "Micheal N. Magoon",
-            "hrs": 7.22,
-            "cost": 180.5,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-22",
-            "emp": "Micheal N. Magoon",
-            "hrs": 1.83,
-            "cost": 45.75,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-22",
-            "emp": "Micheal N. Magoon",
-            "hrs": 1.98,
-            "cost": 49.5,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-22",
-            "emp": "Micheal N. Magoon",
-            "hrs": 2,
-            "cost": 50,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-22",
-            "emp": "Micheal N. Magoon",
-            "hrs": 1.2,
-            "cost": 30,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-20",
-            "emp": "Micheal N. Magoon",
-            "hrs": 1.75,
-            "cost": 43.75,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-20",
-            "emp": "Micheal N. Magoon",
-            "hrs": 1.95,
-            "cost": 48.75,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-20",
-            "emp": "Micheal N. Magoon",
-            "hrs": 1.75,
-            "cost": 43.75,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-17",
-            "emp": "Ronald D. Cramer",
-            "hrs": 2,
-            "cost": 51.5,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-17",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.75,
-            "cost": 45.06,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-17",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.87,
-            "cost": 21.75,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-17",
-            "emp": "Micheal N. Magoon",
-            "hrs": 1.92,
-            "cost": 48,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-17",
-            "emp": "Micheal N. Magoon",
-            "hrs": 1.58,
-            "cost": 39.5,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-16",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.47,
-            "cost": 37.85,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-16",
-            "emp": "Ronald D. Cramer",
-            "hrs": 2,
-            "cost": 51.5,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-16",
-            "emp": "Ronald D. Cramer",
-            "hrs": 0.42,
-            "cost": 10.82,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-16",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.37,
-            "cost": 35.28,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-15",
-            "emp": "Ronald D. Cramer",
-            "hrs": 2,
-            "cost": 51.5,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-15",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.23,
-            "cost": 31.67,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-15",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.63,
-            "cost": 41.97,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-15",
-            "emp": "Ronald D. Cramer",
-            "hrs": 2,
-            "cost": 51.5,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-15",
-            "emp": "Ronald D. Cramer",
-            "hrs": 0.68,
-            "cost": 17.51,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-15",
-            "emp": "Ronald D. Cramer",
-            "hrs": 1.38,
-            "cost": 35.53,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-14",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.2,
-            "cost": 5,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-14",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.58,
-            "cost": 14.5,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-07-14",
-            "emp": "Micheal N. Magoon",
-            "hrs": 0.5,
-            "cost": 12.5,
-            "cat": "Turn"
-          }
-        ],
-        "materialEntries": [
-          {
-            "d": "2026-07-29",
-            "amt": 250,
-            "cat": "Turn",
-            "ln": "SPO Cleaning",
-            "src": "qbo"
-          },
-          {
-            "d": "2026-07-17",
-            "amt": 22.76,
-            "cat": "Turn",
-            "ln": "magoon",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-16",
-            "amt": 45.41,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-07-15",
-            "amt": 329.44,
-            "cat": "Turn",
-            "ln": "cramer",
-            "src": "ramp"
-          }
-        ]
-      },
-      "turn_end": "2026-08-11",
-      "af_turn_end": "2026-08-11",
-      "stage": "Final Walk",
-      "stage_ord": 6,
-      "days_elapsed": null,
-      "days_to_turn": null,
       "status": "complete"
     },
     {
@@ -33782,6 +33581,117 @@
       "status": "complete"
     },
     {
+      "key": "rl21|12",
+      "prop": "rl21",
+      "unit": "12",
+      "at_risk": [],
+      "property_name": "rl21",
+      "city": "Richland",
+      "addr": "2153 Stevens Drive #12 Richland, WA 99354",
+      "unit_id": 766,
+      "unit_status": "Notice-Unrented",
+      "rent_ready": null,
+      "vacant": false,
+      "days_vacant": null,
+      "move_out": "2026-11-30",
+      "available_on": "2026-12-20",
+      "ready_on": "2026-12-20",
+      "target_date": "2026-12-20",
+      "next_move_in": null,
+      "rent": "850.00",
+      "bed_bath": "0/1.00",
+      "sqft": 260,
+      "region": "Tri-Cities",
+      "pm": {
+        "projId": 160670,
+        "name": "Turn - 2153 Stevens Drive #12 UNIT 12",
+        "status": "COMPLETE",
+        "done": 7,
+        "total": 7,
+        "first_appt": null,
+        "final_walk": null,
+        "final_walk_done": "2025-09-22",
+        "completed_date": "2025-09-22",
+        "due": "2026-06-17",
+        "next_task": null,
+        "tasks": null
+      },
+      "next_appt": null,
+      "cost": {
+        "code": "rl21-12",
+        "labor": 279.83,
+        "materials": 179,
+        "total": 458.83,
+        "estimate": 0,
+        "laborEntries": [
+          {
+            "d": "2025-11-14",
+            "emp": "Jared Miller",
+            "hrs": 1.32,
+            "cost": 37.08,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-06-25",
+            "emp": "Micheal N. Magoon",
+            "hrs": 0.73,
+            "cost": 18.25,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-06-25",
+            "emp": "Micheal N. Magoon",
+            "hrs": 0.3,
+            "cost": 7.5,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-06-25",
+            "emp": "Micheal N. Magoon",
+            "hrs": 0.75,
+            "cost": 18.75,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-06-25",
+            "emp": "Micheal N. Magoon",
+            "hrs": 0.78,
+            "cost": 19.5,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-06-25",
+            "emp": "Micheal N. Magoon",
+            "hrs": 4.03,
+            "cost": 100.75,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-06-23",
+            "emp": "Micheal N. Magoon",
+            "hrs": 3.12,
+            "cost": 78,
+            "cat": "Turn"
+          }
+        ],
+        "materialEntries": [
+          {
+            "d": "2025-06-24",
+            "amt": 179,
+            "cat": "Turn",
+            "ln": "saldana",
+            "src": "ramp"
+          }
+        ]
+      },
+      "turn_end": "2025-09-22",
+      "stage": "Move-out",
+      "stage_ord": 0,
+      "days_elapsed": 0,
+      "days_to_turn": -434,
+      "status": "complete"
+    },
+    {
       "key": "rl21|2",
       "prop": "rl21",
       "unit": "2",
@@ -38717,11 +38627,25 @@
       "next_appt": null,
       "cost": {
         "code": "tc68-B54",
-        "labor": 353.97,
+        "labor": 690.93,
         "materials": 729.47,
-        "total": 1083.44,
+        "total": 1420.4,
         "estimate": 0,
         "laborEntries": [
+          {
+            "d": "2026-11-09",
+            "emp": "Armani Mitchell",
+            "hrs": 3.38,
+            "cost": 91.26,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-11-06",
+            "emp": "Armani Mitchell",
+            "hrs": 9.1,
+            "cost": 245.7,
+            "cat": "Turn"
+          },
           {
             "d": "2026-11-05",
             "emp": "Armani Mitchell",
