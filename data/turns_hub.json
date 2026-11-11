@@ -1,12 +1,12 @@
 {
   "ok": true,
-  "fetched_at": "2026-11-11T10:59:42.850Z",
+  "fetched_at": "2026-11-11T18:35:43.978Z",
   "summary": {
     "as_of": "2026-11-11",
-    "units": 242,
+    "units": 245,
     "active": 53,
     "ready": 39,
-    "notice": 6,
+    "notice": 8,
     "at_risk": 38,
     "unscheduled": 34,
     "accruing": 22459.4,
@@ -7816,23 +7816,8 @@
       "key": "c313|1",
       "prop": "c313",
       "unit": "1",
-      "at_risk": [],
       "property_name": "c313",
-      "city": "Spokane",
-      "addr": "3131 So Cook St 1 Spokane, WA 99223",
-      "unit_id": 709,
-      "unit_status": "Vacant-Unrented",
-      "rent_ready": "Yes",
-      "vacant": true,
-      "days_vacant": 82,
-      "move_out": "2026-08-21",
-      "available_on": "2026-10-09",
-      "ready_on": "2026-10-09",
-      "target_date": "2026-09-10",
-      "next_move_in": null,
-      "rent": "1645.00",
-      "bed_bath": "2/2.00",
-      "sqft": 1050,
+      "at_risk": [],
       "region": "Spokane",
       "pm": {
         "projId": 240627,
@@ -7967,10 +7952,10 @@
       },
       "turn_end": "2026-10-06",
       "af_turn_end": "2026-10-11",
-      "stage": "Ready",
-      "stage_ord": 7,
-      "days_elapsed": 46,
-      "days_to_turn": 46,
+      "stage": "Carpet",
+      "stage_ord": 5,
+      "days_elapsed": null,
+      "days_to_turn": null,
       "status": "complete"
     },
     {
@@ -10265,7 +10250,7 @@
       "vacant": true,
       "days_vacant": 0,
       "move_out": null,
-      "available_on": "2026-10-28",
+      "available_on": null,
       "ready_on": "2026-10-28",
       "target_date": null,
       "next_move_in": "2026-11-25",
@@ -12606,6 +12591,44 @@
       "days_elapsed": null,
       "days_to_turn": null,
       "status": "complete"
+    },
+    {
+      "key": "c702|j206",
+      "prop": "c702",
+      "unit": "J206",
+      "at_risk": [],
+      "property_name": "c702",
+      "city": "Spokane",
+      "addr": "7010 N Colton St J206 Spokane, WA 99208",
+      "unit_id": 1428,
+      "unit_status": "Notice-Unrented",
+      "rent_ready": null,
+      "vacant": false,
+      "days_vacant": null,
+      "move_out": "2026-11-20",
+      "available_on": "2026-12-10",
+      "ready_on": "2026-12-10",
+      "target_date": "2026-12-10",
+      "next_move_in": null,
+      "rent": "1595.00",
+      "bed_bath": "3/2.00",
+      "sqft": 1250,
+      "region": "Spokane",
+      "next_appt": null,
+      "cost": {
+        "code": "c702-J206",
+        "labor": 0,
+        "materials": 0,
+        "total": 0,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": []
+      },
+      "stage": "Move-out",
+      "stage_ord": 0,
+      "days_elapsed": 0,
+      "days_to_turn": null,
+      "status": "notice"
     },
     {
       "key": "c702|j301",
@@ -22693,6 +22716,138 @@
       "days_elapsed": null,
       "days_to_turn": null,
       "status": "other"
+    },
+    {
+      "key": "m405|12",
+      "prop": "m405",
+      "unit": "12",
+      "at_risk": [],
+      "property_name": "m405",
+      "city": "Spokane",
+      "addr": "405 S Maple St #12 Spokane, WA 99201",
+      "unit_id": 258,
+      "unit_status": "Notice-Unrented",
+      "rent_ready": null,
+      "vacant": false,
+      "days_vacant": null,
+      "move_out": "2026-12-30",
+      "available_on": "2027-01-19",
+      "ready_on": "2027-01-19",
+      "target_date": "2027-01-19",
+      "next_move_in": null,
+      "rent": "950.00",
+      "bed_bath": "1/1.00",
+      "sqft": 500,
+      "region": "Spokane",
+      "pm": {
+        "projId": 208577,
+        "name": "Turn - 405 S Maple St #12 UNIT 12",
+        "status": "COMPLETE",
+        "done": 7,
+        "total": 7,
+        "first_appt": "2026-03-04",
+        "final_walk": null,
+        "final_walk_done": "2026-03-06",
+        "completed_date": "2026-03-23",
+        "due": "2026-03-21",
+        "next_task": null,
+        "tasks": null
+      },
+      "next_appt": null,
+      "cost": {
+        "code": "m405-12",
+        "labor": 311.07,
+        "materials": 736.88,
+        "total": 1047.95,
+        "estimate": 0,
+        "laborEntries": [
+          {
+            "d": "2026-03-06",
+            "emp": "Ronald D. Cramer",
+            "hrs": 3.22,
+            "cost": 82.92,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-03-05",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.03,
+            "cost": 26.52,
+            "cat": "CapEx"
+          },
+          {
+            "d": "2026-03-04",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.23,
+            "cost": 31.67,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-03-04",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.08,
+            "cost": 27.81,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-03-04",
+            "emp": "Ronald D. Cramer",
+            "hrs": 0.33,
+            "cost": 8.5,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-03-04",
+            "emp": "Ronald D. Cramer",
+            "hrs": 4.17,
+            "cost": 107.38,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-03-04",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.02,
+            "cost": 26.27,
+            "cat": "Turn"
+          }
+        ],
+        "materialEntries": [
+          {
+            "d": "2026-03-09",
+            "amt": 500.5,
+            "cat": "Turn",
+            "ln": "montiel",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-03-05",
+            "amt": 41.22,
+            "cat": "Turn",
+            "ln": "higley",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-03-04",
+            "amt": 105.43,
+            "cat": "Turn",
+            "ln": "cramer",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-03-04",
+            "amt": 89.73,
+            "cat": "Turn",
+            "ln": "cramer",
+            "src": "ramp"
+          }
+        ]
+      },
+      "turn_end": "2026-03-06",
+      "stage": "Move-out",
+      "stage_ord": 0,
+      "days_elapsed": 0,
+      "days_to_turn": -299,
+      "status": "complete"
     },
     {
       "key": "m405|14",
@@ -40770,6 +40925,44 @@
       "days_elapsed": null,
       "days_to_turn": null,
       "status": "other"
+    },
+    {
+      "key": "tc68|d097",
+      "prop": "tc68",
+      "unit": "D097",
+      "at_risk": [],
+      "property_name": "tc68",
+      "city": "Tacoma",
+      "addr": "6830 Tacoma Mall Blvd Apt D097 Tacoma, WA 98409",
+      "unit_id": 1246,
+      "unit_status": "Notice-Unrented",
+      "rent_ready": null,
+      "vacant": false,
+      "days_vacant": null,
+      "move_out": "2026-12-07",
+      "available_on": "2026-12-27",
+      "ready_on": "2026-12-27",
+      "target_date": "2026-12-27",
+      "next_move_in": null,
+      "rent": "1795.00",
+      "bed_bath": "2/1.00",
+      "sqft": 980,
+      "region": "Tacoma",
+      "next_appt": null,
+      "cost": {
+        "code": "tc68-D097",
+        "labor": 0,
+        "materials": 0,
+        "total": 0,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": []
+      },
+      "stage": "Move-out",
+      "stage_ord": 0,
+      "days_elapsed": 0,
+      "days_to_turn": null,
+      "status": "notice"
     },
     {
       "key": "tc68|d100",
