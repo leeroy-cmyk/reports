@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-11-12T01:01:10.014Z",
+  "fetched_at": "2026-11-12T16:59:24.130Z",
   "units": {
     "6": {
       "moveOut": "2026-08-19",
@@ -533,13 +533,6 @@
       "unit": "3134",
       "city": "Spokane"
     },
-    "709": {
-      "moveOut": "2026-08-21",
-      "status": "Vacant-Rented",
-      "prop": "c313",
-      "unit": "1",
-      "city": "Spokane"
-    },
     "718": {
       "moveOut": "2026-07-31",
       "status": "Vacant-Unrented",
@@ -1003,7 +996,7 @@
       "city": "Spokane"
     },
     "1303": {
-      "moveOut": "2026-12-18",
+      "moveOut": "2026-11-13",
       "status": "Notice-Unrented",
       "prop": "c702",
       "unit": "C101",
@@ -1204,26 +1197,9 @@
       "prop": "c702",
       "unit": "K106",
       "city": "Spokane"
-    },
-    "1446": {
-      "moveOut": "2026-07-31",
-      "status": "Vacant-Rented",
-      "prop": "c702",
-      "unit": "K303",
-      "city": "Spokane"
     }
   },
   "changes": [
-    {
-      "date": "2026-09-12",
-      "type": "moveout_removed",
-      "unit_id": "244",
-      "prop": "hl73",
-      "unit": "4",
-      "city": "Helena",
-      "from": "2026-07-29",
-      "was_status": "Vacant-Rented"
-    },
     {
       "date": "2026-09-13",
       "type": "moveout_removed",
@@ -3165,6 +3141,36 @@
       "unit": "1",
       "city": "Spokane",
       "to": "2026-08-21"
+    },
+    {
+      "date": "2026-11-12",
+      "type": "moveout_changed",
+      "unit_id": "1303",
+      "prop": "c702",
+      "unit": "C101",
+      "city": "Spokane",
+      "from": "2026-12-18",
+      "to": "2026-11-13"
+    },
+    {
+      "date": "2026-11-12",
+      "type": "moveout_removed",
+      "unit_id": "709",
+      "prop": "c313",
+      "unit": "1",
+      "city": "Spokane",
+      "from": "2026-08-21",
+      "was_status": "Vacant-Rented"
+    },
+    {
+      "date": "2026-11-12",
+      "type": "moveout_removed",
+      "unit_id": "1446",
+      "prop": "c702",
+      "unit": "K303",
+      "city": "Spokane",
+      "from": "2026-07-31",
+      "was_status": "Vacant-Rented"
     }
   ]
 }
