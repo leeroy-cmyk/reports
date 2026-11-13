@@ -1,17 +1,17 @@
 {
   "ok": true,
-  "fetched_at": "2026-11-13T18:07:59.774Z",
+  "fetched_at": "2026-11-13T23:35:36.838Z",
   "summary": {
     "as_of": "2026-11-13",
     "units": 244,
-    "active": 54,
-    "ready": 37,
+    "active": 53,
+    "ready": 38,
     "notice": 9,
-    "at_risk": 40,
-    "unscheduled": 36,
-    "accruing": 26997.65,
+    "at_risk": 39,
+    "unscheduled": 35,
+    "accruing": 27930.48,
     "avg_days_open": 46,
-    "revenue_at_risk": 2409.17
+    "revenue_at_risk": 2360
   },
   "rows": [
     {
@@ -497,7 +497,7 @@
       "city": "Spokane",
       "addr": "7002 N Colton St C202 Spokane, WA 99208",
       "unit_id": 1312,
-      "unit_status": "Vacant-Unrented",
+      "unit_status": "Vacant-Rented",
       "rent_ready": "No",
       "vacant": true,
       "days_vacant": 10,
@@ -505,7 +505,7 @@
       "available_on": "2026-11-23",
       "ready_on": "2026-11-23",
       "target_date": "2026-11-23",
-      "next_move_in": null,
+      "next_move_in": "2026-11-23",
       "rent": "1280.00",
       "bed_bath": "2/2.00",
       "sqft": 1025,
@@ -662,15 +662,15 @@
       "city": "Spokane",
       "addr": "7002 N Colton St C207 Spokane, WA 99208",
       "unit_id": 1317,
-      "unit_status": "Vacant-Rented",
+      "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
       "days_vacant": 47,
       "move_out": "2026-09-27",
-      "available_on": "2026-11-23",
+      "available_on": "2026-11-25",
       "ready_on": "2026-11-23",
       "target_date": "2026-10-17",
-      "next_move_in": "2026-11-27",
+      "next_move_in": null,
       "rent": "1280.00",
       "bed_bath": "2/2.00",
       "sqft": 1025,
@@ -4656,8 +4656,8 @@
       "cost": {
         "code": "tc68-A11",
         "labor": 102.6,
-        "materials": 157.76,
-        "total": 260.36,
+        "materials": 714.83,
+        "total": 817.43,
         "estimate": 0,
         "laborEntries": [
           {
@@ -4677,6 +4677,13 @@
         ],
         "materialEntries": [
           {
+            "d": "2026-11-09",
+            "amt": 557.07,
+            "cat": "Turn",
+            "ln": "mitchell",
+            "src": "ramp"
+          },
+          {
             "d": "2026-11-06",
             "amt": 110.07,
             "cat": "Turn",
@@ -4695,46 +4702,6 @@
       "stage": null,
       "stage_ord": 0,
       "days_elapsed": 12,
-      "days_to_turn": null,
-      "status": "active"
-    },
-    {
-      "key": "v202|4",
-      "prop": "v202",
-      "unit": "4",
-      "at_risk": [
-        "Nothing scheduled"
-      ],
-      "property_name": "v202",
-      "city": "Spokane Valley",
-      "addr": "12002 E Valleyway Avenue #4 Spokane Valley, WA 99206",
-      "unit_id": 790,
-      "unit_status": "Vacant-Rented",
-      "rent_ready": "No",
-      "vacant": true,
-      "days_vacant": 31,
-      "move_out": "2026-10-13",
-      "available_on": "2026-12-01",
-      "ready_on": "2026-12-01",
-      "target_date": "2026-11-02",
-      "next_move_in": "2026-12-12",
-      "rent": "1475.00",
-      "bed_bath": "2/2.00",
-      "sqft": 950,
-      "region": "Spokane",
-      "next_appt": null,
-      "cost": {
-        "code": "v202-4",
-        "labor": 0,
-        "materials": 0,
-        "total": 0,
-        "estimate": 0,
-        "laborEntries": [],
-        "materialEntries": []
-      },
-      "stage": null,
-      "stage_ord": 0,
-      "days_elapsed": 31,
       "days_to_turn": null,
       "status": "active"
     },
@@ -6169,8 +6136,8 @@
       "cost": {
         "code": "a916-5",
         "labor": 54.75,
-        "materials": 694.71,
-        "total": 749.46,
+        "materials": 701.78,
+        "total": 756.53,
         "estimate": 2977.19,
         "laborEntries": [
           {
@@ -6189,6 +6156,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-11-13",
+            "amt": 7.07,
+            "cat": "Turn",
+            "ln": "normandin",
+            "src": "ramp"
+          },
           {
             "d": "2026-11-12",
             "amt": 8.37,
@@ -11349,7 +11323,7 @@
       "city": "Spokane",
       "addr": "7002 N Colton St C203 Spokane, WA 99208",
       "unit_id": 1313,
-      "unit_status": "Vacant-Unrented",
+      "unit_status": "Vacant-Rented",
       "rent_ready": "Yes",
       "vacant": true,
       "days_vacant": 0,
@@ -11357,7 +11331,7 @@
       "available_on": "2026-09-13",
       "ready_on": "2026-09-13",
       "target_date": null,
-      "next_move_in": null,
+      "next_move_in": "2026-11-30",
       "rent": "1360.00",
       "bed_bath": "2/2.00",
       "sqft": 1140,
@@ -12214,7 +12188,7 @@
       "city": "Spokane",
       "addr": "7006 N Colton St F204 Spokane, WA 99208",
       "unit_id": 1372,
-      "unit_status": "Vacant-Unrented",
+      "unit_status": "Vacant-Rented",
       "rent_ready": "Yes",
       "vacant": true,
       "days_vacant": 0,
@@ -12222,7 +12196,7 @@
       "available_on": "2026-09-28",
       "ready_on": "2026-09-28",
       "target_date": null,
-      "next_move_in": null,
+      "next_move_in": "2026-11-27",
       "rent": "1360.00",
       "bed_bath": "2/2.00",
       "sqft": 1140,
@@ -20976,7 +20950,7 @@
       "vacant": true,
       "days_vacant": 78,
       "move_out": "2026-08-27",
-      "available_on": "2026-11-18",
+      "available_on": "2026-12-01",
       "ready_on": "2026-11-18",
       "target_date": "2026-09-16",
       "next_move_in": null,
@@ -22250,7 +22224,7 @@
       "city": "Spokane",
       "addr": "1221 N Monroe St  - 33 Spokane, WA 99201",
       "unit_id": 432,
-      "unit_status": "Vacant-Unrented",
+      "unit_status": "Vacant-Rented",
       "rent_ready": "Yes",
       "vacant": true,
       "days_vacant": 110,
@@ -22258,7 +22232,7 @@
       "available_on": "2026-11-03",
       "ready_on": "2026-11-03",
       "target_date": "2026-08-15",
-      "next_move_in": null,
+      "next_move_in": "2026-11-30",
       "rent": "1235.00",
       "bed_bath": "2/1.00",
       "sqft": 773,
@@ -36323,7 +36297,7 @@
       "city": "Tacoma",
       "addr": "6830 Tacoma Mall Blvd Apt A03 Tacoma, WA 98409",
       "unit_id": 1152,
-      "unit_status": "Vacant-Unrented",
+      "unit_status": "Vacant-Rented",
       "rent_ready": "Yes",
       "vacant": true,
       "days_vacant": 124,
@@ -36331,7 +36305,7 @@
       "available_on": "2026-10-24",
       "ready_on": "2026-10-24",
       "target_date": "2026-08-01",
-      "next_move_in": null,
+      "next_move_in": "2026-11-25",
       "rent": "1775.00",
       "bed_bath": "2/1.00",
       "sqft": 980,
@@ -37060,8 +37034,8 @@
       "cost": {
         "code": "tc68-A15",
         "labor": 41.31,
-        "materials": 598.18,
-        "total": 639.49,
+        "materials": 973.94,
+        "total": 1015.25,
         "estimate": 5928.88,
         "laborEntries": [
           {
@@ -37073,6 +37047,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-11-09",
+            "amt": 375.76,
+            "cat": "Turn",
+            "ln": "mitchell",
+            "src": "ramp"
+          },
           {
             "d": "2026-11-05",
             "amt": 470.55,
@@ -37595,7 +37576,7 @@
       "city": "Tacoma",
       "addr": "6830 Tacoma Mall Blvd Apt B41 Tacoma, WA 98409",
       "unit_id": 1190,
-      "unit_status": "Vacant-Rented",
+      "unit_status": "Vacant-Unrented",
       "rent_ready": "No",
       "vacant": true,
       "days_vacant": 37,
@@ -37603,7 +37584,7 @@
       "available_on": "2026-11-30",
       "ready_on": "2026-11-30",
       "target_date": "2026-10-27",
-      "next_move_in": "2026-11-30",
+      "next_move_in": null,
       "rent": "1595.00",
       "bed_bath": "2/1.00",
       "sqft": 980,
@@ -41074,6 +41055,44 @@
       "days_elapsed": null,
       "days_to_turn": null,
       "status": "complete"
+    },
+    {
+      "key": "v202|4",
+      "prop": "v202",
+      "unit": "4",
+      "at_risk": [],
+      "property_name": "v202",
+      "city": "Spokane Valley",
+      "addr": "12002 E Valleyway Avenue #4 Spokane Valley, WA 99206",
+      "unit_id": 790,
+      "unit_status": "Vacant-Rented",
+      "rent_ready": "Yes",
+      "vacant": true,
+      "days_vacant": 31,
+      "move_out": "2026-10-13",
+      "available_on": null,
+      "ready_on": "2026-12-01",
+      "target_date": "2026-11-02",
+      "next_move_in": "2026-12-12",
+      "rent": "1475.00",
+      "bed_bath": "2/2.00",
+      "sqft": 950,
+      "region": "Spokane",
+      "next_appt": null,
+      "cost": {
+        "code": "v202-4",
+        "labor": 0,
+        "materials": 0,
+        "total": 0,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": []
+      },
+      "stage": "Ready",
+      "stage_ord": 7,
+      "days_elapsed": 31,
+      "days_to_turn": null,
+      "status": "ready"
     },
     {
       "key": "v202|8",
