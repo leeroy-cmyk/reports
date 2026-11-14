@@ -1,17 +1,17 @@
 {
   "ok": true,
-  "fetched_at": "2026-11-14T10:58:46.240Z",
+  "fetched_at": "2026-11-14T21:17:52.295Z",
   "summary": {
     "as_of": "2026-11-14",
     "units": 244,
-    "active": 53,
-    "ready": 39,
+    "active": 52,
+    "ready": 40,
     "notice": 8,
-    "at_risk": 41,
-    "unscheduled": 35,
-    "accruing": 28389.98,
-    "avg_days_open": 47,
-    "revenue_at_risk": 2360
+    "at_risk": 40,
+    "unscheduled": 34,
+    "accruing": 26737.75,
+    "avg_days_open": 48,
+    "revenue_at_risk": 2317.33
   },
   "rows": [
     {
@@ -684,171 +684,6 @@
       "stage": "Maintenance",
       "stage_ord": 3,
       "days_elapsed": null,
-      "days_to_turn": null,
-      "status": "active"
-    },
-    {
-      "key": "c702|c202",
-      "prop": "c702",
-      "unit": "C202",
-      "at_risk": [
-        "Nothing scheduled"
-      ],
-      "property_name": "c702",
-      "city": "Spokane",
-      "addr": "7002 N Colton St C202 Spokane, WA 99208",
-      "unit_id": 1312,
-      "unit_status": "Vacant-Rented",
-      "rent_ready": "No",
-      "vacant": true,
-      "days_vacant": 11,
-      "move_out": "2026-11-03",
-      "available_on": "2026-11-23",
-      "ready_on": "2026-11-23",
-      "target_date": "2026-11-23",
-      "next_move_in": "2026-11-23",
-      "rent": "1280.00",
-      "bed_bath": "2/2.00",
-      "sqft": 1025,
-      "region": "Spokane",
-      "pm": {
-        "projId": 239153,
-        "name": "Standard Unit Turn",
-        "status": "ACTIVE",
-        "done": 7,
-        "total": 10,
-        "first_appt": "2026-09-11",
-        "final_walk": "2026-09-24",
-        "final_walk_done": null,
-        "completed_date": "2026-10-02",
-        "due": "2026-08-25",
-        "next_task": null,
-        "tasks": [
-          {
-            "task": "Appfolio Estimate",
-            "cat": "estimate",
-            "done": true,
-            "date": null,
-            "who": "Dulce Salinas",
-            "completed": "2026-09-17",
-            "vendor": false
-          },
-          {
-            "task": "C - Paint",
-            "cat": "paint",
-            "done": true,
-            "date": "2026-09-11",
-            "who": "Brady Smith",
-            "completed": "2026-09-15",
-            "vendor": false
-          },
-          {
-            "task": "D - Maintenance",
-            "cat": "maintenance",
-            "done": true,
-            "date": "2026-09-15",
-            "who": "Brady Smith",
-            "completed": "2026-09-15",
-            "vendor": false
-          },
-          {
-            "task": "E - Carpet Cleaning",
-            "cat": "carpet",
-            "done": true,
-            "date": null,
-            "who": null,
-            "completed": "2026-09-16",
-            "vendor": false
-          },
-          {
-            "task": "F - Cleaning",
-            "cat": "cleaning",
-            "done": false,
-            "date": "2026-09-24",
-            "who": "U&K Properties LLC",
-            "completed": null,
-            "vendor": true
-          },
-          {
-            "task": "G - Verify Mailbox Lockbox & Mailbox Keys",
-            "cat": "other",
-            "done": true,
-            "date": null,
-            "who": null,
-            "completed": "2026-09-17",
-            "vendor": false
-          },
-          {
-            "task": "Punch List",
-            "cat": "other",
-            "done": true,
-            "date": "2026-10-02",
-            "who": "Brady Smith",
-            "completed": "2026-10-02",
-            "vendor": false
-          },
-          {
-            "task": "Schedule Vendors",
-            "cat": "other",
-            "done": false,
-            "date": null,
-            "who": "Matt Romme",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Final Walkthrough",
-            "cat": "final-walk",
-            "done": false,
-            "date": "2026-09-24",
-            "who": "Matt Romme",
-            "completed": null,
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": null,
-      "cost": {
-        "code": "c702-C202",
-        "labor": 0,
-        "materials": 1872.28,
-        "total": 1872.28,
-        "estimate": 4658.22,
-        "laborEntries": [],
-        "materialEntries": [
-          {
-            "d": "2026-10-17",
-            "amt": 293.17,
-            "cat": "Turn",
-            "ln": "phillips",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-02",
-            "amt": 58.71,
-            "cat": "Turn",
-            "ln": "smith",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-15",
-            "amt": 1179.12,
-            "cat": "Turn",
-            "ln": "smith",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-10",
-            "amt": 341.28,
-            "cat": "Turn",
-            "ln": "smith",
-            "src": "ramp"
-          }
-        ]
-      },
-      "stage": "Cleaning",
-      "stage_ord": 4,
-      "days_elapsed": 11,
       "days_to_turn": null,
       "status": "active"
     },
@@ -5007,11 +4842,18 @@
       "next_appt": null,
       "cost": {
         "code": "tc68-B54",
-        "labor": 1230.66,
+        "labor": 1450.71,
         "materials": 729.47,
-        "total": 1960.13,
+        "total": 2180.18,
         "estimate": 0,
         "laborEntries": [
+          {
+            "d": "2026-11-13",
+            "emp": "Armani Mitchell",
+            "hrs": 8.15,
+            "cost": 220.05,
+            "cat": "Turn"
+          },
           {
             "d": "2026-11-11",
             "emp": "Armani Mitchell",
@@ -11523,6 +11365,169 @@
       "days_elapsed": null,
       "days_to_turn": null,
       "status": "complete"
+    },
+    {
+      "key": "c702|c202",
+      "prop": "c702",
+      "unit": "C202",
+      "at_risk": [],
+      "property_name": "c702",
+      "city": "Spokane",
+      "addr": "7002 N Colton St C202 Spokane, WA 99208",
+      "unit_id": 1312,
+      "unit_status": "Vacant-Rented",
+      "rent_ready": "Yes",
+      "vacant": true,
+      "days_vacant": 11,
+      "move_out": "2026-11-03",
+      "available_on": null,
+      "ready_on": "2026-11-23",
+      "target_date": "2026-11-23",
+      "next_move_in": "2026-11-23",
+      "rent": "1280.00",
+      "bed_bath": "2/2.00",
+      "sqft": 1025,
+      "region": "Spokane",
+      "pm": {
+        "projId": 239153,
+        "name": "Standard Unit Turn",
+        "status": "ACTIVE",
+        "done": 7,
+        "total": 10,
+        "first_appt": "2026-09-11",
+        "final_walk": "2026-09-24",
+        "final_walk_done": null,
+        "completed_date": "2026-10-02",
+        "due": "2026-08-25",
+        "next_task": null,
+        "tasks": [
+          {
+            "task": "Appfolio Estimate",
+            "cat": "estimate",
+            "done": true,
+            "date": null,
+            "who": "Dulce Salinas",
+            "completed": "2026-09-17",
+            "vendor": false
+          },
+          {
+            "task": "C - Paint",
+            "cat": "paint",
+            "done": true,
+            "date": "2026-09-11",
+            "who": "Brady Smith",
+            "completed": "2026-09-15",
+            "vendor": false
+          },
+          {
+            "task": "D - Maintenance",
+            "cat": "maintenance",
+            "done": true,
+            "date": "2026-09-15",
+            "who": "Brady Smith",
+            "completed": "2026-09-15",
+            "vendor": false
+          },
+          {
+            "task": "E - Carpet Cleaning",
+            "cat": "carpet",
+            "done": true,
+            "date": null,
+            "who": null,
+            "completed": "2026-09-16",
+            "vendor": false
+          },
+          {
+            "task": "F - Cleaning",
+            "cat": "cleaning",
+            "done": false,
+            "date": "2026-09-24",
+            "who": "U&K Properties LLC",
+            "completed": null,
+            "vendor": true
+          },
+          {
+            "task": "G - Verify Mailbox Lockbox & Mailbox Keys",
+            "cat": "other",
+            "done": true,
+            "date": null,
+            "who": null,
+            "completed": "2026-09-17",
+            "vendor": false
+          },
+          {
+            "task": "Punch List",
+            "cat": "other",
+            "done": true,
+            "date": "2026-10-02",
+            "who": "Brady Smith",
+            "completed": "2026-10-02",
+            "vendor": false
+          },
+          {
+            "task": "Schedule Vendors",
+            "cat": "other",
+            "done": false,
+            "date": null,
+            "who": "Matt Romme",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Final Walkthrough",
+            "cat": "final-walk",
+            "done": false,
+            "date": "2026-09-24",
+            "who": "Matt Romme",
+            "completed": null,
+            "vendor": false
+          }
+        ]
+      },
+      "next_appt": null,
+      "cost": {
+        "code": "c702-C202",
+        "labor": 0,
+        "materials": 1872.28,
+        "total": 1872.28,
+        "estimate": 4658.22,
+        "laborEntries": [],
+        "materialEntries": [
+          {
+            "d": "2026-10-17",
+            "amt": 293.17,
+            "cat": "Turn",
+            "ln": "phillips",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-10-02",
+            "amt": 58.71,
+            "cat": "Turn",
+            "ln": "smith",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-09-15",
+            "amt": 1179.12,
+            "cat": "Turn",
+            "ln": "smith",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-09-10",
+            "amt": 341.28,
+            "cat": "Turn",
+            "ln": "smith",
+            "src": "ramp"
+          }
+        ]
+      },
+      "stage": "Ready",
+      "stage_ord": 7,
+      "days_elapsed": 11,
+      "days_to_turn": null,
+      "status": "ready"
     },
     {
       "key": "c702|c203",
