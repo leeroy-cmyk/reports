@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-11-14T03:36:21.091Z",
+  "fetched_at": "2026-11-14T10:58:15.647Z",
   "units": {
     "6": {
       "moveOut": "2026-08-19",
@@ -533,13 +533,6 @@
       "unit": "3134",
       "city": "Spokane"
     },
-    "709": {
-      "moveOut": "2026-08-21",
-      "status": "Vacant-Rented",
-      "prop": "c313",
-      "unit": "1",
-      "city": "Spokane"
-    },
     "718": {
       "moveOut": "2026-07-31",
       "status": "Vacant-Unrented",
@@ -1004,7 +997,7 @@
     },
     "1303": {
       "moveOut": "2026-11-13",
-      "status": "Notice-Unrented",
+      "status": "Vacant-Unrented",
       "prop": "c702",
       "unit": "C101",
       "city": "Spokane"
@@ -1207,43 +1200,6 @@
     }
   },
   "changes": [
-    {
-      "date": "2026-09-14",
-      "type": "moveout_new",
-      "unit_id": "7",
-      "prop": "a916",
-      "unit": "6",
-      "city": "Spokane",
-      "to": "2026-09-18"
-    },
-    {
-      "date": "2026-09-14",
-      "type": "moveout_new",
-      "unit_id": "538",
-      "prop": "rl16",
-      "unit": "B01",
-      "city": "Richland",
-      "to": "2026-07-31"
-    },
-    {
-      "date": "2026-09-14",
-      "type": "moveout_new",
-      "unit_id": "1099",
-      "prop": "o155-Oak",
-      "unit": "A3",
-      "city": "Spokane",
-      "to": "2026-12-31"
-    },
-    {
-      "date": "2026-09-14",
-      "type": "moveout_removed",
-      "unit_id": "1231",
-      "prop": "tc68",
-      "unit": "D082",
-      "city": "Tacoma",
-      "from": "2026-06-18",
-      "was_status": "Vacant-Rented"
-    },
     {
       "date": "2026-09-15",
       "type": "moveout_removed",
@@ -3206,6 +3162,16 @@
       "unit": "1",
       "city": "Spokane",
       "to": "2026-08-21"
+    },
+    {
+      "date": "2026-11-14",
+      "type": "moveout_removed",
+      "unit_id": "709",
+      "prop": "c313",
+      "unit": "1",
+      "city": "Spokane",
+      "from": "2026-08-21",
+      "was_status": "Vacant-Rented"
     }
   ]
 }
