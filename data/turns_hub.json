@@ -1,17 +1,17 @@
 {
   "ok": true,
-  "fetched_at": "2026-11-16T17:02:58.356Z",
+  "fetched_at": "2026-11-17T00:48:45.810Z",
   "summary": {
     "as_of": "2026-11-16",
     "units": 244,
-    "active": 54,
-    "ready": 38,
+    "active": 52,
+    "ready": 40,
     "notice": 9,
-    "at_risk": 47,
-    "unscheduled": 37,
-    "accruing": 27787.66,
-    "avg_days_open": 47,
-    "revenue_at_risk": 2418.67
+    "at_risk": 46,
+    "unscheduled": 36,
+    "accruing": 26807.59,
+    "avg_days_open": 49,
+    "revenue_at_risk": 2335.33
   },
   "rows": [
     {
@@ -274,11 +274,18 @@
       "cost": {
         "code": "rl16-D08",
         "labor": 0,
-        "materials": 2473.56,
-        "total": 2473.56,
+        "materials": 2595.26,
+        "total": 2595.26,
         "estimate": 0,
         "laborEntries": [],
         "materialEntries": [
+          {
+            "d": "2026-11-12",
+            "amt": 121.7,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          },
           {
             "d": "2026-11-12",
             "amt": 290.82,
@@ -373,6 +380,261 @@
       "status": "active"
     },
     {
+      "key": "tc68|a20",
+      "prop": "tc68",
+      "unit": "A20",
+      "at_risk": [
+        "Available date passed",
+        "Over 45 days vacant"
+      ],
+      "property_name": "tc68",
+      "city": "Tacoma",
+      "addr": "6830 Tacoma Mall Blvd Apt A20 Tacoma, WA 98409",
+      "unit_id": 1169,
+      "unit_status": "Vacant-Unrented",
+      "rent_ready": "No",
+      "vacant": true,
+      "days_vacant": 108,
+      "move_out": "2026-07-31",
+      "available_on": "2026-10-30",
+      "ready_on": "2026-11-30",
+      "target_date": "2026-08-20",
+      "next_move_in": null,
+      "rent": "1775.00",
+      "bed_bath": "2/1.00",
+      "sqft": 980,
+      "region": "Tacoma",
+      "pm": {
+        "projId": 243780,
+        "name": "Standard Unit Turn",
+        "status": "ACTIVE",
+        "done": 0,
+        "total": 9,
+        "first_appt": null,
+        "final_walk": null,
+        "final_walk_done": null,
+        "completed_date": null,
+        "due": "2026-08-15",
+        "next_task": {
+          "date": "2026-10-14",
+          "task": "walkthrough"
+        },
+        "tasks": [
+          {
+            "task": "A - Initial walkthrough",
+            "cat": "walkthrough",
+            "done": false,
+            "date": "2026-09-15",
+            "who": "Armani Mitchell",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Appfolio Estimate",
+            "cat": "estimate",
+            "done": false,
+            "date": null,
+            "who": "Dulce Salinas",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "C - Paint",
+            "cat": "paint",
+            "done": false,
+            "date": null,
+            "who": "Chris Phillips",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "D - Maintenance",
+            "cat": "maintenance",
+            "done": false,
+            "date": null,
+            "who": "Armani Mitchell",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "E - Carpet Cleaning",
+            "cat": "carpet",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "F - Cleaning",
+            "cat": "cleaning",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "G - Verify Mailbox Lockbox & Mailbox Keys",
+            "cat": "other",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Schedule Vendors",
+            "cat": "other",
+            "done": false,
+            "date": null,
+            "who": "Armani Mitchell",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Final Walkthrough",
+            "cat": "final-walk",
+            "done": false,
+            "date": null,
+            "who": "Armani Mitchell",
+            "completed": null,
+            "vendor": false
+          }
+        ]
+      },
+      "next_appt": null,
+      "cost": {
+        "code": "tc68-A20",
+        "labor": 245.7,
+        "materials": 981.94,
+        "total": 1227.64,
+        "estimate": 0,
+        "laborEntries": [
+          {
+            "d": "2026-10-29",
+            "emp": "Armani Mitchell",
+            "hrs": 1.4,
+            "cost": 37.8,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-10-29",
+            "emp": "Armani Mitchell",
+            "hrs": 1.08,
+            "cost": 29.16,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-10-26",
+            "emp": "Armani Mitchell",
+            "hrs": 1.42,
+            "cost": 38.34,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-10-26",
+            "emp": "Armani Mitchell",
+            "hrs": 1.87,
+            "cost": 50.49,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-10-26",
+            "emp": "Armani Mitchell",
+            "hrs": 0.9,
+            "cost": 24.3,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-10-26",
+            "emp": "Armani Mitchell",
+            "hrs": 1.23,
+            "cost": 33.21,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-10-26",
+            "emp": "Armani Mitchell",
+            "hrs": 1.2,
+            "cost": 32.4,
+            "cat": "Turn"
+          }
+        ],
+        "materialEntries": [
+          {
+            "d": "2026-10-29",
+            "amt": 23.17,
+            "cat": "Turn",
+            "ln": "mitchell",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-10-26",
+            "amt": 16.33,
+            "cat": "Turn",
+            "ln": "mitchell",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-10-26",
+            "amt": 76.93,
+            "cat": "Turn",
+            "ln": "mitchell",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-10-26",
+            "amt": 77.32,
+            "cat": "Turn",
+            "ln": "mitchell",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-10-26",
+            "amt": 75.24,
+            "cat": "Turn",
+            "ln": "mitchell",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-10-26",
+            "amt": 27.63,
+            "cat": "Turn",
+            "ln": "mitchell",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-10-23",
+            "amt": 245.91,
+            "cat": "Turn",
+            "ln": "mitchell",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-10-21",
+            "amt": 392.6,
+            "cat": "Turn",
+            "ln": "mitchell",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-10-21",
+            "amt": 46.81,
+            "cat": "Turn",
+            "ln": "mitchell",
+            "src": "ramp"
+          }
+        ]
+      },
+      "af_turn_end": "2026-10-29",
+      "stage": "Walkthrough",
+      "stage_ord": 1,
+      "days_elapsed": 108,
+      "days_to_turn": null,
+      "status": "active"
+    },
+    {
       "key": "a511|102",
       "prop": "a511",
       "unit": "102",
@@ -388,7 +650,7 @@
       "vacant": true,
       "days_vacant": 142,
       "move_out": "2026-06-27",
-      "available_on": "2026-12-09",
+      "available_on": "2026-12-18",
       "ready_on": "2026-12-09",
       "target_date": "2026-07-17",
       "next_move_in": null,
@@ -523,7 +785,7 @@
       "vacant": true,
       "days_vacant": 11,
       "move_out": "2026-11-05",
-      "available_on": "2026-12-05",
+      "available_on": "2026-12-18",
       "ready_on": "2026-12-05",
       "target_date": "2026-11-25",
       "next_move_in": null,
@@ -563,7 +825,7 @@
       "vacant": true,
       "days_vacant": 3,
       "move_out": "2026-11-13",
-      "available_on": "2026-12-03",
+      "available_on": "2027-01-05",
       "ready_on": "2026-12-03",
       "target_date": "2026-12-03",
       "next_move_in": null,
@@ -588,171 +850,6 @@
       "status": "active"
     },
     {
-      "key": "c702|c202",
-      "prop": "c702",
-      "unit": "C202",
-      "at_risk": [
-        "Nothing scheduled"
-      ],
-      "property_name": "c702",
-      "city": "Spokane",
-      "addr": "7002 N Colton St C202 Spokane, WA 99208",
-      "unit_id": 1312,
-      "unit_status": "Vacant-Rented",
-      "rent_ready": "No",
-      "vacant": true,
-      "days_vacant": 13,
-      "move_out": "2026-11-03",
-      "available_on": null,
-      "ready_on": "2026-11-23",
-      "target_date": "2026-11-23",
-      "next_move_in": "2026-11-23",
-      "rent": "1280.00",
-      "bed_bath": "2/2.00",
-      "sqft": 1025,
-      "region": "Spokane",
-      "pm": {
-        "projId": 239153,
-        "name": "Standard Unit Turn",
-        "status": "ACTIVE",
-        "done": 7,
-        "total": 10,
-        "first_appt": "2026-09-11",
-        "final_walk": "2026-09-24",
-        "final_walk_done": null,
-        "completed_date": "2026-10-02",
-        "due": "2026-08-25",
-        "next_task": null,
-        "tasks": [
-          {
-            "task": "Appfolio Estimate",
-            "cat": "estimate",
-            "done": true,
-            "date": null,
-            "who": "Dulce Salinas",
-            "completed": "2026-09-17",
-            "vendor": false
-          },
-          {
-            "task": "C - Paint",
-            "cat": "paint",
-            "done": true,
-            "date": "2026-09-11",
-            "who": "Brady Smith",
-            "completed": "2026-09-15",
-            "vendor": false
-          },
-          {
-            "task": "D - Maintenance",
-            "cat": "maintenance",
-            "done": true,
-            "date": "2026-09-15",
-            "who": "Brady Smith",
-            "completed": "2026-09-15",
-            "vendor": false
-          },
-          {
-            "task": "E - Carpet Cleaning",
-            "cat": "carpet",
-            "done": true,
-            "date": null,
-            "who": null,
-            "completed": "2026-09-16",
-            "vendor": false
-          },
-          {
-            "task": "F - Cleaning",
-            "cat": "cleaning",
-            "done": false,
-            "date": "2026-09-24",
-            "who": "U&K Properties LLC",
-            "completed": null,
-            "vendor": true
-          },
-          {
-            "task": "G - Verify Mailbox Lockbox & Mailbox Keys",
-            "cat": "other",
-            "done": true,
-            "date": null,
-            "who": null,
-            "completed": "2026-09-17",
-            "vendor": false
-          },
-          {
-            "task": "Punch List",
-            "cat": "other",
-            "done": true,
-            "date": "2026-10-02",
-            "who": "Brady Smith",
-            "completed": "2026-10-02",
-            "vendor": false
-          },
-          {
-            "task": "Schedule Vendors",
-            "cat": "other",
-            "done": false,
-            "date": null,
-            "who": "Matt Romme",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Final Walkthrough",
-            "cat": "final-walk",
-            "done": false,
-            "date": "2026-09-24",
-            "who": "Matt Romme",
-            "completed": null,
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": null,
-      "cost": {
-        "code": "c702-C202",
-        "labor": 0,
-        "materials": 1872.28,
-        "total": 1872.28,
-        "estimate": 4658.22,
-        "laborEntries": [],
-        "materialEntries": [
-          {
-            "d": "2026-10-17",
-            "amt": 293.17,
-            "cat": "Turn",
-            "ln": "phillips",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-02",
-            "amt": 58.71,
-            "cat": "Turn",
-            "ln": "smith",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-15",
-            "amt": 1179.12,
-            "cat": "Turn",
-            "ln": "smith",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-10",
-            "amt": 341.28,
-            "cat": "Turn",
-            "ln": "smith",
-            "src": "ramp"
-          }
-        ]
-      },
-      "stage": "Cleaning",
-      "stage_ord": 4,
-      "days_elapsed": 13,
-      "days_to_turn": null,
-      "status": "active"
-    },
-    {
       "key": "c702|c207",
       "prop": "c702",
       "unit": "C207",
@@ -768,7 +865,7 @@
       "vacant": true,
       "days_vacant": 50,
       "move_out": "2026-09-27",
-      "available_on": "2026-11-25",
+      "available_on": "2026-12-04",
       "ready_on": "2026-11-23",
       "target_date": "2026-10-17",
       "next_move_in": null,
@@ -936,7 +1033,7 @@
       "vacant": true,
       "days_vacant": 32,
       "move_out": "2026-10-15",
-      "available_on": "2026-12-02",
+      "available_on": "2027-01-04",
       "ready_on": "2026-12-02",
       "target_date": "2026-11-04",
       "next_move_in": null,
@@ -976,7 +1073,7 @@
       "vacant": true,
       "days_vacant": 32,
       "move_out": "2026-10-15",
-      "available_on": "2026-12-03",
+      "available_on": "2027-01-07",
       "ready_on": "2026-12-03",
       "target_date": "2026-11-04",
       "next_move_in": null,
@@ -1016,7 +1113,7 @@
       "vacant": true,
       "days_vacant": 34,
       "move_out": "2026-10-13",
-      "available_on": "2026-12-01",
+      "available_on": "2026-12-18",
       "ready_on": "2026-12-01",
       "target_date": "2026-11-02",
       "next_move_in": null,
@@ -1056,7 +1153,7 @@
       "vacant": true,
       "days_vacant": 7,
       "move_out": "2026-11-09",
-      "available_on": "2026-11-29",
+      "available_on": "2026-12-11",
       "ready_on": "2026-11-29",
       "target_date": "2026-11-29",
       "next_move_in": null,
@@ -1096,7 +1193,7 @@
       "vacant": true,
       "days_vacant": 27,
       "move_out": "2026-10-20",
-      "available_on": "2026-12-04",
+      "available_on": "2027-01-12",
       "ready_on": "2026-12-04",
       "target_date": "2026-11-09",
       "next_move_in": null,
@@ -1280,7 +1377,7 @@
       "vacant": true,
       "days_vacant": 94,
       "move_out": "2026-08-14",
-      "available_on": "2026-11-25",
+      "available_on": "2026-12-07",
       "ready_on": "2026-11-25",
       "target_date": "2026-09-03",
       "next_move_in": null,
@@ -1419,7 +1516,7 @@
       "vacant": true,
       "days_vacant": 57,
       "move_out": "2026-09-20",
-      "available_on": "2026-12-01",
+      "available_on": "2026-12-29",
       "ready_on": "2026-12-01",
       "target_date": "2026-10-10",
       "next_move_in": null,
@@ -1531,7 +1628,7 @@
       "vacant": true,
       "days_vacant": 33,
       "move_out": "2026-10-14",
-      "available_on": "2026-12-31",
+      "available_on": "2027-01-20",
       "ready_on": "2026-12-31",
       "target_date": "2026-11-03",
       "next_move_in": null,
@@ -1611,7 +1708,7 @@
       "vacant": true,
       "days_vacant": 33,
       "move_out": "2026-10-14",
-      "available_on": "2026-12-01",
+      "available_on": "2026-12-03",
       "ready_on": "2026-12-01",
       "target_date": "2026-11-03",
       "next_move_in": null,
@@ -1651,7 +1748,7 @@
       "vacant": true,
       "days_vacant": 44,
       "move_out": "2026-10-03",
-      "available_on": "2026-12-03",
+      "available_on": "2027-01-11",
       "ready_on": "2026-12-10",
       "target_date": "2026-10-23",
       "next_move_in": null,
@@ -1739,8 +1836,8 @@
       "vacant": true,
       "days_vacant": 16,
       "move_out": "2026-10-31",
-      "available_on": "2026-11-20",
-      "ready_on": "2026-11-20",
+      "available_on": "2026-12-03",
+      "ready_on": "2026-12-01",
       "target_date": "2026-11-20",
       "next_move_in": null,
       "rent": "1185.00",
@@ -1793,8 +1890,8 @@
       "vacant": true,
       "days_vacant": 61,
       "move_out": "2026-09-16",
-      "available_on": "2026-11-20",
-      "ready_on": "2026-11-20",
+      "available_on": "2026-12-04",
+      "ready_on": "2026-11-24",
       "target_date": "2026-10-06",
       "next_move_in": null,
       "rent": "1364.00",
@@ -1937,8 +2034,8 @@
       "vacant": true,
       "days_vacant": 77,
       "move_out": "2026-08-31",
-      "available_on": "2026-11-20",
-      "ready_on": "2026-11-20",
+      "available_on": "2026-11-18",
+      "ready_on": "2026-11-18",
       "target_date": "2026-09-20",
       "next_move_in": null,
       "rent": "1334.00",
@@ -2053,11 +2150,18 @@
       "cost": {
         "code": "k104-107-5",
         "labor": 0,
-        "materials": 495.41,
-        "total": 495.41,
+        "materials": 654.01,
+        "total": 654.01,
         "estimate": 0,
         "laborEntries": [],
         "materialEntries": [
+          {
+            "d": "2026-11-06",
+            "amt": 158.6,
+            "cat": "Turn",
+            "ln": "phillips",
+            "src": "ramp"
+          },
           {
             "d": "2026-10-30",
             "amt": 495.41,
@@ -2089,8 +2193,8 @@
       "vacant": true,
       "days_vacant": 47,
       "move_out": "2026-09-30",
-      "available_on": "2027-01-07",
-      "ready_on": "2027-01-07",
+      "available_on": "2026-11-18",
+      "ready_on": "2026-11-18",
       "target_date": "2026-10-20",
       "next_move_in": null,
       "rent": "1334.00",
@@ -2336,8 +2440,8 @@
       "cost": {
         "code": "k104-519-103",
         "labor": 10,
-        "materials": 42.32,
-        "total": 52.32,
+        "materials": 332.15,
+        "total": 342.15,
         "estimate": 1756.68,
         "laborEntries": [
           {
@@ -2349,6 +2453,20 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-11-06",
+            "amt": 24.26,
+            "cat": "Turn",
+            "ln": "phillips",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-11-06",
+            "amt": 265.57,
+            "cat": "Turn",
+            "ln": "phillips",
+            "src": "ramp"
+          },
           {
             "d": "2025-07-24",
             "amt": 42.32,
@@ -2435,8 +2553,8 @@
       "vacant": true,
       "days_vacant": 47,
       "move_out": "2026-09-30",
-      "available_on": "2026-11-20",
-      "ready_on": "2026-11-20",
+      "available_on": "2026-12-10",
+      "ready_on": "2026-12-10",
       "target_date": "2026-10-20",
       "next_move_in": null,
       "rent": "1132.00",
@@ -2989,7 +3107,7 @@
       "vacant": true,
       "days_vacant": 71,
       "move_out": "2026-09-06",
-      "available_on": "2026-11-24",
+      "available_on": "2026-11-30",
       "ready_on": "2026-11-24",
       "target_date": "2026-09-26",
       "next_move_in": null,
@@ -3162,7 +3280,7 @@
       "vacant": true,
       "days_vacant": 9,
       "move_out": "2026-11-07",
-      "available_on": "2026-12-10",
+      "available_on": "2026-12-28",
       "ready_on": "2026-12-10",
       "target_date": "2026-11-27",
       "next_move_in": null,
@@ -3202,7 +3320,7 @@
       "vacant": true,
       "days_vacant": 47,
       "move_out": "2026-09-30",
-      "available_on": "2026-11-23",
+      "available_on": "2026-11-25",
       "ready_on": "2026-11-23",
       "target_date": "2026-10-20",
       "next_move_in": null,
@@ -3346,7 +3464,7 @@
       "vacant": true,
       "days_vacant": 168,
       "move_out": "2026-06-01",
-      "available_on": "2026-12-03",
+      "available_on": "2026-12-11",
       "ready_on": "2026-12-03",
       "target_date": "2026-06-21",
       "next_move_in": null,
@@ -3966,158 +4084,6 @@
       "status": "active"
     },
     {
-      "key": "ps25|c18",
-      "prop": "ps25",
-      "unit": "C18",
-      "at_risk": [
-        "Over 45 days vacant"
-      ],
-      "property_name": "ps25",
-      "city": "Pasco",
-      "addr": "2524 W Sylvester St. - C18 Pasco, WA 99301",
-      "unit_id": 376,
-      "unit_status": "Vacant-Unrented",
-      "rent_ready": "No",
-      "vacant": true,
-      "days_vacant": 77,
-      "move_out": "2026-08-31",
-      "available_on": "2026-11-16",
-      "ready_on": "2026-11-16",
-      "target_date": "2026-09-20",
-      "next_move_in": null,
-      "rent": "1635.00",
-      "bed_bath": "3/1.50",
-      "sqft": 1022,
-      "region": "Tri-Cities",
-      "pm": {
-        "projId": 240185,
-        "name": "Standard Unit Turn",
-        "status": "ACTIVE",
-        "done": 0,
-        "total": 9,
-        "first_appt": null,
-        "final_walk": "2026-12-08",
-        "final_walk_done": null,
-        "completed_date": null,
-        "due": "2026-11-01",
-        "next_task": {
-          "date": "2026-12-08",
-          "task": "final-walk"
-        },
-        "tasks": [
-          {
-            "task": "A - Initial walkthrough",
-            "cat": "walkthrough",
-            "done": false,
-            "date": "2026-09-24",
-            "who": "Margarito Saldana",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Appfolio Estimate",
-            "cat": "estimate",
-            "done": false,
-            "date": null,
-            "who": "Dulce Salinas",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "C - Paint",
-            "cat": "paint",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "D - Maintenance",
-            "cat": "maintenance",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "E - Carpet Cleaning",
-            "cat": "carpet",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "F - Cleaning",
-            "cat": "cleaning",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "G - Verify Mailbox Lockbox & Mailbox Keys",
-            "cat": "other",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Schedule Vendors",
-            "cat": "other",
-            "done": false,
-            "date": null,
-            "who": "Margarito Saldana",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Final Walkthrough",
-            "cat": "final-walk",
-            "done": false,
-            "date": "2026-12-08",
-            "who": "Margarito Saldana",
-            "completed": null,
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": {
-        "date": "2026-12-08",
-        "cat": "final-walk",
-        "who": "Margarito Saldana",
-        "brief": "Final Walkthrough"
-      },
-      "cost": {
-        "code": "ps25-C18",
-        "labor": 0,
-        "materials": 82.09,
-        "total": 82.09,
-        "estimate": 0,
-        "laborEntries": [],
-        "materialEntries": [
-          {
-            "d": "2026-10-15",
-            "amt": 82.09,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          }
-        ]
-      },
-      "stage": "Walkthrough",
-      "stage_ord": 1,
-      "days_elapsed": 77,
-      "days_to_turn": null,
-      "status": "active"
-    },
-    {
       "key": "ps25|f40",
       "prop": "ps25",
       "unit": "F40",
@@ -4133,8 +4099,8 @@
       "vacant": true,
       "days_vacant": 16,
       "move_out": "2026-10-31",
-      "available_on": "2026-12-01",
-      "ready_on": "2026-12-01",
+      "available_on": "2026-12-11",
+      "ready_on": "2026-12-11",
       "target_date": "2026-11-20",
       "next_move_in": null,
       "rent": "1395.00",
@@ -4332,8 +4298,8 @@
       "vacant": true,
       "days_vacant": 47,
       "move_out": "2026-09-30",
-      "available_on": "2026-11-23",
-      "ready_on": "2026-11-23",
+      "available_on": "2026-12-04",
+      "ready_on": "2026-12-04",
       "target_date": "2026-10-20",
       "next_move_in": null,
       "rent": "1627.00",
@@ -5251,7 +5217,7 @@
       "vacant": true,
       "days_vacant": 16,
       "move_out": "2026-10-31",
-      "available_on": "2026-11-20",
+      "available_on": "2026-12-07",
       "ready_on": "2026-11-20",
       "target_date": "2026-11-20",
       "next_move_in": null,
@@ -5291,8 +5257,8 @@
       "vacant": true,
       "days_vacant": 15,
       "move_out": "2026-11-01",
-      "available_on": "2026-11-21",
-      "ready_on": "2026-11-21",
+      "available_on": "2026-11-25",
+      "ready_on": "2026-11-25",
       "target_date": "2026-11-21",
       "next_move_in": null,
       "rent": "1775.00",
@@ -5558,7 +5524,7 @@
       "vacant": true,
       "days_vacant": 34,
       "move_out": "2026-10-13",
-      "available_on": null,
+      "available_on": "2026-12-03",
       "ready_on": "2026-12-01",
       "target_date": "2026-11-02",
       "next_move_in": "2026-12-12",
@@ -6642,12 +6608,12 @@
       "addr": "916 W Augusta Avenue - 11 Spokane, WA 99205",
       "unit_id": 12,
       "unit_status": "Vacant-Unrented",
-      "rent_ready": "No",
+      "rent_ready": "Yes",
       "vacant": true,
       "days_vacant": 16,
       "move_out": "2026-10-31",
-      "available_on": "2026-11-18",
-      "ready_on": "2026-11-18",
+      "available_on": "2026-12-01",
+      "ready_on": "2026-11-17",
       "target_date": "2026-11-20",
       "next_move_in": null,
       "rent": "875.00",
@@ -6877,8 +6843,8 @@
         ]
       },
       "turn_end": "2025-10-03",
-      "stage": "Walkthrough",
-      "stage_ord": 1,
+      "stage": "Ready",
+      "stage_ord": 7,
       "days_elapsed": 0,
       "days_to_turn": -393,
       "status": "complete"
@@ -7114,7 +7080,7 @@
       "vacant": true,
       "days_vacant": 62,
       "move_out": "2026-09-15",
-      "available_on": "2026-11-30",
+      "available_on": "2026-12-09",
       "ready_on": "2026-11-30",
       "target_date": "2026-10-05",
       "next_move_in": null,
@@ -9510,8 +9476,8 @@
       "cost": {
         "code": "c313-22",
         "labor": 817.58,
-        "materials": 617.23,
-        "total": 1434.81,
+        "materials": 649.73,
+        "total": 1467.31,
         "estimate": 0,
         "laborEntries": [
           {
@@ -9628,6 +9594,20 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-11-16",
+            "amt": 27.61,
+            "cat": "Turn",
+            "ln": "normandin",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-11-16",
+            "amt": 4.89,
+            "cat": "Turn",
+            "ln": "cramer",
+            "src": "ramp"
+          },
           {
             "d": "2026-11-11",
             "amt": 15.8,
@@ -11061,12 +11041,12 @@
       "addr": "7022 N Colton St A203 Spokane, WA 99208",
       "unit_id": 1279,
       "unit_status": "Vacant-Unrented",
-      "rent_ready": "No",
+      "rent_ready": "Yes",
       "vacant": true,
       "days_vacant": 0,
       "move_out": null,
-      "available_on": "2026-11-18",
-      "ready_on": "2026-11-18",
+      "available_on": "2026-11-17",
+      "ready_on": "2026-11-17",
       "target_date": null,
       "next_move_in": null,
       "rent": "1360.00",
@@ -11167,11 +11147,18 @@
       "cost": {
         "code": "c702-A203",
         "labor": 0,
-        "materials": 855.97,
-        "total": 855.97,
+        "materials": 975.83,
+        "total": 975.83,
         "estimate": 8783.38,
         "laborEntries": [],
         "materialEntries": [
+          {
+            "d": "2026-11-09",
+            "amt": 119.86,
+            "cat": "Turn",
+            "ln": "phillips",
+            "src": "ramp"
+          },
           {
             "d": "2026-11-05",
             "amt": 39.96,
@@ -11195,11 +11182,11 @@
           }
         ]
       },
-      "stage": "Maintenance",
-      "stage_ord": 3,
+      "stage": "Ready",
+      "stage_ord": 7,
       "days_elapsed": null,
       "days_to_turn": null,
-      "status": "active"
+      "status": "ready"
     },
     {
       "key": "c702|b101",
@@ -11862,6 +11849,169 @@
       "status": "complete"
     },
     {
+      "key": "c702|c202",
+      "prop": "c702",
+      "unit": "C202",
+      "at_risk": [],
+      "property_name": "c702",
+      "city": "Spokane",
+      "addr": "7002 N Colton St C202 Spokane, WA 99208",
+      "unit_id": 1312,
+      "unit_status": "Vacant-Rented",
+      "rent_ready": "Yes",
+      "vacant": true,
+      "days_vacant": 13,
+      "move_out": "2026-11-03",
+      "available_on": "2026-11-16",
+      "ready_on": "2026-11-16",
+      "target_date": "2026-11-23",
+      "next_move_in": "2026-11-23",
+      "rent": "1280.00",
+      "bed_bath": "2/2.00",
+      "sqft": 1025,
+      "region": "Spokane",
+      "pm": {
+        "projId": 239153,
+        "name": "Standard Unit Turn",
+        "status": "ACTIVE",
+        "done": 7,
+        "total": 10,
+        "first_appt": "2026-09-11",
+        "final_walk": "2026-09-24",
+        "final_walk_done": null,
+        "completed_date": "2026-10-02",
+        "due": "2026-08-25",
+        "next_task": null,
+        "tasks": [
+          {
+            "task": "Appfolio Estimate",
+            "cat": "estimate",
+            "done": true,
+            "date": null,
+            "who": "Dulce Salinas",
+            "completed": "2026-09-17",
+            "vendor": false
+          },
+          {
+            "task": "C - Paint",
+            "cat": "paint",
+            "done": true,
+            "date": "2026-09-11",
+            "who": "Brady Smith",
+            "completed": "2026-09-15",
+            "vendor": false
+          },
+          {
+            "task": "D - Maintenance",
+            "cat": "maintenance",
+            "done": true,
+            "date": "2026-09-15",
+            "who": "Brady Smith",
+            "completed": "2026-09-15",
+            "vendor": false
+          },
+          {
+            "task": "E - Carpet Cleaning",
+            "cat": "carpet",
+            "done": true,
+            "date": null,
+            "who": null,
+            "completed": "2026-09-16",
+            "vendor": false
+          },
+          {
+            "task": "F - Cleaning",
+            "cat": "cleaning",
+            "done": false,
+            "date": "2026-09-24",
+            "who": "U&K Properties LLC",
+            "completed": null,
+            "vendor": true
+          },
+          {
+            "task": "G - Verify Mailbox Lockbox & Mailbox Keys",
+            "cat": "other",
+            "done": true,
+            "date": null,
+            "who": null,
+            "completed": "2026-09-17",
+            "vendor": false
+          },
+          {
+            "task": "Punch List",
+            "cat": "other",
+            "done": true,
+            "date": "2026-10-02",
+            "who": "Brady Smith",
+            "completed": "2026-10-02",
+            "vendor": false
+          },
+          {
+            "task": "Schedule Vendors",
+            "cat": "other",
+            "done": false,
+            "date": null,
+            "who": "Matt Romme",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Final Walkthrough",
+            "cat": "final-walk",
+            "done": false,
+            "date": "2026-09-24",
+            "who": "Matt Romme",
+            "completed": null,
+            "vendor": false
+          }
+        ]
+      },
+      "next_appt": null,
+      "cost": {
+        "code": "c702-C202",
+        "labor": 0,
+        "materials": 1872.28,
+        "total": 1872.28,
+        "estimate": 4658.22,
+        "laborEntries": [],
+        "materialEntries": [
+          {
+            "d": "2026-10-17",
+            "amt": 293.17,
+            "cat": "Turn",
+            "ln": "phillips",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-10-02",
+            "amt": 58.71,
+            "cat": "Turn",
+            "ln": "smith",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-09-15",
+            "amt": 1179.12,
+            "cat": "Turn",
+            "ln": "smith",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-09-10",
+            "amt": 341.28,
+            "cat": "Turn",
+            "ln": "smith",
+            "src": "ramp"
+          }
+        ]
+      },
+      "stage": "Ready",
+      "stage_ord": 7,
+      "days_elapsed": 13,
+      "days_to_turn": null,
+      "status": "ready"
+    },
+    {
       "key": "c702|c203",
       "prop": "c702",
       "unit": "C203",
@@ -12185,7 +12335,7 @@
       "vacant": true,
       "days_vacant": 0,
       "move_out": null,
-      "available_on": "2026-12-01",
+      "available_on": "2026-12-17",
       "ready_on": "2026-12-01",
       "target_date": null,
       "next_move_in": null,
@@ -12494,7 +12644,7 @@
       "vacant": true,
       "days_vacant": 10,
       "move_out": "2026-11-06",
-      "available_on": "2026-11-26",
+      "available_on": "2026-12-09",
       "ready_on": "2026-11-26",
       "target_date": "2026-11-26",
       "next_move_in": null,
@@ -13979,7 +14129,7 @@
       "vacant": true,
       "days_vacant": 47,
       "move_out": "2026-09-30",
-      "available_on": "2026-12-03",
+      "available_on": "2026-12-14",
       "ready_on": "2026-12-03",
       "target_date": "2026-10-20",
       "next_move_in": null,
@@ -14175,7 +14325,7 @@
       "vacant": true,
       "days_vacant": 47,
       "move_out": "2026-09-30",
-      "available_on": "2026-12-08",
+      "available_on": "2026-12-22",
       "ready_on": "2026-12-08",
       "target_date": "2026-10-20",
       "next_move_in": null,
@@ -17498,11 +17648,26 @@
       "cost": {
         "code": "k104-519-3",
         "labor": 0,
-        "materials": 0,
-        "total": 0,
+        "materials": 555.59,
+        "total": 555.59,
         "estimate": 229.98,
         "laborEntries": [],
-        "materialEntries": []
+        "materialEntries": [
+          {
+            "d": "2026-11-06",
+            "amt": 132.98,
+            "cat": "Turn",
+            "ln": "phillips",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-11-06",
+            "amt": 422.61,
+            "cat": "Turn",
+            "ln": "phillips",
+            "src": "ramp"
+          }
+        ]
       },
       "turn_end": "2025-08-15",
       "stage": "Maintenance",
@@ -20479,13 +20644,21 @@
         "brief": "D - Maintenance"
       },
       "cost": {
-        "code": "kn47-E106",
+        "code": "kn47-k2-E106",
         "labor": 0,
-        "materials": 0,
-        "total": 0,
-        "estimate": 1881.55,
+        "materials": 195.71,
+        "total": 195.71,
+        "estimate": 0,
         "laborEntries": [],
-        "materialEntries": []
+        "materialEntries": [
+          {
+            "d": "2026-11-16",
+            "amt": 195.71,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          }
+        ]
       },
       "turn_end": "2025-05-14",
       "stage": "Walkthrough",
@@ -22704,7 +22877,7 @@
       "vacant": true,
       "days_vacant": 16,
       "move_out": "2026-10-31",
-      "available_on": "2026-12-02",
+      "available_on": "2026-12-17",
       "ready_on": "2026-12-02",
       "target_date": "2026-11-20",
       "next_move_in": null,
@@ -23091,7 +23264,7 @@
       "vacant": true,
       "days_vacant": 16,
       "move_out": "2026-10-31",
-      "available_on": "2026-11-20",
+      "available_on": "2026-12-08",
       "ready_on": "2026-11-20",
       "target_date": "2026-11-20",
       "next_move_in": null,
@@ -23167,7 +23340,7 @@
       "vacant": true,
       "days_vacant": 47,
       "move_out": "2026-09-30",
-      "available_on": "2026-12-01",
+      "available_on": "2026-12-09",
       "ready_on": "2026-12-01",
       "target_date": "2026-10-20",
       "next_move_in": null,
@@ -25259,7 +25432,7 @@
       "vacant": true,
       "days_vacant": 16,
       "move_out": "2026-10-31",
-      "available_on": "2026-11-25",
+      "available_on": "2026-11-30",
       "ready_on": "2026-11-25",
       "target_date": "2026-11-20",
       "next_move_in": null,
@@ -25312,7 +25485,7 @@
       "vacant": true,
       "days_vacant": 33,
       "move_out": "2026-10-14",
-      "available_on": "2026-12-01",
+      "available_on": "2026-12-08",
       "ready_on": "2026-12-01",
       "target_date": "2026-11-03",
       "next_move_in": null,
@@ -27205,8 +27378,8 @@
       "cost": {
         "code": "ps17-A1",
         "labor": 835.36,
-        "materials": 1352.25,
-        "total": 2187.61,
+        "materials": 1791.58,
+        "total": 2626.94,
         "estimate": 1627.64,
         "laborEntries": [
           {
@@ -27365,6 +27538,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-11-14",
+            "amt": 439.33,
+            "cat": "Turn",
+            "ln": "phillips",
+            "src": "ramp"
+          },
           {
             "d": "2026-10-16",
             "amt": 86.55,
@@ -27553,8 +27733,8 @@
       "cost": {
         "code": "ps17-A11",
         "labor": 373.29,
-        "materials": 633.51,
-        "total": 1006.8,
+        "materials": 1520.9,
+        "total": 1894.19,
         "estimate": 2699.27,
         "laborEntries": [
           {
@@ -27573,6 +27753,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-11-14",
+            "amt": 887.39,
+            "cat": "Turn",
+            "ln": "phillips",
+            "src": "ramp"
+          },
           {
             "d": "2026-10-16",
             "amt": 86.55,
@@ -27631,8 +27818,8 @@
       "vacant": true,
       "days_vacant": 77,
       "move_out": "2026-08-31",
-      "available_on": "2026-12-13",
-      "ready_on": "2026-12-13",
+      "available_on": "2026-12-04",
+      "ready_on": "2026-12-04",
       "target_date": "2026-09-20",
       "next_move_in": null,
       "rent": "956.00",
@@ -27801,8 +27988,8 @@
       "vacant": true,
       "days_vacant": 112,
       "move_out": "2026-07-27",
-      "available_on": "2026-12-07",
-      "ready_on": "2026-12-07",
+      "available_on": "2026-12-01",
+      "ready_on": "2026-12-01",
       "target_date": "2026-08-16",
       "next_move_in": null,
       "rent": "956.00",
@@ -28166,8 +28353,8 @@
       "vacant": true,
       "days_vacant": 47,
       "move_out": "2026-09-30",
-      "available_on": "2026-12-01",
-      "ready_on": "2026-12-01",
+      "available_on": "2026-11-24",
+      "ready_on": "2026-11-24",
       "target_date": "2026-10-20",
       "next_move_in": null,
       "rent": "956.00",
@@ -28718,6 +28905,170 @@
       "days_elapsed": null,
       "days_to_turn": null,
       "status": "complete"
+    },
+    {
+      "key": "ps25|c18",
+      "prop": "ps25",
+      "unit": "C18",
+      "at_risk": [],
+      "property_name": "ps25",
+      "city": "Pasco",
+      "addr": "2524 W Sylvester St. - C18 Pasco, WA 99301",
+      "unit_id": 376,
+      "unit_status": "Vacant-Unrented",
+      "rent_ready": "Yes",
+      "vacant": true,
+      "days_vacant": 77,
+      "move_out": "2026-08-31",
+      "available_on": "2026-11-16",
+      "ready_on": "2026-11-16",
+      "target_date": "2026-09-20",
+      "next_move_in": null,
+      "rent": "1635.00",
+      "bed_bath": "3/1.50",
+      "sqft": 1022,
+      "region": "Tri-Cities",
+      "pm": {
+        "projId": 240185,
+        "name": "Standard Unit Turn",
+        "status": "ACTIVE",
+        "done": 0,
+        "total": 9,
+        "first_appt": null,
+        "final_walk": "2026-12-08",
+        "final_walk_done": null,
+        "completed_date": null,
+        "due": "2026-11-01",
+        "next_task": {
+          "date": "2026-12-08",
+          "task": "final-walk"
+        },
+        "tasks": [
+          {
+            "task": "A - Initial walkthrough",
+            "cat": "walkthrough",
+            "done": false,
+            "date": "2026-09-24",
+            "who": "Margarito Saldana",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Appfolio Estimate",
+            "cat": "estimate",
+            "done": false,
+            "date": null,
+            "who": "Dulce Salinas",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "C - Paint",
+            "cat": "paint",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "D - Maintenance",
+            "cat": "maintenance",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "E - Carpet Cleaning",
+            "cat": "carpet",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "F - Cleaning",
+            "cat": "cleaning",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "G - Verify Mailbox Lockbox & Mailbox Keys",
+            "cat": "other",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Schedule Vendors",
+            "cat": "other",
+            "done": false,
+            "date": null,
+            "who": "Margarito Saldana",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Final Walkthrough",
+            "cat": "final-walk",
+            "done": false,
+            "date": "2026-12-08",
+            "who": "Margarito Saldana",
+            "completed": null,
+            "vendor": false
+          }
+        ]
+      },
+      "next_appt": {
+        "date": "2026-12-08",
+        "cat": "final-walk",
+        "who": "Margarito Saldana",
+        "brief": "Final Walkthrough"
+      },
+      "cost": {
+        "code": "ps25-C18",
+        "labor": 0,
+        "materials": 1292.35,
+        "total": 1292.35,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": [
+          {
+            "d": "2026-11-11",
+            "amt": 170.16,
+            "cat": "Turn",
+            "ln": "phillips",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-11-05",
+            "amt": 1040.1,
+            "cat": "Turn",
+            "ln": "phillips",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-10-15",
+            "amt": 82.09,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          }
+        ]
+      },
+      "stage": "Ready",
+      "stage_ord": 7,
+      "days_elapsed": 77,
+      "days_to_turn": null,
+      "status": "ready"
     },
     {
       "key": "ps25|d28",
@@ -32316,8 +32667,8 @@
       "vacant": true,
       "days_vacant": 9,
       "move_out": "2026-11-07",
-      "available_on": "2026-11-27",
-      "ready_on": "2026-11-27",
+      "available_on": "2026-12-04",
+      "ready_on": "2026-12-04",
       "target_date": "2026-11-27",
       "next_move_in": null,
       "rent": "1627.00",
@@ -33864,7 +34215,7 @@
       "vacant": true,
       "days_vacant": 42,
       "move_out": "2026-10-05",
-      "available_on": "2026-12-01",
+      "available_on": "2026-12-10",
       "ready_on": "2026-12-01",
       "target_date": "2026-10-25",
       "next_move_in": null,
@@ -34530,7 +34881,7 @@
       "vacant": true,
       "days_vacant": 16,
       "move_out": "2026-10-31",
-      "available_on": "2026-12-08",
+      "available_on": "2026-12-23",
       "ready_on": "2026-12-08",
       "target_date": "2026-11-20",
       "next_move_in": null,
@@ -36979,258 +37330,6 @@
       "status": "complete"
     },
     {
-      "key": "tc68|a20",
-      "prop": "tc68",
-      "unit": "A20",
-      "at_risk": [],
-      "property_name": "tc68",
-      "city": "Tacoma",
-      "addr": "6830 Tacoma Mall Blvd Apt A20 Tacoma, WA 98409",
-      "unit_id": 1169,
-      "unit_status": "Vacant-Unrented",
-      "rent_ready": "Yes",
-      "vacant": true,
-      "days_vacant": 108,
-      "move_out": "2026-07-31",
-      "available_on": "2026-10-30",
-      "ready_on": "2026-11-30",
-      "target_date": "2026-08-20",
-      "next_move_in": null,
-      "rent": "1775.00",
-      "bed_bath": "2/1.00",
-      "sqft": 980,
-      "region": "Tacoma",
-      "pm": {
-        "projId": 243780,
-        "name": "Standard Unit Turn",
-        "status": "ACTIVE",
-        "done": 0,
-        "total": 9,
-        "first_appt": null,
-        "final_walk": null,
-        "final_walk_done": null,
-        "completed_date": null,
-        "due": "2026-08-15",
-        "next_task": {
-          "date": "2026-10-14",
-          "task": "walkthrough"
-        },
-        "tasks": [
-          {
-            "task": "A - Initial walkthrough",
-            "cat": "walkthrough",
-            "done": false,
-            "date": "2026-09-15",
-            "who": "Armani Mitchell",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Appfolio Estimate",
-            "cat": "estimate",
-            "done": false,
-            "date": null,
-            "who": "Dulce Salinas",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "C - Paint",
-            "cat": "paint",
-            "done": false,
-            "date": null,
-            "who": "Chris Phillips",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "D - Maintenance",
-            "cat": "maintenance",
-            "done": false,
-            "date": null,
-            "who": "Armani Mitchell",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "E - Carpet Cleaning",
-            "cat": "carpet",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "F - Cleaning",
-            "cat": "cleaning",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "G - Verify Mailbox Lockbox & Mailbox Keys",
-            "cat": "other",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Schedule Vendors",
-            "cat": "other",
-            "done": false,
-            "date": null,
-            "who": "Armani Mitchell",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Final Walkthrough",
-            "cat": "final-walk",
-            "done": false,
-            "date": null,
-            "who": "Armani Mitchell",
-            "completed": null,
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": null,
-      "cost": {
-        "code": "tc68-A20",
-        "labor": 245.7,
-        "materials": 981.94,
-        "total": 1227.64,
-        "estimate": 0,
-        "laborEntries": [
-          {
-            "d": "2026-10-29",
-            "emp": "Armani Mitchell",
-            "hrs": 1.4,
-            "cost": 37.8,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-10-29",
-            "emp": "Armani Mitchell",
-            "hrs": 1.08,
-            "cost": 29.16,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-10-26",
-            "emp": "Armani Mitchell",
-            "hrs": 1.42,
-            "cost": 38.34,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-10-26",
-            "emp": "Armani Mitchell",
-            "hrs": 1.87,
-            "cost": 50.49,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-10-26",
-            "emp": "Armani Mitchell",
-            "hrs": 0.9,
-            "cost": 24.3,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-10-26",
-            "emp": "Armani Mitchell",
-            "hrs": 1.23,
-            "cost": 33.21,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-10-26",
-            "emp": "Armani Mitchell",
-            "hrs": 1.2,
-            "cost": 32.4,
-            "cat": "Turn"
-          }
-        ],
-        "materialEntries": [
-          {
-            "d": "2026-10-29",
-            "amt": 23.17,
-            "cat": "Turn",
-            "ln": "mitchell",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-26",
-            "amt": 16.33,
-            "cat": "Turn",
-            "ln": "mitchell",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-26",
-            "amt": 76.93,
-            "cat": "Turn",
-            "ln": "mitchell",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-26",
-            "amt": 77.32,
-            "cat": "Turn",
-            "ln": "mitchell",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-26",
-            "amt": 75.24,
-            "cat": "Turn",
-            "ln": "mitchell",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-26",
-            "amt": 27.63,
-            "cat": "Turn",
-            "ln": "mitchell",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-23",
-            "amt": 245.91,
-            "cat": "Turn",
-            "ln": "mitchell",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-21",
-            "amt": 392.6,
-            "cat": "Turn",
-            "ln": "mitchell",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-21",
-            "amt": 46.81,
-            "cat": "Turn",
-            "ln": "mitchell",
-            "src": "ramp"
-          }
-        ]
-      },
-      "af_turn_end": "2026-10-29",
-      "stage": "Ready",
-      "stage_ord": 7,
-      "days_elapsed": 108,
-      "days_to_turn": null,
-      "status": "ready"
-    },
-    {
       "key": "tc68|b33",
       "prop": "tc68",
       "unit": "B33",
@@ -39416,8 +39515,8 @@
       "vacant": false,
       "days_vacant": null,
       "move_out": "2026-12-01",
-      "available_on": "2026-12-21",
-      "ready_on": "2026-12-21",
+      "available_on": "2027-01-01",
+      "ready_on": "2027-01-01",
       "target_date": "2026-12-21",
       "next_move_in": null,
       "rent": "1595.00",
@@ -40489,8 +40588,8 @@
       "vacant": false,
       "days_vacant": null,
       "move_out": "2026-12-07",
-      "available_on": "2026-12-27",
-      "ready_on": "2026-12-27",
+      "available_on": "2027-01-01",
+      "ready_on": "2027-01-01",
       "target_date": "2026-12-27",
       "next_move_in": null,
       "rent": "1795.00",
