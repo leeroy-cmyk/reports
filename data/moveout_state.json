@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-11-17T00:48:14.018Z",
+  "fetched_at": "2026-11-17T18:16:04.618Z",
   "units": {
     "6": {
       "moveOut": "2026-08-19",
@@ -234,7 +234,7 @@
     },
     "386": {
       "moveOut": "2026-09-30",
-      "status": "Vacant-Unrented",
+      "status": "Vacant-Rented",
       "prop": "ps25",
       "unit": "D28",
       "city": "Pasco"
@@ -584,7 +584,7 @@
     },
     "739": {
       "moveOut": "2026-08-24",
-      "status": "Vacant-Unrented",
+      "status": "Vacant-Rented",
       "prop": "c313",
       "unit": "31",
       "city": "Spokane"
@@ -645,6 +645,13 @@
       "unit": "8",
       "city": "Spokane Valley"
     },
+    "799": {
+      "moveOut": "2027-01-01",
+      "status": "Notice-Unrented",
+      "prop": "v202",
+      "unit": "13",
+      "city": "Spokane Valley"
+    },
     "806": {
       "moveOut": "2026-08-31",
       "status": "Vacant-Unrented",
@@ -692,6 +699,13 @@
       "status": "Vacant-Unrented",
       "prop": "kn47 K1",
       "unit": "F208",
+      "city": "Kennewick"
+    },
+    "913": {
+      "moveOut": "2026-11-17",
+      "status": "Notice-Unrented",
+      "prop": "kn47 K1",
+      "unit": "G103",
       "city": "Kennewick"
     },
     "915": {
@@ -1221,83 +1235,6 @@
     }
   },
   "changes": [
-    {
-      "date": "2026-09-17",
-      "type": "moveout_removed",
-      "unit_id": "34",
-      "prop": "s300",
-      "unit": "4",
-      "city": "Spokane",
-      "from": "2026-09-17",
-      "was_status": "Notice-Unrented"
-    },
-    {
-      "date": "2026-09-17",
-      "type": "moveout_removed",
-      "unit_id": "415",
-      "prop": "ps17",
-      "unit": "B1",
-      "city": "Pasco",
-      "from": "2026-06-30",
-      "was_status": "Vacant-Rented"
-    },
-    {
-      "date": "2026-09-17",
-      "type": "moveout_removed",
-      "unit_id": "664",
-      "prop": "s129",
-      "unit": "13",
-      "city": "Spokane Valley",
-      "from": "2026-07-31",
-      "was_status": "Vacant-Rented"
-    },
-    {
-      "date": "2026-09-17",
-      "type": "moveout_removed",
-      "unit_id": "1348",
-      "prop": "c702",
-      "unit": "E102",
-      "city": "Spokane",
-      "from": null,
-      "was_status": "Vacant-Rented"
-    },
-    {
-      "date": "2026-09-17",
-      "type": "moveout_new",
-      "unit_id": "1149",
-      "prop": "m221",
-      "unit": "G-D",
-      "city": "Spokane",
-      "to": "2026-09-17"
-    },
-    {
-      "date": "2026-09-17",
-      "type": "moveout_changed",
-      "unit_id": "1394",
-      "prop": "c702",
-      "unit": "G208",
-      "city": "Spokane",
-      "from": "2026-10-04",
-      "to": "2026-09-20"
-    },
-    {
-      "date": "2026-09-17",
-      "type": "moveout_new",
-      "unit_id": "369",
-      "prop": "ps25",
-      "unit": "B11",
-      "city": "Pasco",
-      "to": "2026-10-08"
-    },
-    {
-      "date": "2026-09-17",
-      "type": "moveout_new",
-      "unit_id": "659",
-      "prop": "s129",
-      "unit": "8",
-      "city": "Spokane Valley",
-      "to": "2026-09-30"
-    },
     {
       "date": "2026-09-18",
       "type": "moveout_removed",
@@ -3095,6 +3032,24 @@
       "unit": "C77",
       "city": "Tacoma",
       "to": "2026-12-01"
+    },
+    {
+      "date": "2026-11-17",
+      "type": "moveout_new",
+      "unit_id": "799",
+      "prop": "v202",
+      "unit": "13",
+      "city": "Spokane Valley",
+      "to": "2027-01-01"
+    },
+    {
+      "date": "2026-11-17",
+      "type": "moveout_new",
+      "unit_id": "913",
+      "prop": "kn47 K1",
+      "unit": "G103",
+      "city": "Kennewick",
+      "to": "2026-11-17"
     }
   ]
 }
