@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-11-18T17:35:05.543Z",
+  "fetched_at": "2026-11-18T23:36:06.948Z",
   "units": {
     "6": {
       "moveOut": "2026-08-19",
@@ -470,6 +470,13 @@
       "unit": "D04",
       "city": "Richland"
     },
+    "593": {
+      "moveOut": "2026-08-31",
+      "status": "Vacant-Rented",
+      "prop": "rl16",
+      "unit": "D08",
+      "city": "Richland"
+    },
     "599": {
       "moveOut": "2026-07-31",
       "status": "Vacant-Unrented",
@@ -563,7 +570,7 @@
     },
     "730": {
       "moveOut": "2026-10-31",
-      "status": "Vacant-Unrented",
+      "status": "Vacant-Rented",
       "prop": "c313",
       "unit": "22",
       "city": "Spokane"
@@ -973,13 +980,6 @@
       "prop": "tc68",
       "unit": "D100",
       "city": "Tacoma"
-    },
-    "1266": {
-      "moveOut": "2026-07-30",
-      "status": "Vacant-Unrented",
-      "prop": "kn47 K2",
-      "unit": "Maintenance Garages (2)",
-      "city": "Kennewick"
     },
     "1273": {
       "moveOut": "2026-07-31",
@@ -3020,6 +3020,25 @@
       "unit": "B301",
       "city": "Spokane",
       "from": "2026-09-10",
+      "was_status": "Vacant-Unrented"
+    },
+    {
+      "date": "2026-11-18",
+      "type": "moveout_new",
+      "unit_id": "593",
+      "prop": "rl16",
+      "unit": "D08",
+      "city": "Richland",
+      "to": "2026-08-31"
+    },
+    {
+      "date": "2026-11-18",
+      "type": "moveout_removed",
+      "unit_id": "1266",
+      "prop": "kn47 K2",
+      "unit": "Maintenance Garages (2)",
+      "city": "Kennewick",
+      "from": "2026-07-30",
       "was_status": "Vacant-Unrented"
     }
   ]

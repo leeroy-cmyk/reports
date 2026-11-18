@@ -1,61 +1,19 @@
 {
   "ok": true,
-  "fetched_at": "2026-11-18T17:35:45.139Z",
+  "fetched_at": "2026-11-18T23:36:47.652Z",
   "summary": {
     "as_of": "2026-11-18",
-    "units": 246,
+    "units": 245,
     "active": 44,
     "ready": 45,
     "notice": 10,
     "at_risk": 40,
     "unscheduled": 33,
-    "accruing": 19073.83,
-    "avg_days_open": 50,
-    "revenue_at_risk": 1922.17
+    "accruing": 21741.39,
+    "avg_days_open": 49,
+    "revenue_at_risk": 1976.4
   },
   "rows": [
-    {
-      "key": "kn47|maintenancegarages2",
-      "prop": "kn47",
-      "unit": "Maintenance Garages (2)",
-      "at_risk": [
-        "Available date passed",
-        "Nothing scheduled",
-        "Over 45 days vacant"
-      ],
-      "property_name": "kn47 K2",
-      "city": "Kennewick",
-      "addr": "632 N Arthur Street - Maintenance Garages (2) Kennewick, WA 99336",
-      "unit_id": 1266,
-      "unit_status": "Vacant-Unrented",
-      "rent_ready": "No",
-      "vacant": true,
-      "days_vacant": 111,
-      "move_out": "2026-07-30",
-      "available_on": "2026-08-19",
-      "ready_on": "2026-08-19",
-      "target_date": "2026-08-19",
-      "next_move_in": null,
-      "rent": null,
-      "bed_bath": null,
-      "sqft": null,
-      "region": "Tri-Cities",
-      "next_appt": null,
-      "cost": {
-        "code": "kn47-Maintenance Garages (2)",
-        "labor": 0,
-        "materials": 0,
-        "total": 0,
-        "estimate": 0,
-        "laborEntries": [],
-        "materialEntries": []
-      },
-      "stage": null,
-      "stage_ord": 0,
-      "days_elapsed": 111,
-      "days_to_turn": null,
-      "status": "active"
-    },
     {
       "key": "c702|j205",
       "prop": "c702",
@@ -2389,11 +2347,18 @@
       "cost": {
         "code": "m405-DB",
         "labor": 0,
-        "materials": 886.86,
-        "total": 886.86,
+        "materials": 959.16,
+        "total": 959.16,
         "estimate": 3344.23,
         "laborEntries": [],
         "materialEntries": [
+          {
+            "d": "2026-11-18",
+            "amt": 72.3,
+            "cat": "Turn",
+            "ln": "normandin",
+            "src": "ramp"
+          },
           {
             "d": "2026-11-16",
             "amt": 201.27,
@@ -3674,6 +3639,238 @@
       "stage": null,
       "stage_ord": 0,
       "days_elapsed": 4,
+      "days_to_turn": null,
+      "status": "active"
+    },
+    {
+      "key": "rl16|d08",
+      "prop": "rl16",
+      "unit": "D08",
+      "at_risk": [
+        "Over 45 days vacant"
+      ],
+      "property_name": "rl16",
+      "city": "Richland",
+      "addr": "1621 George Washington Way D08 Richland, WA 99354",
+      "unit_id": 593,
+      "unit_status": "Vacant-Rented",
+      "rent_ready": "No",
+      "vacant": true,
+      "days_vacant": 79,
+      "move_out": "2026-08-31",
+      "available_on": "2026-11-20",
+      "ready_on": "2026-11-20",
+      "target_date": "2026-09-20",
+      "next_move_in": "2026-11-20",
+      "rent": "1627.00",
+      "bed_bath": "3/2.00",
+      "sqft": 1115,
+      "region": "Tri-Cities",
+      "pm": {
+        "projId": 235867,
+        "name": "Standard Unit Turn",
+        "status": "ACTIVE",
+        "done": 2,
+        "total": 9,
+        "first_appt": "2026-09-24",
+        "final_walk": "2026-10-15",
+        "final_walk_done": null,
+        "completed_date": "2026-09-23",
+        "due": "2026-09-15",
+        "next_task": {
+          "date": "2026-10-15",
+          "task": "final-walk"
+        },
+        "tasks": [
+          {
+            "task": "A - Initial walkthrough",
+            "cat": "walkthrough",
+            "done": true,
+            "date": "2026-09-15",
+            "who": "Margarito Saldana",
+            "completed": "2026-09-21",
+            "vendor": false
+          },
+          {
+            "task": "Appfolio Estimate",
+            "cat": "estimate",
+            "done": false,
+            "date": null,
+            "who": "Dulce Salinas",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "C - Paint",
+            "cat": "paint",
+            "done": true,
+            "date": null,
+            "who": null,
+            "completed": "2026-09-23",
+            "vendor": false
+          },
+          {
+            "task": "D - Maintenance",
+            "cat": "maintenance",
+            "done": false,
+            "date": "2026-09-24",
+            "who": "Danny Halfacre",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "E - Carpet Cleaning",
+            "cat": "carpet",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "F - Cleaning",
+            "cat": "cleaning",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "G - Verify Mailbox Lockbox & Mailbox Keys",
+            "cat": "other",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Schedule Vendors",
+            "cat": "other",
+            "done": false,
+            "date": null,
+            "who": "Margarito Saldana",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Final Walkthrough",
+            "cat": "final-walk",
+            "done": false,
+            "date": "2026-10-15",
+            "who": "Margarito Saldana",
+            "completed": null,
+            "vendor": false
+          }
+        ]
+      },
+      "next_appt": null,
+      "cost": {
+        "code": "rl16-D08",
+        "labor": 0,
+        "materials": 2595.26,
+        "total": 2595.26,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": [
+          {
+            "d": "2026-11-12",
+            "amt": 121.7,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-11-12",
+            "amt": 290.82,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-11-12",
+            "amt": 238.27,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-11-12",
+            "amt": 49.52,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-11-11",
+            "amt": 665.2,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-11-11",
+            "amt": 53.42,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-10-02",
+            "amt": 367.86,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-09-28",
+            "amt": 48.93,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-09-28",
+            "amt": 41.46,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-09-26",
+            "amt": -75.04,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-09-24",
+            "amt": 529.45,
+            "cat": "Turn",
+            "ln": "williams",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-09-22",
+            "amt": 75.04,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-04-21",
+            "amt": 188.63,
+            "cat": "Turn",
+            "ln": "dunlap",
+            "src": "ramp"
+          }
+        ]
+      },
+      "af_turn_end": "2024-12-02",
+      "stage": "Maintenance",
+      "stage_ord": 3,
+      "days_elapsed": 79,
       "days_to_turn": null,
       "status": "active"
     },
@@ -6367,7 +6564,7 @@
         "labor": 1273.5,
         "materials": 1308.11,
         "total": 2581.61,
-        "estimate": 1362.32,
+        "estimate": 1403.3,
         "laborEntries": [
           {
             "d": "2026-10-05",
@@ -8402,7 +8599,7 @@
       "city": "Spokane",
       "addr": "3131 So Cook St 22 Spokane, WA 99223",
       "unit_id": 730,
-      "unit_status": "Vacant-Unrented",
+      "unit_status": "Vacant-Rented",
       "rent_ready": "No",
       "vacant": true,
       "days_vacant": 18,
@@ -8410,7 +8607,7 @@
       "available_on": "2026-11-19",
       "ready_on": "2026-11-19",
       "target_date": "2026-11-20",
-      "next_move_in": null,
+      "next_move_in": "2026-12-10",
       "rent": "1525.00",
       "bed_bath": "2/1.50",
       "sqft": 900,
@@ -9853,7 +10050,7 @@
         "labor": 0,
         "materials": 2122.02,
         "total": 2122.02,
-        "estimate": 8312.44,
+        "estimate": 8908.88,
         "laborEntries": [],
         "materialEntries": [
           {
@@ -10350,7 +10547,7 @@
         "labor": 0,
         "materials": 250.3,
         "total": 250.3,
-        "estimate": 1704.72,
+        "estimate": 0,
         "laborEntries": [],
         "materialEntries": [
           {
@@ -11518,7 +11715,7 @@
       "addr": "7002 N Colton St C306 Spokane, WA 99208",
       "unit_id": 1323,
       "unit_status": "Vacant-Unrented",
-      "rent_ready": "Yes",
+      "rent_ready": "No",
       "vacant": true,
       "days_vacant": 0,
       "move_out": null,
@@ -11640,8 +11837,8 @@
       },
       "turn_end": "2026-09-08",
       "af_turn_end": "2026-11-02",
-      "stage": "Ready",
-      "stage_ord": 7,
+      "stage": "Final Walk",
+      "stage_ord": 6,
       "days_elapsed": null,
       "days_to_turn": null,
       "status": "complete"
@@ -12192,7 +12389,7 @@
         "labor": 0,
         "materials": 272.08,
         "total": 272.08,
-        "estimate": 4564.72,
+        "estimate": 5125.24,
         "laborEntries": [],
         "materialEntries": [
           {
@@ -22153,8 +22350,8 @@
       "cost": {
         "code": "kn47-k1-M208",
         "labor": 68.31,
-        "materials": 172.6,
-        "total": 240.91,
+        "materials": 291.02,
+        "total": 359.33,
         "estimate": 0,
         "laborEntries": [
           {
@@ -22180,6 +22377,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-11-18",
+            "amt": 118.42,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          },
           {
             "d": "2025-10-10",
             "amt": 160,
@@ -22555,7 +22759,7 @@
         "labor": 354.25,
         "materials": 307.69,
         "total": 661.94,
-        "estimate": 746.88,
+        "estimate": 761.27,
         "laborEntries": [
           {
             "d": "2026-08-28",
@@ -24360,7 +24564,7 @@
         "labor": 0,
         "materials": 0,
         "total": 0,
-        "estimate": 2904.01,
+        "estimate": 1904.01,
         "laborEntries": [],
         "materialEntries": []
       },
@@ -32180,221 +32384,6 @@
       "status": "complete"
     },
     {
-      "key": "rl16|d08",
-      "prop": "rl16",
-      "unit": "D08",
-      "property_name": "rl16",
-      "at_risk": [],
-      "region": "Tri-Cities",
-      "pm": {
-        "projId": 235867,
-        "name": "Standard Unit Turn",
-        "status": "ACTIVE",
-        "done": 2,
-        "total": 9,
-        "first_appt": "2026-09-24",
-        "final_walk": "2026-10-15",
-        "final_walk_done": null,
-        "completed_date": "2026-09-23",
-        "due": "2026-09-15",
-        "next_task": {
-          "date": "2026-10-15",
-          "task": "final-walk"
-        },
-        "tasks": [
-          {
-            "task": "A - Initial walkthrough",
-            "cat": "walkthrough",
-            "done": true,
-            "date": "2026-09-15",
-            "who": "Margarito Saldana",
-            "completed": "2026-09-21",
-            "vendor": false
-          },
-          {
-            "task": "Appfolio Estimate",
-            "cat": "estimate",
-            "done": false,
-            "date": null,
-            "who": "Dulce Salinas",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "C - Paint",
-            "cat": "paint",
-            "done": true,
-            "date": null,
-            "who": null,
-            "completed": "2026-09-23",
-            "vendor": false
-          },
-          {
-            "task": "D - Maintenance",
-            "cat": "maintenance",
-            "done": false,
-            "date": "2026-09-24",
-            "who": "Danny Halfacre",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "E - Carpet Cleaning",
-            "cat": "carpet",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "F - Cleaning",
-            "cat": "cleaning",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "G - Verify Mailbox Lockbox & Mailbox Keys",
-            "cat": "other",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Schedule Vendors",
-            "cat": "other",
-            "done": false,
-            "date": null,
-            "who": "Margarito Saldana",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Final Walkthrough",
-            "cat": "final-walk",
-            "done": false,
-            "date": "2026-10-15",
-            "who": "Margarito Saldana",
-            "completed": null,
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": null,
-      "cost": {
-        "code": "rl16-D08",
-        "labor": 0,
-        "materials": 2595.26,
-        "total": 2595.26,
-        "estimate": 0,
-        "laborEntries": [],
-        "materialEntries": [
-          {
-            "d": "2026-11-12",
-            "amt": 121.7,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-11-12",
-            "amt": 290.82,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-11-12",
-            "amt": 238.27,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-11-12",
-            "amt": 49.52,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-11-11",
-            "amt": 665.2,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-11-11",
-            "amt": 53.42,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-02",
-            "amt": 367.86,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-28",
-            "amt": 48.93,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-28",
-            "amt": 41.46,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-26",
-            "amt": -75.04,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-24",
-            "amt": 529.45,
-            "cat": "Turn",
-            "ln": "williams",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-09-22",
-            "amt": 75.04,
-            "cat": "Turn",
-            "ln": "halfacre",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-04-21",
-            "amt": 188.63,
-            "cat": "Turn",
-            "ln": "dunlap",
-            "src": "ramp"
-          }
-        ]
-      },
-      "af_turn_end": "2024-12-02",
-      "stage": "Maintenance",
-      "stage_ord": 3,
-      "days_elapsed": null,
-      "days_to_turn": null,
-      "status": "other"
-    },
-    {
       "key": "rl16|d11",
       "prop": "rl16",
       "unit": "D11",
@@ -37189,6 +37178,7 @@
           }
         ]
       },
+      "af_turn_end": "2026-11-18",
       "stage": "Ready",
       "stage_ord": 7,
       "days_elapsed": 45,
@@ -38766,6 +38756,7 @@
           }
         ]
       },
+      "af_turn_end": "2026-11-18",
       "stage": "Ready",
       "stage_ord": 7,
       "days_elapsed": null,
@@ -42875,7 +42866,7 @@
         "labor": 813.44,
         "materials": 572.7,
         "total": 1386.14,
-        "estimate": 1187.55,
+        "estimate": 1231.43,
         "laborEntries": [
           {
             "d": "2026-09-21",
