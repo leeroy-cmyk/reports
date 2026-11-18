@@ -1,17 +1,17 @@
 {
   "ok": true,
-  "fetched_at": "2026-11-17T18:16:44.635Z",
+  "fetched_at": "2026-11-18T01:10:38.270Z",
   "summary": {
     "as_of": "2026-11-17",
     "units": 246,
-    "active": 48,
+    "active": 47,
     "ready": 44,
     "notice": 10,
-    "at_risk": 42,
-    "unscheduled": 35,
-    "accruing": 25813.43,
-    "avg_days_open": 49,
-    "revenue_at_risk": 2141.9
+    "at_risk": 41,
+    "unscheduled": 34,
+    "accruing": 24620.11,
+    "avg_days_open": 48,
+    "revenue_at_risk": 2082.73
   },
   "rows": [
     {
@@ -380,261 +380,6 @@
       "status": "active"
     },
     {
-      "key": "tc68|a20",
-      "prop": "tc68",
-      "unit": "A20",
-      "at_risk": [
-        "Available date passed",
-        "Over 45 days vacant"
-      ],
-      "property_name": "tc68",
-      "city": "Tacoma",
-      "addr": "6830 Tacoma Mall Blvd Apt A20 Tacoma, WA 98409",
-      "unit_id": 1169,
-      "unit_status": "Vacant-Unrented",
-      "rent_ready": "No",
-      "vacant": true,
-      "days_vacant": 109,
-      "move_out": "2026-07-31",
-      "available_on": "2026-10-30",
-      "ready_on": "2026-11-30",
-      "target_date": "2026-08-20",
-      "next_move_in": null,
-      "rent": "1775.00",
-      "bed_bath": "2/1.00",
-      "sqft": 980,
-      "region": "Tacoma",
-      "pm": {
-        "projId": 243780,
-        "name": "Standard Unit Turn",
-        "status": "ACTIVE",
-        "done": 0,
-        "total": 9,
-        "first_appt": null,
-        "final_walk": null,
-        "final_walk_done": null,
-        "completed_date": null,
-        "due": "2026-08-15",
-        "next_task": {
-          "date": "2026-10-14",
-          "task": "walkthrough"
-        },
-        "tasks": [
-          {
-            "task": "A - Initial walkthrough",
-            "cat": "walkthrough",
-            "done": false,
-            "date": "2026-09-15",
-            "who": "Armani Mitchell",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Appfolio Estimate",
-            "cat": "estimate",
-            "done": false,
-            "date": null,
-            "who": "Dulce Salinas",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "C - Paint",
-            "cat": "paint",
-            "done": false,
-            "date": null,
-            "who": "Chris Phillips",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "D - Maintenance",
-            "cat": "maintenance",
-            "done": false,
-            "date": null,
-            "who": "Armani Mitchell",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "E - Carpet Cleaning",
-            "cat": "carpet",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "F - Cleaning",
-            "cat": "cleaning",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "G - Verify Mailbox Lockbox & Mailbox Keys",
-            "cat": "other",
-            "done": false,
-            "date": null,
-            "who": null,
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Schedule Vendors",
-            "cat": "other",
-            "done": false,
-            "date": null,
-            "who": "Armani Mitchell",
-            "completed": null,
-            "vendor": false
-          },
-          {
-            "task": "Final Walkthrough",
-            "cat": "final-walk",
-            "done": false,
-            "date": null,
-            "who": "Armani Mitchell",
-            "completed": null,
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": null,
-      "cost": {
-        "code": "tc68-A20",
-        "labor": 245.7,
-        "materials": 981.94,
-        "total": 1227.64,
-        "estimate": 0,
-        "laborEntries": [
-          {
-            "d": "2026-10-29",
-            "emp": "Armani Mitchell",
-            "hrs": 1.4,
-            "cost": 37.8,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-10-29",
-            "emp": "Armani Mitchell",
-            "hrs": 1.08,
-            "cost": 29.16,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-10-26",
-            "emp": "Armani Mitchell",
-            "hrs": 1.42,
-            "cost": 38.34,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-10-26",
-            "emp": "Armani Mitchell",
-            "hrs": 1.87,
-            "cost": 50.49,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-10-26",
-            "emp": "Armani Mitchell",
-            "hrs": 0.9,
-            "cost": 24.3,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-10-26",
-            "emp": "Armani Mitchell",
-            "hrs": 1.23,
-            "cost": 33.21,
-            "cat": "Turn"
-          },
-          {
-            "d": "2026-10-26",
-            "emp": "Armani Mitchell",
-            "hrs": 1.2,
-            "cost": 32.4,
-            "cat": "Turn"
-          }
-        ],
-        "materialEntries": [
-          {
-            "d": "2026-10-29",
-            "amt": 23.17,
-            "cat": "Turn",
-            "ln": "mitchell",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-26",
-            "amt": 16.33,
-            "cat": "Turn",
-            "ln": "mitchell",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-26",
-            "amt": 76.93,
-            "cat": "Turn",
-            "ln": "mitchell",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-26",
-            "amt": 77.32,
-            "cat": "Turn",
-            "ln": "mitchell",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-26",
-            "amt": 75.24,
-            "cat": "Turn",
-            "ln": "mitchell",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-26",
-            "amt": 27.63,
-            "cat": "Turn",
-            "ln": "mitchell",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-23",
-            "amt": 245.91,
-            "cat": "Turn",
-            "ln": "mitchell",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-21",
-            "amt": 392.6,
-            "cat": "Turn",
-            "ln": "mitchell",
-            "src": "ramp"
-          },
-          {
-            "d": "2026-10-21",
-            "amt": 46.81,
-            "cat": "Turn",
-            "ln": "mitchell",
-            "src": "ramp"
-          }
-        ]
-      },
-      "af_turn_end": "2026-10-29",
-      "stage": "Walkthrough",
-      "stage_ord": 1,
-      "days_elapsed": 109,
-      "days_to_turn": null,
-      "status": "active"
-    },
-    {
       "key": "a511|102",
       "prop": "a511",
       "unit": "102",
@@ -949,11 +694,18 @@
       "cost": {
         "code": "c702-C207",
         "labor": 0,
-        "materials": 1104.31,
-        "total": 1104.31,
-        "estimate": 5093.74,
+        "materials": 1138.63,
+        "total": 1138.63,
+        "estimate": 5183.74,
         "laborEntries": [],
         "materialEntries": [
+          {
+            "d": "2026-11-17",
+            "amt": 34.32,
+            "cat": "Turn",
+            "ln": "smith",
+            "src": "ramp"
+          },
           {
             "d": "2026-11-11",
             "amt": 1104.31,
@@ -2090,7 +1842,7 @@
         "labor": 10,
         "materials": 332.15,
         "total": 342.15,
-        "estimate": 1756.68,
+        "estimate": 2067.5,
         "laborEntries": [
           {
             "d": "2026-08-17",
@@ -2873,7 +2625,7 @@
         "labor": 0,
         "materials": 886.86,
         "total": 886.86,
-        "estimate": 3132.23,
+        "estimate": 3344.23,
         "laborEntries": [],
         "materialEntries": [
           {
@@ -3250,7 +3002,7 @@
         "labor": 2142.56,
         "materials": 2141.03,
         "total": 4283.59,
-        "estimate": 1996.22,
+        "estimate": 2946.13,
         "laborEntries": [
           {
             "d": "2026-09-16",
@@ -6343,6 +6095,7 @@
         ]
       },
       "turn_end": "2025-10-03",
+      "af_turn_end": "2026-11-17",
       "stage": "Ready",
       "stage_ord": 7,
       "days_elapsed": 0,
@@ -6560,6 +6313,7 @@
         ]
       },
       "turn_end": "2025-10-03",
+      "af_turn_end": "2026-11-17",
       "stage": "Ready",
       "stage_ord": 7,
       "days_elapsed": 0,
@@ -10696,6 +10450,7 @@
           }
         ]
       },
+      "af_turn_end": "2026-11-17",
       "stage": "Ready",
       "stage_ord": 7,
       "days_elapsed": null,
@@ -11514,6 +11269,7 @@
           }
         ]
       },
+      "af_turn_end": "2026-11-17",
       "stage": "Ready",
       "stage_ord": 7,
       "days_elapsed": 14,
@@ -12167,7 +11923,7 @@
         "labor": 0,
         "materials": 271.96,
         "total": 271.96,
-        "estimate": 3517.66,
+        "estimate": 4105.97,
         "laborEntries": [],
         "materialEntries": [
           {
@@ -12179,6 +11935,7 @@
           }
         ]
       },
+      "af_turn_end": "2026-11-17",
       "stage": "Ready",
       "stage_ord": 7,
       "days_elapsed": 40,
@@ -13278,7 +13035,7 @@
         "labor": 0,
         "materials": 291.2,
         "total": 291.2,
-        "estimate": 1712.34,
+        "estimate": 2348.63,
         "laborEntries": [],
         "materialEntries": [
           {
@@ -14694,7 +14451,7 @@
         "labor": 765.57,
         "materials": 1200.22,
         "total": 1965.79,
-        "estimate": 2288.89,
+        "estimate": 2586.69,
         "laborEntries": [
           {
             "d": "2026-10-29",
@@ -15066,7 +14823,7 @@
         "labor": 0,
         "materials": 0,
         "total": 0,
-        "estimate": 4048.1,
+        "estimate": 5056.85,
         "laborEntries": [],
         "materialEntries": []
       },
@@ -15228,6 +14985,7 @@
           }
         ]
       },
+      "af_turn_end": "2026-11-17",
       "stage": "Ready",
       "stage_ord": 7,
       "days_elapsed": 78,
@@ -15366,6 +15124,7 @@
           }
         ]
       },
+      "af_turn_end": "2026-11-17",
       "stage": "Ready",
       "stage_ord": 7,
       "days_elapsed": 48,
@@ -15809,7 +15568,7 @@
         "labor": 0,
         "materials": 292.65,
         "total": 292.65,
-        "estimate": 3457,
+        "estimate": 2420,
         "laborEntries": [],
         "materialEntries": [
           {
@@ -16537,7 +16296,7 @@
         "labor": 306.84,
         "materials": 329.2,
         "total": 636.04,
-        "estimate": 1199.84,
+        "estimate": 1399.84,
         "laborEntries": [
           {
             "d": "2026-08-05",
@@ -16783,7 +16542,7 @@
         "labor": 915.75,
         "materials": 739.13,
         "total": 1654.88,
-        "estimate": 2841,
+        "estimate": 1482.86,
         "laborEntries": [
           {
             "d": "2026-09-14",
@@ -17292,7 +17051,7 @@
         "labor": 376.93,
         "materials": 643.73,
         "total": 1020.66,
-        "estimate": 1687.39,
+        "estimate": 1732.39,
         "laborEntries": [
           {
             "d": "2026-08-17",
@@ -17500,7 +17259,7 @@
         "labor": 0,
         "materials": 555.59,
         "total": 555.59,
-        "estimate": 229.98,
+        "estimate": 2936.6,
         "laborEntries": [],
         "materialEntries": [
           {
@@ -25334,7 +25093,7 @@
         "labor": 0,
         "materials": 0,
         "total": 0,
-        "estimate": 4682.78,
+        "estimate": 5254.64,
         "laborEntries": [],
         "materialEntries": []
       },
@@ -27687,7 +27446,7 @@
         "labor": 835.36,
         "materials": 1791.58,
         "total": 2626.94,
-        "estimate": 1627.64,
+        "estimate": 2202.14,
         "laborEntries": [
           {
             "d": "2026-04-17",
@@ -28042,7 +27801,7 @@
         "labor": 373.29,
         "materials": 1520.9,
         "total": 1894.19,
-        "estimate": 2699.27,
+        "estimate": 3768.73,
         "laborEntries": [
           {
             "d": "2025-09-29",
@@ -29378,6 +29137,7 @@
           }
         ]
       },
+      "af_turn_end": "2026-11-17",
       "stage": "Ready",
       "stage_ord": 7,
       "days_elapsed": 78,
@@ -30132,7 +29892,7 @@
         "labor": 0,
         "materials": 1290.21,
         "total": 1290.21,
-        "estimate": 2000.38,
+        "estimate": 4094.1,
         "laborEntries": [],
         "materialEntries": [
           {
@@ -33068,8 +32828,8 @@
       "cost": {
         "code": "rl16-D21",
         "labor": 75.5,
-        "materials": 957.82,
-        "total": 1033.32,
+        "materials": 1443.55,
+        "total": 1519.05,
         "estimate": 0,
         "laborEntries": [
           {
@@ -33088,6 +32848,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-11-17",
+            "amt": 485.73,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          },
           {
             "d": "2026-11-03",
             "amt": 76.13,
@@ -37644,6 +37411,243 @@
       "status": "complete"
     },
     {
+      "key": "tc68|a20",
+      "prop": "tc68",
+      "unit": "A20",
+      "property_name": "tc68",
+      "at_risk": [],
+      "region": "Tacoma",
+      "pm": {
+        "projId": 243780,
+        "name": "Standard Unit Turn",
+        "status": "ACTIVE",
+        "done": 0,
+        "total": 9,
+        "first_appt": null,
+        "final_walk": null,
+        "final_walk_done": null,
+        "completed_date": null,
+        "due": "2026-08-15",
+        "next_task": {
+          "date": "2026-10-14",
+          "task": "walkthrough"
+        },
+        "tasks": [
+          {
+            "task": "A - Initial walkthrough",
+            "cat": "walkthrough",
+            "done": false,
+            "date": "2026-09-15",
+            "who": "Armani Mitchell",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Appfolio Estimate",
+            "cat": "estimate",
+            "done": false,
+            "date": null,
+            "who": "Dulce Salinas",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "C - Paint",
+            "cat": "paint",
+            "done": false,
+            "date": null,
+            "who": "Chris Phillips",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "D - Maintenance",
+            "cat": "maintenance",
+            "done": false,
+            "date": null,
+            "who": "Armani Mitchell",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "E - Carpet Cleaning",
+            "cat": "carpet",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "F - Cleaning",
+            "cat": "cleaning",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "G - Verify Mailbox Lockbox & Mailbox Keys",
+            "cat": "other",
+            "done": false,
+            "date": null,
+            "who": null,
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Schedule Vendors",
+            "cat": "other",
+            "done": false,
+            "date": null,
+            "who": "Armani Mitchell",
+            "completed": null,
+            "vendor": false
+          },
+          {
+            "task": "Final Walkthrough",
+            "cat": "final-walk",
+            "done": false,
+            "date": null,
+            "who": "Armani Mitchell",
+            "completed": null,
+            "vendor": false
+          }
+        ]
+      },
+      "next_appt": null,
+      "cost": {
+        "code": "tc68-A20",
+        "labor": 245.7,
+        "materials": 981.94,
+        "total": 1227.64,
+        "estimate": 0,
+        "laborEntries": [
+          {
+            "d": "2026-10-29",
+            "emp": "Armani Mitchell",
+            "hrs": 1.4,
+            "cost": 37.8,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-10-29",
+            "emp": "Armani Mitchell",
+            "hrs": 1.08,
+            "cost": 29.16,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-10-26",
+            "emp": "Armani Mitchell",
+            "hrs": 1.42,
+            "cost": 38.34,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-10-26",
+            "emp": "Armani Mitchell",
+            "hrs": 1.87,
+            "cost": 50.49,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-10-26",
+            "emp": "Armani Mitchell",
+            "hrs": 0.9,
+            "cost": 24.3,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-10-26",
+            "emp": "Armani Mitchell",
+            "hrs": 1.23,
+            "cost": 33.21,
+            "cat": "Turn"
+          },
+          {
+            "d": "2026-10-26",
+            "emp": "Armani Mitchell",
+            "hrs": 1.2,
+            "cost": 32.4,
+            "cat": "Turn"
+          }
+        ],
+        "materialEntries": [
+          {
+            "d": "2026-10-29",
+            "amt": 23.17,
+            "cat": "Turn",
+            "ln": "mitchell",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-10-26",
+            "amt": 16.33,
+            "cat": "Turn",
+            "ln": "mitchell",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-10-26",
+            "amt": 76.93,
+            "cat": "Turn",
+            "ln": "mitchell",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-10-26",
+            "amt": 77.32,
+            "cat": "Turn",
+            "ln": "mitchell",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-10-26",
+            "amt": 75.24,
+            "cat": "Turn",
+            "ln": "mitchell",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-10-26",
+            "amt": 27.63,
+            "cat": "Turn",
+            "ln": "mitchell",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-10-23",
+            "amt": 245.91,
+            "cat": "Turn",
+            "ln": "mitchell",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-10-21",
+            "amt": 392.6,
+            "cat": "Turn",
+            "ln": "mitchell",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-10-21",
+            "amt": 46.81,
+            "cat": "Turn",
+            "ln": "mitchell",
+            "src": "ramp"
+          }
+        ]
+      },
+      "af_turn_end": "2026-10-29",
+      "stage": "Walkthrough",
+      "stage_ord": 1,
+      "days_elapsed": null,
+      "days_to_turn": null,
+      "status": "other"
+    },
+    {
       "key": "tc68|b33",
       "prop": "tc68",
       "unit": "B33",
@@ -37947,6 +37951,7 @@
           }
         ]
       },
+      "af_turn_end": "2026-11-17",
       "stage": "Ready",
       "stage_ord": 7,
       "days_elapsed": 48,
