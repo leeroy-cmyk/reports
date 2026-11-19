@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "fetched_at": "2026-11-19T13:56:35.799Z",
+  "fetched_at": "2026-11-19T22:00:59.117Z",
   "summary": {
     "as_of": "2026-11-19",
     "units": 244,
@@ -9,7 +9,7 @@
     "notice": 9,
     "at_risk": 41,
     "unscheduled": 34,
-    "accruing": 22751.29,
+    "accruing": 23074.32,
     "avg_days_open": 49,
     "revenue_at_risk": 2019.07
   },
@@ -2389,11 +2389,18 @@
       "cost": {
         "code": "m405-DB",
         "labor": 0,
-        "materials": 959.16,
-        "total": 959.16,
+        "materials": 1198.83,
+        "total": 1198.83,
         "estimate": 3344.23,
         "laborEntries": [],
         "materialEntries": [
+          {
+            "d": "2026-11-19",
+            "amt": 239.67,
+            "cat": "Turn",
+            "ln": "normandin",
+            "src": "ramp"
+          },
           {
             "d": "2026-11-18",
             "amt": 72.3,
@@ -8479,7 +8486,7 @@
       "city": "Spokane",
       "addr": "3131 So Cook St 12 Spokane, WA 99223",
       "unit_id": 720,
-      "unit_status": "Vacant-Unrented",
+      "unit_status": "Vacant-Rented",
       "rent_ready": "Yes",
       "vacant": true,
       "days_vacant": 142,
@@ -8487,7 +8494,7 @@
       "available_on": "2026-10-07",
       "ready_on": "2026-10-07",
       "target_date": "2026-07-20",
-      "next_move_in": null,
+      "next_move_in": "2026-12-01",
       "rent": "1695.00",
       "bed_bath": "2/2.00",
       "sqft": 1050,
@@ -8735,8 +8742,8 @@
       "cost": {
         "code": "c313-22",
         "labor": 985.22,
-        "materials": 649.73,
-        "total": 1634.95,
+        "materials": 668.24,
+        "total": 1653.46,
         "estimate": 0,
         "laborEntries": [
           {
@@ -8867,6 +8874,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-11-19",
+            "amt": 18.51,
+            "cat": "Turn",
+            "ln": "cramer",
+            "src": "ramp"
+          },
           {
             "d": "2026-11-16",
             "amt": 27.61,
@@ -12005,11 +12019,18 @@
       "cost": {
         "code": "c702-E101",
         "labor": 0,
-        "materials": 1009.9,
-        "total": 1009.9,
+        "materials": 1074.75,
+        "total": 1074.75,
         "estimate": 0,
         "laborEntries": [],
         "materialEntries": [
+          {
+            "d": "2026-11-19",
+            "amt": 64.85,
+            "cat": "Turn",
+            "ln": "smith",
+            "src": "ramp"
+          },
           {
             "d": "2026-11-18",
             "amt": 368.71,
@@ -32753,8 +32774,8 @@
       "vacant": true,
       "days_vacant": 19,
       "move_out": "2026-10-31",
-      "available_on": "2026-11-20",
-      "ready_on": "2026-11-20",
+      "available_on": "2026-11-27",
+      "ready_on": "2026-11-27",
       "target_date": "2026-11-20",
       "next_move_in": null,
       "rent": "1443.00",
@@ -32779,8 +32800,8 @@
       "cost": {
         "code": "rl16-D21",
         "labor": 75.5,
-        "materials": 1601.53,
-        "total": 1677.03,
+        "materials": 1654.07,
+        "total": 1729.57,
         "estimate": 0,
         "laborEntries": [
           {
@@ -32799,6 +32820,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-11-19",
+            "amt": 52.54,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          },
           {
             "d": "2026-11-17",
             "amt": 157.98,
@@ -35493,7 +35521,7 @@
       "city": "Tacoma",
       "addr": "3401 Pacific Ave A206 Tacoma, WA 98418",
       "unit_id": 817,
-      "unit_status": "Vacant-Unrented",
+      "unit_status": "Vacant-Rented",
       "rent_ready": "Yes",
       "vacant": true,
       "days_vacant": 111,
@@ -35501,7 +35529,7 @@
       "available_on": "2026-09-16",
       "ready_on": "2026-09-16",
       "target_date": "2026-08-20",
-      "next_move_in": null,
+      "next_move_in": "2026-11-25",
       "rent": "1235.00",
       "bed_bath": "0/1.00",
       "sqft": 500,
