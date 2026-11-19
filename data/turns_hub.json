@@ -1,15 +1,15 @@
 {
   "ok": true,
-  "fetched_at": "2026-11-18T23:36:47.652Z",
+  "fetched_at": "2026-11-19T04:32:13.896Z",
   "summary": {
     "as_of": "2026-11-18",
-    "units": 245,
+    "units": 244,
     "active": 44,
     "ready": 45,
     "notice": 10,
     "at_risk": 40,
     "unscheduled": 33,
-    "accruing": 21741.39,
+    "accruing": 22751.29,
     "avg_days_open": 49,
     "revenue_at_risk": 1976.4
   },
@@ -6942,7 +6942,7 @@
       "vacant": true,
       "days_vacant": 113,
       "move_out": "2026-07-28",
-      "available_on": "2026-11-08",
+      "available_on": null,
       "ready_on": "2026-11-08",
       "target_date": "2026-08-17",
       "next_move_in": "2026-12-01",
@@ -11993,11 +11993,26 @@
       "cost": {
         "code": "c702-E101",
         "labor": 0,
-        "materials": 0,
-        "total": 0,
+        "materials": 1009.9,
+        "total": 1009.9,
         "estimate": 0,
         "laborEntries": [],
-        "materialEntries": []
+        "materialEntries": [
+          {
+            "d": "2026-11-18",
+            "amt": 368.71,
+            "cat": "Turn",
+            "ln": "smith",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-11-18",
+            "amt": 641.19,
+            "cat": "Turn",
+            "ln": "smith",
+            "src": "ramp"
+          }
+        ]
       },
       "stage": "Walkthrough",
       "stage_ord": 1,
@@ -14912,11 +14927,18 @@
       "cost": {
         "code": "k104-107-5",
         "labor": 0,
-        "materials": 654.01,
-        "total": 654.01,
+        "materials": 679.48,
+        "total": 679.48,
         "estimate": 0,
         "laborEntries": [],
         "materialEntries": [
+          {
+            "d": "2026-11-18",
+            "amt": 25.47,
+            "cat": "Turn",
+            "ln": "normandin",
+            "src": "ramp"
+          },
           {
             "d": "2026-11-06",
             "amt": 158.6,
@@ -40658,108 +40680,6 @@
       "turn_end": "2026-08-28",
       "stage": "Maintenance",
       "stage_ord": 3,
-      "days_elapsed": null,
-      "days_to_turn": null,
-      "status": "complete"
-    },
-    {
-      "key": "tc68|d091",
-      "prop": "tc68",
-      "unit": "D091",
-      "property_name": "tc68",
-      "at_risk": [],
-      "region": "Tacoma",
-      "pm": {
-        "projId": 222911,
-        "name": "Standard Unit Turn",
-        "status": "COMPLETE",
-        "done": 7,
-        "total": 7,
-        "first_appt": "2026-08-13",
-        "final_walk": "2026-08-26",
-        "final_walk_done": "2026-08-20",
-        "completed_date": "2026-08-20",
-        "due": "2026-08-10",
-        "next_task": null,
-        "tasks": [
-          {
-            "task": "A - Initial walkthrough",
-            "cat": "walkthrough",
-            "done": true,
-            "date": "2026-06-26",
-            "who": "Armani Mitchell",
-            "completed": "2026-06-30",
-            "vendor": false
-          },
-          {
-            "task": "Appfolio Estimate",
-            "cat": "estimate",
-            "done": true,
-            "date": null,
-            "who": "Dulce Salinas",
-            "completed": "2026-08-20",
-            "vendor": false
-          },
-          {
-            "task": "C - Paint",
-            "cat": "paint",
-            "done": true,
-            "date": "2026-08-13",
-            "who": "Armani Mitchell",
-            "completed": "2026-08-14",
-            "vendor": false
-          },
-          {
-            "task": "D - Maintenance",
-            "cat": "maintenance",
-            "done": true,
-            "date": "2026-08-19",
-            "who": "Armani Mitchell",
-            "completed": "2026-08-20",
-            "vendor": false
-          },
-          {
-            "task": "E - Carpet Cleaning",
-            "cat": "carpet",
-            "done": true,
-            "date": "2026-08-24",
-            "who": "Armani Mitchell",
-            "completed": "2026-08-20",
-            "vendor": false
-          },
-          {
-            "task": "F - Cleaning",
-            "cat": "cleaning",
-            "done": true,
-            "date": "2026-08-31",
-            "who": "Armani Mitchell",
-            "completed": "2026-08-20",
-            "vendor": false
-          },
-          {
-            "task": "Final Walkthrough",
-            "cat": "final-walk",
-            "done": true,
-            "date": "2026-08-26",
-            "who": "Armani Mitchell",
-            "completed": "2026-08-20",
-            "vendor": false
-          }
-        ]
-      },
-      "next_appt": null,
-      "cost": {
-        "code": "tc68-D091",
-        "labor": 0,
-        "materials": 0,
-        "total": 0,
-        "estimate": 0,
-        "laborEntries": [],
-        "materialEntries": []
-      },
-      "turn_end": "2026-08-20",
-      "stage": "Final Walk",
-      "stage_ord": 6,
       "days_elapsed": null,
       "days_to_turn": null,
       "status": "complete"
