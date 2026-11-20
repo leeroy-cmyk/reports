@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "fetched_at": "2026-11-19T22:00:59.117Z",
+  "fetched_at": "2026-11-20T03:00:30.661Z",
   "summary": {
     "as_of": "2026-11-19",
     "units": 244,
@@ -9,7 +9,7 @@
     "notice": 9,
     "at_risk": 41,
     "unscheduled": 34,
-    "accruing": 23074.32,
+    "accruing": 23698.77,
     "avg_days_open": 49,
     "revenue_at_risk": 2019.07
   },
@@ -1472,11 +1472,19 @@
       "cost": {
         "code": "c702-J106",
         "labor": 0,
-        "materials": 0,
-        "total": 0,
+        "materials": 384.78,
+        "total": 384.78,
         "estimate": 0,
         "laborEntries": [],
-        "materialEntries": []
+        "materialEntries": [
+          {
+            "d": "2026-11-19",
+            "amt": 384.78,
+            "cat": "Turn",
+            "ln": "easley",
+            "src": "ramp"
+          }
+        ]
       },
       "stage": null,
       "stage_ord": 0,
@@ -2389,11 +2397,18 @@
       "cost": {
         "code": "m405-DB",
         "labor": 0,
-        "materials": 1198.83,
-        "total": 1198.83,
+        "materials": 1438.5,
+        "total": 1438.5,
         "estimate": 3344.23,
         "laborEntries": [],
         "materialEntries": [
+          {
+            "d": "2026-11-19",
+            "amt": 239.67,
+            "cat": "Turn",
+            "ln": "normandin",
+            "src": "ramp"
+          },
           {
             "d": "2026-11-19",
             "amt": 239.67,
@@ -8494,7 +8509,7 @@
       "available_on": "2026-10-07",
       "ready_on": "2026-10-07",
       "target_date": "2026-07-20",
-      "next_move_in": "2026-12-01",
+      "next_move_in": "2026-12-15",
       "rent": "1695.00",
       "bed_bath": "2/2.00",
       "sqft": 1050,
@@ -29130,7 +29145,7 @@
       "vacant": true,
       "days_vacant": 50,
       "move_out": "2026-09-30",
-      "available_on": "2026-11-08",
+      "available_on": null,
       "ready_on": "2026-11-08",
       "target_date": "2026-10-20",
       "next_move_in": "2026-11-20",
@@ -32800,8 +32815,8 @@
       "cost": {
         "code": "rl16-D21",
         "labor": 75.5,
-        "materials": 1654.07,
-        "total": 1729.57,
+        "materials": 1992.11,
+        "total": 2067.61,
         "estimate": 0,
         "laborEntries": [
           {
@@ -32820,6 +32835,13 @@
           }
         ],
         "materialEntries": [
+          {
+            "d": "2026-11-19",
+            "amt": 338.04,
+            "cat": "Turn",
+            "ln": "halfacre",
+            "src": "ramp"
+          },
           {
             "d": "2026-11-19",
             "amt": 52.54,
