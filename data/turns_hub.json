@@ -1,17 +1,17 @@
 {
   "ok": true,
-  "fetched_at": "2026-11-23T12:12:30.364Z",
+  "fetched_at": "2026-11-23T23:57:44.043Z",
   "summary": {
     "as_of": "2026-11-23",
-    "units": 243,
-    "active": 44,
+    "units": 244,
+    "active": 43,
     "ready": 44,
-    "notice": 8,
-    "at_risk": 40,
-    "unscheduled": 36,
-    "accruing": 21842.29,
-    "avg_days_open": 47,
-    "revenue_at_risk": 1985.8
+    "notice": 9,
+    "at_risk": 39,
+    "unscheduled": 35,
+    "accruing": 22392.69,
+    "avg_days_open": 48,
+    "revenue_at_risk": 1932.63
   },
   "rows": [
     {
@@ -1303,46 +1303,6 @@
       "status": "active"
     },
     {
-      "key": "c702|j206",
-      "prop": "c702",
-      "unit": "J206",
-      "at_risk": [
-        "Nothing scheduled"
-      ],
-      "property_name": "c702",
-      "city": "Spokane",
-      "addr": "7010 N Colton St J206 Spokane, WA 99208",
-      "unit_id": 1428,
-      "unit_status": "Vacant-Unrented",
-      "rent_ready": "No",
-      "vacant": true,
-      "days_vacant": 3,
-      "move_out": "2026-11-20",
-      "available_on": "2026-12-10",
-      "ready_on": "2026-12-10",
-      "target_date": "2026-12-10",
-      "next_move_in": null,
-      "rent": "1595.00",
-      "bed_bath": "3/2.00",
-      "sqft": 1250,
-      "region": "Spokane",
-      "next_appt": null,
-      "cost": {
-        "code": "c702-J206",
-        "labor": 0,
-        "materials": 0,
-        "total": 0,
-        "estimate": 0,
-        "laborEntries": [],
-        "materialEntries": []
-      },
-      "stage": null,
-      "stage_ord": 0,
-      "days_elapsed": 3,
-      "days_to_turn": null,
-      "status": "active"
-    },
-    {
       "key": "e328|2",
       "prop": "e328",
       "unit": "2",
@@ -1384,11 +1344,19 @@
       "cost": {
         "code": "e328-2",
         "labor": 0,
-        "materials": 0,
-        "total": 0,
+        "materials": 543.53,
+        "total": 543.53,
         "estimate": 2085.16,
         "laborEntries": [],
-        "materialEntries": []
+        "materialEntries": [
+          {
+            "d": "2026-11-23",
+            "amt": 543.53,
+            "cat": "Turn",
+            "ln": "normandin",
+            "src": "ramp"
+          }
+        ]
       },
       "stage": null,
       "stage_ord": 0,
@@ -2082,11 +2050,25 @@
       "cost": {
         "code": "m405-DB",
         "labor": 0,
-        "materials": 1198.83,
-        "total": 1198.83,
+        "materials": 1205.7,
+        "total": 1205.7,
         "estimate": 3344.23,
         "laborEntries": [],
         "materialEntries": [
+          {
+            "d": "2026-11-23",
+            "amt": 0.96,
+            "cat": "Turn",
+            "ln": "normandin",
+            "src": "ramp"
+          },
+          {
+            "d": "2026-11-23",
+            "amt": 5.91,
+            "cat": "Turn",
+            "ln": "normandin",
+            "src": "ramp"
+          },
           {
             "d": "2026-11-21",
             "amt": -239.67,
@@ -8018,8 +8000,8 @@
       "vacant": true,
       "days_vacant": 54,
       "move_out": "2026-09-30",
-      "available_on": "2026-10-21",
-      "ready_on": "2026-10-21",
+      "available_on": "2026-10-23",
+      "ready_on": "2026-10-23",
       "target_date": "2026-10-20",
       "next_move_in": null,
       "rent": "1645.00",
@@ -12100,6 +12082,44 @@
       "status": "ready"
     },
     {
+      "key": "c702|j206",
+      "prop": "c702",
+      "unit": "J206",
+      "at_risk": [],
+      "property_name": "c702",
+      "city": "Spokane",
+      "addr": "7010 N Colton St J206 Spokane, WA 99208",
+      "unit_id": 1428,
+      "unit_status": "Notice-Unrented",
+      "rent_ready": null,
+      "vacant": false,
+      "days_vacant": null,
+      "move_out": "2026-11-28",
+      "available_on": "2026-12-18",
+      "ready_on": "2026-12-18",
+      "target_date": "2026-12-18",
+      "next_move_in": null,
+      "rent": "1595.00",
+      "bed_bath": "3/2.00",
+      "sqft": 1250,
+      "region": "Spokane",
+      "next_appt": null,
+      "cost": {
+        "code": "c702-J206",
+        "labor": 0,
+        "materials": 0,
+        "total": 0,
+        "estimate": 0,
+        "laborEntries": [],
+        "materialEntries": []
+      },
+      "stage": "Move-out",
+      "stage_ord": 0,
+      "days_elapsed": 0,
+      "days_to_turn": null,
+      "status": "notice"
+    },
+    {
       "key": "c702|j301",
       "prop": "c702",
       "unit": "J301",
@@ -13744,6 +13764,208 @@
       "days_elapsed": null,
       "days_to_turn": null,
       "status": "other"
+    },
+    {
+      "key": "j312|3112",
+      "prop": "j312",
+      "unit": "3112",
+      "at_risk": [],
+      "property_name": "j312",
+      "city": "Spokane",
+      "addr": "3112 E Jackson Ave Spokane, WA 99207",
+      "unit_id": 684,
+      "unit_status": "Notice-Unrented",
+      "rent_ready": null,
+      "vacant": false,
+      "days_vacant": null,
+      "move_out": "2026-12-31",
+      "available_on": "2027-01-20",
+      "ready_on": "2027-01-20",
+      "target_date": "2027-01-20",
+      "next_move_in": null,
+      "rent": "1290.00",
+      "bed_bath": "2/1.00",
+      "sqft": 700,
+      "region": "Spokane",
+      "pm": {
+        "projId": 185239,
+        "name": "Turn - 3112 E Jackson Ave UNIT 3112",
+        "status": "COMPLETE",
+        "done": 8,
+        "total": 8,
+        "first_appt": "2025-09-11",
+        "final_walk": "2025-09-15",
+        "final_walk_done": "2025-09-23",
+        "completed_date": "2025-10-16",
+        "due": "2025-09-26",
+        "next_task": null,
+        "tasks": null
+      },
+      "next_appt": null,
+      "cost": {
+        "code": "j312-3112",
+        "labor": 560.73,
+        "materials": 1275.06,
+        "total": 1835.79,
+        "estimate": 0,
+        "laborEntries": [
+          {
+            "d": "2025-09-18",
+            "emp": "Ronald D. Cramer",
+            "hrs": 0.67,
+            "cost": 17.25,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-09-17",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.35,
+            "cost": 34.76,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-09-16",
+            "emp": "Micheal N. Magoon",
+            "hrs": 0.5,
+            "cost": 12.5,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-09-16",
+            "emp": "Micheal N. Magoon",
+            "hrs": 0.88,
+            "cost": 22,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-09-15",
+            "emp": "Ronald D. Cramer",
+            "hrs": 2.22,
+            "cost": 57.17,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-09-15",
+            "emp": "Ronald D. Cramer",
+            "hrs": 0.77,
+            "cost": 19.83,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-09-15",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.15,
+            "cost": 29.61,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-09-15",
+            "emp": "Ronald D. Cramer",
+            "hrs": 0.3,
+            "cost": 7.73,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-09-12",
+            "emp": "Ronald D. Cramer",
+            "hrs": 1.67,
+            "cost": 43,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-09-12",
+            "emp": "Ronald D. Cramer",
+            "hrs": 3.1,
+            "cost": 79.83,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-09-12",
+            "emp": "Micheal N. Magoon",
+            "hrs": 2.25,
+            "cost": 56.25,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-09-12",
+            "emp": "Micheal N. Magoon",
+            "hrs": 1.67,
+            "cost": 41.75,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-09-11",
+            "emp": "Ronald D. Cramer",
+            "hrs": 2.23,
+            "cost": 57.42,
+            "cat": "Turn"
+          },
+          {
+            "d": "2025-09-10",
+            "emp": "Ronald D. Cramer",
+            "hrs": 3.17,
+            "cost": 81.63,
+            "cat": "Turn"
+          }
+        ],
+        "materialEntries": [
+          {
+            "d": "2025-10-10",
+            "amt": 13.83,
+            "cat": "Turn",
+            "ln": "cramer",
+            "src": "ramp"
+          },
+          {
+            "d": "2025-10-06",
+            "amt": 539.99,
+            "cat": "Turn",
+            "ln": "higley",
+            "src": "ramp"
+          },
+          {
+            "d": "2025-09-27",
+            "amt": 115.5,
+            "cat": "Turn",
+            "ln": "meng",
+            "src": "ramp"
+          },
+          {
+            "d": "2025-09-15",
+            "amt": 34.78,
+            "cat": "Turn",
+            "ln": "cramer",
+            "src": "ramp"
+          },
+          {
+            "d": "2025-09-12",
+            "amt": 53.34,
+            "cat": "Turn",
+            "ln": "cramer",
+            "src": "ramp"
+          },
+          {
+            "d": "2025-09-12",
+            "amt": 21.74,
+            "cat": "Turn",
+            "ln": "cramer",
+            "src": "ramp"
+          },
+          {
+            "d": "2025-09-10",
+            "amt": 495.88,
+            "cat": "Turn",
+            "ln": "cramer",
+            "src": "ramp"
+          }
+        ]
+      },
+      "turn_end": "2025-09-23",
+      "stage": "Move-out",
+      "stage_ord": 0,
+      "days_elapsed": 0,
+      "days_to_turn": -464,
+      "status": "complete"
     },
     {
       "key": "j312|3134",
@@ -25258,8 +25480,8 @@
       "vacant": true,
       "days_vacant": 23,
       "move_out": "2026-10-31",
-      "available_on": "2026-11-30",
-      "ready_on": "2026-11-30",
+      "available_on": "2026-12-01",
+      "ready_on": "2026-12-01",
       "target_date": "2026-11-20",
       "next_move_in": null,
       "rent": "1340.00",
@@ -28181,8 +28403,8 @@
       "vacant": true,
       "days_vacant": 54,
       "move_out": "2026-09-30",
-      "available_on": "2026-11-24",
-      "ready_on": "2026-11-24",
+      "available_on": "2026-12-04",
+      "ready_on": "2026-12-04",
       "target_date": "2026-10-20",
       "next_move_in": null,
       "rent": "956.00",
@@ -35524,7 +35746,7 @@
       "vacant": true,
       "days_vacant": 115,
       "move_out": "2026-07-31",
-      "available_on": "2026-09-16",
+      "available_on": null,
       "ready_on": "2026-09-16",
       "target_date": "2026-08-20",
       "next_move_in": "2026-11-25",
@@ -35851,7 +36073,7 @@
       "vacant": true,
       "days_vacant": 23,
       "move_out": "2026-10-31",
-      "available_on": "2026-12-01",
+      "available_on": "2027-01-01",
       "ready_on": "2027-01-01",
       "target_date": "2026-11-20",
       "next_move_in": null,
