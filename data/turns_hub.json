@@ -1,12 +1,12 @@
 {
   "ok": true,
-  "fetched_at": "2026-11-24T09:31:25.926Z",
+  "fetched_at": "2026-11-24T20:21:29.981Z",
   "summary": {
     "as_of": "2026-11-24",
-    "units": 242,
+    "units": 241,
     "active": 43,
     "ready": 44,
-    "notice": 9,
+    "notice": 8,
     "at_risk": 39,
     "unscheduled": 36,
     "accruing": 22563.81,
@@ -29727,44 +29727,6 @@
       "status": "complete"
     },
     {
-      "key": "rl16|a08",
-      "prop": "rl16",
-      "unit": "A08",
-      "at_risk": [],
-      "property_name": "rl16",
-      "city": "Richland",
-      "addr": "1621 George Washington Way - A08 A08 Richland, WA 99354",
-      "unit_id": 521,
-      "unit_status": "Notice-Unrented",
-      "rent_ready": null,
-      "vacant": false,
-      "days_vacant": null,
-      "move_out": "2026-11-30",
-      "available_on": "2026-12-20",
-      "ready_on": "2026-12-20",
-      "target_date": "2026-12-20",
-      "next_move_in": null,
-      "rent": "1627.00",
-      "bed_bath": "3/2.00",
-      "sqft": 1115,
-      "region": "Tri-Cities",
-      "next_appt": null,
-      "cost": {
-        "code": "rl16-A08",
-        "labor": 0,
-        "materials": 0,
-        "total": 0,
-        "estimate": 0,
-        "laborEntries": [],
-        "materialEntries": []
-      },
-      "stage": "Move-out",
-      "stage_ord": 0,
-      "days_elapsed": 0,
-      "days_to_turn": null,
-      "status": "notice"
-    },
-    {
       "key": "rl16|a13",
       "prop": "rl16",
       "unit": "A13",
@@ -37550,11 +37512,18 @@
       "next_appt": null,
       "cost": {
         "code": "tc68-B37",
-        "labor": 1153.98,
+        "labor": 1407.78,
         "materials": 104.7,
-        "total": 1258.68,
+        "total": 1512.48,
         "estimate": 5573.28,
         "laborEntries": [
+          {
+            "d": "2026-11-23",
+            "emp": "Armani Mitchell",
+            "hrs": 9.4,
+            "cost": 253.8,
+            "cat": "Turn"
+          },
           {
             "d": "2026-11-20",
             "emp": "Armani Mitchell",
