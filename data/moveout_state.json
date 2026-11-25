@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-11-25T13:31:15.031Z",
+  "fetched_at": "2026-11-25T22:47:50.308Z",
   "units": {
     "6": {
       "moveOut": "2026-08-19",
@@ -603,6 +603,13 @@
       "unit": "8",
       "city": "Spokane Valley"
     },
+    "797": {
+      "moveOut": "2026-11-30",
+      "status": "Notice-Unrented",
+      "prop": "v202",
+      "unit": "11",
+      "city": "Spokane Valley"
+    },
     "799": {
       "moveOut": "2027-01-01",
       "status": "Notice-Unrented",
@@ -727,13 +734,6 @@
       "status": "Notice-Unrented",
       "prop": "kn47 K2",
       "unit": "A206",
-      "city": "Kennewick"
-    },
-    "1011": {
-      "moveOut": "2026-08-13",
-      "status": "Vacant-Unrented",
-      "prop": "kn47 K2",
-      "unit": "B104",
       "city": "Kennewick"
     },
     "1018": {
@@ -864,7 +864,7 @@
     },
     "1186": {
       "moveOut": "2026-09-30",
-      "status": "Vacant-Unrented",
+      "status": "Vacant-Rented",
       "prop": "tc68",
       "unit": "B37",
       "city": "Tacoma"
@@ -2881,6 +2881,25 @@
       "city": "Spokane",
       "from": "2026-09-18",
       "was_status": "Vacant-Rented"
+    },
+    {
+      "date": "2026-11-25",
+      "type": "moveout_new",
+      "unit_id": "797",
+      "prop": "v202",
+      "unit": "11",
+      "city": "Spokane Valley",
+      "to": "2026-11-30"
+    },
+    {
+      "date": "2026-11-25",
+      "type": "moveout_removed",
+      "unit_id": "1011",
+      "prop": "kn47 K2",
+      "unit": "B104",
+      "city": "Kennewick",
+      "from": "2026-08-13",
+      "was_status": "Vacant-Unrented"
     }
   ]
 }
